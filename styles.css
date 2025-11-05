@@ -62,3 +62,43 @@ body{
 
 .site-footer{border-top:1px solid rgba(0,0,0,.08); padding:24px 0 48px; background:#fff}
 .footer-inner{display:flex; align-items:center; justify-content:center}
+/* --- CRESCENDO CUSTOM LOGO + TITLE STYLE --- */
+
+/* Center the logo above the headline */
+.hero-logo {
+  display: block;
+  width: 96px;          /* you can try 80–128px */
+  height: auto;
+  margin: 0 auto 16px;  /* centers and adds space below */
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.08));
+}
+
+/* Optional: hide the top-left brand if you want a cleaner look */
+.site-header .brand {
+  display: none;
+}
+
+/* Keep "Fearfully & Wonderfully Made" on the same line */
+.nowrap {
+  white-space: nowrap;
+}
+
+/* Slight mobile tweak */
+@media (max-width: 420px) {
+  .headline {
+    font-size: clamp(1.9rem, 7.5vw, 2.4rem);
+  }
+  .hero-logo {
+    width: 80px;
+  }
+}
+/* --- GOLD UNDERLINE BELOW HEADLINE --- */
+.headline::after {
+  content: "";
+  display: block;
+  width: 80px;               /* length of the line */
+  height: 2px;               /* thickness */
+  background: var(--accent); /* uses your #C3A35B gold */
+  margin: 12px auto 0;       /* centers it and adds space above */
+  border-radius: 2px;        /* soft edges */
+}
