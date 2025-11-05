@@ -1,19 +1,24 @@
 /* Minimal Crescendo landing styles */
 :root{
-  --ink:#273746;
-  --paper:#ffffff;
-  --brand:#3aa3a9;   /* teal */
-  --brand-2:#7a5fd0; /* muted violet */
-  --accent:#c9a44a;  /* soft gold */
+  --ink:#273746;      /* subtitle/body font color (White Star) */
+  --paper:#f9fafa;    /* soft off-white background */
+  --brand:#3a6073;    /* deep teal-blue for gradients/buttons */
+  --brand-2:#7fb6b3;  /* lighter teal-green for gradient blend */
+  --accent:#C3A35B;   /* warm gold accent */
 }
+
 
 *{box-sizing:border-box}
 html,body{margin:0}
 body{
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
-  color:var(--ink); background:var(--paper); line-height:1.6;
+  font-family:"White Star", serif;
+  color:var(--ink);
+  background:linear-gradient(180deg, #f9fafa 0%, #edf6f5 100%);
+  line-height:1.6;
 }
-h1,h2{font-family:"Playfair Display", Georgia, serif; line-height:1.2; color:#151a20}
+
+h1,h2{font-family:"Le Jour Serif", serif; color:#163245;}  /* main header color */
+body{font-family:"White Star", serif; color:var(--ink);}  /* subtitle/body font */
 .container{width:min(900px,92%); margin-inline:auto}
 
 .site-header{position:sticky; top:0; z-index:10; background:#ffffffc8; backdrop-filter:saturate(180%) blur(14px); border-bottom:1px solid rgba(0,0,0,.06)}
@@ -37,6 +42,7 @@ h1,h2{font-family:"Playfair Display", Georgia, serif; line-height:1.2; color:#15
   display:inline-block; font-weight:700; letter-spacing:.2px; color:#fff; text-decoration:none;
   padding:14px 20px; border-radius:14px; border:0;
   background:linear-gradient(135deg, var(--brand), var(--brand-2));
+
   box-shadow:0 10px 30px rgba(122,95,208,.25);
 }
 .btn:hover{transform:translateY(-1px)}
