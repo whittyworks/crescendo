@@ -122,4 +122,14 @@ body{
   color: #163245;           /* deep blue */
   line-height: 1.0;
   margin
-
+.title-sub {
+  display: block;
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  color: var(--accent);
+  line-height: 1.1;
+  margin-top: -10px;
+}
+  margin-bottom: -6px;
+}
