@@ -64,14 +64,6 @@ body{
 .footer-inner{display:flex; align-items:center; justify-content:center}
 /* --- CRESCENDO CUSTOM LOGO + TITLE STYLE --- */
 
-/* Center the logo above the headline */
-.hero-logo {
-  display: block;
-  width: 96px;          /* you can try 80–128px */
-  height: auto;
-  margin: 0 auto 8px;  /* centers and adds space below */
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.08));
-}
 
 /* Optional: hide the top-left brand if you want a cleaner look */
 .site-header .brand {
@@ -84,20 +76,6 @@ body{
 }
 
 /* --- Split headline style --- */
-.title-main {
-  margin-bottom: 0;          /* remove extra gap */
-  line-height: 1.0;          /* tightens vertical space */
-}
-
-.title-sub {
-  display: block;
-  font-family: "Great Vibes", cursive;
-  font-weight: 400;
-  font-size: clamp(1.8rem, 5vw, 2.6rem);
-  color: var(--accent);
-  line-height: 1.1;
-  margin-top: -10px;   /* was -8px, pull a bit closer */
-}
 
 /* Slight mobile tweak */
 @media (max-width: 420px) {
@@ -109,13 +87,39 @@ body{
   }
 }
 /* --- SIMPLE GOLD LINE UNDER TITLE --- */
-.headline::after {
-  content: "";
+
+/* --- CRESCENDO TITLE + LOGO FINAL STYLING --- */
+
+/* Centered logo above title */
+.hero-logo {
   display: block;
-  width: 80px;               /* adjust width if you want */
-  height: 2px;               /* thin line */
-  background: var(--accent); /* your gold tone (#C3A35B) */
-  margin: 12px auto 0;
-  border-radius: 2px;
+  width: 96px;                     /* Adjust to 80–128px if needed */
+  height: auto;
+  margin: 0 auto 6px;              /* brings logo closer to title */
+  filter: drop-shadow(0 2px 6px rgba(195,163,91,0.25)); /* soft gold halo */
 }
+
+/* Hide small top-left logo if you’re using the centered one */
+.site-header .brand {
+  display: none;
+}
+
+/* Headline container (keeps both lines together) */
+.headline {
+  text-align: center;
+  margin: 0 auto;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  position: relative;
+}
+
+/* Main title: “Crescendo” */
+.title-main {
+  display: block;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: clamp(3rem, 6.5vw, 4.4rem);
+  letter-spacing: 1px;
+  color: #163245;           /* deep blue */
+  line-height: 1.0;
+  margin
 
