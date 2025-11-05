@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crescendo · Fearfully & Wonderfully Made</title>
+  <meta name="description" content="Crescendo: Fearfully & Wonderfully Made — a guided journey to discovering your beauty through the eyes of the Lord." />
+  <meta property="og:title" content="Crescendo · Fearfully & Wonderfully Made" />
+  <meta property="og:description" content="A guided journey of identity, grace, and design — cohorts on Tuesdays at 7:30." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="favicon.png">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#" class="brand">
+        <img src="logo.svg" alt="" class="logo" />
+        <span class="brand-text">Crescendo</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <nav class="menu" data-menu>
+        <a href="#about">About</a>
+        <a href="#cohort">Cohort</a>
+        <a href="#curriculum">Curriculum</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="btn btn--small">Join</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h1>The Symphony of Grace</h1>
+          <p class="lede">A gentle, faith-filled journey to discover your design — body, mind, and soul — through beauty, mercy, and providence.</p>
+          <div class="cta-row">
+            <a href="#cohort" class="btn">Apply to the next cohort</a>
+            <a href="#curriculum" class="btn btn--ghost">See the curriculum</a>
+          </div>
+          <p class="tiny">Tuesdays · 7:30 PM (CST) · Small group format</p>
+        </div>
+        <div class="hero-card">
+          <div class="wash"></div>
+          <img src="images/saint-gallery-placeholder.jpg" alt="Watercolor saint portraits collage" />
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container grid-2">
+        <div>
+          <h2>What is Crescendo?</h2>
+          <p>Crescendo: <em>Fearfully &amp; Wonderfully Made</em> is a 13‑week guided journey that blends prayer, reflection, style &amp; color exploration, and practical rhythms for daily life. It’s designed to be warm, simple, and deeply human.</p>
+          <ul class="checklist">
+            <li>Weekly workbook pages + guided reflections</li>
+            <li>Spotlight Saints &amp; Scripture meditations</li>
+            <li>Gentle style/color discovery that honors dignity</li>
+            <li>Community support &amp; accountability</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>At a glance</h3>
+          <ul class="facts">
+            <li><strong>Length:</strong> 13 weeks</li>
+            <li><strong>When:</strong> Tuesdays at 7:30 PM</li>
+            <li><strong>Format:</strong> 60–75 min live session</li>
+            <li><strong>Who:</strong> Women seeking grace &amp; clarity</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="cohort" class="section alt">
+      <div class="container">
+        <h2>Join the next cohort</h2>
+        <p>Spots are limited to keep the pace gentle and relational. Submit your email and we’ll follow up with details.</p>
+        <form class="signup" method="POST" action="#" onsubmit="return handleSignup(event)">
+          <label>
+            <span>Name</span>
+            <input required type="text" name="name" placeholder="Your name" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input required type="email" name="email" placeholder="you@example.com" />
+          </label>
+          <label class="full">
+            <span>Why Crescendo?</span>
+            <textarea name="note" rows="3" placeholder="Share a sentence about what you hope to receive."></textarea>
+          </label>
+          <button class="btn" type="submit">Request an invite</button>
+          <p class="tiny">By continuing you agree to our <a href="#" aria-disabled="true">terms</a>.</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="curriculum" class="section">
+      <div class="container">
+        <h2>Curriculum overview</h2>
+        <div class="cards">
+          <article class="card"><h3>1. Identity in Christ</h3><p>Foundations of belonging and belovedness.</p></article>
+          <article class="card"><h3>2. Colors of Creation</h3><p>Gentle seasonal color exploration with mercy.</p></article>
+          <article class="card"><h3>3. Shape of Dignity</h3><p>Silhouette &amp; movement cues without labels.</p></article>
+          <article class="card"><h3>4. Presence &amp; Grace</h3><p>Practice rhythms that hold your day together.</p></article>
+          <article class="card"><h3>… and more</h3><p>Saints, songs, reflections, and simple action.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="faq">
+      <div class="container">
+        <h2>FAQ</h2>
+        <details><summary>Is this only for Catholics?</summary><p>Crescendo is rooted in Catholic spirituality and warmly welcomes seekers who resonate with the approach.</p></details>
+        <details><summary>What if I miss a week?</summary><p>Sessions are recorded; gentle catch‑up notes are provided.</p></details>
+        <details><summary>Is there homework?</summary><p>Simple weekly reflections (10–20 minutes) and optional activities.</p></details>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container grid-2">
+        <div>
+          <h2>Questions? Let’s talk.</h2>
+          <p>Email: <a href="mailto:myholycrescendo@gmail.com">myholycrescendo@gmail.com</a></p>
+          <p class="tiny">You can also text the pilot group and we’ll collect emails for the cohort list.</p>
+        </div>
+        <form class="contact" method="POST" action="#" onsubmit="return handleContact(event)">
+          <label><span>Name</span><input required type="text" name="name" /></label>
+          <label><span>Email</span><input required type="email" name="email" /></label>
+          <label class="full"><span>Message</span><textarea rows="4" name="message"></textarea></label>
+          <button class="btn" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="y"></span> Crescendo · Fearfully &amp; Wonderfully Made</p>
+      <nav class="footer-nav">
+        <a href="#about">About</a>
+        <a href="#cohort">Cohort</a>
+        <a href="#curriculum">Curriculum</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
