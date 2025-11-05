@@ -83,6 +83,25 @@ body{
   white-space: nowrap;
 }
 
+/* --- Split headline style --- */
+.title-main {
+  display: block;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 6vw, 3.8rem);
+  letter-spacing: 1px;
+  color: #163245;  /* deep blue */
+  margin-bottom: 4px;
+}
+
+.title-sub {
+  display: block;
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  color: var(--accent);  /* your gold tone */
+  line-height: 1.1;
+}
 /* Slight mobile tweak */
 @media (max-width: 420px) {
   .headline {
