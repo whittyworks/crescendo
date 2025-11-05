@@ -100,14 +100,9 @@ body{
   height: 10px;                     /* taller for a brush feel */
   margin: 18px auto 0;
   border-radius: 999px;             /* gives it an organic curve */
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(195,163,91,0.25) 10%,
-    rgba(195,163,91,0.8) 50%,
-    rgba(195,163,91,0.25) 90%,
-    transparent 100%
-  );
+  background: url('watercolor-bg.png') center/cover no-repeat fixed;
+  background-color:#f9fafa; /* backup color */
+
   filter: blur(0.6px);              /* slight softness */
 }
 @media (max-width: 420px){
