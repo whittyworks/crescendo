@@ -1,5 +1,5 @@
 /* Minimal Crescendo landing styles */
-:root{
+:root {
   --ink:#273746;      /* subtitle/body font color (White Star) */
   --paper:#f9fafa;    /* soft off-white background */
   --brand:#3a6073;    /* deep teal-blue for gradients/buttons */
@@ -7,86 +7,130 @@
   --accent:#C3A35B;   /* warm gold accent */
 }
 
+* { box-sizing: border-box; }
+html, body { margin: 0; }
 
-*{box-sizing:border-box}
-html,body{margin:0}
-body{
-  font-family:"White Star", serif;
-  color:var(--ink);
-  background:linear-gradient(180deg, #f9fafa 0%, #edf6f5 100%);
-  line-height:1.6;
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  background: linear-gradient(180deg, #f9fafa 0%, #edf6f5 100%);
+  line-height: 1.6;
 }
 
-h1,h2{
-  font-family:"Playfair Display", Georgia, serif;
-  color:#163245; /* your deep blue header color */
-}
-body{
-  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
-  color:var(--ink);
+h1, h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  color: #163245; /* deep blue header color */
 }
 
-.container{width:min(900px,92%); margin-inline:auto}
-
-.site-header{position:sticky; top:0; z-index:10; background:#ffffffc8; backdrop-filter:saturate(180%) blur(14px); border-bottom:1px solid rgba(0,0,0,.06)}
-.nav{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:10px 0}
-.brand{display:flex; align-items:center; gap:10px; color:#151a20; text-decoration:none; font-weight:700}
-.brand-text{font-family:"Playfair Display", Georgia, serif; font-size:1.15rem}
-.logo{
-  width: 80px;       /* you can test 80-120px */
-  height: auto;      /* keeps proportions natural */
+.container {
+  width: min(900px, 92%);
+  margin-inline: auto;
 }
-.landing-hero{
-  padding:96px 0 48px;
+
+/* Header + Navigation */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #ffffffc8;
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid rgba(0, 0, 0, .06);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #151a20;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.brand-text {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.15rem;
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+}
+
+/* Hero section */
+.landing-hero {
+  padding: 96px 0 48px;
   background:
     radial-gradient(1200px 400px at 70% -10%, rgba(122,95,208,.14), transparent),
     radial-gradient(1000px 300px at -10% 10%, rgba(58,163,169,.14), transparent);
-  text-align:center;
-}
-.headline{font-size:clamp(2rem,5vw,3.2rem); margin:.1em 0 .2em}
-.tag{font-size:1.2rem; color:#444; margin:.1em 0 .4em}
-.lede{font-size:1.05rem; opacity:.9; margin:.2em 0 1em}
-
-.btn{
-  display:inline-block; font-weight:700; letter-spacing:.2px; color:#fff; text-decoration:none;
-  padding:14px 20px; border-radius:14px; border:0;
-  background:linear-gradient(135deg, var(--brand), var(--brand-2));
-
-  box-shadow:0 10px 30px rgba(122,95,208,.25);
-}
-.btn:hover{transform:translateY(-1px)}
-
-.tiny{font-size:.9rem; opacity:.75; margin-top:10px}
-.mini-about{padding:28px 0 52px}
-.about{font-size:1.05rem; text-align:center; max-width:60ch; margin:0 auto; color:#2b3138}
-
-.site-footer{border-top:1px solid rgba(0,0,0,.08); padding:24px 0 48px; background:#fff}
-.footer-inner{display:flex; align-items:center; justify-content:center}
-/* --- CRESCENDO CUSTOM LOGO + TITLE STYLE --- */
-
-
-/* Optional: hide the top-left brand if you want a cleaner look */
-.site-header .brand {
-  display: none;
+  text-align: center;
 }
 
-/* Keep "Fearfully & Wonderfully Made" on the same line */
-.nowrap {
-  white-space: nowrap;
+.tag {
+  font-size: 1.2rem;
+  color: #444;
+  margin: .1em 0 .4em;
 }
 
-/* --- Split headline style --- */
-
-/* Slight mobile tweak */
-@media (max-width: 420px) {
-  .headline {
-    font-size: clamp(3rem, 6.5vw, 4.4rem);
-  }
-  .hero-logo {
-    width: 80px;
-  }
+.lede {
+  font-size: 1.05rem;
+  opacity: .9;
+  margin: .2em 0 1em;
 }
-/* --- SIMPLE GOLD LINE UNDER TITLE --- */
+
+.btn {
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: .2px;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: 0;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  box-shadow: 0 10px 30px rgba(122,95,208,.25);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.tiny {
+  font-size: .9rem;
+  opacity: .75;
+  margin-top: 10px;
+}
+
+.mini-about {
+  padding: 28px 0 52px;
+}
+
+.about {
+  font-size: 1.05rem;
+  text-align: center;
+  max-width: 60ch;
+  margin: 0 auto;
+  color: #2b3138;
+}
+
+.site-footer {
+  border-top: 1px solid rgba(0,0,0,.08);
+  padding: 24px 0 48px;
+  background: #fff;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* --- CRESCENDO TITLE + LOGO FINAL STYLING --- */
 
@@ -121,7 +165,10 @@ body{
   letter-spacing: 1px;
   color: #163245;           /* deep blue */
   line-height: 1.0;
-  margin
+  margin-bottom: 0;
+}
+
+/* Sub-title: “Fearfully & Wonderfully Made” */
 .title-sub {
   display: block;
   font-family: "Great Vibes", cursive;
@@ -131,5 +178,31 @@ body{
   line-height: 1.1;
   margin-top: -10px;
 }
-  margin-bottom: -6px;
+
+/* Simple centered gold line under title */
+.headline::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 2px;
+  background: var(--accent);
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* Mobile fine-tuning */
+@media (max-width: 480px) {
+  .hero-logo {
+    width: 80px;
+    margin-bottom: 4px;
+  }
+
+  .title-sub {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+    margin-top: -8px;
+  }
+
+  .headline::after {
+    width: 60px;
+  }
 }

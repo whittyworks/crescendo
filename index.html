@@ -12,7 +12,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=gold11" />
+<style>
+  /* Temp override to beat cache/ordering issues */
+  .title-sub { font-family: "Great Vibes", cursive !important; }
+</style>
+  <link rel="stylesheet" href="styles.css?v=gold14" />
   <link rel="icon" href="favicon.png">
 </head>
 <body>
@@ -27,18 +31,18 @@
 
   <main>
     <section class="landing-hero">
-      <div class="container landing-inner">
-        <img src="crescendo-logo.png" alt="Crescendo logo" class="hero-logo">
-        <h1 class="headline">
-          <span class="title-main">Crescendo</span><br>
-          <span class="title-sub">Fearfully &amp; Wonderfully Made</span>
-        </h1>
-        <p class="tag">A Symphony of Grace</p>
-        <p class="lede">Join the next cohort — Tuesdays at 7:30 pm CST</p>
-        <a class="btn" id="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSduGp4gMvLNXUq4kpwv-dzmbWdzXuveVz_DYWCInQuPYrFepw/viewform?usp=header" target="_blank" rel="noopener">Join the Waitlist</a>
-        <p class="tiny">You’ll get one simple email with next steps. No spam, ever.</p>
-      </div>
-    </section>
+  <div class="container landing-inner">
+    <img src="crescendo-logo.png" alt="Crescendo logo" class="hero-logo">
+    <h1 class="headline">
+      <span class="title-main">Crescendo</span><br>
+      <span class="title-sub">Fearfully &amp; Wonderfully Made</span>
+    </h1>
+    <p class="tag">A Symphony of Grace</p>
+    <p class="lede">Join the next cohort — Tuesdays at 7:30 pm CST</p>
+    <a class="btn" id="cta" href="YOUR_FORM_LINK_HERE" target="_blank" rel="noopener">Join the Waitlist</a>
+    <p class="tiny">You’ll get one simple email with next steps. No spam, ever.</p>
+  </div>
+</section>
 
     <section class="mini-about">
       <div class="container">
