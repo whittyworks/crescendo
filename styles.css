@@ -90,18 +90,19 @@ body{
 }
 
 .title-sub {
+  display: block;
   font-family: "Great Vibes", cursive;
   font-weight: 400;
   font-size: clamp(1.8rem, 5vw, 2.6rem);
   color: var(--accent);
   line-height: 1.1;
-  margin-top: -8px;
+  margin-top: -10px;   /* was -8px, pull a bit closer */
 }
 
 /* Slight mobile tweak */
 @media (max-width: 420px) {
   .headline {
-    font-size: clamp(1.9rem, 7.5vw, 2.4rem);
+    font-size: clamp(3rem, 6.5vw, 4.4rem);
   }
   .hero-logo {
     width: 80px;
