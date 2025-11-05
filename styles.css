@@ -85,22 +85,12 @@ body{
 
 /* --- Split headline style --- */
 .title-main {
-  display: block;
-  font-family: "Playfair Display", serif;
-  font-weight: 700;
-  font-size: clamp(2.6rem, 6vw, 3.8rem);
-  letter-spacing: 1px;
-  color: #163245;  /* deep blue */
-  margin-bottom: 4px;
+  margin-bottom: 0;          /* remove extra gap */
+  line-height: 1.0;          /* tightens vertical space */
 }
 
 .title-sub {
-  display: block;
-  font-family: "Great Vibes", cursive;
-  font-weight: 400;
-  font-size: clamp(1.8rem, 5vw, 2.6rem);
-  color: var(--accent);  /* your gold tone */
-  line-height: 1.1;
+  margin-top: -8px;          /* gently pulls it upward */
 }
 /* Slight mobile tweak */
 @media (max-width: 420px) {
@@ -111,20 +101,14 @@ body{
     width: 80px;
   }
 }
-/* --- GOLD BRUSHSTROKE UNDER TITLE --- */
+/* --- SIMPLE GOLD LINE UNDER TITLE --- */
 .headline::after {
   content: "";
   display: block;
-  width: 180px;                     /* make it longer than before */
-  height: 10px;                     /* taller for a brush feel */
-  margin: 18px auto 0;
-  border-radius: 999px;             /* gives it an organic curve */
-  background: url('watercolor-bg.png') center/cover no-repeat fixed;
-  background-color:#f9fafa; /* backup color */
-
-  filter: blur(0.6px);              /* slight softness */
-}
-@media (max-width: 420px){
-  .headline::after{ width:120px; height:8px; }
+  width: 80px;               /* adjust width if you want */
+  height: 2px;               /* thin line */
+  background: var(--accent); /* your gold tone (#C3A35B) */
+  margin: 12px auto 0;
+  border-radius: 2px;
 }
 
