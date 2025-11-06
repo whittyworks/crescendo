@@ -45,39 +45,82 @@ img{ max-width:100%; display:block; }
   backdrop-filter:saturate(180%) blur(14px);
   border-bottom:1px solid rgba(0,0,0,.06);
 }
-.nav{
-  display:flex; align-items:center; justify-content:space-between;
-  gap:16px; padding:10px 0;
-}
-.brand{
-  display:flex; align-items:center; gap:10px;
-  color:#151a20; text-decoration:none; font-weight:700;
-}
-.brand-text{ font-family:"Playfair Display", Georgia, serif; font-size:1.15rem; }
-.logo{ width:80px; height:auto; }
 
-/* Refined sticky header brand */
-.site-header .brand{
-  opacity: 0.95;
-  transition: opacity .25s ease, transform .25s ease;
-}
-.site-header .brand:hover{
-  opacity: 1;
-  transform: translateY(-1px);
+/* --- Two-row centered masthead --- */
+.masthead{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  padding-block: 12px;
 }
 
-.site-header .logo{
-  width: 42px;    /* smaller than hero logo */
-  height: auto;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,.08));
+/* Site title */
+.site-title{
+  font-family:"Playfair Display", Georgia, serif;
+  font-weight:700;
+  font-size: clamp(1.2rem, 2.8vw, 1.4rem);
+  letter-spacing:.4px;
+  color:#163245;
+  text-decoration:none;
 }
 
-.site-header .brand-text{
-  font-family: "Playfair Display", Georgia, serif;
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: .4px;
-  color: #163245;
+/* Menu row */
+.primary-nav .menu{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;              /* spacing between items & separators */
+  flex-wrap:wrap;
+  margin:0;
+  padding:4px 0 2px;
+  list-style:none;
+}
+
+/* Links */
+.nav-link{
+  position:relative;
+  text-decoration:none;
+  color:#273746;
+  font-weight:600;
+  font-size: clamp(.96rem, 2.2vw, 1rem);
+  padding:4px 2px;
+  transition: color .15s ease;
+}
+
+/* Gold underline on hover/active */
+.nav-link::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:-2px;
+  height:2px;
+  transform: scaleX(0);
+  transform-origin:left;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transition: transform .2s ease;
+}
+.nav-link:hover::after,
+.nav-link.is-active::after{ transform: scaleX(1); }
+
+/* Vertical pipe separators */
+.primary-nav .menu li{
+  display:flex; align-items:center;
+}
+.primary-nav .menu li + li::before{
+  content:"│";
+  color:#a8b3bb;
+  opacity:.9;
+  margin: 0 6px;
+}
+
+/* Mobile tweaks */
+@media (max-width:560px){
+  .primary-nav .menu{
+    gap:10px;
+  }
+  .primary-nav .menu li + li::before{
+    margin: 0 4px;
+  }
 }
 
 /* ---------- Hero ---------- */
