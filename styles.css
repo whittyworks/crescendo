@@ -245,6 +245,114 @@ img{ max-width:100%; display:block; }
   background:none;              /* override gradient from the general span */
   color:var(--accent);          /* warm matte gold for contrast */
 }
+/* --- Refined Freebie Layout --- */
+.freebie{
+  padding: clamp(40px, 8vw, 80px) 0;
+  text-align: center;
+  background:
+    radial-gradient(900px 300px at 15% 0%, rgba(195,163,91,.10), transparent 60%),
+    radial-gradient(900px 300px at 85% 0%, rgba(127,182,179,.10), transparent 60%),
+    rgba(255,255,255,.6);
+  border-top: 1px solid rgba(0,0,0,.05);
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
+
+.freebie-inner{
+  width: min(720px, 92%);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(24px, 4vw, 36px);
+}
+
+/* Title */
+.freebie-title{
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.4rem, 3.8vw, 2rem);
+  margin: 0 0 .75rem;
+  color: #163245;
+  text-align: center;
+}
+
+/* Keep your script gold style */
+.freebie-title .script{
+  font-family:"Great Vibes", cursive;
+  font-weight:400;
+  font-size:1.25em;
+  letter-spacing:0.5px;
+  background:none;
+  color:var(--accent);
+}
+
+/* Benefits list */
+/* Benefits list — elegant dash style */
+.benefits{
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  text-align: center;
+  color: #2b3138;
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.benefits li::before{
+  content: "— ";         /* elegant dash */
+  color: var(--accent);  /* warm gold tone */
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.benefits li{
+  margin: 0;
+  max-width: 45ch;       /* keeps nice line width */
+}
+
+/* Form */
+.signup{
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 14px;
+  padding: clamp(18px, 4vw, 28px);
+  box-shadow:
+    0 1px 0 rgba(0,0,0,.03) inset,
+    0 10px 26px rgba(0,0,0,.06),
+    0 2px 8px rgba(195,163,91,.12);
+  width: 100%;
+  max-width: 420px;
+  text-align: left;
+}
+
+/* Fields smaller & balanced */
+.field label{
+  font-size:.85rem;
+}
+.field input{
+  font-size: .95rem;
+  padding: 10px 12px;
+}
+
+.signup .btn{
+  width:100%;
+  margin-top:10px;
+}
+
+.freebie-note, .form-help{
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Mobile fine-tuning */
+@media (max-width: 480px){
+  .freebie-inner{ width: 95%; }
+  .signup{ padding: 18px; }
+}
 
 /* ---------- Mobile tweaks ---------- */
 @media (max-width:480px){
