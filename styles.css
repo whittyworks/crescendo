@@ -239,11 +239,13 @@ a{ color: var(--accent); text-decoration: none; }
 .lede{ font-size:1.05rem; opacity:.9; margin:.2em 0 1em; }
 
 /* Also support page-level subtitle under H1 (Home hero) */
-.subtitle{
+.subtitle {
   font-family: "Great Vibes", cursive;
   font-size: clamp(1.6rem, 4.8vw, 1.9rem);
   color: var(--accent);
-  margin: .25rem 0 1.5rem;
+  margin: 0.75rem 0 1.75rem; /* gives more breathing room above/below */
+  line-height: 1.4;          /* prevents descenders and swashes from clipping */
+  overflow: visible;         /* ensures no part of the script gets cut off */
 }
 
 /* ---------- Buttons ---------- */
