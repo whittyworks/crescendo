@@ -470,34 +470,45 @@ a{ color: var(--accent); text-decoration: none; }
 @media (max-width:380px){
   .title-main{ font-size: clamp(2.2rem, 8vw, 2.6rem); }
 }
-/* ---- Normalize container widths so Hero centers exactly ---- */
+/* === Unified centering (header, main sections, footer) === */
 .container{
-  max-width: none;                 /* neutralize any older max-widths */
-  width: min(900px, 92%);
+  max-width: 900px;
+  width: 92%;
   margin-left: auto;
   margin-right: auto;
   padding-left: clamp(12px, 3vw, 24px);
   padding-right: clamp(12px, 3vw, 24px);
 }
 
-/* In case any page still had a wider hero container from past CSS: */
-.hero > .container,
-.landing-hero > .container{
-  max-width: none;
-  width: min(900px, 92%);
+/* Home hero spacing and centering */
+.hero{
+  padding: 80px 0 120px;
+  text-align: center;
+  position: relative;
+  background:
+    radial-gradient(1200px 500px at 20% 10%, rgba(195,163,91,.12), transparent 60%),
+    radial-gradient(900px 450px at 80% 0%, rgba(127,182,179,.12), transparent 60%),
+    linear-gradient(180deg, #f9fafa 0%, #edf6f5 100%);
+}
+.hero .container{
+  max-width: 900px;
+  width: 92%;
   margin-left: auto;
   margin-right: auto;
 }
-/* === Force hero to use the same centered width as the rest of the site === */
-.hero > .container{
-  width: min(900px, 92%) !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  padding-left: clamp(12px, 3vw, 24px) !important;
-  padding-right: clamp(12px, 3vw, 24px) !important;
-  max-width: none !important; /* neutralize any older max-widths */
-}
 
+/* Keep hero internals centered */
+.hero h1,
+.hero .subtitle,
+.hero .cta-row{ margin-left:auto; margin-right:auto; }
+
+.hero .cta-row{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+/* === Make About section match container width === */  
 /* (Optional) keep About matching too, for optical alignment */
 .about > .container{
   width: min(900px, 92%) !important;
