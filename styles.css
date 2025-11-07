@@ -240,7 +240,7 @@ a{ color: var(--accent); text-decoration: none; }
 
 /* Also support page-level subtitle under H1 (Home hero) */
 .subtitle{
-  font-family: "Dancing Script", cursive;
+  font-family: "Great Vibes", cursive;
   font-size: clamp(1.6rem, 4.8vw, 1.9rem);
   color: var(--accent);
   margin: .25rem 0 1.5rem;
