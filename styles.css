@@ -494,3 +494,30 @@ a{ color: var(--accent); text-decoration: none; }
   margin-left: auto !important;
   margin-right: auto !important;
 }
+/* === Hard-center the Home hero to match site container === */
+.hero,
+.hero .container { text-align: center !important; }
+
+.hero .container{
+  width: min(900px, 92%) !important;
+  margin-inline: auto !important;
+  padding-inline: clamp(12px, 3vw, 24px) !important;
+  max-width: none !important;
+}
+
+/* Make the hero children anchor to the true center line */
+.hero h1,
+.hero .subtitle,
+.hero .cta-row{
+  display: block;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Keep the CTAs perfectly centered */
+.hero .cta-row{
+  display: flex;
+  justify-content: center !important;
+  gap: 12px;
+  flex-wrap: wrap;
+}
