@@ -97,6 +97,25 @@ a{ color: var(--accent); text-decoration: none; }
   background: var(--nav-sep);
   margin: 0 6px;
 }
+/* --- Fix stray gold dash in nav --- */
+.primary-nav .menu li::before {
+  content: none !important;
+}
+
+.primary-nav .menu li + li::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 22px;
+  background: var(--nav-sep);
+  margin: 0 6px;
+}
+
+/* Prevent any gold-line bullets from applying to nav */
+.primary-nav .menu li::marker,
+.primary-nav .menu li::before.gold-list {
+  content: none;
+}
 
 /* Links with GOLD brushstroke underline */
 .nav-link{
