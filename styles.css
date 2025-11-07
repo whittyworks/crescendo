@@ -586,3 +586,19 @@ footer p{ margin: 0; }
 .prelude li{
   margin: 0.3rem 0;
 }
+/* --- Fix About header script line clipping --- */
+.about { overflow: visible; }  /* ensure parent never crops swashes */
+
+.about h1 {
+  margin-bottom: 0.4em;       /* more room under "About" */
+}
+
+.about h1 + .subtitle {
+  display: block;              /* own line box */
+  line-height: 1.6;            /* taller line box for Great Vibes */
+  padding: .2em 0 .25em;       /* adds top/bottom headroom */
+  margin-top: .2em;            /* gentle separation from H1 */
+  overflow: visible;           /* belt-and-suspenders */
+  transform: translateZ(0);    /* WebKit repaint fix (prevents visual crop) */
+}
+/* --- Fix Journey header script line clipping --- */
