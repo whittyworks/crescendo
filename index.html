@@ -12,71 +12,78 @@
     :root{
       --ink:#273746;
       --paper:#f9fafa;
-      --gold:#C3A35B;
+      --gold:#C3A35B;            /* accent gold */
+      --nav-sep:rgba(39,55,70,.25); /* vertical separators */
     }
     *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:"Inter",system-ui,sans-serif;
-      color:var(--ink);
-      background:linear-gradient(180deg,#f9fafa 0%,#edf6f5 100%);
-      line-height:1.6;
-    }
+    body{font-family:"Inter",system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,#f9fafa 0%,#edf6f5 100%);line-height:1.6}
     h1,h2,h3{font-family:"Playfair Display",Georgia,serif;color:#152029;margin-bottom:.6rem}
     p{margin-bottom:1rem}
     a{color:var(--gold);text-decoration:none}
     .container{max-width:1100px;margin:0 auto;padding:0 1rem}
 
-    /* Header */
+    /* ===== Header (matches Journey page structure, centered) ===== */
     .site-header{position:sticky;top:0;z-index:10;background:#ffffffc8;backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid rgba(0,0,0,.06)}
-    .nav{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 0;gap:6px}
-    .brand-text{font-family:"Playfair Display",serif;font-size:1.3rem;font-weight:700;color:#151a20;text-decoration:none}
-    .links{display:flex;gap:18px;justify-content:center}
-    .links a{font-weight:600;padding:8px 10px;border-radius:10px;color:#1c232a;transition:all .2s ease}
-    .links a:hover{color:var(--gold)}
-    .links a.active{color:var(--gold);border-bottom:2px solid var(--gold)}
+    .masthead{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 0}
+    .site-title{font-family:"Playfair Display",serif;font-size:1.8rem;font-weight:700;color:#152029;margin-bottom:8px}
+    .primary-nav{display:flex;justify-content:center}
+    .menu{display:flex;align-items:center;gap:0}
+    .menu li{list-style:none;display:flex;align-items:center}
+    .menu li + li::before{content:"";width:1px;height:22px;background:var(--nav-sep);margin:0 18px}
+    .nav-link{position:relative;display:inline-block;font-weight:700;color:#2b3742;padding:4px 0}
+    .nav-link:hover{color:#2b3742}
+    /* gold shimmer underline on hover/active */
+    .nav-link::after{content:"";position:absolute;left:0;right:0;bottom:-10px;height:4px;background:linear-gradient(90deg, rgba(195,163,91,0) 0%, rgba(195,163,91,.95) 35%, rgba(195,163,91,0) 100%);opacity:0;transform:translateY(2px);transition:opacity .25s ease, transform .25s ease}
+    .nav-link:hover::after{opacity:.6;transform:translateY(0)}
+    .nav-link.is.active::after, .nav-link.active::after{opacity:1;transform:translateY(0)}
+    .nav-link.is.active, .nav-link.active{color:#1a222b}
 
-    /* Hero */
+    /* ===== Hero ===== */
     .hero{padding:80px 0;text-align:center;position:relative}
-    .hero h1{font-size:clamp(2.5rem,6vw,3.8rem);margin-bottom:0.5rem}
-    .hero .subtitle{font-family:'Dancing Script',cursive;font-size:1.8rem;color:var(--gold);margin-bottom:1.5rem}
+    .hero h1{font-size:clamp(2.5rem,6vw,3.8rem);margin-bottom:.5rem}
+    .hero .subtitle{font-family:'Dancing Script',cursive;font-size:1.9rem;color:var(--gold);margin-bottom:1.5rem}
     .cta-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-block;padding:0.8rem 1.4rem;border-radius:999px;font-weight:600;border:none;text-decoration:none;cursor:pointer;transition:all .25s ease}
+    .btn{display:inline-block;padding:.85rem 1.5rem;border-radius:999px;font-weight:600;border:none;text-decoration:none;cursor:pointer;transition:filter .25s ease, transform .02s ease}
+    .btn:active{transform:translateY(1px)}
     .btn.primary{background:linear-gradient(90deg,#d4b165,#c3a35b,#e3cc8a);color:#fff;box-shadow:0 4px 14px rgba(195,163,91,.35)}
     .btn.primary:hover{filter:brightness(1.05)}
     .btn.secondary{background:#fff;border:1px solid var(--gold);color:#152029}
     .btn.secondary:hover{background:#fff8e7}
 
-    /* About */
+    /* ===== About ===== */
     .about{padding:60px 0;text-align:center}
     .about p{max-width:700px;margin:0 auto 1rem}
     .signature{font-family:'Dancing Script',cursive;color:var(--gold);font-size:1.2rem}
 
-    /* Featured Program */
+    /* ===== Featured Program ===== */
     .program{padding:60px 0;text-align:center;background:#fff}
     .program h2{margin-bottom:.4rem}
     .program p{color:#405160;margin-bottom:1rem}
 
-    /* Prelude */
+    /* ===== Prelude ===== */
     .prelude{padding:60px 0;text-align:center}
     .prelude form{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:1rem}
-    input[type=email]{padding:0.9rem 1rem;border-radius:999px;border:1px solid rgba(0,0,0,.15);min-width:260px}
+    input[type=email]{padding:.9rem 1rem;border-radius:999px;border:1px solid rgba(0,0,0,.15);min-width:260px}
 
-    /* Footer */
+    /* ===== Footer ===== */
     footer{padding:30px 0;border-top:1px solid rgba(0,0,0,.06);text-align:center;background:#fff;color:#51616e}
   </style>
 </head>
 <body>
+  <!-- Header copied structure from Journey page -->
   <header class="site-header">
-    <nav class="nav container">
-      <a href="/" class="brand-text">My Holy Crescendo</a>
-      <div class="links">
-        <a class="active" href="/">Home</a>
-        <a href="/about.html">About</a>
-        <a href="/journey.html">Journey</a>
-        <a href="/prelude.html">Prelude</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-    </nav>
+    <div class="container masthead">
+      <a href="/" class="site-title">My Holy Crescendo</a>
+      <nav class="primary-nav" aria-label="Main">
+        <ul class="menu">
+          <li><a class="nav-link is active" href="/">Home</a></li>
+          <li><a class="nav-link" href="/about.html">About</a></li>
+          <li><a class="nav-link" href="/journey.html">The Journey</a></li>
+          <li><a class="nav-link" href="/free-reflection.html">Free Reflection</a></li>
+          <li><a class="nav-link" href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
@@ -135,8 +142,6 @@
     </div>
   </footer>
 
-  <script>
-    document.getElementById('yr').textContent=new Date().getFullYear();
-  </script>
+  <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
 </body>
 </html>
