@@ -33,12 +33,17 @@
             linear-gradient(180deg,#ffffff 0%, #f4faf8 70%, #eef5f4 100%)}
     .kicker{font-weight:600; text-transform:uppercase; letter-spacing:.12em; font-size:.8rem; color:#5a7a86;}
     .title{font-size:clamp(2rem, 4vw, 3.25rem); line-height:1.12}
-    .subtitle{font-size:1.1rem; color:#3c5a62; margin-top:.5rem}
+    .subtitle{ font-family: "Great Vibes", cursive; font-size: clamp(1.6rem, 4.8vw, 1.9rem); color: var(--accent); margin: 0.75rem 0 1.75rem; line-height: 1.4; overflow: visible; }
     .cta-row{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center}
     .btn{display:inline-block; padding:12px 18px; border-radius:999px; text-decoration:none; font-weight:600; border:1px solid transparent}
-    .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:white}
     .btn-ghost{background:#ffffffcc; border-color:#d8e6e2; color:#20434b}
     .btn:hover{transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,.05)}
+
+    /* Title pair */
+    .title-pair{margin:0}
+    .title-pair .title-main{display:block; font-family:"Playfair Display", serif; font-weight:700; font-size:clamp(2.6rem,6.2vw,4rem); line-height:1.0; color:#1b2a33}
+    .title-pair .title-sub{display:block; font-family:"Great Vibes", cursive; font-size:clamp(1.8rem,5vw,2.4rem); margin-top:.15em; background: linear-gradient(90deg, #c3a35b, #e7d7a2, #c3a35b); -webkit-background-clip:text; background-clip:text; color:transparent; animation: shimmer 8s linear infinite }
+    @keyframes shimmer{0%{background-position:0% 50%}100%{background-position:100% 50%}}
 
     /* Section shells */
     section{padding:56px 0}
@@ -77,16 +82,25 @@
     .muted{color:#6b7f87}
     .gold{color:var(--accent)}
     .pill{display:inline-block; padding:.3rem .6rem; border-radius:999px; background:#fff; border:1px solid #e6ecea; font-size:.85rem}
-      /* Gold line bullets (match site accent + timeline vibe) */
+
+    /* Gold line bullets */
     .gold-list{list-style:none; margin:0; padding:0}
     .gold-list li{position:relative; padding-left:22px; margin:.45rem 0; line-height:1.55}
-    .gold-list li::before{
-      content:""; position:absolute; left:0; top:0.9em; transform:translateY(-50%);
-      width:14px; height:2px; border-radius:2px;
-      background:linear-gradient(90deg, rgba(195,163,91,0), var(--accent), rgba(195,163,91,0));
-      box-shadow:0 0 4px rgba(224,201,143,.4);
-    }
-</style>
+    .gold-list li::before{content:""; position:absolute; left:0; top:0.9em; transform:translateY(-50%); width:14px; height:2px; border-radius:2px; background:linear-gradient(90deg, rgba(195,163,91,0), var(--accent), rgba(195,163,91,0)); box-shadow:0 0 4px rgba(224,201,143,.4)}
+
+    /* Waitlist card styling */
+    .waitlist-card{background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:22px; box-shadow:0 10px 26px rgba(0,0,0,.06), 0 2px 8px rgba(195,163,91,.12); padding:18px}
+    .wl-head{display:grid; grid-template-columns:1fr 1fr; gap:0; color:#5c6a70; font-weight:700; text-align:center; padding:8px 14px 10px}
+    .wl-row{display:grid; grid-template-columns:1fr 1fr; gap:0}
+    .wl-input{width:100%; padding:14px 14px; border:1px solid #d6e2df; background:#fff}
+    .wl-input.left{border-right:none; border-top-left-radius:14px; border-bottom-left-radius:14px}
+    .wl-input.right{border-top-right-radius:14px; border-bottom-right-radius:14px}
+    .wl-actions{display:flex; gap:10px; align-items:center; margin-top:14px}
+
+    /* Gold button helper */
+    .btn--gold{ color:#fff; border:0; background-image: linear-gradient(120deg,#b8892e 0%,#e6cc7a 25%,#caa24f 50%,#a8791f 75%,#e6cc7a 100%); background-size:220% 100%; animation: goldflow 6s linear infinite; box-shadow:0 1px 0 rgba(0,0,0,.06) inset, 0 10px 28px rgba(195,163,91,.34), 0 3px 8px rgba(0,0,0,.10)}
+    @keyframes goldflow{0%{background-position:0% 0%}100%{background-position:100% 0%}}
+  </style>
 </head>
 <body>
 
@@ -97,13 +111,17 @@
     <header class="hero">
       <div class="container">
         <div class="kicker">My Holy Crescendo</div>
-        <h1 class="title">Crescendo: <span class="gold">Fearfully &amp; Wonderfully Made</span></h1>
-        <p class="subtitle">A 15‑week guided journey — a symphony of grace in your life.</p>
+        <h1 class="title-pair" style="text-align:center">
+          <span class="title-main">Crescendo</span>
+          <span class="title-sub">Fearfully &amp; Wonderfully Made</span>
+        </h1>
+        <p class="subtitle" style="margin-top:10px">A 15‑week guided journey — a symphony of grace in your life.</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#waitlist">Join the Waitlist</a>
-          <a class="btn btn-ghost" href="/prelude.html">Preview the 3‑day Prelude</a>
+          <a class="btn btn--gold" href="#waitlist">Join the Waitlist</a>
         </div>
         <p class="fine" style="margin-top:10px">Tuesdays · 7:30 pm CT · 60–75 minutes · Start date TBA</p>
+      </div>
+    </header>
       </div>
     </header>
 
@@ -143,7 +161,6 @@
             <ul class="gold-list">
               <li>15 weeks of live small‑group calls (Zoom)</li>
               <li>Companion workbook (printable 5.5×8.5)</li>
-              <li>Gentle daily prompts (10–20 minutes)</li>
               <li>Community space for support & sharing</li>
               <li>Optional prayer partner & office hours</li>
             </ul>
@@ -176,20 +193,15 @@
         <p class="fine">Be the first to know the start date and early‑bird pricing.</p>
 
         <!-- Formspree‑ready form. Replace ACTION URL with your Formspree endpoint. The hidden _redirect sends users to /thank-you on success. -->
-        <form id="waitlist-form" class="card" style="padding:18px; margin-top:12px" action="https://formspree.io/f/your-id" method="POST">
+        <form id="waitlist-form" class="waitlist-card" action="https://formspree.io/f/your-id" method="POST">
           <input type="hidden" name="_redirect" value="/thank-you">
-          <div style="display:grid; gap:12px; grid-template-columns:1fr 1fr">
-            <div>
-              <label for="name" class="muted" style="display:block; font-weight:600; margin-bottom:6px">Name</label>
-              <input id="name" name="name" type="text" required placeholder="Jane Doe" style="width:100%; padding:12px 12px; border-radius:10px; border:1px solid #d6e2df; background:#fff">
-            </div>
-            <div>
-              <label for="email" class="muted" style="display:block; font-weight:600; margin-bottom:6px">Email</label>
-              <input id="email" name="email" type="email" required placeholder="you@example.com" style="width:100%; padding:12px 12px; border-radius:10px; border:1px solid #d6e2df; background:#fff">
-            </div>
+          <div class="wl-head"><span>Name</span><span>Email</span></div>
+          <div class="wl-row">
+            <input id="name" name="name" type="text" required placeholder="Jane Doe" class="wl-input left">
+            <input id="email" name="email" type="email" required placeholder="you@example.com" class="wl-input right">
           </div>
-          <div style="display:flex; gap:10px; align-items:center; margin-top:14px">
-            <button class="btn btn-primary" type="submit">Join the Waitlist</button>
+          <div class="wl-actions">
+            <button class="btn btn--gold" type="submit">Join the Waitlist</button>
             <span class="muted" id="form-msg" aria-live="polite"></span>
           </div>
         </form>
@@ -249,7 +261,7 @@
         <h2>Ready to begin?</h2>
         <p class="fine">If you feel a nudge, take the next gentle step.</p>
         <div class="cta-row" style="margin-top:12px">
-          <a class="btn btn-primary" href="#waitlist">Join the Waitlist</a>
+          <a class="btn btn--gold" href="#waitlist">Join the Waitlist</a>
         </div>
       </div>
     </section>
