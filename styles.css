@@ -663,3 +663,10 @@ ul li::before {
   display: inline-block;     /* keeps list centered overall */
   text-align: left;          /* aligns bullets with text */
 }
+/* Ensure brand link always looks like the header brand */
+.brand,
+.brand:link,
+.brand:visited {
+  color:#151a20;
+  text-decoration:none;
+}
