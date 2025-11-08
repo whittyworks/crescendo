@@ -105,13 +105,22 @@ a{ color: var(--accent); text-decoration: none; }
   align-items: center;
 }
 
-/* Thin separators between items */
-.primary-nav .menu li + li::before {
+/* --- NAV separators: reset first, then add only between items, never before first --- */
+.primary-nav .menu li::before{
+  content: none !important;   /* clears any gold dash or bullet */
+}
+
+.primary-nav .menu li + li::before{
   content: "";
+  display: inline-block;
   width: 1px;
   height: 22px;
   background: var(--nav-sep);
   margin: 0 6px;
+}
+
+.primary-nav .menu li:first-child::before{
+  content: none !important;   /* absolutely no dash before “Home” */
 }
 
 /* Prevent any global bullet or gold-line styles from affecting nav */
@@ -420,12 +429,6 @@ a{ color: var(--accent); text-decoration: none; }
   align-items: center;
   gap: 0.4rem;
 }
-.benefits li::before{
-  content: "— ";
-  color: var(--accent);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
 .benefits li{
   margin: 0;
   max-width: 45ch;
@@ -560,13 +563,6 @@ footer > .container{
 
 .prelude h2{ margin-bottom: .5rem; }
 
-/* keep the bullet list tidy but centered as a block */
-.prelude ul{
-  margin: 1rem auto;
-  padding: 0;
-  max-width: 600px;
-  text-align: left;  /* bullets read better left-aligned within centered block */
-}
 
 /* ensure all section containers share the exact center line */
 .program > .container,
@@ -597,14 +593,6 @@ footer img{
 }
 
 footer p{ margin: 0; }
-/* Center bullets + text for Prelude list */
-.prelude ul{
-  list-style-position: inside;
-  text-align: center;
-  padding: 0;
-  margin: 1rem auto;
-  max-width: 600px;
-}
 .prelude li{
   margin: 0.3rem 0;
 }
@@ -630,21 +618,22 @@ footer p{ margin: 0; }
   top: 0.1em; /* move text slightly down — try 0.05em to 0.15em if needed */
 }
 /* --- Tiny visual adjustment for Journey subtitle --- */
-/* === Global Gold Line Bullets === */
-ul {
+/* === Gold Line Bullets (scoped) === */
+/* Only lists with .gold-list get the dash bullets */
+.gold-list {
   list-style: none;
   padding-left: 0;
   margin: 0 0 1rem;
 }
 
-ul li {
+.gold-list li {
   position: relative;
   padding-left: 22px;
   margin: 0.45rem 0;
   line-height: 1.55;
 }
 
-ul li::before {
+.gold-list li::before {
   content: "";
   position: absolute;
   left: 0;
@@ -653,13 +642,8 @@ ul li::before {
   width: 14px;
   height: 2px;
   border-radius: 2px;
-  background: linear-gradient(
-    90deg,
-    rgba(195, 163, 91, 0),
-    var(--accent),
-    rgba(195, 163, 91, 0)
-  );
-  box-shadow: 0 0 4px rgba(224, 201, 143, 0.4);
+  background: linear-gradient(90deg, rgba(195,163,91,0), var(--accent), rgba(195,163,91,0));
+  box-shadow: 0 0 4px rgba(224,201,143,.4);
 }
 /* Centered sections but left-align gold bullets for readability */
 .gold-list {
@@ -673,5 +657,3 @@ ul li::before {
   color:#151a20;
   text-decoration:none;
 }
-.menu, .menu li { list-style: none !important; }
-.menu li::marker { content: ""; }
