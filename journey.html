@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/style.css?v=5" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crescendo: Fearfully & Wonderfully Made — Journey</title>
+  <meta name="description" content="A 15-week guided journey — a symphony of grace in your life. Learn what you’ll experience, what’s included, who it’s for, logistics, and join the waitlist." />
+  <meta property="og:title" content="Crescendo: Fearfully & Wonderfully Made — Journey" />
+  <meta property="og:description" content="A Symphony of Grace — Explore the 13-week journey of My Holy Crescendo and join the next cohort (Tuesdays, 7:30 pm CST)." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts (match site) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <!-- Page-specific styles -->
+  <style>
+  :root{
+    --ink:#273746; --paper:#f9fafa; --brand:#3a6073; --brand-2:#7fb6b3;
+    --accent:#C3A35B; --accent-2:#E0C98F; --muted:#47515a;
+  }
+
+  html,body{margin:0}
+  body{
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color:var(--ink);
+    background:linear-gradient(180deg,#f9fafa 0%, #edf6f5 100%);
+    line-height:1.6;
+  }
+  h1,h2{font-family:"Playfair Display", Georgia, serif; color:#163245}
+
+  /* Hero */
+  .hero{
+    padding:80px 0 100px; text-align:center;
+    background:
+      radial-gradient(1200px 500px at 20% 10%, rgba(195,163,91,.12), transparent 60%),
+      radial-gradient(900px 450px at 80% 0%, rgba(127,182,179,.12), transparent 60%),
+      linear-gradient(180deg, #f9fafa 0%, #edf6f5 100%);
+  }
+  .kicker{text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-size:.9rem}
+
+  /* Title pair (Crescendo + script subtitle) */
+  .title-pair{margin:0}
+  .title-main{display:block; font-family:"Playfair Display", serif; font-weight:700; font-size:clamp(2.6rem,6.2vw,4rem); line-height:1.0; color:#1b2a33}
+  .title-sub{
+    display:block; font-family:"Great Vibes", cursive; font-size:clamp(1.8rem,5vw,2.4rem); margin-top:.15em;
+    background:linear-gradient(90deg, #c3a35b, #e7d7a2, #c3a35b);
+    -webkit-background-clip:text; background-clip:text; color:transparent; animation:shimmer 8s linear infinite;
+  }
+  @keyframes shimmer{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+
+  .subtitle{font-family:"Great Vibes", cursive; font-size:clamp(1.6rem, 4.8vw, 1.9rem); color:var(--accent); margin:.75rem 0 1.75rem; line-height:1.4}
+  .cta-row{margin-top:22px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap}
+
+  /* Buttons */
+  .btn{display:inline-block; font-weight:700; letter-spacing:.2px; border:0; border-radius:999px; padding:14px 22px; color:#fff; text-decoration:none; transition:transform .15s ease, box-shadow .15s ease}
+  .btn:hover{transform:translateY(-1px)}
+  .btn--gold{
+    background-image:linear-gradient(120deg,#b8892e 0%,#e6cc7a 25%,#caa24f 50%,#a8791f 75%,#e6cc7a 100%);
+    background-size:220% 100%; animation:goldflow 6s linear infinite;
+    box-shadow:0 10px 28px rgba(195,163,91,.34), 0 3px 8px rgba(0,0,0,.10);
+  }
+  @keyframes goldflow{0%{background-position:0% 0%}100%{background-position:100% 0%}}
+
+  .fine{font-size:.95rem; color:var(--muted); margin-top:8px}
+  section{padding:60px 0; text-align:center}
+  .container{width:min(900px, 92%); margin-inline:auto}
+
+  /* Gold line bullets — centered block with left-aligned text */
+  .gold-list{
+    list-style:none; margin:0 auto; padding:0;
+    display:inline-block; text-align:left; max-width:640px;
+  }
+  .gold-list li{position:relative; padding-left:22px; margin:.45rem 0; line-height:1.55}
+  .gold-list li::before{
+    content:""; position:absolute; left:0; top:.9em; transform:translateY(-50%);
+    width:14px; height:2px; border-radius:2px;
+    background:linear-gradient(90deg, rgba(195,163,91,0), var(--accent), rgba(195,163,91,0));
+    box-shadow:0 0 4px rgba(224,201,143,.4);
+  }
+
+  /* FAQ boxes */
+  #faq .faq-wrap{max-width:760px; margin:0 auto; text-align:left}
+  #faq details{background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:14px; padding:14px 16px}
+  #faq details + details{margin-top:10px}
+  #faq summary{cursor:pointer; font-weight:600; list-style:none}
+
+  /* Header fail-safe */
+  .masthead{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    padding-block:12px;
+  }
+  .site-header .site-title,
+  .site-header .site-title:link,
+  .site-header .site-title:visited{
+    text-decoration:none;
+    color:#151a20;
+    font-family:"Playfair Display", Georgia, serif;
+    font-weight:700;
+    font-size:clamp(1.2rem, 2.8vw, 1.4rem);
+  }
+  .primary-nav .menu{
+    list-style:none; margin:0;
+    display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:18px;
+    padding:6px 0 10px;
+  }
+  .primary-nav .menu li{ display:flex; align-items:center; }
+  .primary-nav .menu li + li::before{
+    content:""; width:1px; height:22px; background: rgba(39,55,70,.25); margin:0 6px;
+  }
+  .nav-link{
+    text-decoration:none; color:#273746; font-weight:700; position:relative; padding:4px 2px;
+  }
+  .nav-link::after{
+    content:""; position:absolute; left:0; right:0; bottom:-10px; height:4px;
+    background:linear-gradient(90deg, rgba(195,163,91,0) 0%, rgba(195,163,91,.95) 35%, rgba(195,163,91,0) 100%);
+    opacity:0; transform:translateY(2px); transition:opacity .25s ease, transform .25s ease;
+  }
+  .nav-link:hover::after{ opacity:.6; transform:translateY(0); }
+  .nav-link.is.active::after{ opacity:1; transform:translateY(0); }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="container masthead">
+    <a href="/" class="site-title">My Holy Crescendo</a>
+    <nav class="primary-nav" aria-label="Main">
+      <ul class="menu">
+        <li><a class="nav-link" href="/index.html">Home</a></li>
+        <li><a class="nav-link" href="/about.html">About</a></li>
+        <li><a class="nav-link is active" href="/journey.html">The Journey</a></li>
+        <li><a class="nav-link" href="/prelude.html">Prelude</a></li>
+        <li><a class="nav-link" href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main>
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <div class="kicker">My Holy Crescendo</div>
+      <h1 class="title-pair" style="text-align:center">
+        <span class="title-main">Crescendo</span>
+        <span class="title-sub">Fearfully &amp; Wonderfully Made</span>
+      </h1>
+      <p class="subtitle" style="margin-top:10px">A 15-week guided journey — a symphony of grace in your life.</p>
+      <div class="cta-row">
+        <a class="btn btn--gold" href="#waitlist">Join the Waitlist</a>
+      </div>
+      <p class="fine" style="margin-top:10px">Tuesdays · 7:30 pm CT · 60–75 minutes · Start date TBA</p>
+    </div>
+  </header>
+
+  <!-- What you’ll experience -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-head">
+        <h2>What you’ll experience</h2>
+      </div>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Clarity & Peace</h3>
+          <p>Gentle practices that help you live from belovedness, order your days, and breathe again.</p>
+        </div>
+        <div class="card">
+          <h3>Rooted Identity</h3>
+          <p>Christ-centered tools to understand your gifts and make soul-aligned choices with confidence.</p>
+        </div>
+        <div class="card">
+          <h3>Supportive Community</h3>
+          <p>A small, safe circle for encouragement, honest sharing, and real accountability.</p>
+        </div>
+        <div class="card">
+          <h3>Grace in Motion</h3>
+          <p>Small, doable steps that add up — rhythms of prayer, beauty, and stewardship for daily life.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What’s included / Who it’s for / Logistics -->
+  <section id="details">
+    <div class="container">
+      <div class="grid cols-3">
+        <div>
+          <h2>What’s included</h2>
+          <ul class="gold-list">
+            <li>15 weeks of live small-group calls (Zoom)</li>
+            <li>Companion workbook (printable 5.5×8.5)</li>
+            <li>Community space for support & sharing</li>
+            <li>Optional prayer partner & office hours</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Who it’s for</h2>
+          <ul class="gold-list">
+            <li>Women seeking a Christ-centered reset and deeper identity</li>
+            <li>Those who want beauty, order, and sustainable rhythms</li>
+            <li>Anyone who prefers soul-safe groups over solo courses</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Logistics</h2>
+          <ul class="gold-list">
+            <li><strong>When:</strong> Tuesdays, 7:30 pm CT</li>
+            <li><strong>Length:</strong> 60–75 minutes</li>
+            <li><strong>Starts:</strong> TBA (join the waitlist)</li>
+            <li><strong>Format:</strong> Zoom (replays available)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Waitlist form -->
+  <section id="waitlist" class="cta">
+    <div class="container" style="padding:40px 0 48px; max-width:760px">
+      <h2>Join the Waitlist</h2>
+      <p class="fine">Be the first to know the start date and early-bird pricing.</p>
+
+      <!-- MAILERLITE EMBED -->
+      <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1762785");</style>
+      <style type="text/css">
+      /* MailerLite embed styles (as provided) */
+      .ml-form-embedSubmitLoad {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+      }
+      .g-recaptcha {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0,0,0,0);
+        border: 0;
+      }
+      .ml-form-embedSubmitLoad:after {
+        content: " ";
+        display: block;
+        width: 11px;
+        height: 11px;
+        margin: 1px;
+        border-radius: 50%;
+        border: 4px solid #fff;
+        border-color: #ffffff #ffffff #ffffff transparent;
+        animation: ml-form-embedSubmitLoad 1.2s linear infinite;
+      }
+      @keyframes ml-form-embedSubmitLoad {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      #mlb2-33102111.ml-form-embedContainer {
+        box-sizing: border-box;
+        display: table;
+        margin: 0 auto;
+        position: static;
+        width: 100% !important;
+      }
+      #mlb2-33102111.ml-form-embedContainer h4,
+      #mlb2-33102111.ml-form-embedContainer p,
+      #mlb2-33102111.ml-form-embedContainer span,
+      #mlb2-33102111.ml-form-embedContainer button {
+        text-transform: none !important;
+        letter-spacing: normal !important;
+      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper {
+        background-color: #F9FAF9;
+        border-width: 0px;
+        border-color: transparent;
+        border-radius: 4px;
+        border-style: solid;
+        box-sizing: border-box;
+        display: inline-block !important;
+        margin: 0;
+        padding: 0;
+        position: relative;
+      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper.embedPopup,
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper.embedDefault { width: 400px; }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper.embedForm { max-width: 400px; width: 100%; }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody,
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody {
+        padding: 20px 20px 0 20px;
+      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody.ml-form-embedBodyHorizontal {
+        padding-bottom: 0;
+      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent,
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent {
+        text-align: left;
+        margin: 0 0 20px 0;
+      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent h4,
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent h4 {
+        color: #3A6073;
+        font-family: 'Playfair Display', sans-serif;
+        font-size: 25px;
+        font-weight: 400;
+        margin: 0 0 10px 0;
+        text-align: left;
+        word-break: break-word;
+      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p,
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p {
+        color: #273746;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        margin: 0 0 10px 0;
+        text-align: left;
+      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form {
+        margin: 0;
+        width: 100%;
+      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent,
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
+        margin: 0 0 20px 0;
+        width: 100%;
+      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow {
+        margin: 0 0 10px 0;
+        width: 100%;
+      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-last-item {
+        margin: 0;
+      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input {
+        background-color: #ffffff !important;
+        color: #273746 !important;
+        border-color: #3a6073;
+        border-radius: 4px !important;
+        border-style: solid !important;
+        border-width: 1px !important;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px !important;
+        line-height: 21px !important;
+        margin: 0;
+        padding: 10px 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-webkit-input-placeholder { color: #273746; }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-moz-placeholder { color: #273746; }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-ms-input-placeholder { color: #273746; }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-moz-placeholder { color: #273746; }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit {
+        margin: 0 0 20px 0;
+        float: left;
+        width: 100%;
+      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button {
+        background-color: #3a6073 !important;
+        border: none !important;
+        border-radius: 4px !important;
+        box-shadow: none !important;
+        color: #ffffff !important;
+        cursor: pointer;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        line-height: 21px !important;
+        height: auto;
+        padding: 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button:hover {
+        background-color: #7fb6b3 !important;
+      }
+      .ml-error input, .ml-error textarea, .ml-error select {
+        border-color: red!important;
+      }
+      @media only screen and (max-width: 400px){
+        .ml-form-embedWrapper.embedDefault, .ml-form-embedWrapper.embedPopup { width: 100%!important; }
+      }
+      </style>
+
+      <div id="mlb2-33102111" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-33102111">
+        <div class="ml-form-align-center ">
+          <div class="ml-form-embedWrapper embedForm">
+            <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+              <div class="ml-form-embedContent">
+                <h4>Crescendo Waitlist</h4>
+                <p><em>Join the Waitlist for our 15-week Crescendo Cohort!</em></p>
+              </div>
+
+              <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/1906810/forms/170530801668064317/subscribe" data-code="" method="post" target="_blank">
+                <div class="ml-form-formContent">
+                  <div class="ml-form-fieldRow">
+                    <div class="ml-field-group ml-field-name">
+                      <input aria-label="name" type="text" class="form-control" name="fields[name]" placeholder="Name" autocomplete="given-name">
+                    </div>
+                  </div>
+                  <div class="ml-form-fieldRow ml-last-item">
+                    <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                      <input aria-label="email" aria-required="true" type="email" class="form-control" name="fields[email]" placeholder="Email" autocomplete="email">
+                    </div>
+                  </div>
+                </div>
+
+                <input type="hidden" name="ml-submit" value="1">
+                <div class="ml-form-embedSubmit">
+                  <button type="submit" class="primary">✨Join the Waitlist</button>
+                  <button disabled="disabled" style="display: none;" type="button" class="loading">
+                    <div class="ml-form-embedSubmitLoad"></div>
+                    <span class="sr-only">Loading...</span>
+                  </button>
+                </div>
+                <input type="hidden" name="anticsrf" value="true">
+              </form>
+            </div>
+
+            <div class="ml-form-successBody row-success" style="display: none">
+              <div class="ml-form-successContent">
+                <h4>Thank you!</h4>
+                <p>You have successfully joined our subscriber list.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function ml_webform_success_33102111() {
+          try {
+            window.top.location.href = 'https://myholycrescendo.com/thank-you.html';
+          } catch (e) {
+            window.location.href = 'https://myholycrescendo.com/thank-you.html';
+          }
+        }
+      </script>
+      <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v176e10baa5e7ed80d35ae235be3d5024" type="text/javascript"></script>
+      <script>
+        fetch("https://assets.mailerlite.com/jsonp/1906810/forms/170530801668064317/takel");
+      </script>
+      <!-- END MAILERLITE EMBED -->
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head"><h2>FAQ</h2></div>
+      <div class="grid cols-2">
+        <div>
+          <details>
+            <summary>How much does it cost?</summary>
+            <p class="muted">Pricing will be announced soon with an early-bird range. Join the waitlist to receive the first notice.</p>
+          </details>
+          <details>
+            <summary>Are recordings available?</summary>
+            <p class="muted">Yes — replays will be available for registered participants if you need to miss a week.</p>
+          </details>
+        </div>
+        <div>
+          <details>
+            <summary>What materials do I need?</summary>
+            <p class="muted">You’ll receive a printable workbook (5.5×8.5). Bring a pen, a quiet spot, and a willing heart. Everything else is optional.</p>
+          </details>
+          <details>
+            <summary>Is the group size limited?</summary>
+            <p class="muted">Yes, cohorts are intentionally small to keep the space safe, personal, and interactive.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="cta">
+    <div class="container" style="padding:36px 0 56px; text-align:center">
+      <h2>Ready to begin?</h2>
+      <p class="fine">If you feel a nudge, take the next gentle step.</p>
+      <div class="cta-row" style="margin-top:12px">
+        <a class="btn btn--gold" href="#waitlist">Join the Waitlist</a>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

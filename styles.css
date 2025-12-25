@@ -1,0 +1,659 @@
+/* =========================================================
+   My Holy Crescendo — Global Styles (Unified)
+   - Gold accents + shimmery gold primary buttons
+   - Centered masthead with THIN separators
+   - Gold “brushstroke” underline for nav hover/active
+   - Script subtitle support
+   - Keeps your existing section styles (hero/freebie/footer)
+   ========================================================= */
+
+/* Load fonts site-wide (safe even if you also link in HTML) */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&family=Great+Vibes&display=swap");
+
+/* ---------- Tokens ---------- */
+:root{
+  --ink:#273746;      /* subtitle/body */
+  --paper:#f9fafa;    /* soft off-white bg */
+  --brand:#3a6073;    /* deep teal (optional) */
+  --brand-2:#7fb6b3;  /* lighter teal (optional) */
+  --accent:#C3A35B;   /* warm gold */
+  --accent-2:#E0C98F; /* light gold glow */
+  --muted:#47515a;
+  --ink-2:#163245;    /* headings / brand */
+  --nav-sep: rgba(39,55,70,.25); /* thin line separator color */
+}
+
+/* ---------- Base ---------- */
+*{ box-sizing:border-box; }
+html,body{ margin:0; }
+html{ scroll-behavior:smooth; }
+body{
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
+  color:var(--ink);
+  background: linear-gradient(180deg, #f9fafa 0%, #edf6f5 100%);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+h1,h2{
+  font-family:"Playfair Display", Georgia, serif;
+  color:var(--ink-2);
+}
+
+img{ max-width:100%; display:block; }
+
+a{ color: var(--accent); text-decoration: none; }
+
+/* ---------- Layout ---------- */
+.container{
+  width:min(900px, 92%);
+  margin-inline:auto;
+  padding-left: clamp(12px, 3vw, 24px);
+  padding-right: clamp(12px, 3vw, 24px);
+}
+
+/* ---------- Header (centered, with thin separators) ---------- */
+.site-header{
+  position:sticky; top:0; z-index:10;
+  background:#ffffffc8;
+  backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+/* Align brand + nav in one horizontal row */
+.site-header .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+}
+
+/* Two-row centered masthead */
+.masthead{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  padding-block: 12px;
+}
+
+.site-title{
+  font-family:"Playfair Display", Georgia, serif;
+  font-weight:700;
+  font-size: clamp(1.2rem, 2.8vw, 1.4rem);
+  letter-spacing:.4px;
+  color:var(--ink-2);
+  text-decoration:none;
+}
+
+/* ---------- Primary Navigation ---------- */
+.primary-nav .menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 6px 0 10px; /* gives extra room below links for the gold underline */
+  list-style: none;
+}
+
+/* Each menu item */
+.primary-nav .menu li {
+  display: flex;
+  align-items: center;
+}
+
+/* --- NAV separators: reset first, then add only between items, never before first --- */
+.primary-nav .menu li::before{
+  content: none !important;   /* clears any gold dash or bullet */
+}
+
+.primary-nav .menu li + li::before{
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 22px;
+  background: var(--nav-sep);
+  margin: 0 6px;
+}
+
+.primary-nav .menu li:first-child::before{
+  content: none !important;   /* absolutely no dash before “Home” */
+}
+
+/* Prevent any global bullet or gold-line styles from affecting nav */
+.primary-nav .menu li::marker,
+.primary-nav .menu li::before.gold-list {
+  content: none;
+}
+
+/* Links with GOLD brushstroke underline */
+.nav-link{
+  position:relative;
+  text-decoration:none;
+  color:#273746;
+  font-weight:700;                 /* heavier like Home page */
+  font-size: clamp(.96rem, 2.2vw, 1rem);
+  padding:4px 2px;
+  transition: color .2s ease;
+}
+.nav-link:hover{ color:#273746; }
+
+/* Brushstroke underline (matches Home) */
+.nav-link::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:-10px;   /* slight offset below text */
+  height:4px;
+  background: linear-gradient(
+    90deg,
+    rgba(195,163,91,0) 0%,
+    rgba(195,163,91,.95) 35%,
+    rgba(195,163,91,0) 100%
+  );
+  opacity:0;
+  transform: translateY(2px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.nav-link:hover::after{
+  opacity:.6;
+  transform: translateY(0);
+}
+
+/* Active states support: .active, .is.active, and .is-active */
+.nav-link.active,
+.nav-link.is.active,
+.nav-link.is-active{
+  color:#1a222b;
+}
+.nav-link.active::after,
+.nav-link.is.active::after,
+.nav-link.is-active::after{
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* Mobile tweaks for menu spacing */
+@media (max-width:560px){
+  .primary-nav .menu{ gap:10px; }
+  .primary-nav .menu li + li::before{ margin: 0 4px; height:18px; }
+}
+
+/* ---------- Hero ---------- */
+.landing-hero{
+  padding:96px 0 48px;
+  text-align:center;
+  position:relative; overflow:hidden;
+  background:
+    radial-gradient(1200px 500px at 20% 10%, rgba(195,163,91,.12), transparent 60%),
+    radial-gradient(900px 450px at 80% 0%, rgba(127,182,179,.12), transparent 60%),
+    linear-gradient(180deg, #f9fafa 0%, #edf6f5 100%);
+}
+/* ---------- Home Hero (matches layout of landing-hero) ---------- */
+.hero{
+  padding:80px 0 120px;  /* Adds more breathing room below the buttons */
+  text-align:center;
+  position:relative;
+  background:
+    radial-gradient(1200px 500px at 20% 10%, rgba(195,163,91,.12), transparent 60%),
+    radial-gradient(900px 450px at 80% 0%, rgba(127,182,179,.12), transparent 60%),
+    linear-gradient(180deg, #f9fafa 0%, #edf6f5 100%);
+}
+
+.hero-logo{
+  display:block; width:96px; height:auto;
+  margin:0 auto 6px;
+  filter: drop-shadow(0 2px 6px rgba(195,163,91,.25));
+}
+
+.headline{
+  text-align:center; margin:0 auto;
+  font-size:clamp(2.2rem, 4vw, 3rem);
+  position:relative;
+}
+
+/* Main title */
+.title-main{
+  display:block;
+  font-family:"Playfair Display", serif;
+  font-weight:700;
+  font-size:clamp(3.8rem, 8vw, 5.6rem);
+  letter-spacing:1px;
+  color:var(--ink-2);
+  line-height:1.0;
+  margin-bottom:0;
+}
+
+/* Sub-title (gold shimmer w/ Great Vibes) — still supported */
+.title-sub{
+  display:block;
+  font-family:"Great Vibes", cursive;
+  font-weight:400;
+  font-size:clamp(1.8rem, 5vw, 2.6rem);
+  margin-top:0.2em;
+  line-height:1.3;
+  position:relative;
+  background: linear-gradient(
+    90deg,
+    #c3a35b 0%,
+    #e7d7a2 20%,
+    #c3a35b 40%,
+    #b4933e 60%,
+    #e7d7a2 80%,
+    #c3a35b 100%
+  );
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent;
+  animation: shimmer 8s infinite linear;
+}
+@keyframes shimmer{
+  0%{ background-position:0% 50%; }
+  100%{ background-position:100% 50%; }
+}
+
+/* Optional: a simple rule under headline (disabled) */
+.headline::after { content: none; }
+
+.tag{
+  font-size:1.2rem; color:#444; margin:.1em 0 .4em;
+  position:relative; display:inline-block; padding-inline:10px;
+}
+.tag::after{
+  content:""; display:block; height:2px; width:56%;
+  margin:8px auto 0;
+  background:linear-gradient(90deg, transparent, var(--accent), transparent);
+  filter: drop-shadow(0 0 6px rgba(224,201,143,.5));
+}
+
+.lede{ font-size:1.05rem; opacity:.9; margin:.2em 0 1em; }
+
+/* Also support page-level subtitle under H1 (Home hero) */
+.subtitle {
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(1.6rem, 4.8vw, 1.9rem);
+  color: var(--accent);
+  margin: 0.75rem 0 1.75rem; /* gives more breathing room above/below */
+  line-height: 1.4;          /* prevents descenders and swashes from clipping */
+  overflow: visible;         /* ensures no part of the script gets cut off */
+}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-block;
+  font-weight:700; letter-spacing:.2px;
+  text-decoration:none; border:0; border-radius:999px;
+  padding:14px 20px;
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease, background-color .15s ease;
+  box-shadow: 0 10px 30px rgba(195,163,91,.18), 0 2px 6px rgba(0,0,0,.06);
+}
+.btn:hover{ transform: translateY(-1px); }
+.btn:active{ transform: translateY(0); box-shadow: 0 6px 18px rgba(195,163,91,.18); }
+.btn:focus-visible{
+  outline:3px solid color-mix(in srgb, var(--accent) 35%, white);
+  outline-offset:3px; border-radius:16px;
+}
+
+/* DEFAULT: Gold CTA (matches Home) */
+.btn{ color:#fff; background:linear-gradient(90deg, #d4b165, #c3a35b, #e3cc8a); }
+
+/* Optional TEAL variant if you need it somewhere */
+.btn--teal{
+  color:#fff;
+  background:linear-gradient(135deg, var(--brand), var(--brand-2));
+  box-shadow: 0 10px 30px rgba(58,163,169,.18), 0 2px 6px rgba(0,0,0,.06);
+}
+
+/* Animated bright gold option (keep if you used .btn--gold) */
+.btn--gold{
+  color:#fff;
+  border:0;
+  background-image: linear-gradient(
+    120deg,
+    #b8892e 0%,
+    #e6cc7a 25%,
+    #caa24f 50%,
+    #a8791f 75%,
+    #e6cc7a 100%
+  );
+  background-size: 220% 100%;
+  animation: goldflow 6s linear infinite;
+  box-shadow:
+    0 1px 0 rgba(0,0,0,.06) inset,
+    0 10px 28px rgba(195,163,91,.34),
+    0 3px 8px rgba(0,0,0,.10);
+}
+.btn--gold:hover{
+  transform: translateY(-1px);
+  box-shadow:
+    0 12px 32px rgba(195,163,91,.38),
+    0 4px 10px rgba(0,0,0,.12);
+}
+@keyframes goldflow{ 0%{background-position:0% 0%} 100%{background-position:100% 0%} }
+
+@media (prefers-reduced-motion: reduce){
+  .btn--gold{ animation: none; }
+}
+
+/* ---------- Sections below hero ---------- */
+.mini-about{ padding:28px 0 52px; }
+.about{
+  font-size:1.05rem; text-align:center;
+  max-width:60ch; margin:0 auto; color:#2b3138;
+}
+
+/* ---------- Footer ---------- */
+.site-footer{
+  border-top:1px solid rgba(0,0,0,.08);
+  padding:24px 0 48px; background:#fff;
+}
+.footer-inner{ display:flex; align-items:center; justify-content:center; }
+
+/* ---------- Accessibility / motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .btn{ transition:none; }
+  .title-sub{ animation:none; }
+}
+
+/* --- Freebie title --- */
+.freebie-title{
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.6rem, 4.4vw, 2.2rem);
+  margin: 0 0 .5rem;
+  color: var(--ink-2);
+}
+
+/* General accent for any span inside the title (keeps flexibility) */
+.freebie-title span{
+  background: linear-gradient(90deg, #c3a35b, #e7d7a2, #c3a35b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Make just “A Symphony of Grace” handwritten */
+.freebie-title .script{
+  font-family:"Great Vibes", cursive;
+  font-weight:400;
+  font-size:1.3em;
+  letter-spacing:0.5px;
+  background:none;
+  color:var(--accent);
+}
+
+/* --- Refined Freebie Section with Watercolor Accent & Divider --- */
+.freebie{
+  position: relative;
+  text-align: center;
+  padding: clamp(56px, 10vw, 96px) 0;
+  border-top: 1px solid rgba(0,0,0,.05);
+  border-bottom: 1px solid rgba(0,0,0,.05);
+  background:
+    radial-gradient(900px 400px at 50% 0%, rgba(224,201,143,.22), transparent 70%),
+    radial-gradient(600px 300px at 20% 100%, rgba(127,182,179,.12), transparent 70%),
+    linear-gradient(180deg, #fafaf9 0%, #f5f8f7 100%);
+}
+.freebie::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: url('watercolor-gold.png') center top/cover no-repeat;
+  opacity:0.15;
+  pointer-events:none;
+  mix-blend-mode:multiply;
+}
+.freebie-inner{
+  position: relative;
+  z-index: 1;
+  width: min(720px, 92%);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(24px, 4vw, 36px);
+}
+
+/* Benefits list */
+.benefits{
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  text-align: center;
+  color: #2b3138;
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.benefits li{
+  margin: 0;
+  max-width: 45ch;
+}
+
+/* Sign-up card */
+.signup{
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 14px;
+  padding: clamp(18px, 4vw, 28px);
+  box-shadow:
+    0 1px 0 rgba(0,0,0,.03) inset,
+    0 10px 26px rgba(0,0,0,.06),
+    0 2px 8px rgba(195,163,91,.12);
+  width: 100%;
+  max-width: 420px;
+  text-align: left;
+}
+.field label{ font-size:.85rem; }
+.field input{
+  font-size: .95rem;
+  padding: 10px 12px;
+}
+.signup .btn{ width:100%; margin-top:10px; }
+
+.freebie-note, .form-help{
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* --- Elegant Divider --- */
+.section-divider{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  padding: clamp(20px, 4vw, 40px) 0;
+  background:linear-gradient(180deg, #f9fafa 0%, #edf6f5 100%);
+}
+.divider-line{
+  flex:1;
+  height:2px;
+  max-width:160px;
+  background:linear-gradient(90deg, transparent, var(--accent), transparent);
+  filter: drop-shadow(0 0 4px rgba(195,163,91,.4));
+}
+.divider-logo{
+  width:50px;
+  opacity:.9;
+  filter: drop-shadow(0 1px 3px rgba(195,163,91,.2));
+}
+
+/* Mobile fine-tuning */
+@media (max-width: 480px){
+  .freebie-inner{ width: 95%; }
+  .signup{ padding: 18px; }
+}
+
+/* ---------- Mobile headline tweaks ---------- */
+@media (max-width:480px){
+  .hero-logo{ width:80px; margin-bottom:4px; }
+  .title-sub{ font-size:clamp(1.6rem, 6vw, 2.2rem); margin-top:-8px; }
+}
+@media (max-width:380px){
+  .title-main{ font-size: clamp(2.2rem, 8vw, 2.6rem); }
+}
+/* === Single source of truth for page centering === */
+:root { --page-width: min(900px, 92%); }
+
+.container{
+  width: var(--page-width);
+  margin-inline: auto;
+  padding-inline: clamp(12px, 3vw, 24px);
+}
+
+/* Header uses same center line */
+header .container{ width: var(--page-width); }
+
+/* Each section’s direct container matches the same center line */
+.hero > .container,
+.about > .container,
+.program > .container,
+.prelude > .container,
+footer > .container{
+  width: var(--page-width);
+  margin-inline: auto;
+  padding-inline: clamp(12px, 3vw, 24px);
+}
+
+/* Hero spacing + background */
+.hero{
+  padding: 80px 0 120px;
+  text-align: center;
+  position: relative;
+  background:
+    radial-gradient(1200px 500px at 20% 10%, rgba(195,163,91,.12), transparent 60%),
+    radial-gradient(900px 450px at 80% 0%, rgba(127,182,179,.12), transparent 60%),
+    linear-gradient(180deg, #f9fafa 0%, #edf6f5 100%);
+}
+
+/* Hero text sizing (bigger H1) */
+.hero h1{
+  font-size: clamp(3.2rem, 7.2vw, 4.8rem);
+  margin-bottom: .5rem;
+}
+
+/* Keep CTAs centered */
+.hero .cta-row{
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px){
+  .hero{ padding: 60px 0 90px; }
+}
+/* === Center the Program + Prelude sections like the hero/about === */
+.program,
+.prelude{
+  text-align: center;
+  padding: 60px 0;
+}
+
+.program p{
+  margin: 0 auto 1rem;
+  max-width: 70ch;
+  color: var(--muted);
+}
+
+.prelude h2{ margin-bottom: .5rem; }
+
+
+/* ensure all section containers share the exact center line */
+.program > .container,
+.prelude > .container{
+  width: var(--page-width, min(900px, 92%));
+  margin-inline: auto;
+  padding-inline: clamp(12px, 3vw, 24px);
+}
+/* === Footer: center + match site width === */
+footer{
+  text-align: center;
+  padding: 40px 0;
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,.06);
+  color: var(--muted);
+}
+
+footer > .container{
+  width: var(--page-width, min(900px, 92%));
+  margin-inline: auto;
+  padding-inline: clamp(12px, 3vw, 24px);
+}
+
+footer img{
+  display: block;
+  margin: 0 auto 10px;
+  height: 40px; /* keeps your current look */
+}
+
+footer p{ margin: 0; }
+.prelude li{
+  margin: 0.3rem 0;
+}
+/* --- Fix About header script line clipping --- */
+.about { overflow: visible; }  /* ensure parent never crops swashes */
+
+.about h1 {
+  margin-bottom: 0.4em;       /* more room under "About" */
+}
+
+.about h1 + .subtitle {
+  display: block;              /* own line box */
+  line-height: 1.6;            /* taller line box for Great Vibes */
+  padding: .2em 0 .25em;       /* adds top/bottom headroom */
+  margin-top: .2em;            /* gentle separation from H1 */
+  overflow: visible;           /* belt-and-suspenders */
+  transform: translateZ(0);    /* WebKit repaint fix (prevents visual crop) */
+}
+/* --- Fix Journey header script line clipping --- */
+/* --- Tiny visual adjustment for About subtitle --- */
+.about h1 + .subtitle {
+  position: relative;
+  top: 0.1em; /* move text slightly down — try 0.05em to 0.15em if needed */
+}
+/* --- Tiny visual adjustment for Journey subtitle --- */
+/* === Gold Line Bullets (scoped) === */
+/* Only lists with .gold-list get the dash bullets */
+.gold-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0 0 1rem;
+}
+
+.gold-list li {
+  position: relative;
+  padding-left: 22px;
+  margin: 0.45rem 0;
+  line-height: 1.55;
+}
+
+.gold-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.9em;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(195,163,91,0), var(--accent), rgba(195,163,91,0));
+  box-shadow: 0 0 4px rgba(224,201,143,.4);
+}
+/* Centered sections but left-align gold bullets for readability */
+.gold-list {
+  display: inline-block;     /* keeps list centered overall */
+  text-align: left;          /* aligns bullets with text */
+}
+/* Ensure brand link always looks like the header brand */
+.brand,
+.brand:link,
+.brand:visited {
+  color:#151a20;
+  text-decoration:none;
+}
