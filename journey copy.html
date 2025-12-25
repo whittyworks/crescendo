@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/style.css?v=5" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crescendo: Fearfully & Wonderfully Made — Journey</title>
+  <meta name="description" content="A 15‑week guided journey — a symphony of grace in your life. Learn what you’ll experience, what’s included, who it’s for, logistics, and join the waitlist." />
+  <meta property="og:title" content="Crescendo: Fearfully & Wonderfully Made — Journey" />
+  <meta property="og:description" content="A Symphony of Grace — Explore the 13‑week journey of My Holy Crescendo and join the next cohort (Tuesdays, 7:30 pm CST)." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts (match site) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <!-- Base styles rely on site styles; only light page‑specific helpers below -->
+<style>
+  :root{
+    --ink:#273746; --paper:#f9fafa; --brand:#3a6073; --brand-2:#7fb6b3;
+    --accent:#C3A35B; --accent-2:#E0C98F; --muted:#47515a;
+  }
+
+  html,body{margin:0}
+  body{
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color:var(--ink);
+    background:linear-gradient(180deg,#f9fafa 0%, #edf6f5 100%);
+    line-height:1.6;
+  }
+  h1,h2{font-family:"Playfair Display", Georgia, serif; color:#163245}
+
+  /* Hero */
+  .hero{
+    padding:80px 0 100px; text-align:center;
+    background:
+      radial-gradient(1200px 500px at 20% 10%, rgba(195,163,91,.12), transparent 60%),
+      radial-gradient(900px 450px at 80% 0%, rgba(127,182,179,.12), transparent 60%),
+      linear-gradient(180deg, #f9fafa 0%, #edf6f5 100%);
+  }
+  .kicker{text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-size:.9rem}
+
+  /* Title pair (Crescendo + script subtitle) */
+  .title-pair{margin:0}
+  .title-main{display:block; font-family:"Playfair Display", serif; font-weight:700; font-size:clamp(2.6rem,6.2vw,4rem); line-height:1.0; color:#1b2a33}
+  .title-sub{
+    display:block; font-family:"Great Vibes", cursive; font-size:clamp(1.8rem,5vw,2.4rem); margin-top:.15em;
+    background:linear-gradient(90deg, #c3a35b, #e7d7a2, #c3a35b);
+    -webkit-background-clip:text; background-clip:text; color:transparent; animation:shimmer 8s linear infinite;
+  }
+  @keyframes shimmer{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+
+  .subtitle{font-family:"Great Vibes", cursive; font-size:clamp(1.6rem, 4.8vw, 1.9rem); color:var(--accent); margin:.75rem 0 1.75rem; line-height:1.4}
+  .cta-row{margin-top:22px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap}
+
+  /* Buttons */
+  .btn{display:inline-block; font-weight:700; letter-spacing:.2px; border:0; border-radius:999px; padding:14px 22px; color:#fff; text-decoration:none; transition:transform .15s ease, box-shadow .15s ease}
+  .btn:hover{transform:translateY(-1px)}
+  .btn--gold{
+    background-image:linear-gradient(120deg,#b8892e 0%,#e6cc7a 25%,#caa24f 50%,#a8791f 75%,#e6cc7a 100%);
+    background-size:220% 100%; animation:goldflow 6s linear infinite;
+    box-shadow:0 10px 28px rgba(195,163,91,.34), 0 3px 8px rgba(0,0,0,.10);
+  }
+  @keyframes goldflow{0%{background-position:0% 0%}100%{background-position:100% 0%}}
+
+  .fine{font-size:.95rem; color:var(--muted); margin-top:8px}
+  section{padding:60px 0; text-align:center}
+  .container{width:min(900px, 92%); margin-inline:auto}
+
+  /* Gold line bullets — centered block with left-aligned text */
+  .gold-list{
+    list-style:none; margin:0 auto; padding:0;
+    display:inline-block; text-align:left; max-width:640px;
+  }
+  .gold-list li{position:relative; padding-left:22px; margin:.45rem 0; line-height:1.55}
+  .gold-list li::before{
+    content:""; position:absolute; left:0; top:.9em; transform:translateY(-50%);
+    width:14px; height:2px; border-radius:2px;
+    background:linear-gradient(90deg, rgba(195,163,91,0), var(--accent), rgba(195,163,91,0));
+    box-shadow:0 0 4px rgba(224,201,143,.4);
+  }
+
+  /* Waitlist card */
+  .waitlist-card{
+    background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:22px;
+    box-shadow:0 10px 26px rgba(0,0,0,.06), 0 2px 8px rgba(195,163,91,.12);
+    padding:18px; max-width:600px; margin:0 auto; overflow:hidden;
+  }
+  .wl-head{display:grid; grid-template-columns:1fr 1fr; color:#5c6a70; font-weight:700; text-align:center; padding:8px 14px 10px}
+  .wl-row{display:grid; grid-template-columns:1fr 1fr; border:1px solid #d6e2df; border-radius:14px; overflow:hidden}
+  .wl-input{width:100%; padding:14px; border:0; background:#fff; box-sizing:border-box; height:48px}
+  .wl-input + .wl-input{border-left:1px solid #d6e2df}
+  .wl-actions{display:flex; gap:10px; align-items:center; margin-top:14px}
+
+  /* FAQ boxes */
+  #faq .faq-wrap{max-width:760px; margin:0 auto; text-align:left}
+  #faq details{background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:14px; padding:14px 16px}
+  #faq details + details{margin-top:10px}
+  #faq summary{cursor:pointer; font-weight:600; list-style:none}
+  /* Ensure header brand looks like Home/About even if external CSS fails */
+.masthead{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  padding-block:12px;
+}
+
+.site-header .site-title,
+.site-header .site-title:link,
+.site-header .site-title:visited{
+  text-decoration:none;
+  color:#151a20;                     /* same ink as other pages */
+  font-family:"Playfair Display", Georgia, serif;
+  font-weight:700;
+  font-size:clamp(1.2rem, 2.8vw, 1.4rem);
+}
+/* Minimal nav fail-safe (only kicks in if style.css misses) */
+.primary-nav .menu{
+  list-style:none; margin:0; 
+  display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:18px;
+  padding:6px 0 10px; /* room for brush underline */
+}
+.primary-nav .menu li{ display:flex; align-items:center; }
+.primary-nav .menu li + li::before{
+  content:""; width:1px; height:22px; background: rgba(39,55,70,.25); margin:0 6px;
+}
+.nav-link{
+  text-decoration:none; color:#273746; font-weight:700; position:relative; padding:4px 2px;
+}
+.nav-link::after{
+  content:""; position:absolute; left:0; right:0; bottom:-10px; height:4px;
+  background:linear-gradient(90deg, rgba(195,163,91,0) 0%, rgba(195,163,91,.95) 35%, rgba(195,163,91,0) 100%);
+  opacity:0; transform:translateY(2px); transition:opacity .25s ease, transform .25s ease;
+}
+.nav-link:hover::after{ opacity:.6; transform:translateY(0); }
+.nav-link.is.active::after{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="container masthead">
+    <a href="/" class="site-title">My Holy Crescendo</a>
+    <nav class="primary-nav" aria-label="Main">
+      <ul class="menu">
+        <li><a class="nav-link" href="/index.html">Home</a></li>
+        <li><a class="nav-link" href="/about.html">About</a></li>
+        <li><a class="nav-link is active" href="/journey.html">The Journey</a></li>
+        <li><a class="nav-link" href="/prelude.html">Prelude</a></li>
+        <li><a class="nav-link" href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+  <main>
+    <!-- Hero -->
+    <header class="hero">
+      <div class="container">
+        <div class="kicker">My Holy Crescendo</div>
+        <h1 class="title-pair" style="text-align:center">
+          <span class="title-main">Crescendo</span>
+          <span class="title-sub">Fearfully &amp; Wonderfully Made</span>
+        </h1>
+        <p class="subtitle" style="margin-top:10px">A 15‑week guided journey — a symphony of grace in your life.</p>
+        <div class="cta-row">
+          <a class="btn btn--gold" href="#waitlist">Join the Waitlist</a>
+        </div>
+        <p class="fine" style="margin-top:10px">Tuesdays · 7:30 pm CT · 60–75 minutes · Start date TBA</p>
+      </div>
+    </header>
+
+    <!-- What you’ll experience -->
+    <section id="experience">
+      <div class="container">
+        <div class="section-head">
+          <h2>What you’ll experience</h2>
+        </div>
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Clarity & Peace</h3>
+            <p>Gentle practices that help you live from belovedness, order your days, and breathe again.</p>
+          </div>
+          <div class="card">
+            <h3>Rooted Identity</h3>
+            <p>Christ‑centered tools to understand your gifts and make soul‑aligned choices with confidence.</p>
+          </div>
+          <div class="card">
+            <h3>Supportive Community</h3>
+            <p>A small, safe circle for encouragement, honest sharing, and real accountability.</p>
+          </div>
+          <div class="card">
+            <h3>Grace in Motion</h3>
+            <p>Small, doable steps that add up — rhythms of prayer, beauty, and stewardship for daily life.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What’s included / Who it’s for / Logistics -->
+    <section id="details">
+      <div class="container">
+        <div class="grid cols-3">
+          <div>
+            <h2>What’s included</h2>
+            <ul class="gold-list">
+              <li>15 weeks of live small‑group calls (Zoom)</li>
+              <li>Companion workbook (printable 5.5×8.5)</li>
+              <li>Community space for support & sharing</li>
+              <li>Optional prayer partner & office hours</li>
+            </ul>
+          </div>
+          <div>
+            <h2>Who it’s for</h2>
+            <ul class="gold-list">
+              <li>Women seeking a Christ‑centered reset and deeper identity</li>
+              <li>Those who want beauty, order, and sustainable rhythms</li>
+              <li>Anyone who prefers soul‑safe groups over solo courses</li>
+            </ul>
+          </div>
+          <div>
+            <h2>Logistics</h2>
+            <ul class="gold-list">
+              <li><strong>When:</strong> Tuesdays, 7:30 pm CT</li>
+              <li><strong>Length:</strong> 60–75 minutes</li>
+              <li><strong>Starts:</strong> TBA (join the waitlist)</li>
+              <li><strong>Format:</strong> Zoom (replays available)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Waitlist form -->
+    <section id="waitlist" class="cta">
+      <div class="container" style="padding:40px 0 48px; max-width:760px">
+        <h2>Join the Waitlist</h2>
+        <p class="fine">Be the first to know the start date and early‑bird pricing.</p>
+
+        <!-- Formspree‑ready form. Replace ACTION URL with your Formspree endpoint. The hidden _redirect sends users to /thank-you on success. -->
+        <form id="waitlist-form" class="waitlist-card" action="https://formspree.io/f/your-id" method="POST">
+          <input type="hidden" name="_redirect" value="/thank-you">
+          <div class="wl-head"><span>Name</span><span>Email</span></div>
+          <div class="wl-row">
+            <input id="name" name="name" type="text" required placeholder="Jane Doe" class="wl-input left">
+            <input id="email" name="email" type="email" required placeholder="you@example.com" class="wl-input right">
+          </div>
+          <div class="wl-actions">
+            <button class="btn btn--gold" type="submit">Join the Waitlist</button>
+            <span class="muted" id="form-msg" aria-live="polite"></span>
+          </div>
+        </form>
+
+        <!-- Optional client‑side fallback to redirect when action is a placeholder (e.g., during local dev) -->
+        <script>
+          (function(){
+            const form = document.getElementById('waitlist-form');
+            const msg = document.getElementById('form-msg');
+            form.addEventListener('submit', function(e){
+              // If developer hasn't set a real Formspree action yet, do a soft redirect so UX still works
+              if(form.action.includes('your-id')){
+                e.preventDefault();
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                if(!name || !email){ msg.textContent = 'Please enter your name and a valid email.'; return; }
+                window.location.href = '/thank-you';
+              }
+            });
+          })();
+        </script>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <div class="section-head"><h2>FAQ</h2></div>
+        <div class="grid cols-2">
+          <div>
+            <details>
+              <summary>How much does it cost?</summary>
+              <p class="muted">Pricing will be announced soon with an early‑bird range. Join the waitlist to receive the first notice.</p>
+            </details>
+            <details>
+              <summary>Are recordings available?</summary>
+              <p class="muted">Yes — replays will be available for registered participants if you need to miss a week.</p>
+            </details>
+          </div>
+          <div>
+            <details>
+              <summary>What materials do I need?</summary>
+              <p class="muted">You’ll receive a printable workbook (5.5×8.5). Bring a pen, a quiet spot, and a willing heart. Everything else is optional.</p>
+            </details>
+            <details>
+              <summary>Is the group size limited?</summary>
+              <p class="muted">Yes, cohorts are intentionally small to keep the space safe, personal, and interactive.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing CTA -->
+    <section class="cta">
+      <div class="container" style="padding:36px 0 56px; text-align:center">
+        <h2>Ready to begin?</h2>
+        <p class="fine">If you feel a nudge, take the next gentle step.</p>
+        <div class="cta-row" style="margin-top:12px">
+          <a class="btn btn--gold" href="#waitlist">Join the Waitlist</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
