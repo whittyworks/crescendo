@@ -1,0 +1,142 @@
+<svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Watercolor gradients -->
+    <radialGradient id="mauveGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#DCC5D8;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#DCC5D8;stop-opacity:0" />
+    </radialGradient>
+    
+    <radialGradient id="sageGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#B8C5B0;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#B8C5B0;stop-opacity:0" />
+    </radialGradient>
+    
+    <radialGradient id="blushGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#EBD4D0;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#EBD4D0;stop-opacity:0" />
+    </radialGradient>
+    
+    <radialGradient id="goldGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#E8C872;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:1" />
+    </radialGradient>
+    
+    <filter id="watercolor" x="-50%" y="-50%" width="200%" height="200%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3"/>
+      <feDisplacementMap in="SourceGraphic" scale="6" />
+      <feGaussianBlur stdDeviation="2" />
+    </filter>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Left decorative wildflower -->
+  <g transform="translate(60, 100)">
+    <!-- Watercolor background -->
+    <g filter="url(#watercolor)" opacity="0.5">
+      <circle cx="0" cy="0" r="30" fill="url(#mauveGrad)"/>
+      <circle cx="-10" cy="10" r="25" fill="url(#sageGrad)"/>
+      <circle cx="12" cy="-8" r="28" fill="url(#blushGrad)"/>
+    </g>
+  </g>
+  
+  <!-- Central emblem - The Son radiating light -->
+  <g transform="translate(150, 100)">
+    <!-- Crescendo waves -->
+    <g opacity="0.3" stroke="#D4AF37" fill="none">
+      <path d="M -20 0 Q 0 -8, 20 0" stroke-width="1.5"/>
+      <path d="M -15 8 Q 0 2, 15 8" stroke-width="2"/>
+      <path d="M -10 15 Q 0 12, 10 15" stroke-width="2.5"/>
+    </g>
+    
+    <!-- Sun rays - more prominent -->
+    <g opacity="0.35" stroke="#D4AF37" stroke-width="0.8" stroke-linecap="round">
+      <line x1="0" y1="-25" x2="0" y2="-38" />
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(22.5)"/>
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(45)"/>
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(67.5)"/>
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(90)"/>
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(112.5)"/>
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(135)"/>
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(157.5)"/>
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(180)"/>
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(202.5)"/>
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(225)"/>
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(247.5)"/>
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(270)"/>
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(292.5)"/>
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(315)"/>
+      <line x1="0" y1="-25" x2="0" y2="-38" transform="rotate(337.5)"/>
+    </g>
+    
+    <circle cx="0" cy="0" r="28" fill="none" stroke="#D4AF37" stroke-width="0.8" opacity="0.25"/>
+    <circle cx="0" cy="0" r="24" fill="url(#goldGrad)" opacity="0.3" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="20" fill="url(#goldGrad)" opacity="0.4"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="245" y="90" font-family="Cinzel, serif" font-size="52" 
+        fill="#B8941F" letter-spacing="6" font-weight="500">
+    CRESCENDO
+  </text>
+  
+  <text x="245" y="125" font-family="Cormorant Garamond, serif" font-size="18" 
+        fill="#5C5142" font-style="italic" letter-spacing="2" opacity="0.8">
+    fearfully &amp; wonderfully made
+  </text>
+  
+  <!-- Right decorative wildflower -->
+  <g transform="translate(540, 100)">
+    <!-- Watercolor background -->
+    <g filter="url(#watercolor)" opacity="0.5">
+      <circle cx="0" cy="0" r="28" fill="url(#sageGrad)"/>
+      <circle cx="8" cy="-10" r="24" fill="url(#blushGrad)"/>
+      <circle cx="-8" cy="8" r="26" fill="url(#mauveGrad)"/>
+    </g>
+  </g>
+  
+  <!-- Gold flecks - larger ones in Virgo constellation pattern -->
+  <g fill="#D4AF37" opacity="0.7">
+    <!-- Virgo constellation (asymmetrical, adapted for horizontal layout) -->
+    <!-- Spica (brightest) -->
+    <circle cx="300" cy="140" r="3" opacity="0.9"/>
+    
+    <!-- Main body -->
+    <circle cx="280" cy="115" r="2.5" opacity="0.8"/>
+    <circle cx="265" cy="95" r="2.2" opacity="0.75"/>
+    <circle cx="250" cy="75" r="2" opacity="0.7"/>
+    <circle cx="235" cy="60" r="2.3" opacity="0.75"/>
+    
+    <!-- Right extension -->
+    <circle cx="310" cy="120" r="2.1" opacity="0.7"/>
+    <circle cx="335" cy="105" r="2.3" opacity="0.75"/>
+    <circle cx="360" cy="95" r="2.2" opacity="0.7"/>
+    
+    <!-- Head/top -->
+    <circle cx="220" cy="50" r="2.4" opacity="0.8"/>
+    <circle cx="205" cy="45" r="2.1" opacity="0.7"/>
+    
+    <!-- Left arm -->
+    <circle cx="255" cy="85" r="2" opacity="0.7"/>
+    <circle cx="240" cy="95" r="1.9" opacity="0.65"/>
+    
+    <!-- Smaller scattered flecks -->
+    <circle cx="380" cy="45" r="1.5" opacity="0.7"/>
+    <circle cx="520" cy="60" r="1.6" opacity="0.7"/>
+    <circle cx="190" cy="160" r="1.4" opacity="0.7"/>
+    <circle cx="420" cy="155" r="1.7" opacity="0.7"/>
+    <circle cx="500" cy="145" r="1.3" opacity="0.7"/>
+    <circle cx="80" cy="70" r="1.6" opacity="0.7"/>
+    <circle cx="100" cy="140" r="1.5" opacity="0.7"/>
+    <circle cx="480" cy="80" r="1.4" opacity="0.7"/>
+    <circle cx="350" cy="150" r="1.3" opacity="0.7"/>
+    <circle cx="175" cy="65" r="1.5" opacity="0.7"/>
+    <circle cx="405" cy="50" r="1.4" opacity="0.7"/>
+  </g>
+</svg>

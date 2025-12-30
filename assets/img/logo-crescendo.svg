@@ -1,0 +1,205 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Watercolor gradients for flowers -->
+    <radialGradient id="mauveGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#DCC5D8;stop-opacity:0.8" />
+      <stop offset="70%" style="stop-color:#DCC5D8;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#DCC5D8;stop-opacity:0" />
+    </radialGradient>
+    
+    <radialGradient id="sageGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#B8C5B0;stop-opacity:0.7" />
+      <stop offset="70%" style="stop-color:#B8C5B0;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#B8C5B0;stop-opacity:0" />
+    </radialGradient>
+    
+    <radialGradient id="blushGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#EBD4D0;stop-opacity:0.8" />
+      <stop offset="70%" style="stop-color:#EBD4D0;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#EBD4D0;stop-opacity:0" />
+    </radialGradient>
+    
+    <radialGradient id="goldGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#E8C872;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Filter for soft watercolor effect -->
+    <filter id="watercolor" x="-50%" y="-50%" width="200%" height="200%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" />
+      <feGaussianBlur stdDeviation="3" />
+    </filter>
+    
+    <!-- Filter for gold shimmer -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle - cream -->
+  <circle cx="200" cy="200" r="195" fill="#FDF8F3" stroke="#D4AF37" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Watercolor wildflower blooms -->
+  <!-- Left flower cluster -->
+  <g filter="url(#watercolor)" opacity="0.6">
+    <circle cx="80" cy="150" r="35" fill="url(#mauveGradient)"/>
+    <circle cx="100" cy="135" r="30" fill="url(#blushGradient)"/>
+    <circle cx="70" cy="170" r="28" fill="url(#sageGradient)"/>
+  </g>
+  
+  <!-- Right flower cluster -->
+  <g filter="url(#watercolor)" opacity="0.6">
+    <circle cx="320" cy="250" r="38" fill="url(#sageGradient)"/>
+    <circle cx="300" cy="270" r="32" fill="url(#mauveGradient)"/>
+    <circle cx="335" cy="265" r="30" fill="url(#blushGradient)"/>
+  </g>
+  
+  <!-- Bottom left accent -->
+  <g filter="url(#watercolor)" opacity="0.5">
+    <circle cx="100" cy="310" r="25" fill="url(#blushGradient)"/>
+    <circle cx="85" cy="295" r="22" fill="url(#mauveGradient)"/>
+  </g>
+  
+  <!-- Crescendo wave/arc symbol -->
+  <g opacity="0.4">
+    <path d="M 100 200 Q 150 180, 200 170 Q 250 180, 300 200" 
+          stroke="#D4AF37" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <path d="M 120 210 Q 160 195, 200 190 Q 240 195, 280 210" 
+          stroke="#D4AF37" stroke-width="2" fill="none" opacity="0.7"/>
+    <path d="M 140 220 Q 170 210, 200 208 Q 230 210, 260 220" 
+          stroke="#D4AF37" stroke-width="2.5" fill="none" opacity="0.8"/>
+  </g>
+  
+  <!-- Central emblem - The Son radiating divine light -->
+  <g transform="translate(200, 200)">
+    <!-- Primary sun rays - more prominent -->
+    <g opacity="0.4" stroke="#D4AF37" stroke-width="0.8" fill="none" stroke-linecap="round">
+      <line x1="0" y1="-42" x2="0" y2="-70" />
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(15)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(30)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(45)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(60)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(75)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(90)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(105)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(120)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(135)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(150)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(165)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(180)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(195)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(210)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(225)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(240)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(255)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(270)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(285)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(300)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(315)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(330)"/>
+      <line x1="0" y1="-42" x2="0" y2="-70" transform="rotate(345)"/>
+    </g>
+    
+    <!-- Secondary rays for depth -->
+    <g opacity="0.25" stroke="#D4AF37" stroke-width="0.5" fill="none" stroke-linecap="round">
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(7.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(22.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(37.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(52.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(67.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(82.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(97.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(112.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(127.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(142.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(157.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(172.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(187.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(202.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(217.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(232.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(247.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(262.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(277.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(292.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(307.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(322.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(337.5)"/>
+      <line x1="0" y1="-38" x2="0" y2="-55" transform="rotate(352.5)"/>
+    </g>
+    
+    <!-- Outer decorative circles -->
+    <circle cx="0" cy="0" r="50" fill="none" stroke="#D4AF37" stroke-width="0.8" opacity="0.25"/>
+    <circle cx="0" cy="0" r="45" fill="none" stroke="#D4AF37" stroke-width="0.5" opacity="0.3"/>
+    
+    <!-- Radiant golden center - The Son -->
+    <circle cx="0" cy="0" r="40" fill="url(#goldGradient)" opacity="0.3" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="35" fill="url(#goldGradient)" opacity="0.4" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="28" fill="url(#goldGradient)" opacity="0.5"/>
+  </g>
+  
+  <!-- Gold flecks - larger ones in Virgo constellation pattern -->
+  <g fill="#D4AF37" filter="url(#glow)">
+    <!-- Virgo constellation (asymmetrical pattern) -->
+    <!-- Spica (brightest star at bottom) -->
+    <circle cx="200" cy="310" r="3.5" opacity="0.9"/>
+    
+    <!-- Main body stars -->
+    <circle cx="185" cy="270" r="2.8" opacity="0.8"/>
+    <circle cx="170" cy="235" r="2.5" opacity="0.75"/>
+    <circle cx="160" cy="200" r="2.2" opacity="0.7"/>
+    <circle cx="155" cy="165" r="2.6" opacity="0.75"/>
+    
+    <!-- Right arm -->
+    <circle cx="220" cy="260" r="2.3" opacity="0.7"/>
+    <circle cx="245" cy="240" r="2.5" opacity="0.75"/>
+    <circle cx="270" cy="225" r="2.4" opacity="0.7"/>
+    
+    <!-- Head/top -->
+    <circle cx="175" cy="130" r="2.7" opacity="0.8"/>
+    <circle cx="195" cy="115" r="2.4" opacity="0.7"/>
+    
+    <!-- Left arm extension -->
+    <circle cx="140" cy="180" r="2.3" opacity="0.7"/>
+    <circle cx="115" cy="195" r="2.2" opacity="0.65"/>
+    
+    <!-- Smaller scattered flecks for additional sparkle -->
+    <circle cx="270" cy="95" r="1.5" opacity="0.6"/>
+    <circle cx="90" cy="220" r="1.8" opacity="0.6"/>
+    <circle cx="160" cy="300" r="1.5" opacity="0.65"/>
+    <circle cx="250" cy="320" r="1.7" opacity="0.6"/>
+    <circle cx="340" cy="300" r="1.5" opacity="0.6"/>
+    <circle cx="60" cy="260" r="1.6" opacity="0.6"/>
+    <circle cx="180" cy="80" r="1.4" opacity="0.65"/>
+    <circle cx="330" cy="150" r="1.8" opacity="0.6"/>
+    <circle cx="120" cy="350" r="1.5" opacity="0.6"/>
+    <circle cx="280" cy="130" r="1.6" opacity="0.6"/>
+    <circle cx="310" cy="180" r="1.7" opacity="0.65"/>
+    <circle cx="100" cy="140" r="1.4" opacity="0.6"/>
+    <circle cx="255" cy="110" r="1.3" opacity="0.6"/>
+    <circle cx="295" cy="200" r="1.5" opacity="0.6"/>
+    <circle cx="110" cy="240" r="1.4" opacity="0.65"/>
+    <circle cx="190" cy="315" r="1.3" opacity="0.6"/>
+    <circle cx="230" cy="340" r="1.6" opacity="0.6"/>
+    <circle cx="145" cy="125" r="1.4" opacity="0.6"/>
+  </g>
+  
+  <!-- Text: CRESCENDO -->
+  <text x="200" y="200" font-family="Cinzel, serif" font-size="42" 
+        fill="#B8941F" text-anchor="middle" dominant-baseline="middle" 
+        letter-spacing="4" font-weight="500">
+    CRESCENDO
+  </text>
+  
+  <!-- Subtitle: fearfully & wonderfully made -->
+  <text x="200" y="235" font-family="Cormorant Garamond, serif" font-size="14" 
+        fill="#5C5142" text-anchor="middle" font-style="italic" 
+        letter-spacing="1.5" opacity="0.8">
+    fearfully &amp; wonderfully made
+  </text>
+</svg>

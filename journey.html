@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="/style.css?v=5" />
+  <link rel="stylesheet" href="style.css?v=5" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Crescendo: Fearfully & Wonderfully Made — Journey</title>
-  <meta name="description" content="A 15-week guided journey — a symphony of grace in your life. Learn what you’ll experience, what’s included, who it’s for, logistics, and join the waitlist." />
+  <meta name="description" content="A 15-week guided journey — a symphony of grace in your life. Learn what you'll experience, what's included, who it's for, logistics, and join the waitlist." />
   <meta property="og:title" content="Crescendo: Fearfully & Wonderfully Made — Journey" />
-  <meta property="og:description" content="A Symphony of Grace — Explore the 13-week journey of My Holy Crescendo and join the next cohort (Tuesdays, 7:30 pm CST)." />
+  <meta property="og:description" content="A Symphony of Grace — Explore the 15-week journey of My Holy Crescendo and join the next cohort." />
   <meta property="og:type" content="website" />
 
-  <!-- Google Fonts (match site) -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -41,7 +41,6 @@
   }
   .kicker{text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-size:.9rem}
 
-  /* Title pair (Crescendo + script subtitle) */
   .title-pair{margin:0}
   .title-main{display:block; font-family:"Playfair Display", serif; font-weight:700; font-size:clamp(2.6rem,6.2vw,4rem); line-height:1.0; color:#1b2a33}
   .title-sub{
@@ -68,7 +67,7 @@
   section{padding:60px 0; text-align:center}
   .container{width:min(900px, 92%); margin-inline:auto}
 
-  /* Gold line bullets — centered block with left-aligned text */
+  /* Gold line bullets */
   .gold-list{
     list-style:none; margin:0 auto; padding:0;
     display:inline-block; text-align:left; max-width:640px;
@@ -81,37 +80,38 @@
     box-shadow:0 0 4px rgba(224,201,143,.4);
   }
 
+  /* Format description box */
+  .format-box{
+    background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:14px;
+    padding:28px; margin:32px auto; max-width:720px; text-align:left;
+    box-shadow:0 8px 24px rgba(0,0,0,.06);
+  }
+  .format-box h3{margin-top:0; color:var(--ink-2);}
+  .format-box p{margin-bottom:1rem; line-height:1.7;}
+
   /* FAQ boxes */
   #faq .faq-wrap{max-width:760px; margin:0 auto; text-align:left}
   #faq details{background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:14px; padding:14px 16px}
   #faq details + details{margin-top:10px}
   #faq summary{cursor:pointer; font-weight:600; list-style:none}
 
-  /* Header fail-safe */
+  /* Header */
   .masthead{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:8px;
-    padding-block:12px;
+    display:flex; flex-direction:column; align-items:center; gap:8px; padding-block:12px;
   }
-  .site-header .site-title,
-  .site-header .site-title:link,
-  .site-header .site-title:visited{
-    text-decoration:none;
-    color:#151a20;
-    font-family:"Playfair Display", Georgia, serif;
-    font-weight:700;
+  .site-header .site-title{
+    text-decoration:none; color:#151a20;
+    font-family:"Playfair Display", Georgia, serif; font-weight:700;
     font-size:clamp(1.2rem, 2.8vw, 1.4rem);
   }
   .primary-nav .menu{
-    list-style:none; margin:0;
-    display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:18px;
-    padding:6px 0 10px;
+    list-style:none; margin:0; display:flex; justify-content:center; align-items:center;
+    flex-wrap:wrap; gap:18px; padding:6px 0 10px;
   }
-  .primary-nav .menu li{ display:flex; align-items:center; }
+  .primary-nav .menu li{display:flex; align-items:center;}
+  .primary-nav .menu li::before{content:none !important;}
   .primary-nav .menu li + li::before{
-    content:""; width:1px; height:22px; background: rgba(39,55,70,.25); margin:0 6px;
+    content:""; width:1px; height:22px; background:rgba(39,55,70,.25); margin:0 6px;
   }
   .nav-link{
     text-decoration:none; color:#273746; font-weight:700; position:relative; padding:4px 2px;
@@ -121,8 +121,8 @@
     background:linear-gradient(90deg, rgba(195,163,91,0) 0%, rgba(195,163,91,.95) 35%, rgba(195,163,91,0) 100%);
     opacity:0; transform:translateY(2px); transition:opacity .25s ease, transform .25s ease;
   }
-  .nav-link:hover::after{ opacity:.6; transform:translateY(0); }
-  .nav-link.is.active::after{ opacity:1; transform:translateY(0); }
+  .nav-link:hover::after{opacity:.6; transform:translateY(0);}
+  .nav-link.is.active::after{opacity:1; transform:translateY(0);}
   </style>
 </head>
 <body>
@@ -131,11 +131,11 @@
     <a href="/" class="site-title">My Holy Crescendo</a>
     <nav class="primary-nav" aria-label="Main">
       <ul class="menu">
-        <li><a class="nav-link" href="/index.html">Home</a></li>
-        <li><a class="nav-link" href="/about.html">About</a></li>
-        <li><a class="nav-link is active" href="/journey.html">The Journey</a></li>
-        <li><a class="nav-link" href="/prelude.html">Prelude</a></li>
-        <li><a class="nav-link" href="/contact.html">Contact</a></li>
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="about.html">About</a></li>
+        <li><a class="nav-link is active" href="journey.html">The Journey</a></li>
+        <li><a class="nav-link" href="events.html">Events</a></li>
+        <li><a class="nav-link" href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </div>
@@ -157,48 +157,80 @@
     </div>
   </header>
 
-  <!-- What you’ll experience -->
+  <!-- What IS This Course -->
+  <section style="background:#fff; padding:60px 0;">
+    <div class="container">
+      <h2>What is Crescendo?</h2>
+      <div class="format-box">
+        <h3>🌸 A 15-Week Guided Course</h3>
+        <p><strong>Crescendo: Fearfully & Wonderfully Made</strong> is a structured journey where women gather—either in small in-person groups or virtual cohorts—to discover the intentional beauty God wove into every part of us: body, mind, and spirit.</p>
+        
+        <h3>🎵 Weekly Themes & Practices</h3>
+        <p>Each week explores a different theme through:</p>
+        <ul class="gold-list" style="margin-left:0;">
+          <li>Scripture study and reflection</li>
+          <li>A weekly reflection song for lectio divina (contemplative listening)</li>
+          <li>Creative exercises and journaling prompts</li>
+          <li>Group discussion and shared insights</li>
+          <li>Wildflower imagery as metaphors for our diverse, God-given designs</li>
+        </ul>
+        
+        <h3>💫 Body, Mind, Spirit</h3>
+        <p>This isn't just about spirituality or organization—it's about the <em>whole woman</em>. We explore:</p>
+        <ul class="gold-list" style="margin-left:0;">
+          <li><strong>Body:</strong> The beautiful color and form God gave us, learning to see our bodies as temples, not obstacles</li>
+          <li><strong>Mind:</strong> The beautiful intricacies of how we think, process, and create</li>
+          <li><strong>Spirit:</strong> The wonderful variation in our gifts and how we reflect His image uniquely</li>
+        </ul>
+        
+        <p style="margin-top:1.5rem; font-style:italic; color:var(--muted);">The goal? To come closer to God and learn to see how He made each of us beautiful, fearfully and wonderfully.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What you'll experience -->
   <section id="experience">
     <div class="container">
       <div class="section-head">
-        <h2>What you’ll experience</h2>
+        <h2>What you'll experience</h2>
       </div>
-      <div class="grid cols-2">
-        <div class="card">
-          <h3>Clarity & Peace</h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; margin-top:32px;">
+        <div style="background:#fff; padding:24px; border-radius:14px; box-shadow:0 4px 16px rgba(0,0,0,.06);">
+          <h3 style="margin-top:0;">Clarity & Peace</h3>
           <p>Gentle practices that help you live from belovedness, order your days, and breathe again.</p>
         </div>
-        <div class="card">
-          <h3>Rooted Identity</h3>
+        <div style="background:#fff; padding:24px; border-radius:14px; box-shadow:0 4px 16px rgba(0,0,0,.06);">
+          <h3 style="margin-top:0;">Rooted Identity</h3>
           <p>Christ-centered tools to understand your gifts and make soul-aligned choices with confidence.</p>
         </div>
-        <div class="card">
-          <h3>Supportive Community</h3>
+        <div style="background:#fff; padding:24px; border-radius:14px; box-shadow:0 4px 16px rgba(0,0,0,.06);">
+          <h3 style="margin-top:0;">Supportive Community</h3>
           <p>A small, safe circle for encouragement, honest sharing, and real accountability.</p>
         </div>
-        <div class="card">
-          <h3>Grace in Motion</h3>
-          <p>Small, doable steps that add up — rhythms of prayer, beauty, and stewardship for daily life.</p>
+        <div style="background:#fff; padding:24px; border-radius:14px; box-shadow:0 4px 16px rgba(0,0,0,.06);">
+          <h3 style="margin-top:0;">Grace in Motion</h3>
+          <p>Small, doable steps that add up—rhythms of prayer, beauty, and stewardship for daily life.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- What’s included / Who it’s for / Logistics -->
-  <section id="details">
+  <!-- What's included / Who it's for / Logistics -->
+  <section id="details" style="background:#fff;">
     <div class="container">
-      <div class="grid cols-3">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:32px; text-align:left;">
         <div>
-          <h2>What’s included</h2>
+          <h2 style="text-align:center;">What's included</h2>
           <ul class="gold-list">
             <li>15 weeks of live small-group calls (Zoom)</li>
             <li>Companion workbook (printable 5.5×8.5)</li>
+            <li>Weekly reflection songs for lectio divina</li>
             <li>Community space for support & sharing</li>
             <li>Optional prayer partner & office hours</li>
           </ul>
         </div>
         <div>
-          <h2>Who it’s for</h2>
+          <h2 style="text-align:center;">Who it's for</h2>
           <ul class="gold-list">
             <li>Women seeking a Christ-centered reset and deeper identity</li>
             <li>Those who want beauty, order, and sustainable rhythms</li>
@@ -206,7 +238,7 @@
           </ul>
         </div>
         <div>
-          <h2>Logistics</h2>
+          <h2 style="text-align:center;">Logistics</h2>
           <ul class="gold-list">
             <li><strong>When:</strong> Tuesdays, 7:30 pm CT</li>
             <li><strong>Length:</strong> 60–75 minutes</li>
@@ -227,167 +259,72 @@
       <!-- MAILERLITE EMBED -->
       <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1762785");</style>
       <style type="text/css">
-      /* MailerLite embed styles (as provided) */
-      .ml-form-embedSubmitLoad {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-      }
-      .g-recaptcha {
-        transform: scale(1);
-        -webkit-transform: scale(1);
-        transform-origin: 0 0;
-        -webkit-transform-origin: 0 0;
-      }
-      .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0,0,0,0);
-        border: 0;
-      }
+      .ml-form-embedSubmitLoad {display: inline-block; width: 20px; height: 20px;}
+      .g-recaptcha {transform: scale(1); -webkit-transform: scale(1); transform-origin: 0 0; -webkit-transform-origin: 0 0;}
+      .sr-only {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;}
       .ml-form-embedSubmitLoad:after {
-        content: " ";
-        display: block;
-        width: 11px;
-        height: 11px;
-        margin: 1px;
-        border-radius: 50%;
-        border: 4px solid #fff;
-        border-color: #ffffff #ffffff #ffffff transparent;
+        content: " "; display: block; width: 11px; height: 11px; margin: 1px; border-radius: 50%;
+        border: 4px solid #fff; border-color: #ffffff #ffffff #ffffff transparent;
         animation: ml-form-embedSubmitLoad 1.2s linear infinite;
       }
-      @keyframes ml-form-embedSubmitLoad {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-      #mlb2-33102111.ml-form-embedContainer {
-        box-sizing: border-box;
-        display: table;
-        margin: 0 auto;
-        position: static;
-        width: 100% !important;
-      }
-      #mlb2-33102111.ml-form-embedContainer h4,
-      #mlb2-33102111.ml-form-embedContainer p,
-      #mlb2-33102111.ml-form-embedContainer span,
-      #mlb2-33102111.ml-form-embedContainer button {
-        text-transform: none !important;
-        letter-spacing: normal !important;
+      @keyframes ml-form-embedSubmitLoad {0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); }}
+      #mlb2-33102111.ml-form-embedContainer {box-sizing: border-box; display: table; margin: 0 auto; position: static; width: 100% !important;}
+      #mlb2-33102111.ml-form-embedContainer h4, #mlb2-33102111.ml-form-embedContainer p,
+      #mlb2-33102111.ml-form-embedContainer span, #mlb2-33102111.ml-form-embedContainer button {
+        text-transform: none !important; letter-spacing: normal !important;
       }
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper {
-        background-color: #F9FAF9;
-        border-width: 0px;
-        border-color: transparent;
-        border-radius: 4px;
-        border-style: solid;
-        box-sizing: border-box;
-        display: inline-block !important;
-        margin: 0;
-        padding: 0;
-        position: relative;
+        background-color: #F9FAF9; border-width: 0px; border-color: transparent; border-radius: 4px;
+        border-style: solid; box-sizing: border-box; display: inline-block !important; margin: 0; padding: 0; position: relative;
       }
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper.embedPopup,
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper.embedDefault { width: 400px; }
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper.embedForm { max-width: 400px; width: 100%; }
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody,
-      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody {
-        padding: 20px 20px 0 20px;
-      }
-      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody.ml-form-embedBodyHorizontal {
-        padding-bottom: 0;
-      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody {padding: 20px 20px 0 20px;}
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody.ml-form-embedBodyHorizontal {padding-bottom: 0;}
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent,
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent {
-        text-align: left;
-        margin: 0 0 20px 0;
+        text-align: left; margin: 0 0 20px 0;
       }
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent h4,
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent h4 {
-        color: #3A6073;
-        font-family: 'Playfair Display', sans-serif;
-        font-size: 25px;
-        font-weight: 400;
-        margin: 0 0 10px 0;
-        text-align: left;
-        word-break: break-word;
+        color: #3A6073; font-family: 'Playfair Display', sans-serif; font-size: 25px; font-weight: 400;
+        margin: 0 0 10px 0; text-align: left; word-break: break-word;
       }
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p,
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p {
-        color: #273746;
-        font-family: 'Inter', sans-serif;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-        margin: 0 0 10px 0;
-        text-align: left;
+        color: #273746; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 400; line-height: 20px;
+        margin: 0 0 10px 0; text-align: left;
       }
-      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form {
-        margin: 0;
-        width: 100%;
-      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form {margin: 0; width: 100%;}
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent,
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
-        margin: 0 0 20px 0;
-        width: 100%;
+        margin: 0 0 20px 0; width: 100%;
       }
-      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow {
-        margin: 0 0 10px 0;
-        width: 100%;
-      }
-      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-last-item {
-        margin: 0;
-      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow {margin: 0 0 10px 0; width: 100%;}
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-last-item {margin: 0;}
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input {
-        background-color: #ffffff !important;
-        color: #273746 !important;
-        border-color: #3a6073;
-        border-radius: 4px !important;
-        border-style: solid !important;
-        border-width: 1px !important;
-        font-family: 'Inter', sans-serif;
-        font-size: 14px !important;
-        line-height: 21px !important;
-        margin: 0;
-        padding: 10px 10px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        max-width: 100% !important;
+        background-color: #ffffff !important; color: #273746 !important; border-color: #3a6073; border-radius: 4px !important;
+        border-style: solid !important; border-width: 1px !important; font-family: 'Inter', sans-serif; font-size: 14px !important;
+        line-height: 21px !important; margin: 0; padding: 10px 10px !important; width: 100% !important;
+        box-sizing: border-box !important; max-width: 100% !important;
       }
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-webkit-input-placeholder { color: #273746; }
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-moz-placeholder { color: #273746; }
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-ms-input-placeholder { color: #273746; }
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-moz-placeholder { color: #273746; }
-      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit {
-        margin: 0 0 20px 0;
-        float: left;
-        width: 100%;
-      }
+      #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit {margin: 0 0 20px 0; float: left; width: 100%;}
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button {
-        background-color: #3a6073 !important;
-        border: none !important;
-        border-radius: 4px !important;
-        box-shadow: none !important;
-        color: #ffffff !important;
-        cursor: pointer;
-        font-family: 'Inter', sans-serif !important;
-        font-size: 14px !important;
-        font-weight: 700 !important;
-        line-height: 21px !important;
-        height: auto;
-        padding: 10px !important;
-        width: 100% !important;
+        background-color: #3a6073 !important; border: none !important; border-radius: 4px !important; box-shadow: none !important;
+        color: #ffffff !important; cursor: pointer; font-family: 'Inter', sans-serif !important; font-size: 14px !important;
+        font-weight: 700 !important; line-height: 21px !important; height: auto; padding: 10px !important; width: 100% !important;
         box-sizing: border-box !important;
       }
       #mlb2-33102111.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button:hover {
         background-color: #7fb6b3 !important;
       }
-      .ml-error input, .ml-error textarea, .ml-error select {
-        border-color: red!important;
-      }
+      .ml-error input, .ml-error textarea, .ml-error select {border-color: red!important;}
       @media only screen and (max-width: 400px){
         .ml-form-embedWrapper.embedDefault, .ml-form-embedWrapper.embedPopup { width: 100%!important; }
       }
@@ -451,35 +388,30 @@
       <script>
         fetch("https://assets.mailerlite.com/jsonp/1906810/forms/170530801668064317/takel");
       </script>
-      <!-- END MAILERLITE EMBED -->
     </div>
   </section>
 
   <!-- FAQ -->
-  <section id="faq">
+  <section id="faq" style="background:#fff;">
     <div class="container">
       <div class="section-head"><h2>FAQ</h2></div>
-      <div class="grid cols-2">
-        <div>
-          <details>
-            <summary>How much does it cost?</summary>
-            <p class="muted">Pricing will be announced soon with an early-bird range. Join the waitlist to receive the first notice.</p>
-          </details>
-          <details>
-            <summary>Are recordings available?</summary>
-            <p class="muted">Yes — replays will be available for registered participants if you need to miss a week.</p>
-          </details>
-        </div>
-        <div>
-          <details>
-            <summary>What materials do I need?</summary>
-            <p class="muted">You’ll receive a printable workbook (5.5×8.5). Bring a pen, a quiet spot, and a willing heart. Everything else is optional.</p>
-          </details>
-          <details>
-            <summary>Is the group size limited?</summary>
-            <p class="muted">Yes, cohorts are intentionally small to keep the space safe, personal, and interactive.</p>
-          </details>
-        </div>
+      <div class="faq-wrap">
+        <details>
+          <summary>How much does it cost?</summary>
+          <p class="muted">Pricing will be announced soon with an early-bird range. Join the waitlist to receive the first notice.</p>
+        </details>
+        <details>
+          <summary>Are recordings available?</summary>
+          <p class="muted">Yes—replays will be available for registered participants if you need to miss a week.</p>
+        </details>
+        <details>
+          <summary>What materials do I need?</summary>
+          <p class="muted">You'll receive a printable workbook (5.5×8.5). Bring a pen, a quiet spot, and a willing heart. Everything else is optional.</p>
+        </details>
+        <details>
+          <summary>Is the group size limited?</summary>
+          <p class="muted">Yes, cohorts are intentionally small to keep the space safe, personal, and interactive.</p>
+        </details>
       </div>
     </div>
   </section>
