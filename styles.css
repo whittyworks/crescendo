@@ -2256,3 +2256,410 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* Personal Journey (1:1) Page Specific Styles */
+.personal-hero {
+    min-height: 85vh;
+}
+
+.personal-distinction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    margin: 2rem auto;
+    max-width: 600px;
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+}
+
+.distinction-icon {
+    font-size: 2rem;
+}
+
+.distinction-text {
+    color: var(--text-medium);
+    line-height: 1.6;
+}
+
+/* Difference Grid */
+.difference-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.difference-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.difference-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+}
+
+.difference-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.difference-title {
+    font-size: 1.2rem;
+    color: var(--gold-dark);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.difference-card p {
+    color: var(--text-medium);
+    line-height: 1.7;
+}
+
+/* For/Who Section */
+.for-content {
+    max-width: 900px;
+    margin: 3rem auto;
+}
+
+.for-block {
+    background: white;
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+    margin-bottom: 2rem;
+}
+
+.for-list {
+    list-style: none;
+    padding: 0;
+}
+
+.for-list li {
+    padding: 1rem 0;
+    padding-left: 2.5rem;
+    position: relative;
+    color: var(--text-medium);
+    line-height: 1.7;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.for-list li:last-child {
+    border-bottom: none;
+}
+
+.for-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.for-note {
+    background: rgba(212, 175, 55, 0.05);
+    padding: 2.5rem;
+    border-radius: 8px;
+    border: 2px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Structure Modules */
+.structure-modules {
+    display: grid;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.structure-module {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+    border-left: 4px solid var(--gold);
+    position: relative;
+}
+
+.structure-module.featured {
+    border-left-width: 6px;
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
+}
+
+.module-number {
+    position: absolute;
+    top: -15px;
+    left: 30px;
+    background: var(--gold);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.module-title {
+    font-size: 1.8rem;
+    color: var(--gold-dark);
+    margin-bottom: 0.5rem;
+}
+
+.module-duration {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+}
+
+.module-description {
+    color: var(--text-medium);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.module-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.module-topics span {
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--gold-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+}
+
+/* Investment Content */
+.investment-content {
+    max-width: 900px;
+    margin: 3rem auto;
+    display: grid;
+    gap: 3rem;
+}
+
+.investment-block {
+    background: white;
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+}
+
+/* Process Steps */
+.process-steps {
+    background: white;
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+}
+
+.process-step {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    align-items: flex-start;
+}
+
+.process-step:last-child {
+    margin-bottom: 0;
+}
+
+.step-number {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    background: var(--gold);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.step-content h4 {
+    color: var(--gold-dark);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.step-content p {
+    color: var(--text-medium);
+    line-height: 1.7;
+}
+
+/* Inquiry Form */
+.personal-inquiry {
+    padding: 8rem 5%;
+    background: linear-gradient(135deg, rgba(253, 248, 243, 0.9), rgba(220, 197, 216, 0.1));
+}
+
+.inquiry-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.inquiry-description {
+    font-size: 1.2rem;
+    color: var(--text-medium);
+    line-height: 1.8;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.inquiry-form {
+    background: white;
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+    margin-bottom: 2rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.inquiry-form label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--gold-dark);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.inquiry-form input,
+.inquiry-form select,
+.inquiry-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.inquiry-form input:focus,
+.inquiry-form select:focus,
+.inquiry-form textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+}
+
+.inquiry-form textarea {
+    resize: vertical;
+}
+
+.inquiry-note {
+    background: rgba(212, 175, 55, 0.05);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    text-align: center;
+}
+
+.inquiry-note p {
+    color: var(--text-medium);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Alternatives Grid */
+.alternatives-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.alternative-card {
+    background: white;
+    padding: 3rem 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.alternative-card:hover {
+    transform: translateY(-5px);
+}
+
+.alt-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.alt-title {
+    font-size: 2rem;
+    color: var(--gold-dark);
+    margin-bottom: 0.5rem;
+}
+
+.alt-subtitle {
+    font-size: 1rem;
+    color: var(--text-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+}
+
+.alt-description {
+    color: var(--text-medium);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+/* Mobile Responsive for Personal Journey */
+@media (max-width: 768px) {
+    .personal-distinction {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .difference-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .structure-modules {
+        padding: 0 1rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .process-step {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .alternatives-grid {
+        grid-template-columns: 1fr;
+    }
+}
