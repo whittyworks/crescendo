@@ -1,0 +1,5 @@
+# Redirect old journey.html to new symphony-of-grace.html page
+Redirect 301 /journey.html https://myholycrescendo.com/symphony-of-grace.html
+
+# Additional redirects can be added below as needed
+# Redirect 301 /old-page.html https://myholycrescendo.com/new-page.html
