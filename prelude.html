@@ -264,37 +264,36 @@
                     you'll receive one gentle email each morning—no overwhelm, no pressure, just grace.
                 </p>
 
-                <!-- MAILERLITE FORM PLACEHOLDER -->
+                <!-- FORMSPREE SIGNUP FORM -->
                 <div class="mailerlite-form-container">
-                    <!-- ============================================ -->
-                    <!-- PASTE YOUR MAILERLITE EMBED CODE HERE -->
-                    <!-- ============================================ -->
-                    
-                    <!-- TEMPORARY PLACEHOLDER (Remove this when you add MailerLite) -->
-                    <div class="form-placeholder">
-                        <div class="placeholder-content">
-                            <div class="placeholder-icon">📧</div>
-                            <h3 class="sans">MailerLite Form Goes Here</h3>
-                            <p>Replace this section with your MailerLite embedded form code.</p>
-                            <div class="placeholder-instructions">
-                                <h4 class="sans">How to Add Your Form:</h4>
-                                <ol>
-                                    <li>Create your form in MailerLite</li>
-                                    <li>Get the embed code</li>
-                                    <li>Open this HTML file</li>
-                                    <li>Find this section (line ~341)</li>
-                                    <li>Delete this placeholder div</li>
-                                    <li>Paste your MailerLite code here</li>
-                                </ol>
-                            </div>
+                    <form class="contact-form" action="https://formspree.io/f/mvzgqaap" method="POST" style="max-width: 500px; margin: 0 auto;">
+                        <!-- Hidden fields -->
+                        <input type="hidden" name="_subject" value="New Prelude Signup">
+                        <input type="hidden" name="_next" value="thank-you.html">
+                        
+                        <div class="form-group">
+                            <input type="text" 
+                                   id="prelude-name" 
+                                   name="name" 
+                                   placeholder="Your Name" 
+                                   required
+                                   style="width: 100%; padding: 1rem; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 1rem;">
                         </div>
-                    </div>
-                    <!-- END PLACEHOLDER -->
+                        
+                        <div class="form-group">
+                            <input type="email" 
+                                   id="prelude-email" 
+                                   name="email" 
+                                   placeholder="Your Email" 
+                                   required
+                                   style="width: 100%; padding: 1rem; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 1rem;">
+                        </div>
+                        
+                        <button type="submit" class="cta-button" style="width: 100%; margin-top: 1rem;">
+                            Begin Your Free Prelude
+                        </button>
+                    </form>
                     
-                    <!-- ============================================ -->
-                    <!-- YOUR MAILERLITE CODE WILL GO HERE -->
-                    <!-- ============================================ -->
-                </div>
 
                 <div class="signup-promise">
                     <p>✓ Free forever. No credit card required.</p>
