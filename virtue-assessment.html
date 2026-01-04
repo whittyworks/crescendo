@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtue Assessment · My Holy Crescendo</title>
     <meta name="description" content="Discover your top spiritual virtues with this assessment based on St. Albert the Great's classic work, The Paradise of the Soul.">
+                <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="My Holy Crescendo - Fearfully & Wonderfully Made">
+    <meta property="og:description" content="A transformative journey discovering God's design in your body, mind, and spirit through A Symphony of Grace.">
+    <meta property="og:image" content="https://myholycrescendo.com/assets/img/og-image.png">
+    <meta property="og:url" content="https://myholycrescendo.com/">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"></head>
+
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/jpeg" href="assets/img/crescendo-cover.jpg">
@@ -193,6 +206,7 @@
             gap: 20px;
         }
 
+        .begin-button,
         .nav-buttons button {
             background: var(--gold);
             color: white;
@@ -206,13 +220,45 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
             border: 2px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-buttons button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 70%
+            );
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
         }
 
         .nav-buttons button:hover {
             background: var(--gold-dark);
             border-color: var(--gold-dark);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .nav-buttons button:hover::before {
+            animation: shimmer 1.5s infinite;
         }
 
         .nav-buttons button:disabled {
@@ -221,6 +267,15 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+        }
+
+        .nav-buttons button:disabled::before {
+            display: none;
+        }
+
+        .begin-button {
+            font-size: 1.2rem;
+            padding: 18px 50px;
         }
 
         /* Email Capture Modal */
@@ -302,12 +357,35 @@
             text-transform: uppercase;
             letter-spacing: 0.15em;
             font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .email-form button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 70%
+            );
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
         }
 
         .email-form button:hover {
             background: var(--gold-dark);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .email-form button:hover::before {
+            animation: shimmer 1.5s infinite;
         }
 
         .privacy-note {
@@ -517,150 +595,24 @@
                 width: 100%;
             }
         }
-
-        /* ====================================
-           NAVIGATION DROPDOWN STYLES
-           ==================================== */
-
-        .nav-links li {
-            position: relative;
-        }
-
-        .nav-links .dropdown {
-            position: relative;
-        }
-
-        .nav-links .dropdown > a {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .nav-links .dropdown > a::after {
-            content: '▾';
-            font-size: 0.8rem;
-            transition: transform 0.3s ease;
-        }
-
-        .nav-links .dropdown:hover > a::after {
-            transform: rotate(180deg);
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: white;
-            min-width: 220px;
-            padding: 0;
-            margin-top: 15px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            list-style: none;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-menu li {
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-        }
-
-        .dropdown-menu li:last-child {
-            border-bottom: none;
-        }
-
-        .dropdown-menu a {
-            display: block;
-            padding: 12px 20px;
-            color: var(--text-medium);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            font-weight: 300;
-        }
-
-        .dropdown-menu a:hover {
-            background: var(--cream-dark);
-            color: var(--gold);
-            padding-left: 25px;
-        }
-
-        .dropdown-menu li:first-child a {
-            border-radius: 8px 8px 0 0;
-        }
-
-        .dropdown-menu li:last-child a {
-            border-radius: 0 0 8px 8px;
-        }
-
-        .dropdown-menu .free-badge {
-            display: inline-block;
-            background: var(--gold);
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 10px;
-            margin-left: 8px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        @media (max-width: 768px) {
-            .dropdown-menu {
-                position: static;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                margin-top: 10px;
-                box-shadow: none;
-                border: none;
-                background: transparent;
-                padding-left: 20px;
-            }
-            
-            .dropdown-menu a {
-                padding: 8px 15px;
-                font-size: 0.85rem;
-            }
-            
-            .dropdown-menu a:hover {
-                background: rgba(212, 175, 55, 0.1);
-            }
-            
-            .nav-links .dropdown > a::after {
-                display: none;
-            }
-        }
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="sans">
-    <a href="index.html" class="logo-link">
-        <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
-    </a>
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="symphony-of-grace.html">15-Week Journey</a></li>
-        <li><a href="made-beautiful.html">Retreat</a></li>
-        <li><a href="personal-journey.html">1:1 Coaching</a></li>
-        <li><a href="prelude.html">Free Prelude</a></li>
-        <li><a href="virtue-assessment.html" class="is active">Virtue Quiz</a></li>
-    </ul>
-</nav>
-    
+        <a href="index.html" class="logo-link">
+            <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="symphony-of-grace.html">15-Week Journey</a></li>
+            <li><a href="made-beautiful.html">Retreat</a></li>
+            <li><a href="personal-journey.html">1:1 Coaching</a></li>
+            <li><a href="prelude.html">Free Prelude</a></li>
+            <li><a href="virtue-assessment.html" class="active">Virtue Quiz</a></li>
+        </ul>
+    </nav>
 
     <div class="quiz-container">
         <!-- Intro Screen -->
@@ -690,7 +642,7 @@
             </div>
 
             <div style="text-align: center; margin: 40px 0;">
-                <button onclick="startQuiz()" style="font-size: 1.2rem; padding: 18px 50px;">Begin Assessment</button>
+                <button onclick="startQuiz()" class="begin-button">Begin Assessment</button>
             </div>
         </div>
 
