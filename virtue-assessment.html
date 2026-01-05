@@ -12,6 +12,9 @@
     <!-- EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
     <style>
         /* Quiz-specific styles */
         .quiz-container {
@@ -1162,6 +1165,10 @@
         const questionsPerPage = 7;
         const totalPages = Math.ceil(allQuestions.length / questionsPerPage);
         let answers = new Array(allQuestions.length).fill(null);
+        
+        // Store results for PDF generation
+        let savedResults = null;
+        let savedUserName = null;
 
         function startQuiz() {
             document.getElementById('intro-screen').style.display = 'none';
@@ -1326,6 +1333,10 @@
         }
 
         function showResults(results, userName) {
+            // Save for PDF generation
+            savedResults = results;
+            savedUserName = userName;
+            
             document.getElementById('quiz-screen').style.display = 'none';
             
             const topTen = results.slice(0, 10);
@@ -1377,7 +1388,7 @@
                     </div>
 
                     <div class="action-buttons">
-                        <button class="action-button primary" onclick="downloadResults()">Download Results</button>
+                        <button class="action-button primary" onclick="downloadResults()">Download PDF Results</button>
                         <button class="action-button primary" onclick="emailResults()">Email Results to Me</button>
                         <a href="symphony-of-grace.html" class="action-button secondary">Explore 15-Week Journey</a>
                         <a href="personal-journey.html" class="action-button secondary">1:1 Coaching</a>
@@ -1407,14 +1418,212 @@
         }
 
         function downloadResults() {
-            const results = document.querySelector('.results-container').innerText;
-            const blob = new Blob([results], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'my-virtue-assessment-results.txt';
-            a.click();
-            URL.revokeObjectURL(url);
+            if (!savedResults || !window.jspdf) {
+                alert('Results not ready. Please complete the assessment first.');
+                return;
+            }
+            
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Colors (matching site theme)
+            const goldDark = [184, 148, 31];    // #B8941F
+            const gold = [212, 175, 55];        // #D4AF37
+            const textDark = [44, 36, 22];      // #2C2416
+            const textMedium = [92, 81, 66];    // #5C5142
+            const creamDark = [245, 239, 231];  // #F5EFE7
+            
+            // Page setup
+            const pageWidth = doc.internal.pageSize.width;
+            const pageHeight = doc.internal.pageSize.height;
+            const margin = 20;
+            const contentWidth = pageWidth - (margin * 2);
+            let yPos = margin;
+            
+            // Helper function to add new page if needed
+            function checkPageBreak(neededSpace) {
+                if (yPos + neededSpace > pageHeight - margin) {
+                    doc.addPage();
+                    yPos = margin;
+                    return true;
+                }
+                return false;
+            }
+            
+            // Header - Gold bar
+            doc.setFillColor(...gold);
+            doc.rect(0, 0, pageWidth, 15, 'F');
+            
+            // Title
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(24);
+            doc.setTextColor(...goldDark);
+            yPos = 30;
+            doc.text('The Paradise of the Soul', pageWidth / 2, yPos, { align: 'center' });
+            
+            // Subtitle
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'italic');
+            doc.setTextColor(...textMedium);
+            yPos += 10;
+            doc.text('Virtue Assessment Results', pageWidth / 2, yPos, { align: 'center' });
+            
+            // User name if available
+            if (savedUserName) {
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'normal');
+                yPos += 8;
+                doc.text(`For: ${savedUserName}`, pageWidth / 2, yPos, { align: 'center' });
+            }
+            
+            // Date
+            doc.setFontSize(10);
+            doc.setTextColor(...textMedium);
+            yPos += 6;
+            const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            doc.text(today, pageWidth / 2, yPos, { align: 'center' });
+            
+            // Divider line
+            yPos += 8;
+            doc.setDrawColor(...gold);
+            doc.setLineWidth(0.5);
+            doc.line(margin, yPos, pageWidth - margin, yPos);
+            
+            // Introduction
+            yPos += 10;
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(...textDark);
+            const introText = 'Based on St. Albert the Great\'s classic work, this assessment reveals your top spiritual strengths among the 42 virtues of The Paradise of the Soul.';
+            const introLines = doc.splitTextToSize(introText, contentWidth);
+            doc.text(introLines, margin, yPos);
+            yPos += introLines.length * 6;
+            
+            // Top 10 Virtues Section
+            yPos += 8;
+            doc.setFillColor(...goldDark);
+            doc.rect(margin, yPos - 4, contentWidth, 10, 'F');
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(14);
+            doc.setTextColor(255, 255, 255);
+            doc.text('Your Top 10 Spiritual Strengths', pageWidth / 2, yPos + 2, { align: 'center' });
+            yPos += 12;
+            
+            // Display top 10 virtues
+            const topTen = savedResults.slice(0, 10);
+            topTen.forEach((virtue, index) => {
+                checkPageBreak(35);
+                
+                // Virtue box background
+                doc.setFillColor(...creamDark);
+                doc.rect(margin, yPos, contentWidth, 30, 'F');
+                
+                // Rank number
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(20);
+                doc.setTextColor(...gold);
+                doc.text(`${index + 1}`, margin + 5, yPos + 8);
+                
+                // Virtue name
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(13);
+                doc.setTextColor(...goldDark);
+                doc.text(virtue.name, margin + 18, yPos + 7);
+                
+                // Score
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(10);
+                doc.setTextColor(...gold);
+                doc.text(`Score: ${virtue.score} / 5.00`, margin + 18, yPos + 13);
+                
+                // Description
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(9);
+                doc.setTextColor(...textMedium);
+                const descLines = doc.splitTextToSize(virtue.description, contentWidth - 25);
+                doc.text(descLines, margin + 18, yPos + 19);
+                
+                yPos += 33;
+            });
+            
+            // Complete Ranking Section
+            checkPageBreak(20);
+            yPos += 5;
+            doc.setFillColor(...goldDark);
+            doc.rect(margin, yPos - 4, contentWidth, 10, 'F');
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(14);
+            doc.setTextColor(255, 255, 255);
+            doc.text('Complete Virtue Ranking (42 Virtues)', pageWidth / 2, yPos + 2, { align: 'center' });
+            yPos += 12;
+            
+            // Display remaining virtues (11-42)
+            const remaining = savedResults.slice(10);
+            remaining.forEach((virtue, index) => {
+                const rank = index + 11;
+                checkPageBreak(20);
+                
+                // Alternate background for readability
+                if (index % 2 === 0) {
+                    doc.setFillColor(250, 250, 250);
+                    doc.rect(margin, yPos, contentWidth, 18, 'F');
+                }
+                
+                // Rank
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(11);
+                doc.setTextColor(...gold);
+                doc.text(`${rank}`, margin + 3, yPos + 6);
+                
+                // Virtue name
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(10);
+                doc.setTextColor(...textDark);
+                doc.text(virtue.name, margin + 12, yPos + 5);
+                
+                // Score
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(9);
+                doc.setTextColor(...textMedium);
+                doc.text(`Score: ${virtue.score}`, margin + 12, yPos + 10);
+                
+                // Description (shortened for space)
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8);
+                doc.setTextColor(...textMedium);
+                const shortDesc = virtue.description.length > 80 
+                    ? virtue.description.substring(0, 80) + '...' 
+                    : virtue.description;
+                const descLines = doc.splitTextToSize(shortDesc, contentWidth - 15);
+                doc.text(descLines, margin + 12, yPos + 14);
+                
+                yPos += 20;
+            });
+            
+            // Footer on last page
+            checkPageBreak(20);
+            yPos = pageHeight - 25;
+            doc.setDrawColor(...gold);
+            doc.setLineWidth(0.5);
+            doc.line(margin, yPos, pageWidth - margin, yPos);
+            
+            yPos += 6;
+            doc.setFont('helvetica', 'italic');
+            doc.setFontSize(10);
+            doc.setTextColor(...textMedium);
+            doc.text('My Holy Crescendo', pageWidth / 2, yPos, { align: 'center' });
+            yPos += 5;
+            doc.setFontSize(9);
+            doc.text('fearfully & wonderfully made', pageWidth / 2, yPos, { align: 'center' });
+            yPos += 5;
+            doc.setFontSize(8);
+            doc.text('myholycrescendo.com', pageWidth / 2, yPos, { align: 'center' });
+            
+            // Save the PDF
+            const fileName = savedUserName 
+                ? `virtue-assessment-${savedUserName.replace(/\s+/g, '-')}.pdf`
+                : 'my-virtue-assessment-results.pdf';
+            doc.save(fileName);
         }
 
         function emailResults() {
