@@ -5,25 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtue Assessment · My Holy Crescendo</title>
     <meta name="description" content="Discover your top spiritual virtues with this assessment based on St. Albert the Great's classic work, The Paradise of the Soul.">
-                <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="My Holy Crescendo - Fearfully & Wonderfully Made">
-    <meta property="og:description" content="A transformative journey discovering God's design in your body, mind, and spirit through A Symphony of Grace.">
-    <meta property="og:image" content="https://myholycrescendo.com/assets/img/og-image.png">
-    <meta property="og:url" content="https://myholycrescendo.com/">
-
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png"></head>
-
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/jpeg" href="assets/img/crescendo-cover.jpg">
     
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
     <style>
-        /* Quiz-specific styles that extend the site's base styles */
+        /* Quiz-specific styles */
         .quiz-container {
             max-width: 900px;
             margin: 0 auto;
@@ -99,51 +89,44 @@
             line-height: 1.6;
         }
 
-        .question-section {
-            display: none;
-        }
-
-        .question-section.active {
-            display: block;
-        }
-
         .question-card {
             background: white;
-            padding: 40px;
+            padding: 30px;
             margin: 20px 0;
             border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-        }
-
-        .virtue-name {
-            font-family: 'Cinzel', serif;
-            color: var(--gold-dark);
-            font-weight: 500;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--gold-light);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.08);
+            border-left: 3px solid var(--gold);
         }
 
         .question-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            margin: 20px 0 15px;
+            font-size: 1.15rem;
             color: var(--text-dark);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .question-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+            font-weight: 500;
         }
 
         .likert-scale {
             display: flex;
             justify-content: space-between;
-            margin: 20px 0;
-            flex-wrap: wrap;
             gap: 10px;
+            margin-top: 15px;
         }
 
         .likert-option {
             flex: 1;
-            min-width: 140px;
+            text-align: center;
         }
 
         .likert-option input[type="radio"] {
@@ -153,73 +136,97 @@
         .likert-option label {
             display: block;
             padding: 15px 10px;
-            background: white;
-            border: 2px solid var(--gold-light);
-            border-radius: 5px;
-            text-align: center;
+            background: var(--cream-dark);
+            border: 2px solid transparent;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Montserrat', sans-serif;
             font-size: 0.9rem;
-            color: var(--text-dark);
+            color: var(--text-medium);
         }
 
         .likert-option input[type="radio"]:checked + label {
             background: var(--gold);
             color: white;
-            border-color: var(--gold);
+            border-color: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
         }
 
         .likert-option label:hover {
-            background: var(--cream-dark);
-            border-color: var(--gold);
+            border-color: var(--gold-light);
+            transform: translateY(-1px);
+        }
+
+        .progress-container {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .progress-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--gold-dark);
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 500;
         }
 
         .progress-bar {
-            width: 100%;
-            height: 30px;
+            height: 12px;
             background: var(--cream-dark);
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            margin: 30px 0;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
-            width: 0%;
-            transition: width 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 500;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.95rem;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark));
+            border-radius: 20px;
+            transition: width 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .nav-buttons {
             display: flex;
-            justify-content: space-between;
-            margin-top: 40px;
-            gap: 20px;
+            gap: 15px;
+            justify-content: center;
+            margin: 40px 0;
         }
 
-        .begin-button,
         .nav-buttons button {
-            background: var(--gold);
-            color: white;
+            font-family: 'Montserrat', sans-serif;
+            padding: 15px 35px;
+            font-size: 1rem;
             border: none;
-            padding: 15px 40px;
-            font-size: 1.1rem;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            border: 2px solid var(--gold);
+            font-weight: 500;
             position: relative;
             overflow: hidden;
         }
@@ -231,109 +238,134 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent 30%,
-                rgba(255, 255, 255, 0.3) 50%,
-                transparent 70%
-            );
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
             transform: rotate(45deg);
-            animation: shimmer 3s infinite;
+            animation: shimmer-btn 3s infinite;
         }
 
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%) translateY(-100%) rotate(45deg);
-            }
-            100% {
-                transform: translateX(100%) translateY(100%) rotate(45deg);
-            }
+        @keyframes shimmer-btn {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
-        .nav-buttons button:hover {
+        .nav-buttons button:hover::before {
+            animation: shimmer-btn 1.5s infinite;
+        }
+
+        #prev-btn {
+            background: var(--cream-dark);
+            color: var(--text-dark);
+            border: 2px solid var(--gold-light);
+        }
+
+        #prev-btn:hover:not(:disabled) {
+            background: var(--gold-light);
+            color: white;
+        }
+
+        #prev-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        #next-btn, #submit-btn {
+            background: var(--gold);
+            color: white;
+            border: 2px solid var(--gold);
+        }
+
+        #next-btn:hover, #submit-btn:hover {
             background: var(--gold-dark);
             border-color: var(--gold-dark);
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
         }
 
-        .nav-buttons button:hover::before {
-            animation: shimmer 1.5s infinite;
-        }
-
-        .nav-buttons button:disabled {
-            background: #ccc;
-            border-color: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .nav-buttons button:disabled::before {
-            display: none;
-        }
-
         .begin-button {
-            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
             padding: 18px 50px;
+            font-size: 1.1rem;
+            background: var(--gold);
+            color: white;
+            border: 2px solid var(--gold);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Email Capture Modal */
+        .begin-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+            transform: rotate(45deg);
+            animation: shimmer-btn 3s infinite;
+        }
+
+        .begin-button:hover {
+            background: var(--gold-dark);
+            border-color: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Email Modal */
         .email-modal {
             display: none;
             position: fixed;
-            top: 0;
+            z-index: 1000;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(44, 24, 16, 0.9);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .email-modal.active {
-            display: flex;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
         }
 
         .email-modal-content {
             background: white;
+            margin: 5% auto;
             padding: 50px;
-            border-radius: 10px;
-            max-width: 600px;
-            width: 90%;
+            border-radius: 12px;
+            max-width: 550px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            position: relative;
+            border-top: 5px solid var(--gold);
         }
 
-        .email-modal h2 {
+        .email-modal-content h2 {
             font-family: 'Cinzel', serif;
             color: var(--gold-dark);
-            font-size: 2rem;
             margin-bottom: 20px;
+            font-size: 2rem;
             text-align: center;
         }
 
-        .email-modal p {
+        .email-modal-content p {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem;
             color: var(--text-medium);
             margin-bottom: 25px;
-            text-align: center;
             line-height: 1.7;
+            font-size: 1.05rem;
         }
 
         .email-form {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
         }
 
-        .email-form input[type="email"],
-        .email-form input[type="text"] {
+        .email-form input {
             padding: 15px;
-            border: 2px solid var(--gold-light);
-            border-radius: 5px;
+            border: 2px solid var(--cream-dark);
+            border-radius: 8px;
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             transition: border-color 0.3s ease;
@@ -345,18 +377,18 @@
         }
 
         .email-form button {
+            font-family: 'Montserrat', sans-serif;
+            padding: 15px;
             background: var(--gold);
             color: white;
-            border: none;
-            padding: 18px;
-            font-size: 1.2rem;
+            border: 2px solid var(--gold);
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.1em;
             font-weight: 500;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
@@ -368,24 +400,16 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent 30%,
-                rgba(255, 255, 255, 0.3) 50%,
-                transparent 70%
-            );
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
             transform: rotate(45deg);
-            animation: shimmer 3s infinite;
+            animation: shimmer-btn 3s infinite;
         }
 
         .email-form button:hover {
             background: var(--gold-dark);
+            border-color: var(--gold-dark);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-        }
-
-        .email-form button:hover::before {
-            animation: shimmer 1.5s infinite;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
         }
 
         .privacy-note {
@@ -394,205 +418,228 @@
             color: var(--text-medium);
             text-align: center;
             margin-top: 15px;
-            font-style: italic;
         }
 
-        /* Results Section */
-        #results {
-            display: none;
+        /* Results */
+        .results-container {
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
+            margin: 40px 0;
         }
 
         .results-header {
             text-align: center;
-            margin: 40px 0;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid var(--gold-light);
         }
 
-        .results-header h1 {
+        .results-header h2 {
             font-family: 'Cinzel', serif;
             color: var(--gold-dark);
             font-size: 2.5rem;
             margin-bottom: 15px;
         }
 
-        .results-header .subtitle {
+        .results-header p {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            color: var(--text-medium);
             font-style: italic;
-            color: var(--text-medium);
-        }
-
-        .results-intro {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            margin: 30px 0;
-            border-left: 4px solid var(--gold);
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
-        }
-
-        .results-intro p {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            color: var(--text-medium);
-            line-height: 1.8;
-            margin-bottom: 15px;
         }
 
         .virtue-result {
-            background: white;
+            background: linear-gradient(135deg, rgba(253, 248, 243, 0.5), rgba(220, 197, 216, 0.05));
             padding: 30px;
-            margin: 25px 0;
+            margin: 20px 0;
             border-radius: 8px;
             border-left: 5px solid var(--gold);
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
             transition: transform 0.3s ease;
         }
 
         .virtue-result:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+            transform: translateX(5px);
         }
 
         .virtue-rank {
-            background: var(--gold);
-            color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.3rem;
-            margin-right: 15px;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: var(--gold);
+            font-weight: 600;
+            float: left;
+            margin-right: 25px;
+            line-height: 1;
         }
 
-        .virtue-result h3 {
+        .virtue-content {
+            overflow: hidden;
+        }
+
+        .virtue-name {
             font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
             color: var(--gold-dark);
-            font-size: 1.6rem;
             margin-bottom: 10px;
-            display: inline-block;
+            font-weight: 500;
         }
 
         .virtue-score {
-            float: right;
-            background: var(--gold-light);
-            color: var(--text-dark);
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: bold;
             font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+            font-weight: 500;
         }
 
         .virtue-description {
-            margin-top: 15px;
             font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
+            font-size: 1.05rem;
             color: var(--text-medium);
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-
-        .next-steps {
-            background: var(--cream-dark);
-            padding: 40px;
-            border-radius: 8px;
-            margin: 40px 0;
-            text-align: center;
-        }
-
-        .next-steps h2 {
-            font-family: 'Cinzel', serif;
-            color: var(--gold-dark);
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .next-steps p {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem;
-            color: var(--text-medium);
-            margin-bottom: 25px;
             line-height: 1.7;
         }
 
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .cta-buttons a {
-            background: var(--gold);
-            color: white;
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
+        .show-all-btn {
             font-family: 'Montserrat', sans-serif;
+            padding: 15px 40px;
+            background: var(--cream-dark);
+            color: var(--text-dark);
+            border: 2px solid var(--gold-light);
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
+            font-weight: 500;
             transition: all 0.3s ease;
+            margin: 30px auto;
+            display: block;
+        }
+
+        .show-all-btn:hover {
+            background: var(--gold-light);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .all-virtues {
+            display: none;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 2px solid var(--gold-light);
+        }
+
+        .all-virtues.visible {
+            display: block;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .action-button {
+            font-family: 'Montserrat', sans-serif;
+            padding: 15px 35px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+            transform: rotate(45deg);
+            animation: shimmer-btn 3s infinite;
+        }
+
+        .action-button.primary {
+            background: var(--gold);
+            color: white;
             border: 2px solid var(--gold);
         }
 
-        .cta-buttons a:hover {
+        .action-button.primary:hover {
             background: var(--gold-dark);
             border-color: var(--gold-dark);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
         }
 
-        .cta-buttons a.secondary {
+        .action-button.secondary {
             background: transparent;
             color: var(--gold);
+            border: 2px solid var(--gold);
         }
 
-        .cta-buttons a.secondary:hover {
+        .action-button.secondary:hover {
             background: var(--gold);
             color: white;
         }
 
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             .quiz-hero h1 {
                 font-size: 2rem;
             }
 
-            .intro-section, .question-card {
+            .intro-section {
                 padding: 25px;
+            }
+
+            .question-card {
+                padding: 20px;
             }
 
             .likert-scale {
                 flex-direction: column;
+                gap: 10px;
             }
 
-            .likert-option {
-                min-width: 100%;
-            }
-
-            .nav-buttons {
-                flex-direction: column;
+            .likert-option label {
+                padding: 12px;
             }
 
             .email-modal-content {
+                margin: 10% 5%;
                 padding: 30px 20px;
             }
 
-            .virtue-score {
-                float: none;
-                display: inline-block;
-                margin-top: 10px;
+            .results-container {
+                padding: 25px;
             }
 
-            .cta-buttons {
+            .virtue-rank {
+                float: none;
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .action-buttons {
                 flex-direction: column;
             }
 
-            .cta-buttons a {
+            .action-button {
                 width: 100%;
+                text-align: center;
             }
         }
     </style>
@@ -633,7 +680,7 @@
                     <li>Simple agree/disagree format—no right or wrong answers</li>
                     <li>Approximately 20-30 minutes to complete</li>
                     <li>Receive your personalized top 10 virtues with descriptions</li>
-                    <li>Understand your spiritual strengths and growth areas</li>
+                    <li>Option to view all 42 virtues ranked</li>
                 </ul>
                 
                 <p><strong>How to approach this:</strong> Answer honestly based on your current life, not an idealized version of yourself. This is a tool for self-reflection and spiritual growth, not judgment. The more truthful you are, the more valuable your results will be.</p>
@@ -653,8 +700,11 @@
                 <p class="subtitle">Virtue Assessment</p>
             </div>
             
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress">0%</div>
+            <div class="progress-container">
+                <div class="progress-label" id="progress-label">Page 1 of 18 • Questions 1-7 of 126</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress" style="width: 0%"></div>
+                </div>
             </div>
 
             <div id="quiz-container"></div>
@@ -670,7 +720,7 @@
         <div id="email-modal" class="email-modal">
             <div class="email-modal-content">
                 <h2>Get Your Results</h2>
-                <p>Enter your information below to receive your personalized virtue assessment results. We'll also send you occasional updates about spiritual growth resources from My Holy Crescendo.</p>
+                <p>Enter your information below to receive your personalized virtue assessment results.</p>
                 
                 <form class="email-form" onsubmit="submitEmailAndShowResults(event)">
                     <input type="text" id="user-name" placeholder="Your Name" required>
@@ -678,7 +728,7 @@
                     <button type="submit">Show Me My Results</button>
                 </form>
                 
-                <p class="privacy-note">We respect your privacy. Unsubscribe anytime. <a href="privacy.html" style="color: var(--gold);">Privacy Policy</a></p>
+                <p class="privacy-note">We respect your privacy. <a href="privacy.html" style="color: var(--gold);">Privacy Policy</a></p>
             </div>
         </div>
 
@@ -709,6 +759,12 @@
 
     <script src="script.js"></script>
     <script>
+        // Initialize EmailJS (you'll need to replace these with your actual IDs)
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+        })();
+
+        // Virtue data with questions
         const virtues = [
             {
                 name: "Love of God and Neighbour",
@@ -812,500 +868,578 @@
             {
                 name: "Compassion",
                 questions: [
-                    "I feel genuine sorrow when I see others suffering.",
-                    "I am moved to action by the needs and pain of others.",
-                    "I can empathize deeply with those who are struggling."
+                    "I feel genuine sorrow for others' suffering and pain.",
+                    "I am moved to help those in need without being asked.",
+                    "I can enter into others' experiences with empathy and understanding."
                 ],
-                description: "A tender heart that feels the misery of others and moves us to relieve their suffering, imitating Christ's merciful heart."
-            },
-            {
-                name: "Peace",
-                questions: [
-                    "I maintain inner tranquility even amid external turmoil.",
-                    "I actively work to resolve conflicts and promote harmony.",
-                    "My presence tends to calm and settle difficult situations."
-                ],
-                description: "The virtue that establishes tranquility of order in the soul, keeping us undisturbed by passions and united with God's perfect rest."
-            },
-            {
-                name: "Mercy",
-                questions: [
-                    "I readily forgive those who have wronged me.",
-                    "I show kindness and compassion to those who don't deserve it.",
-                    "I prefer to show mercy rather than demanding justice."
-                ],
-                description: "The virtue that inclines us to compassion for the miserable, forgiving offenses and relieving the necessities of our neighbor."
-            },
-            {
-                name: "Concord",
-                questions: [
-                    "I actively promote unity and agreement among people.",
-                    "I avoid creating division or taking sides in conflicts.",
-                    "I can find common ground with those who differ from me."
-                ],
-                description: "Unity of hearts and minds that binds souls together in mutual love, avoiding discord and maintaining sweet harmony."
-            },
-            {
-                name: "Constancy",
-                questions: [
-                    "I remain steady and unwavering in my commitments.",
-                    "I don't easily abandon my principles when tested.",
-                    "I maintain consistent behavior regardless of changing circumstances."
-                ],
-                description: "Firmness of soul that perseveres in good through all trials, neither altered by prosperity nor broken by adversity."
-            },
-            {
-                name: "Liberality",
-                questions: [
-                    "I give generously without counting the cost.",
-                    "I share my resources readily with those in need.",
-                    "I find joy in giving rather than in accumulating."
-                ],
-                description: "Generous disposition that freely gives to others according to their needs, neither hoarding nor squandering what God has provided."
-            },
-            {
-                name: "Truth",
-                questions: [
-                    "I always speak honestly, even when it costs me.",
-                    "I avoid exaggeration, flattery, or deception.",
-                    "People can rely on my word completely."
-                ],
-                description: "Conformity of words to thoughts and reality, whereby we manifest truth in speech and abhor all falsehood and pretense."
+                description: "The virtue of suffering with others, moved by their misery to alleviate their distress through works of mercy."
             },
             {
                 name: "Meekness",
                 questions: [
-                    "I respond gently to provocation or insult.",
-                    "I control anger and irritation effectively.",
-                    "I am known for being gentle and mild-tempered."
+                    "I respond gently to provocation rather than with anger.",
+                    "I am slow to take offense and quick to forgive.",
+                    "I maintain inner peace even when treated unjustly."
                 ],
-                description: "Gentleness of spirit that moderates anger and maintains sweetness of disposition, imitating Christ's gentle and humble heart."
-            },
-            {
-                name: "Faith",
-                questions: [
-                    "I firmly believe in God and the truths He has revealed.",
-                    "My faith remains strong even when I don't understand.",
-                    "I base my life decisions on spiritual truth rather than worldly wisdom."
-                ],
-                description: "The theological virtue by which we believe all that God has revealed, trusting in His word with certainty beyond human reason."
-            },
-            {
-                name: "Hope",
-                questions: [
-                    "I trust confidently that God will fulfill His promises.",
-                    "I maintain optimism about eternal life and salvation.",
-                    "I don't despair even in dark or difficult times."
-                ],
-                description: "The virtue that confidently expects eternal life and the means to obtain it, anchoring the soul in God's faithful promises."
-            },
-            {
-                name: "Fear of God",
-                questions: [
-                    "I have a healthy reverence and awe for God's majesty.",
-                    "The thought of offending God deeply troubles me.",
-                    "I avoid sin primarily because it displeases God."
-                ],
-                description: "Filial fear that reveres God's majesty and dreads offending Him, keeping us from sin through love rather than servile terror."
-            },
-            {
-                name: "Joy",
-                questions: [
-                    "I experience genuine gladness in spiritual things.",
-                    "My joy is not dependent on external circumstances.",
-                    "I find delight in God and His presence."
-                ],
-                description: "Spiritual gladness that rejoices in God and divine things, maintaining cheerfulness of heart even amid temporal sorrows."
-            },
-            {
-                name: "Spiritual Sadness",
-                questions: [
-                    "I grieve appropriately over sin and evil in the world.",
-                    "I feel sorrow for my own failings and imperfections.",
-                    "My sadness over spiritual matters leads to repentance and growth."
-                ],
-                description: "Holy sorrow for sin and evil that leads to contrition and amendment, avoiding both insensibility and excessive dejection."
-            },
-            {
-                name: "Gratitude",
-                questions: [
-                    "I regularly thank God for His blessings and mercies.",
-                    "I acknowledge and appreciate what others do for me.",
-                    "I have a habitual sense of thankfulness."
-                ],
-                description: "The virtue that recognizes and gives thanks for all benefits received, especially acknowledging God as the source of every good gift."
-            },
-            {
-                name: "Zeal for Souls",
-                questions: [
-                    "I care deeply about others' spiritual wellbeing.",
-                    "I actively work to help others grow closer to God.",
-                    "Saving souls is a priority in my life."
-                ],
-                description: "Ardent desire for the salvation of souls that moves us to labor for others' eternal good, imitating God's salvific will."
-            },
-            {
-                name: "Liberty of Spirit",
-                questions: [
-                    "I feel free from being enslaved by worldly concerns.",
-                    "I experience interior freedom despite external constraints.",
-                    "My spirit soars unhindered by material attachments."
-                ],
-                description: "Freedom from servitude to creatures and passions, enabling the soul to rise swiftly to God without impediment."
-            },
-            {
-                name: "Religion",
-                questions: [
-                    "I give God the worship and honor due to Him.",
-                    "I participate faithfully in religious practices and sacraments.",
-                    "I maintain devotion and reverence in sacred matters."
-                ],
-                description: "The virtue that renders to God proper worship, honor, and service, acknowledging His supreme excellence and our total dependence."
-            },
-            {
-                name: "Maturity",
-                questions: [
-                    "I demonstrate wisdom and discretion in my behavior.",
-                    "I have moved beyond childish ways of thinking and acting.",
-                    "My conduct reflects spiritual and emotional maturity."
-                ],
-                description: "Spiritual adulthood that manifests prudent judgment, stable virtue, and wisdom born of experience and grace."
+                description: "Gentleness of spirit that moderates anger and maintains tranquility in the face of injury, following Christ's example."
             },
             {
                 name: "Simplicity",
                 questions: [
-                    "My intentions are pure and straightforward.",
-                    "I avoid duplicity and hidden agendas.",
-                    "What I appear to be outwardly matches my interior reality."
+                    "I am straightforward and honest in my dealings with others.",
+                    "I avoid duplicity, pretense, or manipulation.",
+                    "My words and actions align with my true intentions."
                 ],
-                description: "Purity of intention that seeks God alone without mixed motives, maintaining singleness of purpose and integrity of heart."
+                description: "The virtue of being single in intention and transparent in action, without guile or divided heart."
+            },
+            {
+                name: "Modesty",
+                questions: [
+                    "I dress and carry myself with appropriate dignity.",
+                    "I avoid drawing excessive attention to myself.",
+                    "My outward behavior reflects interior reverence."
+                ],
+                description: "The virtue that orders our external behavior according to reason and faith, maintaining proper decorum in dress, speech, and deportment."
             },
             {
                 name: "Silence",
                 questions: [
-                    "I am comfortable with quiet and speak only when necessary.",
-                    "I guard my tongue from idle or harmful words.",
-                    "I create space for listening to God through silence."
+                    "I am comfortable with quiet and do not need to fill every space with words.",
+                    "I speak only when necessary and with purpose.",
+                    "I practice custody of the tongue, avoiding idle chatter."
                 ],
-                description: "The virtue that restrains the tongue from unnecessary speech, creating space for contemplation and avoiding the many sins of the mouth."
+                description: "The virtue that guards the tongue and creates space for contemplation, speaking only what is necessary and good."
             },
             {
-                name: "Solitude",
+                name: "Compunction",
                 questions: [
-                    "I value and seek time alone with God.",
-                    "I am comfortable being by myself without distraction.",
-                    "I use solitude as an opportunity for spiritual growth."
+                    "I regularly examine my conscience and acknowledge my sins.",
+                    "I feel genuine sorrow for having offended God.",
+                    "My heart is tender toward my own spiritual state and failings."
                 ],
-                description: "Withdrawal from worldly company to commune with God, finding in sacred solitude what crowds cannot provide."
+                description: "Heartfelt sorrow for sin that pierces the soul and moves it to repentance and amendment of life."
             },
             {
-                name: "Contemplation",
+                name: "Devotion",
                 questions: [
-                    "I regularly engage in deep meditation on divine mysteries.",
-                    "I experience moments of being absorbed in God's presence.",
-                    "Prayer moves beyond words into silent wonder."
+                    "I approach prayer and worship with eagerness and love.",
+                    "I find joy in spiritual exercises and practices.",
+                    "My heart is readily inclined toward God and divine things."
                 ],
-                description: "The elevation of the mind to God whereby the soul gazes upon divine truth with love, tasting the sweetness of eternal things."
+                description: "Promptitude of will to give oneself to divine service, marked by spiritual fervor and readiness for God."
             },
             {
-                name: "Discretion",
+                name: "Religion",
                 questions: [
-                    "I know when to speak and when to remain silent.",
-                    "I can discern between good, better, and best courses of action.",
-                    "I apply wisdom appropriately to different situations."
+                    "I regularly participate in acts of worship and divine service.",
+                    "I honor sacred times, places, and practices.",
+                    "I render to God the worship and reverence due to Him."
                 ],
-                description: "Mother of virtues that judges rightly in all matters, knowing what to do, when, how much, and in what manner is fitting."
-            },
-            {
-                name: "Rejoicing with Others",
-                questions: [
-                    "I genuinely celebrate others' successes and blessings.",
-                    "I feel happy when good things happen to other people.",
-                    "I am free from envy when others prosper."
-                ],
-                description: "The virtue that rejoices in the good fortune of our neighbor, sharing their joy and avoiding the poison of envy."
-            },
-            {
-                name: "Confidence in God",
-                questions: [
-                    "I trust completely in God's providence and care.",
-                    "I cast my anxieties on God with full assurance.",
-                    "I believe God will provide what I need."
-                ],
-                description: "Firm trust in God's goodness and power that casts away anxious care, relying on divine providence with filial confidence."
-            },
-            {
-                name: "Contempt of the World",
-                questions: [
-                    "I see through the emptiness of worldly glory and pleasure.",
-                    "Earthly honors and riches do not attract me.",
-                    "I recognize that this world is passing and temporary."
-                ],
-                description: "The virtue that despises worldly vanities, seeing through temporal illusions to value only what is eternal and divine."
-            },
-            {
-                name: "Mortification",
-                questions: [
-                    "I regularly deny myself legitimate pleasures for spiritual growth.",
-                    "I practice self-discipline in body and spirit.",
-                    "I embrace small sacrifices and penances willingly."
-                ],
-                description: "The death to self that crucifies the flesh with its passions, subduing the body and its unruly appetites to serve the spirit."
+                description: "The virtue that disposes us to give God the worship and honor proper to Him, expressed through prayer, sacrifice, and sacred observance."
             },
             {
                 name: "Contrition",
                 questions: [
-                    "I feel deep sorrow for my sins against God.",
-                    "My regret for wrongdoing comes from love of God rather than fear.",
-                    "I experience heartfelt repentance for my failings."
+                    "I experience deep regret for my sins because they offend God.",
+                    "I am genuinely sorry for having turned away from divine goodness.",
+                    "My sorrow for sin motivates me to change my behavior."
                 ],
-                description: "Sincere sorrow for sin arising from love of God, whereby the heart is crushed with grief for having offended infinite goodness."
+                description: "Perfect sorrow for sin arising from love of God, grieving that one has offended the Supreme Good."
             },
             {
                 name: "Confession",
                 questions: [
-                    "I openly acknowledge my sins and faults.",
-                    "I am willing to confess wrongdoing without making excuses.",
-                    "I regularly examine my conscience and seek reconciliation."
+                    "I regularly acknowledge my sins to God and, when appropriate, to others.",
+                    "I am willing to admit my faults rather than hide them.",
+                    "I approach the sacrament of reconciliation with honesty and humility."
                 ],
-                description: "The virtue that admits guilt and accuses oneself truly, seeking pardon through humble acknowledgment of sin."
+                description: "The virtue of openly acknowledging one's sins and faults before God, leading to healing and restoration."
             },
             {
-                name: "Penance",
+                name: "Satisfaction",
                 questions: [
-                    "I make amends for my sins through acts of satisfaction.",
-                    "I accept the consequences of my wrongdoing.",
-                    "I actively work to repair the damage caused by my sins."
+                    "I willingly accept penances and make amends for my wrongs.",
+                    "I perform acts of reparation for my sins.",
+                    "I seek to repair the damage caused by my failings."
                 ],
-                description: "Satisfactory works undertaken to repair the damage of sin, making amends to God and neighbor for offenses committed."
+                description: "The virtue of making reparation for sins through prayer, fasting, almsgiving, and other penitential works."
             },
             {
                 name: "Perseverance",
                 questions: [
-                    "I continue in virtue even when it becomes difficult.",
-                    "I maintain my spiritual practices consistently over time.",
-                    "I don't give up on my commitments to God."
+                    "I continue in virtue and good works despite difficulties.",
+                    "I remain faithful to my commitments over the long term.",
+                    "I do not give up when spiritual progress seems slow."
                 ],
-                description: "The crown of virtues that endures to the end, remaining faithful in good works until death and attaining eternal reward."
+                description: "Steadfast continuance in good, remaining constant in virtue despite trials, temptations, and the passage of time."
+            },
+            {
+                name: "Magnanimity",
+                questions: [
+                    "I am willing to undertake great things for God's glory.",
+                    "I do not shrink from difficult or lofty spiritual goals.",
+                    "I have a generous spirit that aspires to excellence in virtue."
+                ],
+                description: "Greatness of soul that strives for great things worthy of honor, especially in the service of God."
+            },
+            {
+                name: "Magnificence",
+                questions: [
+                    "I am generous in supporting works of worship and charity.",
+                    "I do not hold back when it comes to honoring God fittingly.",
+                    "I contribute to beautiful and worthy religious expressions."
+                ],
+                description: "The virtue of making great expenditures for worthy causes, especially in divine worship and acts of charity."
+            },
+            {
+                name: "Longanimity",
+                questions: [
+                    "I can wait patiently for good outcomes that may be far off.",
+                    "I endure long trials without losing hope.",
+                    "I maintain courage when facing extended difficulties."
+                ],
+                description: "Long-suffering patience that endures great delays and protracted trials without losing courage or hope."
+            },
+            {
+                name: "Constancy",
+                questions: [
+                    "I remain steadfast in my principles despite external pressures.",
+                    "My spiritual practices are consistent rather than sporadic.",
+                    "I do not waver in my commitments when circumstances change."
+                ],
+                description: "Firmness of spirit that maintains virtue in the face of changing circumstances and ongoing challenges."
+            },
+            {
+                name: "Studiousness",
+                questions: [
+                    "I actively seek to grow in knowledge of God and spiritual truths.",
+                    "I dedicate time to study Scripture and spiritual writings.",
+                    "I have a genuine desire to understand divine mysteries more deeply."
+                ],
+                description: "The virtue that moderates and directs the desire for knowledge toward proper ends, especially divine truth."
+            },
+            {
+                name: "Diligence",
+                questions: [
+                    "I am careful and attentive in fulfilling my duties.",
+                    "I work earnestly in matters of spiritual importance.",
+                    "I avoid negligence and sloth in pursuing virtue."
+                ],
+                description: "Eager application and careful attention in spiritual matters, opposing sloth and carelessness."
+            },
+            {
+                name: "Solicitude",
+                questions: [
+                    "I am concerned about my spiritual welfare and progress.",
+                    "I take thought for my eternal destiny.",
+                    "I am vigilant about matters that affect my soul."
+                ],
+                description: "Careful concern and watchfulness over one's spiritual state and the means of salvation."
+            },
+            {
+                name: "Hope",
+                questions: [
+                    "I trust confidently in God's promises and mercy.",
+                    "I look forward to eternal life with expectation.",
+                    "I maintain hope even in dark or difficult times."
+                ],
+                description: "The theological virtue by which we desire and confidently expect eternal life and the grace needed to attain it."
+            },
+            {
+                name: "Faith",
+                questions: [
+                    "I believe firmly in God and all He has revealed.",
+                    "I trust in divine truth even when I cannot fully understand it.",
+                    "My faith shapes how I view and approach all of life."
+                ],
+                description: "The theological virtue by which we believe in God and all He has revealed, trusting completely in His word."
+            },
+            {
+                name: "Charity",
+                questions: [
+                    "I love God above all things for His own sake.",
+                    "I love others as manifestations of God's goodness.",
+                    "My love extends even to those who are difficult or have wronged me."
+                ],
+                description: "The theological virtue by which we love God above all things for His own sake, and our neighbor as ourselves for the love of God."
+            },
+            {
+                name: "Clemency",
+                questions: [
+                    "I am inclined toward mercy rather than strict justice.",
+                    "I moderate punishments according to circumstances.",
+                    "I show leniency to those who have wronged me."
+                ],
+                description: "Merciful moderation in exacting penalties, tempering justice with compassion."
+            },
+            {
+                name: "Truth",
+                questions: [
+                    "I consistently speak and live in accordance with what is real.",
+                    "I am honest in my words and authentic in my presentation.",
+                    "I avoid deception, exaggeration, or misrepresentation."
+                ],
+                description: "The virtue of conforming one's words and deeds to reality, manifesting oneself truthfully to others."
+            },
+            {
+                name: "Affability",
+                questions: [
+                    "I am pleasant and agreeable in my interactions with others.",
+                    "I make others feel comfortable and welcome.",
+                    "I cultivate friendship and goodwill through my behavior."
+                ],
+                description: "The virtue of being pleasant in conversation and action, making social life agreeable without flattery."
+            },
+            {
+                name: "Liberality",
+                questions: [
+                    "I give freely of my resources to others.",
+                    "I am neither stingy nor wasteful with material goods.",
+                    "I find joy in sharing what I have."
+                ],
+                description: "Proper use of material goods, giving freely without attachment while avoiding both miserliness and prodigality."
+            },
+            {
+                name: "Gratitude",
+                questions: [
+                    "I regularly recognize and acknowledge benefits received.",
+                    "I express thanks to God and others for their goodness.",
+                    "I remember favors and do not take blessings for granted."
+                ],
+                description: "The virtue of recognizing benefits received and making due acknowledgment and return for them."
+            },
+            {
+                name: "Vindication",
+                questions: [
+                    "I appropriately defend what is right and just.",
+                    "I stand up against injustice when necessary.",
+                    "I seek to restore right order when it has been violated."
+                ],
+                description: "The virtue of justly defending oneself or others against wrongdoing and restoring violated rights."
+            },
+            {
+                name: "Observance",
+                questions: [
+                    "I show proper respect to those in positions of authority.",
+                    "I honor parents, elders, and spiritual leaders.",
+                    "I recognize and acknowledge the dignity due to others."
+                ],
+                description: "The virtue of showing honor and respect to those who deserve it according to their office or dignity."
+            },
+            {
+                name: "Obedience to Superiors",
+                questions: [
+                    "I willingly follow those whom God has placed over me.",
+                    "I submit to lawful direction with good spirit.",
+                    "I trust in the wisdom of proper authority."
+                ],
+                description: "The specific virtue of submitting to legitimate superiors as representatives of divine authority."
+            },
+            {
+                name: "Piety",
+                questions: [
+                    "I show loving devotion to God as my Father.",
+                    "I honor the Church, my spiritual mother.",
+                    "I maintain dutiful love toward my earthly parents and homeland."
+                ],
+                description: "The virtue of dutiful devotion toward God, parents, and country, rendering them the honor and service owed."
             }
         ];
 
+        // Flatten questions with virtue tracking
+        let allQuestions = [];
+        virtues.forEach((virtue, virtueIndex) => {
+            virtue.questions.forEach(question => {
+                allQuestions.push({
+                    text: question,
+                    virtueIndex: virtueIndex
+                });
+            });
+        });
+
+        // Quiz state
         let currentPage = 0;
-        let answers = {};
-        let userEmail = '';
-        let userName = '';
+        const questionsPerPage = 7;
+        const totalPages = Math.ceil(allQuestions.length / questionsPerPage);
+        let answers = new Array(allQuestions.length).fill(null);
 
         function startQuiz() {
             document.getElementById('intro-screen').style.display = 'none';
             document.getElementById('quiz-screen').style.display = 'block';
-            renderQuizPage();
-            window.scrollTo(0, 0);
+            renderQuestions();
         }
 
-        function renderQuizPage() {
+        function renderQuestions() {
             const container = document.getElementById('quiz-container');
-            const virtue = virtues[currentPage];
-            
-            let html = `
-                <div class="question-section active">
-                    <div class="question-card">
-                        <div class="virtue-name">${currentPage + 1}. ${virtue.name}</div>
-            `;
+            container.innerHTML = '';
 
-            virtue.questions.forEach((question, qIndex) => {
-                const questionId = `v${currentPage}_q${qIndex}`;
-                html += `
-                    <div class="question-text">${String.fromCharCode(97 + qIndex)}) ${question}</div>
+            const start = currentPage * questionsPerPage;
+            const end = Math.min(start + questionsPerPage, allQuestions.length);
+            const pageQuestions = allQuestions.slice(start, end);
+
+            pageQuestions.forEach((q, index) => {
+                const globalIndex = start + index;
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-card';
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${globalIndex + 1} of ${allQuestions.length}</div>
+                    <div class="question-text">${q.text}</div>
                     <div class="likert-scale">
                         <div class="likert-option">
-                            <input type="radio" id="${questionId}_1" name="${questionId}" value="1">
-                            <label for="${questionId}_1">Strongly<br>Disagree</label>
+                            <input type="radio" id="q${globalIndex}_1" name="q${globalIndex}" value="1" ${answers[globalIndex] === 1 ? 'checked' : ''}>
+                            <label for="q${globalIndex}_1">Strongly Disagree</label>
                         </div>
                         <div class="likert-option">
-                            <input type="radio" id="${questionId}_2" name="${questionId}" value="2">
-                            <label for="${questionId}_2">Disagree</label>
+                            <input type="radio" id="q${globalIndex}_2" name="q${globalIndex}" value="2" ${answers[globalIndex] === 2 ? 'checked' : ''}>
+                            <label for="q${globalIndex}_2">Disagree</label>
                         </div>
                         <div class="likert-option">
-                            <input type="radio" id="${questionId}_3" name="${questionId}" value="3">
-                            <label for="${questionId}_3">Neutral</label>
+                            <input type="radio" id="q${globalIndex}_3" name="q${globalIndex}" value="3" ${answers[globalIndex] === 3 ? 'checked' : ''}>
+                            <label for="q${globalIndex}_3">Neutral</label>
                         </div>
                         <div class="likert-option">
-                            <input type="radio" id="${questionId}_4" name="${questionId}" value="4">
-                            <label for="${questionId}_4">Agree</label>
+                            <input type="radio" id="q${globalIndex}_4" name="q${globalIndex}" value="4" ${answers[globalIndex] === 4 ? 'checked' : ''}>
+                            <label for="q${globalIndex}_4">Agree</label>
                         </div>
                         <div class="likert-option">
-                            <input type="radio" id="${questionId}_5" name="${questionId}" value="5">
-                            <label for="${questionId}_5">Strongly<br>Agree</label>
+                            <input type="radio" id="q${globalIndex}_5" name="q${globalIndex}" value="5" ${answers[globalIndex] === 5 ? 'checked' : ''}>
+                            <label for="q${globalIndex}_5">Strongly Agree</label>
                         </div>
                     </div>
                 `;
+                container.appendChild(questionDiv);
+
+                // Add event listeners
+                for (let i = 1; i <= 5; i++) {
+                    document.getElementById(`q${globalIndex}_${i}`).addEventListener('change', (e) => {
+                        answers[globalIndex] = parseInt(e.target.value);
+                    });
+                }
             });
 
-            html += `
-                    </div>
-                </div>
-            `;
-
-            container.innerHTML = html;
             updateProgress();
-            updateNavigationButtons();
-            setTimeout(restorePreviousAnswers, 50);
+            updateButtons();
         }
 
         function updateProgress() {
-            const totalVirtues = virtues.length;
-            const percentage = ((currentPage + 1) / totalVirtues * 100).toFixed(0);
-            const progressBar = document.getElementById('progress');
-            progressBar.style.width = percentage + '%';
-            progressBar.textContent = `${currentPage + 1} of ${totalVirtues} (${percentage}%)`;
+            const answered = answers.filter(a => a !== null).length;
+            const percentage = (answered / allQuestions.length) * 100;
+            document.getElementById('progress').style.width = percentage + '%';
+            
+            const start = currentPage * questionsPerPage + 1;
+            const end = Math.min((currentPage + 1) * questionsPerPage, allQuestions.length);
+            document.getElementById('progress-label').textContent = 
+                `Page ${currentPage + 1} of ${totalPages} • Questions ${start}-${end} of ${allQuestions.length}`;
         }
 
-        function updateNavigationButtons() {
+        function updateButtons() {
             document.getElementById('prev-btn').disabled = currentPage === 0;
             
-            if (currentPage === virtues.length - 1) {
+            if (currentPage === totalPages - 1) {
                 document.getElementById('next-btn').style.display = 'none';
-                document.getElementById('submit-btn').style.display = 'block';
+                document.getElementById('submit-btn').style.display = 'inline-block';
             } else {
-                document.getElementById('next-btn').style.display = 'block';
+                document.getElementById('next-btn').style.display = 'inline-block';
                 document.getElementById('submit-btn').style.display = 'none';
             }
         }
 
-        function saveCurrentAnswers() {
-            const virtue = virtues[currentPage];
-            virtue.questions.forEach((_, qIndex) => {
-                const questionId = `v${currentPage}_q${qIndex}`;
-                const selected = document.querySelector(`input[name="${questionId}"]:checked`);
-                if (selected) {
-                    answers[questionId] = parseInt(selected.value);
-                }
-            });
-        }
-
-        function restorePreviousAnswers() {
-            virtues[currentPage].questions.forEach((_, qIndex) => {
-                const questionId = `v${currentPage}_q${qIndex}`;
-                if (answers[questionId]) {
-                    const radio = document.getElementById(`${questionId}_${answers[questionId]}`);
-                    if (radio) radio.checked = true;
-                }
-            });
-        }
-
         function nextPage() {
-            saveCurrentAnswers();
-            if (currentPage < virtues.length - 1) {
+            if (currentPage < totalPages - 1) {
                 currentPage++;
-                renderQuizPage();
+                renderQuestions();
                 window.scrollTo(0, 0);
             }
         }
 
         function previousPage() {
-            saveCurrentAnswers();
             if (currentPage > 0) {
                 currentPage--;
-                renderQuizPage();
+                renderQuestions();
                 window.scrollTo(0, 0);
             }
         }
 
         function showEmailCapture() {
-            saveCurrentAnswers();
-            document.getElementById('email-modal').classList.add('active');
+            // Check if all questions answered
+            if (answers.includes(null)) {
+                alert('Please answer all questions before viewing your results.');
+                return;
+            }
+            document.getElementById('email-modal').style.display = 'block';
         }
 
         function submitEmailAndShowResults(event) {
             event.preventDefault();
             
-            userName = document.getElementById('user-name').value;
-            userEmail = document.getElementById('user-email').value;
-            
-            // Hide modal
-            document.getElementById('email-modal').classList.remove('active');
-            
-            // Calculate and show results
-            calculateResults();
+            const name = document.getElementById('user-name').value;
+            const email = document.getElementById('user-email').value;
+
+            // Calculate results first
+            const results = calculateResults();
+
+            // Send email with EmailJS (optional - will fail silently if not configured)
+            const templateParams = {
+                to_name: name,
+                to_email: email,
+                top_virtue: results[0].name,
+                second_virtue: results[1].name,
+                third_virtue: results[2].name
+            };
+
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function() {
+                    console.log('Email sent successfully');
+                }, function(error) {
+                    console.log('Email sending failed (this is optional):', error);
+                });
+
+            // Show results regardless of email
+            document.getElementById('email-modal').style.display = 'none';
+            showResults(results, name);
         }
 
         function calculateResults() {
-            // Calculate scores for each virtue
-            const virtueScores = virtues.map((virtue, vIndex) => {
-                let totalScore = 0;
-                let answeredQuestions = 0;
+            const virtueScores = virtues.map(() => ({ total: 0, count: 0 }));
 
-                virtue.questions.forEach((_, qIndex) => {
-                    const questionId = `v${vIndex}_q${qIndex}`;
-                    if (answers[questionId]) {
-                        totalScore += answers[questionId];
-                        answeredQuestions++;
-                    }
-                });
+            allQuestions.forEach((q, index) => {
+                if (answers[index] !== null) {
+                    virtueScores[q.virtueIndex].total += answers[index];
+                    virtueScores[q.virtueIndex].count++;
+                }
+            });
 
-                const averageScore = answeredQuestions > 0 ? totalScore / answeredQuestions : 0;
-
+            const results = virtues.map((virtue, index) => {
+                const avgScore = virtueScores[index].count > 0 
+                    ? virtueScores[index].total / virtueScores[index].count 
+                    : 0;
                 return {
                     name: virtue.name,
                     description: virtue.description,
-                    score: averageScore,
-                    totalPoints: totalScore,
-                    answeredQuestions: answeredQuestions
+                    score: avgScore.toFixed(2),
+                    rawScore: virtueScores[index].total
                 };
             });
 
-            // Sort by score
-            virtueScores.sort((a, b) => b.score - a.score);
-
-            // Display results
-            displayResults(virtueScores);
+            results.sort((a, b) => b.rawScore - a.rawScore);
+            return results;
         }
 
-        function displayResults(virtueScores) {
+        function showResults(results, userName) {
             document.getElementById('quiz-screen').style.display = 'none';
             
-            const topVirtues = virtueScores.slice(0, 10);
+            const topTen = results.slice(0, 10);
+            const remaining = results.slice(10);
 
             let html = `
-                <div class="results-header">
-                    <h1>${userName ? userName + "'s " : "Your "}Spiritual Profile</h1>
-                    <p class="subtitle">Your Top 10 Virtues from The Paradise of the Soul</p>
-                </div>
-                
-                <div class="results-intro">
-                    <p>Based on your responses, these are the virtues most strongly present in your spiritual life. Each virtue is scored from 1-5 based on your agreement with statements about that virtue.</p>
-                    <p style="margin-top: 15px;"><em>Remember: This assessment reflects your current state. All virtues can be cultivated and strengthened through grace, practice, and spiritual formation.</em></p>
-                </div>
+                <div class="results-container">
+                    <div class="results-header">
+                        <h2>Your Virtue Profile${userName ? ', ' + userName : ''}</h2>
+                        <p>Your Top 10 Spiritual Strengths</p>
+                    </div>
             `;
 
-            topVirtues.forEach((virtue, index) => {
+            topTen.forEach((virtue, index) => {
                 html += `
                     <div class="virtue-result">
-                        <span class="virtue-rank">${index + 1}</span>
-                        <h3>${virtue.name}</h3>
-                        <span class="virtue-score">${virtue.score.toFixed(2)} / 5.00</span>
-                        <div class="virtue-description">${virtue.description}</div>
+                        <div class="virtue-rank">${index + 1}</div>
+                        <div class="virtue-content">
+                            <div class="virtue-name">${virtue.name}</div>
+                            <div class="virtue-score">Score: ${virtue.score} / 5.00</div>
+                            <div class="virtue-description">${virtue.description}</div>
+                        </div>
                     </div>
                 `;
             });
 
             html += `
-                <div class="next-steps">
-                    <h2>Continue Your Journey</h2>
-                    <p>Now that you understand your spiritual strengths, explore how My Holy Crescendo can help you deepen your relationship with God and develop the virtues you're cultivating.</p>
-                    <div class="cta-buttons">
-                        <a href="symphony-of-grace.html">Explore A Symphony of Grace</a>
-                        <a href="made-beautiful.html">Join a Retreat</a>
-                        <a href="personal-journey.html" class="secondary">1:1 Coaching</a>
+                    <button class="show-all-btn" onclick="toggleAllVirtues()">Show All 42 Virtues</button>
+                    
+                    <div class="all-virtues" id="all-virtues">
+                        <h3 style="font-family: 'Cinzel', serif; color: var(--gold-dark); text-align: center; margin-bottom: 30px; font-size: 1.8rem;">Complete Virtue Ranking</h3>
+            `;
+
+            remaining.forEach((virtue, index) => {
+                const rank = index + 11;
+                html += `
+                    <div class="virtue-result">
+                        <div class="virtue-rank">${rank}</div>
+                        <div class="virtue-content">
+                            <div class="virtue-name">${virtue.name}</div>
+                            <div class="virtue-score">Score: ${virtue.score} / 5.00</div>
+                            <div class="virtue-description">${virtue.description}</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="action-button primary" onclick="downloadResults()">Download Results</button>
+                        <button class="action-button primary" onclick="emailResults()">Email Results to Me</button>
+                        <a href="symphony-of-grace.html" class="action-button secondary">Explore 15-Week Journey</a>
+                        <a href="personal-journey.html" class="action-button secondary">1:1 Coaching</a>
                     </div>
                 </div>
             `;
 
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = html;
-            resultsDiv.style.display = 'block';
-            
+            document.getElementById('results').innerHTML = html;
             window.scrollTo(0, 0);
+        }
+
+        function toggleAllVirtues() {
+            const allVirtues = document.getElementById('all-virtues');
+            const button = document.querySelector('.show-all-btn');
+            
+            if (allVirtues.classList.contains('visible')) {
+                allVirtues.classList.remove('visible');
+                button.textContent = 'Show All 42 Virtues';
+            } else {
+                allVirtues.classList.add('visible');
+                button.textContent = 'Hide Additional Virtues';
+                // Scroll to the expanded section
+                setTimeout(() => {
+                    allVirtues.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
+        }
+
+        function downloadResults() {
+            const results = document.querySelector('.results-container').innerText;
+            const blob = new Blob([results], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'my-virtue-assessment-results.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function emailResults() {
+            const email = document.getElementById('user-email').value;
+            if (!email) {
+                alert('Please enter your email address in the form above to receive your results.');
+                return;
+            }
+
+            // Get results text
+            const results = document.querySelector('.results-container').innerText;
+
+            // Send via EmailJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+                to_email: email,
+                results_text: results
+            }).then(
+                function() {
+                    alert('Results emailed successfully! Check your inbox.');
+                },
+                function(error) {
+                    alert('Email sending is not yet configured. Please use the Download button instead.');
+                    console.log('EmailJS error:', error);
+                }
+            );
         }
     </script>
 </body>
