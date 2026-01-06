@@ -3190,7 +3190,6 @@ footer {
     padding: 0.5rem 1.5rem;
     white-space: nowrap;
 }
-.dropdown-menu {
-    min-width: 220px;
-    overflow: visible;
+.dropdown-menu li a {
+    white-space: normal;
 }
