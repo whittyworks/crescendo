@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rule of Life Template · My Holy Crescendo</title>
+            <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="My Holy Crescendo - Fearfully & Wonderfully Made">
+    <meta property="og:description" content="A transformative journey discovering God's design in your body, mind, and spirit through A Symphony of Grace.">
+    <meta property="og:image" content="https://myholycrescendo.com/assets/img/og-image.png">
+    <meta property="og:url" content="https://myholycrescendo.com/rule-of-life.html">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://myholycrescendo.com/assets/img/og-image.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+<!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"></head>
+
+    <meta name="description" content="A free Rule of Life starter template built on the Five Movements: Adoration, Restoration, Relation, Vocation, and Mission. Create rhythm and intentionality in your days.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/jpeg" href="assets/img/crescendo-cover.jpg">
+    
+    <style>
+        /* Page-specific styles */
+        .rule-hero {
+            min-height: 80vh;
+        }
+        
+        .rule-intro {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            margin: 2rem auto;
+            max-width: 600px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
+        }
+        
+        .rule-intro-icon {
+            font-size: 2rem;
+        }
+        
+        .rule-intro-text {
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        
+        /* What is a Rule section */
+        .what-is-rule {
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
+        .what-is-block {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--gold);
+        }
+        
+        .what-is-block p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+        
+        .what-is-block p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .trellis-quote {
+            font-style: italic;
+            color: var(--gold-dark);
+            font-size: 1.25rem;
+            text-align: center;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Five Movements Grid */
+        .movements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .movement-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            text-align: center;
+            border-top: 4px solid var(--gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .movement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+        }
+        
+        .movement-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .movement-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .movement-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .movement-focus {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 1rem;
+        }
+        
+        .movement-description {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+        
+        /* Template Preview */
+        .template-preview {
+            max-width: 900px;
+            margin: 3rem auto;
+        }
+        
+        .preview-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .preview-image {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .preview-mockup {
+            background: linear-gradient(135deg, #FDF8F3, #F5EFE7);
+            border-radius: 4px;
+            padding: 2rem;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .mockup-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .mockup-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+        
+        .mockup-movements {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            line-height: 2;
+        }
+        
+        .preview-details h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--gold-dark);
+            margin-bottom: 1.5rem;
+        }
+        
+        .preview-details p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .template-includes {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .template-includes li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--text-medium);
+            line-height: 1.6;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .template-includes li:last-child {
+            border-bottom: none;
+        }
+        
+        .template-includes li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+        
+        /* Download Section */
+        .download-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(253, 248, 243, 0.9), rgba(220, 197, 216, 0.15));
+            border-radius: 8px;
+            max-width: 700px;
+            margin: 3rem auto;
+        }
+        
+        .download-section h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .download-section p {
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gold);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+        }
+        
+        .download-btn:hover {
+            background: var(--gold-dark);
+            border-color: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        .download-btn span {
+            font-size: 1.3rem;
+        }
+        
+        .download-note {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            font-style: italic;
+        }
+        
+        /* Go Deeper Section */
+        .go-deeper {
+            max-width: 800px;
+            margin: 3rem auto;
+            text-align: center;
+        }
+        
+        .deeper-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .deeper-content h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .deeper-content p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .deeper-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .deeper-feature {
+            text-align: center;
+        }
+        
+        .deeper-feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .deeper-feature-text {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+        
+        /* Scripture Section */
+        .scripture-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .scripture-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .scripture-ref {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .preview-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .movements-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .rule-intro {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .deeper-features {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="sans">
+        <a href="index.html" class="logo-link">
+            <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="is active">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="symphony-of-grace.html">15-Week Journey</a></li>
+            <li><a href="made-beautiful.html">Retreat</a></li>
+            <li><a href="personal-journey.html">1:1 Coaching</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Resources</a>
+                <ul class="dropdown-menu">
+                    <li><a href="prelude.html">Free Prelude</a></li>
+                    <li><a href="mind-frameworks.html">Mind Frameworks Guide</a></li>
+                    <li><a href="virtue-assessment.html">Virtue Assessment</a></li>
+                    <li><a href="rule-of-life.html">Rule of Life</a></li>
+                    <li><a href="healing-the-heart.html">Healing the Heart <span class="coming-soon-badge">Coming Soon</span></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero rule-hero">
+        <div class="watercolor-splash splash-1"></div>
+        <div class="watercolor-splash splash-2"></div>
+        <div class="watercolor-splash splash-3"></div>
+        
+        <!-- Virgo Constellation -->
+        <div class="virgo-constellation">
+            <div class="constellation-star star-large" style="left: 50%; bottom: 15%;"></div>
+            <div class="constellation-star star-medium" style="left: 45%; bottom: 30%;"></div>
+            <div class="constellation-star star-medium" style="left: 40%; bottom: 42%;"></div>
+            <div class="constellation-star star-small" style="left: 37%; bottom: 53%;"></div>
+            <div class="constellation-star star-medium" style="left: 35%; bottom: 62%;"></div>
+            <div class="constellation-star star-small" style="left: 55%; bottom: 33%;"></div>
+            <div class="constellation-star star-medium" style="left: 62%; bottom: 40%;"></div>
+            <div class="constellation-star star-small" style="left: 68%; bottom: 44%;"></div>
+            <div class="constellation-star star-medium" style="left: 38%; bottom: 70%;"></div>
+            <div class="constellation-star star-small" style="left: 45%; bottom: 77%;"></div>
+            <div class="constellation-star star-small" style="left: 32%; bottom: 55%;"></div>
+            <div class="constellation-star star-small" style="left: 25%; bottom: 50%;"></div>
+        </div>
+        
+        <!-- Watercolor flowers -->
+        <div class="watercolor-flower flower-1"></div>
+        <div class="watercolor-flower flower-2"></div>
+        <div class="watercolor-flower flower-3"></div>
+        
+        <div class="gold-leaf leaf-1"></div>
+        <div class="gold-leaf leaf-2"></div>
+        
+        <div class="hero-content">
+            <p class="hero-subtitle sans">Free Resource</p>
+            <h1 class="hero-title script">A Rule of Life</h1>
+            <p class="hero-tagline">Starter Template</p>
+            <p class="hero-description">
+                Order your days around what matters most. This free template introduces the Five Movements—a 
+                framework for creating rhythm and intentionality in your prayer, rest, relationships, home, and calling.
+            </p>
+            <div class="rule-intro">
+                <div class="rule-intro-icon">🌿</div>
+                <div class="rule-intro-text">
+                    <strong>Beautiful. Printable. Free.</strong><br>
+                    8 pages to help you begin crafting a life of grace.
+                </div>
+            </div>
+            <a href="#download" class="cta-button">Download Free Template</a>
+        </div>
+
+        <div class="gold-flecks">
+            <div class="fleck" style="top: 20%; left: 15%; animation-delay: 0s;"></div>
+            <div class="fleck" style="top: 45%; left: 85%; animation-delay: 1s;"></div>
+            <div class="fleck" style="top: 70%; left: 25%; animation-delay: 2s;"></div>
+            <div class="fleck" style="top: 35%; left: 75%; animation-delay: 1.5s;"></div>
+            <div class="fleck" style="top: 80%; left: 60%; animation-delay: 0.5s;"></div>
+        </div>
+    </section>
+
+    <!-- What is a Rule of Life -->
+    <section class="reveal">
+        <div class="watercolor-flower flower-3" style="top: 10%; right: 5%;"></div>
+        <div class="gold-leaf leaf-1"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">The Concept</p>
+                <h2 class="section-title script">What is a Rule of Life?</h2>
+            </div>
+
+            <div class="what-is-rule">
+                <div class="what-is-block">
+                    <p>
+                        A Rule of Life is a rhythmic pattern of practices that order your days around what matters most. 
+                        It's not a rigid schedule or a to-do list—it's a loving structure that helps you say <em>yes</em> to the 
+                        life you're called to live, and a gentle <em>no</em> to the things that pull you away from it.
+                    </p>
+                    <p>
+                        For centuries, religious communities have used Rules of Life to create sacred rhythm. 
+                        But this practice isn't just for monks and nuns—it's for any woman who wants to live with 
+                        intention, presence, and peace.
+                    </p>
+                    <div class="trellis-quote">
+                        Think of it as the trellis that supports a growing vine. The trellis doesn't force the vine to grow—it simply 
+                        provides the structure that allows it to flourish.
+                    </div>
+                    <p>
+                        Your Rule of Life does the same for your soul. It creates space for what matters while 
+                        protecting you from the tyranny of the urgent.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Five Movements -->
+    <section class="reveal" style="background: var(--cream-dark);">
+        <div class="watercolor-flower flower-2" style="top: 15%; left: 5%;"></div>
+        <div class="gold-leaf leaf-2"></div>
+        
+        <div class="flower-accent" style="bottom: 15%; right: 8%;">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="flower-center"></div>
+        </div>
+        
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">The Framework</p>
+                <h2 class="section-title script">The Five Movements</h2>
+                <p class="section-description">
+                    Just as a symphony is composed of movements that work together to create something beautiful, 
+                    your Rule of Life flows through five essential areas. Each one is necessary. None stands alone.
+                </p>
+            </div>
+
+            <div class="movements-grid">
+                <div class="movement-card">
+                    <div class="movement-number">Movement One</div>
+                    <div class="movement-icon">🕊️</div>
+                    <h3 class="movement-name">Adoration</h3>
+                    <p class="movement-focus">Prayer, worship, and time with God</p>
+                    <p class="movement-description">
+                        Before anything else, you are a beloved daughter of God. This movement cultivates 
+                        that relationship through prayer, worship, and sacred encounter.
+                    </p>
+                </div>
+
+                <div class="movement-card">
+                    <div class="movement-number">Movement Two</div>
+                    <div class="movement-icon">✨</div>
+                    <h3 class="movement-name">Restoration</h3>
+                    <p class="movement-focus">Rest, self-care, health, and renewal</p>
+                    <p class="movement-description">
+                        You cannot pour from an empty cup. This movement honors your need for rest, 
+                        beauty, and care of the body and soul God entrusted to you.
+                    </p>
+                </div>
+
+                <div class="movement-card">
+                    <div class="movement-number">Movement Three</div>
+                    <div class="movement-icon">💕</div>
+                    <h3 class="movement-name">Relation</h3>
+                    <p class="movement-focus">Marriage, friendships, and community</p>
+                    <p class="movement-description">
+                        We are made for communion. This movement tends to the relationships that 
+                        sustain us—your spouse, friendships, and faith community.
+                    </p>
+                </div>
+
+                <div class="movement-card">
+                    <div class="movement-number">Movement Four</div>
+                    <div class="movement-icon">🏡</div>
+                    <h3 class="movement-name">Vocation</h3>
+                    <p class="movement-focus">Motherhood, family, and home</p>
+                    <p class="movement-description">
+                        Your home is your domestic church. This movement embraces the beautiful, 
+                        demanding work of raising children and creating a home where love dwells.
+                    </p>
+                </div>
+
+                <div class="movement-card">
+                    <div class="movement-number">Movement Five</div>
+                    <div class="movement-icon">🌿</div>
+                    <h3 class="movement-name">Mission</h3>
+                    <p class="movement-focus">Work, service, and calling in the world</p>
+                    <p class="movement-description">
+                        You have gifts meant to bless beyond your home. This movement honors your 
+                        work and the ways you're called to contribute to God's kingdom.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's In The Template -->
+    <section class="reveal">
+        <div class="watercolor-flower flower-1" style="top: 20%; right: 10%;"></div>
+        <div class="gold-leaf leaf-3"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">The Template</p>
+                <h2 class="section-title script">What's Inside</h2>
+            </div>
+
+            <div class="template-preview">
+                <div class="preview-content">
+                    <div class="preview-image">
+                        <div class="preview-mockup">
+                            <div class="mockup-title">A Rule of Life</div>
+                            <div class="mockup-subtitle">Starter Template</div>
+                            <div style="width: 60px; height: 2px; background: var(--gold); margin: 1rem auto;"></div>
+                            <div class="mockup-movements">
+                                Adoration<br>
+                                Restoration<br>
+                                Relation<br>
+                                Vocation<br>
+                                Mission
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-details">
+                        <h3>8 Beautiful Pages</h3>
+                        <p>
+                            A thoughtfully designed PDF you can print and keep. Created to match 
+                            the aesthetic of My Holy Crescendo—elegant, peaceful, and inspiring.
+                        </p>
+                        <ul class="template-includes">
+                            <li>Introduction to the Rule of Life concept</li>
+                            <li>Overview of all Five Movements</li>
+                            <li>One page per movement with reflection prompts</li>
+                            <li>Space to write your own intentions</li>
+                            <li>"Beginning the Symphony" closing reflection</li>
+                            <li>Scripture and encouragement throughout</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="reveal" style="background: var(--cream-dark);">
+        <div class="watercolor-flower flower-2" style="bottom: 15%; left: 8%;"></div>
+        <div class="watercolor-flower flower-3" style="top: 15%; right: 8%;"></div>
+        
+        <div class="container">
+            <div class="download-section">
+                <h3>Ready to Begin?</h3>
+                <p>
+                    Download your free Rule of Life Starter Template and begin creating 
+                    sacred rhythm in your days.
+                </p>
+                <a href="assets/downloads/rule-of-life-starter-template.pdf" download class="download-btn">
+                    <span>↓</span> Download Free Template
+                </a>
+                <p class="download-note">
+                    No email required. Just our gift to you. ✨
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Go Deeper -->
+    <section class="reveal">
+        <div class="watercolor-flower flower-1" style="top: 15%; left: 10%;"></div>
+        <div class="gold-leaf leaf-1"></div>
+        <div class="gold-leaf leaf-2"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">Want More?</p>
+                <h2 class="section-title script">Go Deeper</h2>
+            </div>
+
+            <div class="go-deeper">
+                <div class="deeper-content">
+                    <h3>This Template is Just the Beginning</h3>
+                    <p>
+                        A blank template is helpful—but crafting a Rule of Life that actually <em>works</em> 
+                        requires discernment, guidance, and community. That's exactly what we do in 
+                        <strong>A Symphony of Grace</strong>.
+                    </p>
+                    
+                    <div class="deeper-features">
+                        <div class="deeper-feature">
+                            <div class="deeper-feature-icon">🙏</div>
+                            <div class="deeper-feature-text">Guided discernment<br>for each movement</div>
+                        </div>
+                        <div class="deeper-feature">
+                            <div class="deeper-feature-icon">👥</div>
+                            <div class="deeper-feature-text">Community support<br>& accountability</div>
+                        </div>
+                        <div class="deeper-feature">
+                            <div class="deeper-feature-icon">📖</div>
+                            <div class="deeper-feature-text">Scripture & saints<br>to inspire you</div>
+                        </div>
+                        <div class="deeper-feature">
+                            <div class="deeper-feature-icon">✨</div>
+                            <div class="deeper-feature-text">Personalized help<br>for your season</div>
+                        </div>
+                    </div>
+                    
+                    <p>
+                        In the 15-week journey, we spend an entire module helping you craft a sustainable, 
+                        life-giving Rule of Life—one that honors who God made you to be.
+                    </p>
+                    
+                    <a href="symphony-of-grace.html" class="cta-button">Explore A Symphony of Grace</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripture -->
+    <section class="reveal" style="background: var(--cream-dark);">
+        <div class="scripture-section">
+            <p class="scripture-text">
+                "For everything there is a season, and a time for every matter under heaven."
+            </p>
+            <p class="scripture-ref">— Ecclesiastes 3:1</p>
+        </div>
+    </section>
+
+    <!-- Other Resources -->
+    <section class="reveal">
+        <div class="watercolor-flower flower-3" style="bottom: 15%; right: 10%;"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">More Free Resources</p>
+                <h2 class="section-title script">Continue Your Journey</h2>
+            </div>
+
+            <div class="alternatives-grid">
+                <div class="alternative-card">
+                    <div class="alt-icon">📝</div>
+                    <h3 class="alt-title script">Virtue Assessment</h3>
+                    <p class="alt-subtitle">Discover Your Spiritual Strengths</p>
+                    <p class="alt-description">
+                        Take our free 126-question assessment based on St. Albert the Great's 
+                        42 virtues and discover your top spiritual strengths.
+                    </p>
+                    <a href="virtue-assessment.html" class="cta-button secondary">Take the Assessment</a>
+                </div>
+
+                <div class="alternative-card">
+                    <div class="alt-icon">🎵</div>
+                    <h3 class="alt-title script">Free Prelude</h3>
+                    <p class="alt-subtitle">3-Day Journey</p>
+                    <p class="alt-description">
+                        Experience a taste of A Symphony of Grace with this free 3-day 
+                        mini-journey of stillness, beauty, and harmony.
+                    </p>
+                    <a href="prelude.html" class="cta-button secondary">Start the Prelude</a>
+                </div>
+
+                <div class="alternative-card">
+                    <div class="alt-icon">🧠</div>
+                    <h3 class="alt-title script">Mind Frameworks</h3>
+                    <p class="alt-subtitle">Understanding Your Design</p>
+                    <p class="alt-description">
+                        Explore the personality and psychology frameworks we use in 
+                        the Mind module of A Symphony of Grace.
+                    </p>
+                    <a href="mind-frameworks.html" class="cta-button secondary">Explore Frameworks</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3 class="script">My Holy Crescendo</h3>
+                <p class="footer-tagline">fearfully & wonderfully made</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="symphony-of-grace.html">15-Week Journey</a>
+                <a href="made-beautiful.html">Retreat</a>
+                <a href="personal-journey.html">1:1 Coaching</a>
+                <a href="prelude.html">Free Prelude</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 My Holy Crescendo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
