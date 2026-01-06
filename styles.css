@@ -3180,7 +3180,8 @@ footer {
     border: 1px solid rgba(212, 175, 55, 0.2);
     border-radius: 4px;
     padding: 0.5rem 0;
-    min-width: 180px;
+    padding-top: 15px;  /* ADD THIS - creates invisible bridge */
+    min-width: 220px;
     box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
     list-style: none;
 }
@@ -3188,8 +3189,5 @@ footer {
 .dropdown-menu li a {
     display: block;
     padding: 0.5rem 1.5rem;
-    white-space: nowrap;
-}
-.dropdown-menu li a {
     white-space: normal;
 }
