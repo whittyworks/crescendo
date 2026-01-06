@@ -3153,3 +3153,19 @@ footer {
         font-size: 1.6rem;
     }
 }
+/* Retreat Included Grid - 3x3 Layout */
+.retreat-included .included-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 900px) {
+    .retreat-included .included-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .retreat-included .included-grid {
+        grid-template-columns: 1fr;
+    }
+}
