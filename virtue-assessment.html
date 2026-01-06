@@ -92,6 +92,75 @@
             line-height: 1.6;
         }
 
+        /* Download Section Styles */
+        .download-section {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(220, 197, 216, 0.1));
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .download-icon {
+            font-size: 3rem;
+            flex-shrink: 0;
+        }
+
+        .download-content h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-dark);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .download-content p {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text-medium);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gold);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+        }
+
+        .download-button:hover {
+            background: var(--gold-dark);
+            border-color: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .download-button span {
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 600px) {
+            .download-section {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
         .question-card {
             background: white;
             padding: 30px;
@@ -659,17 +728,11 @@
             <li><a href="symphony-of-grace.html">15-Week Journey</a></li>
             <li><a href="made-beautiful.html">Retreat</a></li>
             <li><a href="personal-journey.html">1:1 Coaching</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle">Resources</a>
-                <ul class="dropdown-menu">
-                    <li><a href="prelude.html">Free Prelude</a></li>
-                    <li><a href="mind-frameworks.html">Mind Frameworks Guide</a></li>
-                    <li><a href="virtue-assessment.html" class="is active">Virtue Assessment</a></li>
-                    <li><a href="healing-the-heart.html">Healing the Heart <span class="coming-soon-badge">Coming Soon</span></a></li>
-                </ul>
-            </li>
+            <li><a href="prelude.html">Free Prelude</a></li>
+            <li><a href="virtue-assessment.html" class="active">Virtue Quiz</a></li>
         </ul>
     </nav>
+
     <div class="quiz-container">
         <!-- Intro Screen -->
         <div id="intro-screen">
@@ -695,6 +758,18 @@
                 <p><strong>How to approach this:</strong> Answer honestly based on your current life, not an idealized version of yourself. This is a tool for self-reflection and spiritual growth, not judgment. The more truthful you are, the more valuable your results will be.</p>
                 
                 <p style="font-style: italic; margin-top: 25px;">This assessment is offered as a free gift from My Holy Crescendo to support your spiritual journey.</p>
+            </div>
+
+            <!-- Free Download Section -->
+            <div class="download-section">
+                <div class="download-icon">📄</div>
+                <div class="download-content">
+                    <h3>Free Resource: The 42 Virtues</h3>
+                    <p>Want to learn about all 42 virtues before taking the assessment? Download our beautifully designed PDF guide with each virtue and its definition.</p>
+                    <a href="assets/downloads/42-virtues-st-albert-the-great.pdf" download class="download-button">
+                        <span>↓</span> Download PDF Guide
+                    </a>
+                </div>
             </div>
 
             <div style="text-align: center; margin: 40px 0;">
@@ -1397,6 +1472,7 @@
                     <div class="action-buttons">
                         <button class="action-button primary" onclick="downloadResults()">Download PDF Results</button>
                         <button class="action-button primary" onclick="emailResults()">Email Results to Me</button>
+                        <a href="assets/downloads/42-virtues-st-albert-the-great.pdf" download class="action-button secondary">📄 Download All 42 Virtues</a>
                         <a href="symphony-of-grace.html" class="action-button secondary">Explore 15-Week Journey</a>
                         <a href="personal-journey.html" class="action-button secondary">1:1 Coaching</a>
                     </div>
