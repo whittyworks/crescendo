@@ -3221,3 +3221,168 @@ footer {
     background: rgba(212, 175, 55, 0.1);
     color: var(--gold-dark);
 }
+/* ================================================
+   HOMEPAGE OFFERINGS GRID - Additional Styles
+   Add this to your styles.css file
+   ================================================ */
+
+/* Offerings Grid */
+.offerings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Offering Card */
+.offering-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    text-align: center;
+    position: relative;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.offering-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(212, 175, 55, 0.2);
+}
+
+.offering-card.featured {
+    border: 2px solid var(--gold);
+    box-shadow: 0 15px 45px rgba(212, 175, 55, 0.2);
+}
+
+.offering-card.featured::before {
+    content: 'Start Here';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: white;
+    padding: 0.4rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.offering-card-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: var(--gold);
+    background: rgba(212, 175, 55, 0.1);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 1.5rem;
+}
+
+.offering-card-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.offering-card-title {
+    font-size: 1.8rem;
+    color: var(--gold-dark);
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+.offering-card-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.offering-card-description {
+    font-size: 1.05rem;
+    color: var(--text-medium);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.offering-card-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(253, 248, 243, 0.5);
+    border-radius: 8px;
+}
+
+.offering-card-highlights span {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    padding: 0.25rem 0;
+}
+
+.offering-card .cta-button {
+    margin-top: auto;
+    width: 100%;
+    text-align: center;
+}
+
+/* Heart Section */
+.heart-section {
+    padding: 6rem 5%;
+    position: relative;
+}
+
+/* Not Sure Section */
+.not-sure-section {
+    padding: 6rem 5%;
+    position: relative;
+}
+
+/* Mobile Responsive for Offerings Grid */
+@media (max-width: 768px) {
+    .offerings-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+        gap: 2rem;
+    }
+    
+    .offering-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .offering-card-title {
+        font-size: 1.5rem;
+    }
+    
+    .offering-card.featured::before {
+        top: -10px;
+        font-size: 0.75rem;
+        padding: 0.3rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .offering-card-highlights {
+        padding: 1rem;
+    }
+    
+    .offering-card-highlights span {
+        font-size: 0.85rem;
+    }
+}
