@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperament Discovery · My Holy Crescendo</title>
+    <meta name="description" content="Discover your God-given temperament through this scenario-based assessment. Understand how you're wired—body, mind, and spirit.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/jpeg" href="assets/img/crescendo-cover.jpg">
+    <style>
+        /* Temperament Test Specific Styles */
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .intro-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .intro-card h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-dark);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .intro-card p {
+            color: var(--text-medium);
+            margin-bottom: 1rem;
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+
+        .intro-card ul {
+            color: var(--text-medium);
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .intro-card li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        .tip-box {
+            background: rgba(212, 175, 55, 0.08);
+            border-left: 3px solid var(--gold);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tip-box p {
+            margin: 0;
+            font-style: italic;
+            color: var(--gold-dark);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--cream-dark);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold));
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        /* Question Card */
+        .question-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            margin-bottom: 2rem;
+            animation: fadeInQuestion 0.4s ease;
+        }
+
+        @keyframes fadeInQuestion {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .scenario-context {
+            background: var(--cream);
+            padding: 1.25rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: var(--text-medium);
+            border-left: 3px solid var(--gold-light);
+            font-size: 1.1rem;
+        }
+
+        /* Answer Options */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            background: var(--cream);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .option:hover {
+            background: var(--cream-dark);
+            border-color: var(--gold-light);
+        }
+
+        .option.selected {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--gold);
+        }
+
+        .option input {
+            display: none;
+        }
+
+        .option-marker {
+            width: 26px;
+            height: 26px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+        }
+
+        .option.selected .option-marker {
+            background: var(--gold);
+        }
+
+        .option.selected .option-marker::after {
+            content: '✓';
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .option-text {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Likert Scale */
+        .likert-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .likert-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            padding: 0 0.5rem;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        .likert-options {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .likert-option {
+            flex: 1;
+            padding: 1.25rem 1rem;
+            background: var(--cream);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.25s ease;
+            font-size: 1.1rem;
+        }
+
+        .likert-option:hover {
+            background: var(--cream-dark);
+            border-color: var(--gold-light);
+        }
+
+        .likert-option.selected {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: var(--gold);
+            color: var(--gold-dark);
+            font-weight: 600;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-test {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gold);
+            color: white;
+            border: 2px solid var(--gold);
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        .btn-test:hover {
+            background: var(--gold-dark);
+            border-color: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-test:disabled {
+            background: #ccc;
+            border-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-test.secondary {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .btn-test.secondary:hover {
+            background: var(--gold);
+            color: white;
+        }
+
+        /* Results */
+        .results-container {
+            animation: fadeInQuestion 0.5s ease;
+        }
+
+        .results-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .results-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .temperament-bars {
+            margin-bottom: 2.5rem;
+        }
+
+        .temp-bar-item {
+            margin-bottom: 1.75rem;
+        }
+
+        .temp-bar-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .temp-name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .temp-percent {
+            font-size: 1.15rem;
+            color: var(--gold-dark);
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .temp-bar {
+            height: 18px;
+            background: var(--cream-dark);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .temp-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .temp-bar-fill.sanguine { background: linear-gradient(90deg, #FFB347, #FF6B6B); }
+        .temp-bar-fill.choleric { background: linear-gradient(90deg, #FF6B6B, #C44536); }
+        .temp-bar-fill.melancholic { background: linear-gradient(90deg, #6B5B95, #45415E); }
+        .temp-bar-fill.phlegmatic { background: linear-gradient(90deg, #88B04B, #5B8C5A); }
+
+        .blend-result {
+            text-align: center;
+            padding: 2.5rem;
+            background: var(--cream);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .blend-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.75rem;
+        }
+
+        .blend-name {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .blend-description {
+            font-size: 1.2rem;
+            color: var(--text-medium);
+            line-height: 1.9;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .note-card {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 1.75rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .note-card h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-dark);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .note-card p {
+            color: var(--text-medium);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .test-container {
+                padding: 1rem 0;
+            }
+
+            .intro-card,
+            .question-card,
+            .results-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .question-text {
+                font-size: 1.2rem;
+            }
+
+            .likert-options {
+                gap: 0.5rem;
+            }
+
+            .likert-option {
+                padding: 1rem 0.5rem;
+                font-size: 1rem;
+            }
+
+            .likert-labels {
+                font-size: 0.8rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .btn-test {
+                width: 100%;
+                text-align: center;
+            }
+
+            .blend-name {
+                font-size: 2rem;
+            }
+
+            .results-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="sans">
+        <a href="index.html" class="logo-link">
+            <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="symphony-of-grace.html">15-Week Journey</a></li>
+            <li><a href="made-beautiful.html">Retreat</a></li>
+            <li><a href="personal-journey.html">1:1 Coaching</a></li>
+            <li><a href="prelude.html">Free Prelude</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" style="min-height: 50vh; padding-top: 10rem;">
+        <div class="watercolor-splash splash-1"></div>
+        <div class="watercolor-splash splash-2"></div>
+        
+        <div class="virgo-constellation">
+            <div class="constellation-star star-large" style="left: 50%; bottom: 15%;"></div>
+            <div class="constellation-star star-medium" style="left: 45%; bottom: 30%;"></div>
+            <div class="constellation-star star-medium" style="left: 40%; bottom: 42%;"></div>
+            <div class="constellation-star star-small" style="left: 37%; bottom: 53%;"></div>
+            <div class="constellation-star star-medium" style="left: 35%; bottom: 62%;"></div>
+            <div class="constellation-star star-small" style="left: 55%; bottom: 33%;"></div>
+            <div class="constellation-star star-medium" style="left: 62%; bottom: 40%;"></div>
+        </div>
+        
+        <div class="watercolor-flower flower-1"></div>
+        <div class="watercolor-flower flower-2"></div>
+        <div class="gold-leaf leaf-1"></div>
+        
+        <div class="hero-content">
+            <p class="hero-subtitle sans">Part of Your Crescendo Journey</p>
+            <h1 class="hero-title script">Temperament Discovery</h1>
+            <p class="hero-tagline">Understanding Your God-Given Design</p>
+        </div>
+
+        <div class="gold-flecks">
+            <div class="fleck" style="top: 20%; left: 15%; animation-delay: 0s;"></div>
+            <div class="fleck" style="top: 45%; left: 85%; animation-delay: 1s;"></div>
+            <div class="fleck" style="top: 70%; left: 25%; animation-delay: 2s;"></div>
+        </div>
+    </section>
+
+    <!-- Test Section -->
+    <section class="reveal" style="padding: 4rem 5%;">
+        <div class="test-container">
+            
+            <!-- Introduction -->
+            <div id="intro-section">
+                <div class="intro-card">
+                    <h2>About This Assessment</h2>
+                    <p>
+                        This assessment uses <strong>scenario-based questions</strong> designed to reveal your natural 
+                        temperament without leading you toward any particular answer. Unlike tests with obvious 
+                        questions like "Do you enjoy parties?", these scenarios explore how you actually respond 
+                        in various situations.
+                    </p>
+                    <p>
+                        <strong>This test recognizes ALL temperament blends</strong>—including combinations that 
+                        some frameworks consider "impossible" (like sanguine-melancholic or choleric-phlegmatic). 
+                        Your results will show percentages across all four temperaments.
+                    </p>
+                    <ul>
+                        <li><strong>40 questions</strong> across 8 dimensions of temperament</li>
+                        <li><strong>10-15 minutes</strong> to complete</li>
+                        <li><strong>Percentage results</strong> for all four temperaments</li>
+                        <li><strong>No "right" answers</strong>—just honest responses</li>
+                    </ul>
+                    
+                    <div class="tip-box">
+                        <p>
+                            <strong>Tip:</strong> Answer based on your <em>first instinct</em> and how you typically behave, 
+                            not how you think you should behave or how you act in exceptional circumstances.
+                        </p>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="btn-test" onclick="startTest()">Begin Assessment</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question Section -->
+            <div id="question-section" class="hidden">
+                <div class="progress-container">
+                    <div class="progress-info">
+                        <span id="progress-text">Question 1 of 40</span>
+                        <span id="progress-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="question-card" id="question-card">
+                    <!-- Question content inserted by JavaScript -->
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-test secondary" id="prev-btn" onclick="prevQuestion()">← Previous</button>
+                    <button class="btn-test" id="next-btn" onclick="nextQuestion()">Next →</button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-section" class="hidden results-container">
+                <!-- Results inserted by JavaScript -->
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Learn More Section (shows after results) -->
+    <section id="learn-more-section" class="hidden reveal" style="background: var(--cream-dark); padding: 5rem 5%;">
+        <div class="section-header">
+            <p class="section-label sans">Continue Your Journey</p>
+            <h2 class="section-title script">Explore Your Design Further</h2>
+            <p class="section-description">
+                Understanding your temperament is just one part of discovering who God made you to be. 
+                The full Crescendo journey explores your body, mind, and spirit in depth.
+            </p>
+        </div>
+        
+        <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+            <a href="symphony-of-grace.html" class="cta-button">Explore the 15-Week Journey</a>
+            <a href="prelude.html" class="cta-button secondary">Try the Free Prelude</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3 class="script">My Holy Crescendo</h3>
+                <p class="footer-tagline">fearfully & wonderfully made</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="symphony-of-grace.html">15-Week Journey</a>
+                <a href="made-beautiful.html">Retreat</a>
+                <a href="personal-journey.html">1:1 Coaching</a>
+                <a href="prelude.html">Free Prelude</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 My Holy Crescendo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // =====================================================
+        // TEMPERAMENT TEST LOGIC
+        // =====================================================
+        
+        const questions = [
+            // DIMENSION 1: Social Energy (5 questions)
+            {
+                id: 1,
+                dimension: "Social Energy",
+                type: "scenario",
+                context: "You've had a long, demanding week at work.",
+                question: "It's Friday evening. What sounds most appealing?",
+                options: [
+                    { text: "Calling friends to meet up somewhere lively", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "A small dinner gathering with close friends", scores: { S: 1, C: 0, M: 1, P: 2 } },
+                    { text: "A quiet evening alone with a good book or hobby", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Low-key time with one or two people, maybe watching something together", scores: { S: 0, C: 0, M: 1, P: 3 } }
+                ]
+            },
+            {
+                id: 2,
+                dimension: "Social Energy",
+                type: "scenario",
+                context: "You arrive at a networking event where you know almost no one.",
+                question: "After 30 minutes, you're most likely to be...",
+                options: [
+                    { text: "In the middle of a group, telling a story that has everyone laughing", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "Having an intense one-on-one conversation in a quieter corner", scores: { S: 0, C: 1, M: 3, P: 1 } },
+                    { text: "Strategically working the room, collecting business cards", scores: { S: 1, C: 3, M: 0, P: 0 } },
+                    { text: "Finding the one person you clicked with and staying near them", scores: { S: 0, C: 0, M: 1, P: 3 } }
+                ]
+            },
+            {
+                id: 3,
+                dimension: "Social Energy",
+                type: "likert",
+                question: "After spending several hours with a group of people, I typically feel...",
+                lowLabel: "Energized & wanting more",
+                highLabel: "Drained & needing solitude"
+            },
+            {
+                id: 4,
+                dimension: "Social Energy",
+                type: "scenario",
+                context: "A new coworker has started, and they seem to eat lunch alone every day.",
+                question: "Your natural inclination is to...",
+                options: [
+                    { text: "Immediately invite them to join your lunch group", scores: { S: 3, C: 1, M: 0, P: 1 } },
+                    { text: "Wait and observe—they might prefer solitude", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Casually mention where people usually gather, in case they want to join", scores: { S: 1, C: 0, M: 1, P: 3 } },
+                    { text: "Strike up a quick conversation to assess if they need anything", scores: { S: 1, C: 3, M: 0, P: 0 } }
+                ]
+            },
+            {
+                id: 5,
+                dimension: "Social Energy",
+                type: "scenario",
+                question: "When processing a difficult personal situation, I prefer to...",
+                options: [
+                    { text: "Talk it through with multiple friends to get different perspectives", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "Journal or think about it privately before discussing with anyone", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Discuss with one trusted person who really understands me", scores: { S: 0, C: 0, M: 2, P: 3 } },
+                    { text: "Figure out the solution first, then inform others of my decision", scores: { S: 0, C: 3, M: 1, P: 0 } }
+                ]
+            },
+            // DIMENSION 2: Pace & Reactivity (5 questions)
+            {
+                id: 6,
+                dimension: "Pace & Reactivity",
+                type: "scenario",
+                context: "During a meeting, someone proposes a new idea.",
+                question: "Your natural response style is to...",
+                options: [
+                    { text: "Jump in immediately with thoughts and enthusiasm", scores: { S: 3, C: 2, M: 0, P: 0 } },
+                    { text: "Listen carefully, then ask probing questions", scores: { S: 0, C: 1, M: 3, P: 1 } },
+                    { text: "Take mental notes and share thoughts later after reflection", scores: { S: 0, C: 0, M: 2, P: 3 } },
+                    { text: "Quickly assess if it's practical and state your position clearly", scores: { S: 0, C: 3, M: 0, P: 0 } }
+                ]
+            },
+            {
+                id: 7,
+                dimension: "Pace & Reactivity",
+                type: "likert",
+                question: "When making decisions, I tend to...",
+                lowLabel: "Decide quickly & trust my gut",
+                highLabel: "Take time & consider all angles"
+            },
+            {
+                id: 8,
+                dimension: "Pace & Reactivity",
+                type: "scenario",
+                context: "You receive unexpected news that changes your weekend plans.",
+                question: "Your typical first reaction is...",
+                options: [
+                    { text: "Excitement—new adventures await!", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "Frustration—quickly pivot to a new plan", scores: { S: 0, C: 3, M: 0, P: 0 } },
+                    { text: "Disappointment that lingers—I was looking forward to those plans", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Calm acceptance—things happen, we'll figure it out", scores: { S: 0, C: 0, M: 0, P: 3 } }
+                ]
+            },
+            {
+                id: 9,
+                dimension: "Pace & Reactivity",
+                type: "scenario",
+                question: "In conversations, I typically...",
+                options: [
+                    { text: "Think out loud—my best ideas come while talking", scores: { S: 3, C: 2, M: 0, P: 0 } },
+                    { text: "Pause before responding to formulate my thoughts precisely", scores: { S: 0, C: 0, M: 3, P: 2 } },
+                    { text: "Listen more than I speak, contributing when I have something meaningful", scores: { S: 0, C: 0, M: 2, P: 3 } },
+                    { text: "Speak directly and get to the point quickly", scores: { S: 1, C: 3, M: 0, P: 0 } }
+                ]
+            },
+            {
+                id: 10,
+                dimension: "Pace & Reactivity",
+                type: "likert",
+                question: "My natural pace when working on projects is...",
+                lowLabel: "Fast & energetic bursts",
+                highLabel: "Slow & steady consistency"
+            },
+            // DIMENSION 3: Emotional Duration (5 questions)
+            {
+                id: 11,
+                dimension: "Emotional Duration",
+                type: "scenario",
+                context: "Someone makes a hurtful comment to you at a gathering.",
+                question: "Three days later, you're most likely...",
+                options: [
+                    { text: "Completely over it—barely remember what was said", scores: { S: 3, C: 0, M: 0, P: 2 } },
+                    { text: "Still processing—the words replay in quiet moments", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Moved on but planning to address it next time you see them", scores: { S: 0, C: 3, M: 1, P: 0 } },
+                    { text: "Let it go to keep the peace, though it stung", scores: { S: 1, C: 0, M: 1, P: 3 } }
+                ]
+            },
+            {
+                id: 12,
+                dimension: "Emotional Duration",
+                type: "likert",
+                question: "When I experience a strong positive emotion (joy, excitement)...",
+                lowLabel: "It fades quickly—on to the next thing",
+                highLabel: "I savor it deeply for a long time"
+            },
+            {
+                id: 13,
+                dimension: "Emotional Duration",
+                type: "scenario",
+                context: "You made an embarrassing mistake at work last month.",
+                question: "How often does it cross your mind now?",
+                options: [
+                    { text: "Rarely—I've moved on to new things", scores: { S: 3, C: 1, M: 0, P: 1 } },
+                    { text: "Sometimes—it still makes me cringe", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "I've analyzed it, learned from it, and filed it away", scores: { S: 0, C: 2, M: 2, P: 0 } },
+                    { text: "Not much—mistakes happen to everyone", scores: { S: 1, C: 0, M: 0, P: 3 } }
+                ]
+            },
+            {
+                id: 14,
+                dimension: "Emotional Duration",
+                type: "scenario",
+                question: "After a wonderful vacation, I typically...",
+                options: [
+                    { text: "Jump back into life—the vacation was great, now onto new things", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "Feel a lingering sadness that it's over for weeks", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Appreciate the memories but settle back into routine easily", scores: { S: 0, C: 0, M: 0, P: 3 } },
+                    { text: "Immediately start planning the next adventure", scores: { S: 2, C: 3, M: 0, P: 0 } }
+                ]
+            },
+            {
+                id: 15,
+                dimension: "Emotional Duration",
+                type: "likert",
+                question: "When someone wrongs me, I tend to...",
+                lowLabel: "Forgive & forget quickly",
+                highLabel: "Remember for a very long time"
+            },
+            // DIMENSION 4: Emotional Depth & Intensity (5 questions)
+            {
+                id: 16,
+                dimension: "Emotional Depth",
+                type: "scenario",
+                context: "You're watching a movie with friends and a sad scene comes on.",
+                question: "Your reaction is typically...",
+                options: [
+                    { text: "Visibly moved—might tear up openly", scores: { S: 2, C: 0, M: 3, P: 0 } },
+                    { text: "Feel something deep but keep it internal", scores: { S: 0, C: 0, M: 2, P: 3 } },
+                    { text: "Appreciate the storytelling but stay relatively unmoved", scores: { S: 0, C: 2, M: 0, P: 1 } },
+                    { text: "Might comment on it lightheartedly to break the tension", scores: { S: 3, C: 0, M: 0, P: 0 } }
+                ]
+            },
+            {
+                id: 17,
+                dimension: "Emotional Depth",
+                type: "likert",
+                question: "I experience emotions...",
+                lowLabel: "Lightly—they pass through me",
+                highLabel: "Intensely—they consume me fully"
+            },
+            {
+                id: 18,
+                dimension: "Emotional Depth",
+                type: "scenario",
+                question: "In my close relationships, I desire...",
+                options: [
+                    { text: "Fun, spontaneity, and lots of shared experiences", scores: { S: 3, C: 0, M: 0, P: 1 } },
+                    { text: "Deep understanding—someone who truly knows my soul", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Loyalty, stability, and peaceful companionship", scores: { S: 0, C: 0, M: 1, P: 3 } },
+                    { text: "Mutual respect, shared goals, and productive partnership", scores: { S: 0, C: 3, M: 0, P: 0 } }
+                ]
+            },
+            {
+                id: 19,
+                dimension: "Emotional Depth",
+                type: "scenario",
+                context: "You hear a piece of music that particularly moves you.",
+                question: "You're most likely to...",
+                options: [
+                    { text: "Share it immediately with everyone you know", scores: { S: 3, C: 0, M: 1, P: 0 } },
+                    { text: "Sit with it privately, letting it resonate in your heart", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Enjoy it in the moment, then move on", scores: { S: 1, C: 1, M: 0, P: 2 } },
+                    { text: "Analyze what makes it effective musically", scores: { S: 0, C: 2, M: 2, P: 0 } }
+                ]
+            },
+            {
+                id: 20,
+                dimension: "Emotional Depth",
+                type: "likert",
+                question: "I am moved by beauty (art, nature, music)...",
+                lowLabel: "Occasionally & mildly",
+                highLabel: "Frequently & profoundly"
+            },
+            // DIMENSION 5: Task vs. People Orientation (5 questions)
+            {
+                id: 21,
+                dimension: "Orientation",
+                type: "scenario",
+                context: "Your team has a project deadline approaching.",
+                question: "You naturally focus on...",
+                options: [
+                    { text: "Making sure everyone's working well together and morale is high", scores: { S: 3, C: 0, M: 0, P: 2 } },
+                    { text: "Ensuring every detail is perfect and nothing is overlooked", scores: { S: 0, C: 1, M: 3, P: 0 } },
+                    { text: "Driving toward the goal—we can celebrate after we finish", scores: { S: 0, C: 3, M: 0, P: 0 } },
+                    { text: "Supporting others and helping wherever needed", scores: { S: 0, C: 0, M: 1, P: 3 } }
+                ]
+            },
+            {
+                id: 22,
+                dimension: "Orientation",
+                type: "likert",
+                question: "When I look back on my day, I feel most satisfied when I've...",
+                lowLabel: "Connected meaningfully with people",
+                highLabel: "Accomplished concrete tasks"
+            },
+            {
+                id: 23,
+                dimension: "Orientation",
+                type: "scenario",
+                context: "A friend calls you upset about something in their life.",
+                question: "Your natural response is to...",
+                options: [
+                    { text: "Listen with full empathy and help them feel heard", scores: { S: 1, C: 0, M: 2, P: 3 } },
+                    { text: "Offer practical solutions to fix the problem", scores: { S: 0, C: 3, M: 1, P: 0 } },
+                    { text: "Try to cheer them up and lighten the mood", scores: { S: 3, C: 0, M: 0, P: 0 } },
+                    { text: "Ask thoughtful questions to help them process", scores: { S: 0, C: 0, M: 3, P: 1 } }
+                ]
+            },
+            {
+                id: 24,
+                dimension: "Orientation",
+                type: "scenario",
+                question: "In group projects, I naturally gravitate toward...",
+                options: [
+                    { text: "The social glue—keeping energy up and people connected", scores: { S: 3, C: 0, M: 0, P: 1 } },
+                    { text: "Leadership—organizing and driving toward the goal", scores: { S: 0, C: 3, M: 0, P: 0 } },
+                    { text: "Quality control—ensuring excellence in the details", scores: { S: 0, C: 1, M: 3, P: 0 } },
+                    { text: "Support—helping wherever I'm needed, avoiding conflict", scores: { S: 0, C: 0, M: 0, P: 3 } }
+                ]
+            },
+            {
+                id: 25,
+                dimension: "Orientation",
+                type: "likert",
+                question: "I would describe myself as more...",
+                lowLabel: "Relationship-driven",
+                highLabel: "Results-driven"
+            },
+            // DIMENSION 6: Change Tolerance (5 questions)
+            {
+                id: 26,
+                dimension: "Change Tolerance",
+                type: "scenario",
+                context: "Your company announces a major restructuring.",
+                question: "Your initial internal response is...",
+                options: [
+                    { text: "Excitement—new opportunities and fresh starts!", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "Strategic thinking—how can I position myself well?", scores: { S: 0, C: 3, M: 0, P: 0 } },
+                    { text: "Anxiety—what will this mean for my carefully built systems?", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Wait and see—no point worrying until we know more", scores: { S: 0, C: 0, M: 0, P: 3 } }
+                ]
+            },
+            {
+                id: 27,
+                dimension: "Change Tolerance",
+                type: "likert",
+                question: "When it comes to my daily routine, I prefer...",
+                lowLabel: "Variety and spontaneity",
+                highLabel: "Consistency and predictability"
+            },
+            {
+                id: 28,
+                dimension: "Change Tolerance",
+                type: "scenario",
+                question: "When planning a vacation, I prefer...",
+                options: [
+                    { text: "Loose plans—see where the day takes us!", scores: { S: 3, C: 0, M: 0, P: 1 } },
+                    { text: "Detailed itineraries with everything researched", scores: { S: 0, C: 1, M: 3, P: 0 } },
+                    { text: "Efficient planning to maximize what we can do", scores: { S: 0, C: 3, M: 1, P: 0 } },
+                    { text: "Simple, relaxing plans with built-in downtime", scores: { S: 0, C: 0, M: 0, P: 3 } }
+                ]
+            },
+            {
+                id: 29,
+                dimension: "Change Tolerance",
+                type: "scenario",
+                context: "Someone suggests trying a completely new restaurant with unfamiliar cuisine.",
+                question: "Your honest reaction is...",
+                options: [
+                    { text: "Yes! I love trying new things", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "Let me research it first to know what to expect", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "I'd rather go somewhere we know is good", scores: { S: 0, C: 0, M: 1, P: 3 } },
+                    { text: "Sure, but let's have a backup plan if it's bad", scores: { S: 0, C: 3, M: 1, P: 0 } }
+                ]
+            },
+            {
+                id: 30,
+                dimension: "Change Tolerance",
+                type: "likert",
+                question: "Unexpected changes to my plans make me feel...",
+                lowLabel: "Energized & adaptable",
+                highLabel: "Stressed & unsettled"
+            },
+            // DIMENSION 7: Conflict Style (5 questions)
+            {
+                id: 31,
+                dimension: "Conflict Style",
+                type: "scenario",
+                context: "You disagree with a decision your friend group is making.",
+                question: "You're most likely to...",
+                options: [
+                    { text: "Voice it clearly—healthy disagreement is fine", scores: { S: 1, C: 3, M: 0, P: 0 } },
+                    { text: "Go along with the group to preserve harmony", scores: { S: 1, C: 0, M: 0, P: 3 } },
+                    { text: "Privately share concerns with one person you trust", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Make a joke about it but let the group decide", scores: { S: 3, C: 0, M: 0, P: 0 } }
+                ]
+            },
+            {
+                id: 32,
+                dimension: "Conflict Style",
+                type: "likert",
+                question: "When conflict arises, my natural tendency is to...",
+                lowLabel: "Engage directly & address it",
+                highLabel: "Avoid & hope it resolves"
+            },
+            {
+                id: 33,
+                dimension: "Conflict Style",
+                type: "scenario",
+                context: "Two friends are in a dispute and both come to you.",
+                question: "Your natural role is...",
+                options: [
+                    { text: "Peacemaker—help them see each other's perspective", scores: { S: 1, C: 0, M: 1, P: 3 } },
+                    { text: "Truth-teller—point out who's right and wrong", scores: { S: 0, C: 3, M: 0, P: 0 } },
+                    { text: "Listener—let each vent, offer empathy", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Distracter—suggest we all do something fun instead", scores: { S: 3, C: 0, M: 0, P: 0 } }
+                ]
+            },
+            {
+                id: 34,
+                dimension: "Conflict Style",
+                type: "scenario",
+                question: "After an argument with someone close to me, I typically...",
+                options: [
+                    { text: "Bounce back quickly—life's too short to dwell", scores: { S: 3, C: 0, M: 0, P: 1 } },
+                    { text: "Replay the conversation, thinking of what I should have said", scores: { S: 0, C: 1, M: 3, P: 0 } },
+                    { text: "Feel unsettled until harmony is restored", scores: { S: 0, C: 0, M: 1, P: 3 } },
+                    { text: "Stand firm if I was right, move on if resolved", scores: { S: 0, C: 3, M: 0, P: 0 } }
+                ]
+            },
+            {
+                id: 35,
+                dimension: "Conflict Style",
+                type: "likert",
+                question: "I express anger or frustration...",
+                lowLabel: "Openly & immediately",
+                highLabel: "Rarely, keeping it inside"
+            },
+            // DIMENSION 8: Internal Processing (5 questions)
+            {
+                id: 36,
+                dimension: "Internal Processing",
+                type: "scenario",
+                question: "When facing a major life decision, I prefer to...",
+                options: [
+                    { text: "Talk it through with many people to gather input", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "Reflect deeply on my own before discussing with anyone", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Make a quick pros/cons list and decide efficiently", scores: { S: 0, C: 3, M: 0, P: 0 } },
+                    { text: "Let it sit until the right answer becomes clear naturally", scores: { S: 0, C: 0, M: 1, P: 3 } }
+                ]
+            },
+            {
+                id: 37,
+                dimension: "Internal Processing",
+                type: "likert",
+                question: "My inner thought life is...",
+                lowLabel: "Light—I live in the moment",
+                highLabel: "Rich & complex—always processing"
+            },
+            {
+                id: 38,
+                dimension: "Internal Processing",
+                type: "scenario",
+                context: "You have some time alone with no obligations.",
+                question: "Your mind naturally drifts toward...",
+                options: [
+                    { text: "Planning fun activities or who to call", scores: { S: 3, C: 0, M: 0, P: 0 } },
+                    { text: "Reflecting on life, meaning, or relationships", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Relaxing fully—enjoying the peace and quiet", scores: { S: 0, C: 0, M: 0, P: 3 } },
+                    { text: "Goals, projects, and what needs to get done", scores: { S: 0, C: 3, M: 1, P: 0 } }
+                ]
+            },
+            {
+                id: 39,
+                dimension: "Internal Processing",
+                type: "scenario",
+                question: "I am most at peace when...",
+                options: [
+                    { text: "Surrounded by people I love, enjoying the moment", scores: { S: 3, C: 0, M: 0, P: 1 } },
+                    { text: "Alone with my thoughts, in a meaningful headspace", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Making progress on something that matters", scores: { S: 0, C: 3, M: 1, P: 0 } },
+                    { text: "In calm, harmonious environments with no drama", scores: { S: 0, C: 0, M: 0, P: 3 } }
+                ]
+            },
+            {
+                id: 40,
+                dimension: "Internal Processing",
+                type: "likert",
+                question: "I would describe my mind as...",
+                lowLabel: "Active & outwardly engaged",
+                highLabel: "Contemplative & inwardly focused"
+            }
+        ];
+
+        const blendDescriptions = {
+            "Sanguine-Choleric": "You're a dynamic force—enthusiastic, action-oriented, and influential. You energize rooms while driving toward goals. Leadership comes naturally, though you may need to slow down for others.",
+            "Sanguine-Melancholic": "You're a beautiful paradox—outgoing yet deeply feeling, spontaneous yet appreciating depth. You're the life of the party who also needs meaningful connection. Creative, empathetic, and emotionally rich.",
+            "Sanguine-Phlegmatic": "You're genuinely easygoing and likeable. Friendly and warm, you go with the flow while keeping things light. You value harmony and fun equally, though may avoid necessary confrontations.",
+            "Choleric-Sanguine": "You're a born leader with charisma. Goal-driven and persuasive, you move quickly and bring others along. Your challenge is patience with those who move at a different pace.",
+            "Choleric-Melancholic": "You're the perfectionist achiever. Driven, detail-oriented, and uncompromising on quality. You set high standards for yourself and others. Learning flexibility brings growth.",
+            "Choleric-Phlegmatic": "You're quietly powerful. Determined but measured, you achieve goals without drama. You lead through steady competence rather than charisma, preferring substance over style.",
+            "Melancholic-Sanguine": "You're the sensitive creative with social grace. Deep and artistic, you also crave connection and affirmation. You feel everything intensely but can share that richness with others.",
+            "Melancholic-Choleric": "You're the principled achiever. You pursue excellence with passion and hold strong convictions. Detail-oriented and driven, you may need to extend grace to yourself and others.",
+            "Melancholic-Phlegmatic": "You're the gentle intellectual. Thoughtful, loyal, and deeply feeling, you prefer peace and meaningful connection. You notice what others miss but may struggle to voice it.",
+            "Phlegmatic-Sanguine": "You're the friendly peacekeeper. Warm, adaptable, and easy to be around, you value harmony and connection. You bring calm to chaos while keeping things pleasant.",
+            "Phlegmatic-Choleric": "You're the steady executor. Calm under pressure, you get things done without drama. You lead through reliability rather than forcefulness, bringing peaceful competence.",
+            "Phlegmatic-Melancholic": "You're the thoughtful supporter. Gentle, observant, and deeply loyal, you create safe spaces for others. You feel deeply but express it quietly. Self-advocacy is your growth edge.",
+            "Sanguine": "Pure enthusiasm and warmth. You light up rooms, embrace life's adventures, and connect easily with everyone. Depth and follow-through are your growth edges.",
+            "Choleric": "Pure drive and determination. You see what needs to happen and make it so. You lead naturally but may need to cultivate patience and empathy for different paces.",
+            "Melancholic": "Pure depth and sensitivity. You feel life profoundly and notice beauty others miss. You hold yourself to high standards. Self-compassion is your growth edge.",
+            "Phlegmatic": "Pure peace and steadiness. You're the calm in the storm, supportive and reliable. You value harmony above all. Speaking up for yourself is your growth edge."
+        };
+
+        let currentQuestion = 0;
+        let answers = {};
+
+        function startTest() {
+            document.getElementById('intro-section').classList.add('hidden');
+            document.getElementById('question-section').classList.remove('hidden');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            const card = document.getElementById('question-card');
+            
+            let html = `<div class="question-number">Question ${q.id} of 40 · ${q.dimension}</div>`;
+            
+            if (q.context) {
+                html += `<div class="scenario-context">${q.context}</div>`;
+            }
+            
+            html += `<div class="question-text">${q.question}</div>`;
+            
+            if (q.type === 'scenario') {
+                html += '<div class="options-container">';
+                q.options.forEach((opt, idx) => {
+                    const isSelected = answers[q.id] === idx;
+                    html += `
+                        <div class="option ${isSelected ? 'selected' : ''}" onclick="selectOption(${q.id}, ${idx})">
+                            <div class="option-marker"></div>
+                            <div class="option-text">${opt.text}</div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            } else if (q.type === 'likert') {
+                html += `
+                    <div class="likert-container">
+                        <div class="likert-labels">
+                            <span>${q.lowLabel}</span>
+                            <span>${q.highLabel}</span>
+                        </div>
+                        <div class="likert-options">
+                            ${[1,2,3,4,5].map(n => `
+                                <div class="likert-option ${answers[q.id] === n ? 'selected' : ''}" onclick="selectLikert(${q.id}, ${n})">${n}</div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            card.innerHTML = html;
+            
+            // Update progress
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('progress-percent').textContent = Math.round(progress) + '%';
+            
+            // Update nav buttons
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('prev-btn').style.visibility = currentQuestion === 0 ? 'hidden' : 'visible';
+            document.getElementById('next-btn').textContent = currentQuestion === questions.length - 1 ? 'See Results' : 'Next →';
+        }
+
+        function selectOption(questionId, optionIndex) {
+            answers[questionId] = optionIndex;
+            renderQuestion();
+        }
+
+        function selectLikert(questionId, value) {
+            answers[questionId] = value;
+            renderQuestion();
+        }
+
+        function nextQuestion() {
+            if (answers[questions[currentQuestion].id] === undefined) {
+                alert('Please select an answer before continuing.');
+                return;
+            }
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+                window.scrollTo({ top: 200, behavior: 'smooth' });
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+                window.scrollTo({ top: 200, behavior: 'smooth' });
+            }
+        }
+
+        function calculateScores() {
+            let scores = { S: 0, C: 0, M: 0, P: 0 };
+            
+            questions.forEach(q => {
+                const answer = answers[q.id];
+                if (answer === undefined) return;
+                
+                if (q.type === 'scenario') {
+                    const optionScores = q.options[answer].scores;
+                    scores.S += optionScores.S;
+                    scores.C += optionScores.C;
+                    scores.M += optionScores.M;
+                    scores.P += optionScores.P;
+                } else if (q.type === 'likert') {
+                    if (q.dimension === 'Social Energy') {
+                        scores.S += (6 - answer) * 0.6;
+                        scores.C += (6 - answer) * 0.4;
+                        scores.M += answer * 0.6;
+                        scores.P += answer * 0.4;
+                    } else if (q.dimension === 'Pace & Reactivity') {
+                        scores.S += (6 - answer) * 0.6;
+                        scores.C += (6 - answer) * 0.5;
+                        scores.M += answer * 0.5;
+                        scores.P += answer * 0.6;
+                    } else if (q.dimension === 'Emotional Duration') {
+                        scores.S += (6 - answer) * 0.6;
+                        scores.P += (6 - answer) * 0.4;
+                        scores.C += answer * 0.4;
+                        scores.M += answer * 0.6;
+                    } else if (q.dimension === 'Emotional Depth') {
+                        scores.S += (6 - answer) * 0.5;
+                        scores.C += (6 - answer) * 0.3;
+                        scores.M += answer * 0.7;
+                        scores.P += answer * 0.3;
+                    } else if (q.dimension === 'Orientation') {
+                        scores.S += (6 - answer) * 0.6;
+                        scores.P += (6 - answer) * 0.4;
+                        scores.C += answer * 0.6;
+                        scores.M += answer * 0.4;
+                    } else if (q.dimension === 'Change Tolerance') {
+                        scores.S += (6 - answer) * 0.7;
+                        scores.C += (6 - answer) * 0.3;
+                        scores.M += answer * 0.5;
+                        scores.P += answer * 0.5;
+                    } else if (q.dimension === 'Conflict Style') {
+                        scores.C += (6 - answer) * 0.6;
+                        scores.S += (6 - answer) * 0.4;
+                        scores.P += answer * 0.6;
+                        scores.M += answer * 0.4;
+                    } else if (q.dimension === 'Internal Processing') {
+                        scores.S += (6 - answer) * 0.5;
+                        scores.C += (6 - answer) * 0.4;
+                        scores.M += answer * 0.6;
+                        scores.P += answer * 0.5;
+                    }
+                }
+            });
+            
+            const total = scores.S + scores.C + scores.M + scores.P;
+            const percentages = {
+                Sanguine: Math.round((scores.S / total) * 100),
+                Choleric: Math.round((scores.C / total) * 100),
+                Melancholic: Math.round((scores.M / total) * 100),
+                Phlegmatic: Math.round((scores.P / total) * 100)
+            };
+            
+            return { percentages };
+        }
+
+        function getBlendName(percentages) {
+            const sorted = Object.entries(percentages).sort((a, b) => b[1] - a[1]);
+            const [first, second] = sorted;
+            
+            if (first[1] > 40 && first[1] - second[1] > 15) {
+                return first[0];
+            }
+            
+            return `${first[0]}-${second[0]}`;
+        }
+
+        function showResults() {
+            document.getElementById('question-section').classList.add('hidden');
+            document.getElementById('results-section').classList.remove('hidden');
+            document.getElementById('learn-more-section').classList.remove('hidden');
+            
+            const { percentages } = calculateScores();
+            const blendName = getBlendName(percentages);
+            const description = blendDescriptions[blendName] || blendDescriptions[blendName.split('-')[0]];
+            
+            const sorted = Object.entries(percentages).sort((a, b) => b[1] - a[1]);
+            
+            let html = `
+                <div class="results-card">
+                    <h2 class="results-title">Your Temperament Profile</h2>
+                    
+                    <div class="temperament-bars">
+                        ${sorted.map(([name, percent]) => `
+                            <div class="temp-bar-item">
+                                <div class="temp-bar-header">
+                                    <span class="temp-name">${name}</span>
+                                    <span class="temp-percent">${percent}%</span>
+                                </div>
+                                <div class="temp-bar">
+                                    <div class="temp-bar-fill ${name.toLowerCase()}" style="width: ${percent}%"></div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="blend-result">
+                        <div class="blend-label">Your Temperament Blend</div>
+                        <div class="blend-name">${blendName}</div>
+                        <p class="blend-description">${description}</p>
+                    </div>
+                    
+                    <div class="note-card">
+                        <h4>Remember</h4>
+                        <p>Temperament is your natural disposition—how God wired you. It's not a box but a starting point for understanding yourself. All temperaments have strengths and growth edges. Your percentages may shift slightly with mood or context, but your core blend tends to remain stable throughout life.</p>
+                    </div>
+                </div>
+                
+                <div class="results-actions">
+                    <button class="btn-test secondary" onclick="location.reload()">Retake Assessment</button>
+                    <button class="btn-test" onclick="window.print()">Print Results</button>
+                </div>
+            `;
+            
+            document.getElementById('results-section').innerHTML = html;
+            window.scrollTo({ top: 200, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
