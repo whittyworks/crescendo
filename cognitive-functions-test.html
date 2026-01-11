@@ -10,7 +10,7 @@
     <meta property="og:title" content="My Holy Crescendo - Fearfully & Wonderfully Made">
     <meta property="og:description" content="A transformative journey discovering God's design in your body, mind, and spirit through A Symphony of Grace.">
     <meta property="og:image" content="https://myholycrescendo.com/assets/img/og-image.png">
-    <meta property="og:url" content="https://myholycrescendo.com/cognitive-functions-test.html">
+    <meta property="og:url" content="https://myholycrescendo.com/temperament-test.html">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://myholycrescendo.com/assets/img/og-image.png">
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="styles.css">
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png"></head>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/crescendo-cover.jpg">
@@ -991,8 +991,8 @@
                 <ul class="dropdown-menu">
                     <li><a href="prelude.html">Free Prelude</a></li>
                     <li><a href="mind-frameworks.html">Mind Frameworks Guide</a></li>
-                    <li><a href="temperament-test.html">Temperament Test</a></li>
-                    <li><a href="cognitive-functions-test.html" class="is active">Cognitive Functions Test</a></li>
+                    <li><a href="temperament-test.html" class="is active">Temperament Test</a></li>
+                    <li><a href="cognitive-functions-test.html">Cognitive Functions Test</a></li>
                     <li><a href="virtue-assessment.html">Virtue Assessment</a></li>
                     <li><a href="charisms.html">25 Charisms</a></li>
                     <li><a href="rule-of-life.html">Rule of Life</a></li>
@@ -1064,6 +1064,11 @@
                     describe the mechanics of your mind, not just your self-perception.
                 </p>
                 <p>
+                    <strong>Stress reveals truth.</strong> This test also measures how you behave under stress—when 
+                    your "grip" functions activate and your usual patterns shift. Since we can't easily control our 
+                    stress responses, these questions provide another layer of accuracy that traditional tests miss entirely.
+                </p>
+                <p>
                     This test measures all eight functions independently, then matches your profile to the type 
                     whose "function stack" best fits your natural patterns.
                 </p>
@@ -1088,6 +1093,7 @@
                             <li>✓ Questions aren't obvious</li>
                             <li>✓ Measures mental processes</li>
                             <li>✓ 8 functions scored separately</li>
+                            <li>✓ Includes stress patterns</li>
                             <li>✓ Reveals your function stack</li>
                             <li>✓ Shows close alternative types</li>
                         </ul>
@@ -1199,17 +1205,18 @@
             <div id="test-intro" class="test-intro">
                 <h3 class="script">Ready to Begin?</h3>
                 <p>
-                    This assessment contains 48 questions that measure your use of all eight cognitive functions. 
-                    Questions are randomized and designed to reveal your natural mental processes.
+                    This assessment contains 64 questions that measure your use of all eight cognitive functions—both 
+                    in everyday life <em>and</em> under stress. Questions are randomized and designed to reveal your 
+                    natural mental processes, including how you cope when overwhelmed.
                 </p>
                 
                 <div class="test-stats">
                     <div class="stat">
-                        <div class="stat-value">48</div>
+                        <div class="stat-value">64</div>
                         <div class="stat-label sans">Questions</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-value">10-15</div>
+                        <div class="stat-value">12-18</div>
                         <div class="stat-label sans">Minutes</div>
                     </div>
                     <div class="stat">
@@ -1296,72 +1303,137 @@
 
     <script>
         // ============================================
-        // QUESTION DATABASE - 6 questions per function
+        // QUESTION DATABASE - 8 questions per function
+        // Includes both normal use AND stress patterns
         // ============================================
         const questions = [
-            // Ti - Introverted Thinking (internal logic, precision, frameworks)
+            // ==========================================
+            // Ti - Introverted Thinking
+            // Normal use: internal logic, precision, frameworks
+            // Under stress (inferior): emotional outbursts, feeling stupid, social withdrawal
+            // As relief (tertiary): detached analysis to escape feelings
+            // ==========================================
             { id: 1, fn: 'Ti', text: "When someone explains their reasoning, I often mentally check it for internal consistency before accepting it." },
             { id: 2, fn: 'Ti', text: "I enjoy taking apart systems or ideas to understand exactly how each piece works." },
             { id: 3, fn: 'Ti', text: "I'm bothered when terms are used imprecisely or when definitions seem fuzzy." },
             { id: 4, fn: 'Ti', text: "I often build mental models or frameworks to understand how things operate." },
             { id: 5, fn: 'Ti', text: "I'd rather find the most logically correct answer than the most popular or practical one." },
             { id: 6, fn: 'Ti', text: "When I learn something new, I need to understand the underlying principles, not just how to apply it." },
+            // Ti stress/relief patterns
+            { id: 7, fn: 'Ti', text: "When overwhelmed emotionally, I sometimes retreat into cold, detached analysis to feel in control." },
+            { id: 8, fn: 'Ti', text: "Under stress, I may become hypercritical, nitpicking logical flaws in everything around me." },
             
-            // Te - Extraverted Thinking (external organization, efficiency, results)
-            { id: 7, fn: 'Te', text: "I naturally think in terms of steps, plans, and measurable outcomes." },
-            { id: 8, fn: 'Te', text: "I get frustrated when people discuss problems without moving toward solutions." },
-            { id: 9, fn: 'Te', text: "I often reorganize spaces, processes, or systems to make them more efficient." },
-            { id: 10, fn: 'Te', text: "I trust data, evidence, and proven methods over gut feelings or personal intuition." },
-            { id: 11, fn: 'Te', text: "I naturally delegate tasks and organize people toward a shared goal." },
-            { id: 12, fn: 'Te', text: "When making decisions, I prioritize what will produce the best objective results." },
+            // ==========================================
+            // Te - Extraverted Thinking
+            // Normal use: external organization, efficiency, results
+            // Under stress (inferior): feeling incompetent, harsh self-criticism, rigid rule-following
+            // As relief (tertiary): trying to organize/control external chaos
+            // ==========================================
+            { id: 9, fn: 'Te', text: "I naturally think in terms of steps, plans, and measurable outcomes." },
+            { id: 10, fn: 'Te', text: "I get frustrated when people discuss problems without moving toward solutions." },
+            { id: 11, fn: 'Te', text: "I often reorganize spaces, processes, or systems to make them more efficient." },
+            { id: 12, fn: 'Te', text: "I trust data, evidence, and proven methods over gut feelings or personal intuition." },
+            { id: 13, fn: 'Te', text: "I naturally delegate tasks and organize people toward a shared goal." },
+            { id: 14, fn: 'Te', text: "When making decisions, I prioritize what will produce the best objective results." },
+            // Te stress/relief patterns
+            { id: 15, fn: 'Te', text: "Under stress, I become rigidly focused on rules, metrics, or external standards of success." },
+            { id: 16, fn: 'Te', text: "When I feel out of control, I try to regain stability by organizing, list-making, or controlling my environment." },
             
-            // Fi - Introverted Feeling (personal values, authenticity, inner ethics)
-            { id: 13, fn: 'Fi', text: "I have a strong inner sense of what's right and wrong that doesn't depend on what others think." },
-            { id: 14, fn: 'Fi', text: "Being authentic to myself matters more to me than fitting in with a group." },
-            { id: 15, fn: 'Fi', text: "I often need time alone to process my emotions and understand how I really feel." },
-            { id: 16, fn: 'Fi', text: "I'm deeply aware of my own emotional landscape and can articulate subtle feelings." },
-            { id: 17, fn: 'Fi', text: "I evaluate situations based on my personal values, even if others disagree." },
-            { id: 18, fn: 'Fi', text: "I find it difficult to act in ways that contradict my core beliefs, even for practical benefits." },
+            // ==========================================
+            // Fi - Introverted Feeling
+            // Normal use: personal values, authenticity, inner ethics
+            // Under stress (inferior): feeling unloved/unappreciated, value paralysis, hypersensitivity
+            // As relief (tertiary): retreating into personal values to escape external demands
+            // ==========================================
+            { id: 17, fn: 'Fi', text: "I have a strong inner sense of what's right and wrong that doesn't depend on what others think." },
+            { id: 18, fn: 'Fi', text: "Being authentic to myself matters more to me than fitting in with a group." },
+            { id: 19, fn: 'Fi', text: "I often need time alone to process my emotions and understand how I really feel." },
+            { id: 20, fn: 'Fi', text: "I'm deeply aware of my own emotional landscape and can articulate subtle feelings." },
+            { id: 21, fn: 'Fi', text: "I evaluate situations based on my personal values, even if others disagree." },
+            { id: 22, fn: 'Fi', text: "I find it difficult to act in ways that contradict my core beliefs, even for practical benefits." },
+            // Fi stress/relief patterns
+            { id: 23, fn: 'Fi', text: "Under stress, I become hypersensitive to feeling unappreciated or that my values are being violated." },
+            { id: 24, fn: 'Fi', text: "When overwhelmed by external demands, I retreat inward to reconnect with what truly matters to me." },
             
-            // Fe - Extraverted Feeling (social harmony, reading emotions, group dynamics)
-            { id: 19, fn: 'Fe', text: "I quickly pick up on the emotional atmosphere when I enter a room." },
-            { id: 20, fn: 'Fe', text: "I often adjust my behavior to maintain harmony and make others comfortable." },
-            { id: 21, fn: 'Fe', text: "When someone in a group is upset, I feel a pull to address it even if it wasn't my issue." },
-            { id: 22, fn: 'Fe', text: "I naturally consider how my words and actions will affect others' feelings." },
-            { id: 23, fn: 'Fe', text: "I often take on the role of mediator or peacemaker in group conflicts." },
-            { id: 24, fn: 'Fe', text: "I feel genuinely happy when the people around me are happy and comfortable." },
+            // ==========================================
+            // Fe - Extraverted Feeling
+            // Normal use: social harmony, reading emotions, group dynamics
+            // Under stress (inferior): emotional outbursts, feeling rejected, desperate people-pleasing
+            // As relief (tertiary): seeking social validation or connection
+            // ==========================================
+            { id: 25, fn: 'Fe', text: "I quickly pick up on the emotional atmosphere when I enter a room." },
+            { id: 26, fn: 'Fe', text: "I often adjust my behavior to maintain harmony and make others comfortable." },
+            { id: 27, fn: 'Fe', text: "When someone in a group is upset, I feel a pull to address it even if it wasn't my issue." },
+            { id: 28, fn: 'Fe', text: "I naturally consider how my words and actions will affect others' feelings." },
+            { id: 29, fn: 'Fe', text: "I often take on the role of mediator or peacemaker in group conflicts." },
+            { id: 30, fn: 'Fe', text: "I feel genuinely happy when the people around me are happy and comfortable." },
+            // Fe stress/relief patterns
+            { id: 31, fn: 'Fe', text: "Under stress, I become overly concerned with whether others like me or are upset with me." },
+            { id: 32, fn: 'Fe', text: "When I feel disconnected, I seek out social interaction or validation to feel grounded again." },
             
-            // Si - Introverted Sensing (past experience, tradition, detailed memory)
-            { id: 25, fn: 'Si', text: "I often reference past experiences to guide current decisions—'last time this happened...'." },
-            { id: 26, fn: 'Si', text: "I notice when small details in familiar environments have changed." },
-            { id: 27, fn: 'Si', text: "Traditions and established routines provide me with a sense of comfort and stability." },
-            { id: 28, fn: 'Si', text: "I have a detailed memory for past experiences, including sensory details." },
-            { id: 29, fn: 'Si', text: "I prefer proven methods over experimenting with new, untested approaches." },
-            { id: 30, fn: 'Si', text: "I feel unsettled when familiar routines or environments change unexpectedly." },
+            // ==========================================
+            // Si - Introverted Sensing
+            // Normal use: past experience, tradition, detailed memory
+            // Under stress (inferior): dwelling on past failures, hypochondria, rigid routines, catastrophizing based on past
+            // As relief (tertiary): retreating to familiar comforts, nostalgia
+            // ==========================================
+            { id: 33, fn: 'Si', text: "I often reference past experiences to guide current decisions—'last time this happened...'." },
+            { id: 34, fn: 'Si', text: "I notice when small details in familiar environments have changed." },
+            { id: 35, fn: 'Si', text: "Traditions and established routines provide me with a sense of comfort and stability." },
+            { id: 36, fn: 'Si', text: "I have a detailed memory for past experiences, including sensory details like smells or sounds." },
+            { id: 37, fn: 'Si', text: "I prefer proven methods over experimenting with new, untested approaches." },
+            { id: 38, fn: 'Si', text: "I feel unsettled when familiar routines or environments change unexpectedly." },
+            // Si stress/relief patterns
+            { id: 39, fn: 'Si', text: "Under stress, I find comfort in revisiting childhood favorites—foods, shows, music, or places from my past." },
+            { id: 40, fn: 'Si', text: "When anxious, I sometimes get stuck dwelling on past mistakes or negative memories." },
             
-            // Se - Extraverted Sensing (present moment, physical experience, action)
-            { id: 31, fn: 'Se', text: "I'm highly attuned to my physical environment—sounds, textures, colors, movement." },
-            { id: 32, fn: 'Se', text: "I prefer to act and adapt in the moment rather than plan extensively in advance." },
-            { id: 33, fn: 'Se', text: "I enjoy experiences that fully engage my senses—food, nature, sports, aesthetics." },
-            { id: 34, fn: 'Se', text: "I'm good at reading body language and physical cues in real-time." },
-            { id: 35, fn: 'Se', text: "I get restless if I'm stuck in my head too long without physical activity or stimulation." },
-            { id: 36, fn: 'Se', text: "I thrive in fast-paced environments where I can react and respond quickly." },
+            // ==========================================
+            // Se - Extraverted Sensing
+            // Normal use: present moment, physical experience, action
+            // Under stress (inferior): overindulgence, reckless behavior, obsessing over physical details
+            // As relief (tertiary): seeking sensory stimulation or physical activity
+            // ==========================================
+            { id: 41, fn: 'Se', text: "I'm highly attuned to my physical environment—sounds, textures, colors, movement." },
+            { id: 42, fn: 'Se', text: "I prefer to act and adapt in the moment rather than plan extensively in advance." },
+            { id: 43, fn: 'Se', text: "I enjoy experiences that fully engage my senses—food, nature, sports, aesthetics." },
+            { id: 44, fn: 'Se', text: "I'm good at reading body language and physical cues in real-time." },
+            { id: 45, fn: 'Se', text: "I get restless if I'm stuck in my head too long without physical activity or stimulation." },
+            { id: 46, fn: 'Se', text: "I thrive in fast-paced environments where I can react and respond quickly." },
+            // Se stress/relief patterns
+            { id: 47, fn: 'Se', text: "Under stress, I may overindulge in physical pleasures—food, shopping, alcohol, or impulsive experiences." },
+            { id: 48, fn: 'Se', text: "When overwhelmed mentally, I feel better after physical activity, getting outside, or doing something with my hands." },
             
-            // Ni - Introverted Intuition (future vision, patterns, singular insight)
-            { id: 37, fn: 'Ni', text: "I often have a strong sense of how things will unfold, even without concrete evidence." },
-            { id: 38, fn: 'Ni', text: "Insights tend to arrive fully formed in my mind, though I can't always explain how I got there." },
-            { id: 39, fn: 'Ni', text: "I'm drawn to finding the one deeper meaning or pattern beneath the surface of things." },
-            { id: 40, fn: 'Ni', text: "I naturally think in terms of long-term implications and future consequences." },
-            { id: 41, fn: 'Ni', text: "I often 'just know' things are true before I can prove or articulate why." },
-            { id: 42, fn: 'Ni', text: "I find myself drawn to symbolism, metaphor, and hidden meanings." },
+            // ==========================================
+            // Ni - Introverted Intuition
+            // Normal use: future vision, patterns, singular insight
+            // Under stress (inferior): paranoid visions of doom, obsessing over one negative possibility
+            // As relief (tertiary): retreating into abstract thinking or future planning
+            // ==========================================
+            { id: 49, fn: 'Ni', text: "I often have a strong sense of how things will unfold, even without concrete evidence." },
+            { id: 50, fn: 'Ni', text: "Insights tend to arrive fully formed in my mind, though I can't always explain how I got there." },
+            { id: 51, fn: 'Ni', text: "I'm drawn to finding the one deeper meaning or pattern beneath the surface of things." },
+            { id: 52, fn: 'Ni', text: "I naturally think in terms of long-term implications and future consequences." },
+            { id: 53, fn: 'Ni', text: "I often 'just know' things are true before I can prove or articulate why." },
+            { id: 54, fn: 'Ni', text: "I find myself drawn to symbolism, metaphor, and hidden meanings." },
+            // Ni stress/relief patterns
+            { id: 55, fn: 'Ni', text: "Under stress, I sometimes become fixated on a single dark vision of the future that feels inevitable." },
+            { id: 56, fn: 'Ni', text: "When overwhelmed by the present, I retreat into thinking about the future or the bigger picture." },
             
-            // Ne - Extraverted Intuition (possibilities, connections, brainstorming)
-            { id: 43, fn: 'Ne', text: "My mind naturally generates multiple possibilities and 'what if' scenarios." },
-            { id: 44, fn: 'Ne', text: "I easily see unexpected connections between seemingly unrelated ideas or topics." },
-            { id: 45, fn: 'Ne', text: "I get excited exploring new ideas but sometimes struggle to follow through on just one." },
-            { id: 46, fn: 'Ne', text: "I love brainstorming and find that ideas spark other ideas rapidly." },
-            { id: 47, fn: 'Ne', text: "I'm drawn to novelty and get bored when things become too routine or predictable." },
-            { id: 48, fn: 'Ne', text: "I often see potential in things that others overlook or dismiss." },
+            // ==========================================
+            // Ne - Extraverted Intuition
+            // Normal use: possibilities, connections, brainstorming
+            // Under stress (inferior): catastrophizing, seeing only negative possibilities, paranoia
+            // As relief (tertiary): generating ideas or exploring new options to escape
+            // ==========================================
+            { id: 57, fn: 'Ne', text: "My mind naturally generates multiple possibilities and 'what if' scenarios." },
+            { id: 58, fn: 'Ne', text: "I easily see unexpected connections between seemingly unrelated ideas or topics." },
+            { id: 59, fn: 'Ne', text: "I get excited exploring new ideas but sometimes struggle to follow through on just one." },
+            { id: 60, fn: 'Ne', text: "I love brainstorming and find that ideas spark other ideas rapidly." },
+            { id: 61, fn: 'Ne', text: "I'm drawn to novelty and get bored when things become too routine or predictable." },
+            { id: 62, fn: 'Ne', text: "I often see potential in things that others overlook or dismiss." },
+            // Ne stress/relief patterns
+            { id: 63, fn: 'Ne', text: "Under stress, I sometimes spiral into worst-case scenarios, imagining all the ways things could go wrong." },
+            { id: 64, fn: 'Ne', text: "When feeling trapped or stuck, I feel better by brainstorming options or exploring new possibilities." },
         ];
 
         // Type stacks - the cognitive function order for each type
@@ -1621,6 +1693,36 @@
             };
         }
 
+        // Stress examples for inferior function grip
+        function getStressExample(inferiorFn) {
+            const examples = {
+                'Ti': 'becoming hypercritical, nitpicking logical flaws, or withdrawing into cold analysis',
+                'Te': 'obsessing over rules and metrics, harsh self-criticism about productivity, or feeling incompetent',
+                'Fi': 'feeling deeply unappreciated, hypersensitive to value violations, or paralyzed by authenticity concerns',
+                'Fe': 'desperate for approval, feeling rejected by everyone, or having emotional outbursts about being disliked',
+                'Si': 'dwelling on past failures, becoming rigidly attached to routines, or hypochondriac worries',
+                'Se': 'overindulging in food/shopping/substances, reckless physical behavior, or obsessing over physical details',
+                'Ni': 'fixating on a single dark vision of the future, feeling doomed, or paranoid about hidden meanings',
+                'Ne': 'catastrophizing about everything that could go wrong, paranoid worst-case thinking, or scattered anxiety'
+            };
+            return examples[inferiorFn] || 'acting out of character';
+        }
+        
+        // Relief suggestions based on dominant function
+        function getDomRelief(dominantFn) {
+            const relief = {
+                'Ti': 'quiet analysis, solving a puzzle, or understanding how something works',
+                'Te': 'organizing something, making a plan, or accomplishing a concrete task',
+                'Fi': 'connecting with your values, journaling, or creative self-expression',
+                'Fe': 'meaningful connection with loved ones, helping others, or restoring harmony',
+                'Si': 'familiar comforts, established routines, or revisiting meaningful memories',
+                'Se': 'physical activity, engaging your senses, or being fully present in the moment',
+                'Ni': 'quiet reflection, focusing on your vision, or exploring deeper meaning',
+                'Ne': 'brainstorming possibilities, exploring new ideas, or creative conversation'
+            };
+            return relief[dominantFn] || 'activities that feel natural to you';
+        }
+
         // Generate "why" explanation
         function generateWhyExplanation(results) {
             const type = results.bestType;
@@ -1629,8 +1731,12 @@
             
             const dom = stack[0];
             const aux = stack[1];
+            const tert = stack[2];
+            const inf = stack[3];
             const domScore = Math.round(scores[dom]);
             const auxScore = Math.round(scores[aux]);
+            const tertScore = Math.round(scores[tert]);
+            const infScore = Math.round(scores[inf]);
             
             let explanation = `<p><strong>Your results point to ${type}</strong> because of how you scored on the cognitive functions that define this type.</p>`;
             
@@ -1643,10 +1749,28 @@
             }
             explanation += `</p>`;
             
+            // Add stress pattern insight
+            if (tertScore >= 50 || infScore >= 40) {
+                explanation += `<p><strong>Your stress patterns also support this typing.</strong> `;
+                if (tertScore >= 50) {
+                    explanation += `Your tertiary ${tert} (${functionDescriptions[tert].name}) at ${tertScore}% suggests you turn to this function for comfort and relief. `;
+                }
+                if (infScore >= 40) {
+                    explanation += `Your inferior ${inf} scored at ${infScore}%—this function often activates under significant stress, sometimes in less healthy ways.`;
+                }
+                explanation += `</p>`;
+            }
+            
             // Note about close matches
             if (results.typeMatches[1] && results.typeMatches[1][1] / results.maxScore > 0.9) {
                 const altType = results.typeMatches[1][0];
-                explanation += `<p><em>Note: You also scored very close to ${altType}. These types share similar functions—if ${type} doesn't resonate completely, exploring ${altType} may provide additional insight.</em></p>`;
+                const altStack = typeStacks[altType];
+                explanation += `<p><em>Note: You also scored very close to ${altType}. These types share functions (`;
+                
+                // Find shared functions
+                const shared = stack.filter(fn => altStack.includes(fn));
+                explanation += shared.join(', ');
+                explanation += `)—if ${type} doesn't resonate completely, exploring ${altType} may provide additional insight.</em></p>`;
             }
             
             return explanation;
@@ -1694,6 +1818,17 @@
                                     </div>
                                 `;
                             }).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="result-section">
+                        <h3 class="script">Your Stress Patterns</h3>
+                        <div class="why-explanation" style="margin-bottom: 1rem;">
+                            <p><strong>Tertiary Relief (${stack[2]}):</strong> Under moderate stress, you likely turn to your tertiary function ${stack[2]} (${functionDescriptions[stack[2]].name}) for comfort. This is your "relief" function—a familiar place that feels safe when life gets hard.</p>
+                            <p><strong>Inferior Grip (${stack[3]}):</strong> Under severe or prolonged stress, your inferior function ${stack[3]} (${functionDescriptions[stack[3]].name}) may "grip" you—emerging in unhealthy or exaggerated ways. This often feels out of character and can be a sign you need rest and self-care.</p>
+                        </div>
+                        <div class="stress-insight" style="background: linear-gradient(135deg, rgba(220, 197, 216, 0.2), rgba(184, 197, 176, 0.1)); padding: 1.5rem; border-radius: 10px;">
+                            <p style="margin: 0; color: var(--text-medium);"><strong style="color: var(--gold-dark);">What this means:</strong> When you notice yourself ${getStressExample(stack[3])}, it may be a signal that you're in an unhealthy "grip" state. Returning to your dominant ${stack[0]} through ${getDomRelief(stack[0])} can help restore balance.</p>
                         </div>
                     </div>
                     
