@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Temperament Discovery · My Holy Crescendo</title>
     <meta name="description" content="Discover your God-given temperament through this scenario-based assessment. Understand how you're wired—body, mind, and spirit.">
-        <!-- Open Graph -->
+            <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="My Holy Crescendo - Fearfully & Wonderfully Made">
     <meta property="og:description" content="A transformative journey discovering God's design in your body, mind, and spirit through A Symphony of Grace.">
@@ -444,6 +444,82 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 2rem;
+        }
+
+        /* Print/PDF Styles */
+        @media print {
+            /* Hide everything except results */
+            nav, .hero, .progress-container, .nav-buttons, 
+            #intro-section, #question-section, #learn-more-section,
+            footer, .results-actions, .watercolor-splash, 
+            .virgo-constellation, .watercolor-flower, .gold-leaf, .gold-flecks {
+                display: none !important;
+            }
+
+            body {
+                background: white !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .results-card {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+
+            .test-container {
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+
+            section {
+                padding: 1rem !important;
+            }
+
+            .results-title {
+                font-size: 1.8rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            .temp-bar-fill {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .blend-result {
+                page-break-inside: avoid;
+            }
+
+            .note-card {
+                page-break-inside: avoid;
+            }
+
+            /* Add branding to print */
+            .results-card::before {
+                content: "My Holy Crescendo · Temperament Discovery";
+                display: block;
+                text-align: center;
+                font-family: 'Cinzel', serif;
+                font-size: 0.9rem;
+                color: #B8941F;
+                letter-spacing: 0.1em;
+                margin-bottom: 1rem;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid #E8C872;
+            }
+
+            .results-card::after {
+                content: "myholycrescendo.com";
+                display: block;
+                text-align: center;
+                font-size: 0.85rem;
+                color: #5C5142;
+                margin-top: 2rem;
+                padding-top: 1rem;
+                border-top: 1px solid #E8C872;
+            }
         }
 
         .hidden {
@@ -1355,7 +1431,7 @@
                 
                 <div class="results-actions">
                     <button class="btn-test secondary" onclick="location.reload()">Retake Assessment</button>
-                    <button class="btn-test" onclick="window.print()">Print Results</button>
+                    <button class="btn-test" onclick="window.print()">Save as PDF</button>
                 </div>
             `;
             
