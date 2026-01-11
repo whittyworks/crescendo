@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive Functions Personality Test · My Holy Crescendo</title>
+    <meta name="description" content="Discover your true personality type through cognitive functions—a deeper, more accurate approach than traditional letter-based tests. Understand how you truly think, feel, and perceive the world.">
+                <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="My Holy Crescendo - Fearfully & Wonderfully Made">
+    <meta property="og:description" content="A transformative journey discovering God's design in your body, mind, and spirit through A Symphony of Grace.">
+    <meta property="og:image" content="https://myholycrescendo.com/assets/img/og-image.png">
+    <meta property="og:url" content="https://myholycrescendo.com/cognitive-functions-test.html">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://myholycrescendo.com/assets/img/og-image.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"></head>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="assets/img/crescendo-cover.jpg">
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+            --mauve: #DCC5D8;
+            --sage: #B8C5B0;
+            --blush: #EBD4D0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .script {
+            font-family: 'Cinzel', serif;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        .sans {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(253, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .logo-link {
+            text-decoration: none;
+        }
+
+        .logo-image {
+            height: 45px;
+            width: auto;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-image:hover {
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 8rem 5% 5rem;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--gold-dark);
+            font-weight: 500;
+        }
+
+        .hero-tagline {
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            color: var(--text-medium);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        /* Watercolor decorations */
+        .watercolor-splash {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .splash-1 {
+            background: radial-gradient(circle, var(--mauve), transparent);
+            top: 10%;
+            left: -10%;
+        }
+
+        .splash-2 {
+            background: radial-gradient(circle, var(--gold-light), transparent);
+            top: 60%;
+            right: -10%;
+            animation-delay: -7s;
+        }
+
+        .splash-3 {
+            background: radial-gradient(circle, var(--sage), transparent);
+            bottom: 10%;
+            left: 30%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* Gold flecks */
+        .gold-flecks {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        .fleck {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 3px var(--gold-light);
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* Virgo Constellation */
+        .virgo-constellation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .constellation-star {
+            position: absolute;
+            background: radial-gradient(circle, #E8C872, #D4AF37);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(232, 200, 114, 0.8),
+                        0 0 30px rgba(212, 175, 55, 0.6);
+            animation: starTwinkle 3s ease-in-out infinite;
+        }
+
+        .star-large { width: 8px; height: 8px; opacity: 0.9; }
+        .star-medium { width: 6px; height: 6px; opacity: 0.85; }
+        .star-small { width: 5px; height: 5px; opacity: 0.8; }
+
+        @keyframes starTwinkle {
+            0%, 100% { opacity: inherit; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--gold);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+            font-weight: 500;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .cta-button:hover {
+            background: var(--gold-dark);
+            border-color: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--gold);
+            color: white;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-label {
+            font-size: 0.9rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: var(--gold-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 1.25rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about-section {
+            background: var(--cream-dark);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            color: var(--gold-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .comparison-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.1);
+        }
+
+        .comparison-box h4 {
+            font-size: 1.3rem;
+            color: var(--gold-dark);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .comparison-col h5 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-medium);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gold-light);
+        }
+
+        .comparison-col.better h5 {
+            color: var(--gold-dark);
+            border-color: var(--gold);
+        }
+
+        .comparison-col ul {
+            list-style: none;
+            font-size: 1rem;
+        }
+
+        .comparison-col li {
+            padding: 0.5rem 0;
+            color: var(--text-medium);
+        }
+
+        .comparison-col.better li {
+            color: var(--text-dark);
+        }
+
+        /* Functions Section */
+        .functions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .function-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .function-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .function-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .function-abbr {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .function-name {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .function-desc {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+
+        /* Test Container */
+        .test-section {
+            background: linear-gradient(135deg, rgba(253, 248, 243, 0.9), rgba(220, 197, 216, 0.1));
+        }
+
+        #test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .test-intro {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.1);
+        }
+
+        .test-intro h3 {
+            font-size: 2rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+        }
+
+        .test-intro p {
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .test-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--gold-dark);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Question UI */
+        .question-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.1);
+            display: none;
+        }
+
+        .question-container.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .progress-bar {
+            margin-bottom: 2rem;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+
+        .progress-track {
+            height: 8px;
+            background: var(--cream-dark);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark));
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            text-align: center;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            padding: 1rem 0;
+        }
+
+        .answer-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .answer-btn {
+            padding: 1.25rem 1.5rem;
+            background: linear-gradient(135deg, rgba(253, 248, 243, 0.8), rgba(235, 212, 208, 0.3));
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .answer-btn:hover {
+            background: linear-gradient(135deg, rgba(232, 200, 114, 0.2), rgba(212, 175, 55, 0.1));
+            border-color: var(--gold);
+            transform: translateX(5px);
+        }
+
+        .answer-label {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .answer-desc {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--gold);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            color: var(--gold-dark);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Results */
+        .results-container {
+            display: none;
+        }
+
+        .results-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+            margin-bottom: 2rem;
+        }
+
+        .type-result {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(232, 200, 114, 0.15), rgba(220, 197, 216, 0.1));
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .type-letters {
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .type-name {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .type-tagline {
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            font-style: italic;
+        }
+
+        .result-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .result-section h3 {
+            font-size: 1.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .why-explanation {
+            background: rgba(253, 248, 243, 0.7);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .why-explanation p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .why-explanation p:last-child {
+            margin-bottom: 0;
+        }
+
+        .function-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .stack-item {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem;
+            border-radius: 10px;
+            gap: 1.5rem;
+        }
+
+        .stack-item.dominant { background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(232, 200, 114, 0.1)); }
+        .stack-item.auxiliary { background: linear-gradient(135deg, rgba(232, 200, 114, 0.15), rgba(253, 248, 243, 0.5)); }
+        .stack-item.tertiary { background: linear-gradient(135deg, rgba(220, 197, 216, 0.2), rgba(253, 248, 243, 0.5)); }
+        .stack-item.inferior { background: linear-gradient(135deg, rgba(184, 197, 176, 0.2), rgba(253, 248, 243, 0.5)); }
+
+        .stack-position {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            min-width: 80px;
+        }
+
+        .stack-fn {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--gold-dark);
+            min-width: 40px;
+        }
+
+        .stack-info {
+            flex: 1;
+        }
+
+        .stack-name {
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .stack-desc {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+
+        .stack-score {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold-dark);
+        }
+
+        /* All functions chart */
+        .functions-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .chart-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chart-label {
+            min-width: 50px;
+            font-weight: 500;
+            color: var(--gold-dark);
+        }
+
+        .chart-bar-container {
+            flex: 1;
+            height: 24px;
+            background: var(--cream-dark);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .chart-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold));
+            border-radius: 12px;
+            transition: width 0.5s ease;
+        }
+
+        .chart-value {
+            min-width: 50px;
+            text-align: right;
+            font-weight: 500;
+            color: var(--text-medium);
+        }
+
+        /* Close matches */
+        .matches-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .match-card {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            border-radius: 10px;
+            background: var(--cream-dark);
+            transition: transform 0.3s ease;
+        }
+
+        .match-card:first-child {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(232, 200, 114, 0.1));
+            border: 2px solid var(--gold);
+        }
+
+        .match-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .match-type {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .match-percent {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+
+        .reset-btn {
+            display: block;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--cream);
+            padding: 4rem 5% 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: var(--cream-dark);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--gold-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .functions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .matches-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 5%;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+                font-size: 0.85rem;
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 6rem 5% 3rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-tagline {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .functions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .function-card {
+                display: flex;
+                align-items: center;
+                text-align: left;
+                gap: 1.5rem;
+            }
+
+            .function-icon {
+                font-size: 2rem;
+                margin-bottom: 0;
+            }
+
+            .question-container,
+            .result-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .question-text {
+                font-size: 1.2rem;
+            }
+
+            .type-letters {
+                font-size: 3.5rem;
+            }
+
+            .stack-item {
+                flex-wrap: wrap;
+            }
+
+            .matches-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .comparison-table {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="sans">
+        <a href="index.html" class="logo-link">
+            <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="symphony-of-grace.html">15-Week Journey</a></li>
+            <li><a href="made-beautiful.html">Retreat</a></li>
+            <li><a href="personal-journey.html">1:1 Coaching</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Resources</a>
+                <ul class="dropdown-menu">
+                    <li><a href="prelude.html">Free Prelude</a></li>
+                    <li><a href="mind-frameworks.html">Mind Frameworks Guide</a></li>
+                    <li><a href="temperament-test.html">Temperament Test</a></li>
+                    <li><a href="cognitive-functions-test.html" class="is active">Cognitive Functions Test</a></li>
+                    <li><a href="virtue-assessment.html">Virtue Assessment</a></li>
+                    <li><a href="charisms.html">25 Charisms</a></li>
+                    <li><a href="rule-of-life.html">Rule of Life</a></li>
+                    <li><a href="healing-the-heart.html">Healing the Heart <span class="coming-soon-badge">Coming Soon</span></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="watercolor-splash splash-1"></div>
+        <div class="watercolor-splash splash-2"></div>
+        <div class="watercolor-splash splash-3"></div>
+        
+        <div class="virgo-constellation">
+            <div class="constellation-star star-large" style="left: 50%; bottom: 15%;"></div>
+            <div class="constellation-star star-medium" style="left: 45%; bottom: 30%;"></div>
+            <div class="constellation-star star-medium" style="left: 40%; bottom: 42%;"></div>
+            <div class="constellation-star star-small" style="left: 37%; bottom: 53%;"></div>
+            <div class="constellation-star star-medium" style="left: 35%; bottom: 62%;"></div>
+            <div class="constellation-star star-small" style="left: 55%; bottom: 33%;"></div>
+            <div class="constellation-star star-medium" style="left: 62%; bottom: 40%;"></div>
+            <div class="constellation-star star-small" style="left: 68%; bottom: 44%;"></div>
+        </div>
+
+        <div class="gold-flecks">
+            <div class="fleck" style="top: 20%; left: 15%; animation-delay: 0s;"></div>
+            <div class="fleck" style="top: 45%; left: 85%; animation-delay: 1s;"></div>
+            <div class="fleck" style="top: 70%; left: 25%; animation-delay: 2s;"></div>
+            <div class="fleck" style="top: 35%; left: 75%; animation-delay: 1.5s;"></div>
+            <div class="fleck" style="top: 80%; left: 60%; animation-delay: 0.5s;"></div>
+        </div>
+
+        <div class="hero-content">
+            <p class="hero-subtitle sans">Personality Assessment</p>
+            <h1 class="hero-title script">Cognitive Functions Test</h1>
+            <p class="hero-tagline">Discover How You Truly Think</p>
+            <p class="hero-description">
+                Go beyond the letters. This test measures the eight cognitive functions that shape how you 
+                perceive the world and make decisions—revealing your personality type with greater depth and accuracy.
+            </p>
+            <a href="#test-section" class="cta-button">Begin the Test</a>
+        </div>
+    </section>
+
+    <!-- About Cognitive Functions -->
+    <section class="about-section">
+        <div class="section-header">
+            <p class="section-label sans">A Deeper Approach</p>
+            <h2 class="section-title script">Why Cognitive Functions?</h2>
+            <p class="section-description">
+                Traditional personality tests ask about preferences—introvert or extravert, thinking or feeling. 
+                But these questions are easy to "game" if you know which answers lead where.
+            </p>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-content">
+                <h3 class="script">The Problem with Letter-Based Tests</h3>
+                <p>
+                    Most 16-type personality tests ask questions like "Do you prefer being alone or with people?" 
+                    If you've taken a few tests, you learn to recognize which answers produce which results—making 
+                    it easy to unconsciously (or consciously) steer toward your desired type.
+                </p>
+                <p>
+                    <strong>Cognitive functions go deeper.</strong> Instead of asking what you prefer, they reveal 
+                    <em>how</em> you actually process information. These patterns are harder to fake because they 
+                    describe the mechanics of your mind, not just your self-perception.
+                </p>
+                <p>
+                    This test measures all eight functions independently, then matches your profile to the type 
+                    whose "function stack" best fits your natural patterns.
+                </p>
+            </div>
+
+            <div class="comparison-box">
+                <h4 class="sans">Traditional vs. Function-Based</h4>
+                <div class="comparison-table">
+                    <div class="comparison-col">
+                        <h5 class="sans">Letter-Based Tests</h5>
+                        <ul>
+                            <li>❌ Easy to predict answers</li>
+                            <li>❌ Measures preferences</li>
+                            <li>❌ Binary choices (I/E, T/F)</li>
+                            <li>❌ Surface-level typing</li>
+                            <li>❌ Similar to temperament tests</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-col better">
+                        <h5 class="sans">This Test</h5>
+                        <ul>
+                            <li>✓ Questions aren't obvious</li>
+                            <li>✓ Measures mental processes</li>
+                            <li>✓ 8 functions scored separately</li>
+                            <li>✓ Reveals your function stack</li>
+                            <li>✓ Shows close alternative types</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The 8 Functions -->
+    <section>
+        <div class="section-header">
+            <p class="section-label sans">The Building Blocks</p>
+            <h2 class="section-title script">The Eight Cognitive Functions</h2>
+            <p class="section-description">
+                Every personality type uses all eight functions, but in a specific order. Your dominant and 
+                auxiliary functions shape most of your conscious experience.
+            </p>
+        </div>
+
+        <div class="functions-grid">
+            <div class="function-card">
+                <div class="function-icon">🔍</div>
+                <div>
+                    <div class="function-abbr sans">Ti</div>
+                    <div class="function-name">Introverted Thinking</div>
+                    <div class="function-desc">Internal logic, precision, analyzing how systems work</div>
+                </div>
+            </div>
+
+            <div class="function-card">
+                <div class="function-icon">📊</div>
+                <div>
+                    <div class="function-abbr sans">Te</div>
+                    <div class="function-name">Extraverted Thinking</div>
+                    <div class="function-desc">External organization, efficiency, measurable results</div>
+                </div>
+            </div>
+
+            <div class="function-card">
+                <div class="function-icon">💜</div>
+                <div>
+                    <div class="function-abbr sans">Fi</div>
+                    <div class="function-name">Introverted Feeling</div>
+                    <div class="function-desc">Personal values, authenticity, inner ethics</div>
+                </div>
+            </div>
+
+            <div class="function-card">
+                <div class="function-icon">🤝</div>
+                <div>
+                    <div class="function-abbr sans">Fe</div>
+                    <div class="function-name">Extraverted Feeling</div>
+                    <div class="function-desc">Social harmony, reading emotions, group dynamics</div>
+                </div>
+            </div>
+
+            <div class="function-card">
+                <div class="function-icon">📚</div>
+                <div>
+                    <div class="function-abbr sans">Si</div>
+                    <div class="function-name">Introverted Sensing</div>
+                    <div class="function-desc">Past experience, tradition, detailed memory</div>
+                </div>
+            </div>
+
+            <div class="function-card">
+                <div class="function-icon">🌊</div>
+                <div>
+                    <div class="function-abbr sans">Se</div>
+                    <div class="function-name">Extraverted Sensing</div>
+                    <div class="function-desc">Present moment, physical awareness, action</div>
+                </div>
+            </div>
+
+            <div class="function-card">
+                <div class="function-icon">🔮</div>
+                <div>
+                    <div class="function-abbr sans">Ni</div>
+                    <div class="function-name">Introverted Intuition</div>
+                    <div class="function-desc">Future vision, patterns, singular insight</div>
+                </div>
+            </div>
+
+            <div class="function-card">
+                <div class="function-icon">💡</div>
+                <div>
+                    <div class="function-abbr sans">Ne</div>
+                    <div class="function-name">Extraverted Intuition</div>
+                    <div class="function-desc">Possibilities, connections, brainstorming</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Section -->
+    <section id="test-section" class="test-section">
+        <div class="section-header">
+            <p class="section-label sans">The Assessment</p>
+            <h2 class="section-title script">Discover Your Type</h2>
+            <p class="section-description">
+                Answer honestly based on how you naturally think and behave—not who you wish to be 
+                or how you act when stressed. There are no right or wrong answers.
+            </p>
+        </div>
+
+        <div id="test-container">
+            <!-- Test Intro -->
+            <div id="test-intro" class="test-intro">
+                <h3 class="script">Ready to Begin?</h3>
+                <p>
+                    This assessment contains 48 questions that measure your use of all eight cognitive functions. 
+                    Questions are randomized and designed to reveal your natural mental processes.
+                </p>
+                
+                <div class="test-stats">
+                    <div class="stat">
+                        <div class="stat-value">48</div>
+                        <div class="stat-label sans">Questions</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">10-15</div>
+                        <div class="stat-label sans">Minutes</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label sans">Functions</div>
+                    </div>
+                </div>
+
+                <p style="font-style: italic; color: var(--text-medium); margin-bottom: 2rem;">
+                    For most accurate results, answer with your first instinct. Don't overthink!
+                </p>
+
+                <button class="cta-button" onclick="startTest()">Start Assessment</button>
+            </div>
+
+            <!-- Question Container (hidden initially) -->
+            <div id="question-container" class="question-container">
+                <div class="progress-bar">
+                    <div class="progress-info sans">
+                        <span>Question <span id="current-q">1</span> of <span id="total-q">48</span></span>
+                        <span><span id="progress-percent">0</span>%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div id="question-text" class="question-text"></div>
+
+                <div class="answer-options">
+                    <button class="answer-btn" onclick="answerQuestion(5)">
+                        <div class="answer-label">Strongly Agree</div>
+                        <div class="answer-desc">This describes me very well</div>
+                    </button>
+                    <button class="answer-btn" onclick="answerQuestion(4)">
+                        <div class="answer-label">Agree</div>
+                        <div class="answer-desc">This often applies to me</div>
+                    </button>
+                    <button class="answer-btn" onclick="answerQuestion(3)">
+                        <div class="answer-label">Neutral</div>
+                        <div class="answer-desc">Sometimes true, sometimes not</div>
+                    </button>
+                    <button class="answer-btn" onclick="answerQuestion(2)">
+                        <div class="answer-label">Disagree</div>
+                        <div class="answer-desc">This rarely applies to me</div>
+                    </button>
+                    <button class="answer-btn" onclick="answerQuestion(1)">
+                        <div class="answer-label">Strongly Disagree</div>
+                        <div class="answer-desc">This doesn't describe me at all</div>
+                    </button>
+                </div>
+
+                <div class="nav-buttons">
+                    <button id="back-btn" class="nav-btn" onclick="goBack()" disabled>← Back</button>
+                    <button class="nav-btn" onclick="answerQuestion(3)">Skip →</button>
+                </div>
+            </div>
+
+            <!-- Results Container (hidden initially) -->
+            <div id="results-container" class="results-container">
+                <!-- Results will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo script">My Holy Crescendo</div>
+        <p class="footer-tagline">fearfully & wonderfully made</p>
+        
+        <div class="footer-links sans">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="symphony-of-grace.html">Programs</a>
+            <a href="made-beautiful.html">Retreat</a>
+            <a href="prelude.html">Prelude</a>
+        </div>
+
+        <p class="copyright">
+            © 2025 My Holy Crescendo. All rights reserved.<br>
+            Created with love and grace.
+        </p>
+    </footer>
+
+    <script>
+        // ============================================
+        // QUESTION DATABASE - 6 questions per function
+        // ============================================
+        const questions = [
+            // Ti - Introverted Thinking (internal logic, precision, frameworks)
+            { id: 1, fn: 'Ti', text: "When someone explains their reasoning, I often mentally check it for internal consistency before accepting it." },
+            { id: 2, fn: 'Ti', text: "I enjoy taking apart systems or ideas to understand exactly how each piece works." },
+            { id: 3, fn: 'Ti', text: "I'm bothered when terms are used imprecisely or when definitions seem fuzzy." },
+            { id: 4, fn: 'Ti', text: "I often build mental models or frameworks to understand how things operate." },
+            { id: 5, fn: 'Ti', text: "I'd rather find the most logically correct answer than the most popular or practical one." },
+            { id: 6, fn: 'Ti', text: "When I learn something new, I need to understand the underlying principles, not just how to apply it." },
+            
+            // Te - Extraverted Thinking (external organization, efficiency, results)
+            { id: 7, fn: 'Te', text: "I naturally think in terms of steps, plans, and measurable outcomes." },
+            { id: 8, fn: 'Te', text: "I get frustrated when people discuss problems without moving toward solutions." },
+            { id: 9, fn: 'Te', text: "I often reorganize spaces, processes, or systems to make them more efficient." },
+            { id: 10, fn: 'Te', text: "I trust data, evidence, and proven methods over gut feelings or personal intuition." },
+            { id: 11, fn: 'Te', text: "I naturally delegate tasks and organize people toward a shared goal." },
+            { id: 12, fn: 'Te', text: "When making decisions, I prioritize what will produce the best objective results." },
+            
+            // Fi - Introverted Feeling (personal values, authenticity, inner ethics)
+            { id: 13, fn: 'Fi', text: "I have a strong inner sense of what's right and wrong that doesn't depend on what others think." },
+            { id: 14, fn: 'Fi', text: "Being authentic to myself matters more to me than fitting in with a group." },
+            { id: 15, fn: 'Fi', text: "I often need time alone to process my emotions and understand how I really feel." },
+            { id: 16, fn: 'Fi', text: "I'm deeply aware of my own emotional landscape and can articulate subtle feelings." },
+            { id: 17, fn: 'Fi', text: "I evaluate situations based on my personal values, even if others disagree." },
+            { id: 18, fn: 'Fi', text: "I find it difficult to act in ways that contradict my core beliefs, even for practical benefits." },
+            
+            // Fe - Extraverted Feeling (social harmony, reading emotions, group dynamics)
+            { id: 19, fn: 'Fe', text: "I quickly pick up on the emotional atmosphere when I enter a room." },
+            { id: 20, fn: 'Fe', text: "I often adjust my behavior to maintain harmony and make others comfortable." },
+            { id: 21, fn: 'Fe', text: "When someone in a group is upset, I feel a pull to address it even if it wasn't my issue." },
+            { id: 22, fn: 'Fe', text: "I naturally consider how my words and actions will affect others' feelings." },
+            { id: 23, fn: 'Fe', text: "I often take on the role of mediator or peacemaker in group conflicts." },
+            { id: 24, fn: 'Fe', text: "I feel genuinely happy when the people around me are happy and comfortable." },
+            
+            // Si - Introverted Sensing (past experience, tradition, detailed memory)
+            { id: 25, fn: 'Si', text: "I often reference past experiences to guide current decisions—'last time this happened...'." },
+            { id: 26, fn: 'Si', text: "I notice when small details in familiar environments have changed." },
+            { id: 27, fn: 'Si', text: "Traditions and established routines provide me with a sense of comfort and stability." },
+            { id: 28, fn: 'Si', text: "I have a detailed memory for past experiences, including sensory details." },
+            { id: 29, fn: 'Si', text: "I prefer proven methods over experimenting with new, untested approaches." },
+            { id: 30, fn: 'Si', text: "I feel unsettled when familiar routines or environments change unexpectedly." },
+            
+            // Se - Extraverted Sensing (present moment, physical experience, action)
+            { id: 31, fn: 'Se', text: "I'm highly attuned to my physical environment—sounds, textures, colors, movement." },
+            { id: 32, fn: 'Se', text: "I prefer to act and adapt in the moment rather than plan extensively in advance." },
+            { id: 33, fn: 'Se', text: "I enjoy experiences that fully engage my senses—food, nature, sports, aesthetics." },
+            { id: 34, fn: 'Se', text: "I'm good at reading body language and physical cues in real-time." },
+            { id: 35, fn: 'Se', text: "I get restless if I'm stuck in my head too long without physical activity or stimulation." },
+            { id: 36, fn: 'Se', text: "I thrive in fast-paced environments where I can react and respond quickly." },
+            
+            // Ni - Introverted Intuition (future vision, patterns, singular insight)
+            { id: 37, fn: 'Ni', text: "I often have a strong sense of how things will unfold, even without concrete evidence." },
+            { id: 38, fn: 'Ni', text: "Insights tend to arrive fully formed in my mind, though I can't always explain how I got there." },
+            { id: 39, fn: 'Ni', text: "I'm drawn to finding the one deeper meaning or pattern beneath the surface of things." },
+            { id: 40, fn: 'Ni', text: "I naturally think in terms of long-term implications and future consequences." },
+            { id: 41, fn: 'Ni', text: "I often 'just know' things are true before I can prove or articulate why." },
+            { id: 42, fn: 'Ni', text: "I find myself drawn to symbolism, metaphor, and hidden meanings." },
+            
+            // Ne - Extraverted Intuition (possibilities, connections, brainstorming)
+            { id: 43, fn: 'Ne', text: "My mind naturally generates multiple possibilities and 'what if' scenarios." },
+            { id: 44, fn: 'Ne', text: "I easily see unexpected connections between seemingly unrelated ideas or topics." },
+            { id: 45, fn: 'Ne', text: "I get excited exploring new ideas but sometimes struggle to follow through on just one." },
+            { id: 46, fn: 'Ne', text: "I love brainstorming and find that ideas spark other ideas rapidly." },
+            { id: 47, fn: 'Ne', text: "I'm drawn to novelty and get bored when things become too routine or predictable." },
+            { id: 48, fn: 'Ne', text: "I often see potential in things that others overlook or dismiss." },
+        ];
+
+        // Type stacks - the cognitive function order for each type
+        const typeStacks = {
+            'INTJ': ['Ni', 'Te', 'Fi', 'Se'],
+            'INTP': ['Ti', 'Ne', 'Si', 'Fe'],
+            'ENTJ': ['Te', 'Ni', 'Se', 'Fi'],
+            'ENTP': ['Ne', 'Ti', 'Fe', 'Si'],
+            'INFJ': ['Ni', 'Fe', 'Ti', 'Se'],
+            'INFP': ['Fi', 'Ne', 'Si', 'Te'],
+            'ENFJ': ['Fe', 'Ni', 'Se', 'Ti'],
+            'ENFP': ['Ne', 'Fi', 'Te', 'Si'],
+            'ISTJ': ['Si', 'Te', 'Fi', 'Ne'],
+            'ISFJ': ['Si', 'Fe', 'Ti', 'Ne'],
+            'ESTJ': ['Te', 'Si', 'Ne', 'Fi'],
+            'ESFJ': ['Fe', 'Si', 'Ne', 'Ti'],
+            'ISTP': ['Ti', 'Se', 'Ni', 'Fe'],
+            'ISFP': ['Fi', 'Se', 'Ni', 'Te'],
+            'ESTP': ['Se', 'Ti', 'Fe', 'Ni'],
+            'ESFP': ['Se', 'Fi', 'Te', 'Ni'],
+        };
+
+        // Function descriptions
+        const functionDescriptions = {
+            'Ti': { 
+                name: 'Introverted Thinking', 
+                desc: 'Internal logical frameworks, precision, analyzing how things work',
+                icon: '🔍'
+            },
+            'Te': { 
+                name: 'Extraverted Thinking', 
+                desc: 'External organization, efficiency, measurable results and action',
+                icon: '📊'
+            },
+            'Fi': { 
+                name: 'Introverted Feeling', 
+                desc: 'Personal values, authenticity, individual ethics and emotional depth',
+                icon: '💜'
+            },
+            'Fe': { 
+                name: 'Extraverted Feeling', 
+                desc: 'Social harmony, reading emotions, group dynamics and connection',
+                icon: '🤝'
+            },
+            'Si': { 
+                name: 'Introverted Sensing', 
+                desc: 'Past experiences, traditions, detailed memory and reliability',
+                icon: '📚'
+            },
+            'Se': { 
+                name: 'Extraverted Sensing', 
+                desc: 'Present moment awareness, physical experience, action and aesthetics',
+                icon: '🌊'
+            },
+            'Ni': { 
+                name: 'Introverted Intuition', 
+                desc: 'Future vision, patterns, singular insights and foresight',
+                icon: '🔮'
+            },
+            'Ne': { 
+                name: 'Extraverted Intuition', 
+                desc: 'Possibilities, brainstorming, connections between ideas',
+                icon: '💡'
+            },
+        };
+
+        // Type information
+        const typeInfo = {
+            'INTJ': { 
+                name: 'The Architect', 
+                tagline: 'Strategic visionaries who plan everything with precision and foresight',
+                description: 'INTJs lead with Ni (Introverted Intuition), giving them a powerful ability to see future possibilities and patterns. Their auxiliary Te (Extraverted Thinking) helps them organize and execute their visions efficiently. They value competence, independence, and long-term strategy.'
+            },
+            'INTP': { 
+                name: 'The Logician', 
+                tagline: 'Innovative analysts driven by logic, curiosity, and theoretical understanding',
+                description: 'INTPs lead with Ti (Introverted Thinking), creating precise internal frameworks for understanding the world. Their auxiliary Ne (Extraverted Intuition) generates endless possibilities and connections. They seek truth, accuracy, and understanding above all else.'
+            },
+            'ENTJ': { 
+                name: 'The Commander', 
+                tagline: 'Bold, decisive leaders who organize people and resources toward ambitious goals',
+                description: 'ENTJs lead with Te (Extraverted Thinking), naturally organizing the external world for maximum efficiency. Their auxiliary Ni (Introverted Intuition) provides strategic vision. They are driven to lead, achieve, and create lasting systems.'
+            },
+            'ENTP': { 
+                name: 'The Debater', 
+                tagline: 'Quick-witted innovators who love intellectual challenge and exploring ideas',
+                description: 'ENTPs lead with Ne (Extraverted Intuition), constantly generating new ideas and possibilities. Their auxiliary Ti (Introverted Thinking) analyzes and refines these ideas. They thrive on mental stimulation, debate, and creative problem-solving.'
+            },
+            'INFJ': { 
+                name: 'The Advocate', 
+                tagline: 'Quiet visionaries with strong ideals and deep insight into human nature',
+                description: 'INFJs lead with Ni (Introverted Intuition), perceiving deep patterns and future possibilities. Their auxiliary Fe (Extraverted Feeling) attunes them to others\' emotions and needs. They seek meaning, authenticity, and opportunities to help others grow.'
+            },
+            'INFP': { 
+                name: 'The Mediator', 
+                tagline: 'Idealistic, empathetic souls driven by personal values and inner vision',
+                description: 'INFPs lead with Fi (Introverted Feeling), navigating life through deeply held personal values. Their auxiliary Ne (Extraverted Intuition) opens them to possibilities and creative expression. They seek authenticity, meaning, and alignment between their inner and outer worlds.'
+            },
+            'ENFJ': { 
+                name: 'The Protagonist', 
+                tagline: 'Charismatic leaders who inspire others and nurture their potential',
+                description: 'ENFJs lead with Fe (Extraverted Feeling), naturally attuned to group harmony and others\' needs. Their auxiliary Ni (Introverted Intuition) gives them insight into people and situations. They are driven to guide, inspire, and bring out the best in others.'
+            },
+            'ENFP': { 
+                name: 'The Campaigner', 
+                tagline: 'Enthusiastic, creative spirits who see life as full of possibility and meaning',
+                description: 'ENFPs lead with Ne (Extraverted Intuition), seeing possibilities everywhere and making unexpected connections. Their auxiliary Fi (Introverted Feeling) keeps them grounded in personal values. They bring energy, creativity, and warmth to everything they do.'
+            },
+            'ISTJ': { 
+                name: 'The Logistician', 
+                tagline: 'Reliable, practical minds devoted to duty, tradition, and doing what\'s right',
+                description: 'ISTJs lead with Si (Introverted Sensing), drawing on detailed memories and proven methods. Their auxiliary Te (Extraverted Thinking) helps them organize and execute efficiently. They value responsibility, stability, and maintaining established systems.'
+            },
+            'ISFJ': { 
+                name: 'The Defender', 
+                tagline: 'Warm, observant protectors dedicated to caring for others and preserving traditions',
+                description: 'ISFJs lead with Si (Introverted Sensing), carefully storing details and maintaining traditions. Their auxiliary Fe (Extraverted Feeling) attunes them to others\' needs and emotions. They find deep satisfaction in service, care, and creating stability for loved ones.'
+            },
+            'ESTJ': { 
+                name: 'The Executive', 
+                tagline: 'Organized, practical administrators who excel at managing people and projects',
+                description: 'ESTJs lead with Te (Extraverted Thinking), naturally organizing systems and people for efficiency. Their auxiliary Si (Introverted Sensing) provides respect for tradition and proven methods. They value order, responsibility, and getting things done right.'
+            },
+            'ESFJ': { 
+                name: 'The Consul', 
+                tagline: 'Caring, social connectors who create harmony and bring people together',
+                description: 'ESFJs lead with Fe (Extraverted Feeling), naturally attuned to social dynamics and others\' needs. Their auxiliary Si (Introverted Sensing) values tradition and reliability. They find joy in caring for others, maintaining social bonds, and creating warm communities.'
+            },
+            'ISTP': { 
+                name: 'The Virtuoso', 
+                tagline: 'Practical problem-solvers who master tools, techniques, and hands-on skills',
+                description: 'ISTPs lead with Ti (Introverted Thinking), analyzing how things work with precision. Their auxiliary Se (Extraverted Sensing) keeps them grounded in the physical world and responsive to the moment. They excel at troubleshooting, craftsmanship, and practical solutions.'
+            },
+            'ISFP': { 
+                name: 'The Adventurer', 
+                tagline: 'Gentle artists who live authentically and express themselves through action and aesthetics',
+                description: 'ISFPs lead with Fi (Introverted Feeling), guided by deeply personal values and emotional truth. Their auxiliary Se (Extraverted Sensing) connects them to beauty, nature, and the present moment. They express themselves through action, art, and authentic living.'
+            },
+            'ESTP': { 
+                name: 'The Entrepreneur', 
+                tagline: 'Energetic risk-takers who live in the moment and thrive on action',
+                description: 'ESTPs lead with Se (Extraverted Sensing), fully present in the physical world and quick to act. Their auxiliary Ti (Introverted Thinking) provides analytical problem-solving abilities. They excel in crises, negotiation, and anything requiring quick thinking and bold action.'
+            },
+            'ESFP': { 
+                name: 'The Entertainer', 
+                tagline: 'Spontaneous, vivacious spirits who bring joy and energy wherever they go',
+                description: 'ESFPs lead with Se (Extraverted Sensing), fully engaged with the world around them. Their auxiliary Fi (Introverted Feeling) keeps them connected to personal values and emotional authenticity. They bring warmth, fun, and a zest for life to every situation.'
+            },
+        };
+
+        // State
+        let shuffledQuestions = [];
+        let currentQuestion = 0;
+        let answers = {};
+
+        // Shuffle array
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // Start test
+        function startTest() {
+            shuffledQuestions = shuffleArray(questions);
+            currentQuestion = 0;
+            answers = {};
+            
+            document.getElementById('test-intro').style.display = 'none';
+            document.getElementById('question-container').classList.add('active');
+            document.getElementById('results-container').classList.remove('active');
+            
+            showQuestion();
+        }
+
+        // Show current question
+        function showQuestion() {
+            const q = shuffledQuestions[currentQuestion];
+            const total = shuffledQuestions.length;
+            const progress = (currentQuestion / total) * 100;
+            
+            document.getElementById('current-q').textContent = currentQuestion + 1;
+            document.getElementById('total-q').textContent = total;
+            document.getElementById('progress-percent').textContent = Math.round(progress);
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('question-text').textContent = '"' + q.text + '"';
+            document.getElementById('back-btn').disabled = currentQuestion === 0;
+        }
+
+        // Answer question
+        function answerQuestion(value) {
+            const q = shuffledQuestions[currentQuestion];
+            answers[q.id] = { fn: q.fn, value: value };
+            
+            if (currentQuestion < shuffledQuestions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // Go back
+        function goBack() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        // Calculate results
+        function calculateResults() {
+            // Calculate scores for each function
+            const fnScores = { Ti: 0, Te: 0, Fi: 0, Fe: 0, Si: 0, Se: 0, Ni: 0, Ne: 0 };
+            const fnCounts = { Ti: 0, Te: 0, Fi: 0, Fe: 0, Si: 0, Se: 0, Ni: 0, Ne: 0 };
+            
+            Object.values(answers).forEach(({ fn, value }) => {
+                fnScores[fn] += value;
+                fnCounts[fn]++;
+            });
+            
+            // Normalize scores (average per function, scaled to 0-100)
+            const normalizedScores = {};
+            Object.keys(fnScores).forEach(fn => {
+                normalizedScores[fn] = fnCounts[fn] > 0 ? (fnScores[fn] / fnCounts[fn]) * 20 : 0;
+            });
+            
+            // Sort functions by score
+            const sortedFunctions = Object.entries(normalizedScores)
+                .sort((a, b) => b[1] - a[1])
+                .map(([fn, score]) => ({ fn, score: Math.round(score) }));
+            
+            // Calculate best matching type using weighted scoring
+            const typeMatches = {};
+            Object.entries(typeStacks).forEach(([type, stack]) => {
+                let score = 0;
+                stack.forEach((fn, idx) => {
+                    const weight = 4 - idx; // 4, 3, 2, 1
+                    score += normalizedScores[fn] * weight;
+                });
+                typeMatches[type] = score;
+            });
+            
+            // Find best match
+            const sortedTypes = Object.entries(typeMatches)
+                .sort((a, b) => b[1] - a[1]);
+            
+            return {
+                functions: sortedFunctions,
+                normalizedScores,
+                bestType: sortedTypes[0][0],
+                typeMatches: sortedTypes.slice(0, 4),
+                maxScore: sortedTypes[0][1]
+            };
+        }
+
+        // Generate "why" explanation
+        function generateWhyExplanation(results) {
+            const type = results.bestType;
+            const stack = typeStacks[type];
+            const scores = results.normalizedScores;
+            
+            const dom = stack[0];
+            const aux = stack[1];
+            const domScore = Math.round(scores[dom]);
+            const auxScore = Math.round(scores[aux]);
+            
+            let explanation = `<p><strong>Your results point to ${type}</strong> because of how you scored on the cognitive functions that define this type.</p>`;
+            
+            explanation += `<p>Your highest-scoring functions align well with the ${type} stack. You showed strong use of <strong>${dom} (${functionDescriptions[dom].name})</strong> at ${domScore}%`;
+            
+            if (auxScore >= 60) {
+                explanation += ` paired with solid <strong>${aux} (${functionDescriptions[aux].name})</strong> at ${auxScore}%.`;
+            } else {
+                explanation += `. Your ${aux} (${functionDescriptions[aux].name}) scored at ${auxScore}%, which is typical—auxiliary functions are often less conscious.`;
+            }
+            explanation += `</p>`;
+            
+            // Note about close matches
+            if (results.typeMatches[1] && results.typeMatches[1][1] / results.maxScore > 0.9) {
+                const altType = results.typeMatches[1][0];
+                explanation += `<p><em>Note: You also scored very close to ${altType}. These types share similar functions—if ${type} doesn't resonate completely, exploring ${altType} may provide additional insight.</em></p>`;
+            }
+            
+            return explanation;
+        }
+
+        // Show results
+        function showResults() {
+            const results = calculateResults();
+            const type = results.bestType;
+            const stack = typeStacks[type];
+            const info = typeInfo[type];
+            
+            let html = `
+                <div class="result-card">
+                    <div class="type-result">
+                        <div class="type-letters">${type}</div>
+                        <div class="type-name">${info.name}</div>
+                        <div class="type-tagline">${info.tagline}</div>
+                    </div>
+                    
+                    <div class="result-section">
+                        <h3 class="script">Why This Type?</h3>
+                        <div class="why-explanation">
+                            ${generateWhyExplanation(results)}
+                            <p>${info.description}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="result-section">
+                        <h3 class="script">Your Cognitive Function Stack</h3>
+                        <div class="function-stack">
+                            ${stack.map((fn, idx) => {
+                                const positions = ['Dominant', 'Auxiliary', 'Tertiary', 'Inferior'];
+                                const classes = ['dominant', 'auxiliary', 'tertiary', 'inferior'];
+                                const score = Math.round(results.normalizedScores[fn]);
+                                return `
+                                    <div class="stack-item ${classes[idx]}">
+                                        <div class="stack-position sans">${positions[idx]}</div>
+                                        <div class="stack-fn">${fn}</div>
+                                        <div class="stack-info">
+                                            <div class="stack-name">${functionDescriptions[fn].name}</div>
+                                            <div class="stack-desc">${functionDescriptions[fn].desc}</div>
+                                        </div>
+                                        <div class="stack-score">${score}%</div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="result-section">
+                        <h3 class="script">All Functions Ranked</h3>
+                        <div class="functions-chart">
+                            ${results.functions.map(({ fn, score }) => `
+                                <div class="chart-row">
+                                    <div class="chart-label">${fn}</div>
+                                    <div class="chart-bar-container">
+                                        <div class="chart-bar" style="width: ${score}%"></div>
+                                    </div>
+                                    <div class="chart-value">${score}%</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="result-section">
+                        <h3 class="script">Close Matches</h3>
+                        <p style="color: var(--text-medium); margin-bottom: 1rem;">Types that also fit your function profile:</p>
+                        <div class="matches-grid">
+                            ${results.typeMatches.map(([matchType, score], idx) => `
+                                <div class="match-card">
+                                    <div class="match-type">${matchType}</div>
+                                    <div class="match-percent">${Math.round((score / results.maxScore) * 100)}% match</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <button class="cta-button reset-btn" onclick="resetTest()">Take Test Again</button>
+                </div>
+            `;
+            
+            document.getElementById('question-container').classList.remove('active');
+            document.getElementById('results-container').innerHTML = html;
+            document.getElementById('results-container').classList.add('active');
+            
+            // Scroll to results
+            document.getElementById('results-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Reset test
+        function resetTest() {
+            document.getElementById('results-container').classList.remove('active');
+            document.getElementById('results-container').innerHTML = '';
+            document.getElementById('test-intro').style.display = 'block';
+            
+            // Scroll back to test section
+            document.getElementById('test-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
