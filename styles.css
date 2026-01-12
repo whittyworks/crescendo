@@ -109,7 +109,14 @@ nav {
 .nav-links a.active {
     color: var(--gold);
 }
+.nav-links a.portal-back {
+    color: var(--gold);
+    font-weight: 500;
+}
 
+.nav-links a.portal-back:hover {
+    color: var(--gold-dark);
+}
 /* About Page Styles */
 .about-hero {
     min-height: 60vh;
