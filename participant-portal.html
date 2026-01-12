@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participant Portal · My Holy Crescendo</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Exclusive resources for A Symphony of Grace participants.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="assets/img/crescendo-cover.jpg">
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+            --blush: #F5E1DA;
+            --sage: #E8EDE4;
+            --lavender: #EDE8F2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           DECORATIVE ELEMENTS
+           ============================================ */
+        
+        .watercolor-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+        }
+
+        .blob-2 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(245, 225, 218, 0.6) 0%, transparent 70%);
+            bottom: -50px;
+            left: -50px;
+        }
+
+        .blob-3 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(232, 237, 228, 0.6) 0%, transparent 70%);
+            top: 50%;
+            left: 10%;
+        }
+
+        .flourish {
+            display: block;
+            margin: 2rem auto;
+            text-align: center;
+            color: var(--gold);
+            font-size: 1.5rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.6;
+        }
+
+        .flourish::before {
+            content: "✦ ✦ ✦";
+        }
+
+        .gold-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 2rem auto;
+            max-width: 200px;
+        }
+
+        /* ============================================
+           LOGIN SCREEN
+           ============================================ */
+        
+        .portal-login {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            background: 
+                radial-gradient(ellipse at top right, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(245, 225, 218, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at center, rgba(232, 237, 228, 0.3) 0%, transparent 70%),
+                var(--cream);
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 3.5rem;
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 60px rgba(212, 175, 55, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
+        }
+
+        .login-card::after {
+            content: '❧';
+            position: absolute;
+            bottom: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: var(--gold);
+            opacity: 0.2;
+        }
+
+        .login-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .login-card h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.25rem;
+            font-weight: 400;
+        }
+
+        .login-card .tagline {
+            font-style: italic;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .login-card .welcome-text {
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1.1rem 1.5rem;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .password-input::placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .login-error {
+            color: #c44569;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            display: none;
+            font-style: italic;
+        }
+
+        .login-hint {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            line-height: 1.8;
+        }
+
+        .login-hint a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-hint a:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           PORTAL CONTENT
+           ============================================ */
+        
+        .portal-content {
+            display: none;
+        }
+
+        .portal-content.active {
+            display: block;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(253, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold-dark);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        /* Hero */
+        .portal-hero {
+            padding: 10rem 5% 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: 
+                radial-gradient(ellipse at top, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(245, 225, 218, 0.4) 0%, transparent 40%),
+                radial-gradient(ellipse at bottom right, rgba(232, 237, 228, 0.4) 0%, transparent 40%),
+                linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
+        }
+
+        .portal-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
+        }
+
+        .hero-decoration {
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.03;
+            color: var(--gold);
+            pointer-events: none;
+        }
+
+        .hero-decoration.left {
+            top: 10%;
+            left: -5%;
+            transform: rotate(-15deg);
+        }
+
+        .hero-decoration.right {
+            bottom: 0;
+            right: -5%;
+            transform: rotate(15deg);
+        }
+
+        .portal-welcome {
+            max-width: 750px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .portal-welcome .label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .portal-welcome h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .portal-welcome .subtitle {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+        }
+
+        .portal-welcome p {
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            line-height: 1.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            background: white;
+            padding: 2.5rem 5%;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .quick-links-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .quick-links h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .quick-links-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .quick-link {
+            background: var(--cream);
+            color: var(--text-medium);
+            text-decoration: none;
+            padding: 0.9rem 1.8rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .quick-link:hover {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Module Sections */
+        .portal-modules {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .module-section {
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, var(--gold), transparent) 1;
+        }
+
+        .module-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--cream), white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 
+                0 5px 20px rgba(212, 175, 55, 0.15),
+                inset 0 -2px 5px rgba(212, 175, 55, 0.1);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .module-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .module-header .module-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        /* Resource Cards */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 
+                0 10px 40px rgba(212, 175, 55, 0.08),
+                0 2px 10px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.12);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 20px 50px rgba(212, 175, 55, 0.15),
+                0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .resource-card:hover::before {
+            opacity: 1;
+        }
+
+        .resource-card.coming-soon {
+            opacity: 0.7;
+        }
+
+        .resource-card.coming-soon:hover {
+            transform: none;
+            box-shadow: 
+                0 10px 40px rgba(212, 175, 55, 0.08),
+                0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .resource-type {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: white;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            align-self: flex-start;
+        }
+
+        .resource-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .resource-card p {
+            font-size: 1rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gold-dark);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .resource-link:hover {
+            color: var(--gold);
+            gap: 0.75rem;
+        }
+
+        .resource-link.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .coming-badge {
+            display: inline-block;
+            background: var(--cream-dark);
+            color: var(--text-medium);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        /* Scripture Quote */
+        .scripture-section {
+            background: 
+                radial-gradient(ellipse at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%),
+                var(--cream-dark);
+            padding: 4rem 5%;
+            text-align: center;
+            position: relative;
+        }
+
+        .scripture-section blockquote {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-medium);
+            line-height: 1.9;
+        }
+
+        .scripture-section cite {
+            display: block;
+            margin-top: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: var(--gold);
+            font-style: normal;
+            text-transform: uppercase;
+        }
+
+        .scripture-section .quote-mark {
+            font-family: 'Cinzel', serif;
+            font-size: 5rem;
+            color: var(--gold);
+            opacity: 0.2;
+            line-height: 0;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* Support Section */
+        .portal-support {
+            padding: 4rem 5%;
+            text-align: center;
+            background: white;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .portal-support h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .portal-support p {
+            color: var(--text-medium);
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .portal-support a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .portal-support a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 3rem 5% 2rem;
+            text-align: center;
+        }
+
+        footer h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        footer .tagline {
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        footer .copyright {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Logout Button */
+        .logout-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            color: var(--text-medium);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 0.85rem 1.8rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .logout-btn:hover {
+            background: var(--cream-dark);
+            border-color: var(--gold);
+            color: var(--gold-dark);
+        }
+
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--gold);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .portal-hero {
+                padding: 8rem 5% 4rem;
+            }
+
+            .portal-welcome h1 {
+                font-size: 2.2rem;
+            }
+
+            .portal-welcome .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .module-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logout-btn {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.7rem 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .login-card {
+                padding: 2.5rem 2rem;
+            }
+
+            .login-card h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Animation for cards on scroll */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .resource-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .resource-card:nth-child(2) { animation-delay: 0.1s; }
+        .resource-card:nth-child(3) { animation-delay: 0.2s; }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         LOGIN SCREEN
+         ============================================ -->
+    <div id="login-screen" class="portal-login">
+        <div class="watercolor-blob blob-1"></div>
+        <div class="watercolor-blob blob-2"></div>
+        <div class="watercolor-blob blob-3"></div>
+        
+        <div class="login-card">
+            <span class="login-icon">🌿</span>
+            <h1>Participant Portal</h1>
+            <p class="tagline">A Symphony of Grace</p>
+            
+            <p class="welcome-text">
+                Welcome, beloved daughter. Enter your password to access your exclusive resources and continue your journey of becoming.
+            </p>
+            
+            <form onsubmit="checkPassword(event)">
+                <input 
+                    type="password" 
+                    id="password-input" 
+                    class="password-input" 
+                    placeholder="✦  Enter your password  ✦"
+                    autocomplete="off"
+                >
+                <button type="submit" class="login-btn">Enter the Portal</button>
+            </form>
+            
+            <p id="login-error" class="login-error">
+                That password doesn't seem right. Please try again, beloved.
+            </p>
+            
+            <p class="login-hint">
+                Your password was sent in your welcome email.<br>
+                Need help? <a href="mailto:myholycrescendo@gmail.com">Reach out to Bea</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- ============================================
+         PORTAL CONTENT
+         ============================================ -->
+    <div id="portal-content" class="portal-content">
+        
+        <!-- Navigation -->
+        <nav>
+            <a href="index.html" class="logo-text">My Holy Crescendo</a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="symphony-of-grace.html">15-Week Journey</a></li>
+                <li><a href="participant-portal.html" class="active">My Portal</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hero -->
+        <section class="portal-hero">
+            <span class="hero-decoration left">❧</span>
+            <span class="hero-decoration right">☙</span>
+            
+            <div class="portal-welcome">
+                <p class="label">Welcome to Your</p>
+                <h1>Participant Portal</h1>
+                <p class="subtitle">Everything you need for your Symphony of Grace journey</p>
+                <div class="gold-line"></div>
+                <p>
+                    These resources are yours to explore, revisit, and treasure. Each one is designed 
+                    to help you discover another facet of how God fearfully and wonderfully made you.
+                </p>
+            </div>
+        </section>
+
+        <!-- Quick Links -->
+        <section class="quick-links">
+            <div class="quick-links-inner">
+                <h3>Journey to Your Module</h3>
+                <div class="quick-links-list">
+                    <a href="#foundation" class="quick-link">🌿 Foundation</a>
+                    <a href="#body" class="quick-link">✨ Body</a>
+                    <a href="#mind" class="quick-link">💫 Mind</a>
+                    <a href="#spirit" class="quick-link">🕊️ Spirit</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources by Module -->
+        <section class="portal-modules">
+            
+            <!-- Foundation -->
+            <div id="foundation" class="module-section">
+                <div class="module-header">
+                    <div class="module-icon">🌿</div>
+                    <div>
+                        <h2>Foundation</h2>
+                        <p class="module-subtitle">Rooted in Christ · Weeks 1–4</p>
+                    </div>
+                </div>
+                
+                <div class="resources-grid">
+                    <div class="resource-card coming-soon">
+                        <span class="resource-type">Reflection Guide</span>
+                        <h3>Healing the Heart</h3>
+                        <p>A gentle journey into receiving God's love and healing the wounds that keep us from believing we are truly beloved.</p>
+                        <span class="coming-badge">Coming Soon</span>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <span class="resource-type">Workbook</span>
+                        <h3>Identity in Christ</h3>
+                        <p>Reflection exercises to help you anchor your identity in who God says you are — before titles, roles, or achievements.</p>
+                        <a href="#" class="resource-link">Access Resource →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div id="body" class="module-section">
+                <div class="module-header">
+                    <div class="module-icon">✨</div>
+                    <div>
+                        <h2>Body</h2>
+                        <p class="module-subtitle">Embodied Beauty · Weeks 5–8</p>
+                    </div>
+                </div>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <span class="resource-type">Interactive Quiz</span>
+                        <h3>Sacred Style Essence</h3>
+                        <p>Discover how your unique presence reflects the Divine. Uncover your primary and secondary sacred essences.</p>
+                        <a href="sacred-style-essence-quiz.html" class="resource-link">Take the Quiz →</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <span class="resource-type">Guide</span>
+                        <h3>Seasonal Color Analysis</h3>
+                        <p>Understand the colors God chose for you and how they reflect His artistry woven into your very design.</p>
+                        <a href="#" class="resource-link">Access Resource →</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <span class="resource-type">Guide</span>
+                        <h3>Kibbe Body Types</h3>
+                        <p>Explore your physical essence and discover the lines and silhouettes that honor your God-given form.</p>
+                        <a href="#" class="resource-link">Access Resource →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scripture Section -->
+            <section class="scripture-section">
+                <span class="quote-mark">"</span>
+                <blockquote>
+                    For we are God's masterpiece. He has created us anew in Christ Jesus, 
+                    so we can do the good things He planned for us long ago.
+                </blockquote>
+                <cite>Ephesians 2:10</cite>
+            </section>
+
+            <!-- Mind -->
+            <div id="mind" class="module-section" style="margin-top: 4rem;">
+                <div class="module-header">
+                    <div class="module-icon">💫</div>
+                    <div>
+                        <h2>Mind</h2>
+                        <p class="module-subtitle">Interior Landscape · Weeks 9–12</p>
+                    </div>
+                </div>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <span class="resource-type">Interactive Test</span>
+                        <h3>Temperament Test</h3>
+                        <p>Discover your natural temperament — the ancient wisdom revealing how God wired your soul's disposition.</p>
+                        <a href="temperament-test.html" class="resource-link">Take the Test →</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <span class="resource-type">Interactive Test</span>
+                        <h3>Cognitive Functions Test</h3>
+                        <p>Explore how you process information, make decisions, and engage with the world God placed you in.</p>
+                        <a href="cognitive-functions-test.html" class="resource-link">Take the Test →</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <span class="resource-type">PDF Guide</span>
+                        <h3>Mind Frameworks Guide</h3>
+                        <p>A comprehensive overview of personality frameworks and how they weave into your spiritual journey.</p>
+                        <a href="mind-frameworks-guide.pdf" class="resource-link">Download PDF →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spirit -->
+            <div id="spirit" class="module-section">
+                <div class="module-header">
+                    <div class="module-icon">🕊️</div>
+                    <div>
+                        <h2>Spirit</h2>
+                        <p class="module-subtitle">Living Your Calling · Weeks 13–15</p>
+                    </div>
+                </div>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <span class="resource-type">Assessment</span>
+                        <h3>Virtue Assessment</h3>
+                        <p>Identify your strongest virtues and areas for growth as you cultivate a life of holy flourishing.</p>
+                        <a href="virtue-assessment.html" class="resource-link">Take Assessment →</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <span class="resource-type">Guide</span>
+                        <h3>25 Charisms</h3>
+                        <p>Discover your spiritual gifts and how God has uniquely equipped you to serve others and build His Kingdom.</p>
+                        <a href="25-charisms.html" class="resource-link">Explore Charisms →</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <span class="resource-type">Workbook</span>
+                        <h3>Rule of Life</h3>
+                        <p>Create your personal rhythm of prayer, rest, work, and play — a holy structure that honors who you were made to be.</p>
+                        <a href="rule-of-life.html" class="resource-link">Build Your Rule →</a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Support -->
+        <section class="portal-support">
+            <h3>Need Guidance?</h3>
+            <p>Questions about your resources or your journey?</p>
+            <p><a href="mailto:myholycrescendo@gmail.com">myholycrescendo@gmail.com</a></p>
+            <span class="flourish"></span>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <h3>My Holy Crescendo</h3>
+            <p class="tagline">fearfully & wonderfully made</p>
+            <p class="copyright">&copy; 2025 My Holy Crescendo. All rights reserved.</p>
+        </footer>
+
+        <!-- Logout Button -->
+        <button class="logout-btn" onclick="logout()">✦ Sign Out</button>
+    </div>
+
+    <script>
+        // ============================================
+        // SET YOUR PASSWORD HERE
+        // ============================================
+        const PORTAL_PASSWORD = "symphony2025";
+        // ============================================
+
+        // Check if already logged in
+        if (sessionStorage.getItem('portalAccess') === 'granted') {
+            showPortal();
+        }
+
+        function checkPassword(event) {
+            event.preventDefault();
+            const input = document.getElementById('password-input').value;
+            
+            if (input === PORTAL_PASSWORD) {
+                sessionStorage.setItem('portalAccess', 'granted');
+                showPortal();
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+                document.getElementById('password-input').value = '';
+                document.getElementById('password-input').focus();
+            }
+        }
+
+        function showPortal() {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('portal-content').classList.add('active');
+        }
+
+        function logout() {
+            sessionStorage.removeItem('portalAccess');
+            document.getElementById('portal-content').classList.remove('active');
+            document.getElementById('login-screen').style.display = 'flex';
+            document.getElementById('password-input').value = '';
+            document.getElementById('login-error').style.display = 'none';
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>
