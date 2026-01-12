@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 42 Virtues · My Holy Crescendo</title>
+    <meta name="description" content="Explore the 42 virtues from St. Albert the Great's Paradise of the Soul — a treasury of Christian character that reveals God's design for human flourishing.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="The 42 Virtues · My Holy Crescendo">
+    <meta property="og:description" content="Explore the 42 virtues from St. Albert the Great's Paradise of the Soul.">
+    <meta property="og:image" content="https://myholycrescendo.com/assets/img/og-image.png">
+    <meta property="og:url" content="https://myholycrescendo.com/virtues.html">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+            --blush: #F5E1DA;
+            --sage: #E8EDE4;
+            --lavender: #EDE8F2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(253, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .logo-link {
+            display: block;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            height: 45px;
+            width: auto;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-image:hover {
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .nav-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle::after {
+            content: ' ▾';
+            font-size: 0.7em;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+            min-width: 220px;
+            padding: 0.75rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            list-style: none;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.85rem !important;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--cream);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 10rem 5% 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: 
+                radial-gradient(ellipse at top, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(245, 225, 218, 0.4) 0%, transparent 40%),
+                radial-gradient(ellipse at bottom right, rgba(232, 237, 228, 0.4) 0%, transparent 40%),
+                var(--cream);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+        }
+
+        .hero .intro {
+            font-size: 1.2rem;
+            color: var(--text-medium);
+            line-height: 1.9;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .gold-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 2rem auto;
+            max-width: 150px;
+        }
+
+        /* Source Section */
+        .source-section {
+            background: white;
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .source-section .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .source-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .source-section p {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .source-section .author {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-top: 1rem;
+        }
+
+        /* Virtue Categories */
+        .virtues-section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category {
+            margin-bottom: 4rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, var(--gold), transparent) 1;
+        }
+
+        .category-icon {
+            font-size: 2rem;
+        }
+
+        .category-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--gold-dark);
+            font-weight: 400;
+        }
+
+        .virtues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .virtue-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .virtue-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+        }
+
+        .virtue-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .virtue-card p {
+            font-size: 1rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #FDF8F3 0%, #F5EFE7 100%);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 4rem auto;
+            max-width: 700px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
+        }
+
+        .cta-section .flourish {
+            color: var(--gold);
+            font-size: 1.5rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section .lead {
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section .details {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+        }
+
+        .cta-section .details span {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .cta-section .note {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-top: 1.25rem;
+            font-style: italic;
+        }
+
+        /* Portal Teaser */
+        .portal-teaser {
+            background: var(--cream-dark);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .portal-teaser .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .portal-teaser h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .portal-teaser p {
+            color: var(--text-medium);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .portal-teaser .highlight {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 3rem 5% 2rem;
+            text-align: center;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+            font-weight: 400;
+        }
+
+        .footer-tagline {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 5%;
+            }
+
+            .logo-image {
+                height: 35px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .hero {
+                padding: 8rem 5% 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .virtues-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section {
+                padding: 2rem 1.5rem;
+                margin: 3rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo-link">
+            <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="symphony-of-grace.html">15-Week Journey</a></li>
+            <li><a href="made-beautiful.html">Retreat</a></li>
+            <li><a href="personal-journey.html">1:1 Coaching</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Free Resources</a>
+                <ul class="dropdown-menu">
+                    <li><a href="prelude.html">Free Prelude</a></li>
+                    <li><a href="sacred-style-essence-quiz.html">Sacred Style Quiz</a></li>
+                    <li><a href="mind-frameworks.html">Mind Frameworks Guide</a></li>
+                    <li><a href="virtues.html" class="active">42 Virtues</a></li>
+                    <li><a href="charisms.html">25 Charisms</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="label">From The Paradise of the Soul</p>
+            <h1>The 42 Virtues</h1>
+            <p class="subtitle">A Treasury of Christian Character</p>
+            <div class="gold-line"></div>
+            <p class="intro">
+                For centuries, the saints have understood that virtue is not merely about avoiding sin — 
+                it's about becoming fully alive, fully human, fully the person God designed you to be. 
+                These 42 virtues reveal the landscape of a soul flourishing in grace.
+            </p>
+        </div>
+    </section>
+
+    <!-- Source -->
+    <section class="source-section">
+        <div class="container">
+            <h2>Ancient Wisdom for Modern Women</h2>
+            <p>
+                These virtues come from <em>The Paradise of the Soul</em>, a spiritual classic by St. Albert the Great 
+                (Albertus Magnus), the great 13th-century Doctor of the Church and teacher of St. Thomas Aquinas. 
+                His wisdom offers us a map for the interior life — showing us not just who we should be, 
+                but who we already are in Christ.
+            </p>
+            <p class="author">St. Albert the Great · Doctor of the Church</p>
+        </div>
+    </section>
+
+    <!-- Virtues -->
+    <section class="virtues-section">
+
+        <!-- Theological Virtues -->
+        <div class="category">
+            <div class="category-header">
+                <span class="category-icon">✝️</span>
+                <h2>Theological Virtues</h2>
+            </div>
+            <div class="virtues-grid">
+                <div class="virtue-card">
+                    <h3>Faith</h3>
+                    <p>The theological virtue by which we believe in God and all He has revealed, trusting completely in His word.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Hope</h3>
+                    <p>The theological virtue by which we desire and confidently expect eternal life and the grace needed to attain it.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Love of God & Neighbour</h3>
+                    <p>The foundation of all Christian life, whereby we love God above all things and our neighbor as ourselves, seeking the eternal good of souls.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cardinal Virtues -->
+        <div class="category">
+            <div class="category-header">
+                <span class="category-icon">⚖️</span>
+                <h2>Cardinal Virtues</h2>
+            </div>
+            <div class="virtues-grid">
+                <div class="virtue-card">
+                    <h3>Prudence</h3>
+                    <p>The mother of virtues that guides right judgment, enabling us to choose fitting means to achieve good ends and avoid evil.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Justice</h3>
+                    <p>The virtue that renders to God and neighbor what is due, maintaining right order in all relationships and obligations.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Fortitude</h3>
+                    <p>Spiritual strength that enables the soul to undertake and endure difficult tasks for God without yielding to fear or adversity.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Temperance</h3>
+                    <p>The guardian of all virtues that moderates our inclinations and pleasures, keeping us from excess in temporal goods.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Virtues of Humility -->
+        <div class="category">
+            <div class="category-header">
+                <span class="category-icon">🌿</span>
+                <h2>Virtues of Humility & Self-Mastery</h2>
+            </div>
+            <div class="virtues-grid">
+                <div class="virtue-card">
+                    <h3>Humility</h3>
+                    <p>True humility fears receiving glory and contemns it when given, always preferring to be unknown rather than celebrated.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Obedience</h3>
+                    <p>The virtue by which we submit our will to God and His representatives, dying to self-will and embracing divine providence.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Poverty</h3>
+                    <p>Voluntary poverty of spirit that liberates the soul from attachment to created things, making room for God alone.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Chastity</h3>
+                    <p>The angelic virtue that keeps the soul pure and undivided, directing all love toward God and spiritual goods.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Abstinence</h3>
+                    <p>Temperance in food and drink that keeps the body subject to the spirit and maintains clarity of mind for divine contemplation.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Mortification</h3>
+                    <p>The practice of dying to self through voluntary self-denial, subduing the flesh to liberate the spirit.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Virtues of Repentance -->
+        <div class="category">
+            <div class="category-header">
+                <span class="category-icon">💧</span>
+                <h2>Virtues of Repentance</h2>
+            </div>
+            <div class="virtues-grid">
+                <div class="virtue-card">
+                    <h3>Sadness for Sin</h3>
+                    <p>Holy sorrow for sin that arises from love of God, grieving that we have offended infinite goodness and wounded others.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Contrition</h3>
+                    <p>Perfect sorrow for sin arising from love of God, grieving that one has offended the Supreme Good.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Confession</h3>
+                    <p>The virtue of openly acknowledging one's sins and faults before God, leading to healing and restoration.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Penance</h3>
+                    <p>The virtue of making satisfaction for sins through prayer, fasting, almsgiving, and willingly accepted suffering.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interpersonal Virtues -->
+        <div class="category">
+            <div class="category-header">
+                <span class="category-icon">💕</span>
+                <h2>Virtues of Charity & Relationship</h2>
+            </div>
+            <div class="virtues-grid">
+                <div class="virtue-card">
+                    <h3>Compassion</h3>
+                    <p>The virtue of suffering with others, moved by their misery to alleviate their distress through works of mercy.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Mercy</h3>
+                    <p>The virtue by which we are moved with pity for another's distress and seek to relieve it, imitating God's infinite mercy.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Peace</h3>
+                    <p>The tranquility of order that arises from union with God, bringing serenity to the soul and harmony to relationships.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Concord</h3>
+                    <p>Unity of hearts and minds that binds people together in mutual goodwill, reflecting the unity of the Blessed Trinity.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Meekness</h3>
+                    <p>Gentleness of spirit that moderates anger and maintains tranquility in the face of injury, following Christ's example.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Liberality</h3>
+                    <p>Proper use of material goods, giving freely without attachment while avoiding both miserliness and prodigality.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Gratitude</h3>
+                    <p>The virtue of recognizing benefits received and making due acknowledgment and return for them.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Congratulation</h3>
+                    <p>The virtue of rejoicing with those who rejoice, sharing in the happiness of others without envy or resentment.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Zeal of Souls</h3>
+                    <p>Ardent desire for the salvation of souls, moved by charity to seek the eternal good of all people.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contemplative Virtues -->
+        <div class="category">
+            <div class="category-header">
+                <span class="category-icon">🕊️</span>
+                <h2>Contemplative Virtues</h2>
+            </div>
+            <div class="virtues-grid">
+                <div class="virtue-card">
+                    <h3>Religion</h3>
+                    <p>The virtue that disposes us to give God the worship and honor proper to Him, expressed through prayer, sacrifice, and sacred observance.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Fear of the Lord</h3>
+                    <p>Filial fear that reverences God's greatness and dreads offending Him, the beginning of wisdom and foundation of devotion.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Silence</h3>
+                    <p>The virtue that guards the tongue and creates space for contemplation, speaking only what is necessary and good.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Solitude</h3>
+                    <p>The grace of withdrawing from external distractions to commune with God in the hidden sanctuary of the heart.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Contemplation</h3>
+                    <p>The loving gaze upon divine truth, resting in God's presence and perceiving spiritual realities with the eyes of the soul.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Character Virtues -->
+        <div class="category">
+            <div class="category-header">
+                <span class="category-icon">✨</span>
+                <h2>Virtues of Character</h2>
+            </div>
+            <div class="virtues-grid">
+                <div class="virtue-card">
+                    <h3>Patience</h3>
+                    <p>The strength to bear adversity, tribulation, and injury with tranquility of spirit, knowing that all comes from God's hand.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Constancy</h3>
+                    <p>Firmness of spirit that maintains virtue in the face of changing circumstances and ongoing challenges.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Perseverance</h3>
+                    <p>Steadfast continuance in good, remaining constant in virtue despite trials, temptations, and the passage of time.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Truth</h3>
+                    <p>The virtue of conforming one's words and deeds to reality, manifesting oneself truthfully to others.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Simplicity</h3>
+                    <p>The virtue of being single in intention and transparent in action, without guile or divided heart.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Discretion</h3>
+                    <p>The virtue of right judgment that enables one to distinguish between good and evil, appropriate and inappropriate.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Maturity</h3>
+                    <p>Spiritual adulthood that transcends beginners' ways, marked by wisdom, stability, and depth in the spiritual life.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spiritual Freedom -->
+        <div class="category">
+            <div class="category-header">
+                <span class="category-icon">🌟</span>
+                <h2>Virtues of Spiritual Freedom</h2>
+            </div>
+            <div class="virtues-grid">
+                <div class="virtue-card">
+                    <h3>Joy</h3>
+                    <p>The spiritual gladness that arises from union with God and the contemplation of divine goodness, even amid trials.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Liberty</h3>
+                    <p>Spiritual freedom that comes from detachment, liberating the soul from bondage to sin and created things.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Confidence</h3>
+                    <p>Filial trust in God's goodness and providence, approaching Him with the confidence of beloved children.</p>
+                </div>
+                <div class="virtue-card">
+                    <h3>Contempt of the World</h3>
+                    <p>Holy indifference to worldly honors and goods, valuing eternal treasures above temporal vanities.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="flourish">✦ ✦ ✦</div>
+            <h3>Go Deeper Into Your Design</h3>
+            <p class="lead">
+                These 42 virtues are just one facet of how God fearfully and wonderfully made you. 
+                The free 3-Day Prelude will guide you deeper into your identity as His beloved daughter.
+            </p>
+            <p class="details">
+                <span>📖 Scripture & Reflection</span>
+                <span>🕊️ Guided Prayer</span>
+                <span>✨ Daily Practices</span>
+            </p>
+            <a href="prelude.html" class="btn-primary">Start the Free 3-Day Prelude</a>
+            <p class="note">No cost. No commitment. Just an open heart.</p>
+        </div>
+
+    </section>
+
+    <!-- Portal Teaser -->
+    <section class="portal-teaser">
+        <div class="container">
+            <h3>Discover Your Top Virtues</h3>
+            <p>
+                Want to know which of these 42 virtues are your greatest strengths? 
+                Participants in <span class="highlight">A Symphony of Grace</span> receive access to our 
+                full Virtue Assessment — revealing your top 10 virtues and areas for growth.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">
+            <h3>My Holy Crescendo</h3>
+            <p class="footer-tagline">fearfully & wonderfully made</p>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="symphony-of-grace.html">15-Week Journey</a>
+            <a href="made-beautiful.html">Retreat</a>
+            <a href="personal-journey.html">1:1 Coaching</a>
+            <a href="prelude.html">Free Prelude</a>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 My Holy Crescendo. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

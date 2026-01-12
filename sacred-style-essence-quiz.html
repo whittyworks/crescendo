@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sacred Style Essence Quiz · My Holy Crescendo</title>
     <meta name="description" content="Discover how your unique presence reflects the Divine. A contemplative quiz to uncover your Sacred Style Essence.">
+                <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="My Holy Crescendo - Fearfully & Wonderfully Made">
+    <meta property="og:description" content="A transformative journey discovering God's design in your body, mind, and spirit through A Symphony of Grace.">
+    <meta property="og:image" content="https://myholycrescendo.com/assets/img/og-image.png">
+    <meta property="og:url" content="https://myholycrescendo.com/sacred-style-essence-quiz.html">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://myholycrescendo.com/assets/img/og-image.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"></head>
+
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/crescendo-cover.jpg">
     <style>
@@ -41,10 +56,152 @@
             min-height: 100vh;
         }
 
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(253, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .logo-link {
+            display: block;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            height: 45px;
+            width: auto;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-image:hover {
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+
+        .dropdown-toggle::after {
+            content: ' ▾';
+            font-size: 0.7em;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+            min-width: 220px;
+            padding: 0.75rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            list-style: none;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li {
+            padding: 0;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.85rem !important;
+            letter-spacing: 0.05em !important;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--cream);
+        }
+
+        .coming-soon-badge {
+            font-size: 0.6rem;
+            background: var(--cream-dark);
+            color: var(--text-medium);
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        /* Mobile nav */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 5%;
+            }
+            
+            .logo-image {
+                height: 35px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .dropdown-menu {
+                position: fixed;
+                left: 5%;
+                right: 5%;
+                top: auto;
+            }
+        }
+
         .container {
             max-width: 700px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 120px 20px 40px;
         }
 
         .container.results {
@@ -514,6 +671,117 @@
             opacity: 0.8;
         }
 
+        /* Share section */
+        .share-section {
+            background: white;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .share-section p {
+            font-size: 16px;
+            color: var(--text-medium);
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        .share-section .share-prompt {
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            color: var(--gold-dark);
+            margin-bottom: 8px;
+        }
+
+        .copy-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--cream);
+            color: var(--gold-dark);
+            border: 2px solid var(--gold);
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-link-btn:hover {
+            background: var(--gold);
+            color: white;
+        }
+
+        .copy-link-btn.copied {
+            background: var(--keeper);
+            border-color: var(--keeper);
+            color: white;
+        }
+
+        .share-section .share-note {
+            font-size: 13px;
+            color: var(--text-medium);
+            margin-top: 16px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--cream);
+            padding: 3rem 5% 2rem;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+            font-weight: 400;
+        }
+
+        .footer-tagline {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
         /* Screens */
         .screen {
             display: none;
@@ -566,6 +834,30 @@
     </style>
 </head>
 <body>
+
+    <!-- Navigation -->
+    <nav class="sans">
+        <a href="index.html" class="logo-link">
+            <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="symphony-of-grace.html">15-Week Journey</a></li>
+            <li><a href="made-beautiful.html">Retreat</a></li>
+            <li><a href="personal-journey.html">1:1 Coaching</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Free Resources</a>
+                <ul class="dropdown-menu">
+                    <li><a href="prelude.html">Free Prelude</a></li>
+                    <li><a href="sacred-style-essence-quiz.html" class="active">Sacred Style Quiz</a></li>
+                    <li><a href="mind-frameworks.html">Mind Frameworks Guide</a></li>
+                    <li><a href="virtues.html">42 Virtues</a></li>
+                    <li><a href="charisms.html">25 Charisms</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
 
     <!-- INTRO SCREEN -->
     <div id="intro-screen" class="screen active">
@@ -666,11 +958,17 @@
                 <p class="note">No cost. No commitment. Just an open heart.</p>
             </div>
 
+            <div class="share-section">
+                <p class="share-prompt">Love your results?</p>
+                <p>Share this quiz with a friend who needs to discover her sacred essence!</p>
+                <button class="copy-link-btn" onclick="copyQuizLink(this)">
+                    <span>📋</span> Copy Quiz Link
+                </button>
+                <p class="share-note">Screenshot your results for Stories too ✨</p>
+            </div>
+
             <div class="cta-section">
                 <button class="btn btn-secondary" onclick="restartQuiz()">Retake Quiz</button>
-                <p>
-                    Share your results and invite a friend to discover their essence!
-                </p>
             </div>
         </div>
     </div>
@@ -1263,6 +1561,51 @@
             answers = {};
             showScreen('intro-screen');
         }
+
+        function copyQuizLink(button) {
+            const quizUrl = window.location.href.split('?')[0]; // Clean URL without params
+            navigator.clipboard.writeText(quizUrl).then(() => {
+                button.innerHTML = '<span>✓</span> Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.innerHTML = '<span>📋</span> Copy Quiz Link';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = quizUrl;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                button.innerHTML = '<span>✓</span> Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.innerHTML = '<span>📋</span> Copy Quiz Link';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
     </script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">
+            <h3>My Holy Crescendo</h3>
+            <p class="footer-tagline">fearfully & wonderfully made</p>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="symphony-of-grace.html">15-Week Journey</a>
+            <a href="made-beautiful.html">Retreat</a>
+            <a href="personal-journey.html">1:1 Coaching</a>
+            <a href="prelude.html">Free Prelude</a>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 My Holy Crescendo. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
