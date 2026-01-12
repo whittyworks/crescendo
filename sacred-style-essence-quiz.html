@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacred Style Essence Quiz · My Holy Crescendo</title>
+    <meta name="description" content="Discover how your unique presence reflects the Divine. A contemplative quiz to uncover your Sacred Style Essence.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="assets/img/crescendo-cover.jpg">
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+            
+            /* Essence colors */
+            --flame: #B87D7D;
+            --keeper: #9CAF88;
+            --sage: #4A4A4A;
+            --spark: #FF6B35;
+            --heart: #C44569;
+            --grace: #FFB6C1;
+            --veil: #6B5B95;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--cream-dark) 100%);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .container.results {
+            max-width: 800px;
+        }
+
+        /* Typography */
+        .script {
+            font-family: 'Cinzel', serif;
+            font-weight: 400;
+        }
+
+        .sans {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        .label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 42px;
+            color: var(--gold-dark);
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .tagline {
+            font-size: 22px;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 32px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            margin-bottom: 32px;
+        }
+
+        .card p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-medium);
+            margin-bottom: 24px;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Info box */
+        .info-box {
+            background: rgba(212, 175, 55, 0.08);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .info-box .label {
+            margin-bottom: 12px;
+        }
+
+        .info-box p {
+            font-size: 16px;
+            color: var(--text-medium);
+            margin: 8px 0;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            border: none;
+            padding: 18px 48px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: white;
+        }
+
+        /* Progress bar */
+        .progress-container {
+            margin-bottom: 32px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .progress-section {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+        }
+
+        .progress-count {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            color: var(--text-medium);
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 2px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Question */
+        .question-title {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            color: var(--text-dark);
+            margin-bottom: 32px;
+            line-height: 1.4;
+        }
+
+        /* Options */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            background: white;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 16px;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+
+        .option:hover {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .option.selected {
+            border: 2px solid var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* Navigation */
+        .nav-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+        }
+
+        .nav-back {
+            background: transparent;
+            border: none;
+            color: var(--gold);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            padding: 8px 16px;
+        }
+
+        .nav-back:disabled {
+            color: #ccc;
+            cursor: default;
+        }
+
+        .nav-progress {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            color: var(--text-medium);
+        }
+
+        /* Results */
+        .results-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .results-header h1 {
+            font-size: 38px;
+        }
+
+        /* Bar graph */
+        .bar-graph {
+            margin-bottom: 24px;
+        }
+
+        .bar-item {
+            margin-bottom: 16px;
+        }
+
+        .bar-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .bar-name {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+        }
+
+        .bar-name.primary {
+            font-weight: 600;
+        }
+
+        .bar-percent {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            color: var(--text-medium);
+        }
+
+        .bar-track {
+            height: 12px;
+            background: var(--cream-dark);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1s ease;
+        }
+
+        /* Essence card */
+        .essence-card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.1);
+            border-width: 2px;
+            border-style: solid;
+            margin-bottom: 24px;
+        }
+
+        .essence-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .essence-badge {
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .essence-name {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        .essence-subtitle {
+            font-size: 14px;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .essence-description {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--text-medium);
+            margin-bottom: 20px;
+        }
+
+        .essence-info-box {
+            background: rgba(212, 175, 55, 0.06);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .essence-info-box .label {
+            margin-bottom: 8px;
+        }
+
+        .essence-info-box p {
+            font-size: 15px;
+            color: var(--text-medium);
+            margin: 0;
+        }
+
+        .essence-scripture {
+            font-size: 15px;
+            font-style: italic;
+            color: var(--text-medium);
+            border-left-width: 3px;
+            border-left-style: solid;
+            padding-left: 16px;
+            margin: 0;
+        }
+
+        /* Blend box */
+        .blend-box {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(212, 175, 55, 0.03));
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .blend-box h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            color: var(--gold-dark);
+            margin-bottom: 16px;
+        }
+
+        .blend-box p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* CTA section */
+        .cta-section {
+            text-align: center;
+        }
+
+        .cta-section p {
+            font-size: 15px;
+            color: var(--text-medium);
+            margin-top: 32px;
+            font-style: italic;
+        }
+
+        /* Prelude CTA */
+        .prelude-cta {
+            background: linear-gradient(135deg, #FDF8F3 0%, #F5EFE7 100%);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prelude-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
+        }
+
+        .prelude-cta .flourish {
+            color: var(--gold);
+            font-size: 1.5rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
+        .prelude-cta h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 26px;
+            color: var(--gold-dark);
+            margin-bottom: 16px;
+        }
+
+        .prelude-cta .lead {
+            font-size: 18px;
+            color: var(--text-medium);
+            line-height: 1.8;
+            max-width: 550px;
+            margin: 0 auto 24px;
+        }
+
+        .prelude-cta .details {
+            font-size: 15px;
+            color: var(--text-medium);
+            margin-bottom: 28px;
+        }
+
+        .prelude-cta .details span {
+            display: inline-block;
+            margin: 0 12px;
+        }
+
+        .prelude-cta .btn-prelude {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .prelude-cta .btn-prelude:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .prelude-cta .note {
+            font-size: 13px;
+            color: var(--text-medium);
+            margin-top: 20px;
+            opacity: 0.8;
+        }
+
+        /* Screens */
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* Center helper */
+        .text-center {
+            text-align: center;
+        }
+
+        /* Hint text */
+        .hint {
+            font-size: 16px;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 32px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .tagline {
+                font-size: 18px;
+            }
+
+            .card {
+                padding: 24px;
+            }
+
+            .question-title {
+                font-size: 20px;
+            }
+
+            .essence-name {
+                font-size: 22px;
+            }
+
+            .btn {
+                padding: 14px 32px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- INTRO SCREEN -->
+    <div id="intro-screen" class="screen active">
+        <div class="container text-center">
+            <p class="label">My Holy Crescendo</p>
+            <h1>Sacred Style Essence</h1>
+            <p class="tagline">Discovering How You Reflect the Divine</p>
+
+            <div class="card" style="text-align: left;">
+                <p>
+                    You are fearfully and wonderfully made — and this includes not just your body, but your <em>essence</em>: the quality of your presence, the energy you carry, the way you move through the world.
+                </p>
+                <p>
+                    This is not random. God designed each woman to reflect a particular facet of His infinite character. Some women carry His boldness. Others, His tenderness. Some reflect His holy joy; others, His transcendent mystery.
+                </p>
+                <p>
+                    This quiz will help you discover your <strong>Sacred Style Essence</strong> — your primary and secondary ways of reflecting the Divine. This isn't about fashion preferences; it's about recognizing the unique expression of God's beauty He placed within you.
+                </p>
+            </div>
+
+            <div class="info-box">
+                <p class="label">What to Expect</p>
+                <p>✦ 27 contemplative questions</p>
+                <p>✦ About 10-15 minutes to complete</p>
+                <p>✦ Your unique blend of 7 sacred essences</p>
+                <p>✦ Theological reflection on your results</p>
+            </div>
+
+            <p class="hint">
+                Answer with what feels true, not what you think you "should" say.<br>
+                There are no wrong answers — only discovery.
+            </p>
+
+            <button class="btn" onclick="startQuiz()">Begin the Journey</button>
+        </div>
+    </div>
+
+    <!-- QUESTION SCREEN -->
+    <div id="question-screen" class="screen">
+        <div class="container">
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span class="progress-section" id="section-label"></span>
+                    <span class="progress-count" id="question-count"></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="question-title" id="question-text"></h2>
+                <div class="options" id="options-container"></div>
+            </div>
+
+            <div class="nav-row">
+                <button class="nav-back" id="back-btn" onclick="goBack()">← Back</button>
+                <span class="nav-progress" id="percent-complete"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULTS SCREEN -->
+    <div id="results-screen" class="screen">
+        <div class="container results">
+            <div class="results-header">
+                <p class="label">Your Sacred Style Essence</p>
+                <h1 id="results-title"></h1>
+                <p class="tagline" id="results-subtitle"></p>
+            </div>
+
+            <div class="card">
+                <p class="label" style="margin-bottom: 24px;">Your Essence Blend</p>
+                <div class="bar-graph" id="bar-graph"></div>
+            </div>
+
+            <div id="primary-essence"></div>
+            <div id="secondary-essence"></div>
+
+            <div class="blend-box">
+                <h3>Your Unique Blend</h3>
+                <p id="blend-text"></p>
+            </div>
+
+            <div class="prelude-cta">
+                <div class="flourish">✦ ✦ ✦</div>
+                <h3>This Is Just the Beginning</h3>
+                <p class="lead">
+                    You've discovered your Sacred Style Essence — but this is only one facet of how God 
+                    fearfully and wonderfully made you. There's so much more to uncover.
+                </p>
+                <p class="details">
+                    <span>📖 Scripture & Reflection</span>
+                    <span>🕊️ Guided Prayer</span>
+                    <span>✨ Daily Practices</span>
+                </p>
+                <a href="prelude.html" class="btn-prelude">Start the Free 3-Day Prelude</a>
+                <p class="note">No cost. No commitment. Just an open heart.</p>
+            </div>
+
+            <div class="cta-section">
+                <button class="btn btn-secondary" onclick="restartQuiz()">Retake Quiz</button>
+                <p>
+                    Share your results and invite a friend to discover their essence!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Essences data
+        const essences = {
+            flame: {
+                name: "The Flame",
+                subtitle: "Reflecting God's Bold Truth",
+                color: "#B87D7D",
+                description: "You carry the energy of holy boldness. Like Deborah leading Israel or John the Baptist crying in the wilderness, your presence commands attention and speaks truth without apology. God's power and righteousness shine through your angular strength and dramatic presence. You were made to lead, to proclaim, to stand unmoved.",
+                reflects: "God's righteous power, His justice, His uncompromising truth",
+                style: "Bold lines, striking contrasts, architectural silhouettes, statement pieces that command a room",
+                scripture: "\"The Lord gives the word; the women who announce the news are a great host.\" — Psalm 68:11"
+            },
+            keeper: {
+                name: "The Keeper",
+                subtitle: "Reflecting God's Faithful Creation",
+                color: "#9CAF88",
+                description: "You carry the energy of holy groundedness. Like Ruth gleaning in the fields or the woman of Proverbs 31 tending her household, your presence brings authenticity and ease. God's creativity in nature — unhurried, organic, perfectly imperfect — shines through your relaxed warmth. You were made to cultivate, to nurture growth, to bring others back to what's real.",
+                reflects: "God's creative abundance, His faithfulness to creation, His organic artistry",
+                style: "Natural textures, earthy tones, relaxed silhouettes, nothing fussy or overdone",
+                scripture: "\"She considers a field and buys it; out of her earnings she plants a vineyard.\" — Proverbs 31:16"
+            },
+            sage: {
+                name: "The Sage",
+                subtitle: "Reflecting God's Timeless Order",
+                color: "#4A4A4A",
+                description: "You carry the energy of holy reverence. Like the noble women of Scripture who understood the weight of tradition and the dignity of their calling, your presence brings calm authority and timeless grace. God's perfect order — balanced, enduring, refined through ages — shines through your composed elegance. You were made to anchor, to uphold, to embody what lasts.",
+                reflects: "God's eternal nature, His perfect order, His unchanging faithfulness",
+                style: "Timeless silhouettes, quality over trend, refined simplicity, dignified elegance",
+                scripture: "\"Strength and dignity are her clothing, and she laughs at the time to come.\" — Proverbs 31:25"
+            },
+            spark: {
+                name: "The Spark",
+                subtitle: "Reflecting God's Holy Joy",
+                color: "#FF6B35",
+                description: "You carry the energy of holy delight. Like Miriam dancing after the Red Sea crossing or David leaping before the Ark, your presence brings unexpected joy and sacred playfulness. God's delight in creation — surprising, whimsical, full of holy mischief — shines through your spirited energy. You were made to celebrate, to enliven, to remind others that joy is serious business in the Kingdom.",
+                reflects: "God's joy, His delight in creation, His holy playfulness",
+                style: "Unexpected combinations, playful details, youthful energy, mixing high and low",
+                scripture: "\"Then Miriam the prophetess took a tambourine in her hand, and all the women went out after her with tambourines and dancing.\" — Exodus 15:20"
+            },
+            heart: {
+                name: "The Heart",
+                subtitle: "Reflecting God's Tender Love",
+                color: "#C44569",
+                description: "You carry the energy of holy tenderness. Like the woman who anointed Jesus with costly perfume or Mary holding her Son, your presence brings warmth and sensory richness. God's nurturing love — soft, abundant, enveloping — shines through your gentle curves and warm spirit. You were made to comfort, to beautify, to make others feel deeply loved.",
+                reflects: "God's tender mercy, His nurturing heart, His abundant love",
+                style: "Soft textures, flowing fabrics, warm colors, romantic details that invite closeness",
+                scripture: "\"As a mother comforts her child, so will I comfort you.\" — Isaiah 66:13"
+            },
+            grace: {
+                name: "The Grace",
+                subtitle: "Reflecting God's Pure Light",
+                color: "#FFB6C1",
+                description: "You carry the energy of holy innocence. Like the young Mary receiving Gabriel's message with simple trust, your presence brings gentle purity and quiet light. God's tender care for the lamb, the child, the humble heart — delicate, guileless, softly luminous — shines through your gentle spirit. You were made to trust, to soften, to remind others of the beauty of an unhardened heart.",
+                reflects: "God's gentleness, His care for the humble, His pure light",
+                style: "Soft colors, delicate details, gentle silhouettes, sweet without being saccharine",
+                scripture: "\"Blessed are the pure in heart, for they shall see God.\" — Matthew 5:8"
+            },
+            veil: {
+                name: "The Veil",
+                subtitle: "Reflecting God's Holy Mystery",
+                color: "#6B5B95",
+                description: "You carry the energy of holy transcendence. Like Mary of Bethany sitting at Jesus' feet or the contemplatives who spent lifetimes in prayer, your presence seems to come from somewhere beyond. God's ineffable mystery — otherworldly, luminous, not quite of this earth — shines through your ethereal quality. You were made to contemplate, to draw others' eyes upward, to remind the world there is more than what we see.",
+                reflects: "God's transcendence, His holy mystery, His infinite beauty",
+                style: "Flowing fabrics, ethereal colors, elongated silhouettes, pieces that seem to transcend trends",
+                scripture: "\"Mary has chosen the better part, which will not be taken away from her.\" — Luke 10:42"
+            }
+        };
+
+        // Questions
+        const questions = [
+            {
+                section: "Your Presence",
+                question: "When you enter a room, people tend to notice your:",
+                options: [
+                    { essence: "flame", text: "Commanding energy — there's something powerful about your presence" },
+                    { essence: "keeper", text: "Approachable warmth — you seem friendly and down-to-earth" },
+                    { essence: "sage", text: "Quiet dignity — you carry yourself with calm composure" },
+                    { essence: "spark", text: "Lively spirit — there's something energizing about you" },
+                    { essence: "heart", text: "Soft warmth — you seem welcoming and gentle" },
+                    { essence: "grace", text: "Sweet gentleness — there's an innocent quality about you" },
+                    { essence: "veil", text: "Otherworldly quality — something about you seems to transcend the ordinary" }
+                ]
+            },
+            {
+                section: "Your Presence",
+                question: "Friends have described you as:",
+                options: [
+                    { essence: "flame", text: "Striking, bold, intense, powerful" },
+                    { essence: "keeper", text: "Genuine, relaxed, real, earthy" },
+                    { essence: "sage", text: "Elegant, refined, timeless, put-together" },
+                    { essence: "spark", text: "Fun, spirited, youthful, surprising" },
+                    { essence: "heart", text: "Warm, nurturing, soft, feminine" },
+                    { essence: "grace", text: "Sweet, gentle, delicate, kind" },
+                    { essence: "veil", text: "Mysterious, dreamy, unique, ethereal" }
+                ]
+            },
+            {
+                section: "Your Presence",
+                question: "In photographs, you tend to look best when you appear:",
+                options: [
+                    { essence: "flame", text: "Dramatic and powerful — strong poses, striking angles" },
+                    { essence: "keeper", text: "Natural and relaxed — candid shots, outdoor settings" },
+                    { essence: "sage", text: "Polished and composed — classic poses, elegant settings" },
+                    { essence: "spark", text: "Animated and playful — caught mid-laugh, full of movement" },
+                    { essence: "heart", text: "Soft and inviting — gentle lighting, warm expressions" },
+                    { essence: "grace", text: "Sweet and luminous — soft focus, gentle settings" },
+                    { essence: "veil", text: "Ethereal and artistic — unusual angles, dreamy quality" }
+                ]
+            },
+            {
+                section: "Your Presence",
+                question: "When you're being fully yourself, your energy feels:",
+                options: [
+                    { essence: "flame", text: "Like a fire — intense, consuming, impossible to ignore" },
+                    { essence: "keeper", text: "Like a forest — grounded, breathing, alive with quiet life" },
+                    { essence: "sage", text: "Like a cathedral — ordered, reverent, standing through centuries" },
+                    { essence: "spark", text: "Like fireworks — bright, surprising, delightfully unpredictable" },
+                    { essence: "heart", text: "Like a hearth — warm, glowing, drawing others close" },
+                    { essence: "grace", text: "Like morning light — soft, pure, gently illuminating" },
+                    { essence: "veil", text: "Like mist — present but not quite solid, suggesting depths beyond" }
+                ]
+            },
+            {
+                section: "Physical Expression",
+                question: "Your natural way of moving through the world is:",
+                options: [
+                    { essence: "flame", text: "Purposeful and direct — you walk like you know where you're going" },
+                    { essence: "keeper", text: "Easy and unhurried — you move with natural, relaxed rhythm" },
+                    { essence: "sage", text: "Measured and graceful — controlled, never rushed or sloppy" },
+                    { essence: "spark", text: "Quick and animated — lots of gesture, energy in motion" },
+                    { essence: "heart", text: "Flowing and gentle — soft movements, unhurried grace" },
+                    { essence: "grace", text: "Light and delicate — small movements, gentle steps" },
+                    { essence: "veil", text: "Floating and fluid — almost like you're moving through water" }
+                ]
+            },
+            {
+                section: "Physical Expression",
+                question: "Your hands and gestures tend to be:",
+                options: [
+                    { essence: "flame", text: "Bold and emphatic — your hands punctuate your words" },
+                    { essence: "keeper", text: "Natural and unself-conscious — you don't think about them much" },
+                    { essence: "sage", text: "Controlled and elegant — refined, never excessive" },
+                    { essence: "spark", text: "Animated and expressive — they're always in motion" },
+                    { essence: "heart", text: "Soft and touching — you reach out, you connect" },
+                    { essence: "grace", text: "Small and gentle — delicate movements, light touch" },
+                    { essence: "veil", text: "Elongated and graceful — almost dance-like, expressive" }
+                ]
+            },
+            {
+                section: "Physical Expression",
+                question: "Your voice and speaking style tend toward:",
+                options: [
+                    { essence: "flame", text: "Resonant and commanding — people stop and listen" },
+                    { essence: "keeper", text: "Warm and conversational — easy, like talking to a friend" },
+                    { essence: "sage", text: "Measured and clear — thoughtful, well-composed" },
+                    { essence: "spark", text: "Animated and varied — lots of inflection, quick pace" },
+                    { essence: "heart", text: "Soft and melodic — soothing, warm tones" },
+                    { essence: "grace", text: "Gentle and light — soft-spoken, sweet" },
+                    { essence: "veil", text: "Quiet and thoughtful — pauses that say as much as words" }
+                ]
+            },
+            {
+                section: "Aesthetic Attraction",
+                question: "You're most drawn to interior spaces that feel:",
+                options: [
+                    { essence: "flame", text: "Bold and striking — high ceilings, dramatic art, statement pieces" },
+                    { essence: "keeper", text: "Natural and lived-in — plants, wood, comfortable textures" },
+                    { essence: "sage", text: "Timeless and refined — antiques, quality pieces, ordered beauty" },
+                    { essence: "spark", text: "Eclectic and interesting — unexpected combinations, colorful, fun" },
+                    { essence: "heart", text: "Soft and inviting — plush textures, warm colors, cozy corners" },
+                    { essence: "grace", text: "Light and delicate — pastels, florals, gentle prettiness" },
+                    { essence: "veil", text: "Atmospheric and unusual — moody lighting, art, otherworldly feel" }
+                ]
+            },
+            {
+                section: "Aesthetic Attraction",
+                question: "The art and images you're most drawn to tend to be:",
+                options: [
+                    { essence: "flame", text: "Powerful and provocative — bold colors, strong statements" },
+                    { essence: "keeper", text: "Natural and organic — landscapes, nature, earthy tones" },
+                    { essence: "sage", text: "Classical and masterful — old masters, timeless beauty" },
+                    { essence: "spark", text: "Playful and unexpected — pop art, whimsy, bright colors" },
+                    { essence: "heart", text: "Romantic and sensory — flowers, soft light, intimate scenes" },
+                    { essence: "grace", text: "Sweet and gentle — soft imagery, innocence, light" },
+                    { essence: "veil", text: "Mysterious and symbolic — surrealism, religious iconography, the numinous" }
+                ]
+            },
+            {
+                section: "Aesthetic Attraction",
+                question: "The music that speaks to your soul is:",
+                options: [
+                    { essence: "flame", text: "Powerful and moving — full orchestral, dramatic, anthemic" },
+                    { essence: "keeper", text: "Organic and authentic — folk, acoustic, unplugged" },
+                    { essence: "sage", text: "Classical and refined — Bach, timeless compositions" },
+                    { essence: "spark", text: "Upbeat and energizing — makes you want to move" },
+                    { essence: "heart", text: "Romantic and emotional — love songs, lush arrangements" },
+                    { essence: "grace", text: "Sweet and melodic — gentle, pure voices, simple beauty" },
+                    { essence: "veil", text: "Atmospheric and transcendent — chant, ambient, otherworldly" }
+                ]
+            },
+            {
+                section: "Aesthetic Attraction",
+                question: "When you imagine your ideal wardrobe, you see:",
+                options: [
+                    { essence: "flame", text: "Architectural pieces, bold colors, striking silhouettes" },
+                    { essence: "keeper", text: "Quality basics, natural fabrics, unfussy elegance" },
+                    { essence: "sage", text: "Timeless investment pieces, refined neutrals, classic cuts" },
+                    { essence: "spark", text: "Mix of high and low, unexpected pairings, personality pieces" },
+                    { essence: "heart", text: "Soft fabrics, flowing shapes, feminine details" },
+                    { essence: "grace", text: "Delicate pieces, soft colors, sweet details" },
+                    { essence: "veil", text: "Unusual pieces, ethereal fabrics, otherworldly aesthetic" }
+                ]
+            },
+            {
+                section: "Aesthetic Attraction",
+                question: "The jewelry that feels most 'you' is:",
+                options: [
+                    { essence: "flame", text: "Bold statement pieces — large, geometric, impossible to miss" },
+                    { essence: "keeper", text: "Natural materials — wood, stones, artisan-made, organic shapes" },
+                    { essence: "sage", text: "Classic quality — pearls, gold, heirloom pieces" },
+                    { essence: "spark", text: "Fun and unexpected — mixed metals, quirky pieces, colorful" },
+                    { essence: "heart", text: "Romantic and soft — rose gold, hearts, delicate chains" },
+                    { essence: "grace", text: "Dainty and sweet — small pieces, subtle sparkle" },
+                    { essence: "veil", text: "Unusual and meaningful — symbolic pieces, moonstones, mystical" }
+                ]
+            },
+            {
+                section: "Inner Landscape",
+                question: "In prayer or quiet reflection, you most naturally:",
+                options: [
+                    { essence: "flame", text: "Intercede boldly — you approach God with confidence and urgency" },
+                    { essence: "keeper", text: "Rest in gratitude — you notice God in creation and daily gifts" },
+                    { essence: "sage", text: "Follow liturgy — you're nourished by ancient prayers and structure" },
+                    { essence: "spark", text: "Speak freely — your prayers are spontaneous conversations" },
+                    { essence: "heart", text: "Pour out your heart — emotional, intimate, relational" },
+                    { essence: "grace", text: "Trust simply — childlike faith, simple words" },
+                    { essence: "veil", text: "Rest in silence — contemplation, mystery, wordless communion" }
+                ]
+            },
+            {
+                section: "Inner Landscape",
+                question: "The aspect of God's character that most draws you is:",
+                options: [
+                    { essence: "flame", text: "His righteousness and justice — holy power that sets things right" },
+                    { essence: "keeper", text: "His faithfulness and provision — the God who sustains all creation" },
+                    { essence: "sage", text: "His eternal wisdom — the unchanging I AM" },
+                    { essence: "spark", text: "His joy and delight — the God who invented laughter" },
+                    { essence: "heart", text: "His tender mercy — the God who comforts like a mother" },
+                    { essence: "grace", text: "His gentleness — the Good Shepherd, the Lamb" },
+                    { essence: "veil", text: "His transcendent mystery — the God beyond comprehension" }
+                ]
+            },
+            {
+                section: "Inner Landscape",
+                question: "The Biblical woman you most resonate with is:",
+                options: [
+                    { essence: "flame", text: "Deborah or Esther — bold leaders who changed history" },
+                    { essence: "keeper", text: "Ruth or the Proverbs 31 woman — faithful, hardworking, grounded" },
+                    { essence: "sage", text: "Elizabeth or Anna — dignified women of faith and wisdom" },
+                    { essence: "spark", text: "Miriam or Tabitha — joyful, active, full of life" },
+                    { essence: "heart", text: "Mary Magdalene or the woman with the perfume — passionate devotion" },
+                    { essence: "grace", text: "Young Mary or Hannah — humble, trusting, pure-hearted" },
+                    { essence: "veil", text: "Mary of Bethany — the contemplative at Jesus' feet" }
+                ]
+            },
+            {
+                section: "Inner Landscape",
+                question: "When facing difficulty, your natural response is to:",
+                options: [
+                    { essence: "flame", text: "Take action — confront it, speak truth, lead through it" },
+                    { essence: "keeper", text: "Stay steady — put one foot in front of the other, tend what you can" },
+                    { essence: "sage", text: "Seek wisdom — research, pray, find the right path forward" },
+                    { essence: "spark", text: "Find the light — look for humor, hope, unexpected silver linings" },
+                    { essence: "heart", text: "Feel it deeply — process emotions, seek comfort, nurture yourself" },
+                    { essence: "grace", text: "Trust God — simple faith that He will make a way" },
+                    { essence: "veil", text: "Go inward — contemplation, solitude, seeking deeper meaning" }
+                ]
+            },
+            {
+                section: "Social Expression",
+                question: "In a group setting, you naturally tend to:",
+                options: [
+                    { essence: "flame", text: "Lead the conversation — you have things to say and presence to say them" },
+                    { essence: "keeper", text: "Make everyone comfortable — you're the one checking if people have what they need" },
+                    { essence: "sage", text: "Observe thoughtfully — you speak when you have something worth saying" },
+                    { essence: "spark", text: "Energize the room — you bring levity, stories, connection" },
+                    { essence: "heart", text: "Connect emotionally — you draw people out, you notice feelings" },
+                    { essence: "grace", text: "Listen gently — you're present without needing attention" },
+                    { essence: "veil", text: "Hover at the edges — meaningful one-on-one conversations, not center stage" }
+                ]
+            },
+            {
+                section: "Social Expression",
+                question: "People come to you when they need:",
+                options: [
+                    { essence: "flame", text: "A kick in the pants — truth-telling, courage, bold advice" },
+                    { essence: "keeper", text: "Practical help — you'll show up, roll up your sleeves, get it done" },
+                    { essence: "sage", text: "Wise counsel — thoughtful, considered perspective" },
+                    { essence: "spark", text: "Cheering up — you help them see the bright side" },
+                    { essence: "heart", text: "A soft place to land — unconditional warmth and comfort" },
+                    { essence: "grace", text: "Gentle presence — quiet companionship, sweet encouragement" },
+                    { essence: "veil", text: "Deeper meaning — you help them see the bigger picture" }
+                ]
+            },
+            {
+                section: "Social Expression",
+                question: "Your ideal way to show love to others is:",
+                options: [
+                    { essence: "flame", text: "Advocating for them — fighting their battles, speaking up" },
+                    { essence: "keeper", text: "Serving practically — cooking, helping, being there" },
+                    { essence: "sage", text: "Giving wise guidance — sharing knowledge and perspective" },
+                    { essence: "spark", text: "Creating joy — planning fun, bringing laughter, celebrating them" },
+                    { essence: "heart", text: "Nurturing deeply — affection, care, emotional attunement" },
+                    { essence: "grace", text: "Gentle kindness — small sweet gestures, pure intentions" },
+                    { essence: "veil", text: "Praying for them — holding them in sacred space" }
+                ]
+            },
+            {
+                section: "Authentic Self",
+                question: "You feel most like yourself when you're wearing:",
+                options: [
+                    { essence: "flame", text: "Something bold — you can take up space, make a statement" },
+                    { essence: "keeper", text: "Something comfortable — real clothes for real life" },
+                    { essence: "sage", text: "Something classic — quality, polished, appropriate" },
+                    { essence: "spark", text: "Something fun — personality, color, conversation starters" },
+                    { essence: "heart", text: "Something soft — flowing, feminine, touchable" },
+                    { essence: "grace", text: "Something sweet — pretty, gentle, lovely" },
+                    { essence: "veil", text: "Something unusual — not trendy, more like art" }
+                ]
+            },
+            {
+                section: "Authentic Self",
+                question: "When getting dressed for an important event, you hope to look:",
+                options: [
+                    { essence: "flame", text: "Powerful and memorable — people will remember you" },
+                    { essence: "keeper", text: "Authentic and appropriate — yourself, but elevated" },
+                    { essence: "sage", text: "Polished and dignified — timelessly appropriate" },
+                    { essence: "spark", text: "Interesting and delightful — something to talk about" },
+                    { essence: "heart", text: "Beautiful and inviting — soft glamour, approachable elegance" },
+                    { essence: "grace", text: "Pretty and sweet — lovely without trying too hard" },
+                    { essence: "veil", text: "Striking and transcendent — beautiful in an unusual way" }
+                ]
+            },
+            {
+                section: "Authentic Self",
+                question: "Clothes that feel like a 'costume' on you are those that are:",
+                options: [
+                    { essence: "flame", text: "Too quiet, too bland, too forgettable" },
+                    { essence: "keeper", text: "Too fussy, too formal, too high-maintenance" },
+                    { essence: "sage", text: "Too trendy, too loud, too casual" },
+                    { essence: "spark", text: "Too boring, too serious, too expected" },
+                    { essence: "heart", text: "Too harsh, too angular, too cold" },
+                    { essence: "grace", text: "Too bold, too dark, too sophisticated" },
+                    { essence: "veil", text: "Too ordinary, too literal, too predictable" }
+                ]
+            },
+            {
+                section: "Authentic Self",
+                question: "The compliment that would mean the most to you is:",
+                options: [
+                    { essence: "flame", text: "\"You're so powerful — you could change the world\"" },
+                    { essence: "keeper", text: "\"You're so real — being with you feels like coming home\"" },
+                    { essence: "sage", text: "\"You're so elegant — you have such timeless grace\"" },
+                    { essence: "spark", text: "\"You're so fun — you light up the room\"" },
+                    { essence: "heart", text: "\"You're so warm — you make everyone feel loved\"" },
+                    { essence: "grace", text: "\"You're so sweet — there's something pure about you\"" },
+                    { essence: "veil", text: "\"You're so fascinating — there's something otherworldly about you\"" }
+                ]
+            },
+            {
+                section: "Authentic Self",
+                question: "If your life were a story, the genre would be:",
+                options: [
+                    { essence: "flame", text: "Epic — battles, transformation, world-changing moments" },
+                    { essence: "keeper", text: "Literary fiction — real life, beautifully observed" },
+                    { essence: "sage", text: "Historical — rooted in tradition, timeless themes" },
+                    { essence: "spark", text: "Comedy — joy, adventure, happy surprises" },
+                    { essence: "heart", text: "Romance — love, connection, emotional depth" },
+                    { essence: "grace", text: "Fairytale — innocence, goodness, hope" },
+                    { essence: "veil", text: "Magical realism — ordinary life shot through with wonder" }
+                ]
+            },
+            {
+                section: "Deep Resonance",
+                question: "The season that feels most like 'home' to your soul is:",
+                options: [
+                    { essence: "flame", text: "High summer or deep winter — seasons of intensity" },
+                    { essence: "keeper", text: "Early autumn — harvest, groundedness, warmth" },
+                    { essence: "sage", text: "Late autumn — refined, elegant, rich depth" },
+                    { essence: "spark", text: "Spring — new life, energy, possibility" },
+                    { essence: "heart", text: "Late summer — lush, warm, abundant" },
+                    { essence: "grace", text: "Early spring — tender, fresh, delicate" },
+                    { essence: "veil", text: "Winter twilight — liminal, quiet, mysterious" }
+                ]
+            },
+            {
+                section: "Deep Resonance",
+                question: "The natural setting where you feel most yourself is:",
+                options: [
+                    { essence: "flame", text: "Mountains or coastline — dramatic, powerful landscapes" },
+                    { essence: "keeper", text: "Gardens or farmland — cultivated, fruitful earth" },
+                    { essence: "sage", text: "Ancient forests or old estates — rooted, enduring" },
+                    { essence: "spark", text: "Meadows or sunny beaches — open, bright, alive" },
+                    { essence: "heart", text: "Flower gardens or vineyards — lush, sensory, beautiful" },
+                    { essence: "grace", text: "Gentle streams or morning gardens — soft, peaceful" },
+                    { essence: "veil", text: "Mist-covered moors or moonlit waters — otherworldly, liminal" }
+                ]
+            },
+            {
+                section: "Deep Resonance",
+                question: "The word that best describes what you bring to the world is:",
+                options: [
+                    { essence: "flame", text: "POWER" },
+                    { essence: "keeper", text: "AUTHENTICITY" },
+                    { essence: "sage", text: "WISDOM" },
+                    { essence: "spark", text: "JOY" },
+                    { essence: "heart", text: "LOVE" },
+                    { essence: "grace", text: "PURITY" },
+                    { essence: "veil", text: "MYSTERY" }
+                ]
+            }
+        ];
+
+        // State
+        let currentQuestion = 0;
+        let answers = {};
+
+        // Functions
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function startQuiz() {
+            currentQuestion = 0;
+            answers = {};
+            showScreen('question-screen');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+
+            document.getElementById('section-label').textContent = q.section;
+            document.getElementById('question-count').textContent = `${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('question-text').textContent = q.question;
+            document.getElementById('percent-complete').textContent = `${Math.round(progress)}% complete`;
+            document.getElementById('back-btn').disabled = currentQuestion === 0;
+
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            q.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option';
+                if (answers[currentQuestion] === option.essence) {
+                    btn.classList.add('selected');
+                }
+                btn.textContent = option.text;
+                btn.onclick = () => selectOption(option.essence);
+                container.appendChild(btn);
+            });
+        }
+
+        function selectOption(essence) {
+            answers[currentQuestion] = essence;
+
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function goBack() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function calculateResults() {
+            const scores = {
+                flame: 0,
+                keeper: 0,
+                sage: 0,
+                spark: 0,
+                heart: 0,
+                grace: 0,
+                veil: 0
+            };
+
+            Object.values(answers).forEach(essence => {
+                scores[essence]++;
+            });
+
+            const total = Object.values(scores).reduce((a, b) => a + b, 0);
+            const percentages = {};
+            Object.keys(scores).forEach(key => {
+                percentages[key] = Math.round((scores[key] / total) * 100);
+            });
+
+            const sorted = Object.entries(percentages).sort((a, b) => b[1] - a[1]);
+            return { percentages, sorted };
+        }
+
+        function showResults() {
+            const { percentages, sorted } = calculateResults();
+            const primary = sorted[0][0];
+            const secondary = sorted[1][0];
+            const maxPercent = sorted[0][1];
+
+            // Header
+            document.getElementById('results-title').textContent = 
+                `${essences[primary].name} + ${essences[secondary].name}`;
+            document.getElementById('results-subtitle').textContent = 
+                `${essences[primary].subtitle} with ${essences[secondary].subtitle.toLowerCase()}`;
+
+            // Bar graph
+            const barGraph = document.getElementById('bar-graph');
+            barGraph.innerHTML = '';
+
+            sorted.forEach(([essence, percent], index) => {
+                const isPrimary = index < 2;
+                const item = document.createElement('div');
+                item.className = 'bar-item';
+                item.innerHTML = `
+                    <div class="bar-header">
+                        <span class="bar-name ${isPrimary ? 'primary' : ''}" style="color: ${isPrimary ? essences[essence].color : '#5C5142'}">
+                            ${essences[essence].name}${index === 0 ? ' (Primary)' : index === 1 ? ' (Secondary)' : ''}
+                        </span>
+                        <span class="bar-percent">${percent}%</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: ${(percent / maxPercent) * 100}%; background: ${isPrimary ? essences[essence].color : 'var(--gold)'}; opacity: ${isPrimary ? 1 : 0.4};"></div>
+                    </div>
+                `;
+                barGraph.appendChild(item);
+            });
+
+            // Primary essence
+            document.getElementById('primary-essence').innerHTML = renderEssenceCard(primary, 'Primary');
+            
+            // Secondary essence
+            document.getElementById('secondary-essence').innerHTML = renderEssenceCard(secondary, 'Secondary');
+
+            // Blend text
+            document.getElementById('blend-text').innerHTML = `
+                With <strong>${essences[primary].name}</strong> as your primary essence and <strong>${essences[secondary].name}</strong> as your secondary, 
+                you uniquely reflect both ${essences[primary].reflects.split(',')[0].toLowerCase()} and ${essences[secondary].reflects.split(',')[0].toLowerCase()}. 
+                This combination is not accidental — it's how God designed you to reveal His beauty to the world.
+            `;
+
+            showScreen('results-screen');
+        }
+
+        function renderEssenceCard(essenceKey, label) {
+            const e = essences[essenceKey];
+            return `
+                <div class="essence-card" style="border-color: ${e.color};">
+                    <div class="essence-header">
+                        <span class="essence-badge" style="background: ${e.color};">${label}</span>
+                        <h2 class="essence-name" style="color: ${e.color};">${e.name}</h2>
+                    </div>
+                    <p class="essence-subtitle" style="color: ${e.color};">${e.subtitle}</p>
+                    <p class="essence-description">${e.description}</p>
+                    <div class="essence-info-box">
+                        <p class="label">You ${label === 'Primary' ? '' : 'Also '}Reflect</p>
+                        <p>${e.reflects}</p>
+                    </div>
+                    <div class="essence-info-box">
+                        <p class="label">Style Expression</p>
+                        <p>${e.style}</p>
+                    </div>
+                    <p class="essence-scripture" style="border-left-color: ${e.color};">${e.scripture}</p>
+                </div>
+            `;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            answers = {};
+            showScreen('intro-screen');
+        }
+    </script>
+</body>
+</html>
