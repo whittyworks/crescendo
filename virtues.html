@@ -390,6 +390,36 @@
             box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
         }
 
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            color: var(--gold-dark);
+            text-decoration: none;
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+        }
+
+        .btn-download:hover {
+            background: var(--gold);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-download .download-icon {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
         .cta-section .note {
             font-size: 0.9rem;
             color: var(--text-medium);
@@ -557,6 +587,11 @@
                 it's about becoming fully alive, fully human, fully the person God designed you to be. 
                 These 42 virtues reveal the landscape of a soul flourishing in grace.
             </p>
+            <div style="margin-top: 2rem;">
+                <a href="assets/downloads/42-virtues-st-albert-the-great.pdf" download class="btn-download">
+                    <span class="download-icon">↓</span> Download PDF Guide
+                </a>
+            </div>
         </div>
     </section>
 
