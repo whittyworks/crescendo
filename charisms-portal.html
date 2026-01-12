@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 25 Charisms · Participant Portal · My Holy Crescendo</title>
+    <meta name="description" content="Discover the 25 charisms (spiritual gifts) of the Holy Spirit. Learn how God has uniquely gifted you to serve others and build His kingdom.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+            --mauve: #DCC5D8;
+            --sage: #B8C5B0;
+            --blush: #EBD4D0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .script {
+            font-family: 'Cinzel', serif;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        .sans {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        /* Portal Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(253, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .logo-link {
+            text-decoration: none;
+        }
+
+        .logo-image {
+            height: 45px;
+            width: auto;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-image:hover {
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a.portal-back {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .nav-links a.portal-back:hover {
+            color: var(--gold-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 8rem 5% 4rem;
+            overflow: hidden;
+            background: 
+                radial-gradient(ellipse at top, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(245, 225, 218, 0.4) 0%, transparent 40%),
+                radial-gradient(ellipse at bottom right, rgba(232, 237, 228, 0.4) 0%, transparent 40%),
+                var(--cream);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-medium);
+            line-height: 1.9;
+            max-width: 650px;
+            margin: 0 auto 2rem;
+        }
+
+        .gold-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 2rem auto;
+            max-width: 150px;
+        }
+
+        .charisms-intro {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            margin: 2rem auto;
+            max-width: 550px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
+        }
+
+        .charisms-intro-icon {
+            font-size: 2rem;
+        }
+
+        .charisms-intro-text {
+            color: var(--text-medium);
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* What are Charisms */
+        section {
+            padding: 5rem 5%;
+        }
+
+        .what-are-charisms {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .charisms-block {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--gold);
+        }
+
+        .charisms-block p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+
+        .charisms-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .ccc-quote {
+            font-style: italic;
+            color: var(--gold-dark);
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .ccc-quote cite {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            font-style: normal;
+        }
+
+        /* Charisms Grid */
+        .charisms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .charism-card {
+            background: white;
+            padding: 2rem 1.75rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.08);
+            border-top: 3px solid var(--gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .charism-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+        }
+
+        .charism-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .charism-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .charism-description {
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+
+        /* Assessment CTA */
+        .assessment-cta {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(253, 248, 243, 0.9), rgba(220, 197, 216, 0.15));
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .assessment-cta h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+        }
+
+        .assessment-cta p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .assessment-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .assessment-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .assessment-note {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-top: 1.25rem;
+            font-style: italic;
+        }
+
+        .assessment-note a {
+            color: var(--gold);
+        }
+
+        /* Discernment Steps */
+        .discernment-block {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .discernment-block h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+        }
+
+        .discernment-block > p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .discernment-steps {
+            list-style: none;
+        }
+
+        .discernment-steps li {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .step-content p {
+            color: var(--text-medium);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Scripture */
+        .scripture-section {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .scripture-text {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--gold-dark);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .scripture-ref {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 3rem 5% 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .footer-tagline {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .copyright {
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+
+            .charisms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .charisms-intro {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .charisms-intro-text {
+                text-align: center;
+            }
+
+            .discernment-steps li {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Portal Navigation -->
+    <nav class="sans">
+        <a href="index.html" class="logo-link">
+            <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
+        </a>
+        <ul class="nav-links">
+            <li><a href="participant-portal.html" class="portal-back">← Back to Portal</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-subtitle sans">Spiritual Gifts Guide</p>
+            <h1 class="hero-title script">The 25 Charisms</h1>
+            <p class="hero-tagline">of the Holy Spirit</p>
+            <div class="gold-line"></div>
+            <p class="hero-description">
+                God has given you unique spiritual gifts—charisms—to serve others and build His kingdom. 
+                Discovering your charisms helps you understand how the Holy Spirit is personally inviting 
+                you to participate in His work.
+            </p>
+            <div class="charisms-intro">
+                <div class="charisms-intro-icon">🕊️</div>
+                <div class="charisms-intro-text">
+                    <strong>Every baptized Christian has charisms.</strong><br>
+                    The question isn't <em>if</em> you have them, but <em>which</em> ones.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What are Charisms -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">Understanding Charisms</p>
+                <h2 class="section-title script">What Are Charisms?</h2>
+            </div>
+
+            <div class="what-are-charisms">
+                <div class="charisms-block">
+                    <p>
+                        <strong>Charisms</strong> (from the Greek <em>charisma</em>, meaning "gift of grace") are 
+                        special abilities given by the Holy Spirit to all Christians through Baptism and Confirmation. 
+                        Unlike natural talents, charisms are supernatural gifts meant specifically for building up the 
+                        Body of Christ and serving others.
+                    </p>
+                    <p>
+                        While talents can be used for good or selfish purposes, charisms are always oriented toward 
+                        love and service. They empower us to be channels of God's grace in ways that exceed our 
+                        natural abilities.
+                    </p>
+                    <div class="ccc-quote">
+                        "Whether extraordinary or simple and humble, charisms are graces of the Holy Spirit which 
+                        directly or indirectly benefit the Church, ordered as they are to her building up, to the 
+                        good of men, and to the needs of the world."
+                        <cite>— Catechism of the Catholic Church, 799</cite>
+                    </div>
+                    <p>
+                        You likely have 2-4 charisms that are particularly strong in your life. Discovering them 
+                        helps you understand where you're called to serve and how God has uniquely equipped you 
+                        for His purposes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The 25 Charisms -->
+    <section style="background: var(--cream-dark);">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">The Gifts</p>
+                <h2 class="section-title script">The 25 Charisms</h2>
+                <p class="section-description">
+                    While not an exhaustive list, these 25 charisms represent the most commonly recognized 
+                    spiritual gifts given by the Holy Spirit for service in the Church and world.
+                </p>
+            </div>
+
+            <div class="charisms-grid">
+                <div class="charism-card">
+                    <div class="charism-icon">📋</div>
+                    <h3 class="charism-name">Administration</h3>
+                    <p class="charism-description">The ability to organize people, tasks, and resources to accomplish goals that serve the Church and others. Those with this gift bring order and efficiency to ministry.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">🎨</div>
+                    <h3 class="charism-name">Craftsmanship</h3>
+                    <p class="charism-description">The ability to use hands and creativity to create art, crafts, or other works that reflect God's beauty and inspire others toward faith and wonder.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">🔎</div>
+                    <h3 class="charism-name">Discernment</h3>
+                    <p class="charism-description">The ability to perceive whether something is from God, from human nature, or from the evil one. Those with this gift sense spiritual realities others miss.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">💻</div>
+                    <h3 class="charism-name">Digital Communications</h3>
+                    <p class="charism-description">The ability to use technology and digital platforms to spread the Gospel, build community, and serve the Church's mission in the modern world.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">💪</div>
+                    <h3 class="charism-name">Encouragement</h3>
+                    <p class="charism-description">The ability to come alongside others with words that comfort, strengthen, and urge them forward in faith. Those with this gift lift spirits and inspire perseverance.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">📣</div>
+                    <h3 class="charism-name">Evangelism</h3>
+                    <p class="charism-description">The ability to share the Gospel in a way that draws others to faith in Christ. Those with this gift naturally find opportunities to share God's love.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">✝️</div>
+                    <h3 class="charism-name">Faith</h3>
+                    <p class="charism-description">An extraordinary trust in God's promises and providence, even in difficult circumstances. Those with this gift inspire others to believe and trust God more deeply.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">💎</div>
+                    <h3 class="charism-name">Giving</h3>
+                    <p class="charism-description">The ability to give generously of resources, time, and self with joy and without attachment. Those with this gift experience deep fulfillment through generosity.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">🌍</div>
+                    <h3 class="charism-name">Global & Cultural Awareness</h3>
+                    <p class="charism-description">The ability to connect across cultural, ethnic, and socioeconomic differences, bringing diverse people together in Christ and enhancing community.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">💚</div>
+                    <h3 class="charism-name">Healing</h3>
+                    <p class="charism-description">The ability to be a channel of God's healing power—physical, emotional, or spiritual. Those with this gift bring restoration and comfort to the suffering.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">🤝</div>
+                    <h3 class="charism-name">Helping</h3>
+                    <p class="charism-description">The ability to joyfully support others in their work and calling, often behind the scenes. Those with this gift find fulfillment in enabling others' success.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">🏠</div>
+                    <h3 class="charism-name">Hospitality</h3>
+                    <p class="charism-description">The ability to create welcoming, warm environments where people feel at home and cared for. Those with this gift make strangers feel like family.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">🙏</div>
+                    <h3 class="charism-name">Intercession</h3>
+                    <p class="charism-description">The ability to pray for others with unusual faithfulness and see remarkable answers to prayer. Those with this gift feel called to stand in the gap for others.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">📚</div>
+                    <h3 class="charism-name">Knowledge</h3>
+                    <p class="charism-description">The ability to study, understand, and communicate truth in ways that enlighten others. Those with this gift love learning and sharing wisdom from faith and reason.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">👑</div>
+                    <h3 class="charism-name">Leadership</h3>
+                    <p class="charism-description">The ability to see God's vision and guide others toward it with clarity and conviction. Those with this gift naturally inspire people to follow and work together.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">💕</div>
+                    <h3 class="charism-name">Mercy</h3>
+                    <p class="charism-description">The ability to feel deep compassion for those who suffer and respond with practical, loving action. Those with this gift are drawn to the marginalized and hurting.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">🎵</div>
+                    <h3 class="charism-name">Musicianship</h3>
+                    <p class="charism-description">The ability to write, perform, or lead music that draws people into worship and encounter with God. Those with this gift help others experience God through song.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">☮️</div>
+                    <h3 class="charism-name">Peacemaking</h3>
+                    <p class="charism-description">The ability to mediate conflict and bring reconciliation between people or groups. Those with this gift help restore broken relationships and build unity.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">🔥</div>
+                    <h3 class="charism-name">Prophecy</h3>
+                    <p class="charism-description">The ability to receive and communicate messages from God that speak to the present moment. Those with this gift call people to deeper faithfulness and awareness.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">🛠️</div>
+                    <h3 class="charism-name">Service</h3>
+                    <p class="charism-description">The ability to identify needs and meet them with joy, often in practical, hands-on ways. Those with this gift express love through action and deeds.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">🐑</div>
+                    <h3 class="charism-name">Shepherding</h3>
+                    <p class="charism-description">The ability to nurture, guide, and care for a group of people over time, helping them grow in faith. Those with this gift take responsibility for others' spiritual welfare.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">📖</div>
+                    <h3 class="charism-name">Teaching</h3>
+                    <p class="charism-description">The ability to explain truth clearly in ways that help others understand and apply it. Those with this gift make complex ideas accessible and transformative.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">🕊️</div>
+                    <h3 class="charism-name">Voluntary Poverty</h3>
+                    <p class="charism-description">The ability to live simply and joyfully with few possessions, freeing oneself for greater service. Those with this gift find freedom in detachment from material things.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">💡</div>
+                    <h3 class="charism-name">Wisdom</h3>
+                    <p class="charism-description">The ability to see situations from God's perspective and offer insight for decisions and direction. Those with this gift help others navigate complex situations.</p>
+                </div>
+
+                <div class="charism-card">
+                    <div class="charism-icon">✍️</div>
+                    <h3 class="charism-name">Writing</h3>
+                    <p class="charism-description">The ability to compose words that reveal truth, beauty, and goodness in ways that touch hearts and minds. Those with this gift communicate God's love through the written word.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Take the Assessment -->
+    <section>
+        <div class="container">
+            <div class="assessment-cta">
+                <h3>Discover Your Charisms</h3>
+                <p>
+                    Ready to discover which charisms the Holy Spirit has given you? Take this free 
+                    Spiritual Gifts Inventory to begin your discernment journey.
+                </p>
+                <a href="https://spiritualgiftsinventory.com/" target="_blank" rel="noopener" class="assessment-btn">
+                    Take the Free Assessment →
+                </a>
+                <p class="assessment-note">
+                    This free inventory is provided by the <a href="https://spiritualgiftsinventory.com/" target="_blank" rel="noopener">Catholic Archdiocese of Oklahoma City</a>. 
+                    It takes approximately 15-20 minutes to complete.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discernment Process -->
+    <section style="background: var(--cream-dark);">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">The Process</p>
+                <h2 class="section-title script">Discerning Your Charisms</h2>
+            </div>
+
+            <div class="discernment-block">
+                <h3>More Than a Quiz</h3>
+                <p>
+                    While a spiritual gifts inventory is a helpful starting point, true charism discernment 
+                    is an ongoing process that involves prayer, experience, and community confirmation. 
+                    Here's how to continue your journey:
+                </p>
+                
+                <ul class="discernment-steps">
+                    <li>
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Take an Inventory</h4>
+                            <p>Complete a spiritual gifts assessment to identify potential charisms. This gives you a starting point for exploration.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Experiment</h4>
+                            <p>Try serving in areas related to your top charisms. Do you experience joy, energy, and effectiveness? Do others benefit?</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Seek Confirmation</h4>
+                            <p>Ask trusted friends, mentors, or spiritual directors if they see these gifts in you. Charisms are confirmed by community.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Look for Fruit</h4>
+                            <p>True charisms bear fruit—both in your own spiritual life and in tangible benefits to others. Does your service produce good fruit?</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Pray & Discern</h4>
+                            <p>Bring your charisms to prayer. Ask the Holy Spirit to confirm, clarify, and guide you in using them for God's glory.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripture -->
+    <section>
+        <div class="scripture-section">
+            <p class="scripture-text">
+                "Now there are varieties of gifts, but the same Spirit; and there are varieties of service, 
+                but the same Lord; and there are varieties of activities, but it is the same God who empowers 
+                them all in everyone. To each is given the manifestation of the Spirit for the common good."
+            </p>
+            <p class="scripture-ref">— 1 Corinthians 12:4-7</p>
+        </div>
+    </section>
+
+    <!-- Portal Footer -->
+    <footer>
+        <div class="footer-logo script">My Holy Crescendo</div>
+        <p class="footer-tagline">fearfully & wonderfully made</p>
+        
+        <div class="footer-links sans">
+            <a href="participant-portal.html">Portal</a>
+            <a href="index.html">Main Site</a>
+            <a href="mailto:myholycrescendo@gmail.com">Contact</a>
+        </div>
+
+        <p class="copyright">
+            © 2025 My Holy Crescendo. All rights reserved.
+        </p>
+    </footer>
+
+</body>
+</html>
