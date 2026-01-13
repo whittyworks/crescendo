@@ -2965,6 +2965,15 @@ footer {
     border: 2px solid rgba(212, 175, 55, 0.2);
 }
 
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
 /* Go Deeper Section */
 .deeper-options {
     display: grid;
