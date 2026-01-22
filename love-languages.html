@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Languages & Styles · My Holy Crescendo</title>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Love Languages & Styles · My Holy Crescendo">
+    <meta property="og:description" content="Discover how you give and receive love through the 5 Love Languages and 7 Love Styles.">
+    <meta property="og:url" content="https://myholycrescendo.com/love-languages.html">
+    <meta name="description" content="Discover how you give and receive love through the 5 Love Languages and 7 Love Styles.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <style>
+        /* Page-specific styles */
+        .love-hero {
+            min-height: 75vh;
+        }
+        
+        .love-intro {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            margin: 2rem auto;
+            max-width: 650px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
+        }
+        
+        .love-intro-icon {
+            font-size: 2rem;
+        }
+        
+        .love-intro-text {
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        
+        /* What section */
+        .what-are-section {
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
+        .info-block {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--gold);
+        }
+        
+        .info-block p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-block p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .scripture-quote {
+            font-style: italic;
+            color: var(--gold-dark);
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .scripture-quote cite {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            font-style: normal;
+        }
+        
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cards-grid.five-items {
+            max-width: 960px;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 2rem 1.75rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.08);
+            border-top: 3px solid var(--gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+        }
+        
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .card-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .card-description {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+        
+        /* Assessment CTA */
+        .assessment-cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(253, 248, 243, 0.9), rgba(220, 197, 216, 0.15));
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
+        .assessment-cta h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .assessment-cta p {
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .assessment-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gold);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+        }
+        
+        .assessment-btn:hover {
+            background: var(--gold-dark);
+            border-color: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+        
+        .assessment-note {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+        
+        .assessment-note a {
+            color: var(--gold-dark);
+        }
+        
+        /* Dual CTA */
+        .dual-cta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 3rem auto;
+        }
+        
+        .dual-cta .assessment-cta {
+            margin: 0;
+        }
+        
+        /* Alternatives Grid */
+        .alternatives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+        
+        .alternative-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .alternative-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .alt-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .alt-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .alt-subtitle {
+            font-size: 0.95rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .alt-description {
+            font-size: 1rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Scripture Section */
+        .scripture-section {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        
+        .scripture-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--gold-dark);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .scripture-ref {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            letter-spacing: 0.05em;
+        }
+        
+        @media (max-width: 768px) {
+            .dual-cta {
+                grid-template-columns: 1fr;
+            }
+            
+            .dual-cta .assessment-cta {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand script">My Holy Crescendo</a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-menu">
+                <a href="about.html" class="nav-link">About</a>
+                <a href="symphony-of-grace.html" class="nav-link">A Symphony of Grace</a>
+                <a href="made-beautiful.html" class="nav-link">Made Beautiful Retreat</a>
+                <a href="personal-journey.html" class="nav-link">Personal Journey</a>
+                <a href="prelude.html" class="nav-link highlight">Free Prelude</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero love-hero">
+        <div class="hero-bg"></div>
+        <div class="watercolor-flower flower-1"></div>
+        <div class="watercolor-flower flower-2"></div>
+        <div class="gold-leaf leaf-1"></div>
+        <div class="gold-leaf leaf-2"></div>
+        
+        <div class="hero-content">
+            <p class="hero-label sans">Week 7 · Giving & Receiving</p>
+            <h1 class="hero-title script">Love Languages & Styles</h1>
+            <p class="hero-subtitle">Discover how you give and receive love</p>
+        </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="reveal">
+        <div class="container">
+            <div class="love-intro">
+                <span class="love-intro-icon">💕</span>
+                <p class="love-intro-text">
+                    Understanding your love language and love style transforms how you 
+                    connect with God, yourself, and others.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Are Love Languages -->
+    <section class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">The Framework</p>
+                <h2 class="section-title script">Two Lenses on Love</h2>
+            </div>
+
+            <div class="what-are-section">
+                <div class="info-block">
+                    <p>
+                        <strong>The 5 Love Languages</strong>, developed by Dr. Gary Chapman, describe the 
+                        primary ways we express and prefer to receive love. When we speak someone's love 
+                        language, they feel truly seen and cherished.
+                    </p>
+                    <p>
+                        <strong>The 7 Love Styles</strong> describe different dimensions of how we connect 
+                        in relationships—from intellectual and emotional to physical and practical. Understanding 
+                        your style helps you recognize what you naturally give and what you deeply need.
+                    </p>
+                    <p>
+                        Together, these frameworks reveal the <em>how</em> of your heart—how you naturally 
+                        give love, how you long to receive it, and the dimensions that matter most to you.
+                    </p>
+                    
+                    <div class="scripture-quote">
+                        "Beloved, let us love one another, for love is from God, and whoever loves 
+                        has been born of God and knows God."
+                        <cite>— 1 John 4:7</cite>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The 5 Love Languages -->
+    <section class="reveal" style="background: var(--cream-dark);">
+        <div class="watercolor-flower flower-3" style="top: 10%; right: 5%;"></div>
+        <div class="gold-leaf leaf-1"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">Dr. Gary Chapman</p>
+                <h2 class="section-title script">The 5 Love Languages</h2>
+            </div>
+
+            <div class="cards-grid five-items">
+                <div class="info-card">
+                    <div class="card-icon">💬</div>
+                    <h3 class="card-name">Words of Affirmation</h3>
+                    <p class="card-description">
+                        You feel most loved through verbal compliments, words of appreciation, 
+                        encouragement, and hearing "I love you." Written notes and texts also speak 
+                        deeply to your heart.
+                    </p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="card-icon">⏰</div>
+                    <h3 class="card-name">Quality Time</h3>
+                    <p class="card-description">
+                        You feel most loved through undivided attention—someone fully present with you. 
+                        It's not just being together, but truly <em>being</em> together without distractions.
+                    </p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="card-icon">🎁</div>
+                    <h3 class="card-name">Receiving Gifts</h3>
+                    <p class="card-description">
+                        You feel most loved through thoughtful gifts—symbols that someone was thinking 
+                        of you. It's not about cost, but the thought, effort, and meaning behind the gift.
+                    </p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="card-icon">🤝</div>
+                    <h3 class="card-name">Acts of Service</h3>
+                    <p class="card-description">
+                        You feel most loved when someone eases your load through helpful actions—doing 
+                        things for you. Actions speak louder than words for you; love means showing up.
+                    </p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="card-icon">🤗</div>
+                    <h3 class="card-name">Physical Touch</h3>
+                    <p class="card-description">
+                        You feel most loved through physical connection—hugs, holding hands, a touch 
+                        on the arm, sitting close. Physical presence and touch communicate love deeply.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="assessment-cta">
+                <h3>Discover Your Love Language</h3>
+                <p>
+                    Take the official Love Languages quiz to discover your primary and secondary 
+                    love languages—and learn how to better love those around you.
+                </p>
+                <a href="https://5lovelanguages.com/quizzes/love-language" target="_blank" rel="noopener" class="assessment-btn">
+                    Take the Quiz →
+                </a>
+                <p class="assessment-note">
+                    Free quiz from <a href="https://5lovelanguages.com" target="_blank" rel="noopener">5lovelanguages.com</a>. 
+                    Takes about 10 minutes.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Love Styles -->
+    <section class="reveal">
+        <div class="watercolor-flower flower-2" style="bottom: 15%; left: 5%;"></div>
+        <div class="gold-leaf leaf-2"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">Truity</p>
+                <h2 class="section-title script">The 7 Love Styles</h2>
+            </div>
+
+            <div class="cards-grid" style="max-width: 1000px;">
+                <div class="info-card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-name">Activity</h3>
+                    <p class="card-description">
+                        You feel most connected through shared experiences and doing things together. 
+                        Adventures, hobbies, and active quality time are how you bond and show love.
+                    </p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="card-icon">🌟</div>
+                    <h3 class="card-name">Appreciation</h3>
+                    <p class="card-description">
+                        You feel most loved through recognition and praise. Verbal acknowledgment 
+                        of who you are and what you do makes you feel valued and seen.
+                    </p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="card-icon">💭</div>
+                    <h3 class="card-name">Emotional</h3>
+                    <p class="card-description">
+                        You feel most connected through deep emotional sharing and vulnerability. 
+                        Heart-to-heart conversations and emotional presence are essential for you.
+                    </p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="card-icon">💎</div>
+                    <h3 class="card-name">Financial</h3>
+                    <p class="card-description">
+                        You feel cared for through financial generosity and security. Providing 
+                        for or being provided for financially represents love and commitment to you.
+                    </p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="card-icon">🧠</div>
+                    <h3 class="card-name">Intellectual</h3>
+                    <p class="card-description">
+                        You feel most connected through mental stimulation and deep conversations. 
+                        Sharing ideas, debating, and learning together creates intimacy for you.
+                    </p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="card-icon">🤗</div>
+                    <h3 class="card-name">Physical</h3>
+                    <p class="card-description">
+                        You feel most loved through physical affection and closeness. Touch, hugs, 
+                        holding hands, and physical presence communicate love deeply to you.
+                    </p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="card-icon">🔧</div>
+                    <h3 class="card-name">Practical</h3>
+                    <p class="card-description">
+                        You feel most loved through helpful actions and acts of service. When someone 
+                        helps with tasks or makes your life easier, you feel cared for.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="assessment-cta">
+                <h3>Discover Your Love Style</h3>
+                <p>
+                    Take the Truity Love Styles test to understand how you naturally 
+                    give and receive love in your closest relationships.
+                </p>
+                <a href="https://www.truity.com/test/love-styles-test" target="_blank" rel="noopener" class="assessment-btn">
+                    Take the Quiz →
+                </a>
+                <p class="assessment-note">
+                    Free quiz from <a href="https://www.truity.com" target="_blank" rel="noopener">Truity.com</a>. 
+                    Takes about 10 minutes.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integration -->
+    <section class="reveal" style="background: var(--cream-dark);">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">Putting It Together</p>
+                <h2 class="section-title script">Love as a Pathway to Healing</h2>
+            </div>
+
+            <div class="what-are-section">
+                <div class="info-block">
+                    <p>
+                        Your love language shows <em>what</em> makes you feel loved. Your love style 
+                        shows the <em>dimensions</em> through which you most naturally connect. Together, 
+                        they reveal the landscape of your heart.
+                    </p>
+                    <p>
+                        Understanding these patterns isn't about labeling yourself—it's about 
+                        <strong>self-awareness and compassion</strong>. When you know how you naturally 
+                        give and receive love, you can communicate your needs more clearly and love 
+                        others more intentionally.
+                    </p>
+                    <p>
+                        In A Symphony of Grace, we explore how God speaks every love language 
+                        perfectly—and how understanding your unique love style helps you receive 
+                        His love more fully and share it more freely with others.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripture -->
+    <section class="reveal">
+        <div class="scripture-section">
+            <p class="scripture-text">
+                "There is no fear in love, but perfect love casts out fear."
+            </p>
+            <p class="scripture-ref">— 1 John 4:18</p>
+        </div>
+    </section>
+
+    <!-- Other Resources -->
+    <section class="reveal" style="background: var(--cream-dark);">
+        <div class="watercolor-flower flower-1" style="bottom: 15%; right: 10%;"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">More Resources</p>
+                <h2 class="section-title script">Continue Your Journey</h2>
+            </div>
+
+            <div class="alternatives-grid">
+                <div class="alternative-card">
+                    <div class="alt-icon">🎨</div>
+                    <h3 class="alt-title script">Seasonal Color Analysis</h3>
+                    <p class="alt-subtitle">Discover Your Color Palette</p>
+                    <p class="alt-description">
+                        Find the colors that make you come alive based on your 
+                        unique natural coloring and undertones.
+                    </p>
+                    <a href="seasonal-color-quiz.html" class="cta-button secondary">Take the Quiz</a>
+                </div>
+
+                <div class="alternative-card">
+                    <div class="alt-icon">💪</div>
+                    <h3 class="alt-title script">Character Strengths</h3>
+                    <p class="alt-subtitle">VIA Assessment</p>
+                    <p class="alt-description">
+                        Discover your signature character strengths and how 
+                        to use them to flourish in every area of life.
+                    </p>
+                    <a href="character-strengths.html" class="cta-button secondary">Learn More</a>
+                </div>
+
+                <div class="alternative-card">
+                    <div class="alt-icon">🧠</div>
+                    <h3 class="alt-title script">Mind Frameworks</h3>
+                    <p class="alt-subtitle">Understanding Your Design</p>
+                    <p class="alt-description">
+                        Explore temperament, personality types, and cognitive 
+                        functions to understand how you think and process.
+                    </p>
+                    <a href="mind-frameworks.html" class="cta-button secondary">Explore Frameworks</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3 class="script">My Holy Crescendo</h3>
+                <p class="footer-tagline">fearfully & wonderfully made</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="symphony-of-grace.html">15-Week Journey</a>
+                <a href="made-beautiful.html">Retreat</a>
+                <a href="personal-journey.html">1:1 Coaching</a>
+                <a href="prelude.html">Free Prelude</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 My Holy Crescendo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
