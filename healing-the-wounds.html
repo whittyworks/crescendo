@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healing the Wound · My Holy Crescendo</title>
+    <meta property="og:title" content="Healing the Wound · My Holy Crescendo">
+    <meta property="og:description" content="A guided reflection to gently uncover root wounds and bring them to God's healing light.">
+    <meta name="description" content="A guided reflection to gently uncover root wounds and bring them to God's healing light.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #E8D5A3;
+            --gold-dark: #B8960C;
+            --cream: #FDF8F3;
+            --cream-dark: #F5EDE3;
+            --text-dark: #2D2D2D;
+            --text-medium: #5C5C5C;
+            --text-light: #8C8C8C;
+            --lavender: #E6E0F0;
+            --lavender-dark: #9D8EC9;
+            --rose: #F0E0E6;
+            --rose-dark: #C9A0B0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--rose) 100%);
+            border-bottom: 1px solid var(--gold-light);
+        }
+
+        .header-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-subtitle {
+            font-style: italic;
+            color: var(--text-medium);
+            font-size: 1.1rem;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Steps */
+        .step {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Step Content */
+        .step-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold-light);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .step-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .step-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .step-text em {
+            color: var(--text-dark);
+        }
+
+        /* Wound Selection Grid */
+        .wound-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .wound-option {
+            padding: 1rem;
+            border: 2px solid var(--gold-light);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            text-align: center;
+        }
+
+        .wound-option:hover {
+            border-color: var(--gold);
+            background: var(--cream);
+        }
+
+        .wound-option.selected {
+            border-color: var(--rose-dark);
+            background: var(--rose);
+        }
+
+        .wound-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .wound-name {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        /* Scripture Cards */
+        .scripture-section {
+            margin: 2rem 0;
+        }
+
+        .scripture-card {
+            background: var(--cream);
+            border-left: 3px solid var(--gold);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .scripture-card .verse {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .scripture-card .reference {
+            font-size: 0.9rem;
+            color: var(--gold-dark);
+        }
+
+        /* Reflection Prompts */
+        .reflection-section {
+            margin: 2rem 0;
+        }
+
+        .reflection-prompt {
+            background: var(--lavender);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .prompt-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--lavender-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .prompt-question {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .journal-input {
+            width: 100%;
+            padding: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            border: 2px solid var(--lavender-dark);
+            border-radius: 8px;
+            background: white;
+            color: var(--text-dark);
+            min-height: 100px;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .journal-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .journal-input::placeholder {
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Prayer Section */
+        .prayer-box {
+            background: linear-gradient(135deg, var(--rose) 0%, var(--lavender) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .prayer-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--rose-dark);
+            margin-bottom: 1rem;
+        }
+
+        .prayer-text {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* Closing Blessing */
+        .blessing {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            border: 2px solid var(--gold);
+            margin: 2rem 0;
+        }
+
+        .blessing-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .blessing-text {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .blessing-scripture {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gold-light);
+            font-size: 1rem;
+            color: var(--gold-dark);
+        }
+
+        .blessing-scripture cite {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            font-style: normal;
+        }
+
+        /* Selected Wound Display */
+        .wound-display {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gold-light);
+        }
+
+        .wound-display-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .wound-display-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--rose-dark);
+        }
+
+        /* Buttons */
+        .btn {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold-dark);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold-light);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .button-row {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        /* Progress Dots */
+        .progress {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin: 2rem 0;
+        }
+
+        .progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold-light);
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: var(--gold);
+            transform: scale(1.2);
+        }
+
+        .progress-dot.completed {
+            background: var(--gold-dark);
+        }
+
+        /* Gentle reminder */
+        .gentle-reminder {
+            background: var(--cream-dark);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+
+        .gentle-reminder strong {
+            color: var(--gold-dark);
+        }
+
+        /* Summary */
+        .summary-section {
+            background: var(--cream);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .summary-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-text {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+
+            .step-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .wound-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .btn {
+                padding: 0.85rem 1.5rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <p class="header-label">Week 11 · Light in the Shadows</p>
+        <h1>Healing the Wound</h1>
+        <p class="header-subtitle">Gently uncovering root wounds with grace</p>
+    </header>
+
+    <div class="container">
+        <!-- Progress -->
+        <div class="progress">
+            <div class="progress-dot active" data-step="1"></div>
+            <div class="progress-dot" data-step="2"></div>
+            <div class="progress-dot" data-step="3"></div>
+            <div class="progress-dot" data-step="4"></div>
+            <div class="progress-dot" data-step="5"></div>
+        </div>
+
+        <!-- Step 1: Introduction -->
+        <div class="step active" id="step-1">
+            <div class="step-content">
+                <div class="step-icon">🕊️</div>
+                <h2 class="step-title">Before We Begin</h2>
+                <p class="step-text">
+                    This is sacred ground. We're about to gently explore a place in your heart 
+                    that may hold pain. You are not alone in this—Jesus walks with you.
+                </p>
+                
+                <div class="gentle-reminder">
+                    <strong>Remember:</strong> You can pause at any time. There is no rush. 
+                    Healing happens in God's timing, and His grace meets you exactly where you are.
+                </div>
+
+                <div class="prayer-box">
+                    <p class="prayer-label">Opening Prayer</p>
+                    <p class="prayer-text">
+                        Lord, I invite You into this space. Help me to see what You want to heal. 
+                        Give me courage to look at my wounds, and grace to receive Your love. 
+                        I trust that You are gentle and that You are good. Amen.
+                    </p>
+                </div>
+
+                <div class="button-row">
+                    <button class="btn btn-primary" onclick="nextStep()">I'm Ready</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Select Wound -->
+        <div class="step" id="step-2">
+            <div class="step-content">
+                <div class="step-icon">💔</div>
+                <h2 class="step-title">Name the Wound</h2>
+                <p class="step-text">
+                    Which of these wounds resonates with something you've carried? 
+                    Choose the one that stirs something in your heart right now.
+                </p>
+
+                <div class="wound-grid">
+                    <div class="wound-option" onclick="selectWound(this, 'humiliation')">
+                        <div class="wound-icon">😔</div>
+                        <div class="wound-name">Humiliation</div>
+                    </div>
+                    <div class="wound-option" onclick="selectWound(this, 'betrayal')">
+                        <div class="wound-icon">💔</div>
+                        <div class="wound-name">Betrayal</div>
+                    </div>
+                    <div class="wound-option" onclick="selectWound(this, 'injustice')">
+                        <div class="wound-icon">⚖️</div>
+                        <div class="wound-name">Injustice</div>
+                    </div>
+                    <div class="wound-option" onclick="selectWound(this, 'control')">
+                        <div class="wound-icon">🔒</div>
+                        <div class="wound-name">Control</div>
+                    </div>
+                    <div class="wound-option" onclick="selectWound(this, 'abandonment')">
+                        <div class="wound-icon">🚪</div>
+                        <div class="wound-name">Abandonment</div>
+                    </div>
+                    <div class="wound-option" onclick="selectWound(this, 'rejection')">
+                        <div class="wound-icon">🚫</div>
+                        <div class="wound-name">Rejection</div>
+                    </div>
+                    <div class="wound-option" onclick="selectWound(this, 'neglect')">
+                        <div class="wound-icon">👤</div>
+                        <div class="wound-name">Neglect</div>
+                    </div>
+                    <div class="wound-option" onclick="selectWound(this, 'invisibility')">
+                        <div class="wound-icon">👻</div>
+                        <div class="wound-name">Invisibility</div>
+                    </div>
+                    <div class="wound-option" onclick="selectWound(this, 'shame')">
+                        <div class="wound-icon">🙈</div>
+                        <div class="wound-name">Shame</div>
+                    </div>
+                    <div class="wound-option" onclick="selectWound(this, 'unworthiness')">
+                        <div class="wound-icon">📉</div>
+                        <div class="wound-name">Unworthiness</div>
+                    </div>
+                    <div class="wound-option" onclick="selectWound(this, 'comparison')">
+                        <div class="wound-icon">🪞</div>
+                        <div class="wound-name">Comparison</div>
+                    </div>
+                    <div class="wound-option" onclick="selectWound(this, 'burden')">
+                        <div class="wound-icon">🏋️</div>
+                        <div class="wound-name">Burden</div>
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="btn-step-2" disabled>Continue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Scriptures -->
+        <div class="step" id="step-3">
+            <div class="step-content">
+                <div class="wound-display">
+                    <div class="wound-display-icon" id="display-wound-icon"></div>
+                    <div class="wound-display-name">The Wound of <span id="display-wound-name"></span></div>
+                </div>
+
+                <div class="step-icon">📖</div>
+                <h2 class="step-title">God's Word for This Wound</h2>
+                <p class="step-text">
+                    Read these slowly. Let them speak to the place that hurts.
+                </p>
+
+                <div class="scripture-section" id="scripture-container">
+                    <!-- Scriptures will be inserted here -->
+                </div>
+
+                <div class="gentle-reminder">
+                    Which verse speaks most deeply to you? Hold onto it as you continue.
+                </div>
+
+                <div class="button-row">
+                    <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Continue to Reflection</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Reflection -->
+        <div class="step" id="step-4">
+            <div class="step-content">
+                <div class="wound-display">
+                    <div class="wound-display-icon" id="display-wound-icon-2"></div>
+                    <div class="wound-display-name">The Wound of <span id="display-wound-name-2"></span></div>
+                </div>
+
+                <div class="step-icon">✍️</div>
+                <h2 class="step-title">Reflection</h2>
+                <p class="step-text">
+                    Take your time with these questions. Write as much or as little as feels right.
+                </p>
+
+                <div class="reflection-section">
+                    <div class="reflection-prompt">
+                        <p class="prompt-label">Looking Back</p>
+                        <p class="prompt-question">When do you first remember feeling this wound? What happened?</p>
+                        <textarea class="journal-input" id="journal-1" placeholder="Take your time..."></textarea>
+                    </div>
+
+                    <div class="reflection-prompt">
+                        <p class="prompt-label">The Lie</p>
+                        <p class="prompt-question">What lie did this wound teach you to believe about yourself? About God? About others?</p>
+                        <textarea class="journal-input" id="journal-2" placeholder="The wound told me..."></textarea>
+                    </div>
+
+                    <div class="reflection-prompt">
+                        <p class="prompt-label">The Pattern</p>
+                        <p class="prompt-question">How has this wound shown up in your life since? How do you protect yourself from feeling it again?</p>
+                        <textarea class="journal-input" id="journal-3" placeholder="I notice that I..."></textarea>
+                    </div>
+
+                    <div class="reflection-prompt">
+                        <p class="prompt-label">To Jesus</p>
+                        <p class="prompt-question">What do you want to say to Jesus about this wound? What do you need from Him?</p>
+                        <textarea class="journal-input" id="journal-4" placeholder="Jesus, I..."></textarea>
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()">Continue to Prayer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5: Closing Prayer & Blessing -->
+        <div class="step" id="step-5">
+            <div class="step-content">
+                <div class="step-icon">🙏</div>
+                <h2 class="step-title">Bringing It to the Lord</h2>
+                
+                <div class="prayer-box">
+                    <p class="prayer-label">A Prayer for Healing</p>
+                    <p class="prayer-text" id="closing-prayer">
+                        <!-- Dynamic prayer will be inserted -->
+                    </p>
+                </div>
+
+                <div class="blessing">
+                    <div class="blessing-icon">✨</div>
+                    <p class="blessing-text">
+                        You have done holy work today. Even naming the wound is an act of courage. 
+                        God sees you. He honors your bravery. And He is already at work, bringing 
+                        healing to the places you've opened to Him.
+                    </p>
+                    <div class="blessing-scripture" id="closing-scripture">
+                        <!-- Dynamic scripture will be inserted -->
+                    </div>
+                </div>
+
+                <div class="gentle-reminder">
+                    <strong>Remember:</strong> Healing is a journey, not a single moment. 
+                    Be gentle with yourself in the days ahead. You are seen. You are known. You are loved.
+                </div>
+
+                <div class="button-row">
+                    <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary" onclick="startOver()">Reflect on Another Wound</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+        let selectedWound = null;
+
+        const woundData = {
+            humiliation: {
+                name: 'Humiliation',
+                icon: '😔',
+                scriptures: [
+                    { verse: "God saw everything that he had made, and indeed, it was very good.", ref: "Genesis 1:31" },
+                    { verse: "Do not fear, for you will not be ashamed; do not be discouraged, for you will not suffer disgrace.", ref: "Isaiah 54:4" },
+                    { verse: "You are precious in my sight, and honored, and I love you.", ref: "Isaiah 43:4" }
+                ],
+                prayer: "Lord, I have felt small. I have felt the sting of humiliation—moments where I was made to feel less than. But You say I am very good. You say I am precious and honored. Heal the places where shame took root. Help me to stand tall in Your love, knowing that my worth comes from You alone. Amen.",
+                closingVerse: { verse: "You are precious in my sight, and honored, and I love you.", ref: "Isaiah 43:4" }
+            },
+            betrayal: {
+                name: 'Betrayal',
+                icon: '💔',
+                scriptures: [
+                    { verse: "Even if my father and mother abandon me, the Lord will hold me close.", ref: "Psalm 27:10" },
+                    { verse: "He was despised and rejected by mankind, a man of suffering, and familiar with pain.", ref: "Isaiah 53:3" },
+                    { verse: "Blessed is the one who trusts in the Lord, whose confidence is in him.", ref: "Jeremiah 17:7" }
+                ],
+                prayer: "Lord, I have been betrayed. Someone I trusted broke that trust, and the pain still lingers. You know betrayal—You experienced it too. Help me to release this wound into Your hands. Teach me to trust again, starting with You. Be the safe place my heart longs for. Amen.",
+                closingVerse: { verse: "Even if my father and mother abandon me, the Lord will hold me close.", ref: "Psalm 27:10" }
+            },
+            injustice: {
+                name: 'Injustice',
+                icon: '⚖️',
+                scriptures: [
+                    { verse: "He saved us, not because of any works of righteousness that we had done, but according to his mercy.", ref: "Titus 3:5" },
+                    { verse: "Come to me, all you that are weary and are carrying heavy burdens, and I will give you rest... For my yoke is easy, and my burden is light.", ref: "Matthew 11:28-30" },
+                    { verse: "For I am convinced that neither death, nor life... nor anything else in all creation, will be able to separate us from the love of God in Christ Jesus our Lord.", ref: "Romans 8:38-39" }
+                ],
+                prayer: "Lord, life has not been fair. I have been treated unjustly, and the weight of it is heavy. You are a God of justice, and You see every wrong. Help me to release my need to make things right on my own. I trust You to be my defender. Give me rest from carrying this burden. Amen.",
+                closingVerse: { verse: "Come to me, all you that are weary and are carrying heavy burdens, and I will give you rest.", ref: "Matthew 11:28" }
+            },
+            control: {
+                name: 'Control',
+                icon: '🔒',
+                scriptures: [
+                    { verse: "Trust in the Lord with all your heart, and do not rely on your own insight. In all your ways acknowledge him, and he will make straight your paths.", ref: "Proverbs 3:5-6" },
+                    { verse: "Be still, and know that I am God!", ref: "Psalm 46:10" },
+                    { verse: "For surely I know the plans I have for you, says the Lord, plans for your welfare and not for harm, to give you a future with hope.", ref: "Jeremiah 29:11" }
+                ],
+                prayer: "Lord, I have tried to control everything because I was afraid of what would happen if I let go. Someone controlled me, or chaos made me feel unsafe. Teach me to trust You with the unknown. Help me release my grip and rest in Your good plans for me. You are in control, and You are good. Amen.",
+                closingVerse: { verse: "Be still, and know that I am God!", ref: "Psalm 46:10" }
+            },
+            abandonment: {
+                name: 'Abandonment',
+                icon: '🚪',
+                scriptures: [
+                    { verse: "For he has said, 'I will never leave you or forsake you.'", ref: "Hebrews 13:5" },
+                    { verse: "Can a woman forget her nursing child, or show no compassion for the child of her womb? Even these may forget, yet I will not forget you. See, I have inscribed you on the palms of my hands.", ref: "Isaiah 49:15-16" },
+                    { verse: "Even though I walk through the darkest valley, I fear no evil; for you are with me; your rod and your staff—they comfort me.", ref: "Psalm 23:4" }
+                ],
+                prayer: "Lord, I have been left behind. The pain of abandonment has made me afraid to trust, afraid to need anyone. But You promise to never leave me. You have written my name on Your hands. Heal my fear of being left. Help me to believe, deep in my bones, that You will never forsake me. Amen.",
+                closingVerse: { verse: "I will never leave you or forsake you.", ref: "Hebrews 13:5" }
+            },
+            rejection: {
+                name: 'Rejection',
+                icon: '🚫',
+                scriptures: [
+                    { verse: "I have called you by name, you are mine.", ref: "Isaiah 43:1" },
+                    { verse: "Before I formed you in the womb I knew you.", ref: "Jeremiah 1:5" },
+                    { verse: "You are precious in my eyes, and honored, and I love you.", ref: "Isaiah 43:4" }
+                ],
+                prayer: "Lord, I have felt the sting of rejection—of not being chosen, not being wanted. But You chose me before I was born. You call me by name. You say I am Yours. Heal the places where rejection convinced me I wasn't enough. Let Your acceptance be the loudest voice in my heart. Amen.",
+                closingVerse: { verse: "I have called you by name, you are mine.", ref: "Isaiah 43:1" }
+            },
+            neglect: {
+                name: 'Neglect',
+                icon: '👤',
+                scriptures: [
+                    { verse: "Are not two sparrows sold for a penny? Yet not one of them will fall to the ground apart from your Father. And even the hairs of your head are all counted. So do not be afraid; you are of more value than many sparrows.", ref: "Matthew 10:29-31" },
+                    { verse: "The Lord is my shepherd, I shall not want. He makes me lie down in green pastures; he leads me beside still waters; he restores my soul.", ref: "Psalm 23:1-3" },
+                    { verse: "He will feed his flock like a shepherd; he will gather the lambs in his arms, and carry them in his bosom, and gently lead the mother sheep.", ref: "Isaiah 40:11" }
+                ],
+                prayer: "Lord, I was overlooked. My needs went unmet, and I learned to stop asking. But You count the hairs on my head. You notice when a sparrow falls. You see me. Heal the places where neglect made me invisible. Teach me to receive care, starting with Yours. Amen.",
+                closingVerse: { verse: "He will gather the lambs in his arms, and carry them in his bosom.", ref: "Isaiah 40:11" }
+            },
+            invisibility: {
+                name: 'Invisibility',
+                icon: '👻',
+                scriptures: [
+                    { verse: "Guard me as the apple of your eye; hide me in the shadow of your wings.", ref: "Psalm 17:8" },
+                    { verse: "When the righteous cry for help, the Lord hears, and rescues them from all their troubles.", ref: "Psalm 34:17" },
+                    { verse: "Where can I go from your spirit? Or where can I flee from your presence? If I ascend to heaven, you are there; if I make my bed in Sheol, you are there. If I take the wings of the morning and settle at the farthest limits of the sea, even there your hand shall lead me, and your right hand shall hold me fast.", ref: "Psalm 139:7-10" }
+                ],
+                prayer: "Lord, I have felt invisible—unseen, unheard, passed over. But You call me the apple of Your eye. There is nowhere I can go where You are not with me. Your hand holds me. Heal my invisibility. Help me to know, in the deepest part of me, that You see me completely. Amen.",
+                closingVerse: { verse: "Guard me as the apple of your eye; hide me in the shadow of your wings.", ref: "Psalm 17:8" }
+            },
+            shame: {
+                name: 'Shame',
+                icon: '🙈',
+                scriptures: [
+                    { verse: "Though your sins are like scarlet, they shall be white as snow.", ref: "Isaiah 1:18" },
+                    { verse: "So don't be afraid; you are worth more than many sparrows.", ref: "Matthew 10:31" },
+                    { verse: "As far as the east is from the west, so far has he removed our transgressions from us.", ref: "Psalm 103:12" }
+                ],
+                prayer: "Lord, I have carried shame—the heavy weight of believing something is fundamentally wrong with me. But You make me white as snow. You remove my sins as far as the east is from the west. I am not my worst moments. I am Yours. Lift the shame from my shoulders. Help me to walk free. Amen.",
+                closingVerse: { verse: "Though your sins are like scarlet, they shall be white as snow.", ref: "Isaiah 1:18" }
+            },
+            unworthiness: {
+                name: 'Unworthiness',
+                icon: '📉',
+                scriptures: [
+                    { verse: "My grace is sufficient for you, for power is made perfect in weakness.", ref: "2 Corinthians 12:9" },
+                    { verse: "I am confident of this, that the one who began a good work among you will bring it to completion by the day of Jesus Christ.", ref: "Philippians 1:6" },
+                    { verse: "I can do all things through him who strengthens me.", ref: "Philippians 4:13" }
+                ],
+                prayer: "Lord, I have felt unworthy—not good enough, not qualified, not deserving of good things. But Your grace is sufficient for me. You began a good work in me, and You will complete it. My worth isn't about what I can earn; it's about who You say I am. Heal my unworthiness. Let me rest in Your enough. Amen.",
+                closingVerse: { verse: "My grace is sufficient for you, for power is made perfect in weakness.", ref: "2 Corinthians 12:9" }
+            },
+            comparison: {
+                name: 'Comparison',
+                icon: '🪞',
+                scriptures: [
+                    { verse: "But as it is, God arranged the members in the body, each one of them, as he chose.", ref: "1 Corinthians 12:18" },
+                    { verse: "The Lord does not see as mortals see; they look on the outward appearance, but the Lord looks on the heart.", ref: "1 Samuel 16:7" },
+                    { verse: "Indeed, the body does not consist of one member but of many. If the foot would say, 'Because I am not a hand, I do not belong to the body,' that would not make it any less a part of the body... If the whole body were an eye, where would the hearing be?", ref: "1 Corinthians 12:14-17" }
+                ],
+                prayer: "Lord, I have measured myself against others and always come up short. Comparison has stolen my joy and made me forget my own unique design. But You arranged me exactly as You chose. You look at my heart. Help me to celebrate who You made me to be, without wishing I were someone else. Amen.",
+                closingVerse: { verse: "God arranged the members in the body, each one of them, as he chose.", ref: "1 Corinthians 12:18" }
+            },
+            burden: {
+                name: 'Burden',
+                icon: '🏋️',
+                scriptures: [
+                    { verse: "Therefore the Lord waits to be gracious to you; therefore he will rise up to show mercy to you. For the Lord is a God of justice; blessed are all those who wait for him.", ref: "Isaiah 30:18" },
+                    { verse: "Let us therefore approach the throne of grace with boldness, so that we may receive mercy and find grace to help in time of need.", ref: "Hebrews 4:16" },
+                    { verse: "Come to me, all you that are weary and are carrying heavy burdens, and I will give you rest. Take my yoke upon you, and learn from me; for I am gentle and humble in heart, and you will find rest for your souls. For my yoke is easy, and my burden is light.", ref: "Matthew 11:28-30" }
+                ],
+                prayer: "Lord, I have felt like too much—like my needs were a burden, like I took up too much space. But You invite me to come with my heavy load. You want to carry it with me. Your yoke is easy. Your burden is light. Heal the lie that I am too much. Help me to receive from You without guilt. Amen.",
+                closingVerse: { verse: "Come to me, all you that are weary and are carrying heavy burdens, and I will give you rest.", ref: "Matthew 11:28" }
+            }
+        };
+
+        function updateProgress() {
+            document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index + 1 === currentStep) {
+                    dot.classList.add('active');
+                } else if (index + 1 < currentStep) {
+                    dot.classList.add('completed');
+                }
+            });
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById(`step-${step}`).classList.add('active');
+            updateProgress();
+            
+            // Populate wound-specific content
+            if (step === 3 && selectedWound) {
+                populateScriptures();
+            }
+            if (step === 4 && selectedWound) {
+                populateReflectionHeader();
+            }
+            if (step === 5 && selectedWound) {
+                populateClosing();
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function selectWound(element, wound) {
+            document.querySelectorAll('.wound-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedWound = wound;
+            document.getElementById('btn-step-2').disabled = false;
+        }
+
+        function populateScriptures() {
+            const data = woundData[selectedWound];
+            document.getElementById('display-wound-icon').textContent = data.icon;
+            document.getElementById('display-wound-name').textContent = data.name;
+            
+            const container = document.getElementById('scripture-container');
+            container.innerHTML = data.scriptures.map(s => `
+                <div class="scripture-card">
+                    <p class="verse">"${s.verse}"</p>
+                    <p class="reference">— ${s.ref}</p>
+                </div>
+            `).join('');
+        }
+
+        function populateReflectionHeader() {
+            const data = woundData[selectedWound];
+            document.getElementById('display-wound-icon-2').textContent = data.icon;
+            document.getElementById('display-wound-name-2').textContent = data.name;
+        }
+
+        function populateClosing() {
+            const data = woundData[selectedWound];
+            document.getElementById('closing-prayer').textContent = data.prayer;
+            document.getElementById('closing-scripture').innerHTML = `
+                "${data.closingVerse.verse}"
+                <cite>— ${data.closingVerse.ref}</cite>
+            `;
+        }
+
+        function startOver() {
+            currentStep = 1;
+            selectedWound = null;
+            document.querySelectorAll('.wound-option').forEach(opt => opt.classList.remove('selected'));
+            document.getElementById('btn-step-2').disabled = true;
+            document.querySelectorAll('.journal-input').forEach(input => input.value = '');
+            showStep(1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
