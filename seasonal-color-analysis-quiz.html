@@ -526,6 +526,13 @@
             background: var(--cream);
             border-radius: 10px;
             margin-bottom: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .match-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .match-rank {
@@ -641,6 +648,21 @@
         .disclaimer p {
             font-size: 0.85rem;
             margin: 0;
+        }
+
+        /* Explore Seasons Panel */
+        .debug-panel {
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .debug-panel h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--gold-dark);
+            margin-bottom: 10px;
+            text-align: center;
         }
 
         /* Responsive */
@@ -810,6 +832,7 @@
 
             <div class="matches-section">
                 <h3>Your Top Matches</h3>
+                <p style="font-size: 0.8rem; color: var(--text-medium); text-align: center; margin-bottom: 15px;">Click any season to explore its colors and description:</p>
                 <div id="matches-container"></div>
             </div>
 
@@ -832,6 +855,26 @@
             <div class="disclaimer">
                 <h4>This Is a Starting Point</h4>
                 <p>Online quizzes provide direction, but professional draping with actual fabric colors remains the gold standard. Use these results as a guide for experimentation!</p>
+            </div>
+
+            <!-- Explore All Seasons -->
+            <div class="debug-panel" style="background: var(--cream);">
+                <h4>Explore All 12 Seasons</h4>
+                <p style="font-size: 0.8rem; color: var(--text-medium); text-align: center; margin-bottom: 15px;">Click any season to see its colors and description:</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
+                    <button onclick="showSeason('Light Spring')" style="padding: 8px 14px; font-size: 0.75rem; background: #FFE4B5; border: 1px solid #ddd; border-radius: 20px; cursor: pointer;">Light Spring</button>
+                    <button onclick="showSeason('True Spring')" style="padding: 8px 14px; font-size: 0.75rem; background: #FF7F50; color: white; border: 1px solid #ddd; border-radius: 20px; cursor: pointer;">True Spring</button>
+                    <button onclick="showSeason('Bright Spring')" style="padding: 8px 14px; font-size: 0.75rem; background: #FF1493; color: white; border: 1px solid #ddd; border-radius: 20px; cursor: pointer;">Bright Spring</button>
+                    <button onclick="showSeason('Light Summer')" style="padding: 8px 14px; font-size: 0.75rem; background: #E6E6FA; border: 1px solid #ddd; border-radius: 20px; cursor: pointer;">Light Summer</button>
+                    <button onclick="showSeason('True Summer')" style="padding: 8px 14px; font-size: 0.75rem; background: #B0C4DE; border: 1px solid #ddd; border-radius: 20px; cursor: pointer;">True Summer</button>
+                    <button onclick="showSeason('Soft Summer')" style="padding: 8px 14px; font-size: 0.75rem; background: #D8BFD8; border: 1px solid #ddd; border-radius: 20px; cursor: pointer;">Soft Summer</button>
+                    <button onclick="showSeason('Soft Autumn')" style="padding: 8px 14px; font-size: 0.75rem; background: #DEB887; border: 1px solid #ddd; border-radius: 20px; cursor: pointer;">Soft Autumn</button>
+                    <button onclick="showSeason('True Autumn')" style="padding: 8px 14px; font-size: 0.75rem; background: #CD853F; color: white; border: 1px solid #ddd; border-radius: 20px; cursor: pointer;">True Autumn</button>
+                    <button onclick="showSeason('Deep Autumn')" style="padding: 8px 14px; font-size: 0.75rem; background: #8B4513; color: white; border: 1px solid #ddd; border-radius: 20px; cursor: pointer;">Deep Autumn</button>
+                    <button onclick="showSeason('Bright Winter')" style="padding: 8px 14px; font-size: 0.75rem; background: #FF1493; color: white; border: 1px solid #ddd; border-radius: 20px; cursor: pointer;">Bright Winter</button>
+                    <button onclick="showSeason('True Winter')" style="padding: 8px 14px; font-size: 0.75rem; background: #4169E1; color: white; border: 1px solid #ddd; border-radius: 20px; cursor: pointer;">True Winter</button>
+                    <button onclick="showSeason('Deep Winter')" style="padding: 8px 14px; font-size: 0.75rem; background: #191970; color: white; border: 1px solid #ddd; border-radius: 20px; cursor: pointer;">Deep Winter</button>
+                </div>
             </div>
 
             <div class="button-row center">
@@ -1378,7 +1421,7 @@
                 avoid: 'Warm colors, earth tones, black, bright or saturated colors, orange'
             },
             'True Summer': {
-                value: [-1, 1], temp: [2, 4], chroma: [-3, 0],
+                value: [-1, 1], temp: [2, 4], chroma: [-2, 2],
                 subtitle: 'Cool, Soft & Elegant',
                 colors: ['#B0C4DE', '#DDA0DD', '#778899', '#6B8E9B', '#C8A2C8', '#87CEEB'],
                 description: 'You are a True Summer — coolness is your defining characteristic. Your coloring is elegant and sophisticated with blue or gray undertones. You look best in soft, cool, muted colors.',
@@ -1386,7 +1429,7 @@
                 avoid: 'Warm colors, orange, bright or saturated colors, black, earth tones'
             },
             'Soft Summer': {
-                value: [-2, 2], temp: [1, 4], chroma: [0, 4],
+                value: [-2, 2], temp: [1, 4], chroma: [2, 4],
                 subtitle: 'Soft, Cool & Muted',
                 colors: ['#D8BFD8', '#C4AEAD', '#8E9B97', '#A9A9A9', '#B8AFA9', '#9CADB7'],
                 description: 'You are a Soft Summer — softness is your primary characteristic, with cool undertones. Your coloring is gentle, blended, and muted with low to medium contrast. You need soft, muted colors with cool undertones.',
@@ -1394,7 +1437,7 @@
                 avoid: 'Bright or saturated colors, high contrast, neons, pure black or white, warm earth tones'
             },
             'Soft Autumn': {
-                value: [-2, 2], temp: [-4, -1], chroma: [0, 4],
+                value: [-2, 2], temp: [-4, -1], chroma: [2, 4],
                 subtitle: 'Soft, Warm & Muted',
                 colors: ['#DEB887', '#BC8F8F', '#8B7355', '#A0785A', '#9E9E7A', '#C9B59A'],
                 description: 'You are a Soft Autumn — softness is your primary characteristic, with warm undertones. Your coloring is muted, gentle, and earthy with low to medium contrast. You look beautiful in soft, dusty colors with warm undertones.',
@@ -1402,7 +1445,7 @@
                 avoid: 'Bright or saturated colors, pure black or white, neons, cool pastels, high contrast'
             },
             'True Autumn': {
-                value: [0, 3], temp: [-4, -2], chroma: [-3, 0],
+                value: [-1, 3], temp: [-4, -2], chroma: [-2, 2],
                 subtitle: 'Warm, Rich & Earthy',
                 colors: ['#CD853F', '#D2691E', '#8B4513', '#6B8E23', '#B8860B', '#A0522D'],
                 description: 'You are a True Autumn — warmth is your defining characteristic. Your coloring is rich and golden, like autumn leaves. You look stunning in the warm, earthy colors of fall.',
@@ -1580,64 +1623,37 @@
             const tempPercent = Math.min(100, Math.max(0, ((scores.temp + maxScore) / (maxScore * 2)) * 100));
             const chromaPercent = Math.min(100, Math.max(0, ((scores.chroma + maxScore) / (maxScore * 2)) * 100));
 
-            // FIXED ALGORITHM: Temperature determines family FIRST
-            // Warm (negative temp) = Spring or Autumn
-            // Cool (positive temp) = Summer or Winter
+            // ============================================
+            // CLEAN MATCHING ALGORITHM
+            // ============================================
             
             // Using proper thresholds for score range of ±32
-            const strongThreshold = 8;  // Strong leaning
-            const veryStrongThreshold = 15; // Very strong leaning
+            const strongThreshold = 8;
             
+            // Temperature determines family (gatekeeper)
             const isWarm = scores.temp < -strongThreshold;
             const isCool = scores.temp > strongThreshold;
-            const isNeutral = scores.temp >= -strongThreshold && scores.temp <= strongThreshold;
             
-            const isLight = scores.value < -strongThreshold;
-            const isDeep = scores.value > strongThreshold;
-            const isMediumValue = !isLight && !isDeep;
-            
-            const isClear = scores.chroma < -strongThreshold;
-            const isSoft = scores.chroma > strongThreshold;
-            const isMediumChroma = !isClear && !isSoft;
-            
-            // Find PRIMARY characteristic (most extreme)
-            const valueExtreme = Math.abs(scores.value);
-            const tempExtreme = Math.abs(scores.temp);
-            const chromaExtreme = Math.abs(scores.chroma);
-            
-            let primary = 'balanced';
-            if (valueExtreme >= tempExtreme && valueExtreme >= chromaExtreme && valueExtreme > strongThreshold) {
-                primary = scores.value < 0 ? 'light' : 'deep';
-            } else if (tempExtreme > valueExtreme && tempExtreme >= chromaExtreme && tempExtreme > strongThreshold) {
-                primary = scores.temp < 0 ? 'warm' : 'cool';
-            } else if (chromaExtreme > valueExtreme && chromaExtreme > tempExtreme && chromaExtreme > strongThreshold) {
-                primary = scores.chroma < 0 ? 'clear' : 'soft';
-            }
-
-            // Calculate match scores with proper weighting
+            // Calculate match scores
             const matchScores = {};
             
             for (const [name, data] of Object.entries(seasons)) {
                 let score = 100;
                 
-                // TEMPERATURE IS GATEKEEPER - wrong temperature family = major penalty
+                // TEMPERATURE GATEKEEPER - wrong family = big penalty
                 const seasonIsWarm = name.includes('Spring') || name.includes('Autumn');
                 const seasonIsCool = name.includes('Summer') || name.includes('Winter');
                 
-                // Strong penalty for wrong temperature family
-                if (seasonIsWarm && isCool) {
-                    score -= 60; // Cool person should NOT be in warm season
-                }
-                if (seasonIsCool && isWarm) {
-                    score -= 60; // Warm person should NOT be in cool season
-                }
+                if (seasonIsWarm && isCool) score -= 60;
+                if (seasonIsCool && isWarm) score -= 60;
                 
-                // Temperature match - scale the season ranges by 8 to match score range
+                // Distance-based scoring for each dimension
+                // Scale season ranges by 8 to match score range (-32 to +32)
+                
+                // Temperature match
                 const tempMin = data.temp[0] * 8;
                 const tempMax = data.temp[1] * 8;
-                if (scores.temp >= tempMin && scores.temp <= tempMax) {
-                    // In range - no penalty
-                } else {
+                if (scores.temp < tempMin || scores.temp > tempMax) {
                     const tempDist = Math.min(Math.abs(scores.temp - tempMin), Math.abs(scores.temp - tempMax));
                     score -= tempDist * 1.5;
                 }
@@ -1645,36 +1661,60 @@
                 // Value match
                 const valueMin = data.value[0] * 8;
                 const valueMax = data.value[1] * 8;
-                if (scores.value >= valueMin && scores.value <= valueMax) {
-                    // In range
-                } else {
+                if (scores.value < valueMin || scores.value > valueMax) {
                     const valueDist = Math.min(Math.abs(scores.value - valueMin), Math.abs(scores.value - valueMax));
-                    score -= valueDist * 1.2;
+                    score -= valueDist * 1.5;
                 }
                 
                 // Chroma match
                 const chromaMin = data.chroma[0] * 8;
                 const chromaMax = data.chroma[1] * 8;
-                if (scores.chroma >= chromaMin && scores.chroma <= chromaMax) {
-                    // In range
-                } else {
+                if (scores.chroma < chromaMin || scores.chroma > chromaMax) {
                     const chromaDist = Math.min(Math.abs(scores.chroma - chromaMin), Math.abs(scores.chroma - chromaMax));
-                    score -= chromaDist * 1.2;
+                    score -= chromaDist * 1.5;
                 }
-                
-                // Bonus for matching primary characteristic
-                if (name.includes('Soft') && primary === 'soft') score += 20;
-                if (name.includes('Light') && primary === 'light') score += 20;
-                if ((name.includes('Deep') || name.includes('Dark')) && primary === 'deep') score += 20;
-                if ((name.includes('Bright') || name.includes('Clear')) && primary === 'clear') score += 20;
-                if (name.includes('True') && (primary === 'warm' || primary === 'cool')) score += 20;
                 
                 matchScores[name] = Math.max(0, Math.round(score));
             }
 
-            const sortedMatches = Object.entries(matchScores).sort((a, b) => b[1] - a[1]).slice(0, 4);
+            const sortedMatches = Object.entries(matchScores).sort((a, b) => b[1] - a[1]);
             const topSeason = sortedMatches[0][0];
             const topData = seasons[topSeason];
+            
+            // Sister seasons - seasons that share a primary characteristic
+            const sisterSeasons = {
+                'Light Spring': ['Light Summer', 'True Spring', 'Bright Spring'],
+                'True Spring': ['Bright Spring', 'Light Spring', 'True Autumn'],
+                'Bright Spring': ['Bright Winter', 'True Spring', 'Light Spring'],
+                'Light Summer': ['Light Spring', 'True Summer', 'Soft Summer'],
+                'True Summer': ['Soft Summer', 'True Winter', 'Light Summer'],
+                'Soft Summer': ['Soft Autumn', 'True Summer', 'Light Summer'],
+                'Soft Autumn': ['Soft Summer', 'True Autumn', 'Deep Autumn'],
+                'True Autumn': ['Deep Autumn', 'Soft Autumn', 'True Spring'],
+                'Deep Autumn': ['Deep Winter', 'True Autumn', 'Soft Autumn'],
+                'Bright Winter': ['Bright Spring', 'True Winter', 'Deep Winter'],
+                'True Winter': ['Deep Winter', 'Bright Winter', 'True Summer'],
+                'Deep Winter': ['Deep Autumn', 'True Winter', 'Bright Winter']
+            };
+            
+            // Get sisters for top season
+            const sisters = sisterSeasons[topSeason] || [];
+            
+            // Reorder matches to prioritize sister seasons
+            // Keep #1, then show sisters first among remaining, then others
+            const topMatch = sortedMatches[0];
+            const remainingMatches = sortedMatches.slice(1);
+            
+            // Separate sisters from non-sisters
+            const sisterMatches = remainingMatches.filter(([name]) => sisters.includes(name));
+            const otherMatches = remainingMatches.filter(([name]) => !sisters.includes(name));
+            
+            // Sort each group by score
+            sisterMatches.sort((a, b) => b[1] - a[1]);
+            otherMatches.sort((a, b) => b[1] - a[1]);
+            
+            // Combine: top match, then sisters, then others (take top 4 total)
+            const reorderedMatches = [topMatch, ...sisterMatches, ...otherMatches].slice(0, 4);
 
             // Update UI
             document.getElementById('season-result').textContent = topSeason;
@@ -1695,18 +1735,19 @@
             document.getElementById('chroma-result').textContent = 
                 chromaPercent < 35 ? 'Clear' : chromaPercent > 65 ? 'Soft' : 'Medium';
 
-            document.getElementById('matches-container').innerHTML = sortedMatches.map((match, i) => {
+            document.getElementById('matches-container').innerHTML = reorderedMatches.map((match, i) => {
                 const [name, score] = match;
                 const data = seasons[name];
+                const isSister = i > 0 && sisters.includes(name);
                 const swatches = data.colors.slice(0, 4).map(c => 
                     `<div class="match-swatch" style="background: ${c};"></div>`
                 ).join('');
                 return `
-                    <div class="match-item">
+                    <div class="match-item" style="cursor: pointer;" onclick="showSeason('${name}')">
                         <div class="match-rank">${i + 1}</div>
                         <div class="match-colors">${swatches}</div>
                         <div class="match-info">
-                            <div class="match-name">${name}</div>
+                            <div class="match-name">${name}${isSister ? ' <span style="font-size: 0.7rem; color: var(--gold); font-weight: normal;">(sister)</span>' : ''}</div>
                         </div>
                         <div class="match-bar">
                             <div class="match-bar-fill" style="width: ${score}%;"></div>
@@ -1730,6 +1771,30 @@
             scores = { value: 0, temp: 0, chroma: 0 };
             document.getElementById('results').classList.remove('active');
             document.getElementById('intro').classList.add('active');
+        }
+
+        // ============================================
+        // EXPLORE SEASONS FUNCTION
+        // ============================================
+        function showSeason(seasonName) {
+            const data = seasons[seasonName];
+            if (!data) return;
+            
+            // Update the display with this season's info
+            document.getElementById('season-result').textContent = seasonName;
+            document.getElementById('season-subtitle').textContent = data.subtitle;
+            
+            document.getElementById('palette-swatches').innerHTML = data.colors.map(c => 
+                `<div class="palette-swatch" style="background: ${c};"></div>`
+            ).join('');
+            
+            document.getElementById('about-title').textContent = `About ${seasonName}`;
+            document.getElementById('description-text').textContent = data.description;
+            document.getElementById('best-colors').textContent = data.best;
+            document.getElementById('avoid-colors').textContent = data.avoid;
+            
+            // Scroll to top of results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
