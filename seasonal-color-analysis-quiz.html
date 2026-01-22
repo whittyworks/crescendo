@@ -31,6 +31,7 @@
             color: var(--text-dark);
             min-height: 100vh;
             line-height: 1.6;
+            padding-top: 80px;
         }
 
         .container {
@@ -710,6 +711,17 @@
     </style>
 </head>
 <body>
+
+    <!-- Portal Navigation -->
+    <nav class="sans">
+        <a href="index.html" class="logo-link">
+            <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
+        </a>
+        <ul class="nav-links">
+            <li><a href="portal.html" class="portal-back">←Back to Portal</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
         <!-- Header -->
         <div class="quiz-header">
@@ -740,17 +752,17 @@
             <div class="dimension-grid">
                 <div class="dimension-card">
                     <h4>Value</h4>
-                    <div class="spectrum">Light ↔ Deep</div>
+                    <div class="spectrum">Light ←” Deep</div>
                     <p>How light or dark is your overall coloring?</p>
                 </div>
                 <div class="dimension-card">
                     <h4>Temperature</h4>
-                    <div class="spectrum">Warm ↔ Cool</div>
+                    <div class="spectrum">Warm ←” Cool</div>
                     <p>Does your coloring lean golden or rosy?</p>
                 </div>
                 <div class="dimension-card">
                     <h4>Chroma</h4>
-                    <div class="spectrum">Clear ↔ Soft</div>
+                    <div class="spectrum">Clear ←” Soft</div>
                     <p>Is your coloring bright or muted?</p>
                 </div>
             </div>
@@ -786,7 +798,7 @@
                 
                 <div class="spectrum-item">
                     <div class="spectrum-header">
-                        <span class="dimension">Value (Light ↔ Deep)</span>
+                        <span class="dimension">Value (Light ←” Deep)</span>
                         <span id="value-result" class="result">Medium-Deep</span>
                     </div>
                     <div class="spectrum-bar value-bar">
@@ -801,7 +813,7 @@
 
                 <div class="spectrum-item">
                     <div class="spectrum-header">
-                        <span class="dimension">Temperature (Warm ↔ Cool)</span>
+                        <span class="dimension">Temperature (Warm ←” Cool)</span>
                         <span id="temp-result" class="result">Warm</span>
                     </div>
                     <div class="spectrum-bar temp-bar">
@@ -816,7 +828,7 @@
 
                 <div class="spectrum-item">
                     <div class="spectrum-header">
-                        <span class="dimension">Chroma (Clear ↔ Soft)</span>
+                        <span class="dimension">Chroma (Clear ←” Soft)</span>
                         <span id="chroma-result" class="result">Medium</span>
                     </div>
                     <div class="spectrum-bar chroma-bar">
@@ -1627,7 +1639,7 @@
             // CLEAN MATCHING ALGORITHM
             // ============================================
             
-            // Using proper thresholds for score range of ±32
+            // Using proper thresholds for score range of Â±32
             const strongThreshold = 8;
             
             // Temperature determines family (gatekeeper)
