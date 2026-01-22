@@ -438,8 +438,7 @@
 
         /* Spirit Radiance */
         #spirit-radiance {
-            background: radial-gradient(ellipse at center, rgba(255, 250, 240, 1) 0%, rgba(253, 248, 243, 1) 50%, rgba(245, 235, 220, 1) 100%);
-            text-align: center;
+            background: radial-gradient(ellipse at center top, rgba(255, 250, 240, 1) 0%, rgba(253, 248, 243, 1) 50%, rgba(245, 235, 220, 1) 100%);
         }
 
         .radiance-container {
@@ -449,14 +448,21 @@
             padding: 2rem;
         }
 
+        .spirit-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
         .radiance-center {
             position: relative;
-            width: 180px;
-            height: 180px;
+            width: 120px;
+            height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            flex-shrink: 0;
         }
 
         .radiance-glow {
@@ -473,15 +479,17 @@
             50% { transform: scale(1.15); opacity: 0.5; }
         }
 
-        .radiance-icon { z-index: 2; filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.5)); }
-        .radiance-icon svg { width: 80px; height: 80px; }
+        .radiance-icon { z-index: 2; filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4)); }
+        .radiance-icon svg { width: 80px; height: 60px; }
+
+        .spirit-name-block { text-align: left; }
 
         .name-from-heaven {
             font-family: 'Cinzel', serif;
-            font-size: 2.25rem;
+            font-size: 2.5rem;
             color: var(--gold-dark);
             margin-bottom: 0.25rem;
-            min-height: 2.75rem;
+            min-height: 3rem;
             text-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
         }
 
@@ -489,37 +497,44 @@
             font-style: italic;
             color: var(--text-medium);
             font-size: 1.1rem;
-            margin-bottom: 1.5rem;
         }
 
-        .spirit-traits {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-            max-width: 500px;
-        }
-
-        .spirit-trait-badge {
+        .spirit-gifts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            width: 100%;
+            max-width: 600px;
             background: white;
-            padding: 0.75rem 1.25rem;
-            border-radius: 25px;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.1);
+        }
+
+        .gift-column h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .gift-column ul {
+            list-style: none;
+        }
+
+        .gift-column li {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.05rem;
             color: var(--text-dark);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.12);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 0.35rem 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
 
-        .spirit-trait-badge .badge-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.55rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--gold);
-            display: block;
-            margin-bottom: 0.2rem;
-        }
+        .gift-column li:last-child { border-bottom: none; }
 
         /* Final Summary */
         .final-symphony {
@@ -643,6 +658,7 @@
             .symphony-header { padding: 3rem 1.5rem 2rem; }
             .symphony-container { padding: 0 1rem 3rem; }
             .selection-grid { grid-template-columns: 1fr; }
+            .selection-card[style*="grid-column: span 2"] { grid-column: span 1; }
             .visualization-container { padding: 1.5rem 1rem; min-height: 400px; }
             .garden-scene { height: 320px; }
             .tree-svg { width: 150px; height: 210px; }
@@ -652,6 +668,9 @@
             .symphony-summary { grid-template-columns: 1fr; }
             .constellation-container { height: 450px; }
             .mind-trait { transform: scale(0.85); }
+            .spirit-header { flex-direction: column; text-align: center; gap: 1rem; }
+            .spirit-name-block { text-align: center; }
+            .spirit-gifts { grid-template-columns: 1fr; gap: 1.5rem; }
         }
 
         @media print {
@@ -872,11 +891,25 @@
             </symbol>
 
             <!-- Dove -->
-            <symbol id="icon-dove" viewBox="0 0 80 80">
-                <path d="M40 20 Q50 15 55 20 Q65 18 70 25 Q65 28 60 27 Q62 32 60 38 Q55 35 50 36 Q52 42 48 48 L40 55 L32 48 Q28 42 30 36 Q25 35 20 38 Q18 32 20 27 Q15 28 10 25 Q15 18 25 20 Q30 15 40 20" fill="#F8F4F0" stroke="#D4AF37" stroke-width="1.5" opacity="0.95"/>
-                <path d="M40 25 Q47 22 52 25 Q58 24 60 28 Q56 30 52 30 Q53 34 50 38 L40 48 L30 38 Q27 34 28 30 Q24 30 20 28 Q22 24 28 25 Q33 22 40 25" fill="#FFFCF8" opacity="0.9"/>
-                <circle cx="35" cy="28" r="2.5" fill="#2C2416"/>
-                <path d="M28 32 L20 29" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round"/>
+            <symbol id="icon-dove" viewBox="0 0 80 60">
+                <!-- Body -->
+                <ellipse cx="35" cy="35" rx="18" ry="12" fill="#F8F4F0" stroke="#D4AF37" stroke-width="1"/>
+                <!-- Head -->
+                <circle cx="52" cy="30" r="8" fill="#F8F4F0" stroke="#D4AF37" stroke-width="1"/>
+                <!-- Beak -->
+                <path d="M59 30 L68 32 L59 33 Z" fill="#D4AF37"/>
+                <!-- Eye -->
+                <circle cx="54" cy="29" r="1.5" fill="#2C2416"/>
+                <!-- Wing raised -->
+                <path d="M30 35 Q20 18 8 5 Q22 14 38 26 Z" fill="#FFFCF8" stroke="#D4AF37" stroke-width="1"/>
+                <path d="M32 32 Q24 20 15 10 Q26 18 36 27 Z" fill="#F8F4F0" opacity="0.7"/>
+                <!-- Tail feathers -->
+                <path d="M18 38 Q6 36 0 42 Q8 40 18 42 Z" fill="#FFFCF8" stroke="#D4AF37" stroke-width="0.5"/>
+                <path d="M18 35 Q4 32 0 35 Q6 35 17 37 Z" fill="#F8F4F0" stroke="#D4AF37" stroke-width="0.5"/>
+                <!-- Olive branch in beak -->
+                <path d="M66 33 Q72 38 78 36" stroke="#6B8E4A" stroke-width="1.5" fill="none"/>
+                <ellipse cx="75" cy="35" rx="4" ry="2" fill="#9CAF88" transform="rotate(-15 75 35)"/>
+                <ellipse cx="71" cy="37" rx="3" ry="1.5" fill="#7A9F6A" transform="rotate(20 71 37)"/>
             </symbol>
 
             <!-- Mind trait icons -->
@@ -1085,42 +1118,106 @@
                     <label for="name-heaven">Name from Heaven</label>
                     <input type="text" id="name-heaven" placeholder="What does God call you?" oninput="updateSpiritRadiance()">
                 </div>
-                <div class="selection-card">
-                    <label for="top-virtue">Primary Virtue</label>
-                    <select id="top-virtue" onchange="updateSpiritRadiance()">
-                        <option value="">Select your top virtue...</option>
-                        <option value="Faith">Faith</option><option value="Hope">Hope</option><option value="Charity">Charity (Love)</option><option value="Prudence">Prudence</option><option value="Justice">Justice</option><option value="Fortitude">Fortitude</option><option value="Temperance">Temperance</option><option value="Humility">Humility</option><option value="Meekness">Meekness</option><option value="Patience">Patience</option><option value="Chastity">Chastity</option><option value="Liberality">Liberality</option><option value="Diligence">Diligence</option>
-                    </select>
+                <div class="selection-card" style="grid-column: span 2;">
+                    <label>Top 5 Virtues (from your 42)</label>
+                    <div class="checkbox-group" id="virtues-group" style="max-height: 180px;">
+                        <label><input type="checkbox" value="Love of God and Neighbour" onchange="limitVirtues(this)"> Love of God & Neighbour</label>
+                        <label><input type="checkbox" value="Humility" onchange="limitVirtues(this)"> Humility</label>
+                        <label><input type="checkbox" value="Obedience" onchange="limitVirtues(this)"> Obedience</label>
+                        <label><input type="checkbox" value="Patience" onchange="limitVirtues(this)"> Patience</label>
+                        <label><input type="checkbox" value="Poverty" onchange="limitVirtues(this)"> Poverty</label>
+                        <label><input type="checkbox" value="Chastity" onchange="limitVirtues(this)"> Chastity</label>
+                        <label><input type="checkbox" value="Abstinence" onchange="limitVirtues(this)"> Abstinence</label>
+                        <label><input type="checkbox" value="Prudence" onchange="limitVirtues(this)"> Prudence</label>
+                        <label><input type="checkbox" value="Fortitude" onchange="limitVirtues(this)"> Fortitude</label>
+                        <label><input type="checkbox" value="Justice" onchange="limitVirtues(this)"> Justice</label>
+                        <label><input type="checkbox" value="Temperance" onchange="limitVirtues(this)"> Temperance</label>
+                        <label><input type="checkbox" value="Compassion" onchange="limitVirtues(this)"> Compassion</label>
+                        <label><input type="checkbox" value="Peace" onchange="limitVirtues(this)"> Peace</label>
+                        <label><input type="checkbox" value="Mercy" onchange="limitVirtues(this)"> Mercy</label>
+                        <label><input type="checkbox" value="Concord" onchange="limitVirtues(this)"> Concord</label>
+                        <label><input type="checkbox" value="Constancy" onchange="limitVirtues(this)"> Constancy</label>
+                        <label><input type="checkbox" value="Liberality" onchange="limitVirtues(this)"> Liberality</label>
+                        <label><input type="checkbox" value="Truth" onchange="limitVirtues(this)"> Truth</label>
+                        <label><input type="checkbox" value="Meekness" onchange="limitVirtues(this)"> Meekness</label>
+                        <label><input type="checkbox" value="Faith" onchange="limitVirtues(this)"> Faith</label>
+                        <label><input type="checkbox" value="Hope" onchange="limitVirtues(this)"> Hope</label>
+                        <label><input type="checkbox" value="Fear of the Lord" onchange="limitVirtues(this)"> Fear of the Lord</label>
+                        <label><input type="checkbox" value="Joy" onchange="limitVirtues(this)"> Joy</label>
+                        <label><input type="checkbox" value="Sadness for Sin" onchange="limitVirtues(this)"> Sadness for Sin</label>
+                        <label><input type="checkbox" value="Gratitude" onchange="limitVirtues(this)"> Gratitude</label>
+                        <label><input type="checkbox" value="Zeal of Souls" onchange="limitVirtues(this)"> Zeal of Souls</label>
+                        <label><input type="checkbox" value="Liberty" onchange="limitVirtues(this)"> Liberty</label>
+                        <label><input type="checkbox" value="Religion" onchange="limitVirtues(this)"> Religion</label>
+                        <label><input type="checkbox" value="Maturity" onchange="limitVirtues(this)"> Maturity</label>
+                        <label><input type="checkbox" value="Simplicity" onchange="limitVirtues(this)"> Simplicity</label>
+                        <label><input type="checkbox" value="Silence" onchange="limitVirtues(this)"> Silence</label>
+                        <label><input type="checkbox" value="Solitude" onchange="limitVirtues(this)"> Solitude</label>
+                        <label><input type="checkbox" value="Contemplation" onchange="limitVirtues(this)"> Contemplation</label>
+                        <label><input type="checkbox" value="Discretion" onchange="limitVirtues(this)"> Discretion</label>
+                        <label><input type="checkbox" value="Congratulation" onchange="limitVirtues(this)"> Congratulation</label>
+                        <label><input type="checkbox" value="Confidence" onchange="limitVirtues(this)"> Confidence</label>
+                        <label><input type="checkbox" value="Contempt of the World" onchange="limitVirtues(this)"> Contempt of the World</label>
+                        <label><input type="checkbox" value="Mortification" onchange="limitVirtues(this)"> Mortification</label>
+                        <label><input type="checkbox" value="Contrition" onchange="limitVirtues(this)"> Contrition</label>
+                        <label><input type="checkbox" value="Confession" onchange="limitVirtues(this)"> Confession</label>
+                        <label><input type="checkbox" value="Penance" onchange="limitVirtues(this)"> Penance</label>
+                        <label><input type="checkbox" value="Perseverance" onchange="limitVirtues(this)"> Perseverance</label>
+                    </div>
                 </div>
-                <div class="selection-card">
-                    <label for="charism-1">Primary Charism</label>
-                    <select id="charism-1" onchange="updateSpiritRadiance()">
-                        <option value="">Select a charism...</option>
-                        <option value="Administration">Administration</option><option value="Craftsmanship">Craftsmanship</option><option value="Discernment of Spirits">Discernment of Spirits</option><option value="Encouragement">Encouragement</option><option value="Evangelism">Evangelism</option><option value="Faith">Faith</option><option value="Giving">Giving</option><option value="Healing">Healing</option><option value="Helps">Helps</option><option value="Hospitality">Hospitality</option><option value="Intercessory Prayer">Intercessory Prayer</option><option value="Knowledge">Knowledge</option><option value="Leadership">Leadership</option><option value="Mercy">Mercy</option><option value="Missionary">Missionary</option><option value="Music">Music</option><option value="Pastoring">Pastoring</option><option value="Prophecy">Prophecy</option><option value="Service">Service</option><option value="Teaching">Teaching</option><option value="Wisdom">Wisdom</option><option value="Writing">Writing</option>
-                    </select>
-                </div>
-                <div class="selection-card">
-                    <label for="charism-2">Secondary Charism</label>
-                    <select id="charism-2" onchange="updateSpiritRadiance()">
-                        <option value="">Select a charism...</option>
-                        <option value="Administration">Administration</option><option value="Craftsmanship">Craftsmanship</option><option value="Discernment of Spirits">Discernment of Spirits</option><option value="Encouragement">Encouragement</option><option value="Evangelism">Evangelism</option><option value="Faith">Faith</option><option value="Giving">Giving</option><option value="Healing">Healing</option><option value="Helps">Helps</option><option value="Hospitality">Hospitality</option><option value="Intercessory Prayer">Intercessory Prayer</option><option value="Knowledge">Knowledge</option><option value="Leadership">Leadership</option><option value="Mercy">Mercy</option><option value="Missionary">Missionary</option><option value="Music">Music</option><option value="Pastoring">Pastoring</option><option value="Prophecy">Prophecy</option><option value="Service">Service</option><option value="Teaching">Teaching</option><option value="Wisdom">Wisdom</option><option value="Writing">Writing</option>
-                    </select>
+                <div class="selection-card" style="grid-column: span 2;">
+                    <label>Top 3 Charisms (from your 25)</label>
+                    <div class="checkbox-group" id="charisms-group" style="max-height: 160px;">
+                        <label><input type="checkbox" value="Administration" onchange="limitCharisms(this)"> Administration</label>
+                        <label><input type="checkbox" value="Craftsmanship" onchange="limitCharisms(this)"> Craftsmanship</label>
+                        <label><input type="checkbox" value="Discernment" onchange="limitCharisms(this)"> Discernment</label>
+                        <label><input type="checkbox" value="Digital Communications" onchange="limitCharisms(this)"> Digital Communications</label>
+                        <label><input type="checkbox" value="Encouragement" onchange="limitCharisms(this)"> Encouragement</label>
+                        <label><input type="checkbox" value="Evangelism" onchange="limitCharisms(this)"> Evangelism</label>
+                        <label><input type="checkbox" value="Faith" onchange="limitCharisms(this)"> Faith</label>
+                        <label><input type="checkbox" value="Giving" onchange="limitCharisms(this)"> Giving</label>
+                        <label><input type="checkbox" value="Global & Cultural Awareness" onchange="limitCharisms(this)"> Global & Cultural Awareness</label>
+                        <label><input type="checkbox" value="Healing" onchange="limitCharisms(this)"> Healing</label>
+                        <label><input type="checkbox" value="Helping" onchange="limitCharisms(this)"> Helping</label>
+                        <label><input type="checkbox" value="Hospitality" onchange="limitCharisms(this)"> Hospitality</label>
+                        <label><input type="checkbox" value="Intercession" onchange="limitCharisms(this)"> Intercession</label>
+                        <label><input type="checkbox" value="Knowledge" onchange="limitCharisms(this)"> Knowledge</label>
+                        <label><input type="checkbox" value="Leadership" onchange="limitCharisms(this)"> Leadership</label>
+                        <label><input type="checkbox" value="Mercy" onchange="limitCharisms(this)"> Mercy</label>
+                        <label><input type="checkbox" value="Musicianship" onchange="limitCharisms(this)"> Musicianship</label>
+                        <label><input type="checkbox" value="Peacemaking" onchange="limitCharisms(this)"> Peacemaking</label>
+                        <label><input type="checkbox" value="Prophecy" onchange="limitCharisms(this)"> Prophecy</label>
+                        <label><input type="checkbox" value="Service" onchange="limitCharisms(this)"> Service</label>
+                        <label><input type="checkbox" value="Shepherding" onchange="limitCharisms(this)"> Shepherding</label>
+                        <label><input type="checkbox" value="Teaching" onchange="limitCharisms(this)"> Teaching</label>
+                        <label><input type="checkbox" value="Voluntary Poverty" onchange="limitCharisms(this)"> Voluntary Poverty</label>
+                        <label><input type="checkbox" value="Wisdom" onchange="limitCharisms(this)"> Wisdom</label>
+                        <label><input type="checkbox" value="Writing" onchange="limitCharisms(this)"> Writing</label>
+                    </div>
                 </div>
             </div>
 
             <div class="visualization-container" id="spirit-radiance">
                 <div class="radiance-container">
-                    <div class="radiance-center">
-                        <div class="radiance-glow"></div>
-                        <div class="radiance-glow" style="animation-delay: 1.5s; width: 120%; height: 120%;"></div>
-                        <div class="radiance-icon"><svg><use href="#icon-dove"/></svg></div>
+                    <div class="spirit-header">
+                        <div class="radiance-center">
+                            <div class="radiance-glow"></div>
+                            <div class="radiance-icon"><svg><use href="#icon-dove"/></svg></div>
+                        </div>
+                        <div class="spirit-name-block">
+                            <p class="name-from-heaven" id="display-name">Beloved</p>
+                            <p class="name-subtitle">Child of God</p>
+                        </div>
                     </div>
-                    <p class="name-from-heaven" id="display-name">Beloved</p>
-                    <p class="name-subtitle">Child of God</p>
-                    <div class="spirit-traits">
-                        <div class="spirit-trait-badge"><span class="badge-label">Virtue</span><span id="display-virtue">—</span></div>
-                        <div class="spirit-trait-badge"><span class="badge-label">Charism</span><span id="display-charism-1">—</span></div>
-                        <div class="spirit-trait-badge"><span class="badge-label">Charism</span><span id="display-charism-2">—</span></div>
+                    <div class="spirit-gifts">
+                        <div class="gift-column">
+                            <h4>Virtues</h4>
+                            <ul id="display-virtues"><li>—</li></ul>
+                        </div>
+                        <div class="gift-column">
+                            <h4>Charisms</h4>
+                            <ul id="display-charisms"><li>—</li></ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1143,7 +1240,7 @@
                 </div>
                 <div class="summary-column">
                     <h3>Spirit</h3>
-                    <ul><li><strong>Name:</strong> <span id="sum-name">—</span></li><li><strong>Virtue:</strong> <span id="sum-virtue">—</span></li><li><strong>Charisms:</strong> <span id="sum-charisms">—</span></li></ul>
+                    <ul><li><strong>Name:</strong> <span id="sum-name">—</span></li><li><strong>Virtues:</strong> <span id="sum-virtues">—</span></li><li><strong>Charisms:</strong> <span id="sum-charisms">—</span></li></ul>
                 </div>
             </div>
             <div class="scripture-closing">
@@ -1265,15 +1362,31 @@
             }
         }
 
+        function limitVirtues(cb) {
+            const checked = document.querySelectorAll('#virtues-group input:checked');
+            if (checked.length > 5) { cb.checked = false; return; }
+            updateSpiritRadiance();
+        }
+
+        function limitCharisms(cb) {
+            const checked = document.querySelectorAll('#charisms-group input:checked');
+            if (checked.length > 3) { cb.checked = false; return; }
+            updateSpiritRadiance();
+        }
+
         function updateSpiritRadiance() {
             const name = document.getElementById('name-heaven').value;
-            const virtue = document.getElementById('top-virtue').value;
-            const c1 = document.getElementById('charism-1').value;
-            const c2 = document.getElementById('charism-2').value;
+            const virtues = Array.from(document.querySelectorAll('#virtues-group input:checked')).map(cb => cb.value);
+            const charisms = Array.from(document.querySelectorAll('#charisms-group input:checked')).map(cb => cb.value);
+            
             document.getElementById('display-name').textContent = name || 'Beloved';
-            document.getElementById('display-virtue').textContent = virtue || '—';
-            document.getElementById('display-charism-1').textContent = c1 || '—';
-            document.getElementById('display-charism-2').textContent = c2 || '—';
+            
+            const virtuesList = document.getElementById('display-virtues');
+            virtuesList.innerHTML = virtues.length > 0 ? virtues.map(v => `<li>${v}</li>`).join('') : '<li>—</li>';
+            
+            const charismsList = document.getElementById('display-charisms');
+            charismsList.innerHTML = charisms.length > 0 ? charisms.map(c => `<li>${c}</li>`).join('') : '<li>—</li>';
+            
             updateSummary();
         }
 
@@ -1298,13 +1411,11 @@
             document.getElementById('sum-strengths').textContent = strengths.length > 0 ? strengths.join(', ') : '—';
 
             const name = document.getElementById('name-heaven').value;
-            const virtue = document.getElementById('top-virtue').value;
-            const c1 = document.getElementById('charism-1').value;
-            const c2 = document.getElementById('charism-2').value;
+            const virtues = Array.from(document.querySelectorAll('#virtues-group input:checked')).map(cb=>cb.value);
+            const charisms = Array.from(document.querySelectorAll('#charisms-group input:checked')).map(cb=>cb.value);
             document.getElementById('sum-name').textContent = name || '—';
-            document.getElementById('sum-virtue').textContent = virtue || '—';
-            let cText = [c1,c2].filter(Boolean).join(', ');
-            document.getElementById('sum-charisms').textContent = cText || '—';
+            document.getElementById('sum-virtues').textContent = virtues.length > 0 ? virtues.join(', ') : '—';
+            document.getElementById('sum-charisms').textContent = charisms.length > 0 ? charisms.join(', ') : '—';
         }
 
         function saveSymphony() {
@@ -1313,8 +1424,9 @@
                 essence: document.getElementById('essence').value, essenceSecondary: document.getElementById('essence-secondary').value,
                 temperament: document.getElementById('temperament').value, cognitive: document.getElementById('cognitive-type').value,
                 love: document.getElementById('love-language').value, strengths: Array.from(document.querySelectorAll('#strengths-group input:checked')).map(cb=>cb.value),
-                name: document.getElementById('name-heaven').value, virtue: document.getElementById('top-virtue').value,
-                charism1: document.getElementById('charism-1').value, charism2: document.getElementById('charism-2').value
+                name: document.getElementById('name-heaven').value, 
+                virtues: Array.from(document.querySelectorAll('#virtues-group input:checked')).map(cb=>cb.value),
+                charisms: Array.from(document.querySelectorAll('#charisms-group input:checked')).map(cb=>cb.value)
             };
             localStorage.setItem('myBeautifulSymphony', JSON.stringify(data));
             const btn = event.target;
@@ -1335,10 +1447,9 @@
                 document.getElementById('cognitive-type').value = d.cognitive || '';
                 document.getElementById('love-language').value = d.love || '';
                 document.getElementById('name-heaven').value = d.name || '';
-                document.getElementById('top-virtue').value = d.virtue || '';
-                document.getElementById('charism-1').value = d.charism1 || '';
-                document.getElementById('charism-2').value = d.charism2 || '';
                 if (d.strengths) d.strengths.forEach(s => { const cb = document.querySelector(`#strengths-group input[value="${s}"]`); if (cb) cb.checked = true; });
+                if (d.virtues) d.virtues.forEach(v => { const cb = document.querySelector(`#virtues-group input[value="${v}"]`); if (cb) cb.checked = true; });
+                if (d.charisms) d.charisms.forEach(c => { const cb = document.querySelector(`#charisms-group input[value="${c}"]`); if (cb) cb.checked = true; });
                 updateBodyGarden(); updateMindConstellation(); updateSpiritRadiance();
             }
         }
