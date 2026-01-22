@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasonal Color Analysis · My Holy Crescendo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EDE4;
+            --gold: #C9A87C;
+            --gold-dark: #8B7355;
+            --gold-light: #E8DCC8;
+            --text-dark: #3D3D3D;
+            --text-medium: #6B6B6B;
+            --blush: #E8D5D0;
+            --sage: #D4DDD5;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .quiz-header p.label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .quiz-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--gold-dark);
+            margin-bottom: 15px;
+        }
+
+        .quiz-header .subtitle {
+            font-size: 1rem;
+            color: var(--text-medium);
+            font-weight: 300;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 50px 40px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .card.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold-dark);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card p {
+            color: var(--text-medium);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        /* Progress */
+        .progress-container {
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--cream-dark);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark));
+            transition: width 0.3s ease;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: var(--text-medium);
+        }
+
+        .section-label {
+            font-weight: 500;
+            color: var(--gold-dark);
+            padding: 4px 12px;
+            background: var(--cream);
+            border-radius: 20px;
+        }
+
+        /* Intro */
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .dimension-card {
+            background: var(--cream);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .dimension-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--gold-dark);
+            margin-bottom: 5px;
+        }
+
+        .dimension-card .spectrum {
+            font-size: 0.8rem;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .dimension-card p {
+            font-size: 0.8rem;
+            margin: 0;
+        }
+
+        .note-box {
+            background: var(--blush);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .note-box p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .note-box strong {
+            color: var(--gold-dark);
+        }
+
+        /* Questions */
+        .question-category {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            text-align: center;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .question-context {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 25px;
+        }
+
+        /* Options */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 16px 20px;
+            border: 2px solid var(--cream-dark);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .option:hover {
+            border-color: var(--gold-light);
+            background: var(--cream);
+        }
+
+        .option.selected {
+            border-color: var(--gold);
+            background: var(--cream);
+        }
+
+        .option-marker {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold-light);
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option.selected .option-marker {
+            border-color: var(--gold);
+            background: var(--gold);
+        }
+
+        .option.selected .option-marker::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .option-text {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            flex: 1;
+        }
+
+        /* Visual Options */
+        .visual-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .visual-option {
+            border: 2px solid var(--cream-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .visual-option:hover {
+            border-color: var(--gold-light);
+        }
+
+        .visual-option.selected {
+            border-color: var(--gold);
+            box-shadow: 0 4px 12px rgba(201, 168, 124, 0.3);
+        }
+
+        .visual-option .swatches {
+            display: flex;
+            height: 60px;
+        }
+
+        .visual-option .swatch {
+            flex: 1;
+        }
+
+        .visual-option .content {
+            padding: 15px;
+            background: white;
+            text-align: center;
+        }
+
+        .visual-option .label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .visual-option .desc {
+            font-size: 0.75rem;
+            color: var(--text-medium);
+            margin-top: 4px;
+        }
+
+        /* Three column visual options */
+        .visual-options.three-col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .visual-options.three-col .visual-option .swatches {
+            height: 50px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 16px 40px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold-dark);
+            border: 2px solid var(--gold-light);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            background: var(--cream);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 35px;
+            gap: 15px;
+        }
+
+        .button-row.center {
+            justify-content: center;
+        }
+
+        /* Results */
+        .results-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .results-header .label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .results-header .season-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--gold-dark);
+            margin: 10px 0;
+        }
+
+        .results-header .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+        }
+
+        /* Palette */
+        .palette-section {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .palette-swatches {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .palette-swatch {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.8);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Spectrum Results */
+        .spectrum-section {
+            background: var(--cream);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+
+        .spectrum-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--gold-dark);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .spectrum-item {
+            margin-bottom: 25px;
+        }
+
+        .spectrum-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .spectrum-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+
+        .spectrum-header .dimension {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .spectrum-header .result {
+            font-weight: 500;
+            color: var(--gold-dark);
+        }
+
+        .spectrum-bar {
+            height: 14px;
+            border-radius: 7px;
+            position: relative;
+        }
+
+        .spectrum-bar.value-bar {
+            background: linear-gradient(90deg, #FFF8E1, #E8D5B5, #C4A97A, #8B7355, #4A3728);
+        }
+
+        .spectrum-bar.temp-bar {
+            background: linear-gradient(90deg, #FFB74D, #FFE0B2, #E0E0E0, #B3E5FC, #64B5F6);
+        }
+
+        .spectrum-bar.chroma-bar {
+            background: linear-gradient(90deg, #FF5252, #FF8A80, #E0E0E0, #B0B0B0, #757575);
+        }
+
+        .spectrum-marker {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 22px;
+            height: 22px;
+            background: white;
+            border: 3px solid var(--gold-dark);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .spectrum-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            font-size: 0.7rem;
+            color: var(--text-medium);
+        }
+
+        /* Matches */
+        .matches-section {
+            margin: 25px 0;
+        }
+
+        .matches-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--gold-dark);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .match-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: var(--cream);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .match-rank {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            width: 25px;
+            text-align: center;
+        }
+
+        .match-colors {
+            display: flex;
+            gap: 3px;
+        }
+
+        .match-swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+
+        .match-info {
+            flex: 1;
+        }
+
+        .match-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .match-bar {
+            width: 60px;
+            height: 6px;
+            background: var(--cream-dark);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .match-bar-fill {
+            height: 100%;
+            background: var(--gold);
+        }
+
+        .match-percent {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--gold-dark);
+            width: 45px;
+            text-align: right;
+        }
+
+        /* Description */
+        .description-section {
+            background: var(--cream);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+
+        .description-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--gold-dark);
+            margin-bottom: 15px;
+        }
+
+        .description-section p {
+            margin-bottom: 15px;
+        }
+
+        .color-tips {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tip-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .tip-box h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--gold-dark);
+            margin-bottom: 8px;
+        }
+
+        .tip-box p {
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            background: var(--blush);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .disclaimer h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--gold-dark);
+            margin-bottom: 10px;
+        }
+
+        .disclaimer p {
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .quiz-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .card {
+                padding: 30px 20px;
+            }
+
+            .dimension-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .visual-options {
+                grid-template-columns: 1fr;
+            }
+
+            .visual-options.three-col {
+                grid-template-columns: 1fr;
+            }
+
+            .button-row {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .results-header .season-name {
+                font-size: 2.2rem;
+            }
+
+            .color-tips {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="quiz-header">
+            <p class="label">My Holy Crescendo</p>
+            <h1>Seasonal Color Analysis</h1>
+            <p class="subtitle">Discover the colors God wove into your design</p>
+        </div>
+
+        <!-- Progress -->
+        <div id="progress-container" class="progress-container" style="display: none;">
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+            </div>
+            <div class="progress-info">
+                <span id="section-label" class="section-label">Value</span>
+                <span id="progress-text">Question 1 of 24</span>
+            </div>
+        </div>
+
+        <!-- Intro Screen -->
+        <div id="intro" class="card active">
+            <h2>Welcome to Color Analysis</h2>
+            
+            <p style="text-align: center;">This quiz will help you discover your seasonal color palette — the colors that naturally harmonize with your unique coloring and make you look most radiant.</p>
+
+            <p style="text-align: center;">Unlike most color quizzes, this one is based on <strong>Munsell color theory</strong> — the same framework professional color analysts use. We'll measure three dimensions:</p>
+
+            <div class="dimension-grid">
+                <div class="dimension-card">
+                    <h4>Value</h4>
+                    <div class="spectrum">Light ↔ Deep</div>
+                    <p>How light or dark is your overall coloring?</p>
+                </div>
+                <div class="dimension-card">
+                    <h4>Temperature</h4>
+                    <div class="spectrum">Warm ↔ Cool</div>
+                    <p>Does your coloring lean golden or rosy?</p>
+                </div>
+                <div class="dimension-card">
+                    <h4>Chroma</h4>
+                    <div class="spectrum">Clear ↔ Soft</div>
+                    <p>Is your coloring bright or muted?</p>
+                </div>
+            </div>
+
+            <p style="text-align: center;">Answer based on what you <strong>observe</strong>, not what you prefer. This quiz works best when taken in natural daylight.</p>
+
+            <div class="note-box">
+                <p><strong>Best Practice:</strong> Find a window with natural light, remove makeup if possible, and have a mirror handy. Consider your natural hair color if you dye it.</p>
+            </div>
+
+            <div class="button-row center">
+                <button class="btn btn-primary" onclick="startQuiz()">Begin Color Analysis</button>
+            </div>
+        </div>
+
+        <!-- Questions Container -->
+        <div id="questions-container"></div>
+
+        <!-- Results Screen -->
+        <div id="results" class="card">
+            <div class="results-header">
+                <p class="label">Your Seasonal Palette</p>
+                <h2 id="season-result" class="season-name">True Autumn</h2>
+                <p id="season-subtitle" class="subtitle">Warm, Rich & Earthy</p>
+            </div>
+
+            <div class="palette-section">
+                <div id="palette-swatches" class="palette-swatches"></div>
+            </div>
+
+            <div class="spectrum-section">
+                <h3>Your Color Profile</h3>
+                
+                <div class="spectrum-item">
+                    <div class="spectrum-header">
+                        <span class="dimension">Value (Light ↔ Deep)</span>
+                        <span id="value-result" class="result">Medium-Deep</span>
+                    </div>
+                    <div class="spectrum-bar value-bar">
+                        <div id="value-marker" class="spectrum-marker"></div>
+                    </div>
+                    <div class="spectrum-labels">
+                        <span>Light</span>
+                        <span>Medium</span>
+                        <span>Deep</span>
+                    </div>
+                </div>
+
+                <div class="spectrum-item">
+                    <div class="spectrum-header">
+                        <span class="dimension">Temperature (Warm ↔ Cool)</span>
+                        <span id="temp-result" class="result">Warm</span>
+                    </div>
+                    <div class="spectrum-bar temp-bar">
+                        <div id="temp-marker" class="spectrum-marker"></div>
+                    </div>
+                    <div class="spectrum-labels">
+                        <span>Warm</span>
+                        <span>Neutral</span>
+                        <span>Cool</span>
+                    </div>
+                </div>
+
+                <div class="spectrum-item">
+                    <div class="spectrum-header">
+                        <span class="dimension">Chroma (Clear ↔ Soft)</span>
+                        <span id="chroma-result" class="result">Medium</span>
+                    </div>
+                    <div class="spectrum-bar chroma-bar">
+                        <div id="chroma-marker" class="spectrum-marker"></div>
+                    </div>
+                    <div class="spectrum-labels">
+                        <span>Clear/Bright</span>
+                        <span>Medium</span>
+                        <span>Soft/Muted</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="matches-section">
+                <h3>Your Top Matches</h3>
+                <div id="matches-container"></div>
+            </div>
+
+            <div class="description-section">
+                <h3 id="about-title">About Your Season</h3>
+                <p id="description-text"></p>
+                
+                <div class="color-tips">
+                    <div class="tip-box">
+                        <h4>Your Best Colors</h4>
+                        <p id="best-colors"></p>
+                    </div>
+                    <div class="tip-box">
+                        <h4>Colors to Approach with Care</h4>
+                        <p id="avoid-colors"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                <h4>This Is a Starting Point</h4>
+                <p>Online quizzes provide direction, but professional draping with actual fabric colors remains the gold standard. Use these results as a guide for experimentation!</p>
+            </div>
+
+            <div class="button-row center">
+                <button class="btn btn-secondary" onclick="retakeQuiz()">Retake Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // QUESTION DATA - 24 Questions (8 per dimension)
+        // ============================================
+        const questions = [
+            // ========== VALUE SECTION (8 questions) ==========
+            {
+                id: 'hair_value',
+                section: 'Value',
+                category: 'Natural Hair',
+                question: 'What is your natural hair color?',
+                context: 'If you dye your hair, recall your natural color or look at your roots.',
+                type: 'choice',
+                options: [
+                    { text: 'Light blonde, platinum, or white', scores: { value: -4 } },
+                    { text: 'Medium blonde or strawberry blonde', scores: { value: -2 } },
+                    { text: 'Dark blonde or light brown', scores: { value: -1 } },
+                    { text: 'Medium brown', scores: { value: 0 } },
+                    { text: 'Dark brown', scores: { value: 2 } },
+                    { text: 'Black or nearly black', scores: { value: 4 } },
+                    { text: 'Red or auburn (any depth)', scores: { value: 0, temp: -2 } }
+                ]
+            },
+            {
+                id: 'eye_value',
+                section: 'Value',
+                category: 'Eye Color',
+                question: 'How would you describe the depth of your eye color?',
+                context: 'Look at your eyes in natural light.',
+                type: 'choice',
+                options: [
+                    { text: 'Very light (pale blue, light gray, pale green)', scores: { value: -3 } },
+                    { text: 'Light (blue, light green, light hazel)', scores: { value: -2 } },
+                    { text: 'Medium (green, hazel, medium brown)', scores: { value: 0 } },
+                    { text: 'Dark (dark brown, dark hazel)', scores: { value: 2 } },
+                    { text: 'Very dark (deep brown, nearly black)', scores: { value: 4 } }
+                ]
+            },
+            {
+                id: 'skin_value',
+                section: 'Value',
+                category: 'Skin Tone',
+                question: 'How would you describe your skin tone depth?',
+                context: 'Look at the inside of your arm. Ignore any tan.',
+                type: 'choice',
+                options: [
+                    { text: 'Very fair — porcelain, burns easily', scores: { value: -4 } },
+                    { text: 'Fair — light, may burn before tanning', scores: { value: -2 } },
+                    { text: 'Light-medium — beige, tans gradually', scores: { value: 0 } },
+                    { text: 'Medium — olive or tan, tans well', scores: { value: 1 } },
+                    { text: 'Medium-dark — caramel or bronze', scores: { value: 3 } },
+                    { text: 'Deep — dark brown to ebony', scores: { value: 4 } }
+                ]
+            },
+            {
+                id: 'contrast',
+                section: 'Value',
+                category: 'Contrast Level',
+                question: 'What is the contrast between your hair, skin, and eyes?',
+                context: 'High contrast = dramatic difference. Low contrast = features blend together.',
+                type: 'choice',
+                options: [
+                    { text: 'Very high — stark difference (e.g., dark hair + pale skin)', scores: { chroma: 3 } },
+                    { text: 'High — noticeable difference between features', scores: { chroma: 2 } },
+                    { text: 'Medium — moderate contrast', scores: { chroma: 0 } },
+                    { text: 'Low — my features are close in depth', scores: { chroma: -2 } },
+                    { text: 'Very low — everything blends softly', scores: { chroma: -3 } }
+                ]
+            },
+            {
+                id: 'black_test',
+                section: 'Value',
+                category: 'Color Draping',
+                question: 'When you wear BLACK near your face, what happens?',
+                context: 'Think about wearing a black top or scarf.',
+                type: 'choice',
+                options: [
+                    { text: 'I look amazing — defined, elegant, powerful', scores: { value: 4, chroma: 2 } },
+                    { text: 'It looks fine, nothing special', scores: { value: 1 } },
+                    { text: 'It\'s a bit harsh but I can make it work', scores: { value: 0 } },
+                    { text: 'It drains me — I look tired or washed out', scores: { value: -2, chroma: -1 } },
+                    { text: 'It\'s way too heavy for my coloring', scores: { value: -4, chroma: -2 } }
+                ]
+            },
+            {
+                id: 'white_test',
+                section: 'Value',
+                category: 'Color Draping',
+                question: 'When you wear BRIGHT WHITE near your face:',
+                context: 'Pure, stark white — not off-white or cream.',
+                type: 'visual',
+                options: [
+                    {
+                        text: 'It makes me look fresh and bright',
+                        desc: 'My skin glows against it',
+                        colors: ['#FFFFFF', '#FAFAFA'],
+                        scores: { chroma: 2 }
+                    },
+                    {
+                        text: 'It\'s okay but a bit stark',
+                        desc: 'I prefer softer whites',
+                        colors: ['#FFF8F0', '#FFFEF7'],
+                        scores: { value: -1, chroma: -1 }
+                    },
+                    {
+                        text: 'It washes me out completely',
+                        desc: 'Too bright for my coloring',
+                        colors: ['#F5F0E6', '#EDE8DE'],
+                        scores: { value: 1, chroma: -2 }
+                    }
+                ]
+            },
+            {
+                id: 'pastel_vs_deep',
+                section: 'Value',
+                category: 'Color Draping',
+                question: 'Which colors flatter you more — pastels or deep, rich shades?',
+                context: 'Think: powder pink vs. burgundy, sky blue vs. navy.',
+                type: 'visual',
+                options: [
+                    {
+                        text: 'Light pastels',
+                        desc: 'Deep colors overwhelm me',
+                        colors: ['#FFB6C1', '#E6E6FA', '#B0E0E6'],
+                        scores: { value: -4 }
+                    },
+                    {
+                        text: 'Medium tones',
+                        desc: 'Neither extreme is best',
+                        colors: ['#DDA0DD', '#87CEEB', '#98D8C8'],
+                        scores: { value: 0 }
+                    },
+                    {
+                        text: 'Deep, rich colors',
+                        desc: 'Pastels make me look pale',
+                        colors: ['#800020', '#191970', '#2F4F4F'],
+                        scores: { value: 4 }
+                    }
+                ]
+            },
+            {
+                id: 'jewelry_depth',
+                section: 'Value',
+                category: 'Observation',
+                question: 'Which jewelry finish looks most harmonious on you?',
+                context: 'Not which you prefer — which makes your skin look best.',
+                type: 'choice',
+                options: [
+                    { text: 'Bright, polished metals — shiny silver or gold', scores: { chroma: 2 } },
+                    { text: 'Satin finish — subtle sheen', scores: { chroma: 0 } },
+                    { text: 'Brushed or matte metals', scores: { chroma: -2 } },
+                    { text: 'Antiqued, burnished, or oxidized metals', scores: { value: 1, chroma: -2 } }
+                ]
+            },
+
+            // ========== TEMPERATURE SECTION (8 questions) ==========
+            {
+                id: 'vein_test',
+                section: 'Temperature',
+                category: 'Undertone',
+                question: 'Look at the veins on the inside of your wrist. What color are they?',
+                context: 'Do this in natural daylight for the most accurate reading.',
+                type: 'choice',
+                options: [
+                    { text: 'Mostly green or olive', scores: { temp: -4 } },
+                    { text: 'More green than blue', scores: { temp: -2 } },
+                    { text: 'Equal mix of green and blue/purple', scores: { temp: 0 } },
+                    { text: 'More blue/purple than green', scores: { temp: 2 } },
+                    { text: 'Mostly blue or purple', scores: { temp: 4 } }
+                ]
+            },
+            {
+                id: 'hair_warmth',
+                section: 'Temperature',
+                category: 'Natural Hair',
+                question: 'In sunlight, does your natural hair show warm or cool tones?',
+                context: 'Look carefully — even dark hair can have warm or cool undertones.',
+                type: 'choice',
+                options: [
+                    { text: 'Golden, copper, red, or warm auburn highlights', scores: { temp: -4 } },
+                    { text: 'Subtle warmth visible in the light', scores: { temp: -2 } },
+                    { text: 'Neutral — no obvious warm or cool', scores: { temp: 0 } },
+                    { text: 'Subtle ashiness or cool brown', scores: { temp: 2 } },
+                    { text: 'Distinctly ashy, cool, or blue-black', scores: { temp: 4 } }
+                ]
+            },
+            {
+                id: 'eye_warmth',
+                section: 'Temperature',
+                category: 'Eye Color',
+                question: 'Looking closely at your iris, do you see warm or cool tones?',
+                context: 'Warm = gold flecks, amber. Cool = gray, steel blue, cool green.',
+                type: 'choice',
+                options: [
+                    { text: 'Warm — golden flecks, amber, topaz, warm brown', scores: { temp: -4 } },
+                    { text: 'Mostly warm with some neutral', scores: { temp: -2 } },
+                    { text: 'Neutral — neither clearly warm nor cool', scores: { temp: 0 } },
+                    { text: 'Mostly cool with some neutral', scores: { temp: 2 } },
+                    { text: 'Cool — gray, steel blue, cool green, rose brown', scores: { temp: 4 } }
+                ]
+            },
+            {
+                id: 'gold_vs_silver',
+                section: 'Temperature',
+                category: 'Metal Test',
+                question: 'Hold gold and silver near your face. Which looks better?',
+                context: 'Better = makes skin look healthier, clearer, more radiant.',
+                type: 'visual',
+                options: [
+                    {
+                        text: 'Gold is clearly better',
+                        desc: 'Silver looks harsh or cold',
+                        colors: ['#FFD700', '#DAA520'],
+                        scores: { temp: -4 }
+                    },
+                    {
+                        text: 'Gold is slightly better',
+                        desc: 'But silver works too',
+                        colors: ['#FFD700', '#E8E8E8'],
+                        scores: { temp: -2 }
+                    },
+                    {
+                        text: 'Both look equally good',
+                        desc: 'I\'m truly neutral',
+                        colors: ['#FFD700', '#C0C0C0'],
+                        scores: { temp: 0 }
+                    },
+                    {
+                        text: 'Silver is slightly better',
+                        desc: 'But gold works too',
+                        colors: ['#C0C0C0', '#FFD700'],
+                        scores: { temp: 2 }
+                    },
+                    {
+                        text: 'Silver is clearly better',
+                        desc: 'Gold looks wrong on me',
+                        colors: ['#C0C0C0', '#E8E8E8'],
+                        scores: { temp: 4 }
+                    }
+                ]
+            },
+            {
+                id: 'orange_vs_pink',
+                section: 'Temperature',
+                category: 'Color Draping',
+                question: 'Which color family flatters you more near your face?',
+                context: 'Imagine wearing these as a scarf or top.',
+                type: 'visual',
+                options: [
+                    {
+                        text: 'Orange & Coral',
+                        desc: 'These make my skin glow',
+                        colors: ['#FF7F50', '#FF6347'],
+                        scores: { temp: -4 }
+                    },
+                    {
+                        text: 'Peach & Salmon',
+                        desc: 'A warm-cool blend',
+                        colors: ['#FFCBA4', '#FFA07A'],
+                        scores: { temp: -1 }
+                    },
+                    {
+                        text: 'Pink & Rose',
+                        desc: 'These make my skin clearer',
+                        colors: ['#FF69B4', '#DB7093'],
+                        scores: { temp: 4 }
+                    }
+                ]
+            },
+            {
+                id: 'warm_vs_cool_red',
+                section: 'Temperature',
+                category: 'Color Draping',
+                question: 'Which red looks better on you?',
+                context: 'Orange-red (tomato) vs. blue-red (berry/wine).',
+                type: 'visual',
+                options: [
+                    {
+                        text: 'Orange-red (tomato, coral-red)',
+                        desc: 'Cool reds wash me out',
+                        colors: ['#FF4500', '#FF6347'],
+                        scores: { temp: -4 }
+                    },
+                    {
+                        text: 'True red (balanced)',
+                        desc: 'Both extremes work okay',
+                        colors: ['#FF0000', '#DC143C'],
+                        scores: { temp: 0 }
+                    },
+                    {
+                        text: 'Blue-red (berry, wine, raspberry)',
+                        desc: 'Orange-reds look wrong',
+                        colors: ['#C71585', '#8B0045'],
+                        scores: { temp: 4 }
+                    }
+                ]
+            },
+            {
+                id: 'warm_vs_cool_green',
+                section: 'Temperature',
+                category: 'Color Draping',
+                question: 'Which green looks better on you?',
+                context: 'Olive/moss vs. teal/emerald.',
+                type: 'visual',
+                options: [
+                    {
+                        text: 'Warm green (olive, khaki, moss)',
+                        desc: 'Cool greens look off',
+                        colors: ['#6B8E23', '#808000'],
+                        scores: { temp: -4 }
+                    },
+                    {
+                        text: 'True green (balanced)',
+                        desc: 'I can wear both',
+                        colors: ['#228B22', '#2E8B57'],
+                        scores: { temp: 0 }
+                    },
+                    {
+                        text: 'Cool green (teal, emerald, pine)',
+                        desc: 'Warm greens look muddy',
+                        colors: ['#008B8B', '#006400'],
+                        scores: { temp: 4 }
+                    }
+                ]
+            },
+            {
+                id: 'tan_color',
+                section: 'Temperature',
+                category: 'Sun Response',
+                question: 'When you tan (or attempt to), your skin turns:',
+                context: 'Think about how your skin looks after sun exposure.',
+                type: 'choice',
+                options: [
+                    { text: 'Golden, bronze, or warm brown', scores: { temp: -3 } },
+                    { text: 'A neutral brown', scores: { temp: 0 } },
+                    { text: 'Pinkish-brown or grayish', scores: { temp: 2 } },
+                    { text: 'I just burn and peel — I don\'t really tan', scores: { temp: 3 } }
+                ]
+            },
+
+            // ========== CHROMA SECTION (8 questions) ==========
+            {
+                id: 'eye_clarity',
+                section: 'Chroma',
+                category: 'Eye Clarity',
+                question: 'How would you describe your eyes?',
+                context: 'Are they bright and jewel-like, or soft and muted?',
+                type: 'choice',
+                options: [
+                    { text: 'Very bright — jewel-like, sparkling, high contrast in the iris', scores: { chroma: -4 } },
+                    { text: 'Fairly clear and defined', scores: { chroma: -2 } },
+                    { text: 'Medium clarity', scores: { chroma: 0 } },
+                    { text: 'Soft and blended — colors meld together', scores: { chroma: 2 } },
+                    { text: 'Very muted — soft, hazy, or grayed', scores: { chroma: 4 } }
+                ]
+            },
+            {
+                id: 'skin_clarity',
+                section: 'Chroma',
+                category: 'Skin Quality',
+                question: 'How would you describe your skin\'s overall appearance?',
+                context: 'Clear = even, porcelain-like. Soft = freckled, mottled, or ruddy.',
+                type: 'choice',
+                options: [
+                    { text: 'Very clear and even — smooth, translucent quality', scores: { chroma: -3 } },
+                    { text: 'Fairly clear with minor variation', scores: { chroma: -1 } },
+                    { text: 'Average — some variation', scores: { chroma: 0 } },
+                    { text: 'Soft — freckled, ruddy, or visible undertones', scores: { chroma: 2 } },
+                    { text: 'Very textured — heavy freckling, redness, or mottling', scores: { chroma: 4 } }
+                ]
+            },
+            {
+                id: 'hair_clarity',
+                section: 'Chroma',
+                category: 'Hair Quality',
+                question: 'Is your natural hair color vibrant or muted?',
+                context: 'Vibrant = rich, saturated. Muted = ashy, mousy, dusty.',
+                type: 'choice',
+                options: [
+                    { text: 'Very vibrant — rich, glossy, saturated color', scores: { chroma: -3 } },
+                    { text: 'Fairly bright and clear', scores: { chroma: -1 } },
+                    { text: 'Medium saturation', scores: { chroma: 0 } },
+                    { text: 'Somewhat muted or ashy', scores: { chroma: 2 } },
+                    { text: 'Very muted — mousy, dusty, or grayed', scores: { chroma: 4 } }
+                ]
+            },
+            {
+                id: 'bright_vs_muted',
+                section: 'Chroma',
+                category: 'Color Draping',
+                question: 'Which colors make you look more alive?',
+                context: 'Bright, saturated colors vs. soft, dusty versions.',
+                type: 'visual',
+                options: [
+                    {
+                        text: 'Bright, saturated colors',
+                        desc: 'Muted colors make me look tired',
+                        colors: ['#0047AB', '#FF0800', '#228B22'],
+                        scores: { chroma: -4 }
+                    },
+                    {
+                        text: 'Slightly bright, clear colors',
+                        desc: 'Not super saturated',
+                        colors: ['#4682B4', '#CD5C5C', '#3CB371'],
+                        scores: { chroma: -2 }
+                    },
+                    {
+                        text: 'Medium saturation',
+                        desc: 'Neither extreme',
+                        colors: ['#6495ED', '#E9967A', '#8FBC8F'],
+                        scores: { chroma: 0 }
+                    },
+                    {
+                        text: 'Soft, dusty colors',
+                        desc: 'Bright colors overwhelm me',
+                        colors: ['#708090', '#BC8F8F', '#8FBC8F'],
+                        scores: { chroma: 4 }
+                    }
+                ]
+            },
+            {
+                id: 'neon_test',
+                section: 'Chroma',
+                category: 'Color Draping',
+                question: 'How do very bright, almost neon colors look on you?',
+                context: 'Hot pink, electric blue, lime green.',
+                type: 'choice',
+                options: [
+                    { text: 'Amazing — I can pull them off and look vibrant', scores: { chroma: -4 } },
+                    { text: 'Some bright colors work if they\'re the right hue', scores: { chroma: -2 } },
+                    { text: 'They\'re okay but not my best look', scores: { chroma: 0 } },
+                    { text: 'They overwhelm me — too intense', scores: { chroma: 2 } },
+                    { text: 'They look awful on me — way too bright', scores: { chroma: 4 } }
+                ]
+            },
+            {
+                id: 'gray_test',
+                section: 'Chroma',
+                category: 'Color Draping',
+                question: 'When you wear gray, which type looks best?',
+                context: 'Different grays suit different colorings.',
+                type: 'visual',
+                options: [
+                    {
+                        text: 'Charcoal or iron gray',
+                        desc: 'Clear and definite',
+                        colors: ['#36454F', '#4A4A4A'],
+                        scores: { chroma: -2, value: 2 }
+                    },
+                    {
+                        text: 'True medium gray',
+                        desc: 'Balanced',
+                        colors: ['#808080', '#888888'],
+                        scores: { chroma: 0 }
+                    },
+                    {
+                        text: 'Soft heathered gray',
+                        desc: 'Warm or cool undertone',
+                        colors: ['#A8A8A8', '#B8B8B8'],
+                        scores: { chroma: 2 }
+                    },
+                    {
+                        text: 'Gray washes me out',
+                        desc: 'I need more color',
+                        colors: ['#D3D3D3', '#E0E0E0'],
+                        scores: { chroma: -1 }
+                    }
+                ]
+            },
+            {
+                id: 'print_clarity',
+                section: 'Chroma',
+                category: 'Patterns',
+                question: 'What type of prints and patterns look best on you?',
+                context: 'Think about patterns you\'ve successfully worn.',
+                type: 'choice',
+                options: [
+                    { text: 'High-contrast, bold, graphic prints', scores: { chroma: -4 } },
+                    { text: 'Clear, defined patterns', scores: { chroma: -2 } },
+                    { text: 'Medium contrast patterns', scores: { chroma: 0 } },
+                    { text: 'Soft, watercolor-style, blended prints', scores: { chroma: 2 } },
+                    { text: 'Very subtle, tone-on-tone patterns', scores: { chroma: 4 } }
+                ]
+            },
+            {
+                id: 'makeup_intensity',
+                section: 'Chroma',
+                category: 'Makeup',
+                question: 'What intensity of makeup looks most natural on you?',
+                context: 'If you don\'t wear makeup, imagine what would look best.',
+                type: 'choice',
+                options: [
+                    { text: 'Bold, vivid colors look natural and polished', scores: { chroma: -4 } },
+                    { text: 'Clear, defined colors but not extreme', scores: { chroma: -2 } },
+                    { text: 'Medium intensity', scores: { chroma: 0 } },
+                    { text: 'Soft, sheer, blended colors', scores: { chroma: 2 } },
+                    { text: 'Very minimal — bold makeup looks costume-y', scores: { chroma: 4 } }
+                ]
+            }
+        ];
+
+        // ============================================
+        // SEASON DATA
+        // ============================================
+        const seasons = {
+            'Light Spring': {
+                value: [-4, -1], temp: [-4, -1], chroma: [-4, 0],
+                subtitle: 'Warm, Light & Clear',
+                colors: ['#FFE4B5', '#FFDAB9', '#FFA07A', '#98FB98', '#87CEEB', '#FFB6C1'],
+                description: 'You are a Light Spring — your coloring is delicate, warm, and fresh. You have a light overall appearance with warm, golden undertones. Your best colors are warm, light, and clear — like the first flowers of spring.',
+                best: 'Peach, coral, warm pink, ivory, camel, light warm green, aqua, golden tan, apricot',
+                avoid: 'Dark or heavy colors, cool pastels, black, burgundy, cool gray, anything too muted'
+            },
+            'True Spring': {
+                value: [-2, 1], temp: [-4, -2], chroma: [-4, -1],
+                subtitle: 'Warm, Clear & Fresh',
+                colors: ['#FF7F50', '#FFD700', '#32CD32', '#FF6347', '#00CED1', '#FF8C00'],
+                description: 'You are a True Spring — warmth is your defining characteristic. Your coloring is fresh, clear, and sunny with golden undertones throughout. You look best in warm, clear colors with yellow undertones.',
+                best: 'Coral, warm red, golden yellow, turquoise, peach, warm green, camel, ivory, orange',
+                avoid: 'Cool tones, muted or dusty colors, black, dark colors, anything too soft'
+            },
+            'Bright Spring': {
+                value: [-2, 1], temp: [-3, 0], chroma: [-4, -2],
+                subtitle: 'Clear, Vibrant & Warm',
+                colors: ['#FF1493', '#00FF7F', '#FFD700', '#FF4500', '#00BFFF', '#FF69B4'],
+                description: 'You are a Bright Spring — clarity is your superpower. Your coloring is vibrant and high-contrast with warm undertones. You can wear the most saturated, vivid colors that would overwhelm other seasons.',
+                best: 'Hot pink, electric blue, bright coral, vivid yellow, turquoise, bright green, clear warm red',
+                avoid: 'Muted, dusty, or earthy colors, anything dull or grayed, very dark colors'
+            },
+            'Light Summer': {
+                value: [-4, -1], temp: [1, 4], chroma: [-1, 2],
+                subtitle: 'Cool, Light & Soft',
+                colors: ['#E6E6FA', '#B0C4DE', '#DDA0DD', '#98D8C8', '#FFB6C1', '#E0FFFF'],
+                description: 'You are a Light Summer — your coloring is delicate, cool, and ethereal. You have a light overall appearance with cool or neutral undertones. You look beautiful in soft, cool pastels.',
+                best: 'Lavender, powder blue, soft pink, mint, mauve, dove gray, soft white, rose',
+                avoid: 'Warm colors, earth tones, black, bright or saturated colors, orange'
+            },
+            'True Summer': {
+                value: [-1, 1], temp: [2, 4], chroma: [-1, 2],
+                subtitle: 'Cool, Soft & Elegant',
+                colors: ['#B0C4DE', '#DDA0DD', '#778899', '#6B8E9B', '#C8A2C8', '#87CEEB'],
+                description: 'You are a True Summer — coolness is your defining characteristic. Your coloring is elegant and sophisticated with blue or gray undertones. You look best in soft, cool, muted colors.',
+                best: 'Dusty rose, powder blue, soft navy, cocoa, mauve, blue-gray, sage, raspberry',
+                avoid: 'Warm colors, orange, bright or saturated colors, black, earth tones'
+            },
+            'Soft Summer': {
+                value: [-1, 1], temp: [0, 3], chroma: [2, 4],
+                subtitle: 'Muted, Cool-Neutral & Gentle',
+                colors: ['#D8BFD8', '#C4AEAD', '#8E9B97', '#A9A9A9', '#B8AFA9', '#9CADB7'],
+                description: 'You are a Soft Summer — softness is your superpower. Your coloring is gentle, blended, and muted with cool-neutral undertones. You need soft, muted colors that won\'t overwhelm your delicate coloring.',
+                best: 'Dusty rose, soft teal, sage, cocoa, mauve, grayed lavender, soft blue-gray',
+                avoid: 'Bright or saturated colors, high contrast, neons, pure black or white'
+            },
+            'Soft Autumn': {
+                value: [-1, 1], temp: [-3, 0], chroma: [2, 4],
+                subtitle: 'Muted, Warm-Neutral & Earthy',
+                colors: ['#DEB887', '#BC8F8F', '#8B7355', '#A0785A', '#9E9E7A', '#C9B59A'],
+                description: 'You are a Soft Autumn — softness combined with warmth defines your palette. Your coloring is muted and earthy with warm-neutral undertones. You look beautiful in soft, dusty, warm colors.',
+                best: 'Camel, soft teal, dusty rose, olive, mushroom, warm gray, cocoa, sage',
+                avoid: 'Bright or saturated colors, pure black or white, neons, cool pastels'
+            },
+            'True Autumn': {
+                value: [0, 3], temp: [-4, -2], chroma: [-1, 2],
+                subtitle: 'Warm, Rich & Earthy',
+                colors: ['#CD853F', '#D2691E', '#8B4513', '#6B8E23', '#B8860B', '#A0522D'],
+                description: 'You are a True Autumn — warmth is your defining characteristic. Your coloring is rich and golden, like autumn leaves. You look stunning in the warm, earthy colors of fall.',
+                best: 'Terracotta, olive, pumpkin, camel, warm brown, teal, tomato red, mustard',
+                avoid: 'Cool colors, pastels, black, bright pink, icy tones'
+            },
+            'Deep Autumn': {
+                value: [2, 4], temp: [-4, -1], chroma: [-2, 1],
+                subtitle: 'Warm, Deep & Rich',
+                colors: ['#8B4513', '#800000', '#556B2F', '#8B0000', '#4A3728', '#704214'],
+                description: 'You are a Deep Autumn — depth combined with warmth defines your coloring. Your coloring is rich and intense with warm undertones. You look powerful in deep, saturated, warm colors.',
+                best: 'Burgundy, forest green, rust, chocolate brown, olive, burnt orange, warm red',
+                avoid: 'Pastels, cool colors, light or washed-out tones, pure black'
+            },
+            'Bright Winter': {
+                value: [-2, 1], temp: [0, 3], chroma: [-4, -2],
+                subtitle: 'Cool, Clear & Vivid',
+                colors: ['#FF1493', '#00BFFF', '#FF0000', '#00FF00', '#FF00FF', '#4169E1'],
+                description: 'You are a Bright Winter — clarity is your superpower. Your coloring is vivid and high-contrast with cool undertones. You can wear the most saturated, electric colors that would overwhelm others.',
+                best: 'Fuchsia, electric blue, true red, emerald, hot pink, royal purple, icy pastels',
+                avoid: 'Muted, dusty, or earthy colors, warm tones, anything dull or muddy'
+            },
+            'True Winter': {
+                value: [0, 3], temp: [2, 4], chroma: [-3, 0],
+                subtitle: 'Cool, Clear & Dramatic',
+                colors: ['#4169E1', '#DC143C', '#228B22', '#000000', '#FFFFFF', '#8B008B'],
+                description: 'You are a True Winter — coolness and clarity define your coloring. You have dramatic, high-contrast coloring with cool undertones. You look stunning in pure, cool, clear colors.',
+                best: 'True red, royal blue, emerald, black, pure white, fuchsia, icy pastels, charcoal',
+                avoid: 'Warm colors, earth tones, muted or dusty shades, orange'
+            },
+            'Deep Winter': {
+                value: [2, 4], temp: [1, 4], chroma: [-2, 1],
+                subtitle: 'Cool, Deep & Intense',
+                colors: ['#191970', '#800020', '#2F4F4F', '#000000', '#4B0082', '#006400'],
+                description: 'You are a Deep Winter — depth combined with coolness defines your coloring. Your coloring is rich and intense with cool undertones. You look powerful in deep, saturated, cool colors.',
+                best: 'Black, navy, burgundy, forest green, royal purple, charcoal, icy white',
+                avoid: 'Pastels, warm colors, earth tones, light or muted shades, orange'
+            }
+        };
+
+        // ============================================
+        // STATE
+        // ============================================
+        let currentQuestion = 0;
+        let answers = {};
+        let scores = { value: 0, temp: 0, chroma: 0 };
+
+        // ============================================
+        // FUNCTIONS
+        // ============================================
+        function startQuiz() {
+            document.getElementById('intro').classList.remove('active');
+            document.getElementById('progress-container').style.display = 'block';
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            const container = document.getElementById('questions-container');
+            
+            updateProgress();
+
+            let optionsHtml = '';
+            
+            if (q.type === 'visual') {
+                const colCount = q.options.length >= 4 ? '' : (q.options.length === 3 ? ' three-col' : '');
+                optionsHtml = `<div class="visual-options${colCount}">`;
+                q.options.forEach((opt, i) => {
+                    const swatches = opt.colors.map(c => `<div class="swatch" style="background: ${c};"></div>`).join('');
+                    optionsHtml += `
+                        <div class="visual-option" onclick="selectOption(${i})" data-index="${i}">
+                            <div class="swatches">${swatches}</div>
+                            <div class="content">
+                                <div class="label">${opt.text}</div>
+                                <div class="desc">${opt.desc}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                optionsHtml += '</div>';
+            } else {
+                optionsHtml = '<div class="options-container">';
+                q.options.forEach((opt, i) => {
+                    optionsHtml += `
+                        <div class="option" onclick="selectOption(${i})" data-index="${i}">
+                            <div class="option-marker"></div>
+                            <span class="option-text">${opt.text}</span>
+                        </div>
+                    `;
+                });
+                optionsHtml += '</div>';
+            }
+
+            container.innerHTML = `
+                <div class="card active">
+                    <p class="question-category">${q.category}</p>
+                    <h2 class="question-text">${q.question}</h2>
+                    ${q.context ? `<p class="question-context">${q.context}</p>` : ''}
+                    
+                    ${optionsHtml}
+
+                    <div class="button-row">
+                        ${currentQuestion > 0 ? '<button class="btn btn-secondary" onclick="prevQuestion()">Back</button>' : '<div></div>'}
+                        <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>
+                            ${currentQuestion === questions.length - 1 ? 'See My Colors' : 'Next'}
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectOption(index) {
+            const q = questions[currentQuestion];
+            
+            if (q.type === 'visual') {
+                document.querySelectorAll('.visual-option').forEach(opt => opt.classList.remove('selected'));
+                document.querySelectorAll('.visual-option')[index].classList.add('selected');
+            } else {
+                document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                document.querySelectorAll('.option')[index].classList.add('selected');
+            }
+            
+            answers[q.id] = index;
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('section-label').textContent = questions[currentQuestion].section;
+        }
+
+        function nextQuestion() {
+            const q = questions[currentQuestion];
+            const selectedOption = q.options[answers[q.id]];
+            
+            if (selectedOption && selectedOption.scores) {
+                for (const [key, val] of Object.entries(selectedOption.scores)) {
+                    scores[key] += val;
+                }
+            }
+
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                const q = questions[currentQuestion];
+                if (answers[q.id] !== undefined) {
+                    const selectedOption = q.options[answers[q.id]];
+                    if (selectedOption && selectedOption.scores) {
+                        for (const [key, val] of Object.entries(selectedOption.scores)) {
+                            scores[key] -= val;
+                        }
+                    }
+                }
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('progress-container').style.display = 'none';
+            document.getElementById('questions-container').innerHTML = '';
+
+            // Normalize scores to 0-100 percentage
+            const maxScore = 32;
+            const valuePercent = Math.min(100, Math.max(0, ((scores.value + maxScore) / (maxScore * 2)) * 100));
+            const tempPercent = Math.min(100, Math.max(0, ((scores.temp + maxScore) / (maxScore * 2)) * 100));
+            const chromaPercent = Math.min(100, Math.max(0, ((scores.chroma + maxScore) / (maxScore * 2)) * 100));
+
+            // Calculate match scores
+            const matchScores = {};
+            for (const [name, data] of Object.entries(seasons)) {
+                const valueMid = (data.value[0] + data.value[1]) / 2;
+                const tempMid = (data.temp[0] + data.temp[1]) / 2;
+                const chromaMid = (data.chroma[0] + data.chroma[1]) / 2;
+                
+                const valueMatch = Math.max(0, 100 - Math.abs(scores.value - valueMid * 2) * 8);
+                const tempMatch = Math.max(0, 100 - Math.abs(scores.temp - tempMid * 2) * 8);
+                const chromaMatch = Math.max(0, 100 - Math.abs(scores.chroma - chromaMid * 2) * 8);
+                
+                matchScores[name] = Math.round((valueMatch + tempMatch + chromaMatch) / 3);
+            }
+
+            const sortedMatches = Object.entries(matchScores).sort((a, b) => b[1] - a[1]).slice(0, 4);
+            const topSeason = sortedMatches[0][0];
+            const topData = seasons[topSeason];
+
+            // Update UI
+            document.getElementById('season-result').textContent = topSeason;
+            document.getElementById('season-subtitle').textContent = topData.subtitle;
+            
+            document.getElementById('palette-swatches').innerHTML = topData.colors.map(c => 
+                `<div class="palette-swatch" style="background: ${c};"></div>`
+            ).join('');
+
+            document.getElementById('value-marker').style.left = valuePercent + '%';
+            document.getElementById('temp-marker').style.left = tempPercent + '%';
+            document.getElementById('chroma-marker').style.left = chromaPercent + '%';
+
+            document.getElementById('value-result').textContent = 
+                valuePercent < 35 ? 'Light' : valuePercent > 65 ? 'Deep' : 'Medium';
+            document.getElementById('temp-result').textContent = 
+                tempPercent < 35 ? 'Warm' : tempPercent > 65 ? 'Cool' : 'Neutral';
+            document.getElementById('chroma-result').textContent = 
+                chromaPercent < 35 ? 'Clear' : chromaPercent > 65 ? 'Soft' : 'Medium';
+
+            document.getElementById('matches-container').innerHTML = sortedMatches.map((match, i) => {
+                const [name, score] = match;
+                const data = seasons[name];
+                const swatches = data.colors.slice(0, 4).map(c => 
+                    `<div class="match-swatch" style="background: ${c};"></div>`
+                ).join('');
+                return `
+                    <div class="match-item">
+                        <div class="match-rank">${i + 1}</div>
+                        <div class="match-colors">${swatches}</div>
+                        <div class="match-info">
+                            <div class="match-name">${name}</div>
+                        </div>
+                        <div class="match-bar">
+                            <div class="match-bar-fill" style="width: ${score}%;"></div>
+                        </div>
+                        <div class="match-percent">${score}%</div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('about-title').textContent = `About ${topSeason}`;
+            document.getElementById('description-text').textContent = topData.description;
+            document.getElementById('best-colors').textContent = topData.best;
+            document.getElementById('avoid-colors').textContent = topData.avoid;
+
+            document.getElementById('results').classList.add('active');
+        }
+
+        function retakeQuiz() {
+            currentQuestion = 0;
+            answers = {};
+            scores = { value: 0, temp: 0, chroma: 0 };
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('intro').classList.add('active');
+        }
+    </script>
+</body>
+</html>
