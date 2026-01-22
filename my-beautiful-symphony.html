@@ -205,9 +205,8 @@
             padding: 2rem;
             box-shadow: 0 10px 40px rgba(212, 175, 55, 0.12);
             border: 1px solid rgba(212, 175, 55, 0.2);
-            min-height: 450px;
+            min-height: 550px;
             position: relative;
-            overflow: hidden;
             transition: all 0.5s ease;
         }
 
@@ -218,16 +217,18 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(180deg, rgba(232, 237, 228, 0.3) 0%, rgba(245, 239, 231, 0.5) 50%, rgba(212, 175, 55, 0.1) 100%);
+            overflow: visible;
         }
 
         .garden-scene {
             position: relative;
             width: 100%;
             max-width: 600px;
-            height: 380px;
+            height: 460px;
             display: flex;
             align-items: flex-end;
             justify-content: center;
+            padding-top: 40px;
         }
 
         .garden-ground {
@@ -235,14 +236,14 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 60px;
+            height: 80px;
             background: linear-gradient(180deg, rgba(156, 175, 136, 0.3) 0%, rgba(156, 175, 136, 0.5) 100%);
             border-radius: 100% 100% 0 0;
         }
 
         .tree-container {
             position: absolute;
-            bottom: 40px;
+            bottom: 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -272,7 +273,7 @@
 
         .flowers-container {
             position: absolute;
-            bottom: 30px;
+            bottom: 50px;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -288,7 +289,7 @@
 
         .flower-svg {
             width: 80px;
-            height: 100px;
+            height: 120px;
             transition: all 0.5s ease;
             animation: gentleSway 4s ease-in-out infinite;
         }
@@ -657,12 +658,12 @@
         @media (max-width: 768px) {
             .symphony-header { padding: 3rem 1.5rem 2rem; }
             .symphony-container { padding: 0 1rem 3rem; }
-            .selection-grid { grid-template-columns: 1fr; }
+            .selection-grid { grid-template-columns: 1fr !important; }
             .selection-card[style*="grid-column: span 2"] { grid-column: span 1; }
-            .visualization-container { padding: 1.5rem 1rem; min-height: 400px; }
-            .garden-scene { height: 320px; }
+            .visualization-container { padding: 1.5rem 1rem; min-height: 450px; }
+            .garden-scene { height: 360px; }
             .tree-svg { width: 150px; height: 210px; }
-            .flower-svg { width: 60px; height: 75px; }
+            .flower-svg { width: 60px; height: 90px; }
             .final-symphony { padding: 2rem 1.5rem; }
             .checkbox-group { grid-template-columns: 1fr; }
             .symphony-summary { grid-template-columns: 1fr; }
@@ -959,11 +960,11 @@
                 <svg class="section-icon"><use href="#icon-body"/></svg>
                 <div>
                     <h2>Body</h2>
-                    <p class="section-subtitle">Your Sacred Temple</p>
+                    <p class="section-subtitle">Your Sacred Temple · Weeks 1–6</p>
                 </div>
             </div>
 
-            <div class="selection-grid">
+            <div class="selection-grid" style="grid-template-columns: repeat(2, 1fr);">
                 <div class="selection-card">
                     <label for="season">Seasonal Color Palette</label>
                     <select id="season" onchange="updateBodyGarden()">
@@ -1027,11 +1028,11 @@
                 <svg class="section-icon"><use href="#icon-mind"/></svg>
                 <div>
                     <h2>Mind</h2>
-                    <p class="section-subtitle">Your Interior Landscape</p>
+                    <p class="section-subtitle">Your Interior Landscape · Weeks 7–10</p>
                 </div>
             </div>
 
-            <div class="selection-grid">
+            <div class="selection-grid" style="grid-template-columns: repeat(2, 1fr);">
                 <div class="selection-card">
                     <label for="temperament">Temperament</label>
                     <select id="temperament" onchange="updateMindConstellation()">
@@ -1109,18 +1110,20 @@
                 <svg class="section-icon"><use href="#icon-spirit"/></svg>
                 <div>
                     <h2>Spirit</h2>
-                    <p class="section-subtitle">Your Sacred Calling</p>
+                    <p class="section-subtitle">Your Sacred Calling · Weeks 11–15</p>
                 </div>
             </div>
 
-            <div class="selection-grid">
+            <div class="selection-grid" style="grid-template-columns: 1fr;">
                 <div class="selection-card">
                     <label for="name-heaven">Name from Heaven</label>
                     <input type="text" id="name-heaven" placeholder="What does God call you?" oninput="updateSpiritRadiance()">
                 </div>
-                <div class="selection-card" style="grid-column: span 2;">
+            </div>
+            <div class="selection-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="selection-card">
                     <label>Top 5 Virtues (from your 42)</label>
-                    <div class="checkbox-group" id="virtues-group" style="max-height: 180px;">
+                    <div class="checkbox-group" id="virtues-group" style="max-height: 200px;">
                         <label><input type="checkbox" value="Love of God and Neighbour" onchange="limitVirtues(this)"> Love of God & Neighbour</label>
                         <label><input type="checkbox" value="Humility" onchange="limitVirtues(this)"> Humility</label>
                         <label><input type="checkbox" value="Obedience" onchange="limitVirtues(this)"> Obedience</label>
@@ -1165,9 +1168,9 @@
                         <label><input type="checkbox" value="Perseverance" onchange="limitVirtues(this)"> Perseverance</label>
                     </div>
                 </div>
-                <div class="selection-card" style="grid-column: span 2;">
+                <div class="selection-card">
                     <label>Top 3 Charisms (from your 25)</label>
-                    <div class="checkbox-group" id="charisms-group" style="max-height: 160px;">
+                    <div class="checkbox-group" id="charisms-group" style="max-height: 200px;">
                         <label><input type="checkbox" value="Administration" onchange="limitCharisms(this)"> Administration</label>
                         <label><input type="checkbox" value="Craftsmanship" onchange="limitCharisms(this)"> Craftsmanship</label>
                         <label><input type="checkbox" value="Discernment" onchange="limitCharisms(this)"> Discernment</label>
