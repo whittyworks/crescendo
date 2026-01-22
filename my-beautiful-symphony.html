@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Beautiful Symphony · My Holy Crescendo</title>
+    <meta name="description" content="Celebrate the unique masterpiece God created in you - your complete symphony of body, mind, and spirit.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+            --blush: #F5E1DA;
+            --sage: #E8EDE4;
+            --lavender: #EDE8F2;
+            
+            /* Essence Colors */
+            --flame: #B87D7D;
+            --keeper: #9CAF88;
+            --sage-essence: #6B7B8C;
+            --spark: #E8A87C;
+            --heart: #C9A0A0;
+            --grace: #D4B8C4;
+            --veil: #9B8AA6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        
+        .symphony-header {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            background: linear-gradient(180deg, 
+                rgba(212, 175, 55, 0.08) 0%, 
+                transparent 100%);
+        }
+
+        .symphony-header .week-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .symphony-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--gold-dark);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .symphony-header .subtitle {
+            font-style: italic;
+            font-size: 1.25rem;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .flourish {
+            display: block;
+            margin: 2rem auto;
+            text-align: center;
+            color: var(--gold);
+            font-size: 1.5rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.6;
+        }
+
+        /* ============================================
+           MAIN CONTAINER
+           ============================================ */
+        
+        .symphony-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .intro-text {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            line-height: 1.9;
+        }
+
+        /* ============================================
+           SECTION STYLING
+           ============================================ */
+        
+        .symphony-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .section-icon {
+            font-size: 2rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.75rem;
+            color: var(--gold-dark);
+            font-weight: 400;
+        }
+
+        .section-header .section-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-medium);
+            margin-top: 0.25rem;
+        }
+
+        /* ============================================
+           SELECTION CARDS
+           ============================================ */
+        
+        .selection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .selection-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .selection-card label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gold-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .selection-card select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            background: var(--cream);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23D4AF37' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+        }
+
+        .selection-card select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+        }
+
+        .selection-card select:hover {
+            border-color: var(--gold);
+        }
+
+        /* Text input styling */
+        .selection-card input[type="text"],
+        .selection-card textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            background: var(--cream);
+            transition: all 0.3s ease;
+        }
+
+        .selection-card input[type="text"]:focus,
+        .selection-card textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+        }
+
+        .selection-card textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Multi-select for strengths */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 0.5rem;
+            background: var(--cream);
+            border-radius: 8px;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            text-transform: none;
+            letter-spacing: 0;
+            color: var(--text-dark);
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .checkbox-group label:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            accent-color: var(--gold);
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ============================================
+           VISUALIZATION AREAS
+           ============================================ */
+        
+        .visualization-container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        /* Body Garden Visualization */
+        #body-garden {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, 
+                rgba(232, 237, 228, 0.3) 0%,
+                rgba(245, 239, 231, 0.5) 50%,
+                rgba(212, 175, 55, 0.1) 100%);
+        }
+
+        .garden-scene {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 350px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .tree-container {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+            transition: all 0.5s ease;
+        }
+
+        .tree-emoji {
+            font-size: 8rem;
+            line-height: 1;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            transition: all 0.5s ease;
+        }
+
+        .tree-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-medium);
+            margin-top: 0.5rem;
+            background: rgba(255,255,255,0.9);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+        }
+
+        .flowers-container {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            z-index: 3;
+        }
+
+        .flower-group {
+            display: flex;
+            gap: 0.25rem;
+            transition: all 0.5s ease;
+        }
+
+        .flower-emoji {
+            font-size: 2.5rem;
+            animation: gentleSway 3s ease-in-out infinite;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .flower-emoji:nth-child(2) { animation-delay: 0.5s; }
+        .flower-emoji:nth-child(3) { animation-delay: 1s; }
+        .flower-emoji:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes gentleSway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .garden-description {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 1rem 1.5rem;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            max-width: 450px;
+        }
+
+        .garden-description h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-dark);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .garden-description p {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            font-style: italic;
+        }
+
+        /* Season Color Overlays */
+        .season-spring #body-garden {
+            background: linear-gradient(180deg, 
+                rgba(255, 223, 211, 0.3) 0%,
+                rgba(255, 245, 238, 0.5) 50%,
+                rgba(255, 182, 193, 0.15) 100%);
+        }
+
+        .season-summer #body-garden {
+            background: linear-gradient(180deg, 
+                rgba(176, 196, 222, 0.3) 0%,
+                rgba(240, 248, 255, 0.5) 50%,
+                rgba(221, 160, 221, 0.15) 100%);
+        }
+
+        .season-autumn #body-garden {
+            background: linear-gradient(180deg, 
+                rgba(210, 180, 140, 0.3) 0%,
+                rgba(255, 248, 220, 0.5) 50%,
+                rgba(205, 133, 63, 0.15) 100%);
+        }
+
+        .season-winter #body-garden {
+            background: linear-gradient(180deg, 
+                rgba(176, 196, 222, 0.4) 0%,
+                rgba(248, 248, 255, 0.5) 50%,
+                rgba(192, 192, 192, 0.15) 100%);
+        }
+
+        /* Mind Constellation Visualization */
+        #mind-constellation {
+            background: linear-gradient(180deg, 
+                rgba(20, 25, 45, 0.95) 0%,
+                rgba(40, 50, 80, 0.9) 100%);
+            color: white;
+            position: relative;
+        }
+
+        .constellation-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
+        }
+
+        .star {
+            position: absolute;
+            background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .mind-trait {
+            position: absolute;
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        .mind-trait .trait-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.8) 0%, rgba(212, 175, 55, 0.3) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            font-size: 1.5rem;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.7); }
+        }
+
+        .mind-trait .trait-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 0.25rem;
+        }
+
+        .mind-trait .trait-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            color: var(--gold-light);
+            max-width: 120px;
+        }
+
+        /* Constellation lines */
+        .constellation-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .constellation-lines line {
+            stroke: rgba(212, 175, 55, 0.3);
+            stroke-width: 1;
+        }
+
+        /* Spirit Radiance Visualization */
+        #spirit-radiance {
+            background: linear-gradient(180deg, 
+                rgba(253, 248, 243, 1) 0%,
+                rgba(255, 250, 240, 1) 50%,
+                rgba(212, 175, 55, 0.1) 100%);
+            text-align: center;
+        }
+
+        .radiance-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .radiance-center {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .radiance-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(212, 175, 55, 0.4) 0%, 
+                rgba(212, 175, 55, 0.1) 50%,
+                transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+        }
+
+        .radiance-icon {
+            font-size: 4rem;
+            z-index: 2;
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));
+        }
+
+        .name-from-heaven {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+            min-height: 2.5rem;
+        }
+
+        .spirit-traits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            max-width: 500px;
+        }
+
+        .spirit-trait-badge {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--text-dark);
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .spirit-trait-badge .badge-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 0.15rem;
+        }
+
+        /* ============================================
+           FINAL SYMPHONY DISPLAY
+           ============================================ */
+        
+        .final-symphony {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.15);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .final-symphony h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .final-symphony .tagline {
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+        }
+
+        .symphony-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .symphony-summary {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .summary-column h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .summary-column ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        .summary-column li {
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .summary-column li:last-child {
+            border-bottom: none;
+        }
+
+        .summary-column li strong {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .scripture-closing {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--cream);
+            border-radius: 12px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .scripture-closing blockquote {
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .scripture-closing cite {
+            color: var(--gold-dark);
+            font-size: 0.9rem;
+        }
+
+        /* Print/Save Button */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--gold-dark);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--cream);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        
+        @media (max-width: 768px) {
+            .symphony-header {
+                padding: 3rem 1.5rem 2rem;
+            }
+
+            .symphony-container {
+                padding: 0 1rem 3rem;
+            }
+
+            .selection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .visualization-container {
+                padding: 1.5rem;
+                min-height: 350px;
+            }
+
+            .garden-scene {
+                height: 280px;
+            }
+
+            .tree-emoji {
+                font-size: 5rem;
+            }
+
+            .flower-emoji {
+                font-size: 1.8rem;
+            }
+
+            .final-symphony {
+                padding: 2rem 1.5rem;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================
+           PRINT STYLES
+           ============================================ */
+        
+        @media print {
+            body {
+                padding-top: 0;
+            }
+
+            nav, .selection-grid, .action-buttons {
+                display: none !important;
+            }
+
+            .visualization-container {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            .final-symphony {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Portal Navigation -->
+    <nav class="sans">
+        <a href="index.html" class="logo-link">
+            <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
+        </a>
+        <ul class="nav-links">
+            <li><a href="portal.html" class="portal-back">← Back to Portal</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <header class="symphony-header">
+        <p class="week-label">Week 15 · Celebration</p>
+        <h1>My Beautiful Symphony</h1>
+        <p class="subtitle">A celebration of the once-in-a-universe masterpiece God created in you</p>
+    </header>
+
+    <main class="symphony-container">
+        <p class="intro-text">
+            You have journeyed through body, mind, and spirit — discovering the intricate design God wove into every part of you. 
+            Now, gather your discoveries here and witness the beautiful symphony that is <em>uniquely you</em>.
+        </p>
+
+        <!-- ============================================
+             BODY SECTION
+             ============================================ -->
+        <section class="symphony-section" id="body-section">
+            <div class="section-header">
+                <span class="section-icon">🌸</span>
+                <div>
+                    <h2>Body</h2>
+                    <p class="section-subtitle">Your Sacred Temple · Weeks 1–6</p>
+                </div>
+            </div>
+
+            <div class="selection-grid">
+                <div class="selection-card">
+                    <label for="season">Seasonal Color Palette</label>
+                    <select id="season" onchange="updateBodyGarden()">
+                        <option value="">Select your season...</option>
+                        <optgroup label="Spring">
+                            <option value="light-spring">Light Spring</option>
+                            <option value="true-spring">True Spring</option>
+                            <option value="bright-spring">Bright Spring</option>
+                        </optgroup>
+                        <optgroup label="Summer">
+                            <option value="light-summer">Light Summer</option>
+                            <option value="true-summer">True Summer</option>
+                            <option value="soft-summer">Soft Summer</option>
+                        </optgroup>
+                        <optgroup label="Autumn">
+                            <option value="soft-autumn">Soft Autumn</option>
+                            <option value="true-autumn">True Autumn</option>
+                            <option value="dark-autumn">Dark Autumn</option>
+                        </optgroup>
+                        <optgroup label="Winter">
+                            <option value="dark-winter">Dark Winter</option>
+                            <option value="true-winter">True Winter</option>
+                            <option value="bright-winter">Bright Winter</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="selection-card">
+                    <label for="silhouette">Sacred Silhouette</label>
+                    <select id="silhouette" onchange="updateBodyGarden()">
+                        <option value="">Select your silhouette...</option>
+                        <optgroup label="Striking (Italian Cypress)">
+                            <option value="sharp-striking">Sharp Striking</option>
+                            <option value="soft-striking">Soft Striking</option>
+                        </optgroup>
+                        <optgroup label="Sylvan (Oak)">
+                            <option value="sharp-sylvan">Sharp Sylvan</option>
+                            <option value="soft-sylvan">Soft Sylvan</option>
+                        </optgroup>
+                        <optgroup label="Synchronous (Maple)">
+                            <option value="sharp-synchronous">Sharp Synchronous</option>
+                            <option value="soft-synchronous">Soft Synchronous</option>
+                        </optgroup>
+                        <optgroup label="Sprightly (Redbud)">
+                            <option value="sharp-sprightly">Sharp Sprightly</option>
+                            <option value="soft-sprightly">Soft Sprightly</option>
+                        </optgroup>
+                        <optgroup label="Supple (Magnolia)">
+                            <option value="sharp-supple">Sharp Supple</option>
+                            <option value="soft-supple">Soft Supple</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="selection-card">
+                    <label for="essence">Style Essence (Primary)</label>
+                    <select id="essence" onchange="updateBodyGarden()">
+                        <option value="">Select your essence...</option>
+                        <option value="flame">The Flame</option>
+                        <option value="keeper">The Keeper</option>
+                        <option value="sage">The Sage</option>
+                        <option value="spark">The Spark</option>
+                        <option value="heart">The Heart</option>
+                        <option value="grace">The Grace</option>
+                        <option value="veil">The Veil</option>
+                    </select>
+                </div>
+
+                <div class="selection-card">
+                    <label for="essence-secondary">Style Essence (Secondary)</label>
+                    <select id="essence-secondary" onchange="updateBodyGarden()">
+                        <option value="">Select secondary essence...</option>
+                        <option value="flame">The Flame</option>
+                        <option value="keeper">The Keeper</option>
+                        <option value="sage">The Sage</option>
+                        <option value="spark">The Spark</option>
+                        <option value="heart">The Heart</option>
+                        <option value="grace">The Grace</option>
+                        <option value="veil">The Veil</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Body Garden Visualization -->
+            <div class="visualization-container" id="body-garden">
+                <div class="garden-scene">
+                    <div class="tree-container" id="tree-display">
+                        <span class="tree-emoji">🌳</span>
+                        <span class="tree-label">Your Tree</span>
+                    </div>
+                    <div class="flowers-container" id="flowers-display">
+                        <div class="flower-group">
+                            <span class="flower-emoji">🌸</span>
+                            <span class="flower-emoji">🌺</span>
+                            <span class="flower-emoji">🌸</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="garden-description" id="garden-description">
+                    <h3>Your Sacred Garden</h3>
+                    <p>Select your season, silhouette, and essence to see your unique garden bloom.</p>
+                </div>
+            </div>
+        </section>
+
+        <span class="flourish">✦ ✦ ✦</span>
+
+        <!-- ============================================
+             MIND SECTION
+             ============================================ -->
+        <section class="symphony-section" id="mind-section">
+            <div class="section-header">
+                <span class="section-icon">💫</span>
+                <div>
+                    <h2>Mind</h2>
+                    <p class="section-subtitle">Your Interior Landscape · Weeks 7–10</p>
+                </div>
+            </div>
+
+            <div class="selection-grid">
+                <div class="selection-card">
+                    <label for="temperament">Temperament</label>
+                    <select id="temperament" onchange="updateMindConstellation()">
+                        <option value="">Select your temperament...</option>
+                        <option value="choleric">Choleric</option>
+                        <option value="sanguine">Sanguine</option>
+                        <option value="melancholic">Melancholic</option>
+                        <option value="phlegmatic">Phlegmatic</option>
+                        <option value="choleric-sanguine">Choleric-Sanguine</option>
+                        <option value="choleric-melancholic">Choleric-Melancholic</option>
+                        <option value="sanguine-choleric">Sanguine-Choleric</option>
+                        <option value="sanguine-phlegmatic">Sanguine-Phlegmatic</option>
+                        <option value="melancholic-choleric">Melancholic-Choleric</option>
+                        <option value="melancholic-phlegmatic">Melancholic-Phlegmatic</option>
+                        <option value="phlegmatic-sanguine">Phlegmatic-Sanguine</option>
+                        <option value="phlegmatic-melancholic">Phlegmatic-Melancholic</option>
+                    </select>
+                </div>
+
+                <div class="selection-card">
+                    <label for="cognitive-type">Cognitive Type</label>
+                    <select id="cognitive-type" onchange="updateMindConstellation()">
+                        <option value="">Select your type...</option>
+                        <option value="INTJ">INTJ - The Architect</option>
+                        <option value="INTP">INTP - The Logician</option>
+                        <option value="ENTJ">ENTJ - The Commander</option>
+                        <option value="ENTP">ENTP - The Debater</option>
+                        <option value="INFJ">INFJ - The Advocate</option>
+                        <option value="INFP">INFP - The Mediator</option>
+                        <option value="ENFJ">ENFJ - The Protagonist</option>
+                        <option value="ENFP">ENFP - The Campaigner</option>
+                        <option value="ISTJ">ISTJ - The Logistician</option>
+                        <option value="ISFJ">ISFJ - The Defender</option>
+                        <option value="ESTJ">ESTJ - The Executive</option>
+                        <option value="ESFJ">ESFJ - The Consul</option>
+                        <option value="ISTP">ISTP - The Virtuoso</option>
+                        <option value="ISFP">ISFP - The Adventurer</option>
+                        <option value="ESTP">ESTP - The Entrepreneur</option>
+                        <option value="ESFP">ESFP - The Entertainer</option>
+                    </select>
+                </div>
+
+                <div class="selection-card">
+                    <label for="love-language">Primary Love Language</label>
+                    <select id="love-language" onchange="updateMindConstellation()">
+                        <option value="">Select love language...</option>
+                        <option value="words">Words of Affirmation</option>
+                        <option value="acts">Acts of Service</option>
+                        <option value="gifts">Receiving Gifts</option>
+                        <option value="time">Quality Time</option>
+                        <option value="touch">Physical Touch</option>
+                    </select>
+                </div>
+
+                <div class="selection-card">
+                    <label>Top Character Strengths (select up to 5)</label>
+                    <div class="checkbox-group" id="strengths-group">
+                        <!-- Wisdom -->
+                        <label><input type="checkbox" value="Creativity" onchange="updateMindConstellation()"> Creativity</label>
+                        <label><input type="checkbox" value="Curiosity" onchange="updateMindConstellation()"> Curiosity</label>
+                        <label><input type="checkbox" value="Judgment" onchange="updateMindConstellation()"> Judgment</label>
+                        <label><input type="checkbox" value="Love of Learning" onchange="updateMindConstellation()"> Love of Learning</label>
+                        <label><input type="checkbox" value="Perspective" onchange="updateMindConstellation()"> Perspective</label>
+                        <!-- Courage -->
+                        <label><input type="checkbox" value="Bravery" onchange="updateMindConstellation()"> Bravery</label>
+                        <label><input type="checkbox" value="Perseverance" onchange="updateMindConstellation()"> Perseverance</label>
+                        <label><input type="checkbox" value="Honesty" onchange="updateMindConstellation()"> Honesty</label>
+                        <label><input type="checkbox" value="Zest" onchange="updateMindConstellation()"> Zest</label>
+                        <!-- Humanity -->
+                        <label><input type="checkbox" value="Love" onchange="updateMindConstellation()"> Love</label>
+                        <label><input type="checkbox" value="Kindness" onchange="updateMindConstellation()"> Kindness</label>
+                        <label><input type="checkbox" value="Social Intelligence" onchange="updateMindConstellation()"> Social Intelligence</label>
+                        <!-- Justice -->
+                        <label><input type="checkbox" value="Teamwork" onchange="updateMindConstellation()"> Teamwork</label>
+                        <label><input type="checkbox" value="Fairness" onchange="updateMindConstellation()"> Fairness</label>
+                        <label><input type="checkbox" value="Leadership" onchange="updateMindConstellation()"> Leadership</label>
+                        <!-- Temperance -->
+                        <label><input type="checkbox" value="Forgiveness" onchange="updateMindConstellation()"> Forgiveness</label>
+                        <label><input type="checkbox" value="Humility" onchange="updateMindConstellation()"> Humility</label>
+                        <label><input type="checkbox" value="Prudence" onchange="updateMindConstellation()"> Prudence</label>
+                        <label><input type="checkbox" value="Self-Regulation" onchange="updateMindConstellation()"> Self-Regulation</label>
+                        <!-- Transcendence -->
+                        <label><input type="checkbox" value="Appreciation of Beauty" onchange="updateMindConstellation()"> Appreciation of Beauty</label>
+                        <label><input type="checkbox" value="Gratitude" onchange="updateMindConstellation()"> Gratitude</label>
+                        <label><input type="checkbox" value="Hope" onchange="updateMindConstellation()"> Hope</label>
+                        <label><input type="checkbox" value="Humor" onchange="updateMindConstellation()"> Humor</label>
+                        <label><input type="checkbox" value="Spirituality" onchange="updateMindConstellation()"> Spirituality</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mind Constellation Visualization -->
+            <div class="visualization-container" id="mind-constellation">
+                <div class="constellation-container" id="constellation-display">
+                    <!-- Stars will be generated by JS -->
+                    <svg class="constellation-lines" id="constellation-lines"></svg>
+                    
+                    <div class="mind-trait" style="top: 20%; left: 50%; transform: translateX(-50%);">
+                        <div class="trait-icon">🌟</div>
+                        <span class="trait-label">Temperament</span>
+                        <span class="trait-value" id="display-temperament">—</span>
+                    </div>
+                    
+                    <div class="mind-trait" style="top: 45%; left: 20%;">
+                        <div class="trait-icon">🧠</div>
+                        <span class="trait-label">Cognitive Type</span>
+                        <span class="trait-value" id="display-cognitive">—</span>
+                    </div>
+                    
+                    <div class="mind-trait" style="top: 45%; right: 20%;">
+                        <div class="trait-icon">💝</div>
+                        <span class="trait-label">Love Language</span>
+                        <span class="trait-value" id="display-love">—</span>
+                    </div>
+                    
+                    <div class="mind-trait" style="bottom: 15%; left: 50%; transform: translateX(-50%);">
+                        <div class="trait-icon">💎</div>
+                        <span class="trait-label">Top Strengths</span>
+                        <span class="trait-value" id="display-strengths">—</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <span class="flourish">✦ ✦ ✦</span>
+
+        <!-- ============================================
+             SPIRIT SECTION
+             ============================================ -->
+        <section class="symphony-section" id="spirit-section">
+            <div class="section-header">
+                <span class="section-icon">🕊️</span>
+                <div>
+                    <h2>Spirit</h2>
+                    <p class="section-subtitle">Your Sacred Calling · Weeks 11–15</p>
+                </div>
+            </div>
+
+            <div class="selection-grid">
+                <div class="selection-card">
+                    <label for="name-heaven">Name from Heaven</label>
+                    <input type="text" id="name-heaven" placeholder="What does God call you?" oninput="updateSpiritRadiance()">
+                </div>
+
+                <div class="selection-card">
+                    <label for="top-virtue">Primary Virtue</label>
+                    <select id="top-virtue" onchange="updateSpiritRadiance()">
+                        <option value="">Select your top virtue...</option>
+                        <option value="Faith">Faith</option>
+                        <option value="Hope">Hope</option>
+                        <option value="Charity">Charity (Love)</option>
+                        <option value="Prudence">Prudence</option>
+                        <option value="Justice">Justice</option>
+                        <option value="Fortitude">Fortitude</option>
+                        <option value="Temperance">Temperance</option>
+                        <option value="Humility">Humility</option>
+                        <option value="Meekness">Meekness</option>
+                        <option value="Patience">Patience</option>
+                        <option value="Chastity">Chastity</option>
+                        <option value="Liberality">Liberality</option>
+                        <option value="Diligence">Diligence</option>
+                    </select>
+                </div>
+
+                <div class="selection-card">
+                    <label for="charism-1">Primary Charism</label>
+                    <select id="charism-1" onchange="updateSpiritRadiance()">
+                        <option value="">Select a charism...</option>
+                        <option value="Administration">Administration</option>
+                        <option value="Celibacy">Celibacy</option>
+                        <option value="Craftsmanship">Craftsmanship</option>
+                        <option value="Discernment of Spirits">Discernment of Spirits</option>
+                        <option value="Encouragement">Encouragement</option>
+                        <option value="Evangelism">Evangelism</option>
+                        <option value="Faith">Faith</option>
+                        <option value="Giving">Giving</option>
+                        <option value="Healing">Healing</option>
+                        <option value="Helps">Helps</option>
+                        <option value="Hospitality">Hospitality</option>
+                        <option value="Intercessory Prayer">Intercessory Prayer</option>
+                        <option value="Knowledge">Knowledge</option>
+                        <option value="Leadership">Leadership</option>
+                        <option value="Mercy">Mercy</option>
+                        <option value="Missionary">Missionary</option>
+                        <option value="Music">Music</option>
+                        <option value="Pastoring">Pastoring</option>
+                        <option value="Prophecy">Prophecy</option>
+                        <option value="Service">Service</option>
+                        <option value="Teaching">Teaching</option>
+                        <option value="Voluntary Poverty">Voluntary Poverty</option>
+                        <option value="Wisdom">Wisdom</option>
+                        <option value="Writing">Writing</option>
+                    </select>
+                </div>
+
+                <div class="selection-card">
+                    <label for="charism-2">Secondary Charism</label>
+                    <select id="charism-2" onchange="updateSpiritRadiance()">
+                        <option value="">Select a charism...</option>
+                        <option value="Administration">Administration</option>
+                        <option value="Celibacy">Celibacy</option>
+                        <option value="Craftsmanship">Craftsmanship</option>
+                        <option value="Discernment of Spirits">Discernment of Spirits</option>
+                        <option value="Encouragement">Encouragement</option>
+                        <option value="Evangelism">Evangelism</option>
+                        <option value="Faith">Faith</option>
+                        <option value="Giving">Giving</option>
+                        <option value="Healing">Healing</option>
+                        <option value="Helps">Helps</option>
+                        <option value="Hospitality">Hospitality</option>
+                        <option value="Intercessory Prayer">Intercessory Prayer</option>
+                        <option value="Knowledge">Knowledge</option>
+                        <option value="Leadership">Leadership</option>
+                        <option value="Mercy">Mercy</option>
+                        <option value="Missionary">Missionary</option>
+                        <option value="Music">Music</option>
+                        <option value="Pastoring">Pastoring</option>
+                        <option value="Prophecy">Prophecy</option>
+                        <option value="Service">Service</option>
+                        <option value="Teaching">Teaching</option>
+                        <option value="Voluntary Poverty">Voluntary Poverty</option>
+                        <option value="Wisdom">Wisdom</option>
+                        <option value="Writing">Writing</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Spirit Radiance Visualization -->
+            <div class="visualization-container" id="spirit-radiance">
+                <div class="radiance-container">
+                    <div class="radiance-center">
+                        <div class="radiance-glow"></div>
+                        <div class="radiance-glow" style="animation-delay: 1s;"></div>
+                        <span class="radiance-icon">🕊️</span>
+                    </div>
+                    
+                    <p class="name-from-heaven" id="display-name">Beloved</p>
+                    
+                    <div class="spirit-traits" id="spirit-traits-display">
+                        <div class="spirit-trait-badge">
+                            <span class="badge-label">Virtue</span>
+                            <span id="display-virtue">—</span>
+                        </div>
+                        <div class="spirit-trait-badge">
+                            <span class="badge-label">Charism</span>
+                            <span id="display-charism-1">—</span>
+                        </div>
+                        <div class="spirit-trait-badge">
+                            <span class="badge-label">Charism</span>
+                            <span id="display-charism-2">—</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <span class="flourish">✦ ✦ ✦</span>
+
+        <!-- ============================================
+             FINAL SYMPHONY SUMMARY
+             ============================================ -->
+        <section class="final-symphony" id="final-summary">
+            <h2>Your Beautiful Symphony</h2>
+            <p class="tagline">A once-in-a-universe masterpiece, composed by the Creator</p>
+
+            <div class="symphony-summary">
+                <div class="summary-column">
+                    <h3>🌸 Body</h3>
+                    <ul id="summary-body">
+                        <li><strong>Season:</strong> <span id="sum-season">—</span></li>
+                        <li><strong>Silhouette:</strong> <span id="sum-silhouette">—</span></li>
+                        <li><strong>Essence:</strong> <span id="sum-essence">—</span></li>
+                    </ul>
+                </div>
+                <div class="summary-column">
+                    <h3>💫 Mind</h3>
+                    <ul id="summary-mind">
+                        <li><strong>Temperament:</strong> <span id="sum-temperament">—</span></li>
+                        <li><strong>Cognitive:</strong> <span id="sum-cognitive">—</span></li>
+                        <li><strong>Love Language:</strong> <span id="sum-love">—</span></li>
+                        <li><strong>Strengths:</strong> <span id="sum-strengths">—</span></li>
+                    </ul>
+                </div>
+                <div class="summary-column">
+                    <h3>🕊️ Spirit</h3>
+                    <ul id="summary-spirit">
+                        <li><strong>Name:</strong> <span id="sum-name">—</span></li>
+                        <li><strong>Virtue:</strong> <span id="sum-virtue">—</span></li>
+                        <li><strong>Charisms:</strong> <span id="sum-charisms">—</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="scripture-closing">
+                <blockquote>
+                    "For we are God's masterpiece. He has created us anew in Christ Jesus, 
+                    so we can do the good things He planned for us long ago."
+                </blockquote>
+                <cite>— Ephesians 2:10</cite>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="window.print()">🖨️ Print My Symphony</button>
+                <button class="btn btn-secondary" onclick="saveSymphony()">💾 Save to Browser</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // ============================================
+        // DATA DEFINITIONS
+        // ============================================
+        
+        const treeData = {
+            'striking': { emoji: '🌲', name: 'Italian Cypress', desc: 'tall and dramatically vertical' },
+            'sylvan': { emoji: '🌳', name: 'Oak', desc: 'broad, strong, and grounded' },
+            'synchronous': { emoji: '🍁', name: 'Maple', desc: 'balanced and classically beautiful' },
+            'sprightly': { emoji: '🌸', name: 'Redbud', desc: 'petite and delicately charming' },
+            'supple': { emoji: '🌺', name: 'Magnolia', desc: 'soft, lush, and gracefully curved' }
+        };
+
+        const essenceFlowers = {
+            'flame': { 
+                flowers: ['🔥', '🌺', '❤️‍🔥', '🏵️'],
+                names: ['Bird of Paradise', 'Protea', 'Red Dahlia', 'Fire Lily'],
+                desc: 'bold, powerful, uncompromising truth'
+            },
+            'keeper': { 
+                flowers: ['🌻', '💜', '🌿', '🌾'],
+                names: ['Sunflower', 'Lavender', 'Olive Branch', 'Wheat'],
+                desc: 'faithful, abundant, earthy'
+            },
+            'sage': { 
+                flowers: ['🤍', '🌼', '🫒', '🌲'],
+                names: ['White Rose', 'Gardenia', 'Olive Branch', 'Cedar'],
+                desc: 'timeless, ordered, eternal'
+            },
+            'spark': { 
+                flowers: ['🌼', '🌸', '💛', '🌷'],
+                names: ['Daisy', 'Wildflowers', 'Zinnia', 'Yellow Tulip'],
+                desc: 'joyful, playful, delightful'
+            },
+            'heart': { 
+                flowers: ['🌸', '🌹', '💐', '🩷'],
+                names: ['Peony', 'Pink Rose', 'Hydrangea'],
+                desc: 'tender, nurturing, abundant love'
+            },
+            'grace': { 
+                flowers: ['🤍', '🌼', '💮', '🩵'],
+                names: ['Lily', "Baby's Breath", 'Sweet Pea'],
+                desc: 'gentle, pure, humble'
+            },
+            'veil': { 
+                flowers: ['🌙', '💜', '🌿', '🌸'],
+                names: ['Moonflower', 'Wisteria', 'Spanish Moss', 'Cherry Blossom'],
+                desc: 'mysterious, transcendent, ethereal'
+            }
+        };
+
+        const seasonData = {
+            'light-spring': { family: 'spring', name: 'Light Spring' },
+            'true-spring': { family: 'spring', name: 'True Spring' },
+            'bright-spring': { family: 'spring', name: 'Bright Spring' },
+            'light-summer': { family: 'summer', name: 'Light Summer' },
+            'true-summer': { family: 'summer', name: 'True Summer' },
+            'soft-summer': { family: 'summer', name: 'Soft Summer' },
+            'soft-autumn': { family: 'autumn', name: 'Soft Autumn' },
+            'true-autumn': { family: 'autumn', name: 'True Autumn' },
+            'dark-autumn': { family: 'autumn', name: 'Dark Autumn' },
+            'dark-winter': { family: 'winter', name: 'Dark Winter' },
+            'true-winter': { family: 'winter', name: 'True Winter' },
+            'bright-winter': { family: 'winter', name: 'Bright Winter' }
+        };
+
+        // ============================================
+        // BODY GARDEN UPDATE
+        // ============================================
+        
+        function updateBodyGarden() {
+            const season = document.getElementById('season').value;
+            const silhouette = document.getElementById('silhouette').value;
+            const essence = document.getElementById('essence').value;
+            const essenceSecondary = document.getElementById('essence-secondary').value;
+
+            // Update season class on body section
+            const bodySection = document.getElementById('body-section');
+            bodySection.className = 'symphony-section';
+            if (season && seasonData[season]) {
+                bodySection.classList.add('season-' + seasonData[season].family);
+            }
+
+            // Update tree
+            if (silhouette) {
+                const family = silhouette.replace('sharp-', '').replace('soft-', '');
+                const tree = treeData[family];
+                if (tree) {
+                    document.getElementById('tree-display').innerHTML = `
+                        <span class="tree-emoji">${tree.emoji}</span>
+                        <span class="tree-label">${tree.name}</span>
+                    `;
+                }
+            }
+
+            // Update flowers
+            if (essence) {
+                const essenceData = essenceFlowers[essence];
+                const secondaryData = essenceSecondary ? essenceFlowers[essenceSecondary] : null;
+                
+                let flowersHTML = '<div class="flower-group">';
+                essenceData.flowers.forEach(f => {
+                    flowersHTML += `<span class="flower-emoji">${f}</span>`;
+                });
+                flowersHTML += '</div>';
+                
+                if (secondaryData) {
+                    flowersHTML += '<div class="flower-group">';
+                    secondaryData.flowers.slice(0, 2).forEach(f => {
+                        flowersHTML += `<span class="flower-emoji">${f}</span>`;
+                    });
+                    flowersHTML += '</div>';
+                }
+                
+                document.getElementById('flowers-display').innerHTML = flowersHTML;
+            }
+
+            // Update description
+            let descParts = [];
+            if (season && seasonData[season]) {
+                descParts.push(`bathed in ${seasonData[season].name} colors`);
+            }
+            if (silhouette) {
+                const family = silhouette.replace('sharp-', '').replace('soft-', '');
+                if (treeData[family]) {
+                    descParts.push(treeData[family].desc);
+                }
+            }
+            if (essence && essenceFlowers[essence]) {
+                descParts.push(essenceFlowers[essence].desc);
+            }
+
+            if (descParts.length > 0) {
+                document.getElementById('garden-description').innerHTML = `
+                    <h3>Your Sacred Garden</h3>
+                    <p>A garden ${descParts.join(', ')}.</p>
+                `;
+            }
+
+            updateSummary();
+        }
+
+        // ============================================
+        // MIND CONSTELLATION UPDATE
+        // ============================================
+        
+        function updateMindConstellation() {
+            const temperament = document.getElementById('temperament').value;
+            const cognitive = document.getElementById('cognitive-type').value;
+            const love = document.getElementById('love-language').value;
+            
+            // Get selected strengths
+            const checkboxes = document.querySelectorAll('#strengths-group input[type="checkbox"]:checked');
+            const strengths = Array.from(checkboxes).map(cb => cb.value);
+            
+            // Limit to 5 strengths
+            if (checkboxes.length > 5) {
+                checkboxes[checkboxes.length - 1].checked = false;
+                return;
+            }
+
+            // Update displays
+            document.getElementById('display-temperament').textContent = temperament ? 
+                temperament.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('-') : '—';
+            document.getElementById('display-cognitive').textContent = cognitive || '—';
+            document.getElementById('display-love').textContent = love ? 
+                document.querySelector(`#love-language option[value="${love}"]`).textContent : '—';
+            document.getElementById('display-strengths').textContent = strengths.length > 0 ? 
+                strengths.slice(0, 3).join(', ') + (strengths.length > 3 ? '...' : '') : '—';
+
+            // Generate stars
+            generateStars();
+            
+            updateSummary();
+        }
+
+        function generateStars() {
+            const container = document.getElementById('constellation-display');
+            // Remove old stars
+            container.querySelectorAll('.star').forEach(s => s.remove());
+            
+            // Add random stars
+            for (let i = 0; i < 30; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = (Math.random() * 3 + 1) + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(star);
+            }
+        }
+
+        // ============================================
+        // SPIRIT RADIANCE UPDATE
+        // ============================================
+        
+        function updateSpiritRadiance() {
+            const name = document.getElementById('name-heaven').value;
+            const virtue = document.getElementById('top-virtue').value;
+            const charism1 = document.getElementById('charism-1').value;
+            const charism2 = document.getElementById('charism-2').value;
+
+            document.getElementById('display-name').textContent = name || 'Beloved';
+            document.getElementById('display-virtue').textContent = virtue || '—';
+            document.getElementById('display-charism-1').textContent = charism1 || '—';
+            document.getElementById('display-charism-2').textContent = charism2 || '—';
+
+            updateSummary();
+        }
+
+        // ============================================
+        // SUMMARY UPDATE
+        // ============================================
+        
+        function updateSummary() {
+            // Body
+            const season = document.getElementById('season').value;
+            const silhouette = document.getElementById('silhouette').value;
+            const essence = document.getElementById('essence').value;
+            const essenceSecondary = document.getElementById('essence-secondary').value;
+
+            document.getElementById('sum-season').textContent = season && seasonData[season] ? 
+                seasonData[season].name : '—';
+            document.getElementById('sum-silhouette').textContent = silhouette ? 
+                silhouette.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') : '—';
+            
+            let essenceText = essence ? 'The ' + essence.charAt(0).toUpperCase() + essence.slice(1) : '—';
+            if (essenceSecondary) {
+                essenceText += ' + The ' + essenceSecondary.charAt(0).toUpperCase() + essenceSecondary.slice(1);
+            }
+            document.getElementById('sum-essence').textContent = essenceText;
+
+            // Mind
+            const temperament = document.getElementById('temperament').value;
+            const cognitive = document.getElementById('cognitive-type').value;
+            const love = document.getElementById('love-language').value;
+            const checkboxes = document.querySelectorAll('#strengths-group input[type="checkbox"]:checked');
+            const strengths = Array.from(checkboxes).map(cb => cb.value);
+
+            document.getElementById('sum-temperament').textContent = temperament ? 
+                temperament.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('-') : '—';
+            document.getElementById('sum-cognitive').textContent = cognitive || '—';
+            document.getElementById('sum-love').textContent = love ? 
+                document.querySelector(`#love-language option[value="${love}"]`).textContent : '—';
+            document.getElementById('sum-strengths').textContent = strengths.length > 0 ? 
+                strengths.join(', ') : '—';
+
+            // Spirit
+            const name = document.getElementById('name-heaven').value;
+            const virtue = document.getElementById('top-virtue').value;
+            const charism1 = document.getElementById('charism-1').value;
+            const charism2 = document.getElementById('charism-2').value;
+
+            document.getElementById('sum-name').textContent = name || '—';
+            document.getElementById('sum-virtue').textContent = virtue || '—';
+            
+            let charismsText = [];
+            if (charism1) charismsText.push(charism1);
+            if (charism2) charismsText.push(charism2);
+            document.getElementById('sum-charisms').textContent = charismsText.length > 0 ? 
+                charismsText.join(', ') : '—';
+        }
+
+        // ============================================
+        // SAVE/LOAD FUNCTIONALITY
+        // ============================================
+        
+        function saveSymphony() {
+            const data = {
+                season: document.getElementById('season').value,
+                silhouette: document.getElementById('silhouette').value,
+                essence: document.getElementById('essence').value,
+                essenceSecondary: document.getElementById('essence-secondary').value,
+                temperament: document.getElementById('temperament').value,
+                cognitive: document.getElementById('cognitive-type').value,
+                love: document.getElementById('love-language').value,
+                strengths: Array.from(document.querySelectorAll('#strengths-group input:checked')).map(cb => cb.value),
+                name: document.getElementById('name-heaven').value,
+                virtue: document.getElementById('top-virtue').value,
+                charism1: document.getElementById('charism-1').value,
+                charism2: document.getElementById('charism-2').value
+            };
+            
+            localStorage.setItem('myBeautifulSymphony', JSON.stringify(data));
+            alert('Your symphony has been saved! ✨');
+        }
+
+        function loadSymphony() {
+            const saved = localStorage.getItem('myBeautifulSymphony');
+            if (saved) {
+                const data = JSON.parse(saved);
+                
+                document.getElementById('season').value = data.season || '';
+                document.getElementById('silhouette').value = data.silhouette || '';
+                document.getElementById('essence').value = data.essence || '';
+                document.getElementById('essence-secondary').value = data.essenceSecondary || '';
+                document.getElementById('temperament').value = data.temperament || '';
+                document.getElementById('cognitive-type').value = data.cognitive || '';
+                document.getElementById('love-language').value = data.love || '';
+                document.getElementById('name-heaven').value = data.name || '';
+                document.getElementById('top-virtue').value = data.virtue || '';
+                document.getElementById('charism-1').value = data.charism1 || '';
+                document.getElementById('charism-2').value = data.charism2 || '';
+                
+                // Check strengths
+                if (data.strengths) {
+                    data.strengths.forEach(s => {
+                        const cb = document.querySelector(`#strengths-group input[value="${s}"]`);
+                        if (cb) cb.checked = true;
+                    });
+                }
+                
+                // Update all visualizations
+                updateBodyGarden();
+                updateMindConstellation();
+                updateSpiritRadiance();
+            }
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            generateStars();
+            loadSymphony();
+        });
+    </script>
+</body>
+</html>
