@@ -1386,19 +1386,19 @@
                 avoid: 'Warm colors, orange, bright or saturated colors, black, earth tones'
             },
             'Soft Summer': {
-                value: [-1, 1], temp: [0, 3], chroma: [2, 4],
-                subtitle: 'Muted, Cool-Neutral & Gentle',
+                value: [-1, 1], temp: [1, 4], chroma: [2, 4],
+                subtitle: 'Soft, Cool & Muted',
                 colors: ['#D8BFD8', '#C4AEAD', '#8E9B97', '#A9A9A9', '#B8AFA9', '#9CADB7'],
-                description: 'You are a Soft Summer — softness is your superpower. Your coloring is gentle, blended, and muted with cool-neutral undertones. You need soft, muted colors that won\'t overwhelm your delicate coloring.',
+                description: 'You are a Soft Summer — softness is your primary characteristic, with cool undertones. Your coloring is gentle, blended, and muted. You need soft, muted colors with cool undertones.',
                 best: 'Dusty rose, soft teal, sage, cocoa, mauve, grayed lavender, soft blue-gray',
-                avoid: 'Bright or saturated colors, high contrast, neons, pure black or white'
+                avoid: 'Bright or saturated colors, high contrast, neons, pure black or white, warm earth tones'
             },
             'Soft Autumn': {
-                value: [-1, 1], temp: [-3, 0], chroma: [2, 4],
-                subtitle: 'Muted, Warm-Neutral & Earthy',
+                value: [-1, 1], temp: [-4, -1], chroma: [2, 4],
+                subtitle: 'Soft, Warm & Muted',
                 colors: ['#DEB887', '#BC8F8F', '#8B7355', '#A0785A', '#9E9E7A', '#C9B59A'],
-                description: 'You are a Soft Autumn — softness combined with warmth defines your palette. Your coloring is muted and earthy with warm-neutral undertones. You look beautiful in soft, dusty, warm colors.',
-                best: 'Camel, soft teal, dusty rose, olive, mushroom, warm gray, cocoa, sage',
+                description: 'You are a Soft Autumn — softness is your primary characteristic, with warm undertones. Your coloring is muted and earthy. You look beautiful in soft, dusty colors with warm undertones.',
+                best: 'Camel, soft teal, dusty rose, olive, mushroom, warm taupe, cocoa, sage',
                 avoid: 'Bright or saturated colors, pure black or white, neons, cool pastels'
             },
             'True Autumn': {
@@ -1574,24 +1574,102 @@
             document.getElementById('progress-container').style.display = 'none';
             document.getElementById('questions-container').innerHTML = '';
 
-            // Normalize scores to 0-100 percentage
+            // Normalize scores to 0-100 percentage for display
             const maxScore = 32;
             const valuePercent = Math.min(100, Math.max(0, ((scores.value + maxScore) / (maxScore * 2)) * 100));
             const tempPercent = Math.min(100, Math.max(0, ((scores.temp + maxScore) / (maxScore * 2)) * 100));
             const chromaPercent = Math.min(100, Math.max(0, ((scores.chroma + maxScore) / (maxScore * 2)) * 100));
 
-            // Calculate match scores
+            // FIXED ALGORITHM: Temperature determines family FIRST
+            // Warm (negative temp) = Spring or Autumn
+            // Cool (positive temp) = Summer or Winter
+            
+            // Using proper thresholds for score range of ±32
+            const strongThreshold = 8;  // Strong leaning
+            const veryStrongThreshold = 15; // Very strong leaning
+            
+            const isWarm = scores.temp < -strongThreshold;
+            const isCool = scores.temp > strongThreshold;
+            const isNeutral = scores.temp >= -strongThreshold && scores.temp <= strongThreshold;
+            
+            const isLight = scores.value < -strongThreshold;
+            const isDeep = scores.value > strongThreshold;
+            const isMediumValue = !isLight && !isDeep;
+            
+            const isClear = scores.chroma < -strongThreshold;
+            const isSoft = scores.chroma > strongThreshold;
+            const isMediumChroma = !isClear && !isSoft;
+            
+            // Find PRIMARY characteristic (most extreme)
+            const valueExtreme = Math.abs(scores.value);
+            const tempExtreme = Math.abs(scores.temp);
+            const chromaExtreme = Math.abs(scores.chroma);
+            
+            let primary = 'balanced';
+            if (valueExtreme >= tempExtreme && valueExtreme >= chromaExtreme && valueExtreme > strongThreshold) {
+                primary = scores.value < 0 ? 'light' : 'deep';
+            } else if (tempExtreme > valueExtreme && tempExtreme >= chromaExtreme && tempExtreme > strongThreshold) {
+                primary = scores.temp < 0 ? 'warm' : 'cool';
+            } else if (chromaExtreme > valueExtreme && chromaExtreme > tempExtreme && chromaExtreme > strongThreshold) {
+                primary = scores.chroma < 0 ? 'clear' : 'soft';
+            }
+
+            // Calculate match scores with proper weighting
             const matchScores = {};
+            
             for (const [name, data] of Object.entries(seasons)) {
-                const valueMid = (data.value[0] + data.value[1]) / 2;
-                const tempMid = (data.temp[0] + data.temp[1]) / 2;
-                const chromaMid = (data.chroma[0] + data.chroma[1]) / 2;
+                let score = 100;
                 
-                const valueMatch = Math.max(0, 100 - Math.abs(scores.value - valueMid * 2) * 8);
-                const tempMatch = Math.max(0, 100 - Math.abs(scores.temp - tempMid * 2) * 8);
-                const chromaMatch = Math.max(0, 100 - Math.abs(scores.chroma - chromaMid * 2) * 8);
+                // TEMPERATURE IS GATEKEEPER - wrong temperature family = major penalty
+                const seasonIsWarm = name.includes('Spring') || name.includes('Autumn');
+                const seasonIsCool = name.includes('Summer') || name.includes('Winter');
                 
-                matchScores[name] = Math.round((valueMatch + tempMatch + chromaMatch) / 3);
+                // Strong penalty for wrong temperature family
+                if (seasonIsWarm && isCool) {
+                    score -= 60; // Cool person should NOT be in warm season
+                }
+                if (seasonIsCool && isWarm) {
+                    score -= 60; // Warm person should NOT be in cool season
+                }
+                
+                // Temperature match - scale the season ranges by 8 to match score range
+                const tempMin = data.temp[0] * 8;
+                const tempMax = data.temp[1] * 8;
+                if (scores.temp >= tempMin && scores.temp <= tempMax) {
+                    // In range - no penalty
+                } else {
+                    const tempDist = Math.min(Math.abs(scores.temp - tempMin), Math.abs(scores.temp - tempMax));
+                    score -= tempDist * 1.5;
+                }
+                
+                // Value match
+                const valueMin = data.value[0] * 8;
+                const valueMax = data.value[1] * 8;
+                if (scores.value >= valueMin && scores.value <= valueMax) {
+                    // In range
+                } else {
+                    const valueDist = Math.min(Math.abs(scores.value - valueMin), Math.abs(scores.value - valueMax));
+                    score -= valueDist * 1.2;
+                }
+                
+                // Chroma match
+                const chromaMin = data.chroma[0] * 8;
+                const chromaMax = data.chroma[1] * 8;
+                if (scores.chroma >= chromaMin && scores.chroma <= chromaMax) {
+                    // In range
+                } else {
+                    const chromaDist = Math.min(Math.abs(scores.chroma - chromaMin), Math.abs(scores.chroma - chromaMax));
+                    score -= chromaDist * 1.2;
+                }
+                
+                // Bonus for matching primary characteristic
+                if (name.includes('Soft') && primary === 'soft') score += 20;
+                if (name.includes('Light') && primary === 'light') score += 20;
+                if ((name.includes('Deep') || name.includes('Dark')) && primary === 'deep') score += 20;
+                if ((name.includes('Bright') || name.includes('Clear')) && primary === 'clear') score += 20;
+                if (name.includes('True') && (primary === 'warm' || primary === 'cool')) score += 20;
+                
+                matchScores[name] = Math.max(0, Math.round(score));
             }
 
             const sortedMatches = Object.entries(matchScores).sort((a, b) => b[1] - a[1]).slice(0, 4);
