@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacred Silhouettes · Guided Observation · My Holy Crescendo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EDE4;
+            --gold: #C9A87C;
+            --gold-dark: #8B7355;
+            --gold-light: #E8DCC8;
+            --text-dark: #3D3D3D;
+            --text-medium: #6B6B6B;
+            --blush: #E8D5D0;
+            --sage: #D4DDD5;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header p.label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--gold-dark);
+            margin-bottom: 15px;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            color: var(--text-medium);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Progress Steps */
+        .progress-steps {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--cream-dark);
+            border: 2px solid var(--cream-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            transition: all 0.3s ease;
+        }
+
+        .step-indicator.active .step-dot {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: white;
+        }
+
+        .step-indicator.completed .step-dot {
+            background: var(--sage);
+            border-color: var(--sage);
+            color: var(--text-dark);
+        }
+
+        .step-line {
+            width: 30px;
+            height: 2px;
+            background: var(--cream-dark);
+        }
+
+        .step-indicator.completed + .step-line {
+            background: var(--sage);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 50px 40px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .card.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold-dark);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--gold-dark);
+            margin: 25px 0 15px 0;
+        }
+
+        .card p {
+            color: var(--text-medium);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .card ul, .card ol {
+            color: var(--text-medium);
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card li {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: var(--cream);
+            border-left: 4px solid var(--gold);
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            color: var(--text-dark);
+        }
+
+        .highlight-box strong {
+            color: var(--gold-dark);
+        }
+
+        /* Note Box */
+        .note-box {
+            background: var(--blush);
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+
+        .note-box p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+
+        .note-box strong {
+            color: var(--gold-dark);
+        }
+
+        /* Image Placeholder */
+        .image-placeholder {
+            background: var(--cream-dark);
+            border: 2px dashed var(--gold-light);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .image-placeholder p {
+            color: var(--text-medium);
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* Selection Options */
+        .selection-group {
+            margin: 25px 0;
+        }
+
+        .selection-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-bottom: 12px;
+            letter-spacing: 0.05em;
+        }
+
+        .selection-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .selection-option {
+            padding: 18px 24px;
+            border: 2px solid var(--cream-dark);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .selection-option:hover {
+            border-color: var(--gold-light);
+            background: var(--cream);
+        }
+
+        .selection-option.selected {
+            border-color: var(--gold);
+            background: var(--cream);
+        }
+
+        .selection-marker {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--gold-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+            transition: all 0.2s ease;
+        }
+
+        .selection-option.selected .selection-marker {
+            border-color: var(--gold);
+            background: var(--gold);
+        }
+
+        .selection-option.selected .selection-marker::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .selection-content {
+            flex: 1;
+        }
+
+        .selection-content .title {
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .selection-content .desc {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+        }
+
+        /* Height Input */
+        .height-input-row {
+            display: flex;
+            gap: 20px;
+            align-items: flex-end;
+            margin: 20px 0;
+        }
+
+        .height-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .height-field label {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            margin-bottom: 6px;
+        }
+
+        .height-field input {
+            width: 80px;
+            padding: 12px;
+            border: 2px solid var(--cream-dark);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .height-field input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .height-note {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            font-style: italic;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 16px 40px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold-dark);
+            border: 2px solid var(--gold-light);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            background: var(--cream);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 35px;
+            gap: 15px;
+        }
+
+        .button-row.center {
+            justify-content: center;
+        }
+
+        /* Result Card Specific */
+        .result-type-display {
+            text-align: center;
+            padding: 40px;
+            background: var(--cream);
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .result-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .result-type-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            color: var(--gold-dark);
+            margin-bottom: 10px;
+        }
+
+        .result-formula {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            letter-spacing: 0.05em;
+        }
+
+        .result-breakdown {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .breakdown-box {
+            background: var(--cream);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .breakdown-box .label {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .breakdown-box .value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--gold-dark);
+        }
+
+        /* Comparison Box */
+        .comparison-box {
+            background: var(--sage);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .comparison-box h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--gold-dark);
+            margin-bottom: 15px;
+        }
+
+        .comparison-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-row .label {
+            color: var(--text-medium);
+            font-size: 0.85rem;
+        }
+
+        .comparison-row .value {
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.85rem;
+        }
+
+        .match-indicator {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            margin-left: 8px;
+        }
+
+        .match-indicator.match {
+            background: var(--sage);
+            color: var(--text-dark);
+        }
+
+        .match-indicator.different {
+            background: var(--blush);
+            color: var(--gold-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .card {
+                padding: 30px 25px;
+            }
+
+            .button-row {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .result-breakdown {
+                grid-template-columns: 1fr;
+            }
+
+            .result-type-name {
+                font-size: 2rem;
+            }
+
+            .progress-steps {
+                gap: 5px;
+            }
+
+            .step-line {
+                width: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <p class="label">My Holy Crescendo</p>
+            <h1>Guided Observation</h1>
+            <p class="subtitle">Discovering your Sacred Silhouette through gentle observation</p>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="progress-steps" id="progress-steps">
+            <div class="step-indicator active" data-step="1">
+                <div class="step-dot">1</div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step-indicator" data-step="2">
+                <div class="step-dot">2</div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step-indicator" data-step="3">
+                <div class="step-dot">3</div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step-indicator" data-step="4">
+                <div class="step-dot">4</div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step-indicator" data-step="5">
+                <div class="step-dot">5</div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step-indicator" data-step="6">
+                <div class="step-dot">6</div>
+            </div>
+        </div>
+
+        <!-- Step 1: Introduction & Photo Instructions -->
+        <div class="card active" data-step="1">
+            <h2>Step 1: Prepare Your Photo</h2>
+            
+            <p>To discover your Sacred Silhouette, we'll observe how your body is actually built — not how you feel about it or what you prefer, but what your lines truly show us.</p>
+
+            <p>This exercise works best with a photo. Here's how to take one:</p>
+
+            <h3>Photo Guidelines</h3>
+            <ol>
+                <li><strong>Wear form-fitting clothing</strong> — a leotard, swimsuit, or fitted tank and leggings work well. We need to see your actual shape, not the shape of your clothes.</li>
+                <li><strong>Stand naturally</strong> — relaxed posture, arms at your sides, feet a few inches apart.</li>
+                <li><strong>Full-length, front-facing</strong> — the camera should capture your whole body from the front.</li>
+                <li><strong>Camera at chest height</strong> — not angled up or down. About 8-10 feet away.</li>
+                <li><strong>Not in a mirror</strong> — have someone take it, or use a timer.</li>
+            </ol>
+
+            <h3>What You'll Need</h3>
+            <ul>
+                <li>Your photo (printed is best, or on a tablet where you can draw)</li>
+                <li>Tracing paper or a photo editing app</li>
+                <li>A pen or stylus in two colors (we recommend red and blue)</li>
+                <li>Gentle, curious eyes</li>
+            </ul>
+
+            <div class="note-box">
+                <p><strong>Note:</strong> Printing your photo and using tracing paper gives the most objective results. If you're using a digital app, any markup or drawing tool will work.</p>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Remember:</strong> We are observing, not judging. Your body is not a problem to solve — it's a gift to receive. We're simply learning to see what God designed.</p>
+            </div>
+
+            <div class="button-row">
+                <div></div>
+                <button class="btn btn-primary" onclick="goToStep(2)">I Have My Photo Ready</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Enter Height & Understand Anchors -->
+        <div class="card" data-step="2">
+            <h2>Step 2: Your Height & Understanding Anchors</h2>
+
+            <p>Before we look at your photo, let's record your height. This is important because height affects how your lines read.</p>
+
+            <div class="height-input-row">
+                <div class="height-field">
+                    <label>Feet</label>
+                    <input type="number" id="obs-height-feet" min="4" max="7" value="5">
+                </div>
+                <div class="height-field">
+                    <label>Inches</label>
+                    <input type="number" id="obs-height-inches" min="0" max="11" value="4">
+                </div>
+                <p class="height-note" id="height-note"></p>
+            </div>
+
+            <h3>Understanding Your Anchor</h3>
+            <p>Your <strong>Anchor</strong> is your primary line — the dominant characteristic of your silhouette. There are only two options:</p>
+
+            <div class="highlight-box">
+                <p><strong>Straight:</strong> Your body creates a primarily vertical line. If you imagine soft fabric hanging from your shoulder, it would fall relatively straight down without being pushed out significantly by your bust or hips.</p>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Curve:</strong> Your body creates curves that interrupt the vertical line. If you imagine soft fabric hanging from your shoulder, it would be pushed out and around by your bust and/or hips.</p>
+            </div>
+
+            <div class="note-box">
+                <p><strong>Height Note:</strong> If you are 5'6" or taller, your Anchor is automatically <strong>Straight</strong> (vertical). Your height creates a vertical line regardless of curves. If you drew curves on your photo, that becomes part of your <strong>Accent</strong>.</p>
+            </div>
+
+            <div class="button-row">
+                <button class="btn btn-secondary" onclick="goToStep(1)">Back</button>
+                <button class="btn btn-primary" onclick="processHeight()">Continue</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Trace Your Body Outline -->
+        <div class="card" data-step="3">
+            <h2>Step 3: Trace Your Body Outline</h2>
+
+            <p>Now we're going to create a simple tracing of your body's outline. This helps us see your lines objectively, separate from skin tone, clothing, and all the details that can distract us.</p>
+
+            <h3>How to Trace</h3>
+            <ol>
+                <li><strong>Place tracing paper over your photo</strong> (or use your drawing app's tools)</li>
+                <li><strong>Using your first color (we suggest red)</strong>, trace the outline of your body from the top of your head to your feet</li>
+                <li><strong>Include:</strong> The outer edges of your shoulders, arms, torso, hips, and legs</li>
+                <li><strong>Keep it simple</strong> — we just need the silhouette, not details</li>
+            </ol>
+
+            <div class="image-placeholder">
+                <p>[Your body outline tracing goes here — red line showing your silhouette]</p>
+            </div>
+
+            <div class="note-box">
+                <p><strong>Tip:</strong> Try to trace what you actually SEE, not what you think your body looks like. Let your eyes guide your hand. If you're unsure about a line, look again at the photo.</p>
+            </div>
+
+            <h3>What to Observe</h3>
+            <p>Once you have your outline, take a moment to just look at it. Notice:</p>
+            <ul>
+                <li>The overall shape — is it more vertical/straight or more curved?</li>
+                <li>Where is the widest point?</li>
+                <li>How do the shoulders compare to the hips?</li>
+                <li>Is there a defined waist, or does the torso go fairly straight up and down?</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Remember:</strong> We're just observing, not evaluating. There's no "better" shape. Every silhouette is God's intentional design.</p>
+            </div>
+
+            <div class="button-row">
+                <button class="btn btn-secondary" onclick="goToStep(2)">Back</button>
+                <button class="btn btn-primary" onclick="goToStep(4)">I've Traced My Outline</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Identify Anchor (Fabric Drape Exercise) -->
+        <div class="card" data-step="4">
+            <h2>Step 4: The Fabric Line — Identify Your Anchor</h2>
+
+            <p>Now we'll add a second line to your tracing — the "fabric line." This is the key to finding your Anchor.</p>
+
+            <h3>The Fabric Visualization</h3>
+            <p>Imagine a piece of soft, lightweight fabric — like silk chiffon, weighted at the bottom — hanging from the outer edge of your shoulder. <strong>Using your second color (we suggest blue)</strong>, draw this line on your tracing:</p>
+
+            <ol>
+                <li><strong>Start at the edge of your shoulder</strong> where it meets your upper arm</li>
+                <li><strong>Let the "fabric" fall straight down</strong> — draw where it would naturally hang</li>
+                <li><strong>Watch what happens:</strong>
+                    <ul>
+                        <li>Does the fabric hang relatively <strong>straight down</strong> to the hem?</li>
+                        <li>Or does it get <strong>pushed out and around</strong> by your bust and/or hips?</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <div class="image-placeholder">
+                <p>[Your outline (red) with the fabric line (blue) drawn over it]</p>
+            </div>
+
+            <div class="note-box">
+                <p><strong>Important:</strong> The fabric line is NOT the same as your body outline. The fabric <em>skims</em> the body — it doesn't cling to every curve. It shows where your body would push soft fabric out, and where the fabric would hang freely.</p>
+            </div>
+
+            <div class="selection-group" id="anchor-selection">
+                <label>Looking at your fabric line, select your Anchor:</label>
+                <div class="selection-options">
+                    <div class="selection-option" onclick="selectAnchor('straight')" data-value="straight">
+                        <div class="selection-marker"></div>
+                        <div class="selection-content">
+                            <div class="title">Straight</div>
+                            <div class="desc">The fabric line hangs relatively straight down from my shoulder. My bust and hips don't significantly push the fabric out — it falls in a mostly vertical line.</div>
+                        </div>
+                    </div>
+                    <div class="selection-option" onclick="selectAnchor('curve')" data-value="curve">
+                        <div class="selection-marker"></div>
+                        <div class="selection-content">
+                            <div class="title">Curve</div>
+                            <div class="desc">The fabric line gets pushed out and around by my bust and/or hips. There's a clear curve in my fabric line — it doesn't fall straight.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="anchor-override" class="highlight-box" style="display: none;">
+                <p><strong>Based on your height (5'6" or taller):</strong> Your Anchor is automatically <strong>Straight</strong>. Your vertical line is your dominant feature. If you drew curves on your fabric line, that becomes part of your <strong>Accent</strong>.</p>
+            </div>
+
+            <div class="button-row">
+                <button class="btn btn-secondary" onclick="goToStep(3)">Back</button>
+                <button class="btn btn-primary" id="anchor-next-btn" onclick="goToStep(5)" disabled>Continue</button>
+            </div>
+        </div>
+
+        <!-- Step 5: Identify Accent -->
+        <div class="card" data-step="5">
+            <h2>Step 5: Identify Your Accent</h2>
+
+            <p>Now that we know your Anchor is <strong id="selected-anchor-display">___</strong>, let's identify your Accent — the secondary characteristic that makes your silhouette uniquely yours.</p>
+
+            <p>Look at your tracing again, focusing on the relationship between different parts of your body:</p>
+
+            <div class="selection-group">
+                <label id="accent-label">Based on your observations, which best describes your secondary characteristic?</label>
+                <div class="selection-options" id="accent-options">
+                    <!-- Options will be populated by JavaScript based on Anchor -->
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button class="btn btn-secondary" onclick="goToStep(4)">Back</button>
+                <button class="btn btn-primary" id="accent-next-btn" onclick="goToStep(6)" disabled>See My Results</button>
+            </div>
+        </div>
+
+        <!-- Step 6: Results -->
+        <div class="card" data-step="6">
+            <h2>Your Sacred Silhouette</h2>
+
+            <div class="result-type-display">
+                <p class="result-label">Based on your observation</p>
+                <h3 id="final-result-type" class="result-type-name">Soft Sylvan</h3>
+                <p id="final-result-formula" class="result-formula">Curve + Openness</p>
+            </div>
+
+            <div class="result-breakdown">
+                <div class="breakdown-box">
+                    <p class="label">Your Anchor</p>
+                    <p id="final-anchor" class="value">Curve</p>
+                </div>
+                <div class="breakdown-box">
+                    <p class="label">Your Accent</p>
+                    <p id="final-accent" class="value">Openness</p>
+                </div>
+            </div>
+
+            <div id="quiz-comparison" class="comparison-box" style="display: none;">
+                <h4>Compared to Your Quiz Result</h4>
+                <div id="comparison-content"></div>
+            </div>
+
+            <h3>What This Means</h3>
+            <p id="final-description"></p>
+
+            <div class="highlight-box">
+                <p><strong>Next Steps:</strong> Now that you know your Sacred Silhouette, you can explore clothing lines and silhouettes that honor your natural architecture. Remember — this is a tool for understanding, not a box to fit into. You are fearfully and wonderfully made.</p>
+            </div>
+
+            <div class="button-row center">
+                <button class="btn btn-secondary" onclick="startOver()">Start Over</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let currentStep = 1;
+        let heightFeet = 5;
+        let heightInches = 4;
+        let heightTotalInches = 64;
+        let isAutoStraight = false;
+        let selectedAnchor = null;
+        let selectedAccent = null;
+
+        // Accent options based on Anchor
+        const accentOptions = {
+            straight: [
+                {
+                    value: 'tapered',
+                    title: 'Tapered',
+                    desc: 'Everything narrows inward from my shoulders. My shoulders are my widest point, and my hips are narrower. My silhouette tapers down.'
+                },
+                {
+                    value: 'contour',
+                    title: 'Contour',
+                    desc: 'I have waist definition — my waist cuts in, creating softness and curve. But my overall line is still vertical.'
+                },
+                {
+                    value: 'openness',
+                    title: 'Openness',
+                    desc: 'I have breadth through my shoulders and upper torso. My upper body has width and openness. I appear strong and broad.'
+                },
+                {
+                    value: 'balanced',
+                    title: 'Balanced',
+                    desc: 'My upper torso and hips are evenly aligned — proportional and symmetrical. Nothing is particularly wider or narrower.'
+                },
+                {
+                    value: 'compact',
+                    title: 'Compact',
+                    desc: 'My overall frame is petite and condensed. Everything is proportionally smaller. I appear compact or small.'
+                }
+            ],
+            curve: [
+                {
+                    value: 'openness',
+                    title: 'Openness',
+                    desc: 'I have curves AND breadth through my shoulders/upper torso. My frame has width combined with softness.'
+                },
+                {
+                    value: 'balanced',
+                    title: 'Balanced',
+                    desc: 'I have curves with overall proportion. My bust and hips are relatively even, creating a balanced, harmonious shape.'
+                },
+                {
+                    value: 'compact',
+                    title: 'Compact',
+                    desc: 'I have curves in a petite, condensed frame. I\'m small but shapely. Everything is proportionally compact.'
+                },
+                {
+                    value: 'tapered',
+                    title: 'Tapered',
+                    desc: 'I have curves with a narrow, delicate bone structure. My frame is small and tapers, but with feminine curves.'
+                },
+                {
+                    value: 'lush',
+                    title: 'Lush',
+                    desc: 'I have fullness at BOTH my bust AND hips, with a defined waist between. Two distinct curves stacked — very full hourglass.'
+                }
+            ]
+        };
+
+        // Type mapping
+        const typeMap = {
+            'straight-tapered': { name: 'Sharp Striking', formula: 'Straight + Tapered' },
+            'straight-contour': { name: 'Soft Striking', formula: 'Straight + Contour' },
+            'straight-openness': { name: 'Sharp Sylvan', formula: 'Straight + Openness' },
+            'straight-balanced': { name: 'Sharp Synchronous', formula: 'Straight + Balanced' },
+            'straight-compact': { name: 'Sharp Sprightly', formula: 'Straight + Compact' },
+            'curve-openness': { name: 'Soft Sylvan', formula: 'Curve + Openness' },
+            'curve-balanced': { name: 'Soft Synchronous', formula: 'Curve + Balanced' },
+            'curve-compact': { name: 'Soft Sprightly', formula: 'Curve + Compact' },
+            'curve-tapered': { name: 'Sharp Supple', formula: 'Curve + Tapered' },
+            'curve-lush': { name: 'Soft Supple', formula: 'Curve + Lush' }
+        };
+
+        // Descriptions
+        const typeDescriptions = {
+            'Sharp Striking': 'Your silhouette is defined by a strong vertical line with a narrow, angular frame. You carry a striking, elongated presence. Clothes with clean, vertical lines and tailored, narrow silhouettes will honor your natural architecture.',
+            'Soft Striking': 'You have a tall, elongated frame with added softness and curve. Your vertical line is dominant, but your body also has beautiful waist definition. Clothes that honor your length while allowing for your curves will serve you best.',
+            'Sharp Sylvan': 'Your frame has a strong, open quality with breadth through the shoulders. You have a vertical line combined with width that creates a powerful, grounded presence. Unconstructed, relaxed silhouettes will honor your lines.',
+            'Soft Sylvan': 'You combine softness and curves with an open, broad frame. Your shoulders have width, and your body has earthy grounding combined with feminine curves. Flowing pieces that accommodate both your width and curves feel most natural.',
+            'Sharp Synchronous': 'Your body is beautifully proportioned with a moderate vertical line. You have symmetry and balance with a slight lean toward angularity. Classic, clean silhouettes with moderate structure complement your architecture.',
+            'Soft Synchronous': 'You have beautiful proportion and balance throughout your frame with soft, gentle curves. Elegant, classic silhouettes with soft edges and gentle waist definition honor your balanced, feminine frame.',
+            'Sharp Sprightly': 'You have a compact, petite frame with angular, straight lines. Despite your smaller stature, you carry a vertical impression. Fitted pieces with clean lines that honor your petite frame and angularity serve you beautifully.',
+            'Soft Sprightly': 'You have a petite, compact frame with soft curves. Your small stature is combined with femininity and gentle curves. Scaled-down pieces that honor your curves without overwhelming your proportions feel most harmonious.',
+            'Sharp Supple': 'You are curve-dominant with a narrow, delicate bone structure. Your body has softness combined with a small, tapered frame. Soft, curve-honoring pieces that don\'t overwhelm your narrow frame serve you best.',
+            'Soft Supple': 'You are pure feminine curve — lush, soft, and rounded throughout. Your bust and hips are both full with a defined waist between. Soft, draped fabrics that honor and accommodate your curves feel most beautiful.'
+        };
+
+        // Functions
+        function goToStep(step) {
+            // Update step indicators
+            document.querySelectorAll('.step-indicator').forEach(indicator => {
+                const stepNum = parseInt(indicator.dataset.step);
+                indicator.classList.remove('active', 'completed');
+                if (stepNum < step) {
+                    indicator.classList.add('completed');
+                } else if (stepNum === step) {
+                    indicator.classList.add('active');
+                }
+            });
+
+            // Update cards
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove('active');
+                if (parseInt(card.dataset.step) === step) {
+                    card.classList.add('active');
+                }
+            });
+
+            currentStep = step;
+
+            // Special handling for certain steps
+            if (step === 4) {
+                // Step 4 is anchor selection - handle height override
+                if (isAutoStraight) {
+                    document.getElementById('anchor-selection').style.display = 'none';
+                    document.getElementById('anchor-override').style.display = 'block';
+                    document.getElementById('anchor-next-btn').disabled = false;
+                } else {
+                    document.getElementById('anchor-selection').style.display = 'block';
+                    document.getElementById('anchor-override').style.display = 'none';
+                }
+            }
+            if (step === 5) {
+                populateAccentOptions();
+            }
+            if (step === 6) {
+                showFinalResults();
+            }
+        }
+
+        function processHeight() {
+            heightFeet = parseInt(document.getElementById('obs-height-feet').value);
+            heightInches = parseInt(document.getElementById('obs-height-inches').value);
+            heightTotalInches = (heightFeet * 12) + heightInches;
+
+            // Check if automatic straight
+            isAutoStraight = heightTotalInches >= 66; // 5'6" or taller
+
+            if (isAutoStraight) {
+                selectedAnchor = 'straight';
+                document.getElementById('height-note').textContent = 'At 5\'6" or taller, your Anchor is automatically Straight.';
+            }
+
+            goToStep(3);
+        }
+
+        function selectAnchor(anchor) {
+            selectedAnchor = anchor;
+            
+            document.querySelectorAll('#anchor-selection .selection-option').forEach(opt => {
+                opt.classList.remove('selected');
+                if (opt.dataset.value === anchor) {
+                    opt.classList.add('selected');
+                }
+            });
+
+            document.getElementById('anchor-next-btn').disabled = false;
+        }
+
+        function populateAccentOptions() {
+            document.getElementById('selected-anchor-display').textContent = 
+                selectedAnchor.charAt(0).toUpperCase() + selectedAnchor.slice(1);
+
+            const options = accentOptions[selectedAnchor];
+            const container = document.getElementById('accent-options');
+            
+            container.innerHTML = options.map(opt => `
+                <div class="selection-option" onclick="selectAccent('${opt.value}')" data-value="${opt.value}">
+                    <div class="selection-marker"></div>
+                    <div class="selection-content">
+                        <div class="title">${opt.title}</div>
+                        <div class="desc">${opt.desc}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectAccent(accent) {
+            selectedAccent = accent;
+            
+            document.querySelectorAll('#accent-options .selection-option').forEach(opt => {
+                opt.classList.remove('selected');
+                if (opt.dataset.value === accent) {
+                    opt.classList.add('selected');
+                }
+            });
+
+            document.getElementById('accent-next-btn').disabled = false;
+        }
+
+        function showFinalResults() {
+            const key = `${selectedAnchor}-${selectedAccent}`;
+            const result = typeMap[key];
+
+            document.getElementById('final-result-type').textContent = result.name;
+            document.getElementById('final-result-formula').textContent = result.formula;
+            document.getElementById('final-anchor').textContent = 
+                selectedAnchor.charAt(0).toUpperCase() + selectedAnchor.slice(1);
+            document.getElementById('final-accent').textContent = 
+                selectedAccent.charAt(0).toUpperCase() + selectedAccent.slice(1);
+            document.getElementById('final-description').textContent = typeDescriptions[result.name];
+        }
+
+        function startOver() {
+            currentStep = 1;
+            selectedAnchor = null;
+            selectedAccent = null;
+            isAutoStraight = false;
+
+            document.querySelectorAll('.selection-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+
+            document.getElementById('anchor-next-btn').disabled = true;
+            document.getElementById('accent-next-btn').disabled = true;
+
+            goToStep(1);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacred Silhouettes Quiz · My Holy Crescendo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EDE4;
+            --gold: #C9A87C;
+            --gold-dark: #8B7355;
+            --gold-light: #E8DCC8;
+            --text-dark: #3D3D3D;
+            --text-medium: #6B6B6B;
+            --blush: #E8D5D0;
+            --sage: #D4DDD5;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .quiz-header p.label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .quiz-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--gold-dark);
+            margin-bottom: 15px;
+        }
+
+        .quiz-header .subtitle {
+            font-size: 1rem;
+            color: var(--text-medium);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Intro Screen */
+        .intro-screen {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 50px 40px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+
+        .intro-screen h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold-dark);
+            margin-bottom: 20px;
+        }
+
+        .intro-screen p {
+            color: var(--text-medium);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .intro-screen .note {
+            background: var(--cream);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--text-medium);
+        }
+
+        .intro-screen .note strong {
+            color: var(--gold-dark);
+            font-style: normal;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--cream-dark);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-medium);
+            margin-top: 8px;
+            letter-spacing: 0.1em;
+        }
+
+        /* Question Card */
+        .question-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 50px 40px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            display: none;
+        }
+
+        .question-card.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-category {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .question-context {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        /* Options */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 18px 24px;
+            border: 2px solid var(--cream-dark);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .option:hover {
+            border-color: var(--gold-light);
+            background: var(--cream);
+        }
+
+        .option.selected {
+            border-color: var(--gold);
+            background: var(--cream);
+        }
+
+        .option-marker {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--gold-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .option.selected .option-marker {
+            border-color: var(--gold);
+            background: var(--gold);
+        }
+
+        .option.selected .option-marker::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .option-text {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        /* Height Input */
+        .height-input-container {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .height-input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .height-input-group label {
+            font-size: 0.75rem;
+            color: var(--text-medium);
+            margin-bottom: 5px;
+            letter-spacing: 0.05em;
+        }
+
+        .height-input-group input {
+            width: 80px;
+            padding: 12px;
+            border: 2px solid var(--cream-dark);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+        }
+
+        .height-input-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 16px 40px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold-dark);
+            border: 2px solid var(--gold-light);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            background: var(--cream);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 35px;
+            gap: 15px;
+        }
+
+        .button-row.center {
+            justify-content: center;
+        }
+
+        /* Results */
+        .results-screen {
+            display: none;
+        }
+
+        .results-screen.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .results-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 50px 40px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+
+        .results-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .results-type {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--gold-dark);
+            margin-bottom: 10px;
+        }
+
+        .results-formula {
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-bottom: 30px;
+            letter-spacing: 0.05em;
+        }
+
+        .results-description {
+            background: var(--cream);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .results-description h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--gold-dark);
+            margin-bottom: 15px;
+        }
+
+        .results-description p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .results-disclaimer {
+            background: var(--blush);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .results-disclaimer h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--gold-dark);
+            margin-bottom: 10px;
+        }
+
+        .results-disclaimer p {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+        }
+
+        .results-breakdown {
+            background: var(--cream);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .results-breakdown h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--gold-dark);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--cream-dark);
+            font-size: 0.85rem;
+        }
+
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .breakdown-item .label {
+            color: var(--text-medium);
+        }
+
+        .breakdown-item .value {
+            color: var(--gold-dark);
+            font-weight: 500;
+        }
+
+        /* Hidden */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .quiz-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .question-card,
+            .intro-screen,
+            .results-card {
+                padding: 30px 25px;
+            }
+
+            .question-text {
+                font-size: 1.3rem;
+            }
+
+            .button-row {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .results-type {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="quiz-header">
+            <p class="label">My Holy Crescendo</p>
+            <h1>Sacred Silhouettes</h1>
+            <p class="subtitle">Discover your God-given lines</p>
+        </div>
+
+        <!-- Intro Screen -->
+        <div id="intro" class="intro-screen">
+            <h2>Welcome to the Sacred Silhouettes Quiz</h2>
+            <p>This quiz will help you discover your Sacred Silhouette — the unique way God designed your physical frame.</p>
+            <p>You'll answer questions about your height, bone structure, and physical proportions. Try to answer based on what you <em>observe</em>, not what you wish or prefer.</p>
+            
+            <div class="note">
+                <strong>Important:</strong> This quiz gives you a starting point for exploration — not a final diagnosis. After completing the quiz, we recommend using the Guided Observation Tool to confirm your results by looking at your actual lines.
+            </div>
+
+            <p>The quiz takes about 3-5 minutes.</p>
+
+            <div class="button-row center" style="margin-top: 30px;">
+                <button class="btn btn-primary" onclick="startQuiz()">Begin the Quiz</button>
+            </div>
+        </div>
+
+        <!-- Progress -->
+        <div id="progress-container" class="progress-container hidden">
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+            </div>
+            <p id="progress-text" class="progress-text">Question 1 of 12</p>
+        </div>
+
+        <!-- Questions Container -->
+        <div id="questions-container"></div>
+
+        <!-- Results Screen -->
+        <div id="results" class="results-screen">
+            <div class="results-card">
+                <p class="results-label">Your Sacred Silhouette</p>
+                <h2 id="result-type" class="results-type">Soft Sylvan</h2>
+                <p id="result-formula" class="results-formula">Curve + Openness</p>
+
+                <div class="results-description">
+                    <h3>What This Means</h3>
+                    <p id="result-description"></p>
+                </div>
+
+                <div class="results-disclaimer">
+                    <h4>Remember: This Is a Starting Point</h4>
+                    <p>This quiz result is based on your self-reported answers. To confirm your Sacred Silhouette, we recommend completing the Guided Observation exercise, where you'll examine your actual lines using a photo.</p>
+                </div>
+
+                <div class="results-breakdown">
+                    <h4>Your Responses</h4>
+                    <div id="breakdown-content"></div>
+                </div>
+
+                <div class="button-row center">
+                    <button class="btn btn-secondary" onclick="retakeQuiz()">Retake Quiz</button>
+                    <button class="btn btn-primary" onclick="goToObservation()">Continue to Observation Tool</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz Data
+        const questions = [
+            // HEIGHT - Critical for determining Anchor
+            {
+                id: 'height',
+                category: 'Physical Foundation',
+                question: 'What is your height?',
+                context: 'Please enter your height as accurately as possible.',
+                type: 'height'
+            },
+            // VERTICAL LINE QUESTIONS
+            {
+                id: 'first_impression',
+                category: 'Overall Impression',
+                question: 'When people meet you for the first time, they tend to perceive you as:',
+                context: 'Think about comments you\'ve received throughout your life.',
+                type: 'choice',
+                options: [
+                    { text: 'Tall or long, even if I\'m not actually tall', scores: { straight: 3, curve: 0 } },
+                    { text: 'Petite or small, even if I\'m average height', scores: { straight: 0, curve: 2, compact: 2 } },
+                    { text: 'Proportional or "just right"', scores: { straight: 1, curve: 1, balanced: 2 } },
+                    { text: 'Curvy or soft', scores: { straight: 0, curve: 3 } },
+                    { text: 'Strong or athletic', scores: { straight: 1, curve: 1, openness: 2 } }
+                ]
+            },
+            {
+                id: 'silhouette_shape',
+                category: 'Silhouette',
+                question: 'Looking at your body in fitted clothing, your overall silhouette most resembles:',
+                context: 'Stand in front of a mirror in fitted clothes and observe your outline.',
+                type: 'choice',
+                options: [
+                    { text: 'A long, narrow rectangle', scores: { straight: 3, tapered: 2 } },
+                    { text: 'A rectangle with some curves at bust or hips', scores: { straight: 2, contour: 2 } },
+                    { text: 'A strong, broad shape (T or inverted triangle)', scores: { straight: 2, openness: 3 } },
+                    { text: 'A balanced, proportional shape', scores: { straight: 1, curve: 1, balanced: 3 } },
+                    { text: 'An hourglass or figure-eight', scores: { curve: 3, lush: 3 } },
+                    { text: 'A pear or soft triangle', scores: { curve: 2, contour: 2 } },
+                    { text: 'A compact, small version of any of the above', scores: { curve: 1, compact: 3 } }
+                ]
+            },
+            // SHOULDER QUESTIONS
+            {
+                id: 'shoulders',
+                category: 'Upper Body',
+                question: 'Compared to your hips, your shoulders are:',
+                context: 'Measure or visually compare the width of your shoulders to your hips.',
+                type: 'choice',
+                options: [
+                    { text: 'Noticeably wider than my hips', scores: { straight: 2, openness: 3, tapered: 1 } },
+                    { text: 'Slightly wider than my hips', scores: { straight: 1, openness: 2 } },
+                    { text: 'About the same width as my hips', scores: { balanced: 3 } },
+                    { text: 'Slightly narrower than my hips', scores: { curve: 1, contour: 1 } },
+                    { text: 'Noticeably narrower than my hips', scores: { curve: 2, lush: 1, tapered: 1 } }
+                ]
+            },
+            {
+                id: 'shoulder_shape',
+                category: 'Upper Body',
+                question: 'The shape of your shoulders is best described as:',
+                context: 'Look at your shoulders in a tank top or with shoulders exposed.',
+                type: 'choice',
+                options: [
+                    { text: 'Sharp, angular, with visible bone', scores: { straight: 3, tapered: 2 } },
+                    { text: 'Broad and blunt, somewhat squared', scores: { straight: 2, openness: 3 } },
+                    { text: 'Moderate, neither sharp nor sloped', scores: { balanced: 3 } },
+                    { text: 'Sloped and soft, gently tapering', scores: { curve: 2, contour: 2 } },
+                    { text: 'Narrow and delicate', scores: { curve: 2, tapered: 2, compact: 1 } }
+                ]
+            },
+            // WAIST QUESTIONS
+            {
+                id: 'waist_definition',
+                category: 'Midsection',
+                question: 'Your natural waist is:',
+                context: 'Your natural waist is the narrowest part of your torso.',
+                type: 'choice',
+                options: [
+                    { text: 'Not very defined — my torso is fairly straight up and down', scores: { straight: 3, tapered: 1 } },
+                    { text: 'Somewhat defined — there\'s a slight curve inward', scores: { straight: 1, curve: 1, contour: 2 } },
+                    { text: 'Moderately defined — proportional to my bust and hips', scores: { balanced: 3 } },
+                    { text: 'Well-defined — noticeably narrower than bust and hips', scores: { curve: 2, contour: 3 } },
+                    { text: 'Very defined — dramatic curve between bust/hips and waist', scores: { curve: 3, lush: 3 } }
+                ]
+            },
+            // HIP QUESTIONS
+            {
+                id: 'hip_shape',
+                category: 'Lower Body',
+                question: 'Your hip area is best described as:',
+                context: 'Observe the area from your waist to the top of your thighs.',
+                type: 'choice',
+                options: [
+                    { text: 'Narrow and straight, minimal curve', scores: { straight: 3, tapered: 3 } },
+                    { text: 'Moderate, not particularly wide or narrow', scores: { straight: 1, balanced: 2 } },
+                    { text: 'Slightly curved and soft', scores: { curve: 2, contour: 2 } },
+                    { text: 'Full and rounded', scores: { curve: 3, lush: 2 } },
+                    { text: 'Wide and strong-looking', scores: { straight: 1, openness: 2 } }
+                ]
+            },
+            // BUST QUESTIONS
+            {
+                id: 'bust',
+                category: 'Upper Body',
+                question: 'Relative to your frame, your bust is:',
+                context: 'Consider your bust in proportion to your overall body, not cup size.',
+                type: 'choice',
+                options: [
+                    { text: 'Flat or small for my frame', scores: { straight: 2, tapered: 2 } },
+                    { text: 'Moderate, proportional to my body', scores: { balanced: 2 } },
+                    { text: 'Full, tends to be the first thing to push fabric out', scores: { curve: 2, contour: 2, lush: 1 } },
+                    { text: 'Very full, prominent on my frame', scores: { curve: 3, lush: 3 } }
+                ]
+            },
+            // LIMBS
+            {
+                id: 'arms_legs',
+                category: 'Limbs',
+                question: 'Your arms and legs tend to be:',
+                context: 'Think about how clothes fit on your arms and legs.',
+                type: 'choice',
+                options: [
+                    { text: 'Long and narrow, sometimes hard to find long enough sleeves/pants', scores: { straight: 3, tapered: 2 } },
+                    { text: 'Long and somewhat broad or muscular-looking', scores: { straight: 2, openness: 3 } },
+                    { text: 'Moderate length, proportional', scores: { balanced: 3 } },
+                    { text: 'Soft and shapely, with visible curves', scores: { curve: 2, contour: 2 } },
+                    { text: 'Short relative to my torso', scores: { compact: 3 } }
+                ]
+            },
+            // BONE STRUCTURE
+            {
+                id: 'bone_structure',
+                category: 'Overall Frame',
+                question: 'Looking at your wrists, hands, and overall bone structure, you would say your bones are:',
+                context: 'Look at your wrist bones, knuckles, and collarbones.',
+                type: 'choice',
+                options: [
+                    { text: 'Sharp and prominent, visible through skin', scores: { straight: 3, tapered: 2 } },
+                    { text: 'Large and broad, strong-looking', scores: { straight: 2, openness: 3 } },
+                    { text: 'Moderate, neither delicate nor large', scores: { balanced: 3 } },
+                    { text: 'Delicate and small', scores: { curve: 2, compact: 2 } },
+                    { text: 'Soft-looking, not particularly prominent', scores: { curve: 3, lush: 1 } }
+                ]
+            },
+            // FLESH/BODY COMPOSITION
+            {
+                id: 'flesh',
+                category: 'Body Composition',
+                question: 'When you gain weight, it tends to:',
+                context: 'Think about patterns you\'ve noticed over time.',
+                type: 'choice',
+                options: [
+                    { text: 'Distribute evenly all over, I stay relatively straight', scores: { straight: 2, tapered: 1 } },
+                    { text: 'Go to my midsection/stomach area', scores: { straight: 1, openness: 1 } },
+                    { text: 'Stay pretty proportional throughout', scores: { balanced: 3 } },
+                    { text: 'Go to my hips and thighs first', scores: { curve: 2, contour: 2 } },
+                    { text: 'Go to my bust and hips, emphasizing curves', scores: { curve: 3, lush: 3 } },
+                    { text: 'I don\'t gain weight easily / hard to tell', scores: { straight: 1, compact: 1 } }
+                ]
+            },
+            // OVERALL IMPRESSION
+            {
+                id: 'clothing_fit',
+                category: 'Practical Observation',
+                question: 'What fitting challenge do you most often encounter with clothes?',
+                context: 'Think about your most common alterations or fit issues.',
+                type: 'choice',
+                options: [
+                    { text: 'Things are often too short (sleeves, pants, torso)', scores: { straight: 3 } },
+                    { text: 'Shoulders/upper body are tight while waist/hips are loose', scores: { openness: 3 } },
+                    { text: 'Clothes generally fit well off the rack', scores: { balanced: 3 } },
+                    { text: 'Waist gaps while hips fit (or vice versa)', scores: { curve: 2, contour: 2 } },
+                    { text: 'Need to size up for bust/hips, then take in the waist', scores: { curve: 3, lush: 3 } },
+                    { text: 'Things are often too long, need to shorten/hem everything', scores: { compact: 3 } }
+                ]
+            }
+        ];
+
+        // Type Descriptions
+        const typeDescriptions = {
+            'Sharp Striking': {
+                formula: 'Straight + Tapered',
+                description: 'Your silhouette is defined by a strong vertical line with a narrow, angular frame. You carry a striking, elongated presence. Your bone structure is prominent and sharp, and your overall impression is one of length and sleekness. Clothes with clean, vertical lines and tailored, narrow silhouettes will honor your natural architecture.'
+            },
+            'Soft Striking': {
+                formula: 'Straight + Contour',
+                description: 'You have a tall, elongated frame with added softness and curve. Your vertical line is your dominant feature, but your body also has beautiful waist definition and soft curves that need accommodation. You carry both drama and femininity. Clothes that honor your length while allowing for your curves will serve you best.'
+            },
+            'Sharp Sylvan': {
+                formula: 'Straight + Openness',
+                description: 'Your frame has a strong, open quality with breadth through the shoulders and upper body. You have a vertical line combined with width that creates a powerful, grounded presence. Your bone structure is prominent and broad. Unconstructed, relaxed silhouettes that allow for your frame\'s openness will honor your natural lines.'
+            },
+            'Soft Sylvan': {
+                formula: 'Curve + Openness',
+                description: 'You combine softness and curves with an open, broad frame. Your shoulders have width, and your body has a relaxed, earthy quality combined with feminine curves. You are grounded yet soft. Flowing, unconstructed pieces that accommodate both your width and your curves will feel most natural on you.'
+            },
+            'Sharp Synchronous': {
+                formula: 'Straight + Balanced',
+                description: 'Your body is beautifully proportioned with a moderate vertical line. Nothing is extreme — you have symmetry and balance throughout your frame with a slight lean toward angularity. Classic, clean silhouettes with moderate structure will complement your naturally balanced architecture.'
+            },
+            'Soft Synchronous': {
+                formula: 'Curve + Balanced',
+                description: 'You have beautiful proportion and balance throughout your frame with soft, gentle curves. Your body is harmonious — neither extremely angular nor extremely curved. Elegant, classic silhouettes with soft edges and gentle waist definition will honor your balanced, feminine frame.'
+            },
+            'Sharp Sprightly': {
+                formula: 'Straight + Compact',
+                description: 'You have a compact, petite frame with angular, straight lines. Despite your smaller stature, you may carry a vertical impression with sharp bone structure and a narrow silhouette. Fitted pieces with clean lines that honor both your petite frame and your angularity will serve you beautifully.'
+            },
+            'Soft Sprightly': {
+                formula: 'Curve + Compact',
+                description: 'You have a petite, compact frame with soft curves and rounded edges. Your small stature is combined with femininity and gentle curves. There\'s a youthful, fresh quality to your frame. Scaled-down pieces that honor your curves without overwhelming your petite proportions will feel most harmonious.'
+            },
+            'Sharp Supple': {
+                formula: 'Curve + Tapered',
+                description: 'You are curve-dominant with a narrow, delicate bone structure. Your body has softness and feminine curves, but your frame itself is small and tapered. There\'s a delicate, refined quality combined with sensuality. Soft, curve-honoring pieces that don\'t overwhelm your narrow frame will serve you best.'
+            },
+            'Soft Supple': {
+                formula: 'Curve + Lush',
+                description: 'You are pure feminine curve — lush, soft, and rounded throughout. Your bust and hips are both full with a defined waist between them. Your bone structure is soft rather than prominent. You carry a sensual, womanly presence. Soft, draped fabrics that honor and accommodate your curves will feel most beautiful.'
+            }
+        };
+
+        // State
+        let currentQuestion = 0;
+        let answers = {};
+        let scores = {
+            straight: 0,
+            curve: 0,
+            tapered: 0,
+            contour: 0,
+            openness: 0,
+            balanced: 0,
+            compact: 0,
+            lush: 0
+        };
+
+        // Functions
+        function startQuiz() {
+            document.getElementById('intro').classList.add('hidden');
+            document.getElementById('progress-container').classList.remove('hidden');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            const container = document.getElementById('questions-container');
+            
+            updateProgress();
+
+            let html = `
+                <div class="question-card active">
+                    <p class="question-category">${q.category}</p>
+                    <h2 class="question-text">${q.question}</h2>
+                    ${q.context ? `<p class="question-context">${q.context}</p>` : ''}
+            `;
+
+            if (q.type === 'height') {
+                html += `
+                    <div class="height-input-container">
+                        <div class="height-input-group">
+                            <label>Feet</label>
+                            <input type="number" id="height-feet" min="4" max="7" value="5">
+                        </div>
+                        <div class="height-input-group">
+                            <label>Inches</label>
+                            <input type="number" id="height-inches" min="0" max="11" value="4">
+                        </div>
+                    </div>
+                `;
+            } else {
+                html += `<div class="options-container">`;
+                q.options.forEach((opt, i) => {
+                    html += `
+                        <div class="option" onclick="selectOption(${i})" data-index="${i}">
+                            <div class="option-marker"></div>
+                            <span class="option-text">${opt.text}</span>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+
+            html += `
+                <div class="button-row">
+                    ${currentQuestion > 0 ? '<button class="btn btn-secondary" onclick="prevQuestion()">Back</button>' : '<div></div>'}
+                    <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" ${q.type !== 'height' ? 'disabled' : ''}>
+                        ${currentQuestion === questions.length - 1 ? 'See Results' : 'Next'}
+                    </button>
+                </div>
+            </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function selectOption(index) {
+            const options = document.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            answers[questions[currentQuestion].id] = index;
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+        }
+
+        function nextQuestion() {
+            const q = questions[currentQuestion];
+            
+            // Process current answer
+            if (q.type === 'height') {
+                const feet = parseInt(document.getElementById('height-feet').value);
+                const inches = parseInt(document.getElementById('height-inches').value);
+                const totalInches = (feet * 12) + inches;
+                answers.height = { feet, inches, totalInches };
+                
+                // Height scoring: 5'6" (66 inches) is the threshold
+                if (totalInches >= 66) {
+                    scores.straight += 5; // Automatic vertical
+                } else if (totalInches <= 62) { // 5'2" and under
+                    scores.compact += 2;
+                    scores.curve += 1;
+                }
+            } else {
+                const selectedOption = q.options[answers[q.id]];
+                if (selectedOption && selectedOption.scores) {
+                    for (const [key, value] of Object.entries(selectedOption.scores)) {
+                        scores[key] += value;
+                    }
+                }
+            }
+
+            // Move to next question or show results
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('progress-container').classList.add('hidden');
+            document.getElementById('questions-container').innerHTML = '';
+            
+            // Determine Anchor (Straight vs Curve)
+            const anchor = scores.straight >= scores.curve ? 'Straight' : 'Curve';
+            
+            // Determine Accent
+            const accentScores = {
+                tapered: scores.tapered,
+                contour: scores.contour,
+                openness: scores.openness,
+                balanced: scores.balanced,
+                compact: scores.compact,
+                lush: scores.lush
+            };
+
+            // Filter valid accents based on anchor
+            let validAccents;
+            if (anchor === 'Straight') {
+                // Straight anchor can have: tapered, contour, openness, balanced, compact
+                validAccents = { 
+                    tapered: accentScores.tapered,
+                    contour: accentScores.contour,
+                    openness: accentScores.openness,
+                    balanced: accentScores.balanced,
+                    compact: accentScores.compact
+                };
+            } else {
+                // Curve anchor can have: openness, balanced, compact, tapered, lush
+                validAccents = {
+                    openness: accentScores.openness,
+                    balanced: accentScores.balanced,
+                    compact: accentScores.compact,
+                    tapered: accentScores.tapered,
+                    lush: accentScores.lush
+                };
+            }
+
+            const accent = Object.entries(validAccents).reduce((a, b) => a[1] > b[1] ? a : b)[0];
+            const accentCapitalized = accent.charAt(0).toUpperCase() + accent.slice(1);
+
+            // Map to Sacred Silhouette
+            const typeMap = {
+                'Straight-tapered': 'Sharp Striking',
+                'Straight-contour': 'Soft Striking',
+                'Straight-openness': 'Sharp Sylvan',
+                'Curve-openness': 'Soft Sylvan',
+                'Straight-balanced': 'Sharp Synchronous',
+                'Curve-balanced': 'Soft Synchronous',
+                'Straight-compact': 'Sharp Sprightly',
+                'Curve-compact': 'Soft Sprightly',
+                'Curve-tapered': 'Sharp Supple',
+                'Curve-lush': 'Soft Supple'
+            };
+
+            const resultType = typeMap[`${anchor}-${accent}`] || 'Soft Synchronous';
+            const typeInfo = typeDescriptions[resultType];
+
+            // Display results
+            document.getElementById('result-type').textContent = resultType;
+            document.getElementById('result-formula').textContent = typeInfo.formula;
+            document.getElementById('result-description').textContent = typeInfo.description;
+
+            // Build breakdown
+            let breakdownHtml = `
+                <div class="breakdown-item">
+                    <span class="label">Height</span>
+                    <span class="value">${answers.height.feet}'${answers.height.inches}"</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="label">Your Anchor</span>
+                    <span class="value">${anchor}</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="label">Your Accent</span>
+                    <span class="value">${accentCapitalized}</span>
+                </div>
+            `;
+            document.getElementById('breakdown-content').innerHTML = breakdownHtml;
+
+            document.getElementById('results').classList.add('active');
+        }
+
+        function retakeQuiz() {
+            currentQuestion = 0;
+            answers = {};
+            scores = {
+                straight: 0,
+                curve: 0,
+                tapered: 0,
+                contour: 0,
+                openness: 0,
+                balanced: 0,
+                compact: 0,
+                lush: 0
+            };
+            
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('intro').classList.remove('hidden');
+        }
+
+        function goToObservation() {
+            // This would link to the observation tool
+            alert('This would take you to the Guided Observation Tool to confirm your results.');
+        }
+    </script>
+</body>
+</html>
