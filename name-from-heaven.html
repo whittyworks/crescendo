@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Tag from Heaven · My Holy Crescendo</title>
+    <meta property="og:title" content="Name Tag from Heaven · My Holy Crescendo">
+    <meta property="og:description" content="A guided prayer experience to hear what God calls you and replace the lies with His truth.">
+    <meta name="description" content="A guided prayer experience to hear what God calls you and replace the lies with His truth.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #E8D5A3;
+            --gold-dark: #B8960C;
+            --cream: #FDF8F3;
+            --cream-dark: #F5EDE3;
+            --text-dark: #2D2D2D;
+            --text-medium: #5C5C5C;
+            --text-light: #8C8C8C;
+            --lavender: #E6E0F0;
+            --lavender-dark: #9D8EC9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--lavender) 100%);
+            border-bottom: 1px solid var(--gold-light);
+        }
+
+        .header-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-subtitle {
+            font-style: italic;
+            color: var(--text-medium);
+            font-size: 1.1rem;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Steps */
+        .step {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Step Content */
+        .step-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold-light);
+            text-align: center;
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+        }
+
+        .step-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+
+        .step-text em {
+            color: var(--text-dark);
+            font-style: italic;
+        }
+
+        .prayer-text {
+            font-style: italic;
+            font-size: 1.25rem;
+            color: var(--lavender-dark);
+            padding: 1.5rem;
+            background: var(--lavender);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            line-height: 1.6;
+        }
+
+        .scripture {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--gold-dark);
+            padding: 1.5rem;
+            border-left: 3px solid var(--gold);
+            background: var(--cream);
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .scripture cite {
+            display: block;
+            margin-top: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            font-style: normal;
+        }
+
+        /* Breathing Animation */
+        .breath-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--lavender) 0%, var(--gold-light) 100%);
+            margin: 2rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-medium);
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .breath-instruction {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 1rem;
+        }
+
+        /* Input Fields */
+        .input-group {
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .input-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            border: 2px solid var(--gold-light);
+            border-radius: 8px;
+            background: var(--cream);
+            color: var(--text-dark);
+            transition: border-color 0.3s ease;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .text-input::placeholder {
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        textarea.text-input {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Scripture Selection */
+        .scripture-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .scripture-option {
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--gold-light);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .scripture-option:hover {
+            border-color: var(--gold);
+            background: var(--cream);
+        }
+
+        .scripture-option.selected {
+            border-color: var(--gold);
+            background: var(--gold-light);
+        }
+
+        .scripture-option .verse {
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .scripture-option .reference {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+        }
+
+        .scripture-option .theme {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold-dark);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold-light);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .button-row {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        /* Progress Dots */
+        .progress {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin: 2rem 0;
+        }
+
+        .progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold-light);
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: var(--gold);
+            transform: scale(1.2);
+        }
+
+        .progress-dot.completed {
+            background: var(--gold-dark);
+        }
+
+        /* Results / Card Preview */
+        .card-preview {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+            border: 2px solid var(--gold);
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--lavender-dark), var(--gold));
+        }
+
+        .card-lie {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            text-decoration: line-through;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .card-name {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-truth {
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .card-scripture {
+            font-size: 1rem;
+            color: var(--lavender-dark);
+            padding-top: 1rem;
+            border-top: 1px solid var(--gold-light);
+        }
+
+        .card-scripture cite {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            font-style: normal;
+        }
+
+        .card-footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gold-light);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-light);
+        }
+
+        /* Closing affirmation */
+        .closing-affirmation {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--text-medium);
+            text-align: center;
+            margin: 2rem 0;
+            line-height: 1.8;
+        }
+
+        /* Download options */
+        .download-options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        /* Hidden canvas for generating images */
+        #card-canvas, #wallpaper-canvas {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+
+            .step-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .card-name {
+                font-size: 1.6rem;
+            }
+
+            .btn {
+                padding: 0.85rem 1.5rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <p class="header-label">A Guided Prayer Experience</p>
+        <h1>Name Tag from Heaven</h1>
+        <p class="header-subtitle">"I have called you by name" — Isaiah 43:1</p>
+    </header>
+
+    <div class="container">
+        <!-- Progress -->
+        <div class="progress">
+            <div class="progress-dot active" data-step="1"></div>
+            <div class="progress-dot" data-step="2"></div>
+            <div class="progress-dot" data-step="3"></div>
+            <div class="progress-dot" data-step="4"></div>
+            <div class="progress-dot" data-step="5"></div>
+            <div class="progress-dot" data-step="6"></div>
+        </div>
+
+        <!-- Step 1: Center -->
+        <div class="step active" id="step-1">
+            <div class="step-content">
+                <div class="step-icon">🕊️</div>
+                <h2 class="step-title">Settle Into Stillness</h2>
+                <p class="step-text">
+                    Take a quiet moment to breathe and invite Jesus into this space.
+                </p>
+                
+                <div class="breath-circle" id="breath-circle">
+                    <span id="breath-text">Breathe</span>
+                </div>
+                <p class="breath-instruction">Breathe slowly with the circle. In... and out...</p>
+
+                <div class="scripture">
+                    "Before I formed you in the womb I knew you, before you were born I dedicated you."
+                    <cite>— Jeremiah 1:5</cite>
+                </div>
+
+                <div class="button-row">
+                    <button class="btn btn-primary" onclick="nextStep()">I'm Ready</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Listen for Name -->
+        <div class="step" id="step-2">
+            <div class="step-content">
+                <div class="step-icon">👑</div>
+                <h2 class="step-title">Listen for Your Name</h2>
+                <p class="step-text">
+                    Close your eyes for a moment. Ask Jesus:
+                </p>
+                
+                <div class="prayer-text">
+                    "Jesus, what do You call me?"
+                </div>
+                
+                <p class="step-text">
+                    Listen for the word or phrase He places on your heart — <em>Beloved, Daughter, Brave, Light-Bearer, Chosen, Worthy...</em>
+                </p>
+
+                <div class="input-group">
+                    <label class="input-label">My Name from Heaven</label>
+                    <input type="text" class="text-input" id="heavenly-name" placeholder="Write what you heard...">
+                </div>
+
+                <div class="button-row">
+                    <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="btn-step-2">Continue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Surface the Lie -->
+        <div class="step" id="step-3">
+            <div class="step-content">
+                <div class="step-icon">💔</div>
+                <h2 class="step-title">Surface the Lie</h2>
+                <p class="step-text">
+                    What is one lie you've believed about yourself? A whisper that has told you that you are less than who God made you to be?
+                </p>
+
+                <div class="input-group">
+                    <label class="input-label">The Lie I've Believed</label>
+                    <input type="text" class="text-input" id="the-lie" placeholder="I am not enough... I am too much... I am unlovable...">
+                </div>
+
+                <div class="button-row">
+                    <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="btn-step-3">Continue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: The Truth -->
+        <div class="step" id="step-4">
+            <div class="step-content">
+                <div class="step-icon">✨</div>
+                <h2 class="step-title">Receive the Truth</h2>
+                <p class="step-text">
+                    Beneath the lie, write the truth that replaces it. What does God say instead?
+                </p>
+                
+                <p class="step-text" style="font-size: 1rem; color: var(--text-light);">
+                    <em>If you're unsure, simply start with: "I am...</em> <span id="name-echo" style="color: var(--gold-dark);"></span><em>"</em>
+                </p>
+
+                <div class="input-group">
+                    <label class="input-label">The Truth That Replaces It</label>
+                    <textarea class="text-input" id="the-truth" placeholder="I am loved. I am chosen. I am enough in Christ..."></textarea>
+                </div>
+
+                <div class="button-row">
+                    <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="btn-step-4">Continue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5: Choose Scripture -->
+        <div class="step" id="step-5">
+            <div class="step-content">
+                <div class="step-icon">📖</div>
+                <h2 class="step-title">Anchor in Scripture</h2>
+                <p class="step-text">
+                    Choose a Scripture that speaks to your heart:
+                </p>
+
+                <div class="scripture-options">
+                    <div class="scripture-option" onclick="selectScripture(this)" data-verse="I have called you by name; you are mine." data-ref="Isaiah 43:1">
+                        <div class="theme">Identity & Belonging</div>
+                        <div class="verse">"I have called you by name; you are mine."</div>
+                        <div class="reference">— Isaiah 43:1</div>
+                    </div>
+                    
+                    <div class="scripture-option" onclick="selectScripture(this)" data-verse="I have loved you with an everlasting love; I have drawn you with unfailing kindness." data-ref="Jeremiah 31:3">
+                        <div class="theme">Unconditional Love</div>
+                        <div class="verse">"I have loved you with an everlasting love; I have drawn you with unfailing kindness."</div>
+                        <div class="reference">— Jeremiah 31:3</div>
+                    </div>
+                    
+                    <div class="scripture-option" onclick="selectScripture(this)" data-verse="My grace is sufficient for you, for my power is made perfect in weakness." data-ref="2 Corinthians 12:9">
+                        <div class="theme">Enough in Him</div>
+                        <div class="verse">"My grace is sufficient for you, for my power is made perfect in weakness."</div>
+                        <div class="reference">— 2 Corinthians 12:9</div>
+                    </div>
+                    
+                    <div class="scripture-option" onclick="selectScripture(this)" data-verse="I will never leave you nor forsake you." data-ref="Hebrews 13:5">
+                        <div class="theme">Never Alone</div>
+                        <div class="verse">"I will never leave you nor forsake you."</div>
+                        <div class="reference">— Hebrews 13:5</div>
+                    </div>
+                    
+                    <div class="scripture-option" onclick="selectScripture(this)" data-verse="Behold, I am making all things new." data-ref="Revelation 21:5">
+                        <div class="theme">Freedom from the Past</div>
+                        <div class="verse">"Behold, I am making all things new."</div>
+                        <div class="reference">— Revelation 21:5</div>
+                    </div>
+                    
+                    <div class="scripture-option" onclick="selectScripture(this)" data-verse="Come to me, all who are weary and burdened, and I will give you rest." data-ref="Matthew 11:28">
+                        <div class="theme">Rest & Acceptance</div>
+                        <div class="verse">"Come to me, all who are weary and burdened, and I will give you rest."</div>
+                        <div class="reference">— Matthew 11:28</div>
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button class="btn btn-secondary" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="btn-step-5" disabled>Continue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 6: Results -->
+        <div class="step" id="step-6">
+            <div class="step-content">
+                <div class="step-icon">💝</div>
+                <h2 class="step-title">Your Name Tag from Heaven</h2>
+                
+                <div class="card-preview" id="card-preview">
+                    <div class="card-lie" id="display-lie"></div>
+                    <div class="card-name" id="display-name"></div>
+                    <div class="card-truth" id="display-truth"></div>
+                    <div class="card-scripture">
+                        <span id="display-verse"></span>
+                        <cite id="display-ref"></cite>
+                    </div>
+                    <div class="card-footer">You are seen. You are known. You are loved.</div>
+                </div>
+
+                <p class="closing-affirmation">
+                    Read this slowly. Let it rest within you.<br>
+                    <strong>You are seen. You are known. You are loved.</strong>
+                </p>
+
+                <div class="download-options">
+                    <button class="btn btn-primary" onclick="downloadCard()">Download Card</button>
+                    <button class="btn btn-secondary" onclick="downloadWallpaper()">Phone Wallpaper</button>
+                </div>
+
+                <div class="button-row">
+                    <button class="btn btn-secondary" onclick="startOver()">Create Another</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden canvases for image generation -->
+    <canvas id="card-canvas" width="800" height="1000"></canvas>
+    <canvas id="wallpaper-canvas" width="1170" height="2532"></canvas>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 6;
+        let selectedScripture = null;
+
+        // Breathing animation text
+        const breathCircle = document.getElementById('breath-circle');
+        const breathText = document.getElementById('breath-text');
+        let breathingIn = true;
+        
+        setInterval(() => {
+            breathText.textContent = breathingIn ? 'Breathe In' : 'Breathe Out';
+            breathingIn = !breathingIn;
+        }, 4000);
+
+        function updateProgress() {
+            document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index + 1 === currentStep) {
+                    dot.classList.add('active');
+                } else if (index + 1 < currentStep) {
+                    dot.classList.add('completed');
+                }
+            });
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById(`step-${step}`).classList.add('active');
+            updateProgress();
+            
+            // Pre-fill name echo on step 4
+            if (step === 4) {
+                const name = document.getElementById('heavenly-name').value;
+                document.getElementById('name-echo').textContent = name || '___';
+            }
+            
+            // Show results on step 6
+            if (step === 6) {
+                showResults();
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        function selectScripture(element) {
+            document.querySelectorAll('.scripture-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedScripture = {
+                verse: element.dataset.verse,
+                ref: element.dataset.ref
+            };
+            document.getElementById('btn-step-5').disabled = false;
+        }
+
+        function showResults() {
+            const name = document.getElementById('heavenly-name').value || 'Beloved';
+            const lie = document.getElementById('the-lie').value || 'The lie I believed';
+            const truth = document.getElementById('the-truth').value || 'I am loved and chosen.';
+            
+            document.getElementById('display-name').textContent = name;
+            document.getElementById('display-lie').textContent = lie;
+            document.getElementById('display-truth').textContent = truth;
+            
+            if (selectedScripture) {
+                document.getElementById('display-verse').textContent = `"${selectedScripture.verse}"`;
+                document.getElementById('display-ref').textContent = `— ${selectedScripture.ref}`;
+            }
+        }
+
+        function downloadCard() {
+            const canvas = document.getElementById('card-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            const name = document.getElementById('heavenly-name').value || 'Beloved';
+            const lie = document.getElementById('the-lie').value || '';
+            const truth = document.getElementById('the-truth').value || '';
+            const verse = selectedScripture ? selectedScripture.verse : '';
+            const ref = selectedScripture ? selectedScripture.ref : '';
+
+            // Background
+            ctx.fillStyle = '#FDF8F3';
+            ctx.fillRect(0, 0, 800, 1000);
+            
+            // Top decorative bar
+            const gradient = ctx.createLinearGradient(0, 0, 800, 0);
+            gradient.addColorStop(0, '#D4AF37');
+            gradient.addColorStop(0.5, '#9D8EC9');
+            gradient.addColorStop(1, '#D4AF37');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 800, 8);
+            
+            // Border
+            ctx.strokeStyle = '#D4AF37';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(30, 30, 740, 940);
+            
+            // Lie (strikethrough)
+            if (lie) {
+                ctx.font = 'italic 24px Cormorant Garamond, Georgia, serif';
+                ctx.fillStyle = '#8C8C8C';
+                ctx.textAlign = 'center';
+                ctx.fillText(lie, 400, 150);
+                
+                // Strikethrough line
+                const textWidth = ctx.measureText(lie).width;
+                ctx.strokeStyle = '#8C8C8C';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(400 - textWidth/2 - 10, 150);
+                ctx.lineTo(400 + textWidth/2 + 10, 150);
+                ctx.stroke();
+            }
+            
+            // Name
+            ctx.font = '600 72px Cinzel, serif';
+            ctx.fillStyle = '#B8960C';
+            ctx.textAlign = 'center';
+            ctx.fillText(name, 400, 280);
+            
+            // Decorative line under name
+            ctx.strokeStyle = '#E8D5A3';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(200, 320);
+            ctx.lineTo(600, 320);
+            ctx.stroke();
+            
+            // Truth - word wrap
+            ctx.font = 'italic 28px Cormorant Garamond, Georgia, serif';
+            ctx.fillStyle = '#2D2D2D';
+            const truthLines = wrapText(ctx, truth, 600);
+            let y = 400;
+            truthLines.forEach(line => {
+                ctx.fillText(line, 400, y);
+                y += 40;
+            });
+            
+            // Scripture
+            if (verse) {
+                ctx.font = 'italic 22px Cormorant Garamond, Georgia, serif';
+                ctx.fillStyle = '#9D8EC9';
+                const verseLines = wrapText(ctx, `"${verse}"`, 550);
+                y = 650;
+                verseLines.forEach(line => {
+                    ctx.fillText(line, 400, y);
+                    y += 32;
+                });
+                
+                ctx.font = '18px Cormorant Garamond, Georgia, serif';
+                ctx.fillStyle = '#5C5C5C';
+                ctx.fillText(`— ${ref}`, 400, y + 20);
+            }
+            
+            // Footer
+            ctx.fillStyle = '#E8D5A3';
+            ctx.fillRect(100, 880, 600, 1);
+            
+            ctx.font = '16px Montserrat, sans-serif';
+            ctx.fillStyle = '#8C8C8C';
+            ctx.fillText('You are seen. You are known. You are loved.', 400, 920);
+            
+            // Download
+            const link = document.createElement('a');
+            link.download = 'name-from-heaven.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        function downloadWallpaper() {
+            const canvas = document.getElementById('wallpaper-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            const name = document.getElementById('heavenly-name').value || 'Beloved';
+            const verse = selectedScripture ? selectedScripture.verse : 'I have called you by name; you are mine.';
+            const ref = selectedScripture ? selectedScripture.ref : 'Isaiah 43:1';
+
+            // Background gradient
+            const bgGradient = ctx.createLinearGradient(0, 0, 0, 2532);
+            bgGradient.addColorStop(0, '#FDF8F3');
+            bgGradient.addColorStop(0.5, '#E6E0F0');
+            bgGradient.addColorStop(1, '#FDF8F3');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, 1170, 2532);
+            
+            // Decorative circles
+            ctx.fillStyle = 'rgba(212, 175, 55, 0.1)';
+            ctx.beginPath();
+            ctx.arc(200, 400, 300, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = 'rgba(157, 142, 201, 0.1)';
+            ctx.beginPath();
+            ctx.arc(970, 2000, 400, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Name
+            ctx.font = '600 120px Cinzel, serif';
+            ctx.fillStyle = '#B8960C';
+            ctx.textAlign = 'center';
+            ctx.fillText(name, 585, 1200);
+            
+            // Decorative line
+            ctx.strokeStyle = '#D4AF37';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(285, 1280);
+            ctx.lineTo(885, 1280);
+            ctx.stroke();
+            
+            // Scripture
+            ctx.font = 'italic 36px Cormorant Garamond, Georgia, serif';
+            ctx.fillStyle = '#5C5C5C';
+            const verseLines = wrapText(ctx, `"${verse}"`, 800);
+            let y = 1400;
+            verseLines.forEach(line => {
+                ctx.fillText(line, 585, y);
+                y += 50;
+            });
+            
+            ctx.font = '28px Cormorant Garamond, Georgia, serif';
+            ctx.fillStyle = '#8C8C8C';
+            ctx.fillText(`— ${ref}`, 585, y + 30);
+            
+            // Download
+            const link = document.createElement('a');
+            link.download = 'name-from-heaven-wallpaper.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        function wrapText(ctx, text, maxWidth) {
+            const words = text.split(' ');
+            const lines = [];
+            let currentLine = '';
+            
+            words.forEach(word => {
+                const testLine = currentLine + word + ' ';
+                const metrics = ctx.measureText(testLine);
+                if (metrics.width > maxWidth && currentLine !== '') {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine = testLine;
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        function startOver() {
+            currentStep = 1;
+            document.getElementById('heavenly-name').value = '';
+            document.getElementById('the-lie').value = '';
+            document.getElementById('the-truth').value = '';
+            document.querySelectorAll('.scripture-option').forEach(opt => opt.classList.remove('selected'));
+            selectedScripture = null;
+            document.getElementById('btn-step-5').disabled = true;
+            showStep(1);
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
