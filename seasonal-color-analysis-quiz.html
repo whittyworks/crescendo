@@ -598,6 +598,134 @@
             vertical-align: middle;
         }
 
+        /* Save Results Section */
+        .save-results-section {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid var(--cream-dark);
+        }
+
+        .save-results-section h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--gold-dark);
+            margin-bottom: 15px;
+        }
+
+        .save-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .save-btn {
+            padding: 12px 24px;
+            font-size: 0.85rem;
+        }
+
+        .copy-confirmation {
+            color: var(--gold-dark);
+            font-size: 0.85rem;
+            margin-top: 12px;
+            animation: fadeInOut 2s ease;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            nav, 
+            .progress-container,
+            .explore-toggle,
+            .explore-panel,
+            .save-results-section,
+            .button-row,
+            .disclaimer,
+            #intro,
+            #tiebreaker-intro,
+            #questions-container,
+            #tiebreaker-container {
+                display: none !important;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 20px;
+            }
+
+            .card {
+                box-shadow: none;
+                padding: 20px;
+            }
+
+            #results {
+                display: block !important;
+            }
+
+            .quiz-header {
+                margin-bottom: 20px;
+            }
+
+            .quiz-header h1 {
+                font-size: 2rem;
+            }
+
+            .results-header .season-name {
+                font-size: 2.5rem;
+            }
+
+            .palette-swatch {
+                border: 1px solid #ddd;
+            }
+
+            .spectrum-section,
+            .description-section,
+            .matches-section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .spectrum-bar {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .match-item {
+                break-inside: avoid;
+            }
+
+            /* Print header */
+            .print-header {
+                display: block !important;
+                text-align: center;
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+                border-bottom: 2px solid var(--gold);
+            }
+
+            .print-date {
+                font-size: 0.8rem;
+                color: var(--text-medium);
+            }
+        }
+
+        .print-header {
+            display: none;
+        }
+
         .spectrum-labels {
             display: flex;
             justify-content: space-between;
@@ -982,6 +1110,12 @@
 
         <!-- Results Screen -->
         <div id="results" class="card">
+            <div class="print-header">
+                <p style="font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase;">My Holy Crescendo</p>
+                <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--gold-dark);">Colors of Creation — My Results</p>
+                <p class="print-date"></p>
+            </div>
+
             <div class="results-header">
                 <p class="label">Your Seasonal Palette</p>
                 <h2 id="season-result" class="season-name">True Spring</h2>
@@ -1121,6 +1255,20 @@
 
             <div class="button-row center">
                 <button class="btn btn-secondary" onclick="retakeQuiz()">Retake Quiz</button>
+            </div>
+
+            <!-- Save/Share Results -->
+            <div class="save-results-section">
+                <h4>Save Your Results</h4>
+                <div class="save-buttons">
+                    <button class="btn btn-secondary save-btn" onclick="printResults()">
+                        🖨️ Print / Save as PDF
+                    </button>
+                    <button class="btn btn-secondary save-btn" onclick="copyResults()">
+                        📋 Copy Summary
+                    </button>
+                </div>
+                <p id="copy-confirmation" class="copy-confirmation" style="display: none;">✓ Copied to clipboard!</p>
             </div>
         </div>
     </div>
@@ -3229,6 +3377,121 @@
                 
                 scores = tempScores;
             }
+        }
+
+        // ============================================
+        // SAVE/SHARE RESULTS
+        // ============================================
+        function printResults() {
+            // Set the print date
+            const dateStr = new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            document.querySelector('.print-date').textContent = dateStr;
+            
+            // Trigger print
+            window.print();
+        }
+
+        function copyResults() {
+            // Get current displayed season info
+            const seasonName = document.getElementById('season-result').textContent.replace('Exploring', '').trim();
+            const subtitle = document.getElementById('season-subtitle').textContent;
+            const description = document.getElementById('description-text').textContent;
+            const bestColors = document.getElementById('best-colors').textContent;
+            const avoidColors = document.getElementById('avoid-colors').textContent;
+            
+            const valueResult = document.getElementById('value-result').textContent;
+            const tempResult = document.getElementById('temp-result').textContent;
+            const chromaResult = document.getElementById('chroma-result').textContent;
+            
+            // Check for flow badge
+            const flowBadge = document.getElementById('flow-badge-container').textContent.trim();
+            
+            // Check for borrow section
+            const borrowSection = document.getElementById('borrow-section');
+            const borrowText = borrowSection.style.display !== 'none' 
+                ? document.getElementById('borrow-text').textContent 
+                : null;
+            
+            // Get spiritual reflection if visible
+            const reflectionEl = document.getElementById('spiritual-reflection');
+            const reflection = reflectionEl.style.display !== 'none' 
+                ? reflectionEl.textContent 
+                : null;
+            
+            // Build the summary text
+            let summary = `
+═══════════════════════════════════════
+    COLORS OF CREATION — MY RESULTS
+         My Holy Crescendo
+═══════════════════════════════════════
+
+🎨 MY SEASONAL PALETTE: ${seasonName}
+   ${subtitle}
+${flowBadge ? `\n   ${flowBadge}` : ''}
+
+───────────────────────────────────────
+📊 MY COLOR PROFILE
+───────────────────────────────────────
+   Value:       ${valueResult}
+   Temperature: ${tempResult}
+   Chroma:      ${chromaResult}
+
+───────────────────────────────────────
+✨ ABOUT ${seasonName.toUpperCase()}
+───────────────────────────────────────
+${description}
+${reflection ? `\n"${reflection}"` : ''}
+
+───────────────────────────────────────
+💚 MY BEST COLORS
+───────────────────────────────────────
+${bestColors}
+
+───────────────────────────────────────
+⚠️ COLORS TO APPROACH WITH CARE
+───────────────────────────────────────
+${avoidColors}
+${borrowText ? `
+───────────────────────────────────────
+🤝 COLORS I CAN BORROW
+───────────────────────────────────────
+${borrowText}` : ''}
+
+═══════════════════════════════════════
+   Generated on ${new Date().toLocaleDateString()}
+   myholicrescendo.com
+═══════════════════════════════════════
+`.trim();
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(summary).then(() => {
+                // Show confirmation
+                const confirmation = document.getElementById('copy-confirmation');
+                confirmation.style.display = 'block';
+                
+                // Hide after animation
+                setTimeout(() => {
+                    confirmation.style.display = 'none';
+                }, 2000);
+            }).catch(err => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = summary;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const confirmation = document.getElementById('copy-confirmation');
+                confirmation.style.display = 'block';
+                setTimeout(() => {
+                    confirmation.style.display = 'none';
+                }, 2000);
+            });
         }
     </script>
 </body>
