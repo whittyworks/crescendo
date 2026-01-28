@@ -543,6 +543,59 @@
             border: 3px solid var(--gold-dark);
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+
+        .spectrum-marker.draggable {
+            cursor: grab;
+            border-color: var(--gold);
+            box-shadow: 0 2px 12px rgba(201, 168, 124, 0.4);
+        }
+
+        .spectrum-marker.draggable:hover {
+            transform: translate(-50%, -50%) scale(1.15);
+            box-shadow: 0 4px 16px rgba(201, 168, 124, 0.5);
+        }
+
+        .spectrum-marker.dragging {
+            cursor: grabbing;
+            transform: translate(-50%, -50%) scale(1.2);
+            box-shadow: 0 4px 20px rgba(201, 168, 124, 0.6);
+        }
+
+        .explore-toggle {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--cream-dark);
+        }
+
+        .explore-hint {
+            font-size: 0.85rem;
+            color: var(--gold-dark);
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        .explore-mode-active .spectrum-bar {
+            cursor: pointer;
+        }
+
+        .reset-btn {
+            margin-left: 10px;
+            padding: 10px 20px;
+            font-size: 0.8rem;
+        }
+
+        .explore-badge {
+            display: inline-block;
+            background: var(--sage);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: var(--gold-dark);
+            margin-left: 10px;
+            vertical-align: middle;
         }
 
         .spectrum-labels {
@@ -950,7 +1003,7 @@
                         <span class="dimension">Value (Light ↔ Deep)</span>
                         <span id="value-result" class="result">Medium</span>
                     </div>
-                    <div class="spectrum-bar value-bar">
+                    <div class="spectrum-bar value-bar" id="value-bar">
                         <div id="value-marker" class="spectrum-marker"></div>
                     </div>
                     <div class="spectrum-labels">
@@ -965,7 +1018,7 @@
                         <span class="dimension">Temperature (Warm ↔ Cool)</span>
                         <span id="temp-result" class="result">Warm</span>
                     </div>
-                    <div class="spectrum-bar temp-bar">
+                    <div class="spectrum-bar temp-bar" id="temp-bar">
                         <div id="temp-marker" class="spectrum-marker"></div>
                     </div>
                     <div class="spectrum-labels">
@@ -980,7 +1033,7 @@
                         <span class="dimension">Chroma (Clear ↔ Soft)</span>
                         <span id="chroma-result" class="result">Clear</span>
                     </div>
-                    <div class="spectrum-bar chroma-bar">
+                    <div class="spectrum-bar chroma-bar" id="chroma-bar">
                         <div id="chroma-marker" class="spectrum-marker"></div>
                     </div>
                     <div class="spectrum-labels">
@@ -988,6 +1041,13 @@
                         <span>Medium</span>
                         <span>Soft/Muted</span>
                     </div>
+                </div>
+
+                <div class="explore-toggle">
+                    <button id="explore-btn" class="btn btn-secondary" onclick="toggleExploreMode()">
+                        <span id="explore-btn-text">🎨 Explore: Drag the Dots</span>
+                    </button>
+                    <p id="explore-hint" class="explore-hint" style="display: none;">Drag the dots above to see how different combinations create different seasons!</p>
                 </div>
             </div>
 
@@ -2826,6 +2886,349 @@
             }
             
             document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ============================================
+        // EXPLORE MODE - Interactive Spectrum Manipulation
+        // ============================================
+        let exploreMode = false;
+        let originalScores = null;
+        let exploreScores = { value: 0, temp: 0, chroma: 0 };
+        let isDragging = false;
+        let currentDragMarker = null;
+
+        function toggleExploreMode() {
+            exploreMode = !exploreMode;
+            const btn = document.getElementById('explore-btn');
+            const btnText = document.getElementById('explore-btn-text');
+            const hint = document.getElementById('explore-hint');
+            const resultsSection = document.getElementById('results');
+            
+            if (exploreMode) {
+                // Save original scores if first time
+                if (!originalScores) {
+                    originalScores = { ...scores };
+                }
+                exploreScores = { ...scores };
+                
+                btnText.textContent = '↩ Return to My Results';
+                hint.style.display = 'block';
+                resultsSection.classList.add('explore-mode-active');
+                
+                // Make markers draggable
+                ['value', 'temp', 'chroma'].forEach(dim => {
+                    const marker = document.getElementById(`${dim}-marker`);
+                    marker.classList.add('draggable');
+                    setupDragHandlers(marker, dim);
+                });
+                
+            } else {
+                btnText.textContent = '🎨 Explore: Drag the Dots';
+                hint.style.display = 'none';
+                resultsSection.classList.remove('explore-mode-active');
+                
+                // Remove draggable state
+                ['value', 'temp', 'chroma'].forEach(dim => {
+                    const marker = document.getElementById(`${dim}-marker`);
+                    marker.classList.remove('draggable');
+                });
+                
+                // Restore original results
+                if (originalScores) {
+                    scores = { ...originalScores };
+                    updateDisplayFromScores(scores, false);
+                }
+            }
+        }
+
+        function setupDragHandlers(marker, dimension) {
+            // Mouse events
+            marker.addEventListener('mousedown', (e) => startDrag(e, marker, dimension));
+            
+            // Touch events
+            marker.addEventListener('touchstart', (e) => startDrag(e, marker, dimension), { passive: false });
+        }
+
+        function startDrag(e, marker, dimension) {
+            if (!exploreMode) return;
+            e.preventDefault();
+            
+            isDragging = true;
+            currentDragMarker = { marker, dimension };
+            marker.classList.add('dragging');
+            
+            // Add move/end listeners to document
+            document.addEventListener('mousemove', handleDrag);
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchmove', handleDrag, { passive: false });
+            document.addEventListener('touchend', endDrag);
+        }
+
+        function handleDrag(e) {
+            if (!isDragging || !currentDragMarker) return;
+            e.preventDefault();
+            
+            const { marker, dimension } = currentDragMarker;
+            const bar = document.getElementById(`${dimension}-bar`);
+            const rect = bar.getBoundingClientRect();
+            
+            // Get position from mouse or touch
+            const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+            
+            // Calculate percentage position
+            let percent = ((clientX - rect.left) / rect.width) * 100;
+            percent = Math.max(0, Math.min(100, percent)); // Clamp to 0-100
+            
+            // Update marker position
+            marker.style.left = percent + '%';
+            
+            // Convert percentage to score (-32 to +32)
+            const score = ((percent / 100) * 64) - 32;
+            exploreScores[dimension] = score;
+            
+            // Update the dimension label
+            updateDimensionLabel(dimension, percent);
+            
+            // Recalculate and display the season
+            updateExploreResults();
+        }
+
+        function endDrag(e) {
+            if (!isDragging) return;
+            
+            if (currentDragMarker) {
+                currentDragMarker.marker.classList.remove('dragging');
+            }
+            
+            isDragging = false;
+            currentDragMarker = null;
+            
+            document.removeEventListener('mousemove', handleDrag);
+            document.removeEventListener('mouseup', endDrag);
+            document.removeEventListener('touchmove', handleDrag);
+            document.removeEventListener('touchend', endDrag);
+        }
+
+        function updateDimensionLabel(dimension, percent) {
+            const labelEl = document.getElementById(`${dimension}-result`);
+            
+            if (dimension === 'value') {
+                labelEl.textContent = percent < 35 ? 'Light' : percent > 65 ? 'Deep' : 'Medium';
+            } else if (dimension === 'temp') {
+                labelEl.textContent = percent < 35 ? 'Warm' : percent > 65 ? 'Cool' : 'Neutral';
+            } else if (dimension === 'chroma') {
+                labelEl.textContent = percent < 35 ? 'Clear' : percent > 65 ? 'Soft' : 'Medium';
+            }
+        }
+
+        function updateExploreResults() {
+            // Temporarily set scores to explore scores
+            const tempScores = { ...scores };
+            scores = { ...exploreScores };
+            
+            // Calculate matches with explore scores
+            const matchScores = calculateMatchScores();
+            const sortedMatches = Object.entries(matchScores).sort((a, b) => b[1] - a[1]);
+            
+            // Check for flow palette
+            const flowPalette = checkForFlowPalette(matchScores);
+            
+            let topSeason, topData, isFlow = false;
+            
+            if (flowPalette) {
+                const flowData = seasons[flowPalette];
+                const bridgedSeasons = flowData.flowBetween;
+                const score1 = matchScores[bridgedSeasons[0]] || 0;
+                const score2 = matchScores[bridgedSeasons[1]] || 0;
+                
+                // If the bridged seasons are both scoring well and close
+                if (Math.abs(score1 - score2) <= 15 && Math.min(score1, score2) > 40) {
+                    topSeason = flowPalette;
+                    topData = seasons[flowPalette];
+                    isFlow = true;
+                } else {
+                    topSeason = sortedMatches[0][0];
+                    topData = seasons[topSeason];
+                }
+            } else {
+                topSeason = sortedMatches[0][0];
+                topData = seasons[topSeason];
+            }
+            
+            // Update display
+            document.getElementById('season-result').innerHTML = topSeason + '<span class="explore-badge">Exploring</span>';
+            document.getElementById('season-subtitle').textContent = topData.subtitle;
+            
+            // Flow badge
+            const flowBadgeContainer = document.getElementById('flow-badge-container');
+            if (isFlow) {
+                flowBadgeContainer.innerHTML = `<div class="flow-badge">Flow Palette — Bridges ${topData.flowBetween[0]} and ${topData.flowBetween[1]}</div>`;
+            } else {
+                flowBadgeContainer.innerHTML = '';
+            }
+            
+            // Spiritual reflection
+            const reflectionEl = document.getElementById('spiritual-reflection');
+            if (topData.spiritualReflection) {
+                reflectionEl.textContent = topData.spiritualReflection;
+                reflectionEl.style.display = 'block';
+            } else {
+                reflectionEl.style.display = 'none';
+            }
+            
+            // Palette
+            document.getElementById('palette-swatches').innerHTML = topData.colors.map(c => 
+                `<div class="palette-swatch" style="background: ${c};"></div>`
+            ).join('');
+            
+            // Description
+            document.getElementById('about-title').textContent = `About ${topSeason}`;
+            document.getElementById('description-text').textContent = topData.description;
+            document.getElementById('best-colors').textContent = topData.best;
+            document.getElementById('avoid-colors').textContent = topData.avoid;
+            
+            // Borrow section
+            const borrowSection = document.getElementById('borrow-section');
+            const borrowText = document.getElementById('borrow-text');
+            if (topData.borrowFrom) {
+                borrowText.textContent = topData.borrowFrom;
+                borrowSection.style.display = 'block';
+            } else {
+                borrowSection.style.display = 'none';
+            }
+            
+            // Update matches display
+            const related = isFlow ? [] : (relatedSeasons[topSeason] || []);
+            const topMatch = sortedMatches[0];
+            const remainingMatches = sortedMatches.slice(1);
+            const relatedMatches = remainingMatches.filter(([name]) => related.includes(name));
+            const otherMatches = remainingMatches.filter(([name]) => !related.includes(name));
+            relatedMatches.sort((a, b) => b[1] - a[1]);
+            otherMatches.sort((a, b) => b[1] - a[1]);
+            const reorderedMatches = [topMatch, ...relatedMatches, ...otherMatches].slice(0, 4);
+            
+            if (!isFlow) {
+                document.getElementById('matches-container').innerHTML = reorderedMatches.map((match, i) => {
+                    const [name, score] = match;
+                    const data = seasons[name];
+                    const isRelated = i > 0 && related.includes(name);
+                    const swatches = data.colors.slice(0, 4).map(c => 
+                        `<div class="match-swatch" style="background: ${c};"></div>`
+                    ).join('');
+                    return `
+                        <div class="match-item" onclick="showSeason('${name}')">
+                            <div class="match-rank">${i + 1}</div>
+                            <div class="match-colors">${swatches}</div>
+                            <div class="match-info">
+                                <div class="match-name">${name}${isRelated ? ' <span style="font-size: 0.7rem; color: var(--gold); font-weight: normal;">(sister)</span>' : ''}</div>
+                            </div>
+                            <div class="match-bar">
+                                <div class="match-bar-fill" style="width: ${score}%;"></div>
+                            </div>
+                            <div class="match-percent">${score}%</div>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                document.getElementById('matches-container').innerHTML = `
+                    <p style="text-align: center; color: var(--text-medium); font-size: 0.9rem;">
+                        As a Flow palette, you can draw from both ${topData.flowBetween[0]} and ${topData.flowBetween[1]}.
+                    </p>
+                `;
+            }
+            
+            // Restore original scores
+            scores = tempScores;
+        }
+
+        function updateDisplayFromScores(scoreSet, isExploring) {
+            const maxScore = 32;
+            const valuePercent = Math.min(100, Math.max(0, ((scoreSet.value + maxScore) / (maxScore * 2)) * 100));
+            const tempPercent = Math.min(100, Math.max(0, ((scoreSet.temp + maxScore) / (maxScore * 2)) * 100));
+            const chromaPercent = Math.min(100, Math.max(0, ((scoreSet.chroma + maxScore) / (maxScore * 2)) * 100));
+            
+            document.getElementById('value-marker').style.left = valuePercent + '%';
+            document.getElementById('temp-marker').style.left = tempPercent + '%';
+            document.getElementById('chroma-marker').style.left = chromaPercent + '%';
+            
+            document.getElementById('value-result').textContent = 
+                valuePercent < 35 ? 'Light' : valuePercent > 65 ? 'Deep' : 'Medium';
+            document.getElementById('temp-result').textContent = 
+                tempPercent < 35 ? 'Warm' : tempPercent > 65 ? 'Cool' : 'Neutral';
+            document.getElementById('chroma-result').textContent = 
+                chromaPercent < 35 ? 'Clear' : chromaPercent > 65 ? 'Soft' : 'Medium';
+            
+            // Recalculate and show results
+            if (!isExploring) {
+                // Full recalculation for actual results
+                const tempScores = { ...scores };
+                scores = { ...scoreSet };
+                
+                const matchScores = calculateMatchScores();
+                const sortedMatches = Object.entries(matchScores).sort((a, b) => b[1] - a[1]);
+                
+                // Check for flow
+                const flowPalette = checkForFlowPalette(matchScores);
+                let topSeason, topData, isFlow = false;
+                
+                if (flowPalette) {
+                    const flowData = seasons[flowPalette];
+                    const bridgedSeasons = flowData.flowBetween;
+                    const score1 = matchScores[bridgedSeasons[0]] || 0;
+                    const score2 = matchScores[bridgedSeasons[1]] || 0;
+                    
+                    if (Math.abs(score1 - score2) <= 15 && Math.min(score1, score2) > 40) {
+                        topSeason = flowPalette;
+                        topData = seasons[flowPalette];
+                        isFlow = true;
+                    } else {
+                        topSeason = sortedMatches[0][0];
+                        topData = seasons[topSeason];
+                    }
+                } else {
+                    topSeason = sortedMatches[0][0];
+                    topData = seasons[topSeason];
+                }
+                
+                // Update display
+                document.getElementById('season-result').textContent = topSeason;
+                document.getElementById('season-subtitle').textContent = topData.subtitle;
+                
+                const flowBadgeContainer = document.getElementById('flow-badge-container');
+                if (isFlow) {
+                    flowBadgeContainer.innerHTML = `<div class="flow-badge">Flow Palette — Bridges ${topData.flowBetween[0]} and ${topData.flowBetween[1]}</div>`;
+                } else {
+                    flowBadgeContainer.innerHTML = '';
+                }
+                
+                const reflectionEl = document.getElementById('spiritual-reflection');
+                if (topData.spiritualReflection) {
+                    reflectionEl.textContent = topData.spiritualReflection;
+                    reflectionEl.style.display = 'block';
+                } else {
+                    reflectionEl.style.display = 'none';
+                }
+                
+                document.getElementById('palette-swatches').innerHTML = topData.colors.map(c => 
+                    `<div class="palette-swatch" style="background: ${c};"></div>`
+                ).join('');
+                
+                document.getElementById('about-title').textContent = `About ${topSeason}`;
+                document.getElementById('description-text').textContent = topData.description;
+                document.getElementById('best-colors').textContent = topData.best;
+                document.getElementById('avoid-colors').textContent = topData.avoid;
+                
+                const borrowSection = document.getElementById('borrow-section');
+                const borrowText = document.getElementById('borrow-text');
+                if (topData.borrowFrom) {
+                    borrowText.textContent = topData.borrowFrom;
+                    borrowSection.style.display = 'block';
+                } else {
+                    borrowSection.style.display = 'none';
+                }
+                
+                scores = tempScores;
+            }
         }
     </script>
 </body>
