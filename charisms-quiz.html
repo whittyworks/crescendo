@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charism Discovery Quiz · My Holy Crescendo</title>
+    <meta name="description" content="Discover which of the 25 charisms the Holy Spirit has given you. A 7-10 minute quiz to uncover your unique spiritual gifts.">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="My Holy Crescendo – Charism Discovery Quiz">
+    <meta property="og:description" content="Discover which of the 25 charisms the Holy Spirit has given you.">
+    <meta property="og:image" content="https://myholycrescendo.com/assets/img/og-image.png">
+    <meta property="og:url" content="https://myholycrescendo.com/charisms-quiz.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://myholycrescendo.com/assets/img/og-image.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+            --text-light: #8A7A6A;
+            --white: #FFFFFF;
+            --shadow: rgba(44, 36, 22, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(253, 248, 243, 0.97);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .logo-link { display: block; text-decoration: none; }
+        .logo-image { height: 40px; width: auto; display: block; transition: opacity 0.3s; }
+        .logo-image:hover { opacity: 0.8; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: var(--text-medium); text-decoration: none;
+            font-family: 'Montserrat', sans-serif; font-size: 0.85rem;
+            letter-spacing: 0.05em; text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold-dark); }
+
+        /* ── Quiz Wrapper ── */
+        .quiz-wrapper {
+            min-height: 100vh;
+            padding-top: 80px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        /* ── Intro Screen ── */
+        .intro-screen {
+            width: 100%; max-width: 680px;
+            margin: 3rem auto; padding: 0 1.5rem 4rem;
+            text-align: center;
+        }
+        .intro-dove {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .intro-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--gold);
+            margin-bottom: 0.75rem;
+        }
+        .intro-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            color: var(--gold-dark); line-height: 1.25;
+            margin-bottom: 0.5rem;
+        }
+        .intro-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem; font-style: italic;
+            color: var(--text-medium); margin-bottom: 2rem;
+        }
+        .intro-card {
+            background: white; border-radius: 12px;
+            padding: 2.5rem; margin-bottom: 2rem;
+            box-shadow: 0 8px 32px var(--shadow);
+            border-top: 3px solid var(--gold);
+            text-align: left;
+        }
+        .intro-card p {
+            font-size: 1.1rem; color: var(--text-medium);
+            line-height: 1.85; margin-bottom: 1.25rem;
+        }
+        .intro-card p:last-child { margin-bottom: 0; }
+        .intro-card strong { color: var(--text-dark); }
+
+        .intro-stats {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1rem; margin-bottom: 2rem;
+        }
+        .stat-item {
+            background: white; border-radius: 10px;
+            padding: 1.25rem 1rem; text-align: center;
+            box-shadow: 0 4px 16px var(--shadow);
+        }
+        .stat-number {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem; color: var(--gold-dark);
+            display: block; margin-bottom: 0.25rem;
+        }
+        .stat-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem; letter-spacing: 0.05em;
+            color: var(--text-light); text-transform: uppercase;
+        }
+
+        .prayer-card {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.07), rgba(253, 248, 243, 0.95));
+            border: 1.5px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 2.5rem 2.25rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        .prayer-cross {
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            display: block;
+            letter-spacing: 0.1em;
+        }
+        .prayer-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .prayer-text p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem; font-style: italic;
+            color: var(--text-medium); line-height: 1.9;
+            margin-bottom: 1.1rem;
+        }
+        .prayer-text p:last-child { margin-bottom: 0; }
+        .prayer-opening {
+            font-size: 0.95rem !important;
+            font-style: normal !important;
+            font-family: 'Montserrat', sans-serif !important;
+            letter-spacing: 0.04em;
+            color: var(--text-light) !important;
+            margin-bottom: 1.5rem !important;
+        }
+        .prayer-amen {
+            font-family: 'Cinzel', serif !important;
+            font-size: 1.2rem !important;
+            font-style: normal !important;
+            color: var(--gold-dark) !important;
+            letter-spacing: 0.12em;
+            margin-top: 1.5rem !important;
+        }
+
+        .begin-btn {
+            display: inline-block;
+            background: var(--gold);
+            color: white; border: none;
+            padding: 1.1rem 3rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem; font-weight: 500;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+        }
+        .begin-btn:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(212, 175, 55, 0.45);
+        }
+
+        /* ── Quiz Screen ── */
+        .quiz-screen {
+            width: 100%; max-width: 720px;
+            margin: 2rem auto; padding: 0 1.5rem 5rem;
+            display: none;
+        }
+
+        .quiz-header {
+            text-align: center; margin-bottom: 2rem;
+        }
+        .quiz-header .quiz-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem; color: var(--gold-dark);
+            letter-spacing: 0.05em;
+        }
+
+        /* Progress */
+        .progress-wrap { margin-bottom: 2.5rem; }
+        .progress-meta {
+            display: flex; justify-content: space-between;
+            align-items: center; margin-bottom: 0.6rem;
+        }
+        .progress-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem; color: var(--text-light);
+            letter-spacing: 0.04em;
+        }
+        .progress-pct {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem; color: var(--gold); font-weight: 500;
+        }
+        .progress-bar {
+            height: 6px; background: rgba(212, 175, 55, 0.15);
+            border-radius: 3px; overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%; background: linear-gradient(90deg, var(--gold-light), var(--gold));
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        /* Questions */
+        .questions-group { display: flex; flex-direction: column; gap: 1.25rem; }
+
+        .question-card {
+            background: white; border-radius: 12px;
+            padding: 1.75rem 2rem;
+            box-shadow: 0 4px 20px var(--shadow);
+            border-left: 3px solid rgba(212, 175, 55, 0.3);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .question-card.answered { border-left-color: var(--gold); }
+
+        .question-num {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem; letter-spacing: 0.12em;
+            color: var(--gold); text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .question-text {
+            font-size: 1.1rem; color: var(--text-dark);
+            line-height: 1.65; margin-bottom: 1.25rem;
+        }
+
+        /* Rating buttons */
+        .rating-scale {
+            display: flex; gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .rating-btn {
+            flex: 1; min-width: 48px;
+            background: var(--cream-dark);
+            border: 1.5px solid transparent;
+            border-radius: 8px;
+            padding: 0.55rem 0.25rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex; flex-direction: column; align-items: center; gap: 3px;
+        }
+        .rating-btn:hover {
+            background: rgba(212, 175, 55, 0.12);
+            border-color: var(--gold-light);
+        }
+        .rating-btn.selected {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+        .rating-btn .rb-num {
+            font-family: 'Cinzel', serif; font-size: 1rem;
+            color: var(--text-medium); font-weight: 600;
+        }
+        .rating-btn.selected .rb-num { color: white; }
+        .rating-btn .rb-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.55rem; letter-spacing: 0.06em;
+            text-transform: uppercase; color: var(--text-light);
+            text-align: center; line-height: 1.2;
+        }
+        .rating-btn.selected .rb-label { color: rgba(255,255,255,0.85); }
+
+        /* Scale legend */
+        .scale-legend {
+            display: flex; justify-content: space-between;
+            margin-top: 0.4rem;
+        }
+        .scale-legend span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem; letter-spacing: 0.06em;
+            color: var(--text-light); text-transform: uppercase;
+        }
+
+        /* Nav buttons */
+        .nav-row {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 2rem; flex-wrap: wrap; gap: 1rem;
+        }
+        .nav-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
+            cursor: pointer; transition: all 0.3s;
+            padding: 0.75rem 1.75rem; border-radius: 50px;
+        }
+        .btn-prev {
+            background: transparent;
+            border: 1.5px solid rgba(212, 175, 55, 0.4);
+            color: var(--text-medium);
+        }
+        .btn-prev:hover:not(:disabled) {
+            border-color: var(--gold); color: var(--gold-dark);
+        }
+        .btn-prev:disabled { opacity: 0.35; cursor: default; }
+        .btn-next {
+            background: var(--gold); color: white;
+            border: none;
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+        }
+        .btn-next:hover {
+            background: var(--gold-dark);
+            box-shadow: 0 6px 24px rgba(212, 175, 55, 0.45);
+            transform: translateY(-1px);
+        }
+        .btn-results {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            color: white; border: none; display: none;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+        }
+        .btn-results:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(212, 175, 55, 0.5);
+        }
+
+        .unanswered-msg {
+            text-align: center; color: #c0783a;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem; margin-top: 0.75rem;
+            display: none;
+        }
+
+        /* ── Results Screen ── */
+        .results-screen {
+            width: 100%; max-width: 720px;
+            margin: 2rem auto; padding: 0 1.5rem 5rem;
+            display: none;
+        }
+
+        .results-hero {
+            text-align: center; margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(253, 248, 243, 0.9));
+            border-radius: 16px;
+        }
+        .results-dove { font-size: 3rem; margin-bottom: 1rem; }
+        .results-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 0.5rem;
+        }
+        .results-name {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            color: var(--gold-dark); margin-bottom: 0.5rem;
+        }
+        .results-sub {
+            font-size: 1.2rem; font-style: italic; color: var(--text-medium);
+        }
+
+        /* Bar chart */
+        .section-heading {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem; color: var(--gold-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            letter-spacing: 0.05em;
+        }
+
+        .charism-bars { margin-bottom: 3rem; }
+
+        .bar-row {
+            display: flex; align-items: center;
+            gap: 0.75rem; margin-bottom: 0.85rem;
+        }
+        .bar-icon { font-size: 1.2rem; width: 1.6rem; flex-shrink: 0; text-align: center; }
+        .bar-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase;
+            color: var(--text-medium);
+            width: 140px; flex-shrink: 0;
+        }
+        .bar-name.top { color: var(--gold-dark); font-weight: 500; }
+        .bar-track {
+            flex: 1; height: 10px;
+            background: rgba(212, 175, 55, 0.12);
+            border-radius: 5px; overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold));
+            border-radius: 5px;
+            width: 0;
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bar-fill.top { background: linear-gradient(90deg, var(--gold), var(--gold-dark)); }
+        .bar-score {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem; color: var(--text-light);
+            width: 32px; text-align: right; flex-shrink: 0;
+        }
+
+        /* Top charism cards */
+        .top-charisms { margin-bottom: 3rem; }
+
+        .charism-result-card {
+            background: white; border-radius: 12px;
+            padding: 2rem 2.25rem; margin-bottom: 1.5rem;
+            box-shadow: 0 6px 28px var(--shadow);
+            border-top: 3px solid var(--gold);
+            position: relative; overflow: hidden;
+        }
+        .charism-result-card::before {
+            content: attr(data-rank);
+            position: absolute; right: 1.5rem; top: 1.5rem;
+            font-family: 'Cinzel', serif; font-size: 3.5rem;
+            color: rgba(212, 175, 55, 0.08); font-weight: 600;
+            line-height: 1;
+        }
+        .card-header {
+            display: flex; align-items: center; gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .card-icon { font-size: 2rem; }
+        .card-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem; color: var(--gold-dark);
+        }
+        .card-rank-badge {
+            display: inline-block;
+            background: var(--gold); color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 3px 10px; border-radius: 20px; margin-left: 0.5rem;
+        }
+        .card-description {
+            font-size: 1.1rem; color: var(--text-medium);
+            line-height: 1.8; margin-bottom: 1rem;
+        }
+        .card-reflection {
+            font-style: italic; font-size: 1rem;
+            color: var(--gold-dark);
+            border-left: 3px solid rgba(212, 175, 55, 0.4);
+            padding-left: 1rem;
+        }
+
+        /* Reminder box */
+        .discernment-note {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.06), rgba(253, 248, 243, 0.9));
+            border: 1.5px solid rgba(212, 175, 55, 0.25);
+            border-radius: 12px; padding: 2rem 2.25rem;
+            margin-bottom: 2.5rem;
+        }
+        .discernment-note h4 {
+            font-family: 'Cinzel', serif; font-size: 1rem;
+            color: var(--gold-dark); margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        .discernment-note p {
+            font-size: 1rem; color: var(--text-medium);
+            line-height: 1.8; margin-bottom: 0.75rem;
+        }
+        .discernment-note p:last-child { margin-bottom: 0; }
+
+        /* CTA */
+        .results-cta {
+            text-align: center; padding: 2.5rem;
+            background: white; border-radius: 12px;
+            box-shadow: 0 6px 28px var(--shadow);
+            margin-bottom: 2rem;
+        }
+        .results-cta h3 {
+            font-family: 'Cinzel', serif; font-size: 1.4rem;
+            color: var(--gold-dark); margin-bottom: 0.75rem;
+        }
+        .results-cta p {
+            font-size: 1.05rem; color: var(--text-medium);
+            line-height: 1.8; margin-bottom: 1.5rem;
+            max-width: 520px; margin-left: auto; margin-right: auto;
+        }
+        .cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-primary {
+            display: inline-block;
+            background: var(--gold); color: white;
+            padding: 0.9rem 2rem; border-radius: 50px;
+            font-family: 'Montserrat', sans-serif; font-size: 0.82rem;
+            font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+        }
+        .cta-primary:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+        .cta-secondary {
+            display: inline-block;
+            background: transparent; color: var(--gold-dark);
+            padding: 0.9rem 2rem; border-radius: 50px;
+            border: 1.5px solid var(--gold);
+            font-family: 'Montserrat', sans-serif; font-size: 0.82rem;
+            font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .cta-secondary:hover {
+            background: rgba(212, 175, 55, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .retake-btn {
+            background: none; border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem; color: var(--text-light);
+            letter-spacing: 0.06em; text-transform: uppercase;
+            cursor: pointer; margin-top: 1rem;
+            text-decoration: underline; text-underline-offset: 3px;
+        }
+        .retake-btn:hover { color: var(--gold); }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--text-dark);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 3rem 2rem;
+            font-family: 'Montserrat', sans-serif; font-size: 0.8rem;
+            letter-spacing: 0.06em;
+        }
+        .footer-brand-name {
+            font-family: 'Cinzel', serif; font-size: 1.2rem;
+            color: var(--gold-light); margin-bottom: 0.35rem;
+        }
+        .footer-tagline { font-style: italic; margin-bottom: 1.5rem; opacity: 0.7; }
+        .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--gold-light); }
+        .footer-copy { opacity: 0.4; font-size: 0.75rem; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .intro-stats { grid-template-columns: repeat(3, 1fr); }
+            .bar-name { width: 100px; font-size: 0.7rem; }
+            .rating-scale { gap: 0.3rem; }
+            .rating-btn .rb-label { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="sans">
+    <a href="index.html" class="logo-link">
+        <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
+    </a>
+    <ul class="nav-links">
+        <li><a href="charisms.html">← Charisms Guide</a></li>
+        <li><a href="portal.html">Portal</a></li>
+    </ul>
+</nav>
+
+<div class="quiz-wrapper">
+
+    <!-- ═══════════════════════════════ INTRO SCREEN ═══════════════════════════════ -->
+    <div class="intro-screen" id="introScreen">
+        <span class="intro-dove">🕊️</span>
+        <p class="intro-label">Charism Discovery</p>
+        <h1 class="intro-title">Gifts of the<br>Holy Spirit</h1>
+        <p class="intro-subtitle">A Charism Discovery Quiz</p>
+
+        <div class="intro-stats">
+            <div class="stat-item">
+                <span class="stat-number">25</span>
+                <span class="stat-label">Charisms</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">50</span>
+                <span class="stat-label">Questions</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">7–10</span>
+                <span class="stat-label">Minutes</span>
+            </div>
+        </div>
+
+        <div class="intro-card">
+            <p>
+                <strong>Every baptized Christian has charisms.</strong> The question isn't 
+                <em>if</em> the Holy Spirit has gifted you — it's <em>which</em> gifts He has placed within you 
+                for the building up of His Body.
+            </p>
+            <p>
+                This quiz explores all 25 charisms through two reflective statements each. 
+                Rate how true each statement feels in your life right now — there are no right 
+                or wrong answers, only honest ones.
+            </p>
+            <p>
+                You'll receive your top charisms with descriptions to begin your discernment journey.
+            </p>
+        </div>
+
+        <div class="prayer-card">
+            <div class="prayer-cross">✝</div>
+            <p class="prayer-label">A Prayer Before We Begin</p>
+            <div class="prayer-text">
+                <p class="prayer-opening">In the Name of the Father, and of the Son, and of the Holy Spirit.</p>
+                <p>
+                    Holy Spirit, I praise you because you are holy,<br>
+                    and I thank you for dwelling in my heart and working in my life.<br>
+                    Make me more aware of your presence<br>
+                    so I can closely follow the path you call me to walk.
+                </p>
+                <p>
+                    Help me to see you more clearly;<br>
+                    to recognize your animating movement in my life.<br>
+                    Inspire and empower me to be your tabernacle,<br>
+                    a home for the indwelling love of God —
+                </p>
+                <p>
+                    and give me clarity as I discern your will<br>
+                    through this inventory.
+                </p>
+                <p class="prayer-amen">Amen.</p>
+            </div>
+        </div>
+
+        <button class="begin-btn" onclick="startQuiz()">Begin the Quiz →</button>
+    </div>
+
+
+    <!-- ═══════════════════════════════ QUIZ SCREEN ════════════════════════════════ -->
+    <div class="quiz-screen" id="quizScreen">
+        <div class="quiz-header">
+            <p class="quiz-title">Charism Discovery Quiz</p>
+        </div>
+
+        <div class="progress-wrap">
+            <div class="progress-meta">
+                <span class="progress-text" id="progressText">Page 1 of 10</span>
+                <span class="progress-pct" id="progressPct">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div class="questions-group" id="questionsGroup"></div>
+
+        <p class="unanswered-msg" id="unansweredMsg">
+            Please rate all questions on this page before continuing.
+        </p>
+
+        <div class="nav-row">
+            <button class="nav-btn btn-prev" id="prevBtn" onclick="prevPage()" disabled>← Previous</button>
+            <button class="nav-btn btn-next" id="nextBtn" onclick="nextPage()">Next →</button>
+            <button class="nav-btn btn-results" id="resultsBtn" onclick="showResults()">See My Gifts →</button>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════ RESULTS SCREEN ════════════════════════════ -->
+    <div class="results-screen" id="resultsScreen">
+
+        <div class="results-hero">
+            <div class="results-dove">🕊️</div>
+            <p class="results-label">Your Charism Profile</p>
+            <h2 class="results-name" id="topCharismTitle">Your Top Gift</h2>
+            <p class="results-sub" id="topCharismSub"></p>
+        </div>
+
+        <div class="top-charisms" id="topCharismsContainer"></div>
+
+        <div class="charism-bars">
+            <h3 class="section-heading">All 25 Charisms — Your Scores</h3>
+            <div id="barsContainer"></div>
+        </div>
+
+        <div class="discernment-note">
+            <h4>A Word on Discernment</h4>
+            <p>
+                This quiz is a starting point — a helpful mirror to begin noticing where the Holy Spirit 
+                may be at work in you. Your top scores indicate charisms worth exploring more deeply.
+            </p>
+            <p>
+                True charism discernment involves prayer, experimentation, and community confirmation. 
+                Ask: Do I feel joy and energy here? Do others benefit? Does my service bear fruit?
+            </p>
+            <p>
+                You likely have 2–4 strong charisms. Don't be surprised if several rise to the surface — 
+                the Spirit is generous!
+            </p>
+        </div>
+
+        <div class="results-cta">
+            <h3>Go Deeper with Your Gifts</h3>
+            <p>
+                In <em>A Symphony of Grace</em>, we explore your charisms in community — 
+                praying through what they mean and discovering how to live them in daily life.
+            </p>
+            <div class="cta-row">
+                <a href="symphony-of-grace.html" class="cta-primary">Explore the Program</a>
+                <a href="charisms.html" class="cta-secondary">Back to Charisms Guide</a>
+            </div>
+            <br>
+            <button class="retake-btn" onclick="retakeQuiz()">Retake the Quiz</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-brand-name">My Holy Crescendo</div>
+    <p class="footer-tagline">fearfully & wonderfully made</p>
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="symphony-of-grace.html">15-Week Journey</a>
+        <a href="charisms.html">25 Charisms</a>
+        <a href="portal.html">Portal</a>
+    </div>
+    <p class="footer-copy">© 2025 My Holy Crescendo. All rights reserved.</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+//  CHARISM DATA — 25 charisms × 2 questions each = 50 total
+// ═══════════════════════════════════════════════════════════════════
+const charisms = [
+    {
+        id: "administration",
+        name: "Administration",
+        icon: "📋",
+        description: "The God-given ability to organize people, tasks, and resources to accomplish goals that serve the Church and others. Those with this gift bring order, clarity, and efficiency to ministry.",
+        reflection: "You help others find their footing by creating the structures that let them flourish.",
+        questions: [
+            "I naturally see how to organize people and resources to accomplish a shared goal effectively.",
+            "Others often look to me to bring order and structure to a project or ministry."
+        ]
+    },
+    {
+        id: "craftsmanship",
+        name: "Craftsmanship",
+        icon: "🎨",
+        description: "The ability to use hands and creativity — art, making, building — to create works that reflect God's beauty and draw people toward faith, wonder, and encounter with the divine.",
+        reflection: "Your hands are a channel of beauty that speaks what words cannot say.",
+        questions: [
+            "I feel closest to God when I'm creating something beautiful with my hands.",
+            "My creative work has inspired faith, wonder, or deeper reflection in others."
+        ]
+    },
+    {
+        id: "discernment",
+        name: "Discernment",
+        icon: "🔎",
+        description: "The ability to perceive whether something is from God, from human nature, or from the evil one. Those with this gift sense spiritual realities that others often miss.",
+        reflection: "You are called to be a guardian of truth — helping others see what is really at work.",
+        questions: [
+            "I often sense whether something is spiritually healthy or harmful before others notice.",
+            "People seek my perspective when navigating complex or spiritually charged situations."
+        ]
+    },
+    {
+        id: "digital",
+        name: "Digital Communications",
+        icon: "💻",
+        description: "The ability to use technology, media, and digital platforms to spread the Gospel, build community, and serve the Church's mission in the modern world.",
+        reflection: "You are a missionary to the digital age, bringing light into the online world.",
+        questions: [
+            "I feel drawn to share my faith through digital content, online platforms, or technology.",
+            "I have a sense for how to use media to build community and spread truth effectively."
+        ]
+    },
+    {
+        id: "encouragement",
+        name: "Encouragement",
+        icon: "💪",
+        description: "The ability to come alongside others with words that comfort, strengthen, and urge them forward in faith. Those with this gift lift spirits and inspire perseverance.",
+        reflection: "Your words are a lifeline — they remind people who they are and what they're capable of.",
+        questions: [
+            "People tell me my words gave them courage or helped them through a difficult time.",
+            "I naturally know what to say to help someone keep going when they feel like giving up."
+        ]
+    },
+    {
+        id: "evangelism",
+        name: "Evangelism",
+        icon: "📣",
+        description: "The ability to share the Gospel in a way that draws others to faith in Christ. Those with this gift naturally find opportunities to share God's love — without it feeling forced.",
+        reflection: "You carry good news wherever you go, and people are drawn to hear it.",
+        questions: [
+            "I find natural openings to share my faith in ways that draw others toward God.",
+            "Conversations about Jesus feel energizing to me, not awkward or uncomfortable."
+        ]
+    },
+    {
+        id: "faith",
+        name: "Faith",
+        icon: "✝️",
+        description: "An extraordinary trust in God's promises and providence, even in difficult or impossible-seeming circumstances. Those with this gift inspire others to believe and surrender more deeply.",
+        reflection: "Your unwavering trust becomes an anchor for others in the storm.",
+        questions: [
+            "I trust God in situations where others around me struggle to believe He is still at work.",
+            "My confidence in God's goodness and provision often helps others release their fears."
+        ]
+    },
+    {
+        id: "giving",
+        name: "Giving",
+        icon: "💝",
+        description: "The ability to give generously of resources, time, and self with joy and without attachment. Those with this gift experience deep fulfillment through generosity.",
+        reflection: "Your open hands are an image of the Father's lavish, uncalculating love.",
+        questions: [
+            "Giving generously — of my time, talents, or resources — brings me deep, genuine joy.",
+            "I often sense when someone has a need and feel moved to meet it without being asked."
+        ]
+    },
+    {
+        id: "global",
+        name: "Global & Cultural Awareness",
+        icon: "🌍",
+        description: "The ability to connect with ease across cultural, ethnic, and socioeconomic differences, bringing diverse people together in Christ and enriching the whole community.",
+        reflection: "You see the image of God in every face and build bridges where walls once stood.",
+        questions: [
+            "I feel genuinely at home crossing cultural, ethnic, or socioeconomic boundaries to connect.",
+            "I have a heart for those who are different from me and naturally draw diverse people together."
+        ]
+    },
+    {
+        id: "healing",
+        name: "Healing",
+        icon: "💚",
+        description: "The ability to be a channel of God's healing power — physical, emotional, or spiritual. Those with this gift bring restoration and comfort to those who are suffering.",
+        reflection: "Christ's hands of mercy work through yours, offering restoration to the broken.",
+        questions: [
+            "I feel drawn to pray over those who are sick or suffering, trusting God can restore them.",
+            "People often experience peace, comfort, or healing when I pray with or for them."
+        ]
+    },
+    {
+        id: "helping",
+        name: "Helping",
+        icon: "🤝",
+        description: "The ability to joyfully support others in their work and calling, often quietly behind the scenes. Those with this gift find fulfillment in enabling others' success.",
+        reflection: "Your quiet faithfulness behind the scenes makes the whole mission possible.",
+        questions: [
+            "I find deep fulfillment in supporting others behind the scenes, even without recognition.",
+            "When someone else succeeds because of my quiet contribution, I feel genuinely satisfied."
+        ]
+    },
+    {
+        id: "hospitality",
+        name: "Hospitality",
+        icon: "🏠",
+        description: "The ability to create warm, welcoming environments where people feel at home, known, and cared for. Those with this gift make strangers feel like family.",
+        reflection: "Your home and your presence are a foretaste of heaven's welcome.",
+        questions: [
+            "I love creating spaces — physical or relational — where people feel truly at home.",
+            "Gathering people together for meals, connection, or community comes naturally and joyfully to me."
+        ]
+    },
+    {
+        id: "intercession",
+        name: "Intercession",
+        icon: "🙏",
+        description: "The ability to pray for others with unusual faithfulness and see remarkable answers to prayer. Those with this gift feel called to stand in the gap for others.",
+        reflection: "You hold others before the Father in ways they may never know but will always benefit from.",
+        questions: [
+            "I am drawn to pray for others at length and with deep seriousness and faithfulness.",
+            "I have seen meaningful, specific answers to prayers I've offered on behalf of others."
+        ]
+    },
+    {
+        id: "knowledge",
+        name: "Knowledge",
+        icon: "📚",
+        description: "The ability to study, research, and communicate truth in ways that enlighten others. Those with this gift love learning deeply and helping others understand faith and reason together.",
+        reflection: "Your love of truth becomes a lamp that illuminates the path for others.",
+        questions: [
+            "I love researching deeply and find natural ways to connect what I learn to faith and life.",
+            "Others often turn to me when they want a thorough, well-reasoned understanding of something."
+        ]
+    },
+    {
+        id: "leadership",
+        name: "Leadership",
+        icon: "👑",
+        description: "The ability to see God's vision for a community and guide others toward it with clarity and conviction. Those with this gift naturally inspire people to move and work together.",
+        reflection: "You see where God is calling a community and help them find the courage to get there.",
+        questions: [
+            "I naturally see where a group needs to go and feel compelled to help guide them there.",
+            "People follow my lead and trust my direction, even when I haven't sought that role."
+        ]
+    },
+    {
+        id: "mercy",
+        name: "Mercy",
+        icon: "💕",
+        description: "The ability to feel deep, visceral compassion for those who suffer and respond with practical, loving action. Those with this gift are drawn to the marginalized, hurting, and forgotten.",
+        reflection: "You embody the tender heart of Christ for those the world passes by.",
+        questions: [
+            "I am especially drawn to those who are suffering, marginalized, or overlooked by others.",
+            "I feel a deep physical ache of compassion when I encounter others' pain and need to respond."
+        ]
+    },
+    {
+        id: "musicianship",
+        name: "Musicianship",
+        icon: "🎵",
+        description: "The ability to write, perform, or lead music that draws people into worship and encounter with God. Those with this gift help others experience God through song and sound.",
+        reflection: "Your music is a doorway the Holy Spirit uses to bring people into His presence.",
+        questions: [
+            "Music is a primary way I experience and express my relationship with God.",
+            "When I play, sing, or lead worship, others tell me they encountered God in a deeper way."
+        ]
+    },
+    {
+        id: "peacemaking",
+        name: "Peacemaking",
+        icon: "☮️",
+        description: "The ability to mediate conflict and bring reconciliation between individuals or groups. Those with this gift help restore broken relationships and build unity where there is division.",
+        reflection: "You are a bearer of shalom — bringing the peace of Christ into broken places.",
+        questions: [
+            "When conflict arises, I am often the one who helps bring healing and reconciliation.",
+            "People trust me to mediate difficult situations, and I feel genuinely called to that work."
+        ]
+    },
+    {
+        id: "prophecy",
+        name: "Prophecy",
+        icon: "🔥",
+        description: "The ability to receive and communicate messages from God that speak to the present moment — calling people to deeper faithfulness, repentance, or awareness of God's work.",
+        reflection: "You carry a word the world needs — and God trusts you to deliver it with love.",
+        questions: [
+            "I often sense a message or word that I feel called to share with a person or community.",
+            "Others have told me something I said spoke directly to what they were privately experiencing."
+        ]
+    },
+    {
+        id: "service",
+        name: "Service",
+        icon: "🛠️",
+        description: "The ability to identify practical needs and meet them with joy, often in hands-on, tangible ways. Those with this gift express love through action and deeds, not just words.",
+        reflection: "Your hands and feet are the love of God made visible.",
+        questions: [
+            "I am happiest when I can meet a practical, tangible need — seeing a concrete difference made.",
+            "I notice what needs to be done and quietly do it, without needing to be asked."
+        ]
+    },
+    {
+        id: "shepherding",
+        name: "Shepherding",
+        icon: "🐑",
+        description: "The ability to nurture, guide, and care for a group of people over time, helping them grow in faith and holiness. Those with this gift take responsibility for others' spiritual welfare.",
+        reflection: "You carry your community in your heart and walk with them through every season.",
+        questions: [
+            "I feel a deep sense of ongoing responsibility for the spiritual growth of particular people.",
+            "I naturally invest in people over the long haul — walking with them through struggles and growth."
+        ]
+    },
+    {
+        id: "teaching",
+        name: "Teaching",
+        icon: "📖",
+        description: "The ability to explain truth clearly in ways that help others truly understand and apply it. Those with this gift make complex ideas accessible, practical, and transformative.",
+        reflection: "You have the gift of clarity — and through you, truth comes alive for others.",
+        questions: [
+            "I love breaking down complex ideas and truths so others can understand and truly apply them.",
+            "People tell me my explanations opened their eyes or helped something finally 'click' for them."
+        ]
+    },
+    {
+        id: "poverty",
+        name: "Voluntary Poverty",
+        icon: "🕊️",
+        description: "The ability to live simply and joyfully with few possessions, freeing oneself for greater love and service. Those with this gift find genuine freedom in detachment from material things.",
+        reflection: "Your freedom from things is an invitation for others to find freedom in the One who is enough.",
+        questions: [
+            "I feel genuine peace and even joy in living simply with fewer possessions than I could have.",
+            "Material things hold little appeal for me compared to the freedom to love and serve more fully."
+        ]
+    },
+    {
+        id: "wisdom",
+        name: "Wisdom",
+        icon: "💡",
+        description: "The ability to see situations from God's perspective and offer insight for decisions and direction. Those with this gift help others navigate complex situations with clarity and grace.",
+        reflection: "You see what others cannot yet see — and gently help them find the path God intends.",
+        questions: [
+            "I often see how a situation connects to deeper spiritual principles that others haven't yet considered.",
+            "People come to me when they need clarity or wisdom for important decisions in their lives."
+        ]
+    },
+    {
+        id: "writing",
+        name: "Writing",
+        icon: "✍️",
+        description: "The ability to compose words that reveal truth, beauty, and goodness in ways that touch hearts and minds. Those with this gift communicate God's love and truth through the written word.",
+        reflection: "Your words carry a weight and beauty that the Holy Spirit uses to reach souls.",
+        questions: [
+            "Writing is one of my primary ways of processing truth, beauty, and my relationship with God.",
+            "My written words have moved, inspired, or brought someone closer to God or deeper understanding."
+        ]
+    }
+];
+
+// ═══════════════════════════════════════════════════════════════════
+//  QUIZ STATE
+// ═══════════════════════════════════════════════════════════════════
+const QUESTIONS_PER_PAGE = 5;
+const LABELS = ["Never", "Rarely", "Sometimes", "Often", "Always"];
+
+// Flatten all questions into an ordered list, paired with their charism
+const allQuestions = [];
+charisms.forEach(c => {
+    c.questions.forEach(q => {
+        allQuestions.push({ charismId: c.id, text: q });
+    });
+});
+
+const totalPages = Math.ceil(allQuestions.length / QUESTIONS_PER_PAGE);
+let currentPage = 0;
+const answers = {}; // key: questionIndex → value: 1–5
+
+function startQuiz() {
+    document.getElementById('introScreen').style.display = 'none';
+    document.getElementById('quizScreen').style.display = 'block';
+    renderPage(0);
+    window.scrollTo(0, 0);
+}
+
+function renderPage(page) {
+    currentPage = page;
+    const start = page * QUESTIONS_PER_PAGE;
+    const end = Math.min(start + QUESTIONS_PER_PAGE, allQuestions.length);
+
+    // Progress
+    const pct = Math.round((page / totalPages) * 100);
+    document.getElementById('progressText').textContent = `Page ${page + 1} of ${totalPages}`;
+    document.getElementById('progressPct').textContent = `${pct}%`;
+    document.getElementById('progressFill').style.width = `${pct}%`;
+
+    // Buttons
+    document.getElementById('prevBtn').disabled = (page === 0);
+    const isLast = (page === totalPages - 1);
+    document.getElementById('nextBtn').style.display = isLast ? 'none' : 'inline-block';
+    document.getElementById('resultsBtn').style.display = isLast ? 'inline-block' : 'none';
+    document.getElementById('unansweredMsg').style.display = 'none';
+
+    // Questions
+    const container = document.getElementById('questionsGroup');
+    container.innerHTML = '';
+
+    for (let i = start; i < end; i++) {
+        const q = allQuestions[i];
+        const saved = answers[i];
+        const card = document.createElement('div');
+        card.className = `question-card${saved ? ' answered' : ''}`;
+        card.id = `qcard-${i}`;
+
+        card.innerHTML = `
+            <p class="question-num">Question ${i + 1} of ${allQuestions.length}</p>
+            <p class="question-text">${q.text}</p>
+            <div class="rating-scale" id="scale-${i}">
+                ${[1,2,3,4,5].map(n => `
+                    <button class="rating-btn${saved === n ? ' selected' : ''}" 
+                            onclick="rate(${i}, ${n})" 
+                            aria-label="Rate ${n} – ${LABELS[n-1]}">
+                        <span class="rb-num">${n}</span>
+                        <span class="rb-label">${LABELS[n-1]}</span>
+                    </button>
+                `).join('')}
+            </div>
+            <div class="scale-legend">
+                <span>Not at all like me</span>
+                <span>Completely like me</span>
+            </div>
+        `;
+        container.appendChild(card);
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function rate(qIndex, value) {
+    answers[qIndex] = value;
+    // Update buttons
+    const scale = document.getElementById(`scale-${qIndex}`);
+    scale.querySelectorAll('.rating-btn').forEach((btn, i) => {
+        btn.classList.toggle('selected', i + 1 === value);
+    });
+    // Mark card answered
+    document.getElementById(`qcard-${qIndex}`).classList.add('answered');
+    document.getElementById('unansweredMsg').style.display = 'none';
+}
+
+function pageIsComplete() {
+    const start = currentPage * QUESTIONS_PER_PAGE;
+    const end = Math.min(start + QUESTIONS_PER_PAGE, allQuestions.length);
+    for (let i = start; i < end; i++) {
+        if (answers[i] === undefined) return false;
+    }
+    return true;
+}
+
+function nextPage() {
+    if (!pageIsComplete()) {
+        document.getElementById('unansweredMsg').style.display = 'block';
+        return;
+    }
+    if (currentPage < totalPages - 1) {
+        renderPage(currentPage + 1);
+    }
+}
+
+function prevPage() {
+    if (currentPage > 0) renderPage(currentPage - 1);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  RESULTS
+// ═══════════════════════════════════════════════════════════════════
+function showResults() {
+    if (!pageIsComplete()) {
+        document.getElementById('unansweredMsg').style.display = 'block';
+        return;
+    }
+
+    // Tally scores per charism (max 10 per charism: 2 questions × max 5)
+    const scores = {};
+    charisms.forEach(c => { scores[c.id] = 0; });
+
+    allQuestions.forEach((q, i) => {
+        if (answers[i] !== undefined) {
+            scores[q.charismId] += answers[i];
+        }
+    });
+
+    // Sort charisms by score descending
+    const ranked = charisms.map(c => ({
+        ...c,
+        score: scores[c.id],
+        pct: Math.round((scores[c.id] / 10) * 100)
+    })).sort((a, b) => b.score - a.score);
+
+    // Switch screens
+    document.getElementById('quizScreen').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Hero
+    document.getElementById('topCharismTitle').textContent = ranked[0].icon + '  ' + ranked[0].name;
+    document.getElementById('topCharismSub').textContent = 'Your highest charism — and your top 3 below';
+
+    // Top 3 cards
+    const topContainer = document.getElementById('topCharismsContainer');
+    topContainer.innerHTML = '<h3 class="section-heading">Your Top Charisms</h3>';
+    const ordinals = ['Your #1 Gift', 'Your #2 Gift', 'Your #3 Gift'];
+    ranked.slice(0, 3).forEach((c, idx) => {
+        const card = document.createElement('div');
+        card.className = 'charism-result-card';
+        card.setAttribute('data-rank', idx + 1);
+        card.innerHTML = `
+            <div class="card-header">
+                <span class="card-icon">${c.icon}</span>
+                <div>
+                    <span class="card-name">${c.name}</span>
+                    <span class="card-rank-badge">${ordinals[idx]}</span>
+                </div>
+            </div>
+            <p class="card-description">${c.description}</p>
+            <p class="card-reflection">${c.reflection}</p>
+        `;
+        topContainer.appendChild(card);
+    });
+
+    // Bar chart — animate after short delay
+    const barsContainer = document.getElementById('barsContainer');
+    barsContainer.innerHTML = '';
+    ranked.forEach((c, i) => {
+        const row = document.createElement('div');
+        row.className = 'bar-row';
+        const isTop = i < 3;
+        row.innerHTML = `
+            <span class="bar-icon">${c.icon}</span>
+            <span class="bar-name${isTop ? ' top' : ''}">${c.name}</span>
+            <div class="bar-track">
+                <div class="bar-fill${isTop ? ' top' : ''}" id="bar-${c.id}" style="width:0%"></div>
+            </div>
+            <span class="bar-score">${c.pct}%</span>
+        `;
+        barsContainer.appendChild(row);
+    });
+
+    // Animate bars
+    setTimeout(() => {
+        ranked.forEach(c => {
+            const bar = document.getElementById(`bar-${c.id}`);
+            if (bar) bar.style.width = `${c.pct}%`;
+        });
+    }, 200);
+}
+
+function retakeQuiz() {
+    // Reset
+    Object.keys(answers).forEach(k => delete answers[k]);
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('introScreen').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
