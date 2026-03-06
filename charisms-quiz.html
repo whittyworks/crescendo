@@ -550,6 +550,101 @@
         }
         .retake-btn:hover { color: var(--gold); }
 
+
+
+        /* ── Save Results ── */
+        .save-results-wrap {
+            margin: 2rem 0 1.5rem;
+            text-align: center;
+        }
+        .save-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        .save-row {
+            display: flex; gap: 1rem;
+            justify-content: center; flex-wrap: wrap;
+        }
+        .save-btn {
+            display: flex; align-items: center; gap: 0.85rem;
+            padding: 0.9rem 1.5rem; border-radius: 10px;
+            cursor: pointer; transition: all 0.25s;
+            text-align: left; min-width: 190px;
+        }
+        .save-btn-email {
+            background: white;
+            border: 1.5px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+        .save-btn-email:hover {
+            border-color: var(--gold);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
+        }
+        .save-btn-pdf {
+            background: var(--cream-dark);
+            border: 1.5px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+        .save-btn-pdf:hover {
+            border-color: var(--gold);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
+        }
+        .save-btn-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .save-btn-text { display: flex; flex-direction: column; gap: 2px; }
+        .save-btn-text strong {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem; color: var(--text-dark);
+            font-weight: 500; letter-spacing: 0.02em;
+        }
+        .save-btn-text small {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.68rem; color: var(--text-light);
+            letter-spacing: 0.03em;
+        }
+
+        /* ── Print / PDF styles ── */
+        @media print {
+            nav, footer, .quiz-wrapper > *:not(.results-screen),
+            .results-cta, .save-results-wrap, .retake-btn,
+            .discernment-note { display: none !important; }
+
+            body { background: white; }
+            .results-screen { display: block !important; padding: 0; margin: 0; max-width: 100%; }
+
+            .results-hero {
+                background: none;
+                border-bottom: 2px solid #D4AF37;
+                padding: 1.5rem 0;
+                margin-bottom: 1.5rem;
+            }
+            .results-name { color: #B8941F; font-size: 1.8rem; }
+
+            .charism-result-card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #D4AF37;
+                margin-bottom: 1rem;
+            }
+            .bar-track { background: #f0e8d6; }
+            .section-heading { color: #B8941F; }
+
+            .print-footer {
+                display: block !important;
+                text-align: center;
+                margin-top: 2rem;
+                padding-top: 1rem;
+                border-top: 1px solid #D4AF37;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 0.75rem;
+                color: #8A7A6A;
+            }
+        }
+        .print-footer { display: none; }
+
         /* ── Footer ── */
         footer {
             background: var(--text-dark);
@@ -733,15 +828,25 @@
                 <a href="symphony-of-grace.html" class="cta-primary">Explore the Program</a>
                 <a href="charisms.html" class="cta-secondary">Back to Charisms Guide</a>
             </div>
-            <br>
+            <div class="save-results-wrap">
+                <p class="save-label">Save Your Results</p>
+                <div class="save-row">
+                    <button class="save-btn save-btn-pdf" onclick="saveAsPDF()">
+                        <span class="save-btn-icon">📄</span>
+                        <span class="save-btn-text">
+                            <strong>Save as PDF</strong>
+                            <small>Print or save to device</small>
+                        </span>
+                    </button>
+                </div>
+            </div>
             <button class="retake-btn" onclick="retakeQuiz()">Retake the Quiz</button>
         </div>
-    </div>
+        <div class="print-footer">
+            My Holy Crescendo · fearfully & wonderfully made · myholycrescendo.com
+        </div>
 
-</div>
-
-<!-- Footer -->
-<footer>
+    </div> ══════════════════ --><footer>
     <div class="footer-brand-name">My Holy Crescendo</div>
     <p class="footer-tagline">fearfully & wonderfully made</p>
     <div class="footer-links">
@@ -1042,19 +1147,33 @@ const charisms = [
 const QUESTIONS_PER_PAGE = 5;
 const LABELS = ["Never", "Rarely", "Sometimes", "Often", "Always"];
 
-// Flatten all questions into an ordered list, paired with their charism
-const allQuestions = [];
+// Build flat question list — will be shuffled on start
+let allQuestions = [];
 charisms.forEach(c => {
     c.questions.forEach(q => {
         allQuestions.push({ charismId: c.id, text: q });
     });
 });
 
-const totalPages = Math.ceil(allQuestions.length / QUESTIONS_PER_PAGE);
+let totalPages = 0;
 let currentPage = 0;
-const answers = {}; // key: questionIndex → value: 1–5
+const answers = {};
+let savedRanked = null;
+
+// Fisher-Yates shuffle
+function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
 
 function startQuiz() {
+    allQuestions = shuffle(allQuestions);
+    totalPages = Math.ceil(allQuestions.length / QUESTIONS_PER_PAGE);
+    Object.keys(answers).forEach(k => delete answers[k]);
     document.getElementById('introScreen').style.display = 'none';
     document.getElementById('quizScreen').style.display = 'block';
     renderPage(0);
@@ -1066,20 +1185,17 @@ function renderPage(page) {
     const start = page * QUESTIONS_PER_PAGE;
     const end = Math.min(start + QUESTIONS_PER_PAGE, allQuestions.length);
 
-    // Progress
     const pct = Math.round((page / totalPages) * 100);
     document.getElementById('progressText').textContent = `Page ${page + 1} of ${totalPages}`;
     document.getElementById('progressPct').textContent = `${pct}%`;
     document.getElementById('progressFill').style.width = `${pct}%`;
 
-    // Buttons
     document.getElementById('prevBtn').disabled = (page === 0);
     const isLast = (page === totalPages - 1);
     document.getElementById('nextBtn').style.display = isLast ? 'none' : 'inline-block';
     document.getElementById('resultsBtn').style.display = isLast ? 'inline-block' : 'none';
     document.getElementById('unansweredMsg').style.display = 'none';
 
-    // Questions
     const container = document.getElementById('questionsGroup');
     container.innerHTML = '';
 
@@ -1089,14 +1205,13 @@ function renderPage(page) {
         const card = document.createElement('div');
         card.className = `question-card${saved ? ' answered' : ''}`;
         card.id = `qcard-${i}`;
-
         card.innerHTML = `
             <p class="question-num">Question ${i + 1} of ${allQuestions.length}</p>
             <p class="question-text">${q.text}</p>
             <div class="rating-scale" id="scale-${i}">
                 ${[1,2,3,4,5].map(n => `
-                    <button class="rating-btn${saved === n ? ' selected' : ''}" 
-                            onclick="rate(${i}, ${n})" 
+                    <button class="rating-btn${saved === n ? ' selected' : ''}"
+                            onclick="rate(${i}, ${n})"
                             aria-label="Rate ${n} – ${LABELS[n-1]}">
                         <span class="rb-num">${n}</span>
                         <span class="rb-label">${LABELS[n-1]}</span>
@@ -1110,18 +1225,15 @@ function renderPage(page) {
         `;
         container.appendChild(card);
     }
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function rate(qIndex, value) {
     answers[qIndex] = value;
-    // Update buttons
     const scale = document.getElementById(`scale-${qIndex}`);
     scale.querySelectorAll('.rating-btn').forEach((btn, i) => {
         btn.classList.toggle('selected', i + 1 === value);
     });
-    // Mark card answered
     document.getElementById(`qcard-${qIndex}`).classList.add('answered');
     document.getElementById('unansweredMsg').style.display = 'none';
 }
@@ -1140,9 +1252,7 @@ function nextPage() {
         document.getElementById('unansweredMsg').style.display = 'block';
         return;
     }
-    if (currentPage < totalPages - 1) {
-        renderPage(currentPage + 1);
-    }
+    if (currentPage < totalPages - 1) renderPage(currentPage + 1);
 }
 
 function prevPage() {
@@ -1150,45 +1260,43 @@ function prevPage() {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  RESULTS
+//  RESULTS + EMAIL MODAL
 // ═══════════════════════════════════════════════════════════════════
 function showResults() {
     if (!pageIsComplete()) {
         document.getElementById('unansweredMsg').style.display = 'block';
         return;
     }
+    renderResults();
+}
 
-    // Tally scores per charism (max 10 per charism: 2 questions × max 5)
+
+function renderResults() {
+    // Tally scores
     const scores = {};
     charisms.forEach(c => { scores[c.id] = 0; });
-
     allQuestions.forEach((q, i) => {
-        if (answers[i] !== undefined) {
-            scores[q.charismId] += answers[i];
-        }
+        if (answers[i] !== undefined) scores[q.charismId] += answers[i];
     });
 
-    // Sort charisms by score descending
-    const ranked = charisms.map(c => ({
+    savedRanked = charisms.map(c => ({
         ...c,
         score: scores[c.id],
         pct: Math.round((scores[c.id] / 10) * 100)
     })).sort((a, b) => b.score - a.score);
 
-    // Switch screens
     document.getElementById('quizScreen').style.display = 'none';
     document.getElementById('resultsScreen').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Hero
-    document.getElementById('topCharismTitle').textContent = ranked[0].icon + '  ' + ranked[0].name;
-    document.getElementById('topCharismSub').textContent = 'Your highest charism — and your top 3 below';
+    document.getElementById('topCharismTitle').textContent = savedRanked[0].icon + '  ' + savedRanked[0].name;
+    document.getElementById('topCharismSub').textContent = 'Your top 3 charisms are below';
 
     // Top 3 cards
     const topContainer = document.getElementById('topCharismsContainer');
     topContainer.innerHTML = '<h3 class="section-heading">Your Top Charisms</h3>';
     const ordinals = ['Your #1 Gift', 'Your #2 Gift', 'Your #3 Gift'];
-    ranked.slice(0, 3).forEach((c, idx) => {
+    savedRanked.slice(0, 3).forEach((c, idx) => {
         const card = document.createElement('div');
         card.className = 'charism-result-card';
         card.setAttribute('data-rank', idx + 1);
@@ -1206,10 +1314,10 @@ function showResults() {
         topContainer.appendChild(card);
     });
 
-    // Bar chart — animate after short delay
+    // Bar chart
     const barsContainer = document.getElementById('barsContainer');
     barsContainer.innerHTML = '';
-    ranked.forEach((c, i) => {
+    savedRanked.forEach((c, i) => {
         const row = document.createElement('div');
         row.className = 'bar-row';
         const isTop = i < 3;
@@ -1223,18 +1331,22 @@ function showResults() {
         `;
         barsContainer.appendChild(row);
     });
-
-    // Animate bars
     setTimeout(() => {
-        ranked.forEach(c => {
+        savedRanked.forEach(c => {
             const bar = document.getElementById(`bar-${c.id}`);
             if (bar) bar.style.width = `${c.pct}%`;
         });
     }, 200);
+
+}
+
+
+function saveAsPDF() {
+    window.print();
 }
 
 function retakeQuiz() {
-    // Reset
+    savedRanked = null;
     Object.keys(answers).forEach(k => delete answers[k]);
     document.getElementById('resultsScreen').style.display = 'none';
     document.getElementById('introScreen').style.display = 'block';
