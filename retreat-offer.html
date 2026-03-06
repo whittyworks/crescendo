@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Special Invitation · My Holy Crescendo</title>
+<meta name="description" content="As a Made Beautiful retreat attendee, you're invited to continue the journey at half price — forever.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   RESET & ROOT
+═══════════════════════════════════════════════════════════ */
+:root {
+  --cream:       #FDF8F3;
+  --cream-dark:  #F5EFE7;
+  --cream-mid:   #F0E8DC;
+  --gold:        #D4AF37;
+  --gold-light:  #E8C872;
+  --gold-dark:   #B8941F;
+  --gold-pale:   rgba(212,175,55,0.12);
+  --text-dark:   #2C2416;
+  --text-mid:    #5C5142;
+  --text-light:  #8A7A6A;
+  --mauve:       #DCC5D8;
+  --sage:        #B8C5B0;
+  --blush:       #EBD4D0;
+  --shadow-gold: rgba(212,175,55,0.18);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+
+/* ═══════════════════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════════════════ */
+@keyframes fadeUp   { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
+@keyframes floatOrb {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33%     { transform: translate(24px,-24px) scale(1.08); }
+  66%     { transform: translate(-18px,18px) scale(0.94); }
+}
+@keyframes shimmer {
+  0%   { transform: translateX(-120%) rotate(25deg); }
+  100% { transform: translateX(120%) rotate(25deg); }
+}
+@keyframes starPulse {
+  0%,100% { transform:scale(1);   box-shadow: 0 0 8px 2px rgba(232,200,114,0.7); }
+  50%     { transform:scale(1.35); box-shadow: 0 0 18px 5px rgba(232,200,114,1); }
+}
+@keyframes leafFloat {
+  0%,100% { transform: rotate(var(--r,45deg)) translate(0,0); }
+  50%     { transform: rotate(var(--r,45deg)) translate(6px,-10px); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════════════════ */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:1000;
+  background: rgba(253,248,243,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+  padding: 1.25rem 5%;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 500;
+  color: var(--gold-dark); text-decoration: none; letter-spacing: 0.08em;
+}
+.nav-logo img { height: 42px; width: auto; }
+.nav-links { display:flex; gap:2rem; list-style:none; }
+.nav-links a {
+  font-family: 'Montserrat', sans-serif; font-size: 0.75rem;
+  font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-mid); text-decoration: none; transition: color 0.25s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+/* ═══════════════════════════════════════════════════════════
+   DECORATIVE ELEMENTS
+═══════════════════════════════════════════════════════════ */
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(70px); pointer-events: none; opacity: 0.18;
+  animation: floatOrb var(--dur,22s) ease-in-out infinite;
+  animation-delay: var(--delay,0s);
+}
+.star {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, #F0D060, var(--gold));
+  box-shadow: 0 0 8px 2px rgba(232,200,114,0.7);
+  animation: starPulse var(--pd,3s) ease-in-out infinite;
+  animation-delay: var(--pdelay,0s);
+  pointer-events: none;
+}
+.leaf {
+  position: absolute; pointer-events: none;
+  width: 22px; height: 38px;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+  border-radius: 0 60% 60% 60%;
+  opacity: 0.35; filter: blur(1.5px);
+  animation: leafFloat 12s ease-in-out infinite;
+  animation-delay: var(--ldelay,0s);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 9rem 2rem 6rem;
+  position: relative; overflow: hidden;
+  background: linear-gradient(168deg, var(--cream) 0%, var(--cream-dark) 55%, rgba(220,197,216,0.18) 100%);
+}
+.hero-inner {
+  position: relative; z-index: 3;
+  max-width: 720px; margin: 0 auto;
+  animation: fadeUp 1.1s ease-out both;
+}
+
+.badge {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif; font-size: 0.65rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-dark);
+  background: var(--gold-pale);
+  border: 1px solid rgba(212,175,55,0.38);
+  padding: 0.5rem 1.4rem; border-radius: 50px;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-family: 'Cinzel', serif; font-weight: 400;
+  font-size: clamp(2.1rem, 6vw, 3.8rem);
+  color: var(--gold-dark); line-height: 1.18;
+  margin-bottom: 1.1rem;
+  animation: fadeUp 1.1s 0.15s ease-out both;
+}
+.hero-sub {
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  font-style: italic; color: var(--text-mid);
+  line-height: 1.75; margin-bottom: 2.5rem;
+  animation: fadeUp 1.1s 0.3s ease-out both;
+}
+
+/* PRICE CARD */
+.price-card {
+  background: white; border-radius: 18px;
+  padding: 2.25rem 2.25rem 2rem;
+  max-width: 440px; margin: 0 auto 2.5rem;
+  box-shadow: 0 18px 52px var(--shadow-gold), 0 2px 8px rgba(0,0,0,0.04);
+  border: 1.5px solid rgba(212,175,55,0.28);
+  position: relative; overflow: hidden;
+  animation: fadeUp 1.1s 0.45s ease-out both;
+}
+.price-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:4px;
+  background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark));
+}
+.price-pill {
+  display: inline-block;
+  background: linear-gradient(110deg, var(--gold-light), var(--gold-dark));
+  color: white; font-family:'Montserrat',sans-serif;
+  font-size: 0.63rem; letter-spacing:0.15em; text-transform:uppercase;
+  padding: 0.35rem 1.1rem; border-radius:50px; margin-bottom:1.25rem;
+}
+.price-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1.1rem; margin-bottom: 1.1rem; flex-wrap: wrap;
+}
+.price-was {
+  font-family: 'Cinzel', serif; font-size: 1.9rem;
+  color: #ccc; text-decoration: line-through; text-decoration-color: #bbb;
+}
+.price-arrow { color: var(--gold); font-size: 1.1rem; opacity: 0.7; }
+.price-now {
+  font-family: 'Cinzel', serif; font-size: 2.9rem;
+  color: var(--gold-dark); font-weight: 600; line-height: 1;
+}
+.price-now small {
+  display: block; font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--gold); margin-top: 0.3rem; font-weight: 400;
+}
+.price-note {
+  font-size: 1rem; font-style: italic;
+  color: var(--text-mid); line-height: 1.65;
+}
+.price-card-footer {
+  display: flex; flex-direction: column; gap: 0.6rem;
+  margin-top: 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(212,175,55,0.2);
+}
+.price-card-badge {
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  background: rgba(212,175,55,0.06);
+  border-radius: 8px; padding: 0.75rem 1rem;
+  text-align: left;
+}
+.price-card-badge span { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+.price-card-badge p {
+  font-size: 0.92rem; color: var(--text-mid);
+  line-height: 1.55; font-style: normal;
+}
+.price-card-badge p strong { color: var(--text-dark); font-weight: 600; }
+.price-note strong { color: var(--gold-dark); font-style: normal; font-weight: 600; }
+
+.hero-cta { animation: fadeUp 1.1s 0.6s ease-out both; }
+.hero-cta-hint {
+  font-family: 'Montserrat', sans-serif; font-size: 0.75rem;
+  color: var(--text-light); margin-top: 1rem; letter-spacing: 0.04em;
+}
+.hero-scholarship-hint {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-style: italic;
+  color: var(--text-mid); margin-top: 0.65rem;
+  opacity: 0.85;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════════════════════ */
+.btn {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif; font-size: 0.82rem;
+  font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; border: none; cursor: pointer;
+  padding: 1.05rem 2.5rem; border-radius: 50px;
+  transition: all 0.28s; position: relative; overflow: hidden;
+}
+.btn::after {
+  content:''; position:absolute; top:0; left:-100%; width:60%; height:100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+  transform: skewX(-18deg); transition: left 0.5s;
+}
+.btn:hover::after { left:140%; }
+.btn-gold {
+  background: var(--gold); color: white;
+  box-shadow: 0 4px 20px rgba(212,175,55,0.38);
+  border: 2px solid var(--gold);
+}
+.btn-gold:hover {
+  background: var(--gold-dark); border-color: var(--gold-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(212,175,55,0.45);
+}
+.btn-submit {
+  width: 100%; display: block;
+  background: var(--gold); color: white; border: none;
+  font-family: 'Montserrat', sans-serif; font-size: 0.85rem;
+  font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 1.1rem 2rem; border-radius: 50px;
+  cursor: pointer; transition: all 0.28s;
+  box-shadow: 0 4px 20px rgba(212,175,55,0.35);
+  position: relative; overflow: hidden;
+}
+.btn-submit:hover {
+  background: var(--gold-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(212,175,55,0.45);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SECTIONS
+═══════════════════════════════════════════════════════════ */
+.section {
+  padding: 6rem 5%;
+  position: relative; overflow: hidden;
+}
+.section-alt { background: var(--cream-dark); }
+.container { max-width: 960px; margin: 0 auto; }
+.container-sm { max-width: 700px; margin: 0 auto; }
+
+.section-eyebrow {
+  display: block;
+  font-family: 'Montserrat', sans-serif; font-size: 0.68rem;
+  letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+.section-title {
+  font-family: 'Cinzel', serif; font-weight: 400;
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  color: var(--gold-dark); line-height: 1.2; margin-bottom: 1.2rem;
+}
+.section-body {
+  font-size: 1.12rem; color: var(--text-mid); line-height: 1.9;
+  max-width: 680px;
+}
+.section-head { margin-bottom: 3.5rem; }
+
+.gold-rule {
+  width: 70px; height: 1px; margin: 2.5rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   WHAT CARDS
+═══════════════════════════════════════════════════════════ */
+.what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.what-card {
+  background: white; border-radius: 14px;
+  padding: 2rem 1.75rem;
+  border-top: 3px solid var(--gold);
+  box-shadow: 0 4px 18px rgba(212,175,55,0.08);
+  transition: transform 0.28s, box-shadow 0.28s;
+}
+.what-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(212,175,55,0.15); }
+.what-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+.what-card h3 {
+  font-family: 'Cinzel', serif; font-size: 1.05rem;
+  color: var(--gold-dark); margin-bottom: 0.6rem;
+}
+.what-card p { font-size: 1rem; color: var(--text-mid); line-height: 1.75; }
+
+/* ═══════════════════════════════════════════════════════════
+   MODULES
+═══════════════════════════════════════════════════════════ */
+.modules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.module-card {
+  background: white; border-radius: 14px;
+  padding: 2rem 1.75rem;
+  border-left: 4px solid var(--gold);
+  box-shadow: 0 4px 18px rgba(212,175,55,0.08);
+}
+.mod-eye {
+  font-family: 'Montserrat', sans-serif; font-size: 0.63rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.35rem;
+}
+.mod-name {
+  font-family: 'Cinzel', serif; font-size: 1.3rem;
+  color: var(--gold-dark); margin-bottom: 0.2rem;
+}
+.mod-weeks {
+  font-family: 'Montserrat', sans-serif; font-size: 0.7rem;
+  color: var(--text-light); letter-spacing: 0.06em; margin-bottom: 1.25rem;
+}
+.mod-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.mod-list li {
+  font-size: 0.97rem; color: var(--text-mid);
+  padding-left: 1.2rem; position: relative; line-height: 1.5;
+}
+.mod-list li::before {
+  content: '·'; position: absolute; left: 0;
+  color: var(--gold); font-size: 1.4rem; line-height: 1;
+}
+.mod-list li strong { color: var(--text-dark); }
+
+/* ═══════════════════════════════════════════════════════════
+   INCLUDED
+═══════════════════════════════════════════════════════════ */
+.included-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
+  gap: 1rem;
+}
+.inc-item {
+  display: flex; align-items: flex-start; gap: 1rem;
+  background: white; border-radius: 12px;
+  padding: 1.25rem 1.4rem;
+  box-shadow: 0 3px 12px rgba(212,175,55,0.07);
+}
+.inc-check {
+  flex-shrink: 0; width: 26px; height: 26px;
+  background: var(--gold); color: white; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 700; margin-top: 2px;
+}
+.inc-item h4 {
+  font-family: 'Montserrat', sans-serif; font-size: 0.75rem;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--text-dark); margin-bottom: 0.2rem;
+}
+.inc-item p { font-size: 0.93rem; color: var(--text-mid); line-height: 1.55; }
+
+/* ═══════════════════════════════════════════════════════════
+   SCRIPTURE
+═══════════════════════════════════════════════════════════ */
+.scripture {
+  text-align: center; padding: 5rem 2rem;
+  background: var(--cream-mid); position: relative; overflow: hidden;
+}
+.scripture p {
+  font-size: clamp(1.2rem, 3vw, 1.55rem); font-style: italic;
+  color: var(--text-mid); line-height: 1.85;
+  max-width: 650px; margin: 0 auto 1rem;
+}
+.scripture cite {
+  font-family: 'Montserrat', sans-serif; font-size: 0.75rem;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold);
+  font-style: normal;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   OFFER BLOCK + FORM
+═══════════════════════════════════════════════════════════ */
+.offer-block {
+  background: white; border-radius: 18px;
+  padding: 3.5rem 3rem;
+  box-shadow: 0 18px 52px var(--shadow-gold);
+  border: 1.5px solid rgba(212,175,55,0.22);
+  text-align: center; position: relative; overflow: hidden;
+}
+.offer-block::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:4px;
+  background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark));
+}
+.offer-icon { font-size: 2.4rem; margin-bottom: 1.2rem; }
+.offer-block h2 {
+  font-family: 'Cinzel', serif; font-size: clamp(1.5rem,3.5vw,2.1rem);
+  color: var(--gold-dark); margin-bottom: 1rem; line-height: 1.25;
+}
+.offer-block .offer-text {
+  font-size: 1.08rem; color: var(--text-mid); line-height: 1.85;
+  max-width: 500px; margin: 0 auto 2rem;
+}
+
+.price-summary {
+  display: inline-flex; align-items: center; gap: 1.1rem;
+  background: var(--gold-pale); border: 1px solid rgba(212,175,55,0.28);
+  border-radius: 12px; padding: 0.9rem 1.75rem;
+  margin-bottom: 2.5rem; flex-wrap: wrap; justify-content: center;
+}
+.ps-was { font-family:'Montserrat',sans-serif; font-size:0.78rem; color:#bbb; letter-spacing:0.04em; }
+.ps-was s { font-size:1.05rem; }
+.ps-now { font-family:'Cinzel',serif; font-size:1.9rem; color:var(--gold-dark); }
+.ps-forever {
+  font-family:'Montserrat',sans-serif; font-size:0.65rem;
+  letter-spacing:0.12em; text-transform:uppercase; color:var(--gold);
+  border-left: 1px solid rgba(212,175,55,0.3); padding-left:1rem; line-height:1.55;
+}
+
+.form-wrap { text-align: left; margin-top: 0.5rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin-bottom: 0.9rem; }
+.form-group { margin-bottom: 0.9rem; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; padding: 0.88rem 1.2rem;
+  border: 1.5px solid rgba(212,175,55,0.25);
+  border-radius: 8px; background: var(--cream);
+  font-family: 'Cormorant Garamond', serif; font-size: 1.05rem;
+  color: var(--text-dark); outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
+  background: white;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: #b5a494; }
+.form-group select { cursor: pointer; color: var(--text-dark); }
+.form-group textarea { resize: vertical; min-height: 110px; }
+.scholarship-note {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  background: rgba(212,175,55,0.07);
+  border: 1px solid rgba(212,175,55,0.22);
+  border-radius: 10px; padding: 1.1rem 1.25rem;
+  margin-top: 1.25rem; text-align: left;
+}
+.scholarship-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+.scholarship-note p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; font-style: italic;
+  color: var(--text-mid); line-height: 1.65;
+}
+.form-privacy {
+  color: var(--text-light); margin-top: 1rem;
+  text-align: center; line-height: 1.65; letter-spacing: 0.03em;
+}
+.form-privacy a { color: var(--gold); text-decoration: none; }
+
+/* ═══════════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════════ */
+footer {
+  background: var(--text-dark); color: var(--cream);
+  padding: 4rem 5% 2rem; text-align: center;
+}
+.footer-name {
+  font-family: 'Cinzel', serif; font-size: 1.5rem;
+  color: var(--gold-light); margin-bottom: 0.4rem;
+}
+.footer-tag {
+  font-style: italic; color: rgba(253,248,243,0.6);
+  font-size: 1rem; margin-bottom: 2rem;
+}
+.footer-links {
+  display: flex; gap: 1.75rem; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 2rem;
+}
+.footer-links a {
+  font-family: 'Montserrat', sans-serif; font-size: 0.75rem;
+  letter-spacing: 0.08em; color: var(--gold-light);
+  text-decoration: none; transition: color 0.25s;
+}
+.footer-links a:hover { color: var(--gold); }
+.footer-copy {
+  font-family: 'Montserrat', sans-serif; font-size: 0.72rem;
+  color: var(--text-mid); padding-top: 2rem;
+  border-top: 1px solid rgba(212,175,55,0.15);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.75s ease-out, transform 0.75s ease-out; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 680px) {
+  nav { flex-direction: column; gap: 0.75rem; padding: 1rem 5%; }
+  .nav-links { gap: 1.25rem; flex-wrap: wrap; justify-content: center; }
+  .what-grid, .modules-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .offer-block { padding: 2.25rem 1.5rem; }
+  .section { padding: 4.5rem 5%; }
+  .price-summary { gap: 0.75rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span style="display:none;font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dark);letter-spacing:0.08em;">My Holy Crescendo</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="made-beautiful.html">← Made Beautiful</a></li>
+    <li><a href="symphony-of-grace.html">15-Week Journey</a></li>
+  </ul>
+</nav>
+
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <!-- Orbs -->
+  <div class="orb" style="width:460px;height:460px;background:radial-gradient(circle,var(--mauve),transparent);top:-8%;left:-12%;--dur:24s;"></div>
+  <div class="orb" style="width:380px;height:380px;background:radial-gradient(circle,var(--gold-light),transparent);top:55%;right:-10%;--dur:30s;--delay:-9s;"></div>
+  <div class="orb" style="width:320px;height:320px;background:radial-gradient(circle,var(--sage),transparent);bottom:5%;left:28%;--dur:20s;--delay:-15s;"></div>
+  <!-- Stars -->
+  <div class="star" style="width:8px;height:8px;top:72%;left:48%;--pd:2.8s;--pdelay:0s;"></div>
+  <div class="star" style="width:6px;height:6px;top:58%;left:42%;--pd:3.4s;--pdelay:0.6s;"></div>
+  <div class="star" style="width:5px;height:5px;top:48%;left:38%;--pd:2.6s;--pdelay:0.3s;"></div>
+  <div class="star" style="width:7px;height:7px;top:40%;left:35%;--pd:3.8s;--pdelay:1s;"></div>
+  <div class="star" style="width:5px;height:5px;top:30%;left:36%;--pd:2.9s;--pdelay:0.8s;"></div>
+  <div class="star" style="width:6px;height:6px;top:62%;left:55%;--pd:3.1s;--pdelay:0.4s;"></div>
+  <div class="star" style="width:7px;height:7px;top:55%;left:62%;--pd:3.5s;--pdelay:1.2s;"></div>
+  <div class="star" style="width:5px;height:5px;top:35%;left:25%;--pd:2.7s;--pdelay:0.2s;"></div>
+  <!-- Leaves -->
+  <div class="leaf" style="top:18%;right:22%;--r:42deg;--ldelay:-2s;"></div>
+  <div class="leaf" style="top:55%;left:12%;--r:-28deg;--ldelay:-6s;"></div>
+
+  <div class="hero-inner">
+    <div class="badge">🌸 &nbsp; A Special Invitation for Made Beautiful Attendees &nbsp; 🌸</div>
+
+    <h1>The Symphony<br>Continues.</h1>
+
+    <p class="hero-sub">
+      If your heart is calling you deeper,<br>this is for you.
+    </p>
+
+    <div class="price-card">
+      <div class="price-pill">Your Exclusive Retreat Offer</div>
+      <div class="price-row">
+        <div class="price-was">$798</div>
+        <div class="price-arrow">→</div>
+        <div class="price-now">
+          $399
+          <small>yours, in perpetuity</small>
+        </div>
+      </div>
+      <p class="price-note">
+        Because you said yes to <em>Made Beautiful</em>, you have
+        <strong>50% off A Symphony of Grace</strong> — waiting for whenever the time is right.
+        No deadline, no pressure. This is a one-time offer, so use it when you're ready.
+      </p>
+      <div class="price-card-footer">
+        <div class="price-card-badge guarantee">
+          <span>💛</span>
+          <p><strong>100% Money-Back Guarantee</strong> — If at any point you feel you're not getting your money's worth, we'll refund you in full, no questions asked, through the end of the program.</p>
+        </div>
+        <div class="price-card-badge scholarship">
+          <span>🤍</span>
+          <p><strong>Scholarships Available</strong> — No one is turned away for lack of funds. Just mention it when you reach out.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#interest" class="btn btn-gold">Yes, I'm Interested →</a>
+      <p class="hero-cta-hint">Scroll to learn more, or jump straight to the form below.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ WHAT IS IT ═══ -->
+<section class="section reveal">
+  <div class="orb" style="width:300px;height:300px;background:radial-gradient(circle,var(--blush),transparent);top:10%;right:2%;--dur:26s;opacity:0.12;"></div>
+  <div class="leaf" style="bottom:20%;right:18%;--r:110deg;--ldelay:-4s;"></div>
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">The Journey</span>
+      <h2 class="section-title">What is A Symphony of Grace?</h2>
+      <p class="section-body">
+        A Symphony of Grace is a 15-week immersive program designed to help you understand the
+        unique, <em>once-in-a-universe</em> symphony that God created you to be. Together we explore
+        the fullness of who you are — body, mind, and spirit — through Scripture, the wisdom of the
+        saints, and carefully chosen frameworks that illuminate God's design in you.
+      </p>
+      <p class="section-body" style="margin-top:1rem;">
+        The retreat gave you a taste. The program gives you the whole table.
+      </p>
+    </div>
+
+    <div class="what-grid">
+      <div class="what-card">
+        <div class="what-icon">👥</div>
+        <h3>Small Cohort Community</h3>
+        <p>Intimate groups of 8–12 women for authentic sharing, deep friendship, and mutual accompaniment through the journey.</p>
+      </div>
+      <div class="what-card">
+        <div class="what-icon">📖</div>
+        <h3>Full-Color Workbook</h3>
+        <p>Over 200 pages of beautifully designed reflections, exercises, and Scripture study — yours to keep and return to always.</p>
+      </div>
+      <div class="what-card">
+        <div class="what-icon">🎵</div>
+        <h3>15 Meditation Songs</h3>
+        <p>Music curated for each week's theme, awakening the heart to wonder and deepening your contemplative practice.</p>
+      </div>
+      <div class="what-card">
+        <div class="what-icon">🕊️</div>
+        <h3>Saints' Wisdom</h3>
+        <p>Each week features a holy man or woman from Church history — showing you what love made visible looks like in a real life.</p>
+      </div>
+    </div>
+    <div class="gold-rule"></div>
+  </div>
+</section>
+
+
+<!-- ═══ MODULES ═══ -->
+<section class="section section-alt reveal">
+  <div class="orb" style="width:280px;height:280px;background:radial-gradient(circle,var(--mauve),transparent);top:15%;left:2%;--dur:28s;opacity:0.13;"></div>
+  <div class="leaf" style="top:20%;right:10%;--r:65deg;--ldelay:-9s;"></div>
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Four Movements</span>
+      <h2 class="section-title">The Modules of Your Symphony</h2>
+      <p class="section-body">
+        Like the movements of a great symphony, each module builds upon the last —
+        creating a complete, coherent composition of grace, beauty, and self-understanding.
+      </p>
+    </div>
+
+    <div class="modules-grid">
+      <div class="module-card">
+        <p class="mod-eye">Movement I</p>
+        <h3 class="mod-name">Foundation</h3>
+        <p class="mod-weeks">Weeks 1–3 · Rooted in Christ</p>
+        <ul class="mod-list">
+          <li><strong>You Are Called</strong> — Daughter of the King, named and claimed by God</li>
+          <li><strong>Identity in Christ</strong> — Our identity found only in the One who made us</li>
+          <li><strong>Receiving His Love</strong> — Learning to truly receive the love of the Father</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <p class="mod-eye">Movement II</p>
+        <h3 class="mod-name">Body</h3>
+        <p class="mod-weeks">Weeks 4–6 · Fearfully & Wonderfully Made</p>
+        <ul class="mod-list">
+          <li><strong>Colors of Creation</strong> — The unique palette God used to paint you</li>
+          <li><strong>Sacred Style Essence</strong> — How the Lord is glorified in your presence</li>
+          <li><strong>Sacred Silhouettes</strong> — The beauty and dignity of your created form</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <p class="mod-eye">Movement III</p>
+        <h3 class="mod-name">Mind</h3>
+        <p class="mod-weeks">Weeks 7–10 · Woven in Wisdom</p>
+        <ul class="mod-list">
+          <li><strong>Four Temperament Blend</strong> — Your God-given way of being in the world</li>
+          <li><strong>16 Personality Types</strong> — Your way of seeing and engaging the world</li>
+          <li><strong>VIA Character Strengths</strong> — Your gifts, entrusted by God</li>
+          <li><strong>Love Languages</strong> — How you give and receive love</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <p class="mod-eye">Movement IV</p>
+        <h3 class="mod-name">Spirit</h3>
+        <p class="mod-weeks">Weeks 11–15 · Alive in Grace</p>
+        <ul class="mod-list">
+          <li><strong>Light in the Shadows</strong> — Wound work; healing in the light of Christ</li>
+          <li><strong>42 Virtues</strong> — Growing in holiness with St. Albert the Great</li>
+          <li><strong>25 Charisms</strong> — Finding your spiritual gifts to further the kingdom</li>
+          <li><strong>Rule of Life</strong> — Ordering your life rightly, with God at the center</li>
+          <li><strong>Beautiful Symphony</strong> — A celebration of the unique masterpiece you are</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ INCLUDED ═══ -->
+<section class="section reveal">
+  <div class="orb" style="width:260px;height:260px;background:radial-gradient(circle,var(--sage),transparent);bottom:8%;right:3%;--dur:22s;opacity:0.12;"></div>
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Everything You Receive</span>
+      <h2 class="section-title">What's Included</h2>
+    </div>
+    <div class="included-grid">
+      <div class="inc-item">
+        <div class="inc-check">✓</div>
+        <div><h4>Full-Color Workbook</h4><p>200+ pages of reflections, exercises, and beautiful design</p></div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-check">✓</div>
+        <div><h4>15 Weekly Sessions</h4><p>Live guided discussions with your intimate cohort</p></div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-check">✓</div>
+        <div><h4>15 Meditation Songs</h4><p>Music curated for each week's theme</p></div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-check">✓</div>
+        <div><h4>Private Community</h4><p>Online group for prayer, support, and friendship</p></div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-check">✓</div>
+        <div><h4>Saints' Study</h4><p>Holy men and women from Church history as your companions</p></div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-check">✓</div>
+        <div><h4>Garden of Grace</h4><p>15 flowers with theological significance, yours to keep</p></div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-check">✓</div>
+        <div><h4>All Assessments</h4><p>VIA Strengths, Temperaments, 16 Types & more — included</p></div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-check">✓</div>
+        <div><h4>Lifetime Access</h4><p>Return to the materials whenever you need them</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ SCRIPTURE ═══ -->
+<div class="scripture">
+  <div class="orb" style="width:300px;height:300px;background:radial-gradient(circle,var(--mauve),transparent);top:0%;left:-5%;--dur:26s;position:absolute;opacity:0.1;"></div>
+  <p>
+    "For we are God's masterpiece. He has created us anew in Christ Jesus,
+    so we can do the good things he planned for us long ago."
+  </p>
+  <cite>— Ephesians 2:10</cite>
+</div>
+
+
+<!-- ═══ INTEREST FORM ═══ -->
+<section id="interest" class="section section-alt reveal">
+  <div class="orb" style="width:320px;height:320px;background:radial-gradient(circle,var(--gold-light),transparent);top:10%;left:-8%;--dur:25s;opacity:0.1;"></div>
+  <div class="orb" style="width:260px;height:260px;background:radial-gradient(circle,var(--mauve),transparent);bottom:5%;right:-5%;--dur:20s;--delay:-8s;opacity:0.1;"></div>
+  <div class="leaf" style="top:15%;right:14%;--r:55deg;--ldelay:-3s;"></div>
+  <div class="container-sm">
+    <div class="offer-block">
+      <div class="offer-icon">🌸</div>
+      <h2>Reserve Your Spot at Half Price</h2>
+      <p class="offer-text">
+        This offer is exclusively for women who attended the <em>Made Beautiful</em> retreat.
+        Fill out the form below and I'll be in touch with everything you need to join the next cohort.
+      </p>
+
+      <div class="price-summary">
+        <div class="ps-was">Regular price <s>$798</s></div>
+        <div class="ps-now">$399</div>
+        <div class="ps-forever">Your price,<br>forever</div>
+      </div>
+
+      <form class="form-wrap" action="https://formspree.io/f/mreblqqb" method="POST">
+        <input type="hidden" name="_subject" value="Symphony of Grace — Retreat Attendee Interest (50% Off)">
+        <input type="hidden" name="_next" value="https://myholycrescendo.com/thank-you.html">
+        <input type="hidden" name="offer" value="Made Beautiful Retreat — 50% Off in Perpetuity">
+
+        <div class="form-row">
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Your first name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Your email address" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <select name="timing">
+            <option value="">When are you hoping to join?</option>
+            <option value="next-cohort">The very next cohort!</option>
+            <option value="few-months">In the next few months</option>
+            <option value="not-sure">Not sure yet — just exploring</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <textarea name="message" placeholder="Anything you'd like me to know — questions, where you are in your journey, what drew you to the retreat... (optional)"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Yes, I'm Interested — Count Me In →</button>
+
+        <div class="scholarship-note">
+          <span class="scholarship-icon">🤍</span>
+          <p>If finances are a barrier, scholarships are available. Simply mention it in your message above — there is no shame in asking, and no one will be turned away for lack of funds.</p>
+        </div>
+
+        <p class="form-privacy">
+          Your information stays with me. No spam, ever.
+          <a href="privacy.html">Privacy Policy</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p class="footer-name">My Holy Crescendo</p>
+  <p class="footer-tag">fearfully & wonderfully made</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="symphony-of-grace.html">15-Week Journey</a>
+    <a href="made-beautiful.html">Made Beautiful Retreat</a>
+    <a href="prelude.html">Free Prelude</a>
+  </div>
+  <p class="footer-copy">© 2025 My Holy Crescendo. All rights reserved.</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver(entries =>
+    entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
