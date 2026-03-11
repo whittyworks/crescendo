@@ -1353,7 +1353,6 @@
         function showResults() {
             document.getElementById('question-section').classList.add('hidden');
             document.getElementById('results-section').classList.remove('hidden');
-            document.getElementById('learn-more-section').classList.remove('hidden');
             
             const { percentages } = calculateScores();
             const blendName = getBlendName(percentages);
