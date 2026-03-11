@@ -657,7 +657,6 @@
                             <button class="btn-test secondary" onclick="clearAndStart()">Start Fresh</button>
                         </div>
                     </div>
-
                     <div id="fresh-start-area" style="text-align: center; margin-top: 2rem;">
                         <button class="btn-test" onclick="startTest()">Begin Assessment</button>
                     </div>
@@ -725,10 +724,10 @@
                 context: "You've had a long, demanding week at work.",
                 question: "It's Friday evening. What sounds most appealing?",
                 options: [
-                    { text: "Calling friends to meet up somewhere lively", scores: { S: 3, C: 1, M: 0, P: 0 } },
-                    { text: "A small dinner gathering with close friends", scores: { S: 1, C: 0, M: 1, P: 2 } },
-                    { text: "A quiet evening alone with a good book or hobby", scores: { S: 0, C: 0, M: 3, P: 1 } },
-                    { text: "Low-key time with one or two people, maybe watching something together", scores: { S: 0, C: 0, M: 1, P: 3 } }
+                    { text: "Calling friends to meet up somewhere lively — being around people genuinely recharges me", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "A small gathering with close friends — I want warmth and connection, but in a manageable setting", scores: { S: 1, C: 1, M: 0, P: 2 } },
+                    { text: "A quiet evening alone — I genuinely need solitude to restore my inner world, not just rest my body", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Low-key time with one or two familiar people — comfortable company with no pressure to be 'on'", scores: { S: 0, C: 0, M: 1, P: 3 } }
                 ]
             },
             {
@@ -738,10 +737,10 @@
                 context: "You arrive at a networking event where you know almost no one.",
                 question: "After 30 minutes, you're most likely to be...",
                 options: [
-                    { text: "In the middle of a group, telling a story that has everyone laughing", scores: { S: 3, C: 1, M: 0, P: 0 } },
-                    { text: "Having an intense one-on-one conversation in a quieter corner", scores: { S: 0, C: 1, M: 3, P: 1 } },
-                    { text: "Strategically working the room, collecting business cards", scores: { S: 1, C: 3, M: 0, P: 0 } },
-                    { text: "Finding the one person you clicked with and staying near them", scores: { S: 0, C: 0, M: 1, P: 3 } }
+                    { text: "In the middle of a group, telling a story that has everyone laughing — social energy pulls me right in", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "In a deep one-on-one conversation in a quieter corner — small talk exhausts me but real connection doesn't", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Strategically working the room — I came with a purpose and I intend to accomplish it", scores: { S: 0, C: 3, M: 0, P: 0 } },
+                    { text: "Anchored to the one person I clicked with — one genuine connection feels like enough for the evening", scores: { S: 0, C: 0, M: 1, P: 3 } }
                 ]
             },
             {
@@ -759,10 +758,10 @@
                 context: "A new coworker has started, and they seem to eat lunch alone every day.",
                 question: "Your natural inclination is to...",
                 options: [
-                    { text: "Immediately invite them to join your lunch group", scores: { S: 3, C: 1, M: 0, P: 1 } },
-                    { text: "Wait and observe—they might prefer solitude", scores: { S: 0, C: 0, M: 3, P: 1 } },
-                    { text: "Casually mention where people usually gather, in case they want to join", scores: { S: 1, C: 0, M: 1, P: 3 } },
-                    { text: "Strike up a quick conversation to assess if they need anything", scores: { S: 1, C: 3, M: 0, P: 0 } }
+                    { text: "Immediately invite them to join — I can't help it, I want everyone to feel included", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "Wait and observe — I don't want to intrude; they might need solitude the way I sometimes do", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Casually mention where people gather — I want to open the door without pushing them through it", scores: { S: 0, C: 0, M: 0, P: 3 } },
+                    { text: "Strike up a quick conversation to size up the situation — if they need something, I'll handle it", scores: { S: 0, C: 3, M: 0, P: 0 } }
                 ]
             },
             {
@@ -771,10 +770,10 @@
                 type: "scenario",
                 question: "When processing a difficult personal situation, I prefer to...",
                 options: [
-                    { text: "Talk it through with multiple friends to get different perspectives", scores: { S: 3, C: 1, M: 0, P: 0 } },
-                    { text: "Journal or think about it privately before discussing with anyone", scores: { S: 0, C: 0, M: 3, P: 1 } },
-                    { text: "Discuss with one trusted person who really understands me", scores: { S: 0, C: 0, M: 2, P: 3 } },
-                    { text: "Figure out the solution first, then inform others of my decision", scores: { S: 0, C: 3, M: 1, P: 0 } }
+                    { text: "Talk it through with friends — saying it out loud helps me understand what I actually think and feel", scores: { S: 3, C: 0, M: 0, P: 0 } },
+                    { text: "Journal or sit with it privately first — I need to understand my own feelings before anyone else influences them", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Talk with one trusted person who really gets me — I don't need many opinions, just one safe presence", scores: { S: 0, C: 0, M: 1, P: 3 } },
+                    { text: "Figure out the solution myself first — I don't need input, I need clarity, and then I'll act", scores: { S: 0, C: 3, M: 1, P: 0 } }
                 ]
             },
             // DIMENSION 2: Pace & Reactivity (5 questions)
@@ -785,10 +784,10 @@
                 context: "During a meeting, someone proposes a new idea.",
                 question: "Your natural response style is to...",
                 options: [
-                    { text: "Jump in immediately with thoughts and enthusiasm", scores: { S: 3, C: 2, M: 0, P: 0 } },
-                    { text: "Listen carefully, then ask probing questions", scores: { S: 0, C: 1, M: 3, P: 1 } },
-                    { text: "Take mental notes and share thoughts later after reflection", scores: { S: 0, C: 0, M: 2, P: 3 } },
-                    { text: "Quickly assess if it's practical and state your position clearly", scores: { S: 0, C: 3, M: 0, P: 0 } }
+                    { text: "Jump in immediately — I process out loud and the live back-and-forth is where my best thinking happens", scores: { S: 3, C: 2, M: 0, P: 0 } },
+                    { text: "Listen carefully, then ask probing questions — I want to fully understand something before forming an opinion", scores: { S: 0, C: 1, M: 3, P: 0 } },
+                    { text: "Take mental notes and share later — I need time to process before I can contribute something worthwhile", scores: { S: 0, C: 0, M: 1, P: 3 } },
+                    { text: "Quickly assess whether it's practical and say so — I cut through the noise and focus on what will actually work", scores: { S: 0, C: 3, M: 0, P: 0 } }
                 ]
             },
             {
@@ -806,10 +805,10 @@
                 context: "You receive unexpected news that changes your weekend plans.",
                 question: "Your typical first reaction is...",
                 options: [
-                    { text: "Excitement—new adventures await!", scores: { S: 3, C: 1, M: 0, P: 0 } },
-                    { text: "Frustration—quickly pivot to a new plan", scores: { S: 0, C: 3, M: 0, P: 0 } },
-                    { text: "Disappointment that lingers—I was looking forward to those plans", scores: { S: 0, C: 0, M: 3, P: 1 } },
-                    { text: "Calm acceptance—things happen, we'll figure it out", scores: { S: 0, C: 0, M: 0, P: 3 } }
+                    { text: "Excitement — I don't dread change, I look for what it opens up", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "Frustration, then immediate action — disruption annoys me, but I'm already solving it", scores: { S: 0, C: 3, M: 0, P: 0 } },
+                    { text: "Real disappointment that lingers — I had mentally and emotionally invested in what we'd planned", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Calm acceptance — I don't need to control outcomes; we'll land somewhere fine no matter what", scores: { S: 0, C: 0, M: 0, P: 3 } }
                 ]
             },
             {
@@ -818,10 +817,10 @@
                 type: "scenario",
                 question: "In conversations, I typically...",
                 options: [
-                    { text: "Think out loud—my best ideas come while talking", scores: { S: 3, C: 2, M: 0, P: 0 } },
-                    { text: "Pause before responding to formulate my thoughts precisely", scores: { S: 0, C: 0, M: 3, P: 2 } },
-                    { text: "Listen more than I speak, contributing when I have something meaningful", scores: { S: 0, C: 0, M: 2, P: 3 } },
-                    { text: "Speak directly and get to the point quickly", scores: { S: 1, C: 3, M: 0, P: 0 } }
+                    { text: "Think out loud — the back-and-forth is where I come alive and my ideas actually sharpen", scores: { S: 3, C: 2, M: 0, P: 0 } },
+                    { text: "Pause before responding — I don't want to say something I don't actually mean, so I take the time to get it right", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Listen more than speak — I'd rather say nothing than say something hollow just to fill the silence", scores: { S: 0, C: 0, M: 1, P: 3 } },
+                    { text: "Speak directly and get to the point — I value clarity and see no reason to circle around what I mean", scores: { S: 1, C: 3, M: 0, P: 0 } }
                 ]
             },
             {
@@ -840,10 +839,10 @@
                 context: "Someone makes a hurtful comment to you at a gathering.",
                 question: "Three days later, you're most likely...",
                 options: [
-                    { text: "Completely over it—barely remember what was said", scores: { S: 3, C: 0, M: 0, P: 2 } },
-                    { text: "Still processing—the words replay in quiet moments", scores: { S: 0, C: 0, M: 3, P: 0 } },
-                    { text: "Moved on but planning to address it next time you see them", scores: { S: 0, C: 3, M: 1, P: 0 } },
-                    { text: "Let it go to keep the peace, though it stung", scores: { S: 1, C: 0, M: 1, P: 3 } }
+                    { text: "Completely over it — it stung in the moment but I don't let things stick; life moves forward", scores: { S: 3, C: 1, M: 0, P: 1 } },
+                    { text: "Still processing — the words replay in quiet moments and I'm still trying to understand why it hurt so much", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Moved on emotionally, but I'll address it directly next time — I don't let things slide if they matter", scores: { S: 0, C: 3, M: 1, P: 0 } },
+                    { text: "Let it go — bringing it up would cost more than it's worth, and I'd rather have peace than be right", scores: { S: 0, C: 0, M: 0, P: 3 } }
                 ]
             },
             {
@@ -861,10 +860,10 @@
                 context: "You made an embarrassing mistake at work last month.",
                 question: "How often does it cross your mind now?",
                 options: [
-                    { text: "Rarely—I've moved on to new things", scores: { S: 3, C: 1, M: 0, P: 1 } },
-                    { text: "Sometimes—it still makes me cringe", scores: { S: 0, C: 0, M: 3, P: 0 } },
-                    { text: "I've analyzed it, learned from it, and filed it away", scores: { S: 0, C: 2, M: 2, P: 0 } },
-                    { text: "Not much—mistakes happen to everyone", scores: { S: 1, C: 0, M: 0, P: 3 } }
+                    { text: "Rarely — I've already moved on to new things; dwelling just isn't how I'm wired", scores: { S: 3, C: 1, M: 0, P: 1 } },
+                    { text: "Sometimes — it still makes me cringe because I hold myself to a standard and I fell short of it", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "I analyzed it, extracted the lesson, and filed it away — I deal with mistakes efficiently and move on", scores: { S: 0, C: 3, M: 1, P: 0 } },
+                    { text: "Not much — mistakes happen to everyone and I've made my peace with imperfection", scores: { S: 1, C: 0, M: 0, P: 3 } }
                 ]
             },
             {
@@ -873,10 +872,10 @@
                 type: "scenario",
                 question: "After a wonderful vacation, I typically...",
                 options: [
-                    { text: "Jump back into life—the vacation was great, now onto new things", scores: { S: 3, C: 1, M: 0, P: 0 } },
-                    { text: "Feel a lingering sadness that it's over for weeks", scores: { S: 0, C: 0, M: 3, P: 0 } },
-                    { text: "Appreciate the memories but settle back into routine easily", scores: { S: 0, C: 0, M: 0, P: 3 } },
-                    { text: "Immediately start planning the next adventure", scores: { S: 2, C: 3, M: 0, P: 0 } }
+                    { text: "Jump right back in — the vacation was wonderful, and now there are new things to look forward to", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "Feel a lingering sadness for days or weeks — beautiful things ending always stays with me", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Appreciate the memories warmly, then settle back in — home and routine are good too, and that's enough", scores: { S: 0, C: 0, M: 0, P: 3 } },
+                    { text: "Start planning the next trip almost immediately — the best part of one adventure is dreaming up the next", scores: { S: 2, C: 3, M: 0, P: 0 } }
                 ]
             },
             {
@@ -895,10 +894,10 @@
                 context: "You're watching a movie with friends and a sad scene comes on.",
                 question: "Your reaction is typically...",
                 options: [
-                    { text: "Visibly moved—might tear up openly", scores: { S: 2, C: 0, M: 3, P: 0 } },
-                    { text: "Feel something deep but keep it internal", scores: { S: 0, C: 0, M: 2, P: 3 } },
-                    { text: "Appreciate the storytelling but stay relatively unmoved", scores: { S: 0, C: 2, M: 0, P: 1 } },
-                    { text: "Might comment on it lightheartedly to break the tension", scores: { S: 3, C: 0, M: 0, P: 0 } }
+                    { text: "Visibly moved — I don't try to contain it when something truly touches me; emotion shows on my face", scores: { S: 2, C: 0, M: 3, P: 0 } },
+                    { text: "Feel something stirring inside, but keep it to myself — my inner world is private, not for display", scores: { S: 0, C: 0, M: 2, P: 2 } },
+                    { text: "Appreciate the craft and storytelling, but stay emotionally detached — I engage my mind more than my heart", scores: { S: 0, C: 3, M: 0, P: 1 } },
+                    { text: "Comment on it lightly to break the tension — heavy emotion in a group feels uncomfortable and I want to lift it", scores: { S: 3, C: 0, M: 0, P: 0 } }
                 ]
             },
             {
@@ -915,10 +914,10 @@
                 type: "scenario",
                 question: "In my close relationships, I desire...",
                 options: [
-                    { text: "Fun, spontaneity, and lots of shared experiences", scores: { S: 3, C: 0, M: 0, P: 1 } },
-                    { text: "Deep understanding—someone who truly knows my soul", scores: { S: 0, C: 0, M: 3, P: 1 } },
-                    { text: "Loyalty, stability, and peaceful companionship", scores: { S: 0, C: 0, M: 1, P: 3 } },
-                    { text: "Mutual respect, shared goals, and productive partnership", scores: { S: 0, C: 3, M: 0, P: 0 } }
+                    { text: "Fun, spontaneity, and lots of shared experiences — relationships should feel joyful and alive", scores: { S: 3, C: 0, M: 0, P: 0 } },
+                    { text: "Deep understanding — I need someone who truly knows my soul, not just my surface", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Loyalty, stability, and peaceful companionship — I want someone I can simply be with, without effort or drama", scores: { S: 0, C: 0, M: 0, P: 3 } },
+                    { text: "Mutual respect and shared goals — I'm most alive in relationships where we're building something together", scores: { S: 0, C: 3, M: 0, P: 0 } }
                 ]
             },
             {
@@ -928,10 +927,10 @@
                 context: "You hear a piece of music that particularly moves you.",
                 question: "You're most likely to...",
                 options: [
-                    { text: "Share it immediately with everyone you know", scores: { S: 3, C: 0, M: 1, P: 0 } },
-                    { text: "Sit with it privately, letting it resonate in your heart", scores: { S: 0, C: 0, M: 3, P: 1 } },
-                    { text: "Enjoy it in the moment, then move on", scores: { S: 1, C: 1, M: 0, P: 2 } },
-                    { text: "Analyze what makes it effective musically", scores: { S: 0, C: 2, M: 2, P: 0 } }
+                    { text: "Share it immediately with everyone — beauty is better when it's spread around", scores: { S: 3, C: 0, M: 0, P: 0 } },
+                    { text: "Sit with it privately and let it settle — some things are too sacred to immediately hand away", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Enjoy it in the moment, then move on — I appreciate it without needing to hold onto it", scores: { S: 1, C: 0, M: 0, P: 3 } },
+                    { text: "Analyze what makes it effective — I'm drawn to understand why it works, not just to feel it", scores: { S: 0, C: 2, M: 2, P: 0 } }
                 ]
             },
             {
@@ -950,10 +949,10 @@
                 context: "Your team has a project deadline approaching.",
                 question: "You naturally focus on...",
                 options: [
-                    { text: "Making sure everyone's working well together and morale is high", scores: { S: 3, C: 0, M: 0, P: 2 } },
-                    { text: "Ensuring every detail is perfect and nothing is overlooked", scores: { S: 0, C: 1, M: 3, P: 0 } },
-                    { text: "Driving toward the goal—we can celebrate after we finish", scores: { S: 0, C: 3, M: 0, P: 0 } },
-                    { text: "Supporting others and helping wherever needed", scores: { S: 0, C: 0, M: 1, P: 3 } }
+                    { text: "Making sure everyone's working well together — people are what make the work meaningful", scores: { S: 3, C: 0, M: 0, P: 2 } },
+                    { text: "Making sure every detail is right and nothing is overlooked — I can't let quality slip, even under pressure", scores: { S: 0, C: 1, M: 3, P: 0 } },
+                    { text: "Driving toward the goal — results first; relationships are strong enough to sustain a push", scores: { S: 0, C: 3, M: 0, P: 0 } },
+                    { text: "Supporting wherever I'm needed — I don't need a defined role or credit, I just want the team to succeed", scores: { S: 1, C: 0, M: 0, P: 3 } }
                 ]
             },
             {
@@ -971,10 +970,10 @@
                 context: "A friend calls you upset about something in their life.",
                 question: "Your natural response is to...",
                 options: [
-                    { text: "Listen with full empathy and help them feel heard", scores: { S: 1, C: 0, M: 2, P: 3 } },
-                    { text: "Offer practical solutions to fix the problem", scores: { S: 0, C: 3, M: 1, P: 0 } },
-                    { text: "Try to cheer them up and lighten the mood", scores: { S: 3, C: 0, M: 0, P: 0 } },
-                    { text: "Ask thoughtful questions to help them process", scores: { S: 0, C: 0, M: 3, P: 1 } }
+                    { text: "Listen with full empathy — they don't need solutions right now, they need to feel truly understood", scores: { S: 0, C: 0, M: 2, P: 3 } },
+                    { text: "Offer practical solutions — I can't help wanting to actually fix it rather than just sit in the feeling", scores: { S: 0, C: 3, M: 0, P: 0 } },
+                    { text: "Try to cheer them up and lighten the mood — heavy emotion makes me want to lift things, not dwell", scores: { S: 3, C: 0, M: 0, P: 0 } },
+                    { text: "Ask thoughtful questions to help them find their own clarity — I feel it with them and want to guide them through", scores: { S: 0, C: 0, M: 3, P: 1 } }
                 ]
             },
             {
@@ -983,10 +982,10 @@
                 type: "scenario",
                 question: "In group projects, I naturally gravitate toward...",
                 options: [
-                    { text: "The social glue—keeping energy up and people connected", scores: { S: 3, C: 0, M: 0, P: 1 } },
-                    { text: "Leadership—organizing and driving toward the goal", scores: { S: 0, C: 3, M: 0, P: 0 } },
-                    { text: "Quality control—ensuring excellence in the details", scores: { S: 0, C: 1, M: 3, P: 0 } },
-                    { text: "Support—helping wherever I'm needed, avoiding conflict", scores: { S: 0, C: 0, M: 0, P: 3 } }
+                    { text: "The social glue — keeping energy high and people connected so the whole thing feels worth doing", scores: { S: 3, C: 0, M: 0, P: 1 } },
+                    { text: "Leadership — someone needs to take charge and move things forward, and I naturally step into that", scores: { S: 0, C: 3, M: 0, P: 0 } },
+                    { text: "Quality control — someone has to hold the standard and I feel personally responsible for the work being excellent", scores: { S: 0, C: 1, M: 3, P: 0 } },
+                    { text: "Support — I fill gaps wherever they appear; I don't need the spotlight, just the satisfaction of being useful", scores: { S: 0, C: 0, M: 0, P: 3 } }
                 ]
             },
             {
@@ -1005,10 +1004,10 @@
                 context: "Your company announces a major restructuring.",
                 question: "Your initial internal response is...",
                 options: [
-                    { text: "Excitement—new opportunities and fresh starts!", scores: { S: 3, C: 1, M: 0, P: 0 } },
-                    { text: "Strategic thinking—how can I position myself well?", scores: { S: 0, C: 3, M: 0, P: 0 } },
-                    { text: "Anxiety—what will this mean for my carefully built systems?", scores: { S: 0, C: 0, M: 3, P: 1 } },
-                    { text: "Wait and see—no point worrying until we know more", scores: { S: 0, C: 0, M: 0, P: 3 } }
+                    { text: "Excitement — change doesn't scare me; I immediately look for what it opens up", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "Strategic thinking — change creates opportunity and I want to be the one who moves first", scores: { S: 0, C: 3, M: 0, P: 0 } },
+                    { text: "Anxiety — I've built careful systems and routines that work, and this threatens all of it", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Wait and see — I'm not going to borrow trouble before I have to; we'll deal with it when it's real", scores: { S: 0, C: 0, M: 0, P: 3 } }
                 ]
             },
             {
@@ -1025,10 +1024,10 @@
                 type: "scenario",
                 question: "When planning a vacation, I prefer...",
                 options: [
-                    { text: "Loose plans—see where the day takes us!", scores: { S: 3, C: 0, M: 0, P: 1 } },
-                    { text: "Detailed itineraries with everything researched", scores: { S: 0, C: 1, M: 3, P: 0 } },
-                    { text: "Efficient planning to maximize what we can do", scores: { S: 0, C: 3, M: 1, P: 0 } },
-                    { text: "Simple, relaxing plans with built-in downtime", scores: { S: 0, C: 0, M: 0, P: 3 } }
+                    { text: "Loose plans — the spontaneity is half the fun; over-planning takes the magic out", scores: { S: 3, C: 0, M: 0, P: 0 } },
+                    { text: "Detailed itineraries with everything researched in advance — I need to know what to expect so I can actually relax", scores: { S: 0, C: 1, M: 3, P: 0 } },
+                    { text: "Efficient planning to maximize every hour — I don't want to look back and feel like we missed something", scores: { S: 0, C: 3, M: 1, P: 0 } },
+                    { text: "Simple plans with lots of built-in rest — I want to actually decompress, not run a packed itinerary", scores: { S: 0, C: 0, M: 0, P: 3 } }
                 ]
             },
             {
@@ -1038,10 +1037,10 @@
                 context: "Someone suggests trying a completely new restaurant with unfamiliar cuisine.",
                 question: "Your honest reaction is...",
                 options: [
-                    { text: "Yes! I love trying new things", scores: { S: 3, C: 1, M: 0, P: 0 } },
-                    { text: "Let me research it first to know what to expect", scores: { S: 0, C: 0, M: 3, P: 0 } },
-                    { text: "I'd rather go somewhere we know is good", scores: { S: 0, C: 0, M: 1, P: 3 } },
-                    { text: "Sure, but let's have a backup plan if it's bad", scores: { S: 0, C: 3, M: 1, P: 0 } }
+                    { text: "Yes! — novelty is exciting to me, not risky; the unknown is part of the fun", scores: { S: 3, C: 1, M: 0, P: 0 } },
+                    { text: "Let me look it up first — I need enough information to know what I'm walking into before I can commit", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "I'd rather go somewhere reliable — why gamble when the familiar is guaranteed to be good?", scores: { S: 0, C: 0, M: 0, P: 3 } },
+                    { text: "Sure, but I want a backup plan — I'm open to it, but I don't like being caught without options", scores: { S: 0, C: 3, M: 1, P: 0 } }
                 ]
             },
             {
@@ -1060,10 +1059,10 @@
                 context: "You disagree with a decision your friend group is making.",
                 question: "You're most likely to...",
                 options: [
-                    { text: "Voice it clearly—healthy disagreement is fine", scores: { S: 1, C: 3, M: 0, P: 0 } },
-                    { text: "Go along with the group to preserve harmony", scores: { S: 1, C: 0, M: 0, P: 3 } },
-                    { text: "Privately share concerns with one person you trust", scores: { S: 0, C: 0, M: 3, P: 1 } },
-                    { text: "Make a joke about it but let the group decide", scores: { S: 3, C: 0, M: 0, P: 0 } }
+                    { text: "Voice it clearly — healthy disagreement makes for better decisions, and I'm not afraid of the pushback", scores: { S: 1, C: 3, M: 0, P: 0 } },
+                    { text: "Go along with the group — the relationship and peace matter more to me than winning the point", scores: { S: 0, C: 0, M: 0, P: 3 } },
+                    { text: "Share my concerns privately with one trusted person — I can't pretend I agree, but I won't disrupt the group", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Make a light joke about it — I can signal that I'm not fully on board without making it a whole thing", scores: { S: 3, C: 0, M: 0, P: 0 } }
                 ]
             },
             {
@@ -1081,10 +1080,10 @@
                 context: "Two friends are in a dispute and both come to you.",
                 question: "Your natural role is...",
                 options: [
-                    { text: "Peacemaker—help them see each other's perspective", scores: { S: 1, C: 0, M: 1, P: 3 } },
-                    { text: "Truth-teller—point out who's right and wrong", scores: { S: 0, C: 3, M: 0, P: 0 } },
-                    { text: "Listener—let each vent, offer empathy", scores: { S: 0, C: 0, M: 3, P: 1 } },
-                    { text: "Distracter—suggest we all do something fun instead", scores: { S: 3, C: 0, M: 0, P: 0 } }
+                    { text: "Peacemaker — the tension is uncomfortable for everyone and I want to restore harmony as quickly as possible", scores: { S: 1, C: 0, M: 0, P: 3 } },
+                    { text: "Truth-teller — someone has to say the honest thing, even if it's uncomfortable, and I don't shy from that", scores: { S: 0, C: 3, M: 0, P: 0 } },
+                    { text: "Listener — I feel what both of them feel and I want each of them to know they're truly heard", scores: { S: 0, C: 0, M: 3, P: 1 } },
+                    { text: "Distractor — conflict is heavy and I believe lightness heals more than dissecting who said what", scores: { S: 3, C: 0, M: 0, P: 0 } }
                 ]
             },
             {
@@ -1093,10 +1092,10 @@
                 type: "scenario",
                 question: "After an argument with someone close to me, I typically...",
                 options: [
-                    { text: "Bounce back quickly—life's too short to dwell", scores: { S: 3, C: 0, M: 0, P: 1 } },
-                    { text: "Replay the conversation, thinking of what I should have said", scores: { S: 0, C: 1, M: 3, P: 0 } },
-                    { text: "Feel unsettled until harmony is restored", scores: { S: 0, C: 0, M: 1, P: 3 } },
-                    { text: "Stand firm if I was right, move on if resolved", scores: { S: 0, C: 3, M: 0, P: 0 } }
+                    { text: "Bounce back quickly — once it's resolved it's resolved; dwelling doesn't serve anyone", scores: { S: 3, C: 0, M: 0, P: 1 } },
+                    { text: "Replay the whole conversation — I keep analyzing what went wrong, what I should have said, what it means", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Feel unsettled until things are right between us again — the discomfort of broken connection stays with me", scores: { S: 0, C: 0, M: 1, P: 3 } },
+                    { text: "Stand firm if I was right, move on cleanly once it's resolved — I don't need to process, I need resolution", scores: { S: 0, C: 3, M: 0, P: 0 } }
                 ]
             },
             {
@@ -1114,10 +1113,10 @@
                 type: "scenario",
                 question: "When facing a major life decision, I prefer to...",
                 options: [
-                    { text: "Talk it through with many people to gather input", scores: { S: 3, C: 1, M: 0, P: 0 } },
-                    { text: "Reflect deeply on my own before discussing with anyone", scores: { S: 0, C: 0, M: 3, P: 1 } },
-                    { text: "Make a quick pros/cons list and decide efficiently", scores: { S: 0, C: 3, M: 0, P: 0 } },
-                    { text: "Let it sit until the right answer becomes clear naturally", scores: { S: 0, C: 0, M: 1, P: 3 } }
+                    { text: "Talk it through with many people — other voices help me hear my own thinking more clearly", scores: { S: 3, C: 0, M: 0, P: 0 } },
+                    { text: "Reflect deeply on my own first — I need to understand what I actually think before anyone else can influence it", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Make a quick pros/cons list and decide — I trust my analysis and I don't like sitting in indecision", scores: { S: 0, C: 3, M: 1, P: 0 } },
+                    { text: "Let it sit and wait for clarity — I don't force decisions; the right answer tends to surface when I'm not pushing", scores: { S: 0, C: 0, M: 0, P: 3 } }
                 ]
             },
             {
@@ -1135,10 +1134,10 @@
                 context: "You have some time alone with no obligations.",
                 question: "Your mind naturally drifts toward...",
                 options: [
-                    { text: "Planning fun activities or who to call", scores: { S: 3, C: 0, M: 0, P: 0 } },
-                    { text: "Reflecting on life, meaning, or relationships", scores: { S: 0, C: 0, M: 3, P: 1 } },
-                    { text: "Relaxing fully—enjoying the peace and quiet", scores: { S: 0, C: 0, M: 0, P: 3 } },
-                    { text: "Goals, projects, and what needs to get done", scores: { S: 0, C: 3, M: 1, P: 0 } }
+                    { text: "Planning who to call or what fun thing to do — even alone, my mind goes to people and energy", scores: { S: 3, C: 0, M: 0, P: 0 } },
+                    { text: "Reflecting on life, meaning, and what it all adds up to — I can't help going deep when there's space to think", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Relaxing fully — a quiet mind is a gift, not a waste; I don't need to produce or process to feel okay", scores: { S: 0, C: 0, M: 0, P: 3 } },
+                    { text: "Goals and what I need to build next — my mind goes to what I'm working toward, even at rest", scores: { S: 0, C: 3, M: 1, P: 0 } }
                 ]
             },
             {
@@ -1147,10 +1146,10 @@
                 type: "scenario",
                 question: "I am most at peace when...",
                 options: [
-                    { text: "Surrounded by people I love, enjoying the moment", scores: { S: 3, C: 0, M: 0, P: 1 } },
-                    { text: "Alone with my thoughts, in a meaningful headspace", scores: { S: 0, C: 0, M: 3, P: 0 } },
-                    { text: "Making progress on something that matters", scores: { S: 0, C: 3, M: 1, P: 0 } },
-                    { text: "In calm, harmonious environments with no drama", scores: { S: 0, C: 0, M: 0, P: 3 } }
+                    { text: "Surrounded by people I love, just enjoying the moment — connection and warmth are where I come alive", scores: { S: 3, C: 0, M: 0, P: 0 } },
+                    { text: "Alone with my thoughts in a space that feels meaningful — my inner world is rich and I need room for it", scores: { S: 0, C: 0, M: 3, P: 0 } },
+                    { text: "Making real progress on something that matters — momentum and purpose are my version of peace", scores: { S: 0, C: 3, M: 1, P: 0 } },
+                    { text: "In calm, harmonious environments with no drama or pressure — ease is my natural state and I protect it", scores: { S: 0, C: 0, M: 0, P: 3 } }
                 ]
             },
             {
@@ -1188,12 +1187,10 @@
         let currentQuestion = 0;
         let answers = {};
 
-        // ── Check localStorage on page load ──
         window.addEventListener('DOMContentLoaded', function() {
             try {
                 const savedResults = localStorage.getItem(RESULTS_KEY);
                 const savedProgress = localStorage.getItem(STORAGE_KEY);
-
                 if (savedResults) {
                     const data = JSON.parse(savedResults);
                     showBanner('Your results from a previous session are saved.', 'View My Results', function() {
@@ -1202,8 +1199,7 @@
                     });
                 } else if (savedProgress) {
                     const data = JSON.parse(savedProgress);
-                    const q = data.currentQuestion + 1;
-                    showBanner('You have a session in progress — Question ' + q + ' of 40.', 'Resume Where I Left Off', function() {
+                    showBanner('You have a session in progress — Question ' + (data.currentQuestion + 1) + ' of 40.', 'Resume Where I Left Off', function() {
                         currentQuestion = data.currentQuestion;
                         answers = data.answers;
                         document.getElementById('intro-section').classList.add('hidden');
@@ -1238,17 +1234,6 @@
             clearSaved();
             currentQuestion = 0;
             answers = {};
-            document.getElementById('intro-section').classList.add('hidden');
-            document.getElementById('question-section').classList.remove('hidden');
-            renderQuestion();
-        }
-
-        function resumeTest() {
-            try {
-                const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
-                currentQuestion = data.currentQuestion;
-                answers = data.answers;
-            } catch(e) {}
             document.getElementById('intro-section').classList.add('hidden');
             document.getElementById('question-section').classList.remove('hidden');
             renderQuestion();
@@ -1364,45 +1349,46 @@
                     scores.P += optionScores.P;
                 } else if (q.type === 'likert') {
                     if (q.dimension === 'Social Energy') {
-                        scores.S += (6 - answer) * 0.6;
-                        scores.C += (6 - answer) * 0.4;
-                        scores.M += answer * 0.6;
-                        scores.P += answer * 0.4;
+                        scores.S += (6 - answer) * 0.65;
+                        scores.C += (6 - answer) * 0.35;
+                        scores.M += answer * 0.65;
+                        scores.P += answer * 0.35;
                     } else if (q.dimension === 'Pace & Reactivity') {
-                        scores.S += (6 - answer) * 0.6;
-                        scores.C += (6 - answer) * 0.5;
-                        scores.M += answer * 0.5;
-                        scores.P += answer * 0.6;
+                        scores.S += (6 - answer) * 0.65;
+                        scores.C += (6 - answer) * 0.55;
+                        scores.M += answer * 0.35;
+                        scores.P += answer * 0.65;
                     } else if (q.dimension === 'Emotional Duration') {
-                        scores.S += (6 - answer) * 0.6;
-                        scores.P += (6 - answer) * 0.4;
-                        scores.C += answer * 0.4;
-                        scores.M += answer * 0.6;
+                        scores.S += (6 - answer) * 0.55;
+                        scores.P += (6 - answer) * 0.45;
+                        scores.C += answer * 0.25;
+                        scores.M += answer * 0.75;
                     } else if (q.dimension === 'Emotional Depth') {
-                        scores.S += (6 - answer) * 0.5;
-                        scores.C += (6 - answer) * 0.3;
-                        scores.M += answer * 0.7;
-                        scores.P += answer * 0.3;
+                        scores.S += (6 - answer) * 0.50;
+                        scores.C += (6 - answer) * 0.35;
+                        scores.P += (6 - answer) * 0.15;
+                        scores.M += answer * 0.85;
+                        scores.P += answer * 0.15;
                     } else if (q.dimension === 'Orientation') {
-                        scores.S += (6 - answer) * 0.6;
-                        scores.P += (6 - answer) * 0.4;
-                        scores.C += answer * 0.6;
-                        scores.M += answer * 0.4;
+                        scores.S += (6 - answer) * 0.55;
+                        scores.P += (6 - answer) * 0.45;
+                        scores.C += answer * 0.65;
+                        scores.M += answer * 0.35;
                     } else if (q.dimension === 'Change Tolerance') {
-                        scores.S += (6 - answer) * 0.7;
-                        scores.C += (6 - answer) * 0.3;
-                        scores.M += answer * 0.5;
-                        scores.P += answer * 0.5;
+                        scores.S += (6 - answer) * 0.65;
+                        scores.C += (6 - answer) * 0.35;
+                        scores.M += answer * 0.55;
+                        scores.P += answer * 0.45;
                     } else if (q.dimension === 'Conflict Style') {
-                        scores.C += (6 - answer) * 0.6;
-                        scores.S += (6 - answer) * 0.4;
-                        scores.P += answer * 0.6;
-                        scores.M += answer * 0.4;
+                        scores.C += (6 - answer) * 0.65;
+                        scores.S += (6 - answer) * 0.35;
+                        scores.P += answer * 0.75;
+                        scores.M += answer * 0.25;
                     } else if (q.dimension === 'Internal Processing') {
-                        scores.S += (6 - answer) * 0.5;
-                        scores.C += (6 - answer) * 0.4;
-                        scores.M += answer * 0.6;
-                        scores.P += answer * 0.5;
+                        scores.S += (6 - answer) * 0.50;
+                        scores.C += (6 - answer) * 0.50;
+                        scores.M += answer * 0.85;
+                        scores.P += answer * 0.15;
                     }
                 }
             });
@@ -1421,19 +1407,17 @@
         function getBlendName(percentages) {
             const sorted = Object.entries(percentages).sort((a, b) => b[1] - a[1]);
             const [first, second] = sorted;
-            
-            if (first[1] > 40 && first[1] - second[1] > 15) {
+            // Only show pure temperament if truly dominant (60%+ and 25pt gap)
+            if (first[1] >= 60 && first[1] - second[1] >= 25) {
                 return first[0];
             }
-            
             return `${first[0]}-${second[0]}`;
         }
 
         function showResults() {
             const { percentages } = calculateScores();
             const blendName = getBlendName(percentages);
-            try { localStorage.setItem(RESULTS_KEY, JSON.stringify({ percentages, blendName })); } catch(e) {}
-            clearSaved(); // clear in-progress save
+            try { localStorage.setItem(RESULTS_KEY, JSON.stringify({ percentages, blendName })); clearSaved(); } catch(e) {}
             document.getElementById('question-section').classList.add('hidden');
             renderResultsHTML(percentages, blendName);
         }
@@ -1442,6 +1426,7 @@
             document.getElementById('results-section').classList.remove('hidden');
             
             const description = blendDescriptions[blendName] || blendDescriptions[blendName.split('-')[0]];
+            
             const sorted = Object.entries(percentages).sort((a, b) => b[1] - a[1]);
             
             let html = `
