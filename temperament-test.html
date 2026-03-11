@@ -650,7 +650,23 @@
                         </p>
                     </div>
                     
-                    <div style="text-align: center; margin-top: 2rem;">
+                    <div id="resume-banner" style="display:none; background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.35); border-radius: 8px; padding: 1.25rem 1.5rem; margin-top: 1.5rem; text-align: center;">
+                        <p style="margin: 0 0 1rem; color: var(--gold-dark); font-family: 'Montserrat', sans-serif; font-size: 0.95rem;">You have a saved session in progress.</p>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                            <button class="btn-test" onclick="resumeTest()">Resume Where I Left Off</button>
+                            <button class="btn-test secondary" onclick="clearAndStart()">Start Fresh</button>
+                        </div>
+                    </div>
+
+                    <div id="results-banner" style="display:none; background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.35); border-radius: 8px; padding: 1.25rem 1.5rem; margin-top: 1.5rem; text-align: center;">
+                        <p style="margin: 0 0 1rem; color: var(--gold-dark); font-family: 'Montserrat', sans-serif; font-size: 0.95rem;">Your results from a previous session are saved.</p>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                            <button class="btn-test" onclick="showSavedResults()">View My Results</button>
+                            <button class="btn-test secondary" onclick="clearAndStart()">Retake Assessment</button>
+                        </div>
+                    </div>
+
+                    <div id="fresh-start-btn" style="text-align: center; margin-top: 2rem;">
                         <button class="btn-test" onclick="startTest()">Begin Assessment</button>
                     </div>
                 </div>
@@ -1174,8 +1190,75 @@
             "Phlegmatic": "Pure peace and steadiness. You're the calm in the storm, supportive and reliable. You value harmony above all. Speaking up for yourself is your growth edge."
         };
 
+        const STORAGE_KEY = 'mhc_temperament_progress';
+        const RESULTS_KEY = 'mhc_temperament_results';
+
         let currentQuestion = 0;
         let answers = {};
+
+        function saveProgress() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ currentQuestion, answers }));
+        }
+
+        function loadProgress() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                return saved ? JSON.parse(saved) : null;
+            } catch(e) { return null; }
+        }
+
+        function saveResults(data) {
+            localStorage.setItem(RESULTS_KEY, JSON.stringify(data));
+            localStorage.removeItem(STORAGE_KEY);
+        }
+
+        function loadResults() {
+            try {
+                const saved = localStorage.getItem(RESULTS_KEY);
+                return saved ? JSON.parse(saved) : null;
+            } catch(e) { return null; }
+        }
+
+        function clearAndStart() {
+            localStorage.removeItem(STORAGE_KEY);
+            localStorage.removeItem(RESULTS_KEY);
+            currentQuestion = 0;
+            answers = {};
+            startTest();
+        }
+
+        function resumeTest() {
+            const saved = loadProgress();
+            if (saved) {
+                currentQuestion = saved.currentQuestion;
+                answers = saved.answers;
+            }
+            document.getElementById('intro-section').classList.add('hidden');
+            document.getElementById('question-section').classList.remove('hidden');
+            renderQuestion();
+        }
+
+        function showSavedResults() {
+            const saved = loadResults();
+            if (saved) {
+                document.getElementById('intro-section').classList.add('hidden');
+                renderResultsHTML(saved.percentages, saved.blendName);
+            }
+        }
+
+        // On page load — check for saved state
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedResults = loadResults();
+            const savedProgress = loadProgress();
+
+            if (savedResults) {
+                document.getElementById('results-banner').style.display = 'block';
+                document.getElementById('fresh-start-btn').style.display = 'none';
+            } else if (savedProgress && Object.keys(savedProgress.answers).length > 0) {
+                document.getElementById('resume-banner').style.display = 'block';
+                document.getElementById('fresh-start-btn').style.display = 'none';
+            }
+        });
 
         function startTest() {
             document.getElementById('intro-section').classList.add('hidden');
@@ -1239,11 +1322,13 @@
 
         function selectOption(questionId, optionIndex) {
             answers[questionId] = optionIndex;
+            saveProgress();
             renderQuestion();
         }
 
         function selectLikert(questionId, value) {
             answers[questionId] = value;
+            saveProgress();
             renderQuestion();
         }
 
@@ -1351,7 +1436,14 @@
         }
 
         function showResults() {
+            const { percentages } = calculateScores();
+            const blendName = getBlendName(percentages);
+            saveResults({ percentages, blendName });
             document.getElementById('question-section').classList.add('hidden');
+            renderResultsHTML(percentages, blendName);
+        }
+
+        function renderResultsHTML(percentages, blendName) {
             document.getElementById('results-section').classList.remove('hidden');
             
             const { percentages } = calculateScores();
@@ -1391,7 +1483,7 @@
                 </div>
                 
                 <div class="results-actions">
-                    <button class="btn-test secondary" onclick="location.reload()">Retake Assessment</button>
+                    <button class="btn-test secondary" onclick="clearAndStart()">Retake Assessment</button>
                     <button class="btn-test" onclick="window.print()">Save as PDF</button>
                 </div>
             `;
