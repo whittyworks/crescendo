@@ -847,6 +847,130 @@
             margin-top: 2rem;
         }
 
+        /* Clickable match cards */
+        .match-card.clickable {
+            cursor: pointer;
+            position: relative;
+        }
+        .match-card.clickable::after {
+            content: 'Explore →';
+            display: block;
+            font-size: 0.75rem;
+            color: var(--gold);
+            margin-top: 0.35rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.05em;
+        }
+        .match-card.clickable:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(212,175,55,0.2);
+            border: 1px solid rgba(212,175,55,0.4);
+        }
+
+        /* Type Modal */
+        .type-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(44,36,22,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .type-modal-overlay.active {
+            display: flex;
+        }
+        .type-modal-content {
+            background: var(--cream);
+            border-radius: 16px;
+            max-width: 680px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 2.5rem;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(44,36,22,0.3);
+            animation: modalIn 0.3s ease;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem; right: 1.25rem;
+            background: none; border: none;
+            font-size: 1.8rem; cursor: pointer;
+            color: var(--text-medium);
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .modal-close:hover { color: var(--gold-dark); }
+        .modal-type-header {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(232,200,114,0.15), rgba(220,197,216,0.1));
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        .modal-type-letters {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold-dark);
+            letter-spacing: 0.1em;
+        }
+        .modal-type-name {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin: 0.25rem 0;
+        }
+        .modal-type-tagline {
+            font-size: 1rem;
+            color: var(--text-medium);
+            font-style: italic;
+        }
+        .modal-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .modal-stack-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.9rem 1rem;
+            border-radius: 8px;
+        }
+        .modal-stack-item.dominant { background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(232,200,114,0.1)); }
+        .modal-stack-item.auxiliary { background: linear-gradient(135deg, rgba(232,200,114,0.12), rgba(253,248,243,0.5)); }
+        .modal-stack-item.tertiary { background: linear-gradient(135deg, rgba(220,197,216,0.18), rgba(253,248,243,0.5)); }
+        .modal-stack-item.inferior { background: linear-gradient(135deg, rgba(184,197,176,0.18), rgba(253,248,243,0.5)); }
+        .modal-fn { font-size: 1.1rem; font-weight: 700; color: var(--gold-dark); min-width: 36px; }
+        .modal-pos { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); min-width: 70px; font-family: 'Montserrat', sans-serif; }
+        .modal-fn-name { font-size: 0.95rem; color: var(--text-dark); font-weight: 500; }
+        .modal-fn-desc { font-size: 0.85rem; color: var(--text-medium); }
+        .modal-desc {
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            padding: 1rem 1.25rem;
+            background: rgba(253,248,243,0.7);
+            border-left: 4px solid var(--gold);
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1rem;
+        }
+        .modal-shared-note {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            font-style: italic;
+            padding: 0.75rem 1rem;
+            background: rgba(220,197,216,0.15);
+            border-radius: 8px;
+        }
+
         /* Footer */
         footer {
             background: var(--text-dark);
@@ -1073,22 +1197,22 @@
                     <div class="comparison-col">
                         <h5 class="sans">Letter-Based Tests</h5>
                         <ul>
-                            <li>❌ Easy to predict answers</li>
-                            <li>❌ Measures preferences</li>
-                            <li>❌ Binary choices (I/E, T/F)</li>
-                            <li>❌ Surface-level typing</li>
-                            <li>❌ Similar to temperament tests</li>
+                            <li>âŒ Easy to predict answers</li>
+                            <li>âŒ Measures preferences</li>
+                            <li>âŒ Binary choices (I/E, T/F)</li>
+                            <li>âŒ Surface-level typing</li>
+                            <li>âŒ Similar to temperament tests</li>
                         </ul>
                     </div>
                     <div class="comparison-col better">
                         <h5 class="sans">This Test</h5>
                         <ul>
-                            <li>✓ Questions aren't obvious</li>
-                            <li>✓ Measures mental processes</li>
-                            <li>✓ 8 functions scored separately</li>
-                            <li>✓ Includes stress patterns</li>
-                            <li>✓ Reveals your function stack</li>
-                            <li>✓ Shows close alternative types</li>
+                            <li>âœ“ Questions aren't obvious</li>
+                            <li>âœ“ Measures mental processes</li>
+                            <li>âœ“ 8 functions scored separately</li>
+                            <li>âœ“ Includes stress patterns</li>
+                            <li>âœ“ Reveals your function stack</li>
+                            <li>âœ“ Shows close alternative types</li>
                         </ul>
                     </div>
                 </div>
@@ -1222,7 +1346,18 @@
                     For most accurate results, answer with your first instinct. Don't overthink!
                 </p>
 
-                <button class="cta-button" onclick="startTest()">Start Assessment</button>
+                <div id="resume-banner" style="display:none; margin-bottom:1.5rem; padding:1.25rem 1.5rem; background:linear-gradient(135deg,rgba(212,175,55,0.15),rgba(220,197,216,0.15)); border:1px solid rgba(212,175,55,0.4); border-radius:12px;">
+                    <p style="margin:0 0 1rem; color:var(--text-dark); font-size:1.05rem;">
+                        ✨ You have a quiz in progress — <span id="resume-progress-text" style="color:var(--gold-dark);font-weight:600;"></span>
+                    </p>
+                    <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+                        <button class="cta-button" onclick="resumeTest()" style="padding:0.75rem 2rem;">Resume Where I Left Off</button>
+                        <button class="cta-button secondary" onclick="clearAndStart()" style="padding:0.75rem 2rem;">Start Fresh</button>
+                    </div>
+                </div>
+                <div id="start-btn-container">
+                    <button class="cta-button" onclick="startTest()">Start Assessment</button>
+                </div>
             </div>
 
             <!-- Question Container (hidden initially) -->
@@ -1264,7 +1399,7 @@
 
                 <div class="nav-buttons">
                     <button id="back-btn" class="nav-btn" onclick="goBack()" disabled>← Back</button>
-                    <button class="nav-btn" onclick="answerQuestion(3)">Skip →</button>
+                    <button class="nav-btn" onclick="answerQuestion(3)">Skip â†’</button>
                 </div>
             </div>
 
@@ -1274,6 +1409,14 @@
             </div>
         </div>
     </section>
+
+    <!-- Type Detail Modal -->
+    <div id="type-modal" class="type-modal-overlay" onclick="closeTypeModal(event)">
+        <div class="type-modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeTypeModal()">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <!-- Portal Footer -->
@@ -1579,6 +1722,65 @@
         let shuffledQuestions = [];
         let currentQuestion = 0;
         let answers = {};
+        const STORAGE_KEY = 'mhc_cognitive_quiz';
+
+        // Save progress to localStorage
+        function saveProgress() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                    shuffledQuestions,
+                    currentQuestion,
+                    answers
+                }));
+            } catch(e) {}
+        }
+
+        // Load progress from localStorage
+        function loadProgress() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                return saved ? JSON.parse(saved) : null;
+            } catch(e) { return null; }
+        }
+
+        // Clear saved progress
+        function clearProgress() {
+            try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+        }
+
+        // Check on page load if there's a saved quiz
+        function checkForSavedProgress() {
+            const saved = loadProgress();
+            if (saved && saved.shuffledQuestions && saved.shuffledQuestions.length > 0 && saved.currentQuestion > 0) {
+                const answered = Object.keys(saved.answers).length;
+                const total = saved.shuffledQuestions.length;
+                document.getElementById('resume-progress-text').textContent =
+                    `${answered} of ${total} questions answered`;
+                document.getElementById('resume-banner').style.display = 'block';
+                document.getElementById('start-btn-container').style.display = 'none';
+            }
+        }
+
+        // Resume saved test
+        function resumeTest() {
+            const saved = loadProgress();
+            if (!saved) return;
+            shuffledQuestions = saved.shuffledQuestions;
+            currentQuestion = saved.currentQuestion;
+            answers = saved.answers;
+            document.getElementById('test-intro').style.display = 'none';
+            document.getElementById('question-container').classList.add('active');
+            document.getElementById('results-container').classList.remove('active');
+            showQuestion();
+        }
+
+        // Clear saved data and start fresh
+        function clearAndStart() {
+            clearProgress();
+            document.getElementById('resume-banner').style.display = 'none';
+            document.getElementById('start-btn-container').style.display = 'block';
+            startTest();
+        }
 
         // Shuffle array
         function shuffleArray(array) {
@@ -1595,6 +1797,7 @@
             shuffledQuestions = shuffleArray(questions);
             currentQuestion = 0;
             answers = {};
+            clearProgress();
             
             document.getElementById('test-intro').style.display = 'none';
             document.getElementById('question-container').classList.add('active');
@@ -1624,8 +1827,10 @@
             
             if (currentQuestion < shuffledQuestions.length - 1) {
                 currentQuestion++;
+                saveProgress();
                 showQuestion();
             } else {
+                clearProgress();
                 showResults();
             }
         }
@@ -1634,6 +1839,7 @@
         function goBack() {
             if (currentQuestion > 0) {
                 currentQuestion--;
+                saveProgress();
                 showQuestion();
             }
         }
@@ -1840,10 +2046,10 @@
                     
                     <div class="result-section">
                         <h3 class="script">Close Matches</h3>
-                        <p style="color: var(--text-medium); margin-bottom: 1rem;">Types that also fit your function profile:</p>
+                        <p style="color: var(--text-medium); margin-bottom: 1rem;">Types that also fit your function profile — click any to explore:</p>
                         <div class="matches-grid">
                             ${results.typeMatches.map(([matchType, score], idx) => `
-                                <div class="match-card">
+                                <div class="match-card clickable" onclick="openTypeModal('${matchType}', '${type}')">
                                     <div class="match-type">${matchType}</div>
                                     <div class="match-percent">${Math.round((score / results.maxScore) * 100)}% match</div>
                                 </div>
@@ -1865,13 +2071,75 @@
 
         // Reset test
         function resetTest() {
+            clearProgress();
             document.getElementById('results-container').classList.remove('active');
             document.getElementById('results-container').innerHTML = '';
             document.getElementById('test-intro').style.display = 'block';
+            document.getElementById('resume-banner').style.display = 'none';
+            document.getElementById('start-btn-container').style.display = 'block';
             
             // Scroll back to test section
             document.getElementById('test-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+
+        // Open type detail modal
+        function openTypeModal(targetType, primaryType) {
+            const info = typeInfo[targetType];
+            const stack = typeStacks[targetType];
+            const primaryStack = typeStacks[primaryType];
+            const positions = ['Dominant', 'Auxiliary', 'Tertiary', 'Inferior'];
+            const classes = ['dominant', 'auxiliary', 'tertiary', 'inferior'];
+
+            // Find shared functions with primary type
+            const shared = stack.filter(fn => primaryStack.includes(fn));
+
+            let sharedNote = '';
+            if (targetType !== primaryType && shared.length > 0) {
+                sharedNote = `<p class="modal-shared-note">💡 ${targetType} shares <strong>${shared.join(', ')}</strong> with your primary result (${primaryType}) — which is why these types scored so close together for you.</p>`;
+            }
+
+            const stackHtml = stack.map((fn, idx) => `
+                <div class="modal-stack-item ${classes[idx]}">
+                    <span class="modal-pos sans">${positions[idx]}</span>
+                    <span class="modal-fn">${fn}</span>
+                    <div>
+                        <div class="modal-fn-name">${functionDescriptions[fn].name}</div>
+                        <div class="modal-fn-desc">${functionDescriptions[fn].desc}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('modal-body').innerHTML = `
+                <div class="modal-type-header">
+                    <div class="modal-type-letters script">${targetType}</div>
+                    <div class="modal-type-name">${info.name}</div>
+                    <div class="modal-type-tagline">${info.tagline}</div>
+                </div>
+                <h3 class="script" style="color:var(--gold-dark);margin-bottom:1rem;font-size:1.3rem;">Cognitive Function Stack</h3>
+                <div class="modal-stack">${stackHtml}</div>
+                <p class="modal-desc">${info.description}</p>
+                ${sharedNote}
+            `;
+
+            document.getElementById('type-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close type modal
+        function closeTypeModal(e) {
+            if (!e || e.target === document.getElementById('type-modal')) {
+                document.getElementById('type-modal').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeTypeModal();
+        });
+
+        // Check for saved progress on page load
+        checkForSavedProgress();
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
