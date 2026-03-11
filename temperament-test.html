@@ -650,23 +650,15 @@
                         </p>
                     </div>
                     
-                    <div id="resume-banner" style="display:none; background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.35); border-radius: 8px; padding: 1.25rem 1.5rem; margin-top: 1.5rem; text-align: center;">
-                        <p style="margin: 0 0 1rem; color: var(--gold-dark); font-family: 'Montserrat', sans-serif; font-size: 0.95rem;">You have a saved session in progress.</p>
-                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                            <button class="btn-test" onclick="resumeTest()">Resume Where I Left Off</button>
+                    <div id="saved-banner" style="display:none; background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.3); border-radius:8px; padding:1.25rem 1.5rem; margin-top:1.5rem; text-align:center;">
+                        <p id="saved-banner-msg" style="margin:0 0 1rem; color:var(--gold-dark); font-family:'Montserrat',sans-serif; font-size:0.95rem;"></p>
+                        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+                            <button class="btn-test" id="saved-primary-btn"></button>
                             <button class="btn-test secondary" onclick="clearAndStart()">Start Fresh</button>
                         </div>
                     </div>
 
-                    <div id="results-banner" style="display:none; background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.35); border-radius: 8px; padding: 1.25rem 1.5rem; margin-top: 1.5rem; text-align: center;">
-                        <p style="margin: 0 0 1rem; color: var(--gold-dark); font-family: 'Montserrat', sans-serif; font-size: 0.95rem;">Your results from a previous session are saved.</p>
-                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                            <button class="btn-test" onclick="showSavedResults()">View My Results</button>
-                            <button class="btn-test secondary" onclick="clearAndStart()">Retake Assessment</button>
-                        </div>
-                    </div>
-
-                    <div id="fresh-start-btn" style="text-align: center; margin-top: 2rem;">
+                    <div id="fresh-start-area" style="text-align: center; margin-top: 2rem;">
                         <button class="btn-test" onclick="startTest()">Begin Assessment</button>
                     </div>
                 </div>
@@ -1190,75 +1182,77 @@
             "Phlegmatic": "Pure peace and steadiness. You're the calm in the storm, supportive and reliable. You value harmony above all. Speaking up for yourself is your growth edge."
         };
 
-        const STORAGE_KEY = 'mhc_temperament_progress';
-        const RESULTS_KEY = 'mhc_temperament_results';
+        const STORAGE_KEY = 'mhc_temperament';
+        const RESULTS_KEY  = 'mhc_temperament_results';
 
         let currentQuestion = 0;
         let answers = {};
 
+        // ── Check localStorage on page load ──
+        window.addEventListener('DOMContentLoaded', function() {
+            try {
+                const savedResults = localStorage.getItem(RESULTS_KEY);
+                const savedProgress = localStorage.getItem(STORAGE_KEY);
+
+                if (savedResults) {
+                    const data = JSON.parse(savedResults);
+                    showBanner('Your results from a previous session are saved.', 'View My Results', function() {
+                        document.getElementById('intro-section').classList.add('hidden');
+                        renderResultsHTML(data.percentages, data.blendName);
+                    });
+                } else if (savedProgress) {
+                    const data = JSON.parse(savedProgress);
+                    const q = data.currentQuestion + 1;
+                    showBanner('You have a session in progress — Question ' + q + ' of 40.', 'Resume Where I Left Off', function() {
+                        currentQuestion = data.currentQuestion;
+                        answers = data.answers;
+                        document.getElementById('intro-section').classList.add('hidden');
+                        document.getElementById('question-section').classList.remove('hidden');
+                        renderQuestion();
+                    });
+                }
+            } catch(e) {}
+        });
+
+        function showBanner(msg, btnLabel, btnAction) {
+            document.getElementById('saved-banner-msg').textContent = msg;
+            const btn = document.getElementById('saved-primary-btn');
+            btn.textContent = btnLabel;
+            btn.onclick = btnAction;
+            document.getElementById('saved-banner').style.display = 'block';
+            document.getElementById('fresh-start-area').style.display = 'none';
+        }
+
         function saveProgress() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify({ currentQuestion, answers }));
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ currentQuestion, answers })); } catch(e) {}
         }
 
-        function loadProgress() {
+        function clearSaved() {
             try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                return saved ? JSON.parse(saved) : null;
-            } catch(e) { return null; }
-        }
-
-        function saveResults(data) {
-            localStorage.setItem(RESULTS_KEY, JSON.stringify(data));
-            localStorage.removeItem(STORAGE_KEY);
-        }
-
-        function loadResults() {
-            try {
-                const saved = localStorage.getItem(RESULTS_KEY);
-                return saved ? JSON.parse(saved) : null;
-            } catch(e) { return null; }
+                localStorage.removeItem(STORAGE_KEY);
+                localStorage.removeItem(RESULTS_KEY);
+            } catch(e) {}
         }
 
         function clearAndStart() {
-            localStorage.removeItem(STORAGE_KEY);
-            localStorage.removeItem(RESULTS_KEY);
+            clearSaved();
             currentQuestion = 0;
             answers = {};
-            startTest();
-        }
-
-        function resumeTest() {
-            const saved = loadProgress();
-            if (saved) {
-                currentQuestion = saved.currentQuestion;
-                answers = saved.answers;
-            }
             document.getElementById('intro-section').classList.add('hidden');
             document.getElementById('question-section').classList.remove('hidden');
             renderQuestion();
         }
 
-        function showSavedResults() {
-            const saved = loadResults();
-            if (saved) {
-                document.getElementById('intro-section').classList.add('hidden');
-                renderResultsHTML(saved.percentages, saved.blendName);
-            }
+        function resumeTest() {
+            try {
+                const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+                currentQuestion = data.currentQuestion;
+                answers = data.answers;
+            } catch(e) {}
+            document.getElementById('intro-section').classList.add('hidden');
+            document.getElementById('question-section').classList.remove('hidden');
+            renderQuestion();
         }
-
-        // On page load — check for saved state
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedResults = loadResults();
-            const savedProgress = loadProgress();
-
-            if (savedResults) {
-                document.getElementById('results-banner').style.display = 'block';
-                document.getElementById('fresh-start-btn').style.display = 'none';
-            } else if (savedProgress && Object.keys(savedProgress.answers).length > 0) {
-                document.getElementById('resume-banner').style.display = 'block';
-                document.getElementById('fresh-start-btn').style.display = 'none';
-            }
-        });
 
         function startTest() {
             document.getElementById('intro-section').classList.add('hidden');
@@ -1438,7 +1432,8 @@
         function showResults() {
             const { percentages } = calculateScores();
             const blendName = getBlendName(percentages);
-            saveResults({ percentages, blendName });
+            try { localStorage.setItem(RESULTS_KEY, JSON.stringify({ percentages, blendName })); } catch(e) {}
+            clearSaved(); // clear in-progress save
             document.getElementById('question-section').classList.add('hidden');
             renderResultsHTML(percentages, blendName);
         }
@@ -1446,10 +1441,7 @@
         function renderResultsHTML(percentages, blendName) {
             document.getElementById('results-section').classList.remove('hidden');
             
-            const { percentages } = calculateScores();
-            const blendName = getBlendName(percentages);
             const description = blendDescriptions[blendName] || blendDescriptions[blendName.split('-')[0]];
-            
             const sorted = Object.entries(percentages).sort((a, b) => b[1] - a[1]);
             
             let html = `
