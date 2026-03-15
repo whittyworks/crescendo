@@ -137,8 +137,7 @@
 
 
     <!-- Photo Gallery -->
-    <section class="retreat-gallery reveal" style="background: var(--cream-dark); padding: 5rem 0;">
-        <div class="watercolor-flower flower-1" style="top: 10%; right: 5%;"></div>
+    <section class="retreat-gallery reveal" style="background: var(--cream-dark); padding: 4rem 0;">
         <div class="container">
             <div class="section-header">
                 <p class="section-label sans">From Our Last Retreat</p>
@@ -147,31 +146,48 @@
                     Each woman leaves carrying something beautiful — a reminder of who she is and who made her.
                 </p>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto; gap: 1.25rem; margin-top: 3rem; max-width: 900px; margin-left: auto; margin-right: auto;">
-                <!-- Left: tall hero image -->
-                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.12); grid-row: span 2;">
-                    <img src="assets/img/retreat-bouquet-hero.jpeg" alt="Spiritual bouquet from Made Beautiful retreat" style="width:100%; height:100%; min-height:500px; object-fit:cover; object-position: center; display:block;">
+
+            <!-- Option B: tall left + 2x2 right -->
+            <div style="display:flex; gap:1.25rem; margin-top:3rem; max-width:860px; margin-left:auto; margin-right:auto; align-items:stretch;">
+                
+                <!-- Left: tall hero -->
+                <div style="flex:1; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.12); min-height:480px;">
+                    <img src="assets/img/retreat-bouquet-hero.jpg" 
+                         alt="Spiritual bouquet from Made Beautiful retreat" 
+                         style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
                 </div>
+
                 <!-- Right: 2x2 grid -->
-                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.12);">
-                    <img src="assets/img/retreat-bouquet-red.jpeg" alt="Retreat attendee holding her spiritual bouquet" style="width:100%; height:240px; object-fit:cover; object-position: center top; display:block;">
-                </div>
-                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.12);">
-                    <img src="assets/img/retreat-bouquet-olive.jpeg" alt="Retreat attendee holding her spiritual bouquet" style="width:100%; height:240px; object-fit:cover; object-position: center top; display:block;">
-                </div>
-                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.12);">
-                    <img src="assets/img/retreat-bouquet-navy.jpeg" alt="Retreat attendee holding her spiritual bouquet" style="width:100%; height:240px; object-fit:cover; object-position: center top; display:block;">
-                </div>
-                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.12);">
-                    <img src="assets/img/retreat-bouquet-hands.jpeg" alt="Retreat attendee holding her spiritual bouquet" style="width:100%; height:240px; object-fit:cover; object-position: center top; display:block;">
+                <div style="flex:1; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:1.25rem;">
+                    <div style="border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.12);">
+                        <img src="assets/img/retreat-bouquet-red.jpg" 
+                             alt="Retreat attendee holding her bouquet" 
+                             style="width:100%; height:100%; min-height:220px; object-fit:cover; object-position:center top; display:block;">
+                    </div>
+                    <div style="border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.12);">
+                        <img src="assets/img/retreat-bouquet-olive.jpg" 
+                             alt="Retreat attendee holding her bouquet" 
+                             style="width:100%; height:100%; min-height:220px; object-fit:cover; object-position:center top; display:block;">
+                    </div>
+                    <div style="border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.12);">
+                        <img src="assets/img/retreat-bouquet-navy.jpg" 
+                             alt="Retreat attendee holding her bouquet" 
+                             style="width:100%; height:100%; min-height:220px; object-fit:cover; object-position:center top; display:block;">
+                    </div>
+                    <div style="border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.12);">
+                        <img src="assets/img/retreat-bouquet-hands.jpg" 
+                             alt="Retreat attendee holding her bouquet" 
+                             style="width:100%; height:100%; min-height:220px; object-fit:cover; object-position:center top; display:block;">
+                    </div>
                 </div>
             </div>
+
             <p style="text-align:center; font-style:italic; color:var(--text-medium); margin-top:2rem; font-size:1rem;">
                 "Fearfully &amp; wonderfully made" — each bouquet as unique as the woman who made it.
             </p>
         </div>
     </section>
-    
+
 <!-- Schedule -->
     <section id="schedule" class="retreat-schedule reveal" style="background: var(--cream-dark);">
         <div class="watercolor-flower flower-2" style="top: 15%; left: 5%;"></div>
@@ -208,9 +224,9 @@
                             take a few deep breaths together, open with prayer, and set our intentions for the day ahead.
                         </p>
                         <div class="schedule-elements">
-                            <span>☕ Refreshments</span>
-                            <span>ðŸ•Šï¸ Opening Prayer</span>
-                            <span>ðŸ“‹ Day Overview</span>
+                            <span>Refreshments</span>
+                            <span>Opening Prayer</span>
+                            <span>Day Overview</span>
                         </div>
                     </div>
                 </div>
@@ -227,9 +243,9 @@
                             and Scripture, we'll explore what it means to be called "beloved" and "daughter."
                         </p>
                         <div class="schedule-elements">
-                            <span>ðŸ“– Scripture Meditation</span>
-                            <span>âœï¸ Journaling Prompts</span>
-                            <span>ðŸ’­ Silent Reflection</span>
+                            <span>Scripture Meditation</span>
+                            <span>Journaling Prompts</span>
+                            <span>Silent Reflection</span>
                         </div>
                     </div>
                 </div>
@@ -246,9 +262,9 @@
                             creativity is visible in your physical design, from your coloring to your essence.
                         </p>
                         <div class="schedule-elements">
-                            <span>ðŸŒˆ Beauty Discovery</span>
-                            <span>ðŸ’ƒ Embodied Prayer</span>
-                            <span>✨ Personal Reflection</span>
+                            <span>Beauty Discovery</span>
+                            <span>Embodied Prayer</span>
+                            <span>Personal Reflection</span>
                         </div>
                     </div>
                 </div>
@@ -266,9 +282,9 @@
                             Regardless, this will be a sacred space for silence, prayer, and encounter with the Lord.
                         </p>
                         <div class="schedule-elements">
-                            <span>ðŸ•Šï¸ Silent Prayer</span>
-                            <span>ðŸ’­ Contemplation</span>
-                            <span>ðŸ™ Personal Reflection</span>
+                            <span>Silent Prayer</span>
+                            <span>Contemplation</span>
+                            <span>Personal Reflection</span>
                         </div>
                     </div>
                 </div>
@@ -285,9 +301,9 @@
                             or simply sit in silence. Walk the grounds, journal, or just breathe.
                         </p>
                         <div class="schedule-elements">
-                            <span>ðŸ½ï¸ Lunch Provided</span>
-                            <span>ðŸŒ³ Nature Walk Option</span>
-                            <span>ðŸ¤« Silent Reflection Space</span>
+                            <span>Lunch Provided</span>
+                            <span>Nature Walk Option</span>
+                            <span>Silent Reflection Space</span>
                         </div>
                     </div>
                 </div>
@@ -304,9 +320,9 @@
                             struggles. We'll explore how understanding your interior landscape deepens self-compassion.
                         </p>
                         <div class="schedule-elements">
-                            <span>ðŸ§  Self-Discovery</span>
-                            <span>ðŸ’ Compassion Practice</span>
-                            <span>ðŸŽ¨ Creative Expression</span>
+                            <span>Self-Discovery</span>
+                            <span>Compassion Practice</span>
+                            <span>Creative Expression</span>
                         </div>
                     </div>
                 </div>
@@ -323,9 +339,9 @@
                             to help you remember your belovedness even in the midst of ordinary days.
                         </p>
                         <div class="schedule-elements">
-                            <span>ðŸ•Šï¸ Rule of Life Intro</span>
-                            <span>ðŸ“¿ Prayer Practice</span>
-                            <span>ðŸŒ± Next Steps</span>
+                            <span>Rule of Life Intro</span>
+                            <span>Prayer Practice</span>
+                            <span>Next Steps</span>
                         </div>
                     </div>
                 </div>
@@ -343,9 +359,9 @@
                             day's grace. Take it home as a lasting symbol of your belovedness.
                         </p>
                         <div class="schedule-elements">
-                            <span>ðŸŒ¸ Sola Flower Arrangement</span>
-                            <span>ðŸŽ¨ Creative Prayer</span>
-                            <span>ðŸ’ Keepsake to Treasure</span>
+                            <span>Sola Flower Arrangement</span>
+                            <span>Creative Prayer</span>
+                            <span>Keepsake to Treasure</span>
                         </div>
                     </div>
                 </div>
@@ -363,9 +379,9 @@
                             carrying your spiritual bouquet and the peace of this sacred day.
                         </p>
                         <div class="schedule-elements">
-                            <span>ðŸ™ Blessing Circle</span>
-                            <span>ðŸ’ Bouquet Complete</span>
-                            <span>✨ Sending Forth</span>
+                            <span>Blessing Circle</span>
+                            <span>Bouquet Complete</span>
+                            <span>Sending Forth</span>
                         </div>
                     </div>
                 </div>
@@ -502,7 +518,8 @@
 
             <div class="details-cards">
                 <div class="detail-card">
-                    <div class="detail-icon">ðŸ“…</div>
+                    
+                    <div class="detail-icon">📅</div>
                     <h3 class="detail-card-title sans">When</h3>
                     <p class="detail-card-info">
                         <strong>Date Coming Soon</strong><br>
@@ -512,7 +529,8 @@
                 </div>
 
                 <div class="detail-card">
-                    <div class="detail-icon">ðŸ“</div>
+                    
+                    <div class="detail-icon">📍</div>
                     <h3 class="detail-card-title sans">Where</h3>
                     <p class="detail-card-info">
                         <strong>Sacred Retreat Space</strong><br>
@@ -522,7 +540,8 @@
                 </div>
 
                 <div class="detail-card">
-                    <div class="detail-icon">ðŸ‘¥</div>
+                    
+                    <div class="detail-icon">👥</div>
                     <h3 class="detail-card-title sans">Community</h3>
                     <p class="detail-card-info">
                         <strong>Private Event</strong><br>
@@ -532,7 +551,8 @@
                 </div>
 
                 <div class="detail-card">
-                    <div class="detail-icon">ðŸ’</div>
+                    
+                    <div class="detail-icon">🌸</div>
                     <h3 class="detail-card-title sans">Special Feature</h3>
                     <p class="detail-card-info">
                         <strong>Spiritual Bouquet Craft</strong><br>
