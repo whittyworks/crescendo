@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Way of Seeing · My Holy Crescendo</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="assets/img/crescendo-cover.jpg">
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+            --blush: #F5E1DA;
+            --sage: #E8EDE4;
+            --mauve: #DCC5D8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(253,248,243,0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+        }
+
+        .nav-brand {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--text-medium);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--gold-dark); }
+
+        /* ── HERO ── */
+        .hero {
+            padding: 9rem 5% 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -80px;
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: -60px;
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(220,197,216,0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .session-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+
+        .ornament {
+            color: var(--gold);
+            font-size: 1.2rem;
+            letter-spacing: 0.3em;
+            margin: 1rem 0;
+        }
+
+        .hero-description {
+            max-width: 580px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+        }
+
+        /* ── INTRO CARD ── */
+        #intro-card {
+            max-width: 680px;
+            margin: 0 auto 3rem;
+            background: white;
+            border: 1px solid rgba(212,175,55,0.25);
+            border-radius: 2px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 30px rgba(44,36,22,0.06);
+        }
+
+        .intro-note {
+            font-size: 1rem;
+            color: var(--text-medium);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-note strong {
+            color: var(--text-dark);
+        }
+
+        .start-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: var(--gold-dark);
+            color: var(--cream);
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .start-btn:hover {
+            background: var(--text-dark);
+            transform: translateY(-1px);
+        }
+
+        /* ── CHAT INTERFACE ── */
+        #chat-container {
+            display: none;
+            max-width: 720px;
+            margin: 0 auto 4rem;
+            padding: 0 1rem;
+        }
+
+        .chat-window {
+            background: white;
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 2px;
+            min-height: 420px;
+            max-height: 560px;
+            overflow-y: auto;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 30px rgba(44,36,22,0.06);
+            scroll-behavior: smooth;
+        }
+
+        /* Message bubbles */
+        .msg {
+            margin-bottom: 1.5rem;
+            animation: fadeUp 0.4s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .msg-guide {
+            display: flex;
+            gap: 0.9rem;
+            align-items: flex-start;
+        }
+
+        .guide-avatar {
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            color: white;
+            letter-spacing: 0.05em;
+        }
+
+        .guide-bubble {
+            background: var(--cream-dark);
+            border: 1px solid rgba(212,175,55,0.15);
+            border-radius: 2px 12px 12px 12px;
+            padding: 1rem 1.2rem;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            line-height: 1.75;
+            max-width: calc(100% - 50px);
+        }
+
+        .msg-user {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .user-bubble {
+            background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.06));
+            border: 1px solid rgba(212,175,55,0.25);
+            border-radius: 12px 2px 12px 12px;
+            padding: 1rem 1.2rem;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            line-height: 1.75;
+            max-width: 80%;
+            font-style: italic;
+        }
+
+        /* Typing indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 0.9rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+            padding: 0.8rem 1rem;
+            background: var(--cream-dark);
+            border-radius: 2px 12px 12px 12px;
+            border: 1px solid rgba(212,175,55,0.15);
+        }
+
+        .typing-dots span {
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: bounce 1.2s infinite;
+        }
+
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+            40% { transform: translateY(-5px); opacity: 1; }
+        }
+
+        /* Input area */
+        .input-area {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.9rem 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            background: white;
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 2px;
+            resize: none;
+            min-height: 52px;
+            max-height: 140px;
+            line-height: 1.6;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: var(--gold);
+        }
+
+        .chat-input::placeholder {
+            color: rgba(92,81,66,0.45);
+            font-style: italic;
+        }
+
+        .send-btn {
+            padding: 0.9rem 1.4rem;
+            background: var(--gold-dark);
+            color: var(--cream);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            min-height: 52px;
+            white-space: nowrap;
+        }
+
+        .send-btn:hover:not(:disabled) {
+            background: var(--text-dark);
+            transform: translateY(-1px);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .input-hint {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            color: var(--text-medium);
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+            text-align: right;
+            opacity: 0.7;
+        }
+
+        /* ── RESULTS ── */
+        #results-container {
+            display: none;
+            max-width: 720px;
+            margin: 0 auto 4rem;
+            padding: 0 1rem;
+        }
+
+        .result-header {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            background: white;
+            border: 1px solid rgba(212,175,55,0.25);
+            border-bottom: none;
+        }
+
+        .result-type-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-type-code {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-type-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 1rem;
+        }
+
+        .result-body {
+            background: white;
+            border: 1px solid rgba(212,175,55,0.25);
+            padding: 2rem 2.5rem;
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            line-height: 1.85;
+        }
+
+        .result-body h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin: 2rem 0 0.75rem;
+        }
+
+        .result-body h3:first-child { margin-top: 0; }
+
+        .result-body p {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .function-stack {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .fn-card {
+            text-align: center;
+            padding: 1rem 0.5rem;
+            border: 1px solid rgba(212,175,55,0.2);
+            background: var(--cream);
+        }
+
+        .fn-position {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-medium);
+            margin-bottom: 0.3rem;
+        }
+
+        .fn-code {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold-dark);
+            font-weight: 600;
+        }
+
+        .fn-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-top: 0.25rem;
+        }
+
+        .restart-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 1px solid rgba(212,175,55,0.4);
+            color: var(--text-medium);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .restart-btn:hover {
+            background: var(--cream-dark);
+            color: var(--text-dark);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            border-top: 1px solid rgba(212,175,55,0.15);
+        }
+
+        .footer-brand {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.12em;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .footer-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-medium);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .function-stack { grid-template-columns: repeat(2, 1fr); }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="portal.html" class="nav-brand">My Holy Crescendo</a>
+        <ul class="nav-links">
+            <li><a href="portal.html">Portal</a></li>
+            <li><a href="mind-frameworks.html">Back to Mind</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <p class="session-label">Session 10 &middot; Mind Module</p>
+        <h1>Your Way of Seeing</h1>
+        <p class="hero-sub">16 Personality Types &amp; Cognitive Functions</p>
+        <div class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
+        <p class="hero-description">
+            God did not wire every mind the same. The way you take in the world, process meaning, 
+            make decisions, and move through life — these are not random. They are written into you 
+            by a God who creates with intention. This guided reflection will help you discover your way of seeing.
+        </p>
+    </section>
+
+    <!-- INTRO CARD -->
+    <div id="intro-card">
+        <p class="intro-note">
+            Rather than a traditional quiz, this is a <strong>guided conversation</strong>. You'll be 
+            presented with real-life scenarios and asked to respond honestly — not to pick the "right" answer, 
+            but to describe what actually happens in you.
+        </p>
+        <p class="intro-note">
+            There are no wrong answers. The more honestly and specifically you respond, the more 
+            accurate your result will be. <strong>Answer with your first instinct.</strong> Don't edit yourself.
+        </p>
+        <p class="intro-note" style="font-style: italic; color: var(--text-medium); font-size: 0.95rem;">
+            This reflection takes about 10&ndash;15 minutes. Find a quiet moment before you begin.
+        </p>
+        <button class="start-btn" onclick="startReflection()">Begin the Reflection</button>
+    </div>
+
+    <!-- CHAT INTERFACE -->
+    <div id="chat-container">
+        <div class="chat-window" id="chat-window">
+            <!-- messages rendered here -->
+        </div>
+        <div class="input-area">
+            <textarea 
+                class="chat-input" 
+                id="user-input" 
+                placeholder="Respond as honestly and naturally as you can..."
+                rows="2"
+                onkeydown="handleKeyDown(event)"
+                oninput="autoResize(this)"
+            ></textarea>
+            <button class="send-btn" id="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+        <p class="input-hint">Press Enter to send &middot; Shift+Enter for a new line</p>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results-container">
+        <div class="result-header">
+            <p class="result-type-label">Your Type</p>
+            <div class="result-type-code" id="result-code">—</div>
+            <div class="result-type-name" id="result-name"></div>
+            <div class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
+        </div>
+        <div class="result-body" id="result-body">
+            <!-- populated by JS -->
+        </div>
+        <button class="restart-btn" onclick="restartReflection()">Begin Again</button>
+    </div>
+
+    <footer>
+        <div class="footer-brand">My Holy Crescendo</div>
+        <p class="footer-tagline">fearfully &amp; wonderfully made</p>
+        <div class="footer-links">
+            <a href="portal.html">Portal</a>
+            <a href="index.html">Main Site</a>
+            <a href="mailto:myholycrescendo@gmail.com">Contact</a>
+        </div>
+    </footer>
+
+    <script>
+    // ============================================================
+    // STATE
+    // ============================================================
+    let conversationHistory = [];
+    let isWaiting = false;
+    let reflectionComplete = false;
+
+    const SYSTEM_PROMPT = `You are a warm, perceptive guide helping women in a Catholic faith-based formation program discover their cognitive function type (MBTI / cognitive functions framework). You work for "My Holy Crescendo," a program led by Bea that helps women understand the unique symphony God created them to be.
+
+Your role is to have a natural, warm, conversational exchange — NOT a formal quiz. You ask scenario-based questions, read the woman's responses for cognitive function patterns, and gently guide her toward her type.
+
+== YOUR APPROACH ==
+- Warm, feminine, faith-rooted tone. Occasionally reference that God wired each person uniquely.
+- Ask one scenario at a time. After she responds, briefly acknowledge what you noticed (warmly, not clinically), then ask the next scenario or a follow-up.
+- You are reading for cognitive FUNCTIONS, not letter preferences. Focus on *how* she processes, not what she prefers.
+- Use 4-6 scenarios total before arriving at a conclusion. You may ask brief follow-up questions if needed.
+- Do not name the functions or types during the conversation — keep it feeling like a natural reflection, not a test.
+- When you have enough information (usually after 4-6 substantive responses), deliver the result.
+
+== SCENARIOS TO DRAW FROM (adapt naturally, don't copy verbatim) ==
+1. Someone you respect gives lukewarm feedback on something you poured yourself into. How do you feel, and what do you do?
+2. Your day falls apart by 10am — unexpected demands, nothing goes as planned. Walk me through how the rest of your day goes internally.
+3. You're in a group and someone says something you believe is genuinely wrong. What happens in you, and do you speak up?
+4. You've been running on empty for two weeks. What does your version of "checking out" look like?
+5. Someone close to you is clearly upset but hasn't said anything directly to you. What happens inside you, and do you address it?
+6. You're choosing between two genuinely good options. Walk me through your process. What makes you feel stuck or free?
+7. (Follow-up) When you're excited about an idea, are you more energized talking about all the directions it could go, or by actually starting to make something tangible?
+8. (Follow-up) When you walk into a room, are you more aware of the physical environment, or already in your head thinking about something else?
+
+== THE 16 TYPES AND THEIR FUNCTION STACKS ==
+INTJ: Ni-Te-Fi-Se | INTP: Ti-Ne-Si-Fe | ENTJ: Te-Ni-Se-Fi | ENTP: Ne-Ti-Fe-Si
+INFJ: Ni-Fe-Ti-Se | INFP: Fi-Ne-Si-Te | ENFJ: Fe-Ni-Se-Ti | ENFP: Ne-Fi-Te-Si
+ISTJ: Si-Te-Fi-Ne | ISFJ: Si-Fe-Ti-Ne | ESTJ: Te-Si-Ne-Fi | ESFJ: Fe-Si-Ne-Ti
+ISTP: Ti-Se-Ni-Fe | ISFP: Fi-Se-Ni-Te | ESTP: Se-Ti-Fe-Ni | ESFP: Se-Fi-Te-Ni
+
+== KEY PATTERNS TO IDENTIFY ==
+- Fi dominant (INFP/ISFP): Criticism lands as identity wound. Values and self are fused. Deep internal processing before external action.
+- Fe dominant (ENFJ/ESFJ): Tuned to group emotional temperature. Driven to restore harmony. Others' feelings feel like her own problem.
+- Ni dominant (INTJ/INFJ): Convergent. Singular focus. "Just knows." Future-oriented with dark fixation under stress.
+- Ne dominant (ENFP/ENTP): Generates multiple simultaneous futures. Decision paralysis from possibilities. Energized by ideas and connection.
+- Si dominant (ISTJ/ISFJ): Anchored in past experience. Traditions comfort. Detailed memory. Change is unsettling.
+- Se dominant (ESTP/ESFP): Present-moment. Physical and immediate. Acts first, reflects later.
+- Ti dominant (INTP/ISTP): Internal logical framework. Precision-seeking. Retreats into analysis under stress.
+- Te dominant (ENTJ/ESTJ): External organization and results. Efficiency. Control-seeking under stress.
+
+Inferior function grip patterns (under stress):
+- Inferior Te (Fi dominant): barking orders, harsh efficiency, throwing into work/lists
+- Inferior Fe (Ti dominant): emotional outbursts, desperate people-pleasing
+- Inferior Fi (Te dominant): feeling unloved, hypersensitivity to values violations
+- Inferior Ti (Fe dominant): nitpicking, cold withdrawal, hypercritical analysis
+- Inferior Se (Ni dominant): overindulgence, impulsive physical behavior
+- Inferior Ni (Se dominant): catastrophizing one dark possibility, paranoia
+- Inferior Si (Ne dominant): nostalgia comfort, obsessive routines, hypochondria
+- Inferior Ne (Si dominant): catastrophizing all possibilities, seeing only negatives
+
+== DELIVERING THE RESULT ==
+When you're ready to share the result, end your final message with this EXACT format (including the delimiters):
+
+<<<RESULT>>>
+TYPE: [4-letter code]
+NAME: [type name, e.g. "The Mediator"]
+STACK: [function1]-[function2]-[function3]-[function4]
+SUMMARY: [2-3 sentences describing her type in warm, faith-rooted language — how God wired this particular mind]
+DOMINANT_INSIGHT: [1-2 sentences specifically about her dominant function and what it means for how she moves through the world]
+GRIP_INSIGHT: [1-2 sentences about her inferior function grip — what it looks like when she's depleted or stressed, and what it reveals]
+FORMATION_NOTE: [1-2 sentences connecting her type to her formation journey — how understanding this can deepen her relationship with God and herself]
+<<<END>>>
+
+Everything before <<<RESULT>>> is part of the conversation. Everything inside is parsed for the result display.
+
+Begin the conversation with a warm, brief welcome — invite her into the first scenario naturally, as if you're sitting across from her with a cup of tea.`;
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    function startReflection() {
+        document.getElementById('intro-card').style.display = 'none';
+        document.getElementById('chat-container').style.display = 'block';
+        conversationHistory = [];
+        sendToAPI(null, true);
+    }
+
+    // ============================================================
+    // MESSAGE RENDERING
+    // ============================================================
+    function appendMessage(role, text) {
+        const window = document.getElementById('chat-window');
+        const msg = document.createElement('div');
+        msg.className = `msg ${role === 'guide' ? 'msg-guide' : 'msg-user'}`;
+
+        if (role === 'guide') {
+            msg.innerHTML = `
+                <div class="guide-avatar">MHC</div>
+                <div class="guide-bubble">${formatText(text)}</div>
+            `;
+        } else {
+            msg.innerHTML = `<div class="user-bubble">${formatText(text)}</div>`;
+        }
+
+        window.appendChild(msg);
+        window.scrollTop = window.scrollHeight;
+    }
+
+    function formatText(text) {
+        // Remove result block if present before displaying
+        text = text.replace(/<<<RESULT>>>[\s\S]*<<<END>>>/g, '').trim();
+        // Convert line breaks
+        return text.replace(/\n/g, '<br>');
+    }
+
+    function showTyping() {
+        const window = document.getElementById('chat-window');
+        const indicator = document.createElement('div');
+        indicator.className = 'typing-indicator';
+        indicator.id = 'typing-indicator';
+        indicator.innerHTML = `
+            <div class="guide-avatar">MHC</div>
+            <div class="typing-dots">
+                <span></span><span></span><span></span>
+            </div>
+        `;
+        window.appendChild(indicator);
+        window.scrollTop = window.scrollHeight;
+    }
+
+    function hideTyping() {
+        const indicator = document.getElementById('typing-indicator');
+        if (indicator) indicator.remove();
+    }
+
+    // ============================================================
+    // SEND / RECEIVE
+    // ============================================================
+    async function sendMessage() {
+        const input = document.getElementById('user-input');
+        const text = input.value.trim();
+        if (!text || isWaiting) return;
+
+        input.value = '';
+        input.style.height = 'auto';
+        appendMessage('user', text);
+
+        conversationHistory.push({ role: 'user', content: text });
+        await sendToAPI(text, false);
+    }
+
+    async function sendToAPI(userText, isOpening) {
+        isWaiting = true;
+        document.getElementById('send-btn').disabled = true;
+        document.getElementById('user-input').disabled = true;
+        showTyping();
+
+        const messages = isOpening
+            ? [{ role: 'user', content: 'Please begin the reflection.' }]
+            : conversationHistory;
+
+        try {
+            const response = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    model: 'claude-sonnet-4-20250514',
+                    max_tokens: 1000,
+                    system: SYSTEM_PROMPT,
+                    messages: messages
+                })
+            });
+
+            const data = await response.json();
+            const reply = data.content?.[0]?.text || '';
+
+            hideTyping();
+            conversationHistory.push({ role: 'assistant', content: reply });
+
+            // Check for result
+            if (reply.includes('<<<RESULT>>>')) {
+                const visibleText = reply.replace(/<<<RESULT>>>[\s\S]*<<<END>>>/g, '').trim();
+                if (visibleText) appendMessage('guide', visibleText);
+                parseAndShowResult(reply);
+            } else {
+                appendMessage('guide', reply);
+            }
+
+        } catch (err) {
+            hideTyping();
+            appendMessage('guide', 'I\'m sorry — something went quiet on my end. Please try sending your response again.');
+            console.error(err);
+        }
+
+        isWaiting = false;
+        document.getElementById('send-btn').disabled = false;
+        document.getElementById('user-input').disabled = false;
+        document.getElementById('user-input').focus();
+    }
+
+    // ============================================================
+    // RESULT PARSING
+    // ============================================================
+    const functionNames = {
+        'Ni': 'Introverted Intuition',
+        'Ne': 'Extraverted Intuition',
+        'Si': 'Introverted Sensing',
+        'Se': 'Extraverted Sensing',
+        'Ti': 'Introverted Thinking',
+        'Te': 'Extraverted Thinking',
+        'Fi': 'Introverted Feeling',
+        'Fe': 'Extraverted Feeling'
+    };
+
+    const stackPositions = ['Dominant', 'Auxiliary', 'Tertiary', 'Inferior'];
+
+    function parseAndShowResult(rawText) {
+        const block = rawText.match(/<<<RESULT>>>([\s\S]*?)<<<END>>>/)?.[1] || '';
+        const get = (key) => {
+            const match = block.match(new RegExp(`${key}:\\s*(.+)`));
+            return match ? match[1].trim() : '';
+        };
+
+        const type   = get('TYPE');
+        const name   = get('NAME');
+        const stack  = get('STACK').split('-').map(s => s.trim());
+        const summary      = get('SUMMARY');
+        const dominant     = get('DOMINANT_INSIGHT');
+        const grip         = get('GRIP_INSIGHT');
+        const formation    = get('FORMATION_NOTE');
+
+        // Populate header
+        document.getElementById('result-code').textContent = type;
+        document.getElementById('result-name').textContent = name;
+
+        // Build function stack cards
+        const stackHTML = stack.map((fn, i) => `
+            <div class="fn-card">
+                <div class="fn-position">${stackPositions[i]}</div>
+                <div class="fn-code">${fn}</div>
+                <div class="fn-name">${functionNames[fn] || fn}</div>
+            </div>
+        `).join('');
+
+        // Build result body
+        document.getElementById('result-body').innerHTML = `
+            <h3>Your Function Stack</h3>
+            <div class="function-stack">${stackHTML}</div>
+
+            <h3>How God Wired You</h3>
+            <p>${summary}</p>
+
+            <h3>Your Dominant Gift</h3>
+            <p>${dominant}</p>
+
+            <h3>When You're Running on Empty</h3>
+            <p>${grip}</p>
+
+            <h3>A Note for Your Formation</h3>
+            <p>${formation}</p>
+
+            <p style="margin-top:2rem; font-style:italic; font-size:0.95rem; color:var(--text-medium);">
+                "I praise you, for I am fearfully and wonderfully made." — Psalm 139:14
+            </p>
+        `;
+
+        // Show results, hide chat
+        setTimeout(() => {
+            document.getElementById('chat-container').style.display = 'none';
+            document.getElementById('results-container').style.display = 'block';
+            document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
+        }, 800);
+    }
+
+    // ============================================================
+    // RESTART
+    // ============================================================
+    function restartReflection() {
+        conversationHistory = [];
+        reflectionComplete = false;
+        document.getElementById('results-container').style.display = 'none';
+        document.getElementById('chat-window').innerHTML = '';
+        document.getElementById('chat-container').style.display = 'block';
+        document.getElementById('user-input').value = '';
+        sendToAPI(null, true);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ============================================================
+    // UI HELPERS
+    // ============================================================
+    function handleKeyDown(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    }
+
+    function autoResize(el) {
+        el.style.height = 'auto';
+        el.style.height = Math.min(el.scrollHeight, 140) + 'px';
+    }
+    </script>
+</body>
+</html>
