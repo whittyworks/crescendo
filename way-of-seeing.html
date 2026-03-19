@@ -602,11 +602,11 @@
         <div class="footer-links">
             <a href="portal.html">Portal</a>
             <a href="index.html">Main Site</a>
-            <a href="mailto:myholycrescendo@gmail.com">Contact</a>
+            <a href="/cdn-cgi/l/email-protection#eb86928384879288998e98888e858f84ab8c868a8287c5888486">Contact</a>
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         var conversationHistory = [];
         var isWaiting = false;
 
@@ -686,9 +686,29 @@
                 });
 
                 var data = await response.json();
+
+                // Surface any API errors clearly
+                if (data.error) {
+                    hideTyping();
+                    appendMessage('guide', 'There was an error: ' + (data.error.message || JSON.stringify(data.error)));
+                    isWaiting = false;
+                    document.getElementById('send-btn').disabled = false;
+                    document.getElementById('user-input').disabled = false;
+                    return;
+                }
+
                 var reply = (data.content && data.content[0] && data.content[0].text) ? data.content[0].text : '';
 
                 hideTyping();
+
+                if (!reply) {
+                    appendMessage('guide', 'Something went quiet on my end — full response: ' + JSON.stringify(data).substring(0, 200));
+                    isWaiting = false;
+                    document.getElementById('send-btn').disabled = false;
+                    document.getElementById('user-input').disabled = false;
+                    return;
+                }
+
                 conversationHistory.push({ role: 'assistant', content: reply });
 
                 if (reply.includes('<<<r>>>')) {
