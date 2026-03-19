@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Way of Seeing · My Holy Crescendo</title>
+    <title>Your Way of Seeing &middot; My Holy Crescendo</title>
     <meta name="robots" content="noindex, nofollow">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/crescendo-cover.jpg">
@@ -31,7 +31,6 @@
             min-height: 100vh;
         }
 
-        /* ── NAV ── */
         nav {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -71,7 +70,6 @@
 
         .nav-links a:hover { color: var(--gold-dark); }
 
-        /* ── HERO ── */
         .hero {
             padding: 9rem 5% 4rem;
             text-align: center;
@@ -140,7 +138,6 @@
             line-height: 1.8;
         }
 
-        /* ── INTRO CARD ── */
         #intro-card {
             max-width: 680px;
             margin: 0 auto 3rem;
@@ -158,8 +155,15 @@
             margin-bottom: 1.5rem;
         }
 
-        .intro-note strong {
-            color: var(--text-dark);
+        .intro-note strong { color: var(--text-dark); }
+
+        .privacy-note {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            border-top: 1px solid rgba(212,175,55,0.2);
+            padding-top: 1.25rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
         }
 
         .start-btn {
@@ -182,7 +186,6 @@
             transform: translateY(-1px);
         }
 
-        /* ── CHAT INTERFACE ── */
         #chat-container {
             display: none;
             max-width: 720px;
@@ -203,7 +206,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Message bubbles */
         .msg {
             margin-bottom: 1.5rem;
             animation: fadeUp 0.4s ease forwards;
@@ -264,7 +266,6 @@
             font-style: italic;
         }
 
-        /* Typing indicator */
         .typing-indicator {
             display: flex;
             gap: 0.9rem;
@@ -297,7 +298,6 @@
             40% { transform: translateY(-5px); opacity: 1; }
         }
 
-        /* Input area */
         .input-area {
             display: flex;
             gap: 0.75rem;
@@ -321,9 +321,7 @@
             outline: none;
         }
 
-        .chat-input:focus {
-            border-color: var(--gold);
-        }
+        .chat-input:focus { border-color: var(--gold); }
 
         .chat-input::placeholder {
             color: rgba(92,81,66,0.45);
@@ -350,10 +348,7 @@
             transform: translateY(-1px);
         }
 
-        .send-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
+        .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         .input-hint {
             font-family: 'Montserrat', sans-serif;
@@ -365,7 +360,6 @@
             opacity: 0.7;
         }
 
-        /* ── RESULTS ── */
         #results-container {
             display: none;
             max-width: 720px;
@@ -427,11 +421,7 @@
         }
 
         .result-body h3:first-child { margin-top: 0; }
-
-        .result-body p {
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
+        .result-body p { margin-bottom: 1rem; color: var(--text-dark); }
 
         .function-stack {
             display: grid;
@@ -492,7 +482,6 @@
             color: var(--text-dark);
         }
 
-        /* ── FOOTER ── */
         footer {
             text-align: center;
             padding: 3rem 5%;
@@ -546,45 +535,46 @@
         </ul>
     </nav>
 
-    <!-- HERO -->
     <section class="hero">
         <p class="session-label">Session 10 &middot; Mind Module</p>
         <h1>Your Way of Seeing</h1>
         <p class="hero-sub">16 Personality Types &amp; Cognitive Functions</p>
         <div class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
         <p class="hero-description">
-            God did not wire every mind the same. The way you take in the world, process meaning, 
-            make decisions, and move through life — these are not random. They are written into you 
+            God did not wire every mind the same. The way you take in the world, process meaning,
+            make decisions, and move through life &mdash; these are not random. They are written into you
             by a God who creates with intention. This guided reflection will help you discover your way of seeing.
         </p>
     </section>
 
-    <!-- INTRO CARD -->
     <div id="intro-card">
         <p class="intro-note">
-            Rather than a traditional quiz, this is a <strong>guided conversation</strong>. You'll be 
-            presented with real-life scenarios and asked to respond honestly — not to pick the "right" answer, 
+            Rather than a traditional quiz, this is a <strong>guided conversation</strong>. You will be
+            presented with real-life scenarios and asked to respond honestly &mdash; not to pick the &ldquo;right&rdquo; answer,
             but to describe what actually happens in you.
         </p>
         <p class="intro-note">
-            There are no wrong answers. The more honestly and specifically you respond, the more 
-            accurate your result will be. <strong>Answer with your first instinct.</strong> Don't edit yourself.
+            There are no wrong answers. The more honestly and specifically you respond, the more
+            accurate your result will be. <strong>Answer with your first instinct.</strong> Do not edit yourself.
         </p>
         <p class="intro-note" style="font-style: italic; color: var(--text-medium); font-size: 0.95rem;">
             This reflection takes about 10&ndash;15 minutes. Find a quiet moment before you begin.
         </p>
+        <p class="privacy-note">
+            <strong>A note on privacy:</strong> Your responses are not saved or stored by My Holy Crescendo.
+            This reflection uses AI to read your answers and generate your result &mdash; your conversation exists only
+            for the duration of your session and is gone when you close the page.
+            This is a formation tool, not a counseling resource. Please bring anything tender that surfaces to a trusted friend, spiritual director, or counselor.
+        </p>
         <button class="start-btn" onclick="startReflection()">Begin the Reflection</button>
     </div>
 
-    <!-- CHAT INTERFACE -->
     <div id="chat-container">
-        <div class="chat-window" id="chat-window">
-            <!-- messages rendered here -->
-        </div>
+        <div class="chat-window" id="chat-window"></div>
         <div class="input-area">
-            <textarea 
-                class="chat-input" 
-                id="user-input" 
+            <textarea
+                class="chat-input"
+                id="user-input"
                 placeholder="Respond as honestly and naturally as you can..."
                 rows="2"
                 onkeydown="handleKeyDown(event)"
@@ -595,17 +585,14 @@
         <p class="input-hint">Press Enter to send &middot; Shift+Enter for a new line</p>
     </div>
 
-    <!-- RESULTS -->
     <div id="results-container">
         <div class="result-header">
             <p class="result-type-label">Your Type</p>
-            <div class="result-type-code" id="result-code">—</div>
+            <div class="result-type-code" id="result-code">&mdash;</div>
             <div class="result-type-name" id="result-name"></div>
             <div class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
         </div>
-        <div class="result-body" id="result-body">
-            <!-- populated by JS -->
-        </div>
+        <div class="result-body" id="result-body"></div>
         <button class="restart-btn" onclick="restartReflection()">Begin Again</button>
     </div>
 
@@ -620,303 +607,195 @@
     </footer>
 
     <script>
-    // ============================================================
-    // STATE
-    // ============================================================
-    let conversationHistory = [];
-    let isWaiting = false;
-    let reflectionComplete = false;
+        var conversationHistory = [];
+        var isWaiting = false;
 
-    const SYSTEM_PROMPT = `You are a warm, perceptive guide helping women in a Catholic faith-based formation program discover their cognitive function type (MBTI / cognitive functions framework). You work for "My Holy Crescendo," a program led by Bea that helps women understand the unique symphony God created them to be.
+        var SYSTEM_PROMPT = 'You are a warm, perceptive guide helping women in a Catholic faith-based formation program discover their cognitive function type (MBTI / cognitive functions framework). You work for "My Holy Crescendo," a program led by Bea that helps women understand the unique symphony God created them to be.\n\nYour role is to have a natural, warm, conversational exchange. You ask scenario-based questions, read the responses for cognitive function patterns, and gently guide her toward her type.\n\n== YOUR APPROACH ==\n- Warm, feminine, faith-rooted tone. Occasionally reference that God wired each person uniquely.\n- Ask one scenario at a time. After she responds, briefly acknowledge what you noticed (warmly, not clinically), then ask the next scenario or a follow-up.\n- You are reading for cognitive FUNCTIONS, not letter preferences. Focus on how she processes, not what she prefers.\n- Use 4-6 scenarios total before arriving at a conclusion. You may ask brief follow-up questions if needed.\n- Do not name the functions or types during the conversation. Keep it feeling like a natural reflection, not a test.\n- When you have enough information (usually after 4-6 substantive responses), deliver the result.\n\n== SCENARIOS TO DRAW FROM (adapt naturally, do not copy verbatim) ==\n1. Someone you respect gives lukewarm feedback on something you poured yourself into. How do you feel, and what do you do?\n2. Your day falls apart by 10am. Walk me through how the rest of your day goes internally.\n3. You are in a group and someone says something you believe is genuinely wrong. What happens in you, and do you speak up?\n4. You have been running on empty for two weeks. What does your version of checking out look like?\n5. Someone close to you is clearly upset but has not said anything directly to you. What happens inside you, and do you address it?\n6. You are choosing between two genuinely good options. Walk me through your process.\n7. When you are excited about an idea, are you more energized talking about all the directions it could go, or by actually starting to make something tangible?\n8. When you walk into a room, are you more aware of the physical environment, or already in your head thinking about something else?\n\n== THE 16 TYPES AND THEIR FUNCTION STACKS ==\nINTJ: Ni-Te-Fi-Se | INTP: Ti-Ne-Si-Fe | ENTJ: Te-Ni-Se-Fi | ENTP: Ne-Ti-Fe-Si\nINFJ: Ni-Fe-Ti-Se | INFP: Fi-Ne-Si-Te | ENFJ: Fe-Ni-Se-Ti | ENFP: Ne-Fi-Te-Si\nISTJ: Si-Te-Fi-Ne | ISFJ: Si-Fe-Ti-Ne | ESTJ: Te-Si-Ne-Fi | ESFJ: Fe-Si-Ne-Ti\nISTP: Ti-Se-Ni-Fe | ISFP: Fi-Se-Ni-Te | ESTP: Se-Ti-Fe-Ni | ESFP: Se-Fi-Te-Ni\n\n== KEY PATTERNS TO IDENTIFY ==\n- Fi dominant (INFP/ISFP): Criticism lands as identity wound. Values and self are fused. Deep internal processing before external action.\n- Fe dominant (ENFJ/ESFJ): Tuned to group emotional temperature. Driven to restore harmony. Others feelings feel like her own problem.\n- Ni dominant (INTJ/INFJ): Convergent. Singular focus. Just knows. Future-oriented with dark fixation under stress.\n- Ne dominant (ENFP/ENTP): Generates multiple simultaneous futures. Decision paralysis from possibilities. Energized by ideas and connection.\n- Si dominant (ISTJ/ISFJ): Anchored in past experience. Traditions comfort. Detailed memory. Change is unsettling.\n- Se dominant (ESTP/ESFP): Present-moment. Physical and immediate. Acts first, reflects later.\n- Ti dominant (INTP/ISTP): Internal logical framework. Precision-seeking. Retreats into analysis under stress.\n- Te dominant (ENTJ/ESTJ): External organization and results. Efficiency. Control-seeking under stress.\n\nInferior function grip patterns under stress:\n- Inferior Te (Fi dominant): barking orders, harsh efficiency, throwing into work or lists\n- Inferior Fe (Ti dominant): emotional outbursts, desperate people-pleasing\n- Inferior Fi (Te dominant): feeling unloved, hypersensitivity to values violations\n- Inferior Ti (Fe dominant): nitpicking, cold withdrawal, hypercritical analysis\n- Inferior Se (Ni dominant): overindulgence, impulsive physical behavior\n- Inferior Ni (Se dominant): catastrophizing one dark possibility, paranoia\n- Inferior Si (Ne dominant): nostalgia comfort, obsessive routines, hypochondria\n- Inferior Ne (Si dominant): catastrophizing all possibilities, seeing only negatives\n\n== DELIVERING THE RESULT ==\nWhen you are ready to share the result, end your final message with this EXACT format including the delimiters:\n\n<<<r>>>\nTYPE: [4-letter code]\nNAME: [type name, e.g. The Mediator]\nSTACK: [function1]-[function2]-[function3]-[function4]\nSUMMARY: [2-3 sentences describing her type in warm, faith-rooted language about how God wired this particular mind]\nDOMINANT_INSIGHT: [1-2 sentences about her dominant function and what it means for how she moves through the world]\nGRIP_INSIGHT: [1-2 sentences about her inferior function grip, what it looks like when she is depleted or stressed, and what it reveals]\nFORMATION_NOTE: [1-2 sentences connecting her type to her formation journey and how understanding this can deepen her relationship with God and herself]\n<<<END>>>\n\nEverything before <<<r>>> is part of the conversation. Everything inside is parsed for the result display.\n\nBegin the conversation with a warm, brief welcome. Invite her into the first scenario naturally, as if you are sitting across from her with a cup of tea.';
 
-Your role is to have a natural, warm, conversational exchange — NOT a formal quiz. You ask scenario-based questions, read the woman's responses for cognitive function patterns, and gently guide her toward her type.
-
-== YOUR APPROACH ==
-- Warm, feminine, faith-rooted tone. Occasionally reference that God wired each person uniquely.
-- Ask one scenario at a time. After she responds, briefly acknowledge what you noticed (warmly, not clinically), then ask the next scenario or a follow-up.
-- You are reading for cognitive FUNCTIONS, not letter preferences. Focus on *how* she processes, not what she prefers.
-- Use 4-6 scenarios total before arriving at a conclusion. You may ask brief follow-up questions if needed.
-- Do not name the functions or types during the conversation — keep it feeling like a natural reflection, not a test.
-- When you have enough information (usually after 4-6 substantive responses), deliver the result.
-
-== SCENARIOS TO DRAW FROM (adapt naturally, don't copy verbatim) ==
-1. Someone you respect gives lukewarm feedback on something you poured yourself into. How do you feel, and what do you do?
-2. Your day falls apart by 10am — unexpected demands, nothing goes as planned. Walk me through how the rest of your day goes internally.
-3. You're in a group and someone says something you believe is genuinely wrong. What happens in you, and do you speak up?
-4. You've been running on empty for two weeks. What does your version of "checking out" look like?
-5. Someone close to you is clearly upset but hasn't said anything directly to you. What happens inside you, and do you address it?
-6. You're choosing between two genuinely good options. Walk me through your process. What makes you feel stuck or free?
-7. (Follow-up) When you're excited about an idea, are you more energized talking about all the directions it could go, or by actually starting to make something tangible?
-8. (Follow-up) When you walk into a room, are you more aware of the physical environment, or already in your head thinking about something else?
-
-== THE 16 TYPES AND THEIR FUNCTION STACKS ==
-INTJ: Ni-Te-Fi-Se | INTP: Ti-Ne-Si-Fe | ENTJ: Te-Ni-Se-Fi | ENTP: Ne-Ti-Fe-Si
-INFJ: Ni-Fe-Ti-Se | INFP: Fi-Ne-Si-Te | ENFJ: Fe-Ni-Se-Ti | ENFP: Ne-Fi-Te-Si
-ISTJ: Si-Te-Fi-Ne | ISFJ: Si-Fe-Ti-Ne | ESTJ: Te-Si-Ne-Fi | ESFJ: Fe-Si-Ne-Ti
-ISTP: Ti-Se-Ni-Fe | ISFP: Fi-Se-Ni-Te | ESTP: Se-Ti-Fe-Ni | ESFP: Se-Fi-Te-Ni
-
-== KEY PATTERNS TO IDENTIFY ==
-- Fi dominant (INFP/ISFP): Criticism lands as identity wound. Values and self are fused. Deep internal processing before external action.
-- Fe dominant (ENFJ/ESFJ): Tuned to group emotional temperature. Driven to restore harmony. Others' feelings feel like her own problem.
-- Ni dominant (INTJ/INFJ): Convergent. Singular focus. "Just knows." Future-oriented with dark fixation under stress.
-- Ne dominant (ENFP/ENTP): Generates multiple simultaneous futures. Decision paralysis from possibilities. Energized by ideas and connection.
-- Si dominant (ISTJ/ISFJ): Anchored in past experience. Traditions comfort. Detailed memory. Change is unsettling.
-- Se dominant (ESTP/ESFP): Present-moment. Physical and immediate. Acts first, reflects later.
-- Ti dominant (INTP/ISTP): Internal logical framework. Precision-seeking. Retreats into analysis under stress.
-- Te dominant (ENTJ/ESTJ): External organization and results. Efficiency. Control-seeking under stress.
-
-Inferior function grip patterns (under stress):
-- Inferior Te (Fi dominant): barking orders, harsh efficiency, throwing into work/lists
-- Inferior Fe (Ti dominant): emotional outbursts, desperate people-pleasing
-- Inferior Fi (Te dominant): feeling unloved, hypersensitivity to values violations
-- Inferior Ti (Fe dominant): nitpicking, cold withdrawal, hypercritical analysis
-- Inferior Se (Ni dominant): overindulgence, impulsive physical behavior
-- Inferior Ni (Se dominant): catastrophizing one dark possibility, paranoia
-- Inferior Si (Ne dominant): nostalgia comfort, obsessive routines, hypochondria
-- Inferior Ne (Si dominant): catastrophizing all possibilities, seeing only negatives
-
-== DELIVERING THE RESULT ==
-When you're ready to share the result, end your final message with this EXACT format (including the delimiters):
-
-<<<RESULT>>>
-TYPE: [4-letter code]
-NAME: [type name, e.g. "The Mediator"]
-STACK: [function1]-[function2]-[function3]-[function4]
-SUMMARY: [2-3 sentences describing her type in warm, faith-rooted language — how God wired this particular mind]
-DOMINANT_INSIGHT: [1-2 sentences specifically about her dominant function and what it means for how she moves through the world]
-GRIP_INSIGHT: [1-2 sentences about her inferior function grip — what it looks like when she's depleted or stressed, and what it reveals]
-FORMATION_NOTE: [1-2 sentences connecting her type to her formation journey — how understanding this can deepen her relationship with God and herself]
-<<<END>>>
-
-Everything before <<<RESULT>>> is part of the conversation. Everything inside is parsed for the result display.
-
-Begin the conversation with a warm, brief welcome — invite her into the first scenario naturally, as if you're sitting across from her with a cup of tea.`;
-
-    // ============================================================
-    // INIT
-    // ============================================================
-    function startReflection() {
-        document.getElementById('intro-card').style.display = 'none';
-        document.getElementById('chat-container').style.display = 'block';
-        conversationHistory = [];
-        sendToAPI(null, true);
-    }
-
-    // ============================================================
-    // MESSAGE RENDERING
-    // ============================================================
-    function appendMessage(role, text) {
-        const window = document.getElementById('chat-window');
-        const msg = document.createElement('div');
-        msg.className = `msg ${role === 'guide' ? 'msg-guide' : 'msg-user'}`;
-
-        if (role === 'guide') {
-            msg.innerHTML = `
-                <div class="guide-avatar">MHC</div>
-                <div class="guide-bubble">${formatText(text)}</div>
-            `;
-        } else {
-            msg.innerHTML = `<div class="user-bubble">${formatText(text)}</div>`;
+        function startReflection() {
+            document.getElementById('intro-card').style.display = 'none';
+            document.getElementById('chat-container').style.display = 'block';
+            conversationHistory = [];
+            sendToAPI(true);
         }
 
-        window.appendChild(msg);
-        window.scrollTop = window.scrollHeight;
-    }
-
-    function formatText(text) {
-        // Remove result block if present before displaying
-        text = text.replace(/<<<RESULT>>>[\s\S]*<<<END>>>/g, '').trim();
-        // Convert line breaks
-        return text.replace(/\n/g, '<br>');
-    }
-
-    function showTyping() {
-        const window = document.getElementById('chat-window');
-        const indicator = document.createElement('div');
-        indicator.className = 'typing-indicator';
-        indicator.id = 'typing-indicator';
-        indicator.innerHTML = `
-            <div class="guide-avatar">MHC</div>
-            <div class="typing-dots">
-                <span></span><span></span><span></span>
-            </div>
-        `;
-        window.appendChild(indicator);
-        window.scrollTop = window.scrollHeight;
-    }
-
-    function hideTyping() {
-        const indicator = document.getElementById('typing-indicator');
-        if (indicator) indicator.remove();
-    }
-
-    // ============================================================
-    // SEND / RECEIVE
-    // ============================================================
-    async function sendMessage() {
-        const input = document.getElementById('user-input');
-        const text = input.value.trim();
-        if (!text || isWaiting) return;
-
-        input.value = '';
-        input.style.height = 'auto';
-        appendMessage('user', text);
-
-        conversationHistory.push({ role: 'user', content: text });
-        await sendToAPI(text, false);
-    }
-
-    async function sendToAPI(userText, isOpening) {
-        isWaiting = true;
-        document.getElementById('send-btn').disabled = true;
-        document.getElementById('user-input').disabled = true;
-        showTyping();
-
-        const messages = isOpening
-            ? [{ role: 'user', content: 'Please begin the reflection.' }]
-            : conversationHistory;
-
-        try {
-            const response = await fetch('https://api.anthropic.com/v1/messages', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    model: 'claude-sonnet-4-20250514',
-                    max_tokens: 1000,
-                    system: SYSTEM_PROMPT,
-                    messages: messages
-                })
-            });
-
-            const data = await response.json();
-            const reply = data.content?.[0]?.text || '';
-
-            hideTyping();
-            conversationHistory.push({ role: 'assistant', content: reply });
-
-            // Check for result
-            if (reply.includes('<<<RESULT>>>')) {
-                const visibleText = reply.replace(/<<<RESULT>>>[\s\S]*<<<END>>>/g, '').trim();
-                if (visibleText) appendMessage('guide', visibleText);
-                parseAndShowResult(reply);
+        function appendMessage(role, text) {
+            var chatWindow = document.getElementById('chat-window');
+            var msg = document.createElement('div');
+            msg.className = 'msg ' + (role === 'guide' ? 'msg-guide' : 'msg-user');
+            if (role === 'guide') {
+                msg.innerHTML = '<div class="guide-avatar">MHC</div><div class="guide-bubble">' + formatText(text) + '</div>';
             } else {
-                appendMessage('guide', reply);
+                msg.innerHTML = '<div class="user-bubble">' + formatText(text) + '</div>';
+            }
+            chatWindow.appendChild(msg);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+
+        function formatText(text) {
+            text = text.replace(/<<<r>>>[\s\S]*<<<END>>>/g, '').trim();
+            return text.replace(/\n/g, '<br>');
+        }
+
+        function showTyping() {
+            var chatWindow = document.getElementById('chat-window');
+            var indicator = document.createElement('div');
+            indicator.className = 'typing-indicator';
+            indicator.id = 'typing-indicator';
+            indicator.innerHTML = '<div class="guide-avatar">MHC</div><div class="typing-dots"><span></span><span></span><span></span></div>';
+            chatWindow.appendChild(indicator);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+
+        function hideTyping() {
+            var indicator = document.getElementById('typing-indicator');
+            if (indicator) indicator.remove();
+        }
+
+        function sendMessage() {
+            var input = document.getElementById('user-input');
+            var text = input.value.trim();
+            if (!text || isWaiting) return;
+            input.value = '';
+            input.style.height = 'auto';
+            appendMessage('user', text);
+            conversationHistory.push({ role: 'user', content: text });
+            sendToAPI(false);
+        }
+
+        async function sendToAPI(isOpening) {
+            isWaiting = true;
+            document.getElementById('send-btn').disabled = true;
+            document.getElementById('user-input').disabled = true;
+            showTyping();
+
+            var messages = isOpening
+                ? [{ role: 'user', content: 'Please begin the reflection.' }]
+                : conversationHistory;
+
+            try {
+                var response = await fetch('/.netlify/functions/claude-proxy', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        model: 'claude-sonnet-4-20250514',
+                        max_tokens: 1000,
+                        system: SYSTEM_PROMPT,
+                        messages: messages
+                    })
+                });
+
+                var data = await response.json();
+                var reply = (data.content && data.content[0] && data.content[0].text) ? data.content[0].text : '';
+
+                hideTyping();
+                conversationHistory.push({ role: 'assistant', content: reply });
+
+                if (reply.includes('<<<r>>>')) {
+                    var visibleText = reply.replace(/<<<r>>>[\s\S]*<<<END>>>/g, '').trim();
+                    if (visibleText) appendMessage('guide', visibleText);
+                    parseAndShowResult(reply);
+                } else {
+                    appendMessage('guide', reply);
+                }
+
+            } catch (err) {
+                hideTyping();
+                appendMessage('guide', 'I\'m sorry, something went quiet on my end. Please try sending your response again.');
+                console.error(err);
             }
 
-        } catch (err) {
-            hideTyping();
-            appendMessage('guide', 'I\'m sorry — something went quiet on my end. Please try sending your response again.');
-            console.error(err);
+            isWaiting = false;
+            document.getElementById('send-btn').disabled = false;
+            document.getElementById('user-input').disabled = false;
+            document.getElementById('user-input').focus();
         }
 
-        isWaiting = false;
-        document.getElementById('send-btn').disabled = false;
-        document.getElementById('user-input').disabled = false;
-        document.getElementById('user-input').focus();
-    }
-
-    // ============================================================
-    // RESULT PARSING
-    // ============================================================
-    const functionNames = {
-        'Ni': 'Introverted Intuition',
-        'Ne': 'Extraverted Intuition',
-        'Si': 'Introverted Sensing',
-        'Se': 'Extraverted Sensing',
-        'Ti': 'Introverted Thinking',
-        'Te': 'Extraverted Thinking',
-        'Fi': 'Introverted Feeling',
-        'Fe': 'Extraverted Feeling'
-    };
-
-    const stackPositions = ['Dominant', 'Auxiliary', 'Tertiary', 'Inferior'];
-
-    function parseAndShowResult(rawText) {
-        const block = rawText.match(/<<<RESULT>>>([\s\S]*?)<<<END>>>/)?.[1] || '';
-        const get = (key) => {
-            const match = block.match(new RegExp(`${key}:\\s*(.+)`));
-            return match ? match[1].trim() : '';
+        var functionNames = {
+            'Ni': 'Introverted Intuition', 'Ne': 'Extraverted Intuition',
+            'Si': 'Introverted Sensing',   'Se': 'Extraverted Sensing',
+            'Ti': 'Introverted Thinking',  'Te': 'Extraverted Thinking',
+            'Fi': 'Introverted Feeling',   'Fe': 'Extraverted Feeling'
         };
 
-        const type   = get('TYPE');
-        const name   = get('NAME');
-        const stack  = get('STACK').split('-').map(s => s.trim());
-        const summary      = get('SUMMARY');
-        const dominant     = get('DOMINANT_INSIGHT');
-        const grip         = get('GRIP_INSIGHT');
-        const formation    = get('FORMATION_NOTE');
+        var stackPositions = ['Dominant', 'Auxiliary', 'Tertiary', 'Inferior'];
 
-        // Populate header
-        document.getElementById('result-code').textContent = type;
-        document.getElementById('result-name').textContent = name;
+        function parseAndShowResult(rawText) {
+            var block = '';
+            var match = rawText.match(/<<<r>>>([\s\S]*?)<<<END>>>/);
+            if (match) block = match[1];
 
-        // Build function stack cards
-        const stackHTML = stack.map((fn, i) => `
-            <div class="fn-card">
-                <div class="fn-position">${stackPositions[i]}</div>
-                <div class="fn-code">${fn}</div>
-                <div class="fn-name">${functionNames[fn] || fn}</div>
-            </div>
-        `).join('');
+            function get(key) {
+                var re = new RegExp(key + ':\\s*(.+)');
+                var m = block.match(re);
+                return m ? m[1].trim() : '';
+            }
 
-        // Build result body
-        document.getElementById('result-body').innerHTML = `
-            <h3>Your Function Stack</h3>
-            <div class="function-stack">${stackHTML}</div>
+            var type      = get('TYPE');
+            var name      = get('NAME');
+            var stackRaw  = get('STACK');
+            var summary   = get('SUMMARY');
+            var dominant  = get('DOMINANT_INSIGHT');
+            var grip      = get('GRIP_INSIGHT');
+            var formation = get('FORMATION_NOTE');
+            var stack     = stackRaw.split('-').map(function(s){ return s.trim(); });
 
-            <h3>How God Wired You</h3>
-            <p>${summary}</p>
+            document.getElementById('result-code').textContent = type;
+            document.getElementById('result-name').textContent = name;
 
-            <h3>Your Dominant Gift</h3>
-            <p>${dominant}</p>
+            var stackHTML = '';
+            for (var i = 0; i < stack.length; i++) {
+                var fn = stack[i];
+                stackHTML += '<div class="fn-card">'
+                    + '<div class="fn-position">' + (stackPositions[i] || '') + '</div>'
+                    + '<div class="fn-code">' + fn + '</div>'
+                    + '<div class="fn-name">' + (functionNames[fn] || fn) + '</div>'
+                    + '</div>';
+            }
 
-            <h3>When You're Running on Empty</h3>
-            <p>${grip}</p>
+            document.getElementById('result-body').innerHTML =
+                '<h3>Your Function Stack</h3>'
+                + '<div class="function-stack">' + stackHTML + '</div>'
+                + '<h3>How God Wired You</h3>'
+                + '<p>' + summary + '</p>'
+                + '<h3>Your Dominant Gift</h3>'
+                + '<p>' + dominant + '</p>'
+                + '<h3>When You Are Running on Empty</h3>'
+                + '<p>' + grip + '</p>'
+                + '<h3>A Note for Your Formation</h3>'
+                + '<p>' + formation + '</p>'
+                + '<p style="margin-top:2rem; font-style:italic; font-size:0.95rem; color:var(--text-medium);">'
+                + '&ldquo;I praise you, for I am fearfully and wonderfully made.&rdquo; &mdash; Psalm 139:14'
+                + '</p>';
 
-            <h3>A Note for Your Formation</h3>
-            <p>${formation}</p>
-
-            <p style="margin-top:2rem; font-style:italic; font-size:0.95rem; color:var(--text-medium);">
-                "I praise you, for I am fearfully and wonderfully made." — Psalm 139:14
-            </p>
-        `;
-
-        // Show results, hide chat
-        setTimeout(() => {
-            document.getElementById('chat-container').style.display = 'none';
-            document.getElementById('results-container').style.display = 'block';
-            document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
-        }, 800);
-    }
-
-    // ============================================================
-    // RESTART
-    // ============================================================
-    function restartReflection() {
-        conversationHistory = [];
-        reflectionComplete = false;
-        document.getElementById('results-container').style.display = 'none';
-        document.getElementById('chat-window').innerHTML = '';
-        document.getElementById('chat-container').style.display = 'block';
-        document.getElementById('user-input').value = '';
-        sendToAPI(null, true);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // ============================================================
-    // UI HELPERS
-    // ============================================================
-    function handleKeyDown(e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            sendMessage();
+            setTimeout(function() {
+                document.getElementById('chat-container').style.display = 'none';
+                document.getElementById('results-container').style.display = 'block';
+                document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
+            }, 800);
         }
-    }
 
-    function autoResize(el) {
-        el.style.height = 'auto';
-        el.style.height = Math.min(el.scrollHeight, 140) + 'px';
-    }
+        function restartReflection() {
+            conversationHistory = [];
+            document.getElementById('results-container').style.display = 'none';
+            document.getElementById('chat-window').innerHTML = '';
+            document.getElementById('chat-container').style.display = 'block';
+            document.getElementById('user-input').value = '';
+            sendToAPI(true);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleKeyDown(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function autoResize(el) {
+            el.style.height = 'auto';
+            el.style.height = Math.min(el.scrollHeight, 140) + 'px';
+        }
     </script>
 </body>
 </html>
