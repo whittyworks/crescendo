@@ -1309,6 +1309,7 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -1626,7 +1627,7 @@
         <div class="footer-links sans">
             <a href="portal.html">Portal</a>
             <a href="index.html">Main Site</a>
-            <a href="mailto:myholycrescendo@gmail.com">Contact</a>
+            <a href="/cdn-cgi/l/email-protection#402d39282f2c392332253323252e242f00272d21292c6e232f2d">Contact</a>
         </div>
 
         <p class="copyright">
@@ -1634,7 +1635,7 @@
         </p>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // ============================================
         // QUESTION DATABASE - 8 questions per function
         // Includes both normal use AND stress patterns
@@ -2549,11 +2550,17 @@
                     </div>
 
                     <button class="cta-button reset-btn" onclick="resetTest()">Take the Assessment Again</button>
+                    <button class="cta-button" id="save-profile-btn" onclick="saveToProfile()" style="display:none; background:linear-gradient(135deg,#B8941F,#D4AF37); border-color:#B8941F; margin-top:1rem;">&#10022; Save to My Profile</button>
+                    <p id="save-profile-msg" style="text-align:center; font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; margin-top:1rem; display:none;"></p>
                 </div>
             `;
 
             container.innerHTML = html;
             container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Store result and show save button if logged in
+            window._cogResult = type;
+            checkAndShowSaveButton();
         }
 
         // ============================================
@@ -2589,6 +2596,62 @@
                 }
             });
         });
+
+        // ── Supabase Save to Profile ───────────────────────────
+        const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function checkAndShowSaveButton() {
+            const { data: { session } } = await sb.auth.getSession();
+            if (session) {
+                const btn = document.getElementById('save-profile-btn');
+                if (btn) btn.style.display = 'inline-block';
+            }
+        }
+
+        async function saveToProfile() {
+            const { data: { session } } = await sb.auth.getSession();
+            if (!session) {
+                showSaveMsg('Please sign in to save to your profile.', '#c44569');
+                return;
+            }
+            const btn = document.getElementById('save-profile-btn');
+            const originalText = btn.textContent;
+            btn.textContent = 'Saving…';
+            btn.disabled = true;
+
+            const { data: existing } = await sb
+                .from('user_results')
+                .select('result_data')
+                .eq('user_id', session.user.id)
+                .eq('assessment', 'symphony_profile')
+                .maybeSingle();
+
+            const profileData = existing?.result_data || {};
+            profileData.p_type = window._cogResult;
+
+            const { error } = await sb.from('user_results').upsert({
+                user_id: session.user.id,
+                assessment: 'symphony_profile',
+                result_data: profileData,
+                updated_at: new Date().toISOString()
+            }, { onConflict: 'user_id,assessment' });
+
+            btn.disabled = false;
+            if (error) {
+                btn.textContent = originalText;
+                showSaveMsg('Something went wrong — please try again.', '#c44569');
+            } else {
+                btn.textContent = '✓ Saved!';
+                showSaveMsg('✦ Your type has been saved to your Symphony Profile.', '#4a7c59');
+            }
+        }
+
+        function showSaveMsg(text, color) {
+            const msg = document.getElementById('save-profile-msg');
+            if (msg) { msg.textContent = text; msg.style.color = color; msg.style.display = 'block'; }
+        }
     </script>
 </body>
 </html>
