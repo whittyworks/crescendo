@@ -27,7 +27,8 @@
     <link rel="stylesheet" href="styles.css">
 <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png"></head>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
 
     <meta name="description" content="Discover your top spiritual virtues with this assessment based on St. Albert the Great's classic work, The Paradise of the Soul.">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
@@ -740,6 +741,7 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 <!-- Portal Navigation -->
@@ -846,7 +848,7 @@
     <div class="footer-links sans">
         <a href="portal.html">Portal</a>
         <a href="index.html">Main Site</a>
-        <a href="mailto:myholycrescendo@gmail.com">Contact</a>
+        <a href="/cdn-cgi/l/email-protection#82effbeaedeefbe1f0e7f1e1e7ece6edc2e5efe3ebeeace1edef">Contact</a>
     </div>
 
     <p class="copyright">
@@ -854,7 +856,7 @@
     </p>
 </footer>
 
-    <script src="script.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
     <script>
         // Initialize EmailJS (you'll need to replace these with your actual IDs)
         (function() {
@@ -1485,15 +1487,21 @@
                     <div class="action-buttons">
                         <button class="action-button primary" onclick="downloadResults()">Download PDF Results</button>
                         <button class="action-button primary" onclick="emailResults()">Email Results to Me</button>
+                        <button class="action-button primary" id="save-profile-btn" onclick="saveToProfile()" style="display:none; background:linear-gradient(135deg,#B8941F,#D4AF37); border-color:#B8941F;">&#10022; Save to My Profile</button>
                         <a href="assets/pdf/42-virtues-st-albert-the-great.pdf" download class="action-button secondary">Download All 42 Virtues</a>
                         <a href="symphony-of-grace.html" class="action-button secondary">Explore 15-Week Journey</a>
                         <a href="personal-journey.html" class="action-button secondary">1:1 Coaching</a>
                     </div>
+                    <p id="save-profile-msg" style="text-align:center; font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; margin-top:1rem; display:none;"></p>
                 </div>
             `;
 
             document.getElementById('results').innerHTML = html;
             window.scrollTo(0, 0);
+
+            // Store top 5 for Supabase save
+            window._virtueResults = results.slice(0, 5).map(v => v.name);
+            checkAndShowSaveButton();
         }
 
         function toggleAllVirtues() {
@@ -1723,28 +1731,73 @@
         }
 
         function emailResults() {
-            const email = document.getElementById('user-email').value;
-            if (!email) {
-                alert('Please enter your email address in the form above to receive your results.');
+            const email = prompt('Enter your email address:');
+            if (!email) return;
+            if (!savedResults) {
+                alert('No results to email. Please complete the assessment first.');
                 return;
             }
-
-            // Get results text
             const results = document.querySelector('.results-container').innerText;
+            alert('Email sending is not yet configured. Please use the Download PDF option instead.');
+        }
 
-            // Send via EmailJS
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
-                to_email: email,
-                results_text: results
-            }).then(
-                function() {
-                    alert('Results emailed successfully! Check your inbox.');
-                },
-                function(error) {
-                    alert('Email sending is not yet configured. Please use the Download button instead.');
-                    console.log('EmailJS error:', error);
-                }
-            );
+        function toggleAllVirtues() {
+            const allVirtues = document.getElementById('all-virtues');
+            const button = document.querySelector('.show-all-btn');
+            if (allVirtues.classList.contains('visible')) {
+                allVirtues.classList.remove('visible');
+                button.textContent = 'Show All 42 Virtues';
+            } else {
+                allVirtues.classList.add('visible');
+                button.textContent = 'Hide Additional Virtues';
+                setTimeout(() => { allVirtues.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+            }
+        }
+
+        // ── Supabase Save to Profile ───────────────────────────
+        const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function checkAndShowSaveButton() {
+            const { data: { session } } = await sb.auth.getSession();
+            if (session) {
+                const btn = document.getElementById('save-profile-btn');
+                if (btn) btn.style.display = 'inline-block';
+            }
+        }
+
+        async function saveToProfile() {
+            const { data: { session } } = await sb.auth.getSession();
+            if (!session) { showSaveMsg('Please sign in to save to your profile.', '#c44569'); return; }
+            const btn = document.getElementById('save-profile-btn');
+            btn.textContent = 'Saving…'; btn.disabled = true;
+
+            const { data: existing } = await sb
+                .from('user_results').select('result_data')
+                .eq('user_id', session.user.id).eq('assessment', 'symphony_profile').maybeSingle();
+
+            const profileData = existing?.result_data || {};
+            const virtues = window._virtueResults || [];
+            profileData.p_vir1 = virtues[0] || '';
+            profileData.p_vir2 = virtues[1] || '';
+            profileData.p_vir3 = virtues[2] || '';
+            profileData.p_vir4 = virtues[3] || '';
+            profileData.p_vir5 = virtues[4] || '';
+
+            const { error } = await sb.from('user_results').upsert({
+                user_id: session.user.id, assessment: 'symphony_profile',
+                result_data: profileData, updated_at: new Date().toISOString()
+            }, { onConflict: 'user_id,assessment' });
+
+            btn.disabled = false;
+            if (error) { btn.textContent = '✦ Save to My Profile'; showSaveMsg('Something went wrong — please try again.', '#c44569'); }
+            else { btn.textContent = '✓ Saved!'; showSaveMsg('✦ Your top virtues have been saved to your Symphony Profile.', '#4a7c59'); }
+        }
+
+        function showSaveMsg(text, color) {
+            const msg = document.getElementById('save-profile-msg');
+            if (msg) { msg.textContent = text; msg.style.color = color; msg.style.display = 'block'; }
         }
     </script>
 </body>
