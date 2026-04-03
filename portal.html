@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7QX21GDR7T"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-7QX21GDR7T');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Participant Portal · My Holy Crescendo</title>
@@ -94,7 +85,7 @@
         }
 
         .flourish::before {
-            content: "✦ ✦ ✦";
+            content: "âœ¦ âœ¦ âœ¦";
         }
 
         .gold-line {
@@ -149,7 +140,7 @@
         }
 
         .login-card::after {
-            content: '❇';
+            content: 'â§';
             position: absolute;
             bottom: 1rem;
             right: 1.5rem;
@@ -832,7 +823,75 @@
 
         .resource-card:nth-child(2) { animation-delay: 0.1s; }
         .resource-card:nth-child(3) { animation-delay: 0.2s; }
+
+        /* ============================================
+           AUTH TABS & FORMS
+           ============================================ */
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-radius: 50px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .auth-tab {
+            flex: 1;
+            padding: 0.8rem;
+            background: transparent;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .auth-tab.active {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+        }
+        .auth-input {
+            width: 100%;
+            padding: 1.1rem 1.5rem;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-dark);
+        }
+        .auth-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+        .auth-input::placeholder { color: #bbb; font-style: italic; }
+        .login-success {
+            color: #4a7c59;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            display: none;
+            font-style: italic;
+        }
+        .user-badge {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: var(--gold-dark);
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+        }
+        .auth-loading { opacity: 0.6; pointer-events: none; }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -848,30 +907,47 @@
             <span class="login-icon">🌿</span>
             <h1>Participant Portal</h1>
             <p class="tagline">A Symphony of Grace</p>
-            
-            <p class="welcome-text">
-                Welcome, beloved daughter. Enter your password to access your exclusive resources and continue your journey of becoming.
-            </p>
-            
-            <form onsubmit="checkPassword(event)">
-                <input 
-                    type="password" 
-                    id="password-input" 
-                    class="password-input" 
-                    placeholder="✦  Enter your password  ✦"
-                    autocomplete="off"
-                >
-                <button type="submit" class="login-btn">Enter the Portal</button>
-            </form>
-            
-            <p id="login-error" class="login-error">
-                That password doesn't seem right. Please try again, beloved.
-            </p>
-            
-            <p class="login-hint">
-                Your password was sent in your welcome email.<br>
-                Need help? <a href="/cdn-cgi/l/email-protection#ec8195848380958f9e899f8f89828883ac8b818d8580c28f8381">Reach out to Bea</a>
-            </p>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="showTab('signin')">Sign In</button>
+                <button class="auth-tab" onclick="showTab('signup')">Create Account</button>
+            </div>
+
+            <!-- Sign In -->
+            <div id="signin-form">
+                <p class="welcome-text">Welcome back, beloved daughter.</p>
+                <input type="email" id="signin-email" class="auth-input" placeholder="✦  Your email  ✦" autocomplete="email">
+                <input type="password" id="signin-password" class="auth-input" placeholder="✦  Your password  ✦" autocomplete="current-password">
+                <button class="login-btn" onclick="signIn()">Enter the Portal</button>
+                <p id="signin-error" class="login-error"></p>
+                <p class="login-hint" style="margin-top:1.5rem;">
+                    <a href="#" onclick="showForgot(); return false;">Forgot your password?</a>
+                </p>
+            </div>
+
+            <!-- Sign Up -->
+            <div id="signup-form" style="display:none">
+                <p class="welcome-text">Create your account to begin the journey.</p>
+                <input type="email" id="signup-email" class="auth-input" placeholder="✦  Your email  ✦" autocomplete="email">
+                <input type="password" id="signup-password" class="auth-input" placeholder="✦  Choose a password  ✦" autocomplete="new-password">
+                <input type="password" id="signup-confirm" class="auth-input" placeholder="✦  Confirm password  ✦" autocomplete="new-password">
+                <button class="login-btn" onclick="signUp()">Create Account</button>
+                <p id="signup-error" class="login-error"></p>
+                <p id="signup-success" class="login-success">✦ Check your email for a confirmation link, beloved. ✦</p>
+            </div>
+
+            <!-- Forgot Password -->
+            <div id="forgot-form" style="display:none">
+                <p class="welcome-text">We’ll send you a link to reset your password.</p>
+                <input type="email" id="forgot-email" class="auth-input" placeholder="✦  Your email  ✦" autocomplete="email">
+                <button class="login-btn" onclick="sendReset()">Send Reset Link</button>
+                <p id="forgot-error" class="login-error"></p>
+                <p id="forgot-success" class="login-success">✦ Check your email for a reset link. ✦</p>
+                <p class="login-hint" style="margin-top:1.5rem;">
+                    <a href="#" onclick="showTab('signin'); return false;">Back to sign in</a>
+                </p>
+            </div>
+
         </div>
     </div>
 
@@ -898,10 +974,11 @@
 
         <!-- Hero -->
         <section class="portal-hero">
-            <span class="hero-decoration left">❇</span>
-            <span class="hero-decoration right">☙</span>
+            <span class="hero-decoration left">â§</span>
+            <span class="hero-decoration right">â˜™</span>
             
             <div class="portal-welcome">
+                <p id="user-badge" class="user-badge" style="display:none"></p>
                 <p class="label">Welcome to Your</p>
                 <h1>Participant Portal</h1>
                 <p class="subtitle">Everything you need for your Symphony of Grace journey</p>
@@ -918,10 +995,10 @@
             <div class="quick-links-inner">
                 <h3>Journey to Your Module</h3>
                 <div class="quick-links-list">
-                    <a href="#foundation" class="quick-link">🌿 Foundation</a>
-                    <a href="#body" class="quick-link">✨ Body</a>
-                    <a href="#mind" class="quick-link">💫 Mind</a>
-                    <a href="#spirit" class="quick-link">🕊️ Spirit</a>
+                    <a href="#foundation" class="quick-link">ðŸŒ¿ Foundation</a>
+                    <a href="#body" class="quick-link">âœ¨ Body</a>
+                    <a href="#mind" class="quick-link">ðŸ’« Mind</a>
+                    <a href="#spirit" class="quick-link">ðŸ•Šï¸ Spirit</a>
                 </div>
             </div>
         </section>
@@ -932,10 +1009,10 @@
             <!-- Foundation -->
             <div id="foundation" class="module-section">
                 <div class="module-header">
-                    <div class="module-icon">🌿</div>
+                    <div class="module-icon">ðŸŒ¿</div>
                     <div>
                         <h2>Foundation</h2>
-                        <p class="module-subtitle">Rooted in Christ · Weeks 1—3</p>
+                        <p class="module-subtitle">Rooted in Christ · Weeks 1â€“3</p>
                     </div>
                 </div>
                 
@@ -944,14 +1021,14 @@
                         <span class="resource-type">Guided Experience</span>
                         <h3>Name from Heaven</h3>
                         <p>Receive your name from Heaven through a guided prayer experience.</p>
-                        <a href="name-from-heaven.html" class="resource-link">Start Experience →</a>
+                        <a href="name-from-heaven.html" class="resource-link">Start Experience â†’</a>
                     </div>
                     
                     <div class="resource-card">
                         <span class="resource-type">Workbook</span>
                         <h3>Identity in Christ</h3>
-                        <p>Reflection exercises to help you anchor your identity in who God says you are – before titles, roles, or achievements.</p>
-                        <a href="#" class="resource-link">Access Resource →</a>
+                        <p>Reflection exercises to help you anchor your identity in who God says you are â€” before titles, roles, or achievements.</p>
+                        <a href="#" class="resource-link">Access Resource â†’</a>
                     </div>
                 </div>
             </div>
@@ -959,10 +1036,10 @@
             <!-- Body -->
             <div id="body" class="module-section">
                 <div class="module-header">
-                    <div class="module-icon">✨</div>
+                    <div class="module-icon">âœ¨</div>
                     <div>
                         <h2>Body</h2>
-                        <p class="module-subtitle">Embodied Beauty · Weeks 4—6</p>
+                        <p class="module-subtitle">Embodied Beauty · Weeks 4â€“6</p>
                     </div>
                 </div>
                 
@@ -971,35 +1048,35 @@
                         <span class="resource-type">PDF Download</span>
                         <h3>Week 4: Colors of Creation</h3>
                         <p>Session materials exploring the beautiful palette God designed uniquely for you.</p>
-                        <a href="assets/pdf/symphony-week4.pdf" class="resource-link" download>Download PDF →</a>
+                        <a href="assets/pdf/symphony-week4.pdf" class="resource-link" download>Download PDF â†’</a>
                     </div>
 
                     <div class="resource-card">
                         <span class="resource-type">Interactive Quiz</span>
                         <h3>Seasonal Color Analysis</h3>
                         <p>Understand the colors God chose for you and how they reflect His artistry woven into your very design.</p>
-                        <a href="seasonal-color-analysis-quiz.html" class="resource-link">Take the Quiz →</a>
+                        <a href="seasonal-color-analysis-quiz.html" class="resource-link">Take the Quiz â†’</a>
                     </div>
                     
                     <div class="resource-card">
                         <span class="resource-type">Interactive Quiz</span>
                         <h3>Sacred Style Essence</h3>
                         <p>Discover how your unique presence reflects the Divine. Uncover your primary and secondary sacred essences.</p>
-                        <a href="sacred-style-essence-quiz.html" class="resource-link">Take the Quiz →</a>
+                        <a href="sacred-style-essence-quiz.html" class="resource-link">Take the Quiz â†’</a>
                     </div>
                     
                     <div class="resource-card">
                         <span class="resource-type">Interactive Quiz</span>
                         <h3>Sacred Silhouettes</h3>
-                        <p>Discover your Sacred Silhouette – a starting point for exploring your God-given lines.</p>
-                        <a href="sacred-silhouettes.html" class="resource-link">Take the Quiz →</a>
+                        <p>Discover your Sacred Silhouette â€” a starting point for exploring your God-given lines.</p>
+                        <a href="sacred-silhouettes.html" class="resource-link">Take the Quiz â†’</a>
                     </div>
 
                     <div class="resource-card">
                         <span class="resource-type">Guided Exercise</span>
                         <h3>Sacred Silhouettes Observation</h3>
                         <p>Confirm your Sacred Silhouette through gentle observation of your actual lines.</p>
-                        <a href="sacred-silhouettes-observation.html" class="resource-link">Start Observation →</a>
+                        <a href="sacred-silhouettes-observation.html" class="resource-link">Start Observation â†’</a>
                     </div>
                 </div>
             </div>
@@ -1017,54 +1094,40 @@
             <!-- Mind -->
             <div id="mind" class="module-section" style="margin-top: 4rem;">
                 <div class="module-header">
-                    <div class="module-icon">💫</div>
+                    <div class="module-icon">ðŸ’«</div>
                     <div>
                         <h2>Mind</h2>
-                        <p class="module-subtitle">Interior Landscape · Weeks 7—10</p>
+                        <p class="module-subtitle">Interior Landscape · Weeks 7â€“10</p>
                     </div>
                 </div>
                 
                 <div class="resources-grid">
                     <div class="resource-card">
-                        <span class="resource-type">Interactive Test</span>
-                        <h3>Temperament Test</h3>
-                        <p>Discover your classical temperament blend and understand the unique way God wired your natural way of being in the world.</p>
-                        <a href="temperament-test.html" class="resource-link">Take the Test →</a>
+                        <span class="resource-type">Guide</span>
+                        <h3>Love Languages & Styles</h3>
+                        <p>Learn your love languages and styles to deepen your relationships and spiritual growth.</p>
+                        <a href="love-languages.html" class="resource-link">Explore Guide â†’</a>
                     </div>
-
-                    <div class="resource-card">
-                        <span class="resource-type">Interactive Test</span>
-                        <h3>Cognitive Functions Test</h3>
-                        <p>Explore how you process information, make decisions, and engage with the world God placed you in.</p>
-                        <a href="cognitive-functions-test.html" class="resource-link">Take the Test →</a>
-                    </div>
-
-                    <div class="resource-card">
-                        <span class="resource-type">Guided Reflection</span>
-                        <h3>Your Way of Seeing</h3>
-                        <p>A conversational reflection that reveals your personality type through real-life scenarios — not a quiz, but a guided discovery of how God uniquely wired your mind.</p>
-                        <a href="way-of-seeing.html" class="resource-link">Begin Reflection →</a>
-                    </div>
-
+                    
                     <div class="resource-card">
                         <span class="resource-type">Guide</span>
                         <h3>VIA Character Strengths</h3>
                         <p>Discover your core character strengths and how they shape your spiritual journey.</p>
-                        <a href="character-strengths.html" class="resource-link">Explore Guide →</a>
+                        <a href="character-strengths.html" class="resource-link">Explore Guide â†’</a>
                     </div>
-
+                    
                     <div class="resource-card">
-                        <span class="resource-type">Guide</span>
-                        <h3>Love Languages &amp; Styles</h3>
-                        <p>Learn your love languages and styles to deepen your relationships and spiritual growth.</p>
-                        <a href="love-languages.html" class="resource-link">Explore Guide →</a>
+                        <span class="resource-type">Interactive Test</span>
+                        <h3>Cognitive Functions Test</h3>
+                        <p>Explore how you process information, make decisions, and engage with the world God placed you in.</p>
+                        <a href="cognitive-functions-test.html" class="resource-link">Take the Test â†’</a>
                     </div>
                     
                     <div class="resource-card">
                         <span class="resource-type">PDF Guide</span>
                         <h3>Mind Frameworks Guide</h3>
                         <p>A comprehensive overview of personality frameworks and how they weave into your spiritual journey.</p>
-                        <a href="assets/pdf/mind-frameworks-guide.pdf" class="resource-link">Download PDF →</a>
+                        <a href="assets/pdf/mind-frameworks-guide.pdf" class="resource-link">Download PDF â†’</a>
                     </div>
                 </div>
             </div>
@@ -1072,10 +1135,10 @@
             <!-- Spirit -->
             <div id="spirit" class="module-section">
                 <div class="module-header">
-                    <div class="module-icon">🕊️</div>
+                    <div class="module-icon">ðŸ•Šï¸</div>
                     <div>
                         <h2>Spirit</h2>
-                        <p class="module-subtitle">Living Your Calling · Weeks 11—15</p>
+                        <p class="module-subtitle">Living Your Calling · Weeks 11â€“15</p>
                     </div>
                 </div>
                 
@@ -1084,48 +1147,28 @@
                         <span class="resource-type">Guided Reflection</span>
                         <h3>Healing Your Wounds</h3>
                         <p>Reflect on your spiritual wounds and invite God's healing presence into your life.</p>
-                        <a href="healing-the-wounds.html" class="resource-link">Begin Reflection →</a>
+                        <a href="healing-the-wounds.html" class="resource-link">Begin Reflection â†’</a>
                     </div>
                     
                     <div class="resource-card">
                         <span class="resource-type">Assessment</span>
                         <h3>Virtue Assessment</h3>
                         <p>Identify your strongest virtues and areas for growth as you cultivate a life of holy flourishing.</p>
-                        <a href="virtue-assessment.html" class="resource-link">Take Assessment →</a>
+                        <a href="virtue-assessment.html" class="resource-link">Take Assessment â†’</a>
                     </div>
                     
                     <div class="resource-card">
                         <span class="resource-type">Guide</span>
                         <h3>25 Charisms</h3>
                         <p>Discover your spiritual gifts and how God has uniquely equipped you to serve others and build His Kingdom.</p>
-                        <a href="charisms-portal.html" class="resource-link">Explore Charisms →</a>
+                        <a href="charisms-portal.html" class="resource-link">Explore Charisms â†’</a>
                     </div>
                     
                     <div class="resource-card">
                         <span class="resource-type">Workbook</span>
                         <h3>Rule of Life</h3>
-                        <p>Create your personal rhythm of prayer, rest, work, and play – a holy structure that honors who you were made to be.</p>
-                        <a href="rule-of-life.html" class="resource-link">Build Your Rule →</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Before the Celebration -->
-            <div class="module-section" style="margin-top: 4rem;">
-                <div class="module-header">
-                    <div class="module-icon">🎶</div>
-                    <div>
-                        <h2>Before the Celebration</h2>
-                        <p class="module-subtitle">Sessions 1&ndash;12 &middot; A Look Back</p>
-                    </div>
-                </div>
-
-                <div class="resources-grid">
-                    <div class="resource-card" style="grid-column: 1 / -1; border-left: 4px solid var(--gold); background: linear-gradient(135deg, rgba(253,248,243,1), rgba(212,175,55,0.05));">
-                        <span class="resource-type">Reflection Form</span>
-                        <h3>Your Symphony, So Far</h3>
-                        <p>Twelve sessions. Four modules. One extraordinary journey. Before we celebrate, take time to look back at everything you have discovered &mdash; your name from the Lord, your colors, your strengths, your wounds, your virtues, and so much more. This form gathers it all in one place and invites you to reflect on who you were at Session 1 and who you are becoming.</p>
-                        <a href="crescendo-recap.html" class="resource-link">Open Reflection Form &rarr;</a>
+                        <p>Create your personal rhythm of prayer, rest, work, and play â€” a holy structure that honors who you were made to be.</p>
+                        <a href="rule-of-life.html" class="resource-link">Build Your Rule â†’</a>
                     </div>
                 </div>
             </div>
@@ -1133,7 +1176,7 @@
             <!-- Additional Materials -->
             <div class="module-section" style="margin-top: 4rem;">
                 <div class="module-header">
-                    <div class="module-icon">📚</div>
+                    <div class="module-icon">ðŸ“š</div>
                     <div>
                         <h2>Additional Materials</h2>
                         <p class="module-subtitle">Bonus Resources for Your Journey</p>
@@ -1168,47 +1211,133 @@
         </footer>
 
         <!-- Logout Button -->
-        <button class="logout-btn" onclick="logout()">✦ Sign Out</button>
+        <button class="logout-btn" onclick="logout()">âœ¦ Sign Out</button>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // ============================================
-        // SET YOUR PASSWORD HERE
-        // ============================================
-        const PORTAL_PASSWORD = "symphony2025";
-        // ============================================
+    <script>
+        const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // Check if already logged in
-        if (sessionStorage.getItem('portalAccess') === 'granted') {
-            showPortal();
+        // Check for existing session on load
+        sb.auth.getSession().then(({ data: { session } }) => {
+            if (session) showPortal(session.user);
+        });
+
+        // Listen for auth changes
+        sb.auth.onAuthStateChange((event, session) => {
+            if (event === 'SIGNED_IN' && session) showPortal(session.user);
+            if (event === 'SIGNED_OUT') showLoginScreen();
+        });
+
+        async function signIn() {
+            const email = document.getElementById('signin-email').value.trim();
+            const password = document.getElementById('signin-password').value;
+            const errEl = document.getElementById('signin-error');
+            const btn = document.querySelector('#signin-form .login-btn');
+            errEl.style.display = 'none';
+            if (!email || !password) {
+                errEl.textContent = 'Please enter your email and password.';
+                errEl.style.display = 'block'; return;
+            }
+            btn.textContent = 'Entering…'; btn.classList.add('auth-loading');
+            const { error } = await sb.auth.signInWithPassword({ email, password });
+            btn.textContent = 'Enter the Portal'; btn.classList.remove('auth-loading');
+            if (error) { errEl.textContent = 'That doesn’t seem right. Please try again, beloved.'; errEl.style.display = 'block'; }
         }
 
-        function checkPassword(event) {
-            event.preventDefault();
-            const input = document.getElementById('password-input').value;
-            
-            if (input === PORTAL_PASSWORD) {
-                sessionStorage.setItem('portalAccess', 'granted');
-                showPortal();
-            } else {
-                document.getElementById('login-error').style.display = 'block';
-                document.getElementById('password-input').value = '';
-                document.getElementById('password-input').focus();
+        async function signUp() {
+            const email = document.getElementById('signup-email').value.trim();
+            const password = document.getElementById('signup-password').value;
+            const confirm = document.getElementById('signup-confirm').value;
+            const errEl = document.getElementById('signup-error');
+            const successEl = document.getElementById('signup-success');
+            const btn = document.querySelector('#signup-form .login-btn');
+            errEl.style.display = 'none'; successEl.style.display = 'none';
+            if (!email || !password) { errEl.textContent = 'Please fill in all fields.'; errEl.style.display = 'block'; return; }
+            if (password !== confirm) { errEl.textContent = 'Passwords don’t match — try again.'; errEl.style.display = 'block'; return; }
+            if (password.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; errEl.style.display = 'block'; return; }
+            btn.textContent = 'Creating…'; btn.classList.add('auth-loading');
+            const { error } = await sb.auth.signUp({ email, password });
+            btn.textContent = 'Create Account'; btn.classList.remove('auth-loading');
+            if (error) { errEl.textContent = error.message; errEl.style.display = 'block'; }
+            else { successEl.style.display = 'block'; }
+        }
+
+        async function sendReset() {
+            const email = document.getElementById('forgot-email').value.trim();
+            const errEl = document.getElementById('forgot-error');
+            const successEl = document.getElementById('forgot-success');
+            const btn = document.querySelector('#forgot-form .login-btn');
+            errEl.style.display = 'none'; successEl.style.display = 'none';
+            if (!email) { errEl.textContent = 'Please enter your email address.'; errEl.style.display = 'block'; return; }
+            btn.textContent = 'Sending…'; btn.classList.add('auth-loading');
+            const { error } = await sb.auth.resetPasswordForEmail(email, {
+                redirectTo: 'https://myholycrescendo.com/portal.html'
+            });
+            btn.textContent = 'Send Reset Link'; btn.classList.remove('auth-loading');
+            if (error) { errEl.textContent = error.message; errEl.style.display = 'block'; }
+            else { successEl.style.display = 'block'; }
+        }
+
+        async function logout() { await sb.auth.signOut(); }
+
+        function showPortal(user) {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('portal-content').classList.add('active');
+            if (user) {
+                const badge = document.getElementById('user-badge');
+                if (badge) { badge.textContent = '✦  ' + user.email + '  ✦'; badge.style.display = 'inline-block'; }
             }
         }
 
-        function showPortal() {
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('portal-content').classList.add('active');
-        }
-
-        function logout() {
-            sessionStorage.removeItem('portalAccess');
+        function showLoginScreen() {
             document.getElementById('portal-content').classList.remove('active');
             document.getElementById('login-screen').style.display = 'flex';
-            document.getElementById('password-input').value = '';
-            document.getElementById('login-error').style.display = 'none';
         }
+
+        function showTab(tab) {
+            document.getElementById('signin-form').style.display = tab === 'signin' ? 'block' : 'none';
+            document.getElementById('signup-form').style.display = tab === 'signup' ? 'block' : 'none';
+            document.getElementById('forgot-form').style.display = 'none';
+            document.querySelectorAll('.auth-tab').forEach((t, i) => {
+                t.classList.toggle('active', (i === 0 && tab === 'signin') || (i === 1 && tab === 'signup'));
+            });
+        }
+
+        function showForgot() {
+            document.getElementById('signin-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'none';
+            document.getElementById('forgot-form').style.display = 'block';
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+        }
+
+        // Enter key submits sign-in
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') {
+                const sf = document.getElementById('signin-form');
+                if (sf && sf.style.display !== 'none') signIn();
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Mobile menu
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script><script>
+
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
