@@ -681,6 +681,7 @@
             .rating-btn .rb-label { display: none; }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -841,13 +842,21 @@
                 <p class="save-label">Save Your Results</p>
                 <div class="save-row">
                     <button class="save-btn save-btn-pdf" onclick="saveAsPDF()">
-                        <span class="save-btn-icon">📄</span>
+                        <span class="save-btn-icon">&#128196;</span>
                         <span class="save-btn-text">
                             <strong>Save as PDF</strong>
                             <small>Print or save to device</small>
                         </span>
                     </button>
+                    <button class="save-btn" id="save-profile-btn" onclick="saveToProfile()" style="display:none; background:linear-gradient(135deg,#B8941F,#D4AF37); color:white; border:none; cursor:pointer;">
+                        <span class="save-btn-icon">&#10022;</span>
+                        <span class="save-btn-text">
+                            <strong>Save to My Profile</strong>
+                            <small>Saves top 3 to your Symphony</small>
+                        </span>
+                    </button>
                 </div>
+                <p id="save-profile-msg" style="text-align:center; font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; margin-top:1rem; display:none;"></p>
             </div>
             <button class="retake-btn" onclick="retakeQuiz()">Retake the Quiz</button>
         </div>
@@ -1347,6 +1356,10 @@ function renderResults() {
         });
     }, 200);
 
+    // Store top 3 for Supabase save
+    window._charismResults = savedRanked.slice(0, 3).map(c => c.name);
+    checkAndShowSaveButton();
+
 }
 
 
@@ -1360,6 +1373,57 @@ function retakeQuiz() {
     document.getElementById('resultsScreen').style.display = 'none';
     document.getElementById('introScreen').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Supabase Save to Profile ───────────────────────────
+const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+async function checkAndShowSaveButton() {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) {
+        const btn = document.getElementById('save-profile-btn');
+        if (btn) btn.style.display = 'inline-flex';
+    }
+}
+
+async function saveToProfile() {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) { showSaveMsg('Please sign in to save to your profile.', '#c44569'); return; }
+    const btn = document.getElementById('save-profile-btn');
+    const strong = btn.querySelector('strong');
+    if (strong) strong.textContent = 'Saving…';
+    btn.disabled = true;
+
+    const { data: existing } = await sb
+        .from('user_results').select('result_data')
+        .eq('user_id', session.user.id).eq('assessment', 'symphony_profile').maybeSingle();
+
+    const profileData = existing?.result_data || {};
+    const charisms = window._charismResults || [];
+    profileData.p_char1 = charisms[0] || '';
+    profileData.p_char2 = charisms[1] || '';
+    profileData.p_char3 = charisms[2] || '';
+
+    const { error } = await sb.from('user_results').upsert({
+        user_id: session.user.id, assessment: 'symphony_profile',
+        result_data: profileData, updated_at: new Date().toISOString()
+    }, { onConflict: 'user_id,assessment' });
+
+    btn.disabled = false;
+    if (error) {
+        if (strong) strong.textContent = 'Save to My Profile';
+        showSaveMsg('Something went wrong — please try again.', '#c44569');
+    } else {
+        if (strong) strong.textContent = '✓ Saved!';
+        showSaveMsg('✦ Your top charisms have been saved to your Symphony Profile.', '#4a7c59');
+    }
+}
+
+function showSaveMsg(text, color) {
+    const msg = document.getElementById('save-profile-msg');
+    if (msg) { msg.textContent = text; msg.style.color = color; msg.style.display = 'block'; }
 }
 </script>
 
