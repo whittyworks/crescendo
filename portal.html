@@ -495,8 +495,11 @@
         /* Resource Cards */
         .resources-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
+        }
+        @media (max-width: 768px) {
+            .resources-grid { grid-template-columns: 1fr; }
         }
 
         .resource-card {
@@ -773,9 +776,7 @@
                 font-size: 1.1rem;
             }
 
-            .resources-grid {
-                grid-template-columns: 1fr;
-            }
+
 
             .module-header {
                 flex-direction: column;
