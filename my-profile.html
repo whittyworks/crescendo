@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Symphony Profile &middot; My Holy Crescendo</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        /* ── Nav ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(253,248,243,0.97);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212,175,55,0.1);
+        }
+        .logo-text { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold-dark); text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a {
+            font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 1px;
+            text-transform: uppercase; color: var(--text-medium); text-decoration: none; transition: color 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+        .account-btn {
+            display: flex; align-items: center; gap: 0.6rem;
+            background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.25);
+            border-radius: 50px; padding: 0.5rem 1.2rem 0.5rem 0.8rem;
+            cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 0.78rem;
+            letter-spacing: 0.5px; color: var(--text-medium); transition: all 0.3s;
+        }
+        .account-btn:hover { background: rgba(212,175,55,0.15); border-color: var(--gold); color: var(--gold-dark); }
+        .account-avatar {
+            width: 28px; height: 28px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; color: white; font-weight: 600; flex-shrink: 0;
+        }
+        .account-dropdown {
+            position: absolute; top: calc(100% + 0.75rem); right: 0;
+            background: white; border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            min-width: 220px; overflow: hidden; display: none; z-index: 2000;
+        }
+        .account-dropdown.open { display: block; }
+        .dropdown-header { padding: 1.2rem 1.5rem; background: var(--cream); border-bottom: 1px solid rgba(212,175,55,0.1); }
+        .dropdown-header .d-name { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold-dark); }
+        .dropdown-header .d-email { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; color: var(--text-medium); margin-top: 0.15rem; opacity: 0.8; }
+        .dropdown-item {
+            display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1.5rem;
+            font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: var(--text-medium);
+            cursor: pointer; transition: background 0.2s; border: none; background: none;
+            width: 100%; text-align: left; letter-spacing: 0.5px;
+        }
+        .dropdown-item:hover { background: var(--cream); color: var(--gold-dark); }
+        .dropdown-item.danger:hover { background: #fff5f5; color: #c44569; }
+        .dropdown-divider { height: 1px; background: rgba(212,175,55,0.1); }
+        .dropdown-icon { font-size: 1rem; width: 18px; text-align: center; }
+
+        /* ── Hero ── */
+        .profile-hero {
+            padding: 9rem 5% 4rem;
+            text-align: center;
+            background:
+                radial-gradient(ellipse at top, rgba(212,175,55,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(245,225,218,0.4) 0%, transparent 40%),
+                linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
+            border-bottom: 1px solid rgba(212,175,55,0.1);
+            position: relative;
+        }
+        .profile-hero::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
+        }
+        .hero-label {
+            font-family: 'Montserrat', sans-serif; font-size: 0.78rem; letter-spacing: 4px;
+            text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;
+        }
+        .hero-name-badge {
+            display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 0.75rem;
+            letter-spacing: 1px; color: var(--gold-dark); background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.2); padding: 0.4rem 1.2rem;
+            border-radius: 50px; margin-bottom: 1.25rem;
+        }
+        .profile-hero h1 {
+            font-family: 'Cinzel', serif; font-size: 3rem; color: var(--gold-dark);
+            font-weight: 400; margin-bottom: 0.75rem; line-height: 1.2;
+        }
+        .profile-hero .subtitle {
+            font-size: 1.3rem; font-style: italic; color: var(--text-medium); margin-bottom: 1.5rem;
+        }
+        .gold-line {
+            height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            max-width: 200px; margin: 0 auto 1.5rem;
+        }
+        .hero-verse {
+            font-size: 1.05rem; font-style: italic; color: var(--text-medium);
+            max-width: 500px; margin: 0 auto; line-height: 1.8;
+        }
+        .hero-verse cite {
+            display: block; font-style: normal; font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--gold); margin-top: 6px;
+        }
+
+        /* ── Save bar ── */
+        .save-bar {
+            position: sticky; top: 68px; z-index: 900;
+            background: rgba(253,248,243,0.97); backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(212,175,55,0.12);
+            padding: 0.75rem 5%;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+        }
+        .save-status {
+            font-family: 'Montserrat', sans-serif; font-size: 0.75rem;
+            letter-spacing: 1px; color: var(--text-medium);
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .save-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #ccc; transition: background 0.3s;
+        }
+        .save-dot.saved { background: #4a7c59; }
+        .save-dot.saving { background: var(--gold); animation: pulse 1s infinite; }
+        .save-dot.unsaved { background: #e07b39; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        .save-btn {
+            font-family: 'Montserrat', sans-serif; font-size: 0.72rem; letter-spacing: 2px;
+            text-transform: uppercase; padding: 0.6rem 1.8rem;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white; border: none; border-radius: 50px; cursor: pointer;
+            transition: all 0.3s; box-shadow: 0 3px 12px rgba(212,175,55,0.3);
+        }
+        .save-btn:hover { box-shadow: 0 5px 18px rgba(212,175,55,0.4); transform: translateY(-1px); }
+        .save-btn:disabled { opacity: 0.6; cursor: default; transform: none; }
+
+        /* ── Tabs ── */
+        .tab-bar {
+            display: flex; background: white;
+            border-bottom: 2px solid rgba(212,175,55,0.12);
+            padding: 0 5%;
+        }
+        .tab-btn {
+            font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px;
+            text-transform: uppercase; padding: 1.25rem 2rem;
+            border: none; background: none; cursor: pointer;
+            color: var(--text-medium); transition: all 0.3s;
+            border-bottom: 3px solid transparent; margin-bottom: -2px;
+        }
+        .tab-btn.active { color: var(--gold-dark); border-bottom-color: var(--gold); }
+        .tab-btn:hover { color: var(--gold); }
+
+        /* ── Page container ── */
+        .page-content { max-width: 900px; margin: 0 auto; padding: 3rem 5% 6rem; }
+
+        /* ── Section headers ── */
+        .section-module-header {
+            display: flex; align-items: center; gap: 18px; margin: 3.5rem 0 2rem;
+        }
+        .module-badge {
+            font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.2em;
+            text-transform: uppercase; color: white; background: var(--gold-dark);
+            padding: 5px 14px; border-radius: 30px; white-space: nowrap;
+        }
+        .module-title-text {
+            font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 500; color: var(--gold-dark);
+        }
+        .module-line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(212,175,55,0.4), transparent); }
+
+        /* ── Profile fields card ── */
+        .profile-card {
+            background: white; border-radius: 12px;
+            box-shadow: 0 6px 30px rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.15);
+            overflow: hidden; margin-bottom: 2rem;
+        }
+        .profile-card-header {
+            background: linear-gradient(135deg, var(--gold-dark), #a07a18);
+            padding: 1.4rem 2rem;
+        }
+        .profile-card-header h2 {
+            font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 500; color: white;
+        }
+        .profile-card-header p {
+            font-family: 'Cormorant Garamond', serif; font-size: 0.95rem;
+            font-style: italic; color: rgba(255,255,255,0.8); margin-top: 3px;
+        }
+        .profile-card-body { padding: 2.25rem 2rem; }
+
+        /* ── Name from the Lord ── */
+        .name-from-lord {
+            background: linear-gradient(135deg, rgba(212,175,55,0.05), rgba(220,197,216,0.08));
+            border: 1px solid rgba(212,175,55,0.25); border-radius: 8px;
+            padding: 1.5rem 2rem; margin-bottom: 2rem; text-align: center;
+        }
+        .name-from-lord label {
+            display: block; font-family: 'Montserrat', sans-serif; font-size: 0.68rem;
+            letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 0.75rem;
+        }
+        .name-from-lord input {
+            border: none; border-bottom: 2px solid rgba(212,175,55,0.4); background: transparent;
+            font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--text-dark);
+            text-align: center; width: 100%; max-width: 440px;
+            padding: 6px 8px; outline: none; transition: border-color 0.3s;
+        }
+        .name-from-lord input:focus { border-bottom-color: var(--gold); }
+        .name-from-lord input::placeholder { color: rgba(92,81,66,0.3); font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; }
+
+        /* ── Group labels / dividers ── */
+        .group-label {
+            font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.22em;
+            text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .group-label::after { content: ''; flex: 1; height: 1px; background: rgba(212,175,55,0.2); }
+        .profile-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(212,175,55,0.2), transparent); margin: 1.75rem 0; }
+
+        /* ── Field grids ── */
+        .field-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.75rem; }
+        .field-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.1rem; margin-bottom: 1.75rem; }
+        .field-group { display: flex; flex-direction: column; gap: 6px; }
+        .field-group label {
+            font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.16em;
+            text-transform: uppercase; color: var(--text-medium);
+        }
+        .field-group input[type="text"] {
+            border: none; border-bottom: 1px solid rgba(212,175,55,0.35); background: transparent;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--text-dark);
+            padding: 6px 2px; outline: none; transition: border-color 0.3s;
+        }
+        .field-group input:focus { border-bottom-color: var(--gold); }
+        .field-group input::placeholder { color: rgba(92,81,66,0.3); font-style: italic; }
+
+        /* ── Multi-entry (strengths, charisms, etc.) ── */
+        .multi-entries { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.75rem; }
+        .multi-entry { display: flex; align-items: center; gap: 12px; }
+        .entry-num {
+            font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--gold-light);
+            min-width: 18px; text-align: right;
+        }
+        .multi-entry input {
+            flex: 1; border: none; border-bottom: 1px solid rgba(212,175,55,0.3); background: transparent;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--text-dark);
+            padding: 5px 2px; outline: none; transition: border-color 0.3s;
+        }
+        .multi-entry input:focus { border-bottom-color: var(--gold); }
+        .multi-entry input::placeholder { color: rgba(92,81,66,0.3); font-style: italic; }
+
+        /* ── Session / journey cards ── */
+        .session-card {
+            background: white; border-radius: 10px;
+            box-shadow: 0 6px 24px rgba(212,175,55,0.08); margin-bottom: 1.5rem; overflow: hidden;
+            border: 1px solid rgba(212,175,55,0.1);
+        }
+        .session-card-header {
+            display: flex; align-items: baseline; gap: 14px;
+            padding: 1.4rem 1.75rem 1.1rem;
+            border-bottom: 1px solid rgba(212,175,55,0.1);
+            background: rgba(253,248,243,0.6);
+        }
+        .session-number {
+            font-family: 'Cinzel', serif; font-size: 1.7rem; color: var(--gold-light); line-height: 1; min-width: 28px;
+        }
+        .session-title { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 500; color: var(--text-dark); margin-bottom: 2px; }
+        .session-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; font-style: italic; color: var(--text-medium); }
+        .session-card-body { padding: 1.5rem 1.75rem; }
+        .question { margin-bottom: 1.25rem; }
+        .question:last-child { margin-bottom: 0; }
+        .question p { font-family: 'Cormorant Garamond', serif; font-size: 1.08rem; color: var(--text-dark); margin-bottom: 8px; line-height: 1.65; }
+        .question textarea {
+            width: 100%; border: 1px solid rgba(212,175,55,0.25); border-radius: 6px;
+            background: rgba(253,248,243,0.5); font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem; color: var(--text-dark); padding: 10px 13px;
+            resize: vertical; outline: none; line-height: 1.65; transition: border-color 0.3s; min-height: 80px;
+        }
+        .question textarea:focus { border-color: var(--gold); background: white; }
+        .question textarea::placeholder { color: rgba(92,81,66,0.35); font-style: italic; }
+
+        /* ── Synthesis ── */
+        .synthesis-section {
+            margin-top: 3rem; background: linear-gradient(135deg, rgba(195,163,91,0.07), rgba(220,197,216,0.1));
+            border: 1px solid rgba(212,175,55,0.25); border-radius: 10px; padding: 2.5rem;
+        }
+        .synthesis-heading {
+            font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 500;
+            color: var(--gold-dark); margin-bottom: 6px; text-align: center;
+        }
+        .synthesis-intro {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.08rem; font-style: italic;
+            color: var(--text-medium); text-align: center; margin-bottom: 2.25rem; line-height: 1.7;
+        }
+        .synthesis-q { margin-bottom: 1.75rem; }
+        .synthesis-q p { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 8px; line-height: 1.65; }
+        .synthesis-q textarea {
+            width: 100%; border: 1px solid rgba(212,175,55,0.28); border-radius: 6px; background: white;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--text-dark);
+            padding: 10px 13px; resize: vertical; outline: none; line-height: 1.65; transition: border-color 0.3s;
+        }
+        .synthesis-q textarea:focus { border-color: var(--gold); }
+        .synthesis-q textarea::placeholder { color: rgba(92,81,66,0.35); font-style: italic; }
+        .three-words-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1.75rem; }
+        .word-field { display: flex; flex-direction: column; gap: 6px; }
+        .word-field label {
+            font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.16em;
+            text-transform: uppercase; color: var(--gold-dark); text-align: center;
+        }
+        .word-field input {
+            border: none; border-bottom: 1px solid rgba(212,175,55,0.4); background: transparent;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--text-dark);
+            padding: 6px 2px; outline: none; transition: border-color 0.3s; text-align: center;
+        }
+        .word-field input:focus { border-bottom-color: var(--gold); }
+        .word-field input::placeholder { color: rgba(92,81,66,0.3); font-style: italic; }
+        .synth-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(212,175,55,0.25), transparent); margin: 1.5rem 0; }
+
+        /* ── Opening block ── */
+        .opening-block {
+            background: linear-gradient(135deg, rgba(212,175,55,0.06), rgba(220,197,216,0.08));
+            border: 1px solid rgba(212,175,55,0.2); border-radius: 8px; padding: 2rem 2.5rem;
+            margin-bottom: 3rem; text-align: center;
+        }
+        .opening-block p {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic;
+            color: var(--text-medium); line-height: 1.8; max-width: 600px; margin: 0 auto;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 700px) {
+            .profile-hero h1 { font-size: 2.1rem; }
+            .field-grid-2, .field-grid-3, .three-words-row { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .tab-btn { padding: 1rem 1.2rem; font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ======================================================
+     NAV
+     ====================================================== -->
+<nav>
+    <a href="index.html" class="logo-text">My Holy Crescendo</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portal.html">Portal</a></li>
+        <li><a href="my-profile.html" class="active">My Symphony</a></li>
+    </ul>
+    <div style="position:relative;">
+        <button class="account-btn" onclick="toggleDropdown()" id="account-btn">
+            <div class="account-avatar" id="account-avatar">?</div>
+            <span id="account-btn-name">Account</span>
+        </button>
+        <div class="account-dropdown" id="account-dropdown">
+            <div class="dropdown-header">
+                <div class="d-name" id="dropdown-name">Welcome</div>
+                <div class="d-email" id="dropdown-email"></div>
+            </div>
+            <button class="dropdown-item" onclick="window.location.href='portal.html'">
+                <span class="dropdown-icon">&#9674;</span> Back to Portal
+            </button>
+            <button class="dropdown-item" onclick="openAccountModal()">
+                <span class="dropdown-icon">&#9998;</span> Edit Profile
+            </button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item danger" onclick="signOut()">
+                <span class="dropdown-icon">&#10022;</span> Sign Out
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- ======================================================
+     HERO
+     ====================================================== -->
+<div class="profile-hero">
+    <p class="hero-label">A Symphony of Grace</p>
+    <p id="hero-badge" class="hero-name-badge" style="display:none"></p>
+    <h1>My Symphony Profile</h1>
+    <p class="subtitle">Everything God has revealed about how He made you</p>
+    <div class="gold-line"></div>
+    <div class="hero-verse">
+        &#8220;I praise you, for I am fearfully and wonderfully made.<br>
+        Wonderful are your works; my soul knows it very well.&#8221;
+        <cite>Psalm 139:14</cite>
+    </div>
+</div>
+
+<!-- ======================================================
+     SAVE BAR
+     ====================================================== -->
+<div class="save-bar">
+    <div class="save-status">
+        <div class="save-dot" id="save-dot"></div>
+        <span id="save-text">Loading your profile&hellip;</span>
+    </div>
+    <button class="save-btn" id="save-btn" onclick="saveAll()" disabled>Save All Changes</button>
+</div>
+
+<!-- ======================================================
+     TABS
+     ====================================================== -->
+<div class="tab-bar">
+    <button class="tab-btn active" id="tab-profile" onclick="switchTab('profile')">&#9675; Your Symphony</button>
+    <button class="tab-btn" id="tab-journey" onclick="switchTab('journey')">&#9674; Your Journey</button>
+</div>
+
+<!-- ======================================================
+     TAB 1: YOUR SYMPHONY PROFILE
+     ====================================================== -->
+<div id="pane-profile">
+<div class="page-content">
+
+    <!-- ── Symphony Profile Card ── -->
+    <div class="profile-card" style="margin-top: 1.5rem;">
+        <div class="profile-card-header">
+            <h2>Your Symphony Profile</h2>
+            <p>Everything you have discovered about how God made you</p>
+        </div>
+        <div class="profile-card-body">
+
+            <!-- Name from the Lord -->
+            <div class="name-from-lord">
+                <label>My Name from the Lord</label>
+                <input type="text" id="p_name_lord" placeholder="The name He has spoken over you&hellip;" oninput="markUnsaved()">
+            </div>
+
+            <!-- Foundation -->
+            <div class="group-label">Foundation</div>
+            <div class="field-grid-2" style="margin-bottom:0;">
+                <div class="field-group">
+                    <label>My Identity in Christ</label>
+                    <input type="text" id="p_identity" placeholder="Who He says you are&hellip;" oninput="markUnsaved()">
+                </div>
+                <div class="field-group">
+                    <label>A Word He Has Spoken Over Me</label>
+                    <input type="text" id="p_word_spoken" placeholder="A word or phrase&hellip;" oninput="markUnsaved()">
+                </div>
+            </div>
+
+            <div class="profile-divider"></div>
+
+            <!-- Body -->
+            <div class="group-label">Body</div>
+            <div class="field-grid-3">
+                <div class="field-group">
+                    <label>Color Season</label>
+                    <input type="text" id="p_color_season" placeholder="e.g. Soft Autumn&hellip;" oninput="markUnsaved()">
+                </div>
+                <div class="field-group">
+                    <label>Style Essence</label>
+                    <input type="text" id="p_style_essence" placeholder="e.g. Romantic + Classic&hellip;" oninput="markUnsaved()">
+                </div>
+                <div class="field-group">
+                    <label>Sacred Silhouette</label>
+                    <input type="text" id="p_silhouette" placeholder="Your body line&hellip;" oninput="markUnsaved()">
+                </div>
+            </div>
+
+            <div class="profile-divider"></div>
+
+            <!-- Mind -->
+            <div class="group-label">Mind</div>
+            <div class="field-grid-2">
+                <div class="field-group">
+                    <label>Primary Love Language</label>
+                    <input type="text" id="p_love_primary" placeholder="How you receive love most&hellip;" oninput="markUnsaved()">
+                </div>
+                <div class="field-group">
+                    <label>Secondary Love Language</label>
+                    <input type="text" id="p_love_secondary" placeholder="Your second language&hellip;" oninput="markUnsaved()">
+                </div>
+            </div>
+            <div class="field-grid-2">
+                <div class="field-group">
+                    <label>Temperament Blend</label>
+                    <input type="text" id="p_temperament" placeholder="e.g. Melancholic-Sanguine&hellip;" oninput="markUnsaved()">
+                </div>
+                <div class="field-group">
+                    <label>16 Types / Cognitive Functions</label>
+                    <input type="text" id="p_type" placeholder="e.g. INFP (Fi-Ne)&hellip;" oninput="markUnsaved()">
+                </div>
+            </div>
+            <div class="group-label" style="margin-top:0.25rem;">Top Character Strengths</div>
+            <div class="multi-entries">
+                <div class="multi-entry"><span class="entry-num">1</span><input type="text" id="p_str1" placeholder="Your signature strength&hellip;" oninput="markUnsaved()"></div>
+                <div class="multi-entry"><span class="entry-num">2</span><input type="text" id="p_str2" placeholder="" oninput="markUnsaved()"></div>
+                <div class="multi-entry"><span class="entry-num">3</span><input type="text" id="p_str3" placeholder="" oninput="markUnsaved()"></div>
+                <div class="multi-entry"><span class="entry-num">4</span><input type="text" id="p_str4" placeholder="" oninput="markUnsaved()"></div>
+                <div class="multi-entry"><span class="entry-num">5</span><input type="text" id="p_str5" placeholder="" oninput="markUnsaved()"></div>
+            </div>
+
+            <div class="profile-divider"></div>
+
+            <!-- Spirit -->
+            <div class="group-label">Spirit</div>
+            <div class="group-label" style="font-size:0.62rem; margin-bottom:0.6rem;">Top Virtues</div>
+            <div class="multi-entries">
+                <div class="multi-entry"><span class="entry-num">1</span><input type="text" id="p_vir1" placeholder="Your highest virtue&hellip;" oninput="markUnsaved()"></div>
+                <div class="multi-entry"><span class="entry-num">2</span><input type="text" id="p_vir2" placeholder="" oninput="markUnsaved()"></div>
+                <div class="multi-entry"><span class="entry-num">3</span><input type="text" id="p_vir3" placeholder="" oninput="markUnsaved()"></div>
+                <div class="multi-entry"><span class="entry-num">4</span><input type="text" id="p_vir4" placeholder="" oninput="markUnsaved()"></div>
+                <div class="multi-entry"><span class="entry-num">5</span><input type="text" id="p_vir5" placeholder="" oninput="markUnsaved()"></div>
+            </div>
+            <div class="group-label" style="font-size:0.62rem; margin-bottom:0.6rem; margin-top:1rem;">My Charisms</div>
+            <div class="multi-entries" style="margin-bottom:0;">
+                <div class="multi-entry"><span class="entry-num">1</span><input type="text" id="p_char1" placeholder="A gift the Spirit has entrusted to you&hellip;" oninput="markUnsaved()"></div>
+                <div class="multi-entry"><span class="entry-num">2</span><input type="text" id="p_char2" placeholder="" oninput="markUnsaved()"></div>
+                <div class="multi-entry"><span class="entry-num">3</span><input type="text" id="p_char3" placeholder="" oninput="markUnsaved()"></div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!-- ======================================================
+     TAB 2: YOUR JOURNEY (REFLECTION JOURNAL)
+     ====================================================== -->
+<div id="pane-journey" style="display:none;">
+<div class="page-content">
+
+    <div class="opening-block" style="margin-top:1.5rem;">
+        <p>Before you answer a single question, take a breath. Light a candle if you&#8217;d like. Ask the Holy Spirit to bring to mind what He most wants you to see. This is not a test &#8212; it is an act of remembrance. You have done hard and holy work. Let it speak.</p>
+    </div>
+
+    <!-- MODULE ONE: FOUNDATION -->
+    <div class="section-module-header">
+        <span class="module-badge">Module One</span>
+        <span class="module-title-text">Foundation</span>
+        <div class="module-line"></div>
+    </div>
+
+    <div class="session-card">
+        <div class="session-card-header">
+            <span class="session-number">1</span>
+            <div><div class="session-title">You Are Called</div><div class="session-subtitle">Named and claimed by the Father</div></div>
+        </div>
+        <div class="session-card-body">
+            <div class="question"><p>God calls you by name &#8212; Daughter of the King. What does it mean to you <em>now</em> to be claimed as His own? Has that felt different since Session 1?</p><textarea id="j_s1q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+            <div class="question"><p>Is there a moment from this program where you felt most like a daughter &#8212; fully known, fully held?</p><textarea id="j_s1q2" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        </div>
+    </div>
+
+    <div class="session-card">
+        <div class="session-card-header">
+            <span class="session-number">2</span>
+            <div><div class="session-title">Identity in Christ</div><div class="session-subtitle">The One who made us defines who we are</div></div>
+        </div>
+        <div class="session-card-body">
+            <div class="question"><p>Before this program, where were you most likely to look for your identity &#8212; achievement, relationships, roles? What has shifted?</p><textarea id="j_s2q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+            <div class="question"><p>Is there a false identity you have set down &#8212; or one you are still working to release?</p><textarea id="j_s2q2" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        </div>
+    </div>
+
+    <div class="session-card">
+        <div class="session-card-header">
+            <span class="session-number">3</span>
+            <div><div class="session-title">Receiving His Love</div><div class="session-subtitle">Without love, we are nothing</div></div>
+        </div>
+        <div class="session-card-body">
+            <div class="question"><p>How has your capacity to receive God&#8217;s love changed over these twelve sessions? Where do you still sense resistance?</p><textarea id="j_s3q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        </div>
+    </div>
+
+    <!-- MODULE TWO: BODY -->
+    <div class="section-module-header">
+        <span class="module-badge">Module Two</span>
+        <span class="module-title-text">Body</span>
+        <div class="module-line"></div>
+    </div>
+
+    <div class="session-card">
+        <div class="session-card-header">
+            <span class="session-number">4</span>
+            <div><div class="session-title">Colors of Creation</div><div class="session-subtitle">The unique palette God used to paint His masterpiece &#8212; you</div></div>
+        </div>
+        <div class="session-card-body">
+            <div class="question"><p>What did your color season reveal about how God painted you? How has that changed the way you see yourself in a mirror, in a photograph, in a room?</p><textarea id="j_s4q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        </div>
+    </div>
+
+    <div class="session-card">
+        <div class="session-card-header">
+            <span class="session-number">5</span>
+            <div><div class="session-title">Presence &amp; Grace: Sacred Style Essence</div><div class="session-subtitle">How the Lord is glorified in our presence in the world</div></div>
+        </div>
+        <div class="session-card-body">
+            <div class="question"><p>How do you understand the way God is glorified through your particular presence now? Has the way you inhabit a room, a conversation, or a moment changed?</p><textarea id="j_s5q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        </div>
+    </div>
+
+    <div class="session-card">
+        <div class="session-card-header">
+            <span class="session-number">6</span>
+            <div><div class="session-title">Shape of Dignity: Sacred Silhouettes</div><div class="session-subtitle">The beauty in our created form</div></div>
+        </div>
+        <div class="session-card-body">
+            <div class="question"><p>What did it mean to you to see your created form as dignified and beautiful? What is still tender here &#8212; and what has softened?</p><textarea id="j_s6q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        </div>
+    </div>
+
+    <!-- MODULE THREE: MIND -->
+    <div class="section-module-header">
+        <span class="module-badge">Module Three</span>
+        <span class="module-title-text">Mind</span>
+        <div class="module-line"></div>
+    </div>
+
+    <div class="session-card">
+        <div class="session-card-header">
+            <span class="session-number">7</span>
+            <div><div class="session-title">Giving &amp; Receiving: Love Languages</div><div class="session-subtitle">How we give and receive love</div></div>
+        </div>
+        <div class="session-card-body">
+            <div class="question"><p>How has knowing your love language (and others&#8217;) changed how you give or receive love &#8212; in your relationships, and with God?</p><textarea id="j_s7q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        </div>
+    </div>
+
+    <div class="session-card">
+        <div class="session-card-header">
+            <span class="session-number">8</span>
+            <div><div class="session-title">Strengths as Entrusted Gifts: VIA Character Strengths</div><div class="session-subtitle">The unique blend of strengths God has given you</div></div>
+        </div>
+        <div class="session-card-body">
+            <div class="question"><p>Which of your character strengths surprised you most? Which one do you feel most called to steward right now &#8212; and how are you doing that?</p><textarea id="j_s8q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        </div>
+    </div>
+
+    <div class="session-card">
+        <div class="session-card-header">
+            <span class="session-number">9</span>
+            <div><div class="session-title">Your Way of Being: Four Temperament Blend</div><div class="session-subtitle">Our God-given way of being in the world</div></div>
+        </div>
+        <div class="session-card-body">
+            <div class="question"><p>What has your temperament revealed about your God-given way of being in the world? Have you found it easier to extend grace to yourself in the areas where your temperament creates friction?</p><textarea id="j_s9q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        </div>
+    </div>
+
+    <div class="session-card">
+        <div class="session-card-header">
+            <span class="session-number">10</span>
+            <div><div class="session-title">Your Way of Seeing: 16 Types &amp; Cognitive Functions</div><div class="session-subtitle">How God wired your mind to perceive and engage the world</div></div>
+        </div>
+        <div class="session-card-body">
+            <div class="question"><p>How has understanding your cognitive wiring changed the way you relate to yourself &#8212; or to others who see the world differently?</p><textarea id="j_s10q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+            <div class="question"><p>Is there a function or tendency in you that you have learned to see as a gift rather than a flaw?</p><textarea id="j_s10q2" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        </div>
+    </div>
+
+    <!-- MODULE FOUR: SPIRIT -->
+    <div class="section-module-header">
+        <span class="module-badge">Module Four</span>
+        <span class="module-title-text">Spirit</span>
+        <div class="module-line"></div>
+    </div>
+
+    <div class="session-card">
+        <div class="session-card-header">
+            <span class="session-number">11</span>
+            <div><div class="session-title">Light in the Shadows: Wound Work</div><div class="session-subtitle">Allowing the light of Christ to shine in our shadows</div></div>
+        </div>
+        <div class="session-card-body">
+            <div class="question"><p>What shadow did you bring into the light? You do not have to name it here &#8212; but what is Christ saying to you in that place?</p><textarea id="j_s11q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+            <div class="question"><p>How has this session changed the way you hold your wounds &#8212; as something to hide, or something He can redeem?</p><textarea id="j_s11q2" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        </div>
+    </div>
+
+    <div class="session-card">
+        <div class="session-card-header">
+            <span class="session-number">12</span>
+            <div><div class="session-title">Growing in Holiness: 42 Virtues</div><div class="session-subtitle">Based on St. Albert the Great&#8217;s <em>Paradise of the Soul</em></div></div>
+        </div>
+        <div class="session-card-body">
+            <div class="question"><p>Which virtue is God most clearly cultivating in you right now? What does that invitation look like in your ordinary daily life?</p><textarea id="j_s12q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+            <div class="question"><p>Is there a virtue you resisted at first that you now find yourself drawn toward? What happened there?</p><textarea id="j_s12q2" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        </div>
+    </div>
+
+    <!-- SYNTHESIS -->
+    <div class="synthesis-section">
+        <h2 class="synthesis-heading">Your Symphony in View</h2>
+        <p class="synthesis-intro">Twelve sessions. Twelve movements of discovery. Now step back and listen to what has been composed.</p>
+
+        <div class="synthesis-q"><p>Which session or concept has stayed with you the most &#8212; the one that follows you into your ordinary week?</p><textarea id="j_syn1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        <div class="synthesis-q"><p>What is one thing you believed about yourself at Session 1 that has shifted, softened, or been set down?</p><textarea id="j_syn2" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        <div class="synthesis-q"><p>Was there a moment in this program where you felt <em>seen</em> by God through something you were learning? What was it?</p><textarea id="j_syn3" rows="4" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        <div class="synthesis-q"><p>If you had to name the single most significant thing God has revealed to you about yourself through these twelve sessions, what would it be?</p><textarea id="j_syn4" rows="4" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        <div class="synthesis-q"><p>Where do you sense your symphony beginning to come into focus? Where does it still feel like unresolved music?</p><textarea id="j_syn5" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+        <div class="synthesis-q"><p>What would you want the other women in this cohort to know about what this journey has meant to you?</p><textarea id="j_syn6" rows="4" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+
+        <div class="synth-divider"></div>
+
+        <p style="font-family:'Montserrat',sans-serif; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-dark); text-align:center; margin-bottom:1.1rem;">Three Words</p>
+        <div class="three-words-row">
+            <div class="word-field"><label>Who I was at Session 1</label><input type="text" id="j_word1" placeholder="one word" oninput="markUnsaved()"></div>
+            <div class="word-field"><label>What this journey has been</label><input type="text" id="j_word2" placeholder="one word" oninput="markUnsaved()"></div>
+            <div class="word-field"><label>Who I am becoming</label><input type="text" id="j_word3" placeholder="one word" oninput="markUnsaved()"></div>
+        </div>
+
+        <div class="synth-divider"></div>
+        <div class="synthesis-q" style="margin-bottom:0;"><p>Is there anything you want to bring into the celebration &#8212; something you want to say aloud, receive, or offer to the group?</p><textarea id="j_syn7" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+    </div>
+
+</div>
+</div>
+
+<!-- ======================================================
+     EDIT PROFILE MODAL (simple)
+     ====================================================== -->
+<div id="modal-overlay" onclick="closeModal(event)" style="display:none; position:fixed; inset:0; background:rgba(44,36,22,0.5); backdrop-filter:blur(4px); z-index:3000; align-items:center; justify-content:center; padding:2rem;">
+    <div style="background:white; border-radius:20px; padding:2.5rem; max-width:420px; width:100%; position:relative; border:1px solid rgba(212,175,55,0.15);">
+        <button onclick="closeModal()" style="position:absolute;top:1.25rem;right:1.5rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-medium);opacity:0.5;">&times;</button>
+        <p style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold-dark);margin-bottom:0.25rem;">Edit Profile</p>
+        <p style="font-family:'Montserrat',sans-serif;font-size:0.75rem;letter-spacing:1px;color:var(--text-medium);text-transform:uppercase;margin-bottom:1.75rem;">Account settings</p>
+        <div style="margin-bottom:1.25rem;">
+            <label style="display:block;font-family:'Montserrat',sans-serif;font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-medium);margin-bottom:0.5rem;">First Name</label>
+            <input type="text" id="modal-name" style="width:100%;padding:0.9rem 1.2rem;border:2px solid rgba(212,175,55,0.25);border-radius:12px;font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text-dark);background:var(--cream);outline:none;">
+        </div>
+        <div style="margin-bottom:1.75rem;">
+            <label style="display:block;font-family:'Montserrat',sans-serif;font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-medium);margin-bottom:0.5rem;">Email</label>
+            <input type="email" id="modal-email" style="width:100%;padding:0.9rem 1.2rem;border:2px solid rgba(212,175,55,0.25);border-radius:12px;font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text-dark);background:var(--cream);outline:none;">
+        </div>
+        <p id="modal-msg" style="font-size:0.9rem;font-style:italic;margin-bottom:1rem;display:none;"></p>
+        <div style="display:flex;gap:1rem;">
+            <button onclick="closeModal()" style="flex:1;padding:0.9rem;border-radius:50px;font-family:'Montserrat',sans-serif;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;background:var(--cream);color:var(--text-medium);border:1px solid rgba(212,175,55,0.2);">Cancel</button>
+            <button onclick="saveAccountInfo()" style="flex:1;padding:0.9rem;border-radius:50px;font-family:'Montserrat',sans-serif;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:white;border:none;box-shadow:0 4px 15px rgba(212,175,55,0.3);">Save</button>
+        </div>
+    </div>
+</div>
+
+<!-- ======================================================
+     SCRIPT
+     ====================================================== -->
+<script>
+    const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let currentUser = null;
+    let saveTimer = null;
+    let hasUnsaved = false;
+
+    // ── Profile field IDs ─────────────────────────────────────
+    const PROFILE_FIELDS = [
+        'p_name_lord','p_identity','p_word_spoken',
+        'p_color_season','p_style_essence','p_silhouette',
+        'p_love_primary','p_love_secondary',
+        'p_temperament','p_type',
+        'p_str1','p_str2','p_str3','p_str4','p_str5',
+        'p_vir1','p_vir2','p_vir3','p_vir4','p_vir5',
+        'p_char1','p_char2','p_char3'
+    ];
+    const JOURNAL_FIELDS = [
+        'j_s1q1','j_s1q2','j_s2q1','j_s2q2','j_s3q1',
+        'j_s4q1','j_s5q1','j_s6q1','j_s7q1','j_s8q1',
+        'j_s9q1','j_s10q1','j_s10q2','j_s11q1','j_s11q2',
+        'j_s12q1','j_s12q2',
+        'j_syn1','j_syn2','j_syn3','j_syn4','j_syn5','j_syn6','j_syn7',
+        'j_word1','j_word2','j_word3'
+    ];
+
+    // ── Init ──────────────────────────────────────────────────
+    sb.auth.getSession().then(async ({ data: { session } }) => {
+        if (!session) { window.location.href = 'portal.html'; return; }
+        currentUser = session.user;
+        populateNav(currentUser);
+        await loadAllData();
+    });
+
+    sb.auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_OUT') window.location.href = 'portal.html';
+    });
+
+    // ── Nav population ────────────────────────────────────────
+    function populateNav(user) {
+        const name = user.user_metadata?.full_name || '';
+        const email = user.email || '';
+        const display = name || email;
+        const initial = display.charAt(0).toUpperCase();
+        document.getElementById('account-avatar').textContent = initial;
+        document.getElementById('account-btn-name').textContent = name || 'Account';
+        document.getElementById('dropdown-name').textContent = name || email;
+        document.getElementById('dropdown-email').textContent = email;
+        const badge = document.getElementById('hero-badge');
+        badge.textContent = '\u2726  ' + (name || email) + '  \u2726';
+        badge.style.display = 'inline-block';
+        // Pre-fill modal
+        document.getElementById('modal-name').value = name;
+        document.getElementById('modal-email').value = email;
+    }
+
+    // ── Load all data ─────────────────────────────────────────
+    async function loadAllData() {
+        setSaveStatus('loading', 'Loading your profile\u2026');
+        try {
+            const { data, error } = await sb
+                .from('user_results')
+                .select('assessment, result_data')
+                .eq('user_id', currentUser.id);
+
+            if (error) throw error;
+
+            if (data) {
+                const profileRow = data.find(r => r.assessment === 'symphony_profile');
+                const journeyRow  = data.find(r => r.assessment === 'reflection_journal');
+                if (profileRow) populateFields(PROFILE_FIELDS, profileRow.result_data);
+                if (journeyRow)  populateFields(JOURNAL_FIELDS, journeyRow.result_data);
+            }
+            setSaveStatus('saved', 'All changes saved');
+            document.getElementById('save-btn').disabled = false;
+        } catch(e) {
+            setSaveStatus('unsaved', 'Could not load data');
+            document.getElementById('save-btn').disabled = false;
+        }
+    }
+
+    function populateFields(fields, data) {
+        fields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && data[id] !== undefined) el.value = data[id];
+        });
+    }
+
+    // ── Collect field values into object ──────────────────────
+    function collectFields(fields) {
+        const obj = {};
+        fields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) obj[id] = el.value;
+        });
+        return obj;
+    }
+
+    // ── Save all ──────────────────────────────────────────────
+    async function saveAll() {
+        if (!currentUser) return;
+        setSaveStatus('saving', 'Saving\u2026');
+        document.getElementById('save-btn').disabled = true;
+
+        const profileData = collectFields(PROFILE_FIELDS);
+        const journeyData = collectFields(JOURNAL_FIELDS);
+
+        try {
+            const upserts = [
+                { user_id: currentUser.id, assessment: 'symphony_profile', result_data: profileData, updated_at: new Date().toISOString() },
+                { user_id: currentUser.id, assessment: 'reflection_journal', result_data: journeyData, updated_at: new Date().toISOString() }
+            ];
+            const { error } = await sb.from('user_results').upsert(upserts, { onConflict: 'user_id,assessment' });
+            if (error) throw error;
+            setSaveStatus('saved', 'All changes saved');
+            hasUnsaved = false;
+        } catch(e) {
+            setSaveStatus('unsaved', 'Save failed \u2014 please try again');
+        }
+        document.getElementById('save-btn').disabled = false;
+    }
+
+    // ── Auto-save (3s debounce) ───────────────────────────────
+    function markUnsaved() {
+        hasUnsaved = true;
+        setSaveStatus('unsaved', 'Unsaved changes');
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(saveAll, 3000);
+    }
+
+    // ── Save status indicator ─────────────────────────────────
+    function setSaveStatus(state, text) {
+        const dot = document.getElementById('save-dot');
+        const txt = document.getElementById('save-text');
+        dot.className = 'save-dot ' + state;
+        txt.textContent = text;
+    }
+
+    // ── Tab switching ─────────────────────────────────────────
+    function switchTab(tab) {
+        document.getElementById('pane-profile').style.display = tab === 'profile' ? 'block' : 'none';
+        document.getElementById('pane-journey').style.display  = tab === 'journey'  ? 'block' : 'none';
+        document.getElementById('tab-profile').classList.toggle('active', tab === 'profile');
+        document.getElementById('tab-journey').classList.toggle('active', tab === 'journey');
+    }
+
+    // ── Dropdown ──────────────────────────────────────────────
+    function toggleDropdown() {
+        document.getElementById('account-dropdown').classList.toggle('open');
+    }
+    document.addEventListener('click', function(e) {
+        const btn = document.getElementById('account-btn');
+        const dd  = document.getElementById('account-dropdown');
+        if (dd && btn && !btn.contains(e.target) && !dd.contains(e.target)) dd.classList.remove('open');
+    });
+
+    // ── Sign out ──────────────────────────────────────────────
+    async function signOut() { await sb.auth.signOut(); }
+
+    // ── Modal ─────────────────────────────────────────────────
+    function openAccountModal() {
+        document.getElementById('account-dropdown').classList.remove('open');
+        const ov = document.getElementById('modal-overlay');
+        ov.style.display = 'flex';
+    }
+    function closeModal(e) {
+        if (e && e.target !== document.getElementById('modal-overlay')) return;
+        document.getElementById('modal-overlay').style.display = 'none';
+    }
+    async function saveAccountInfo() {
+        const name  = document.getElementById('modal-name').value.trim();
+        const email = document.getElementById('modal-email').value.trim();
+        const msg   = document.getElementById('modal-msg');
+        msg.style.display = 'none';
+        const updates = {};
+        if (name)  updates.data  = { full_name: name };
+        if (email) updates.email = email;
+        const { data, error } = await sb.auth.updateUser(updates);
+        if (error) { msg.textContent = error.message; msg.style.color='#c44569'; msg.style.display='block'; }
+        else { msg.textContent = '\u2726 Profile updated.'; msg.style.color='#4a7c59'; msg.style.display='block'; populateNav(data.user); currentUser = data.user; }
+    }
+
+    // ── Warn on leaving with unsaved changes ──────────────────
+    window.addEventListener('beforeunload', function(e) {
+        if (hasUnsaved) { e.preventDefault(); e.returnValue = ''; }
+    });
+</script>
+</body>
+</html>
