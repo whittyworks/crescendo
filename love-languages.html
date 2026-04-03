@@ -302,6 +302,7 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <!-- Portal Navigation -->
@@ -577,7 +578,42 @@
         </div>
     </section>
 
+    <!-- Record Your Results -->
+    <section class="reveal" id="record-results" style="background: white; padding: 5rem 5%;">
+        <div class="container" style="max-width: 700px; margin: 0 auto;">
+            <div class="section-header" style="text-align:center; margin-bottom: 2.5rem;">
+                <p class="section-label sans">Save to Your Profile</p>
+                <h2 class="section-title script">Record Your Love Languages</h2>
+                <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--text-medium); margin-top:1rem; line-height:1.8;">
+                    After completing the quiz, enter your primary and secondary love languages below to save them to your Symphony Profile.
+                </p>
+            </div>
+            <div id="love-login-msg" style="display:none; text-align:center; font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; color:var(--text-medium); margin-bottom:1.5rem;">
+                <a href="portal.html" style="color:var(--gold);">Sign in to your portal</a> to save your results.
+            </div>
+            <div id="love-form">
+                <div style="display:flex; flex-direction:column; gap:1.25rem; margin-bottom:2rem;">
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                        <label style="font-family:'Montserrat',sans-serif; font-size:0.65rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--text-medium);">Primary Love Language</label>
+                        <input type="text" id="love1" placeholder="How you receive love most&hellip;" style="border:none; border-bottom:1px solid rgba(212,175,55,0.35); background:transparent; font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--text-dark); padding:8px 4px; outline:none;">
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                        <label style="font-family:'Montserrat',sans-serif; font-size:0.65rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--text-medium);">Secondary Love Language</label>
+                        <input type="text" id="love2" placeholder="Your second language&hellip;" style="border:none; border-bottom:1px solid rgba(212,175,55,0.35); background:transparent; font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--text-dark); padding:8px 4px; outline:none;">
+                    </div>
+                </div>
+                <div style="text-align:center;">
+                    <button id="save-love-btn" onclick="saveLoveLanguages()" style="font-family:'Montserrat',sans-serif; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase; padding:1rem 2.5rem; background:linear-gradient(135deg,#B8941F,#D4AF37); color:white; border:none; border-radius:50px; cursor:pointer; box-shadow:0 4px 20px rgba(212,175,55,0.3);">
+                        &#10022; Save to My Profile
+                    </button>
+                    <p id="save-love-msg" style="font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; margin-top:1rem; display:none;"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Scripture -->
+
     <section class="reveal">
         <div class="scripture-section">
             <p class="scripture-text">
@@ -656,5 +692,61 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        sb.auth.getSession().then(async ({ data: { session } }) => {
+            if (!session) {
+                document.getElementById('love-login-msg').style.display = 'block';
+                document.getElementById('save-love-btn').style.display = 'none';
+                return;
+            }
+            // Load existing values
+            const { data } = await sb
+                .from('user_results')
+                .select('result_data')
+                .eq('user_id', session.user.id)
+                .eq('assessment', 'symphony_profile')
+                .maybeSingle();
+            if (data?.result_data) {
+                if (data.result_data.p_love_primary) document.getElementById('love1').value = data.result_data.p_love_primary;
+                if (data.result_data.p_love_secondary) document.getElementById('love2').value = data.result_data.p_love_secondary;
+            }
+        });
+
+        async function saveLoveLanguages() {
+            const { data: { session } } = await sb.auth.getSession();
+            if (!session) return;
+            const btn = document.getElementById('save-love-btn');
+            btn.textContent = 'Saving…'; btn.disabled = true;
+
+            const { data: existing } = await sb
+                .from('user_results')
+                .select('result_data')
+                .eq('user_id', session.user.id)
+                .eq('assessment', 'symphony_profile')
+                .maybeSingle();
+
+            const profileData = existing?.result_data || {};
+            profileData.p_love_primary = document.getElementById('love1').value;
+            profileData.p_love_secondary = document.getElementById('love2').value;
+
+            const { error } = await sb.from('user_results').upsert({
+                user_id: session.user.id,
+                assessment: 'symphony_profile',
+                result_data: profileData,
+                updated_at: new Date().toISOString()
+            }, { onConflict: 'user_id,assessment' });
+
+            btn.textContent = '✦ Save to My Profile'; btn.disabled = false;
+            const msg = document.getElementById('save-love-msg');
+            if (error) { msg.textContent = 'Something went wrong — please try again.'; msg.style.color = '#c44569'; }
+            else { msg.textContent = '✦ Your love languages have been saved to your Symphony Profile.'; msg.style.color = '#4a7c59'; btn.textContent = '✓ Saved!'; }
+            msg.style.display = 'block';
+        }
+    </script>
+
 </body>
 </html>
