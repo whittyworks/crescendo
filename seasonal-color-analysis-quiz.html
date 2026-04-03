@@ -1020,6 +1020,7 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -1271,13 +1272,17 @@
                 <h4>Save Your Results</h4>
                 <div class="save-buttons">
                     <button class="btn btn-secondary save-btn" onclick="printResults()">
-                        🖨️ Print / Save as PDF
+                        &#128424; Print / Save as PDF
                     </button>
                     <button class="btn btn-secondary save-btn" onclick="copyResults()">
-                        📋 Copy Summary
+                        &#128203; Copy Summary
+                    </button>
+                    <button class="btn save-btn" id="save-profile-btn" onclick="saveToProfile()" style="display:none; background:linear-gradient(135deg,#B8941F,#D4AF37); color:white; border:none; cursor:pointer;">
+                        &#10022; Save to My Profile
                     </button>
                 </div>
-                <p id="copy-confirmation" class="copy-confirmation" style="display: none;">✓ Copied to clipboard!</p>
+                <p id="copy-confirmation" class="copy-confirmation" style="display: none;">&#10003; Copied to clipboard!</p>
+                <p id="save-profile-msg" style="text-align:center; font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; margin-top:0.75rem; display:none;"></p>
             </div>
         </div>
     </div>
@@ -2982,6 +2987,10 @@
             }
 
             document.getElementById('results').classList.add('active');
+
+            // Store for Supabase save
+            window._colorResult = topSeason;
+            checkAndShowSaveButton();
         }
 
         function retakeQuiz() {
@@ -3501,6 +3510,61 @@ ${borrowText}` : ''}
                     confirmation.style.display = 'none';
                 }, 2000);
             });
+        }
+
+        // ── Supabase Save to Profile ───────────────────────────
+        const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function checkAndShowSaveButton() {
+            const { data: { session } } = await sb.auth.getSession();
+            if (session) {
+                const btn = document.getElementById('save-profile-btn');
+                if (btn) btn.style.display = 'inline-block';
+            }
+        }
+
+        async function saveToProfile() {
+            const { data: { session } } = await sb.auth.getSession();
+            if (!session) {
+                showSaveMsg('Please sign in to save to your profile.', '#c44569');
+                return;
+            }
+            const btn = document.getElementById('save-profile-btn');
+            btn.textContent = 'Saving…';
+            btn.disabled = true;
+
+            const { data: existing } = await sb
+                .from('user_results')
+                .select('result_data')
+                .eq('user_id', session.user.id)
+                .eq('assessment', 'symphony_profile')
+                .maybeSingle();
+
+            const profileData = existing?.result_data || {};
+            profileData.p_color_season = window._colorResult;
+
+            const { error } = await sb.from('user_results').upsert({
+                user_id: session.user.id,
+                assessment: 'symphony_profile',
+                result_data: profileData,
+                updated_at: new Date().toISOString()
+            }, { onConflict: 'user_id,assessment' });
+
+            btn.disabled = false;
+            if (error) {
+                btn.textContent = '✦ Save to My Profile';
+                showSaveMsg('Something went wrong — please try again.', '#c44569');
+            } else {
+                btn.textContent = '✓ Saved!';
+                showSaveMsg('✦ Your color season has been saved to your Symphony Profile.', '#4a7c59');
+            }
+        }
+
+        function showSaveMsg(text, color) {
+            const msg = document.getElementById('save-profile-msg');
+            if (msg) { msg.textContent = text; msg.style.color = color; msg.style.display = 'block'; }
         }
     </script>
 </body>
