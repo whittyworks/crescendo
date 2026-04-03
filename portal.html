@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Participant Portal · My Holy Crescendo</title>
+    <title>Participant Portal &#183; My Holy Crescendo</title>
     <meta name="robots" content="noindex, nofollow">
     <meta name="description" content="Exclusive resources for A Symphony of Grace participants.">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
@@ -85,7 +85,7 @@
         }
 
         .flourish::before {
-            content: "âœ¦ âœ¦ âœ¦";
+            content: "&#10022; &#10022; &#10022;";
         }
 
         .gold-line {
@@ -140,7 +140,7 @@
         }
 
         .login-card::after {
-            content: '\2767';
+            content: '&#10087;';
             position: absolute;
             bottom: 1rem;
             right: 1.5rem;
@@ -777,10 +777,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .resources-grid {
-                grid-template-columns: 1fr;
-            }
-
             .module-header {
                 flex-direction: column;
                 text-align: center;
@@ -828,304 +824,49 @@
         .resource-card:nth-child(2) { animation-delay: 0.1s; }
         .resource-card:nth-child(3) { animation-delay: 0.2s; }
 
-        /* ============================================
-           AUTH TABS & FORMS
-           ============================================ */
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 2rem;
-            border-radius: 50px;
-            overflow: hidden;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-        .auth-tab {
-            flex: 1;
-            padding: 0.8rem;
-            background: transparent;
-            border: none;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.78rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-medium);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .auth-tab.active {
-            background: linear-gradient(135deg, var(--gold-light), var(--gold));
-            color: white;
-        }
-        .auth-input {
-            width: 100%;
-            padding: 1.1rem 1.5rem;
-            border: 2px solid rgba(212, 175, 55, 0.3);
-            border-radius: 50px;
-            font-size: 1rem;
-            font-family: 'Montserrat', sans-serif;
-            text-align: center;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.8);
-            color: var(--text-dark);
-        }
-        .auth-input:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-        }
-        .auth-input::placeholder { color: #bbb; font-style: italic; }
-        .login-success {
-            color: #4a7c59;
-            font-size: 0.95rem;
-            margin-top: 1rem;
-            display: none;
-            font-style: italic;
-        }
-        .user-badge {
-            display: inline-block;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            color: var(--gold-dark);
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 0.4rem 1.2rem;
-            border-radius: 50px;
-            margin-bottom: 1.5rem;
-        }
-        .auth-loading { opacity: 0.6; pointer-events: none; }
-
-        /* ============================================
-           ACCOUNT DROPDOWN & MODAL
-           ============================================ */
-        .account-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            background: rgba(212, 175, 55, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            border-radius: 50px;
-            padding: 0.5rem 1.2rem 0.5rem 0.8rem;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.78rem;
-            letter-spacing: 0.5px;
-            color: var(--text-medium);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .account-btn:hover {
-            background: rgba(212, 175, 55, 0.15);
-            border-color: var(--gold);
-            color: var(--gold-dark);
-        }
-        .account-avatar {
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            color: white;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-        .account-dropdown {
-            position: absolute;
-            top: calc(100% + 0.75rem);
-            right: 0;
-            background: white;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1), 0 2px 10px rgba(212,175,55,0.1);
-            min-width: 220px;
-            overflow: hidden;
-            display: none;
-            z-index: 2000;
-        }
-        .account-dropdown.open { display: block; }
-        .dropdown-header {
-            padding: 1.2rem 1.5rem;
-            background: var(--cream);
-            border-bottom: 1px solid rgba(212,175,55,0.1);
-        }
-        .dropdown-header .d-name {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            color: var(--gold-dark);
-            font-weight: 500;
-        }
-        .dropdown-header .d-email {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.72rem;
-            color: var(--text-medium);
-            margin-top: 0.15rem;
-            opacity: 0.8;
-        }
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.9rem 1.5rem;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            color: var(--text-medium);
-            cursor: pointer;
-            transition: background 0.2s ease;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-            letter-spacing: 0.5px;
-        }
-        .dropdown-item:hover { background: var(--cream); color: var(--gold-dark); }
-        .dropdown-item.danger:hover { background: #fff5f5; color: #c44569; }
-        .dropdown-divider { height: 1px; background: rgba(212,175,55,0.1); }
-        .dropdown-icon { font-size: 1rem; width: 18px; text-align: center; }
-
-        /* Account Settings Modal */
-        .account-modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(44, 36, 22, 0.5);
-            backdrop-filter: blur(4px);
-            z-index: 3000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-        .account-modal-overlay.open { display: flex; }
-        .account-modal {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            max-width: 460px;
-            width: 100%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            border: 1px solid rgba(212,175,55,0.15);
-            position: relative;
-        }
-        .account-modal::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 4px;
-            border-radius: 20px 20px 0 0;
-            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
-        }
-        .modal-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
-            color: var(--gold-dark);
-            margin-bottom: 0.25rem;
-            font-weight: 400;
-        }
-        .modal-subtitle {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.78rem;
-            letter-spacing: 1px;
-            color: var(--text-medium);
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-        }
-        .modal-field { margin-bottom: 1.25rem; }
-        .modal-label {
-            display: block;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--text-medium);
-            margin-bottom: 0.5rem;
-        }
-        .modal-input {
-            width: 100%;
-            padding: 0.9rem 1.2rem;
-            border: 2px solid rgba(212,175,55,0.25);
-            border-radius: 12px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.05rem;
-            color: var(--text-dark);
-            background: var(--cream);
-            transition: all 0.3s ease;
-        }
-        .modal-input:focus {
-            outline: none;
-            border-color: var(--gold);
-            background: white;
-        }
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.75rem;
-        }
-        .modal-btn {
-            flex: 1;
-            padding: 0.9rem;
-            border-radius: 50px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.78rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-        }
-        .modal-btn-primary {
-            background: linear-gradient(135deg, var(--gold-light), var(--gold));
-            color: white;
-            box-shadow: 0 4px 15px rgba(212,175,55,0.3);
-        }
-        .modal-btn-primary:hover { box-shadow: 0 6px 20px rgba(212,175,55,0.4); transform: translateY(-1px); }
-        .modal-btn-secondary {
-            background: var(--cream);
-            color: var(--text-medium);
-            border: 1px solid rgba(212,175,55,0.2);
-        }
-        .modal-btn-secondary:hover { background: var(--cream-dark); }
-        .modal-close {
-            position: absolute;
-            top: 1.25rem; right: 1.5rem;
-            background: none; border: none;
-            font-size: 1.5rem; cursor: pointer;
-            color: var(--text-medium); opacity: 0.5;
-            transition: opacity 0.2s;
-        }
-        .modal-close:hover { opacity: 1; }
-        .modal-success {
-            color: #4a7c59; font-style: italic;
-            font-size: 0.95rem; margin-top: 0.75rem;
-            display: none;
-        }
-        .modal-error {
-            color: #c44569; font-style: italic;
-            font-size: 0.95rem; margin-top: 0.75rem;
-            display: none;
-        }
-        .modal-tabs {
-            display: flex;
-            gap: 0;
-            margin-bottom: 1.75rem;
-            border-radius: 50px;
-            overflow: hidden;
-            border: 1px solid rgba(212,175,55,0.25);
-        }
-        .modal-tab {
-            flex: 1; padding: 0.65rem;
-            background: transparent; border: none;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.72rem; letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--text-medium); cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .modal-tab.active {
-            background: linear-gradient(135deg, var(--gold-light), var(--gold));
-            color: white;
-        }
+        .auth-tabs { display:flex; margin-bottom:2rem; border-radius:50px; overflow:hidden; border:1px solid rgba(212,175,55,0.3); }
+        .auth-tab { flex:1; padding:0.8rem; background:transparent; border:none; font-family:'Montserrat',sans-serif; font-size:0.78rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-medium); cursor:pointer; transition:all 0.3s; }
+        .auth-tab.active { background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:white; }
+        .auth-input { width:100%; padding:1.1rem 1.5rem; border:2px solid rgba(212,175,55,0.3); border-radius:50px; font-size:1rem; font-family:'Montserrat',sans-serif; text-align:center; margin-bottom:1rem; transition:all 0.3s; background:rgba(255,255,255,0.8); color:var(--text-dark); }
+        .auth-input:focus { outline:none; border-color:var(--gold); box-shadow:0 0 20px rgba(212,175,55,0.2); }
+        .auth-input::placeholder { color:#bbb; font-style:italic; }
+        .login-success { color:#4a7c59; font-size:0.95rem; margin-top:1rem; display:none; font-style:italic; }
+        .auth-loading { opacity:0.6; pointer-events:none; }
+        .user-badge { display:inline-block; font-family:'Montserrat',sans-serif; font-size:0.75rem; letter-spacing:1px; color:var(--gold-dark); background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.2); padding:0.4rem 1.2rem; border-radius:50px; margin-bottom:1.5rem; }
+        .account-btn { display:flex; align-items:center; gap:0.6rem; background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.25); border-radius:50px; padding:0.5rem 1.2rem 0.5rem 0.8rem; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:0.78rem; letter-spacing:0.5px; color:var(--text-medium); transition:all 0.3s; position:relative; }
+        .account-btn:hover { background:rgba(212,175,55,0.15); border-color:var(--gold); color:var(--gold-dark); }
+        .account-avatar { width:28px; height:28px; background:linear-gradient(135deg,var(--gold-light),var(--gold)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; color:white; font-weight:600; flex-shrink:0; }
+        .account-dropdown { position:absolute; top:calc(100% + 0.75rem); right:0; background:white; border:1px solid rgba(212,175,55,0.2); border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,0.1); min-width:220px; overflow:hidden; display:none; z-index:2000; }
+        .account-dropdown.open { display:block; }
+        .dropdown-header { padding:1.2rem 1.5rem; background:var(--cream); border-bottom:1px solid rgba(212,175,55,0.1); }
+        .dropdown-header .d-name { font-family:'Cinzel',serif; font-size:1rem; color:var(--gold-dark); }
+        .dropdown-header .d-email { font-family:'Montserrat',sans-serif; font-size:0.72rem; color:var(--text-medium); margin-top:0.15rem; opacity:0.8; }
+        .dropdown-item { display:flex; align-items:center; gap:0.75rem; padding:0.9rem 1.5rem; font-family:'Montserrat',sans-serif; font-size:0.8rem; color:var(--text-medium); cursor:pointer; transition:background 0.2s; border:none; background:none; width:100%; text-align:left; letter-spacing:0.5px; }
+        .dropdown-item:hover { background:var(--cream); color:var(--gold-dark); }
+        .dropdown-item.danger:hover { background:#fff5f5; color:#c44569; }
+        .dropdown-divider { height:1px; background:rgba(212,175,55,0.1); }
+        .dropdown-icon { font-size:1rem; width:18px; text-align:center; }
+        .account-modal-overlay { position:fixed; inset:0; background:rgba(44,36,22,0.5); backdrop-filter:blur(4px); z-index:3000; display:none; align-items:center; justify-content:center; padding:2rem; }
+        .account-modal-overlay.open { display:flex; }
+        .account-modal { background:white; border-radius:20px; padding:2.5rem; max-width:460px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.15); border:1px solid rgba(212,175,55,0.15); position:relative; }
+        .account-modal::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; border-radius:20px 20px 0 0; background:linear-gradient(90deg,var(--gold-light),var(--gold),var(--gold-light)); }
+        .modal-title { font-family:'Cinzel',serif; font-size:1.5rem; color:var(--gold-dark); margin-bottom:0.25rem; font-weight:400; }
+        .modal-subtitle { font-family:'Montserrat',sans-serif; font-size:0.78rem; letter-spacing:1px; color:var(--text-medium); text-transform:uppercase; margin-bottom:2rem; }
+        .modal-field { margin-bottom:1.25rem; }
+        .modal-label { display:block; font-family:'Montserrat',sans-serif; font-size:0.75rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-medium); margin-bottom:0.5rem; }
+        .modal-input { width:100%; padding:0.9rem 1.2rem; border:2px solid rgba(212,175,55,0.25); border-radius:12px; font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:var(--text-dark); background:var(--cream); transition:all 0.3s; }
+        .modal-input:focus { outline:none; border-color:var(--gold); background:white; }
+        .modal-actions { display:flex; gap:1rem; margin-top:1.75rem; }
+        .modal-btn { flex:1; padding:0.9rem; border-radius:50px; font-family:'Montserrat',sans-serif; font-size:0.78rem; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; border:none; }
+        .modal-btn-primary { background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:white; box-shadow:0 4px 15px rgba(212,175,55,0.3); }
+        .modal-btn-secondary { background:var(--cream); color:var(--text-medium); border:1px solid rgba(212,175,55,0.2); }
+        .modal-close { position:absolute; top:1.25rem; right:1.5rem; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text-medium); opacity:0.5; transition:opacity 0.2s; }
+        .modal-close:hover { opacity:1; }
+        .modal-success { color:#4a7c59; font-style:italic; font-size:0.95rem; margin-top:0.75rem; display:none; }
+        .modal-error { color:#c44569; font-style:italic; font-size:0.95rem; margin-top:0.75rem; display:none; }
+        .modal-tabs { display:flex; margin-bottom:1.75rem; border-radius:50px; overflow:hidden; border:1px solid rgba(212,175,55,0.25); }
+        .modal-tab { flex:1; padding:0.65rem; background:transparent; border:none; font-family:'Montserrat',sans-serif; font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-medium); cursor:pointer; transition:all 0.3s; }
+        .modal-tab.active { background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:white; }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -1149,19 +890,15 @@
                 <button class="auth-tab" onclick="showTab('signup')">Create Account</button>
             </div>
 
-            <!-- Sign In -->
             <div id="signin-form">
                 <p class="welcome-text">Welcome back, beloved daughter.</p>
                 <input type="email" id="signin-email" class="auth-input" placeholder="&#10022;  Your email  &#10022;" autocomplete="email">
                 <input type="password" id="signin-password" class="auth-input" placeholder="&#10022;  Your password  &#10022;" autocomplete="current-password">
                 <button class="login-btn" onclick="signIn()">Enter the Portal</button>
                 <p id="signin-error" class="login-error"></p>
-                <p class="login-hint" style="margin-top:1.5rem;">
-                    <a href="#" onclick="showForgot(); return false;">Forgot your password?</a>
-                </p>
+                <p class="login-hint" style="margin-top:1.5rem;"><a href="#" onclick="showForgot(); return false;">Forgot your password?</a></p>
             </div>
 
-            <!-- Sign Up -->
             <div id="signup-form" style="display:none">
                 <p class="welcome-text">Create your account to begin the journey.</p>
                 <input type="text" id="signup-name" class="auth-input" placeholder="&#10022;  Your first name  &#10022;" autocomplete="given-name">
@@ -1173,19 +910,15 @@
                 <p id="signup-success" class="login-success">&#10022; Check your email for a confirmation link, beloved. &#10022;</p>
             </div>
 
-            <!-- Forgot Password -->
             <div id="forgot-form" style="display:none">
-                <p class="welcome-text">We’ll send you a link to reset your password.</p>
+                <p class="welcome-text">We&#8217;ll send you a link to reset your password.</p>
                 <input type="email" id="forgot-email" class="auth-input" placeholder="&#10022;  Your email  &#10022;" autocomplete="email">
                 <button class="login-btn" onclick="sendReset()">Send Reset Link</button>
                 <p id="forgot-error" class="login-error"></p>
                 <p id="forgot-success" class="login-success">&#10022; Check your email for a reset link. &#10022;</p>
-                <p class="login-hint" style="margin-top:1.5rem;">
-                    <a href="#" onclick="showTab('signin'); return false;">Back to sign in</a>
-                </p>
+                <p class="login-hint" style="margin-top:1.5rem;"><a href="#" onclick="showTab('signin'); return false;">Back to sign in</a></p>
             </div>
-
-        </div>
+        </div></div>
     </div>
 
     <!-- ============================================
@@ -1236,7 +969,7 @@
 
         <!-- Hero -->
         <section class="portal-hero">
-            <span class="hero-decoration left">&#10023;</span>
+            <span class="hero-decoration left">&#10087;</span>
             <span class="hero-decoration right">&#9753;</span>
             
             <div class="portal-welcome">
@@ -1260,7 +993,7 @@
                     <a href="#foundation" class="quick-link">&#127807; Foundation</a>
                     <a href="#body" class="quick-link">&#10024; Body</a>
                     <a href="#mind" class="quick-link">&#128171; Mind</a>
-                    <a href="#spirit" class="quick-link">&#128330; Spirit</a>
+                    <a href="#spirit" class="quick-link">&#128330;&#65039; Spirit</a>
                 </div>
             </div>
         </section>
@@ -1274,7 +1007,7 @@
                     <div class="module-icon">&#127807;</div>
                     <div>
                         <h2>Foundation</h2>
-                        <p class="module-subtitle">Rooted in Christ · Weeks 1&ndash;3</p>
+                        <p class="module-subtitle">Rooted in Christ &#183; Weeks 1&ndash;3</p>
                     </div>
                 </div>
                 
@@ -1282,7 +1015,7 @@
                     <div class="resource-card">
                         <span class="resource-type">Session PDF</span>
                         <h3>Session 1: You Are Called</h3>
-                        <p>Named and claimed by the Father — your identity begins here.</p>
+                        <p>Named and claimed by the Father &#8212; your identity begins here.</p>
                         <a href="assets/pdf/sessions/session-01.pdf" class="resource-link" download>Download PDF &#8594;</a>
                     </div>
                     <div class="resource-card">
@@ -1296,14 +1029,16 @@
                         <h3>Session 3: Receiving His Love</h3>
                         <p>Learning to open your hands and heart to the love God offers freely.</p>
                         <a href="assets/pdf/sessions/session-03.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
+                    </div> 
                     <div class="resource-card">
                         <span class="resource-type">Guided Experience</span>
                         <h3>Name from Heaven</h3>
                         <p>Receive your name from Heaven through a guided prayer experience.</p>
                         <a href="name-from-heaven.html" class="resource-link">Start Experience &#8594;</a>
                     </div>
-                </div></div>
+                    
+
+                </div>
             </div>
 
             <!-- Body -->
@@ -1312,22 +1047,20 @@
                     <div class="module-icon">&#10024;</div>
                     <div>
                         <h2>Body</h2>
-                        <p class="module-subtitle">Embodied Beauty · Weeks 4&ndash;6</p>
+                        <p class="module-subtitle">Embodied Beauty &#183; Weeks 4&ndash;6</p>
                     </div>
                 </div>
                 
                 <div class="resources-grid">
-
-
                     <div class="resource-card">
                         <span class="resource-type">Session PDF</span>
                         <h3>Session 4: Colors of Creation</h3>
-                        <p>The unique palette God used to paint His masterpiece — you.</p>
+                        <p>The unique palette God used to paint His masterpiece &#8212; you.</p>
                         <a href="assets/pdf/sessions/session-04.pdf" class="resource-link" download>Download PDF &#8594;</a>
                     </div>
                     <div class="resource-card">
                         <span class="resource-type">Session PDF</span>
-                        <h3>Session 5: Presence & Grace: Sacred Style Essence</h3>
+                        <h3>Session 5: Presence &amp; Grace: Sacred Style Essence</h3>
                         <p>How the Lord is glorified in your presence in the world.</p>
                         <a href="assets/pdf/sessions/session-05.pdf" class="resource-link" download>Download PDF &#8594;</a>
                     </div>
@@ -1337,6 +1070,8 @@
                         <p>Seeing the beauty and dignity in your God-given form.</p>
                         <a href="assets/pdf/sessions/session-06.pdf" class="resource-link" download>Download PDF &#8594;</a>
                     </div>
+
+
                     <div class="resource-card">
                         <span class="resource-type">Interactive Quiz</span>
                         <h3>Seasonal Color Analysis</h3>
@@ -1364,7 +1099,7 @@
                         <p>Confirm your Sacred Silhouette through gentle observation of your actual lines.</p>
                         <a href="sacred-silhouettes-observation.html" class="resource-link">Start Observation &#8594;</a>
                     </div>
-                </div></div>
+                </div>
             </div>
 
             <!-- Scripture Section -->
@@ -1383,7 +1118,7 @@
                     <div class="module-icon">&#128171;</div>
                     <div>
                         <h2>Mind</h2>
-                        <p class="module-subtitle">Interior Landscape · Weeks 7&ndash;10</p>
+                        <p class="module-subtitle">Interior Landscape &#183; Weeks 7&ndash;10</p>
                     </div>
                 </div>
                 
@@ -1408,85 +1143,26 @@
                     </div>
                     <div class="resource-card">
                         <span class="resource-type">Session PDF</span>
-                        <h3>Session 10: Giving & Receiving: Love Languages</h3>
-                        <p>How you give and receive love — and what that reveals about God’s design.</p>
+                        <h3>Session 10: Giving &amp; Receiving: Love Languages</h3>
+                        <p>How you give and receive love &#8212; and what that reveals about God&#8217;s design.</p>
                         <a href="assets/pdf/sessions/session-10.pdf" class="resource-link" download>Download PDF &#8594;</a>
                     </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 7: Your Way of Being: Temperament</h3>
-                        <p>Discovering your God-given temperament and how He wired you.</p>
-                        <span class="resource-link" style="opacity:0.6; cursor:default;">Coming Soon</span>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 8: Your Way of Seeing: 16 Types</h3>
-                        <p>Exploring your cognitive wiring and how God designed your mind.</p>
-                        <span class="resource-link" style="opacity:0.6; cursor:default;">Coming Soon</span>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 9: Strengths as Entrusted Gifts</h3>
-                        <p>The unique blend of character strengths God has given you.</p>
-                        <span class="resource-link" style="opacity:0.6; cursor:default;">Coming Soon</span>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 10: Giving & Receiving: Love Languages</h3>
-                        <p>How you give and receive love — and what that reveals about God's design.</p>
-                        <span class="resource-link" style="opacity:0.6; cursor:default;">Coming Soon</span>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Interactive Test</span>
-                        <h3>Temperament Test</h3>
-                        <p>Discover your classical temperament blend and understand the unique way God wired your natural way of being in the world.</p>
-                        <a href="temperament-test.html" class="resource-link">Take the Test &#8594;</a>
-                    </div>
-
-                    <div class="resource-card">
-                        <span class="resource-type">Interactive Test</span>
-                        <h3>Cognitive Functions Test</h3>
-                        <p>Explore how you process information, make decisions, and engage with the world God placed you in.</p>
-                        <a href="cognitive-functions-test.html" class="resource-link">Take the Test &#8594;</a>
-                    </div>
-
-                    <div class="resource-card">
-                        <span class="resource-type">Guided Reflection</span>
-                        <h3>Your Way of Seeing</h3>
-                        <p>A conversational reflection that reveals your personality type through real-life scenarios &#8212; not a quiz, but a guided discovery of how God uniquely wired your mind.</p>
-                        <a href="way-of-seeing.html" class="resource-link">Begin Reflection &#8594;</a>
-                    </div>
-
-                    <div class="resource-card">
-                        <span class="resource-type">Guide</span>
-                        <h3>VIA Character Strengths</h3>
-                        <p>Discover your core character strengths and how they shape your spiritual journey.</p>
-                        <a href="character-strengths.html" class="resource-link">Explore Guide &#8594;</a>
-                    </div>
-
-                    <div class="resource-card">
-                        <span class="resource-type">Guide</span>
-                        <h3>Love Languages &amp; Styles</h3>
-                        <p>Learn your love languages and styles to deepen your relationships and spiritual growth.</p>
-                        <a href="love-languages.html" class="resource-link">Explore Guide &#8594;</a>
-                    </div>
-                    
-                    <div class="resource-card">
-                        <span class="resource-type">PDF Guide</span>
-                        <h3>Mind Frameworks Guide</h3>
-                        <p>A comprehensive overview of personality frameworks and how they weave into your spiritual journey.</p>
-                        <a href="assets/pdf/mind-frameworks-guide.pdf" class="resource-link">Download PDF &#8594;</a>
-                    </div>
-                </div>
+                    <div class="resource-card"><span class="resource-type">Interactive Test</span><h3>Temperament Test</h3><p>Discover your classical temperament blend and understand the unique way God wired your natural way of being in the world.</p><a href="temperament-test.html" class="resource-link">Take the Test &#8594;</a></div>
+                    <div class="resource-card"><span class="resource-type">Interactive Test</span><h3>Cognitive Functions Test</h3><p>Explore how you process information, make decisions, and engage with the world God placed you in.</p><a href="cognitive-functions-test.html" class="resource-link">Take the Test &#8594;</a></div>
+                    <div class="resource-card"><span class="resource-type">Guided Reflection</span><h3>Your Way of Seeing</h3><p>A conversational reflection that reveals your personality type through real-life scenarios &#8212; not a quiz, but a guided discovery of how God uniquely wired your mind.</p><a href="way-of-seeing.html" class="resource-link">Begin Reflection &#8594;</a></div>
+                    <div class="resource-card"><span class="resource-type">Guide</span><h3>VIA Character Strengths</h3><p>Discover your core character strengths and how they shape your spiritual journey.</p><a href="character-strengths.html" class="resource-link">Explore Guide &#8594;</a></div>
+                    <div class="resource-card"><span class="resource-type">Guide</span><h3>Love Languages &amp; Styles</h3><p>Learn your love languages and styles to deepen your relationships and spiritual growth.</p><a href="love-languages.html" class="resource-link">Explore Guide &#8594;</a></div>
+                    <div class="resource-card"><span class="resource-type">PDF Guide</span><h3>Mind Frameworks Guide</h3><p>A comprehensive overview of personality frameworks and how they weave into your spiritual journey.</p><a href="assets/pdf/mind-frameworks-guide.pdf" class="resource-link">Download PDF &#8594;</a></div>
+                </div></div>
             </div>
 
             <!-- Spirit -->
             <div id="spirit" class="module-section">
                 <div class="module-header">
-                    <div class="module-icon">&#128330;</div>
+                    <div class="module-icon">&#128330;&#65039;</div>
                     <div>
                         <h2>Spirit</h2>
-                        <p class="module-subtitle">Living Your Calling · Weeks 11&ndash;15</p>
+                        <p class="module-subtitle">Living Your Calling &#183; Weeks 11&ndash;15</p>
                     </div>
                 </div>
                 
@@ -1500,7 +1176,7 @@
                     <div class="resource-card">
                         <span class="resource-type">Session PDF</span>
                         <h3>Session 12: Growing in Holiness: 42 Virtues</h3>
-                        <p>Walking through St. Albert the Great’s Paradise of the Soul.</p>
+                        <p>Walking through St. Albert the Great&#8217;s <em>Paradise of the Soul</em>.</p>
                         <a href="assets/pdf/sessions/session-12.pdf" class="resource-link" download>Download PDF &#8594;</a>
                     </div>
                     <div class="resource-card">
@@ -1522,61 +1198,31 @@
                         <a href="assets/pdf/sessions/session-15.pdf" class="resource-link" download>Download PDF &#8594;</a>
                     </div>
                     <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 11: Light in the Shadows: Wound Work</h3>
-                        <p>Allowing the light of Christ to shine into the places that need healing.</p>
-                        <span class="resource-link" style="opacity:0.6; cursor:default;">Coming Soon</span>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 12: Growing in Holiness: 42 Virtues</h3>
-                        <p>Walking through St. Albert the Great’s Paradise of the Soul.</p>
-                        <span class="resource-link" style="opacity:0.6; cursor:default;">Coming Soon</span>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 13: The Spirit at Work: Charisms</h3>
-                        <p>Discovering the spiritual gifts the Holy Spirit has entrusted to you.</p>
-                        <span class="resource-link" style="opacity:0.6; cursor:default;">Coming Soon</span>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 14: Living Fully Alive: Rule of Life</h3>
-                        <p>Ordering your days with God at the center.</p>
-                        <span class="resource-link" style="opacity:0.6; cursor:default;">Coming Soon</span>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 15: Beautiful Symphony: Celebration</h3>
-                        <p>Beholding the holistic beauty of who God created you to be.</p>
-                        <span class="resource-link" style="opacity:0.6; cursor:default;">Coming Soon</span>
-                    </div>
-                    <div class="resource-card">
                         <span class="resource-type">Guided Reflection</span>
                         <h3>Healing Your Wounds</h3>
                         <p>Reflect on your spiritual wounds and invite God's healing presence into your life.</p>
-                        <a href="healing-the-wounds.html" class="resource-link">Begin Reflection â†’</a>
+                        <a href="healing-the-wounds.html" class="resource-link">Begin Reflection &#8594;</a>
                     </div>
                     
                     <div class="resource-card">
                         <span class="resource-type">Assessment</span>
                         <h3>Virtue Assessment</h3>
                         <p>Identify your strongest virtues and areas for growth as you cultivate a life of holy flourishing.</p>
-                        <a href="virtue-assessment.html" class="resource-link">Take Assessment â†’</a>
+                        <a href="virtue-assessment.html" class="resource-link">Take Assessment &#8594;</a>
                     </div>
                     
                     <div class="resource-card">
                         <span class="resource-type">Guide</span>
                         <h3>25 Charisms</h3>
                         <p>Discover your spiritual gifts and how God has uniquely equipped you to serve others and build His Kingdom.</p>
-                        <a href="charisms-portal.html" class="resource-link">Explore Charisms â†’</a>
+                        <a href="charisms-portal.html" class="resource-link">Explore Charisms &#8594;</a>
                     </div>
                     
                     <div class="resource-card">
                         <span class="resource-type">Workbook</span>
                         <h3>Rule of Life</h3>
-                        <p>Create your personal rhythm of prayer, rest, work, and play â€” a holy structure that honors who you were made to be.</p>
-                        <a href="rule-of-life.html" class="resource-link">Build Your Rule â†’</a>
+                        <p>Create your personal rhythm of prayer, rest, work, and play &#8212; a holy structure that honors who you were made to be.</p>
+                        <a href="rule-of-life.html" class="resource-link">Build Your Rule &#8594;</a>
                     </div>
                 </div>
             </div>
@@ -1594,7 +1240,7 @@
                     <div class="resource-card" style="grid-column: 1 / -1; border-left: 4px solid var(--gold); background: linear-gradient(135deg, rgba(253,248,243,1), rgba(212,175,55,0.05));">
                         <span class="resource-type">Reflection Form</span>
                         <h3>Your Symphony, So Far</h3>
-                        <p>Twelve sessions. Four modules. One extraordinary journey. Before we celebrate, take time to look back at everything you have discovered &#8212; your name from the Lord, your colors, your strengths, your wounds, your virtues, and so much more. This form gathers it all in one place and invites you to reflect on who you were at Session 1 and who you are becoming.</p>
+                        <p>Twelve sessions. Four modules. One extraordinary journey. Before we celebrate, take time to look back at everything you have discovered &#8212; your name from the Lord, your colors, your strengths, your wounds, your virtues, and so much more.</p>
                         <a href="crescendo-recap.html" class="resource-link">Open Reflection Form &#8594;</a>
                     </div>
                 </div>
@@ -1643,12 +1289,9 @@
         const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
         const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // Check for existing session on load
         sb.auth.getSession().then(({ data: { session } }) => {
             if (session) showPortal(session.user);
         });
-
-        // Listen for auth changes
         sb.auth.onAuthStateChange((event, session) => {
             if (event === 'SIGNED_IN' && session) showPortal(session.user);
             if (event === 'SIGNED_OUT') showLoginScreen();
@@ -1658,12 +1301,9 @@
             const email = document.getElementById('signin-email').value.trim();
             const password = document.getElementById('signin-password').value;
             const errEl = document.getElementById('signin-error');
-            const btn = document.querySelector('#signin-form .login-btn');
             errEl.style.display = 'none';
-            if (!email || !password) {
-                errEl.textContent = 'Please enter your email and password.';
-                errEl.style.display = 'block'; return;
-            }
+            if (!email || !password) { errEl.textContent = 'Please enter your email and password.'; errEl.style.display = 'block'; return; }
+            const btn = document.querySelector('#signin-form .login-btn');
             btn.textContent = 'Entering…'; btn.classList.add('auth-loading');
             const { error } = await sb.auth.signInWithPassword({ email, password });
             btn.textContent = 'Enter the Portal'; btn.classList.remove('auth-loading');
@@ -1684,10 +1324,7 @@
             if (password !== confirm) { errEl.textContent = 'Passwords don’t match — try again.'; errEl.style.display = 'block'; return; }
             if (password.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; errEl.style.display = 'block'; return; }
             btn.textContent = 'Creating…'; btn.classList.add('auth-loading');
-            const { error } = await sb.auth.signUp({
-                email, password,
-                options: { data: { full_name: name } }
-            });
+            const { error } = await sb.auth.signUp({ email, password, options: { data: { full_name: name } } });
             btn.textContent = 'Create Account'; btn.classList.remove('auth-loading');
             if (error) { errEl.textContent = error.message; errEl.style.display = 'block'; }
             else { successEl.style.display = 'block'; }
@@ -1701,9 +1338,7 @@
             errEl.style.display = 'none'; successEl.style.display = 'none';
             if (!email) { errEl.textContent = 'Please enter your email address.'; errEl.style.display = 'block'; return; }
             btn.textContent = 'Sending…'; btn.classList.add('auth-loading');
-            const { error } = await sb.auth.resetPasswordForEmail(email, {
-                redirectTo: 'https://myholycrescendo.com/portal.html'
-            });
+            const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: 'https://myholycrescendo.com/portal.html' });
             btn.textContent = 'Send Reset Link'; btn.classList.remove('auth-loading');
             if (error) { errEl.textContent = error.message; errEl.style.display = 'block'; }
             else { successEl.style.display = 'block'; }
@@ -1717,14 +1352,12 @@
             if (user) {
                 const name = user.user_metadata?.full_name || '';
                 const email = user.email || '';
-                const display = name || email;
-                const initial = display.charAt(0).toUpperCase();
                 const badge = document.getElementById('user-badge');
-                if (badge) { badge.textContent = '\u2726  Welcome, ' + (name || email) + '  \u2726'; badge.style.display = 'inline-block'; }
+                if (badge) { badge.textContent = '✦  Welcome, ' + (name || email) + '  ✦'; badge.style.display = 'inline-block'; }
                 const btnName = document.getElementById('account-btn-name');
                 if (btnName) btnName.textContent = name || 'Account';
                 const avatar = document.getElementById('account-avatar');
-                if (avatar) avatar.textContent = initial;
+                if (avatar) avatar.textContent = (name || email).charAt(0).toUpperCase();
                 const dName = document.getElementById('dropdown-name');
                 if (dName) dName.textContent = name || email;
                 const dEmail = document.getElementById('dropdown-email');
@@ -1736,10 +1369,12 @@
             }
         }
 
-        function toggleAccountDropdown() {
-            document.getElementById('account-dropdown').classList.toggle('open');
+        function showLoginScreen() {
+            document.getElementById('portal-content').classList.remove('active');
+            document.getElementById('login-screen').style.display = 'flex';
         }
 
+        function toggleAccountDropdown() { document.getElementById('account-dropdown').classList.toggle('open'); }
         document.addEventListener('click', function(e) {
             const btn = document.getElementById('account-btn');
             const dd = document.getElementById('account-dropdown');
@@ -1751,7 +1386,6 @@
             document.getElementById('account-modal-overlay').classList.add('open');
             switchModalTab(tab || 'profile');
         }
-
         function closeAccountModal(e) {
             if (e && e.target !== document.getElementById('account-modal-overlay')) return;
             document.getElementById('account-modal-overlay').classList.remove('open');
@@ -1759,15 +1393,11 @@
                 const el = document.getElementById(id); if (el) el.style.display = 'none';
             });
         }
-
         function switchModalTab(tab) {
             document.getElementById('modal-profile-tab').style.display = tab === 'profile' ? 'block' : 'none';
             document.getElementById('modal-password-tab').style.display = tab === 'password' ? 'block' : 'none';
-            document.querySelectorAll('.modal-tab').forEach((t, i) => {
-                t.classList.toggle('active', (i === 0 && tab === 'profile') || (i === 1 && tab === 'password'));
-            });
+            document.querySelectorAll('.modal-tab').forEach((t, i) => t.classList.toggle('active', (i===0&&tab==='profile')||(i===1&&tab==='password')));
         }
-
         async function saveProfile() {
             const name = document.getElementById('modal-name').value.trim();
             const email = document.getElementById('modal-email').value.trim();
@@ -1781,71 +1411,87 @@
             if (error) { errorEl.textContent = error.message; errorEl.style.display = 'block'; }
             else { successEl.style.display = 'block'; showPortal(data.user); }
         }
-
         async function savePassword() {
             const newPass = document.getElementById('modal-new-password').value;
             const confirm = document.getElementById('modal-confirm-password').value;
             const successEl = document.getElementById('password-success');
             const errorEl = document.getElementById('password-error');
             successEl.style.display = 'none'; errorEl.style.display = 'none';
-            if (newPass !== confirm) { errorEl.textContent = 'Passwords don\u2019t match.'; errorEl.style.display = 'block'; return; }
+            if (newPass !== confirm) { errorEl.textContent = 'Passwords don’t match.'; errorEl.style.display = 'block'; return; }
             if (newPass.length < 6) { errorEl.textContent = 'Password must be at least 6 characters.'; errorEl.style.display = 'block'; return; }
             const { error } = await sb.auth.updateUser({ password: newPass });
             if (error) { errorEl.textContent = error.message; errorEl.style.display = 'block'; }
-            else {
-                successEl.style.display = 'block';
-                document.getElementById('modal-new-password').value = '';
-                document.getElementById('modal-confirm-password').value = '';
-            }
+            else { successEl.style.display = 'block'; document.getElementById('modal-new-password').value = ''; document.getElementById('modal-confirm-password').value = ''; }
         }
-
-        function showLoginScreen() {
-            document.getElementById('portal-content').classList.remove('active');
-            document.getElementById('login-screen').style.display = 'flex';
-        }
-
         function showTab(tab) {
-            document.getElementById('signin-form').style.display = tab === 'signin' ? 'block' : 'none';
-            document.getElementById('signup-form').style.display = tab === 'signup' ? 'block' : 'none';
+            document.getElementById('signin-form').style.display = tab==='signin'?'block':'none';
+            document.getElementById('signup-form').style.display = tab==='signup'?'block':'none';
             document.getElementById('forgot-form').style.display = 'none';
-            document.querySelectorAll('.auth-tab').forEach((t, i) => {
-                t.classList.toggle('active', (i === 0 && tab === 'signin') || (i === 1 && tab === 'signup'));
-            });
+            document.querySelectorAll('.auth-tab').forEach((t,i) => t.classList.toggle('active',(i===0&&tab==='signin')||(i===1&&tab==='signup')));
         }
-
         function showForgot() {
             document.getElementById('signin-form').style.display = 'none';
             document.getElementById('signup-form').style.display = 'none';
             document.getElementById('forgot-form').style.display = 'block';
             document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
         }
-
-        // Enter key submits sign-in
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') {
+            if (e.key==='Enter' && document.getElementById('login-screen').style.display!=='none') {
                 const sf = document.getElementById('signin-form');
                 if (sf && sf.style.display !== 'none') signIn();
             }
         });
-
-        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
-                if (href === '#') return;
+                if (href==='#') return;
                 e.preventDefault();
                 const target = document.querySelector(href);
                 if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
-
-        // Mobile menu
         function toggleMenu() {
             const navLinks = document.querySelector('.nav-links');
             navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
         }
     </script><script>
+        // ============================================
+        // SET YOUR PASSWORD HERE
+        // ============================================
+        const PORTAL_PASSWORD = "symphony2025";
+        // ============================================
 
+        // Check if already logged in
+        if (sessionStorage.getItem('portalAccess') === 'granted') {
+            showPortal();
+        }
+
+        function checkPassword(event) {
+            event.preventDefault();
+            const input = document.getElementById('password-input').value;
+            
+            if (input === PORTAL_PASSWORD) {
+                sessionStorage.setItem('portalAccess', 'granted');
+                showPortal();
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+                document.getElementById('password-input').value = '';
+                document.getElementById('password-input').focus();
+            }
+        }
+
+        function showPortal() {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('portal-content').classList.add('active');
+        }
+
+        function logout() {
+            sessionStorage.removeItem('portalAccess');
+            document.getElementById('portal-content').classList.remove('active');
+            document.getElementById('login-screen').style.display = 'flex';
+            document.getElementById('password-input').value = '';
+            document.getElementById('login-error').style.display = 'none';
+        }
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1874,22 +1520,13 @@
             <button class="modal-close" onclick="closeAccountModal()">&times;</button>
             <p class="modal-title">My Account</p>
             <p class="modal-subtitle">Manage your profile</p>
-
             <div class="modal-tabs">
                 <button class="modal-tab active" onclick="switchModalTab('profile')">Profile</button>
                 <button class="modal-tab" onclick="switchModalTab('password')">Password</button>
             </div>
-
-            <!-- Profile Tab -->
             <div id="modal-profile-tab">
-                <div class="modal-field">
-                    <label class="modal-label">First Name</label>
-                    <input type="text" id="modal-name" class="modal-input" placeholder="Your first name">
-                </div>
-                <div class="modal-field">
-                    <label class="modal-label">Email Address</label>
-                    <input type="email" id="modal-email" class="modal-input" placeholder="Your email">
-                </div>
+                <div class="modal-field"><label class="modal-label">First Name</label><input type="text" id="modal-name" class="modal-input" placeholder="Your first name"></div>
+                <div class="modal-field"><label class="modal-label">Email Address</label><input type="email" id="modal-email" class="modal-input" placeholder="Your email"></div>
                 <p id="profile-success" class="modal-success">&#10022; Profile updated successfully.</p>
                 <p id="profile-error" class="modal-error"></p>
                 <div class="modal-actions">
@@ -1897,17 +1534,9 @@
                     <button class="modal-btn modal-btn-primary" onclick="saveProfile()">Save Changes</button>
                 </div>
             </div>
-
-            <!-- Password Tab -->
             <div id="modal-password-tab" style="display:none">
-                <div class="modal-field">
-                    <label class="modal-label">New Password</label>
-                    <input type="password" id="modal-new-password" class="modal-input" placeholder="New password">
-                </div>
-                <div class="modal-field">
-                    <label class="modal-label">Confirm New Password</label>
-                    <input type="password" id="modal-confirm-password" class="modal-input" placeholder="Confirm new password">
-                </div>
+                <div class="modal-field"><label class="modal-label">New Password</label><input type="password" id="modal-new-password" class="modal-input" placeholder="New password"></div>
+                <div class="modal-field"><label class="modal-label">Confirm New Password</label><input type="password" id="modal-confirm-password" class="modal-input" placeholder="Confirm new password"></div>
                 <p id="password-success" class="modal-success">&#10022; Password updated successfully.</p>
                 <p id="password-error" class="modal-error"></p>
                 <div class="modal-actions">
@@ -1917,6 +1546,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>
