@@ -890,6 +890,238 @@
             margin-bottom: 1.5rem;
         }
         .auth-loading { opacity: 0.6; pointer-events: none; }
+
+        /* ============================================
+           ACCOUNT DROPDOWN & MODAL
+           ============================================ */
+        .account-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 50px;
+            padding: 0.5rem 1.2rem 0.5rem 0.8rem;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            color: var(--text-medium);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .account-btn:hover {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: var(--gold);
+            color: var(--gold-dark);
+        }
+        .account-avatar {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: white;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .account-dropdown {
+            position: absolute;
+            top: calc(100% + 0.75rem);
+            right: 0;
+            background: white;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1), 0 2px 10px rgba(212,175,55,0.1);
+            min-width: 220px;
+            overflow: hidden;
+            display: none;
+            z-index: 2000;
+        }
+        .account-dropdown.open { display: block; }
+        .dropdown-header {
+            padding: 1.2rem 1.5rem;
+            background: var(--cream);
+            border-bottom: 1px solid rgba(212,175,55,0.1);
+        }
+        .dropdown-header .d-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--gold-dark);
+            font-weight: 500;
+        }
+        .dropdown-header .d-email {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            color: var(--text-medium);
+            margin-top: 0.15rem;
+            opacity: 0.8;
+        }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.9rem 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: background 0.2s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            letter-spacing: 0.5px;
+        }
+        .dropdown-item:hover { background: var(--cream); color: var(--gold-dark); }
+        .dropdown-item.danger:hover { background: #fff5f5; color: #c44569; }
+        .dropdown-divider { height: 1px; background: rgba(212,175,55,0.1); }
+        .dropdown-icon { font-size: 1rem; width: 18px; text-align: center; }
+
+        /* Account Settings Modal */
+        .account-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(44, 36, 22, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .account-modal-overlay.open { display: flex; }
+        .account-modal {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 460px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            border: 1px solid rgba(212,175,55,0.15);
+            position: relative;
+        }
+        .account-modal::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            border-radius: 20px 20px 0 0;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
+        }
+        .modal-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.25rem;
+            font-weight: 400;
+        }
+        .modal-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 1px;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        .modal-field { margin-bottom: 1.25rem; }
+        .modal-label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-medium);
+            margin-bottom: 0.5rem;
+        }
+        .modal-input {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid rgba(212,175,55,0.25);
+            border-radius: 12px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            background: var(--cream);
+            transition: all 0.3s ease;
+        }
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: white;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.75rem;
+        }
+        .modal-btn {
+            flex: 1;
+            padding: 0.9rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .modal-btn-primary {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+        }
+        .modal-btn-primary:hover { box-shadow: 0 6px 20px rgba(212,175,55,0.4); transform: translateY(-1px); }
+        .modal-btn-secondary {
+            background: var(--cream);
+            color: var(--text-medium);
+            border: 1px solid rgba(212,175,55,0.2);
+        }
+        .modal-btn-secondary:hover { background: var(--cream-dark); }
+        .modal-close {
+            position: absolute;
+            top: 1.25rem; right: 1.5rem;
+            background: none; border: none;
+            font-size: 1.5rem; cursor: pointer;
+            color: var(--text-medium); opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+        .modal-close:hover { opacity: 1; }
+        .modal-success {
+            color: #4a7c59; font-style: italic;
+            font-size: 0.95rem; margin-top: 0.75rem;
+            display: none;
+        }
+        .modal-error {
+            color: #c44569; font-style: italic;
+            font-size: 0.95rem; margin-top: 0.75rem;
+            display: none;
+        }
+        .modal-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 1.75rem;
+            border-radius: 50px;
+            overflow: hidden;
+            border: 1px solid rgba(212,175,55,0.25);
+        }
+        .modal-tab {
+            flex: 1; padding: 0.65rem;
+            background: transparent; border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem; letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-medium); cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .modal-tab.active {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -904,7 +1136,7 @@
         <div class="watercolor-blob blob-3"></div>
         
         <div class="login-card">
-            <span class="login-icon">🌿</span>
+            <span class="login-icon">&#127807;</span>
             <h1>Participant Portal</h1>
             <p class="tagline">A Symphony of Grace</p>
 
@@ -916,8 +1148,8 @@
             <!-- Sign In -->
             <div id="signin-form">
                 <p class="welcome-text">Welcome back, beloved daughter.</p>
-                <input type="email" id="signin-email" class="auth-input" placeholder="✦  Your email  ✦" autocomplete="email">
-                <input type="password" id="signin-password" class="auth-input" placeholder="✦  Your password  ✦" autocomplete="current-password">
+                <input type="email" id="signin-email" class="auth-input" placeholder="&#10022;  Your email  &#10022;" autocomplete="email">
+                <input type="password" id="signin-password" class="auth-input" placeholder="&#10022;  Your password  &#10022;" autocomplete="current-password">
                 <button class="login-btn" onclick="signIn()">Enter the Portal</button>
                 <p id="signin-error" class="login-error"></p>
                 <p class="login-hint" style="margin-top:1.5rem;">
@@ -928,21 +1160,22 @@
             <!-- Sign Up -->
             <div id="signup-form" style="display:none">
                 <p class="welcome-text">Create your account to begin the journey.</p>
-                <input type="email" id="signup-email" class="auth-input" placeholder="✦  Your email  ✦" autocomplete="email">
-                <input type="password" id="signup-password" class="auth-input" placeholder="✦  Choose a password  ✦" autocomplete="new-password">
-                <input type="password" id="signup-confirm" class="auth-input" placeholder="✦  Confirm password  ✦" autocomplete="new-password">
+                <input type="text" id="signup-name" class="auth-input" placeholder="&#10022;  Your first name  &#10022;" autocomplete="given-name">
+                <input type="email" id="signup-email" class="auth-input" placeholder="&#10022;  Your email  &#10022;" autocomplete="email">
+                <input type="password" id="signup-password" class="auth-input" placeholder="&#10022;  Choose a password  &#10022;" autocomplete="new-password">
+                <input type="password" id="signup-confirm" class="auth-input" placeholder="&#10022;  Confirm password  &#10022;" autocomplete="new-password">
                 <button class="login-btn" onclick="signUp()">Create Account</button>
                 <p id="signup-error" class="login-error"></p>
-                <p id="signup-success" class="login-success">✦ Check your email for a confirmation link, beloved. ✦</p>
+                <p id="signup-success" class="login-success">&#10022; Check your email for a confirmation link, beloved. &#10022;</p>
             </div>
 
             <!-- Forgot Password -->
             <div id="forgot-form" style="display:none">
                 <p class="welcome-text">We’ll send you a link to reset your password.</p>
-                <input type="email" id="forgot-email" class="auth-input" placeholder="✦  Your email  ✦" autocomplete="email">
+                <input type="email" id="forgot-email" class="auth-input" placeholder="&#10022;  Your email  &#10022;" autocomplete="email">
                 <button class="login-btn" onclick="sendReset()">Send Reset Link</button>
                 <p id="forgot-error" class="login-error"></p>
-                <p id="forgot-success" class="login-success">✦ Check your email for a reset link. ✦</p>
+                <p id="forgot-success" class="login-success">&#10022; Check your email for a reset link. &#10022;</p>
                 <p class="login-hint" style="margin-top:1.5rem;">
                     <a href="#" onclick="showTab('signin'); return false;">Back to sign in</a>
                 </p>
@@ -970,6 +1203,28 @@
                 <li><a href="symphony-of-grace.html">15-Week Journey</a></li>
                 <li><a href="portal.html" class="active">My Portal</a></li>
             </ul>
+            <div style="position:relative;">
+                <button class="account-btn" onclick="toggleAccountDropdown()" id="account-btn">
+                    <div class="account-avatar" id="account-avatar">?</div>
+                    <span id="account-btn-name">Account</span>
+                </button>
+                <div class="account-dropdown" id="account-dropdown">
+                    <div class="dropdown-header">
+                        <div class="d-name" id="dropdown-name">Welcome</div>
+                        <div class="d-email" id="dropdown-email"></div>
+                    </div>
+                    <button class="dropdown-item" onclick="openAccountModal('profile')">
+                        <span class="dropdown-icon">&#9998;</span> Edit Profile
+                    </button>
+                    <button class="dropdown-item" onclick="openAccountModal('password')">
+                        <span class="dropdown-icon">&#128274;</span> Change Password
+                    </button>
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item danger" onclick="logout()">
+                        <span class="dropdown-icon">&#10022;</span> Sign Out
+                    </button>
+                </div>
+            </div>
         </nav>
 
         <!-- Hero -->
@@ -1209,9 +1464,6 @@
             <p class="tagline">fearfully & wonderfully made</p>
             <p class="copyright">&copy; 2025 My Holy Crescendo. All rights reserved.</p>
         </footer>
-
-        <!-- Logout Button -->
-        <button class="logout-btn" onclick="logout()">âœ¦ Sign Out</button>
     </div>
 
     <script>
@@ -1247,6 +1499,7 @@
         }
 
         async function signUp() {
+            const name = document.getElementById('signup-name').value.trim();
             const email = document.getElementById('signup-email').value.trim();
             const password = document.getElementById('signup-password').value;
             const confirm = document.getElementById('signup-confirm').value;
@@ -1254,11 +1507,15 @@
             const successEl = document.getElementById('signup-success');
             const btn = document.querySelector('#signup-form .login-btn');
             errEl.style.display = 'none'; successEl.style.display = 'none';
+            if (!name) { errEl.textContent = 'Please enter your first name.'; errEl.style.display = 'block'; return; }
             if (!email || !password) { errEl.textContent = 'Please fill in all fields.'; errEl.style.display = 'block'; return; }
             if (password !== confirm) { errEl.textContent = 'Passwords don’t match — try again.'; errEl.style.display = 'block'; return; }
             if (password.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; errEl.style.display = 'block'; return; }
             btn.textContent = 'Creating…'; btn.classList.add('auth-loading');
-            const { error } = await sb.auth.signUp({ email, password });
+            const { error } = await sb.auth.signUp({
+                email, password,
+                options: { data: { full_name: name } }
+            });
             btn.textContent = 'Create Account'; btn.classList.remove('auth-loading');
             if (error) { errEl.textContent = error.message; errEl.style.display = 'block'; }
             else { successEl.style.display = 'block'; }
@@ -1286,8 +1543,87 @@
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('portal-content').classList.add('active');
             if (user) {
+                const name = user.user_metadata?.full_name || '';
+                const email = user.email || '';
+                const display = name || email;
+                const initial = display.charAt(0).toUpperCase();
                 const badge = document.getElementById('user-badge');
-                if (badge) { badge.textContent = '✦  ' + user.email + '  ✦'; badge.style.display = 'inline-block'; }
+                if (badge) { badge.textContent = '\u2726  Welcome, ' + (name || email) + '  \u2726'; badge.style.display = 'inline-block'; }
+                const btnName = document.getElementById('account-btn-name');
+                if (btnName) btnName.textContent = name || 'Account';
+                const avatar = document.getElementById('account-avatar');
+                if (avatar) avatar.textContent = initial;
+                const dName = document.getElementById('dropdown-name');
+                if (dName) dName.textContent = name || email;
+                const dEmail = document.getElementById('dropdown-email');
+                if (dEmail) dEmail.textContent = email;
+                const mn = document.getElementById('modal-name');
+                if (mn) mn.value = name;
+                const me = document.getElementById('modal-email');
+                if (me) me.value = email;
+            }
+        }
+
+        function toggleAccountDropdown() {
+            document.getElementById('account-dropdown').classList.toggle('open');
+        }
+
+        document.addEventListener('click', function(e) {
+            const btn = document.getElementById('account-btn');
+            const dd = document.getElementById('account-dropdown');
+            if (dd && btn && !btn.contains(e.target) && !dd.contains(e.target)) dd.classList.remove('open');
+        });
+
+        function openAccountModal(tab) {
+            document.getElementById('account-dropdown').classList.remove('open');
+            document.getElementById('account-modal-overlay').classList.add('open');
+            switchModalTab(tab || 'profile');
+        }
+
+        function closeAccountModal(e) {
+            if (e && e.target !== document.getElementById('account-modal-overlay')) return;
+            document.getElementById('account-modal-overlay').classList.remove('open');
+            ['profile-success','profile-error','password-success','password-error'].forEach(id => {
+                const el = document.getElementById(id); if (el) el.style.display = 'none';
+            });
+        }
+
+        function switchModalTab(tab) {
+            document.getElementById('modal-profile-tab').style.display = tab === 'profile' ? 'block' : 'none';
+            document.getElementById('modal-password-tab').style.display = tab === 'password' ? 'block' : 'none';
+            document.querySelectorAll('.modal-tab').forEach((t, i) => {
+                t.classList.toggle('active', (i === 0 && tab === 'profile') || (i === 1 && tab === 'password'));
+            });
+        }
+
+        async function saveProfile() {
+            const name = document.getElementById('modal-name').value.trim();
+            const email = document.getElementById('modal-email').value.trim();
+            const successEl = document.getElementById('profile-success');
+            const errorEl = document.getElementById('profile-error');
+            successEl.style.display = 'none'; errorEl.style.display = 'none';
+            const updates = {};
+            if (name) updates.data = { full_name: name };
+            if (email) updates.email = email;
+            const { data, error } = await sb.auth.updateUser(updates);
+            if (error) { errorEl.textContent = error.message; errorEl.style.display = 'block'; }
+            else { successEl.style.display = 'block'; showPortal(data.user); }
+        }
+
+        async function savePassword() {
+            const newPass = document.getElementById('modal-new-password').value;
+            const confirm = document.getElementById('modal-confirm-password').value;
+            const successEl = document.getElementById('password-success');
+            const errorEl = document.getElementById('password-error');
+            successEl.style.display = 'none'; errorEl.style.display = 'none';
+            if (newPass !== confirm) { errorEl.textContent = 'Passwords don\u2019t match.'; errorEl.style.display = 'block'; return; }
+            if (newPass.length < 6) { errorEl.textContent = 'Password must be at least 6 characters.'; errorEl.style.display = 'block'; return; }
+            const { error } = await sb.auth.updateUser({ password: newPass });
+            if (error) { errorEl.textContent = error.message; errorEl.style.display = 'block'; }
+            else {
+                successEl.style.display = 'block';
+                document.getElementById('modal-new-password').value = '';
+                document.getElementById('modal-confirm-password').value = '';
             }
         }
 
@@ -1359,5 +1695,56 @@
             navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
         }
     </script>
+
+    <!-- Account Settings Modal -->
+    <div class="account-modal-overlay" id="account-modal-overlay" onclick="closeAccountModal(event)">
+        <div class="account-modal">
+            <button class="modal-close" onclick="closeAccountModal()">&times;</button>
+            <p class="modal-title">My Account</p>
+            <p class="modal-subtitle">Manage your profile</p>
+
+            <div class="modal-tabs">
+                <button class="modal-tab active" onclick="switchModalTab('profile')">Profile</button>
+                <button class="modal-tab" onclick="switchModalTab('password')">Password</button>
+            </div>
+
+            <!-- Profile Tab -->
+            <div id="modal-profile-tab">
+                <div class="modal-field">
+                    <label class="modal-label">First Name</label>
+                    <input type="text" id="modal-name" class="modal-input" placeholder="Your first name">
+                </div>
+                <div class="modal-field">
+                    <label class="modal-label">Email Address</label>
+                    <input type="email" id="modal-email" class="modal-input" placeholder="Your email">
+                </div>
+                <p id="profile-success" class="modal-success">&#10022; Profile updated successfully.</p>
+                <p id="profile-error" class="modal-error"></p>
+                <div class="modal-actions">
+                    <button class="modal-btn modal-btn-secondary" onclick="closeAccountModal()">Cancel</button>
+                    <button class="modal-btn modal-btn-primary" onclick="saveProfile()">Save Changes</button>
+                </div>
+            </div>
+
+            <!-- Password Tab -->
+            <div id="modal-password-tab" style="display:none">
+                <div class="modal-field">
+                    <label class="modal-label">New Password</label>
+                    <input type="password" id="modal-new-password" class="modal-input" placeholder="New password">
+                </div>
+                <div class="modal-field">
+                    <label class="modal-label">Confirm New Password</label>
+                    <input type="password" id="modal-confirm-password" class="modal-input" placeholder="Confirm new password">
+                </div>
+                <p id="password-success" class="modal-success">&#10022; Password updated successfully.</p>
+                <p id="password-error" class="modal-error"></p>
+                <div class="modal-actions">
+                    <button class="modal-btn modal-btn-secondary" onclick="closeAccountModal()">Cancel</button>
+                    <button class="modal-btn modal-btn-primary" onclick="savePassword()">Update Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
