@@ -27,7 +27,8 @@
     <link rel="stylesheet" href="styles.css">
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png"></head>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
 
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/crescendo-cover.jpg">
@@ -845,6 +846,7 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -982,6 +984,8 @@
 
             <div class="cta-section">
                 <button class="btn btn-secondary" onclick="restartQuiz()">Retake Quiz</button>
+                <button class="btn" id="save-profile-btn" onclick="saveToProfile()" style="display:none; background:linear-gradient(135deg,#B8941F,#D4AF37); color:white; border-color:#B8941F;">&#10022; Save to My Profile</button>
+                <p id="save-profile-msg" style="text-align:center; font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; margin-top:1rem; display:none;"></p>
             </div>
         </div>
     </div>
@@ -1562,6 +1566,10 @@
             `;
 
             showScreen('results-screen');
+
+            // Store for Supabase save
+            window._essenceResult = essences[primary].name + ' + ' + essences[secondary].name;
+            checkAndShowSaveButton();
         }
 
         function renderEssenceCard(essenceKey, label) {
@@ -1638,5 +1646,61 @@
             <p>&copy; 2025 My Holy Crescendo. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function checkAndShowSaveButton() {
+            const { data: { session } } = await sb.auth.getSession();
+            if (session) {
+                const btn = document.getElementById('save-profile-btn');
+                if (btn) btn.style.display = 'inline-block';
+            }
+        }
+
+        async function saveToProfile() {
+            const { data: { session } } = await sb.auth.getSession();
+            if (!session) {
+                showSaveMsg('Please sign in to save to your profile.', '#c44569');
+                return;
+            }
+            const btn = document.getElementById('save-profile-btn');
+            const originalText = btn.textContent;
+            btn.textContent = 'Saving…';
+            btn.disabled = true;
+
+            const { data: existing } = await sb
+                .from('user_results')
+                .select('result_data')
+                .eq('user_id', session.user.id)
+                .eq('assessment', 'symphony_profile')
+                .maybeSingle();
+
+            const profileData = existing?.result_data || {};
+            profileData.p_style_essence = window._essenceResult;
+
+            const { error } = await sb.from('user_results').upsert({
+                user_id: session.user.id,
+                assessment: 'symphony_profile',
+                result_data: profileData,
+                updated_at: new Date().toISOString()
+            }, { onConflict: 'user_id,assessment' });
+
+            btn.disabled = false;
+            if (error) {
+                btn.textContent = originalText;
+                showSaveMsg('Something went wrong — please try again.', '#c44569');
+            } else {
+                btn.textContent = '✓ Saved!';
+                showSaveMsg('✦ Your Sacred Style Essence has been saved to your Symphony Profile.', '#4a7c59');
+            }
+        }
+
+        function showSaveMsg(text, color) {
+            const msg = document.getElementById('save-profile-msg');
+            if (msg) { msg.textContent = text; msg.style.color = color; msg.style.display = 'block'; }
+        }
+    </script>
 </body>
 </html>
