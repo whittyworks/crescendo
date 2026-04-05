@@ -28,6 +28,27 @@
 <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+    // MHC Shared Supabase Client
+    window._mhcSb = supabase.createClient("https://whpxmygwxdwktnwpzqkt.supabase.co", "sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km");
+    </script>
+    <script>
+    // MHC Auth Guard
+    (async function() {
+        document.documentElement.style.visibility = "hidden";
+        try {
+            const { data: { session } } = await window._mhcSb.auth.getSession();
+            if (!session) {
+                window.location.replace("portal.html");
+            } else {
+                document.documentElement.style.visibility = "";
+                window._mhcAuth = window._mhcSb;
+            }
+        } catch(e) {
+            window.location.replace("portal.html");
+        }
+    })();
+    </script>
 </head>
 
     <meta name="description" content="Discover your top spiritual virtues with this assessment based on St. Albert the Great's classic work, The Paradise of the Soul.">
@@ -1755,9 +1776,7 @@
         }
 
         // ── Supabase Save to Profile ───────────────────────────
-        const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
-        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const sb = window._mhcSb; // shared client
 
         async function checkAndShowSaveButton() {
             const { data: { session } } = await sb.auth.getSession();

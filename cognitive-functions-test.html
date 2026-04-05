@@ -12,7 +12,7 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cognitive Functions Personality Test Â· My Holy Crescendo</title>
+    <title>Cognitive Functions Personality Test · My Holy Crescendo</title>
     <meta name="description" content="Discover your true personality type through cognitive functions—a deeper, more accurate approach than traditional letter-based tests. Understand how you truly think, feel, and perceive the world.">
                 <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -1310,6 +1310,27 @@
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+    // MHC Shared Supabase Client
+    window._mhcSb = supabase.createClient("https://whpxmygwxdwktnwpzqkt.supabase.co", "sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km");
+    </script>
+    <script>
+    // MHC Auth Guard
+    (async function() {
+        document.documentElement.style.visibility = "hidden";
+        try {
+            const { data: { session } } = await window._mhcSb.auth.getSession();
+            if (!session) {
+                window.location.replace("portal.html");
+            } else {
+                document.documentElement.style.visibility = "";
+                window._mhcAuth = window._mhcSb;
+            }
+        } catch(e) {
+            window.location.replace("portal.html");
+        }
+    })();
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -1631,7 +1652,7 @@
         </div>
 
         <p class="copyright">
-            Â© 2025 My Holy Crescendo. All rights reserved.
+            © 2025 My Holy Crescendo. All rights reserved.
         </p>
     </footer>
 
@@ -2598,9 +2619,7 @@
         });
 
         // ── Supabase Save to Profile ───────────────────────────
-        const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
-        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const sb = window._mhcSb; // shared client
 
         async function checkAndShowSaveButton() {
             const { data: { session } } = await sb.auth.getSession();

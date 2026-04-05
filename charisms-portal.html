@@ -559,6 +559,25 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+    // MHC Auth Guard
+    (async function() {
+        document.documentElement.style.visibility = "hidden";
+        try {
+            const sb = supabase.createClient("https://whpxmygwxdwktnwpzqkt.supabase.co", "sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km");
+            const { data: { session } } = await sb.auth.getSession();
+            if (!session) {
+                window.location.replace("portal.html");
+            } else {
+                document.documentElement.style.visibility = "";
+                window._mhcAuth = sb;
+            }
+        } catch(e) {
+            window.location.replace("portal.html");
+        }
+    })();
+    </script>
 </head>
 <body>
 
