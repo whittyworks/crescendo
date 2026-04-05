@@ -866,7 +866,34 @@
                 font-size: 13px;
             }
         }
-    </style>
+    
+        /* Portal nav fix */
+        nav.sans {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(253, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .logo-image { height: 45px; width: auto; display: block; }
+        .logo-link { display: block; text-decoration: none; }
+        nav.sans .nav-links { display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; }
+        nav.sans .nav-links li { list-style: none; }
+        .portal-back {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #B8941F;
+            text-decoration: none;
+        }
+        .portal-back:hover { color: #D4AF37; }
+        </style>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -877,21 +904,7 @@
             <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
         </a>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="symphony-of-grace.html">15-Week Journey</a></li>
-            <li><a href="made-beautiful.html">Retreat</a></li>
-            <li><a href="personal-journey.html">1:1 Coaching</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle">Free Resources</a>
-                <ul class="dropdown-menu">
-                    <li><a href="prelude.html">Free Prelude</a></li>
-                    <li><a href="sacred-style-essence-quiz.html" class="active">Sacred Style Quiz</a></li>
-                    <li><a href="mind-frameworks.html">Mind Frameworks Guide</a></li>
-                    <li><a href="virtues.html">42 Virtues</a></li>
-                    <li><a href="charisms.html">25 Charisms</a></li>
-                </ul>
-            </li>
+            <li><a href="portal.html" class="portal-back">← Back to Portal</a></li>
         </ul>
     </nav>
 

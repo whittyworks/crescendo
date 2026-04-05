@@ -53,6 +53,10 @@
             border-bottom: 1px solid rgba(212,175,55,0.2);
         }
 
+        .logo-image { height: 45px; width: auto; display: block; }
+        .logo-link { display: block; text-decoration: none; }
+        .portal-back { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: #B8941F; text-decoration: none; }
+        .portal-back:hover { color: #D4AF37; }
         .nav-brand {
             font-family: 'Cinzel', serif;
             font-size: 0.85rem;
@@ -536,11 +540,12 @@
 </head>
 <body>
 
-    <nav>
-        <a href="portal.html" class="nav-brand">My Holy Crescendo</a>
+    <nav class="sans">
+        <a href="index.html" class="logo-link">
+            <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
+        </a>
         <ul class="nav-links">
-            <li><a href="portal.html">Portal</a></li>
-            <li><a href="mind-frameworks.html">Back to Mind</a></li>
+            <li><a href="portal.html" class="portal-back">← Back to Portal</a></li>
         </ul>
     </nav>
 
