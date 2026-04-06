@@ -28,27 +28,6 @@
 <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-    // MHC Shared Supabase Client
-    window._mhcSb = supabase.createClient("https://whpxmygwxdwktnwpzqkt.supabase.co", "sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km");
-    </script>
-    <script>
-    // MHC Auth Guard
-    (async function() {
-        document.documentElement.style.visibility = "hidden";
-        try {
-            const { data: { session } } = await window._mhcSb.auth.getSession();
-            if (!session) {
-                window.location.replace("portal.html");
-            } else {
-                document.documentElement.style.visibility = "";
-                window._mhcAuth = window._mhcSb;
-            }
-        } catch(e) {
-            window.location.replace("portal.html");
-        }
-    })();
-    </script>
 </head>
 
     <meta name="description" content="Discover your top spiritual virtues with this assessment based on St. Albert the Great's classic work, The Paradise of the Soul.">
@@ -869,7 +848,7 @@
     <div class="footer-links sans">
         <a href="portal.html">Portal</a>
         <a href="index.html">Main Site</a>
-        <a href="/cdn-cgi/l/email-protection#82effbeaedeefbe1f0e7f1e1e7ece6edc2e5efe3ebeeace1edef">Contact</a>
+        <a href="mailto:bea@myholycrescendo.com">Contact</a>
     </div>
 
     <p class="copyright">
@@ -877,7 +856,7 @@
     </p>
 </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
+    <script src="script.js"></script>
     <script>
         // Initialize EmailJS (you'll need to replace these with your actual IDs)
         (function() {
@@ -1133,20 +1112,20 @@
             {
                 name: "Religion",
                 questions: [
-                    "I regularly participate in acts of worship and divine service.",
-                    "I honor sacred times, places, and practices.",
-                    "I render to God the worship and reverence due to Him."
+                    "I actively order my daily choices toward God rather than toward physical comfort or pleasure.",
+                    "I prefer spiritual nourishment — prayer, Scripture, the sacraments — over indulgences that pamper the flesh.",
+                    "I am aware when physical pleasures are competing with my interior life, and I choose accordingly."
                 ],
-                description: "The virtue that disposes us to give God the worship and honor proper to Him, expressed through prayer, sacrifice, and sacred observance."
+                description: "The virtue by which the soul consciously governs the flesh — preferring spiritual nourishment over physical indulgence, and ordering all of life toward God rather than toward the comfort and pleasure of the body."
             },
             {
                 name: "Maturity",
                 questions: [
-                    "I approach spiritual matters with wisdom and understanding.",
-                    "I have moved beyond childish or superficial faith.",
-                    "My spiritual life shows depth and thoughtful development."
+                    "I am not given to flippant humor or excessive joking that distracts from what matters.",
+                    "My manner and bearing reflect a collected, restrained dignity rather than restlessness or levity.",
+                    "I am aware when lightheartedness is becoming disordered — closing my heart rather than opening it."
                 ],
-                description: "Spiritual adulthood that transcends beginners' ways, marked by wisdom, stability, and depth in the spiritual life."
+                description: "A holy seriousness of soul — all affections and powers directed unanimously toward God, restrained from vanity and flippancy. Not the absence of joy, but the absence of the disordered levity that closes the heart to grace."
             },
             {
                 name: "Simplicity",
@@ -1776,7 +1755,9 @@
         }
 
         // ── Supabase Save to Profile ───────────────────────────
-        const sb = window._mhcSb; // shared client
+        const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         async function checkAndShowSaveButton() {
             const { data: { session } } = await sb.auth.getSession();
