@@ -865,8 +865,8 @@
 
         try {
             const upserts = [
-                { user_id: currentUser.id, assessment: 'symphony_profile', result_data: profileData, updated_at: new Date().toISOString() },
-                { user_id: currentUser.id, assessment: 'reflection_journal', result_data: journeyData, updated_at: new Date().toISOString() }
+                { user_id: currentUser.id, email: currentUser.email, assessment: 'symphony_profile', result_data: profileData, updated_at: new Date().toISOString() },
+                { user_id: currentUser.id, email: currentUser.email, assessment: 'reflection_journal', result_data: journeyData, updated_at: new Date().toISOString() }
             ];
             const { error } = await sb.from('user_results').upsert(upserts, { onConflict: 'user_id,assessment' });
             if (error) throw error;

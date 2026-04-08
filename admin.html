@@ -424,40 +424,30 @@
     // ── Load all data ─────────────────────────────────────────
     async function loadDashboard() {
         try {
-            // Get all user_results rows
+            // Get all user_results rows including email column
             const { data: results, error: rErr } = await sb
                 .from('user_results')
-                .select('user_id, assessment, result_data');
+                .select('user_id, email, assessment, result_data');
 
             if (rErr) throw rErr;
 
-            // Get all auth users via admin — we use a workaround:
-            // query auth.users is not available with anon key,
-            // so we get emails from the profiles we have
             // Group results by user_id
             const byUser = {};
             results.forEach(row => {
-                if (!byUser[row.user_id]) byUser[row.user_id] = { profile: null, journal: null };
+                if (!byUser[row.user_id]) {
+                    byUser[row.user_id] = {
+                        email: row.email || null,
+                        profile: null,
+                        journal: null
+                    };
+                }
+                // Always update email if we find one
+                if (row.email) byUser[row.user_id].email = row.email;
                 if (row.assessment === 'symphony_profile') byUser[row.user_id].profile = row.result_data;
                 if (row.assessment === 'reflection_journal') byUser[row.user_id].journal = row.result_data;
             });
 
-            // We need emails — use RPC or metadata workaround
-            // Try getting user metadata from auth.users via service role isn't available
-            // Instead, store emails alongside results by calling auth.getUser for each
-            // The cleanest approach: use a profiles table query if it exists,
-            // otherwise display user IDs with whatever we can get
-
-            // Try to get user list from auth (only works if RLS allows it)
-            const { data: { users }, error: uErr } = await sb.auth.admin?.listUsers() || { data: { users: [] }, error: null };
-
-            // Build email map
-            const emailMap = {};
-            if (users && users.length) {
-                users.forEach(u => { emailMap[u.id] = { email: u.email, name: u.user_metadata?.full_name || '' }; });
-            }
-
-            renderDashboard(byUser, emailMap);
+            renderDashboard(byUser);
 
         } catch(e) {
             console.error(e);
@@ -467,7 +457,7 @@
     }
 
     // ── Render ────────────────────────────────────────────────
-    function renderDashboard(byUser, emailMap) {
+    function renderDashboard(byUser) {
         const userIds = Object.keys(byUser);
         const now = new Date().toLocaleString('en-US', { month:'long', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit' });
         document.getElementById('last-updated').textContent = 'Last refreshed ' + now;
@@ -495,9 +485,8 @@
         list.innerHTML = '';
 
         userIds.forEach((uid, idx) => {
-            const info = emailMap[uid] || {};
-            const email = info.email || uid.substring(0, 12) + '...';
-            const name = info.name || email.split('@')[0];
+            const email = byUser[uid].email || uid.substring(0, 12) + '...';
+            const name = email.split('@')[0];
             const initial = name.charAt(0).toUpperCase();
             const profile = byUser[uid].profile || {};
             const journal = byUser[uid].journal || {};
