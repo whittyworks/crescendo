@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin &middot; My Holy Crescendo</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --navy: #163245;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+            --green: #4a7c59;
+            --red: #c44569;
+            --amber: #b8860b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+            padding-top: 80px;
+        }
+
+        /* ── Nav ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(253,248,243,0.97);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+        }
+        .nav-brand { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-dark); }
+        .nav-sub { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
+        .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-right a { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; color: var(--text-medium); text-decoration: none; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-right a:hover { color: var(--gold); }
+
+        /* ── Page ── */
+        .page-header {
+            padding: 3rem 5% 2rem;
+            border-bottom: 1px solid rgba(212,175,55,0.15);
+        }
+        .page-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            font-weight: 400;
+            margin-bottom: 0.25rem;
+        }
+        .page-header p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            letter-spacing: 1px;
+        }
+
+        /* ── Loading / Access denied ── */
+        .state-msg {
+            text-align: center;
+            padding: 6rem 5%;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            letter-spacing: 1px;
+        }
+
+        /* ── Summary cards ── */
+        .summary-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            padding: 2rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            border: 1px solid rgba(212,175,55,0.15);
+            box-shadow: 0 3px 12px rgba(212,175,55,0.06);
+        }
+        .summary-card .s-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.68rem;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.4rem;
+        }
+        .summary-card .s-value {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            font-weight: 400;
+        }
+
+        /* ── Participant grid ── */
+        .participants {
+            padding: 0 5% 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.25rem;
+        }
+
+        .participant-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid rgba(212,175,55,0.15);
+            box-shadow: 0 3px 12px rgba(212,175,55,0.06);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+        .participant-card:hover { box-shadow: 0 6px 24px rgba(212,175,55,0.12); }
+
+        .participant-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .p-avatar {
+            width: 44px; height: 44px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .p-info { flex: 1; min-width: 0; }
+        .p-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+        .p-email {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            color: var(--text-medium);
+            letter-spacing: 0.5px;
+        }
+
+        .p-status {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .status-pill {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.3rem 0.75rem;
+            border-radius: 50px;
+        }
+        .status-pill.complete { background: rgba(74,124,89,0.1); color: var(--green); }
+        .status-pill.partial  { background: rgba(184,134,11,0.1); color: var(--amber); }
+        .status-pill.empty    { background: rgba(196,69,105,0.1); color: var(--red); }
+
+        .p-chevron {
+            font-size: 0.8rem;
+            color: var(--gold);
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+        .participant-card.open .p-chevron { transform: rotate(180deg); }
+
+        /* ── Detail panel ── */
+        .participant-detail {
+            display: none;
+            border-top: 1px solid rgba(212,175,55,0.15);
+            padding: 1.5rem;
+        }
+        .participant-card.open .participant-detail { display: block; }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) { .detail-grid { grid-template-columns: 1fr; } }
+
+        .detail-section h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+        }
+
+        .detail-row {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.6rem;
+            align-items: baseline;
+        }
+        .detail-key {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.68rem;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-width: 120px;
+            flex-shrink: 0;
+        }
+        .detail-val {
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+        .detail-val.empty {
+            font-style: italic;
+            color: rgba(92,81,66,0.4);
+            font-size: 0.85rem;
+        }
+
+        /* journal entries truncated */
+        .journal-entry {
+            margin-bottom: 1rem;
+            padding: 0.75rem 1rem;
+            background: var(--cream);
+            border-radius: 8px;
+            border-left: 3px solid rgba(212,175,55,0.3);
+        }
+        .journal-entry .j-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold);
+            margin-bottom: 0.25rem;
+        }
+        .journal-entry .j-text {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        .journal-entry .j-text.empty {
+            font-style: italic;
+            color: rgba(92,81,66,0.35);
+        }
+
+        /* ── Opus helper ── */
+        .opus-panel {
+            margin-top: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            background: linear-gradient(135deg, #FDF8F3, #F5EFE7);
+            border: 1px solid rgba(212,175,55,0.25);
+            border-radius: 8px;
+        }
+        .opus-panel h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--gold-dark);
+            font-weight: 400;
+            margin-bottom: 0.75rem;
+        }
+        .opus-summary {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            line-height: 1.9;
+            color: var(--text-medium);
+        }
+        .opus-summary strong { color: var(--text-dark); }
+
+        .copy-btn {
+            margin-top: 0.75rem;
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .copy-btn:hover { background: var(--gold-dark); }
+        .copy-btn.copied { background: var(--green); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div>
+        <div class="nav-brand">My Holy Crescendo</div>
+        <div class="nav-sub">Admin Dashboard</div>
+    </div>
+    <div class="nav-right">
+        <a href="portal.html">&larr; Portal</a>
+        <a href="#" onclick="signOut()">Sign Out</a>
+    </div>
+</nav>
+
+<div id="access-denied" class="state-msg" style="display:none;">
+    Access denied. This page is only available to administrators.
+</div>
+
+<div id="loading-msg" class="state-msg">
+    Loading participant data&hellip;
+</div>
+
+<div id="dashboard" style="display:none;">
+
+    <div class="page-header">
+        <h1>Participant Dashboard</h1>
+        <p id="last-updated"></p>
+    </div>
+
+    <div class="summary-bar" id="summary-bar"></div>
+
+    <div class="participants">
+        <p class="section-title">All Participants</p>
+        <div id="participant-list"></div>
+    </div>
+
+</div>
+
+<script>
+    const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const ADMIN_EMAIL = 'bea@myholycrescendo.com';
+    const ADMIN_EMAIL_ALT = 'bea.whitmarsh@gmail.com';
+
+    // Profile field labels for display
+    const PROFILE_LABELS = {
+        p_name_lord:      'Name from the Lord',
+        p_identity:       'Identity in Christ',
+        p_word_spoken:    'Word Spoken Over Me',
+        p_color_season:   'Color Season',
+        p_style_essence:  'Style Essence',
+        p_silhouette:     'Silhouette',
+        p_love_primary:   'Primary Love Language',
+        p_love_secondary: 'Secondary Love Language',
+        p_temperament:    'Temperament',
+        p_type:           'Personality Type',
+        p_str1: 'Strength 1', p_str2: 'Strength 2', p_str3: 'Strength 3',
+        p_str4: 'Strength 4', p_str5: 'Strength 5',
+        p_vir1: 'Virtue 1',  p_vir2: 'Virtue 2',  p_vir3: 'Virtue 3',
+        p_vir4: 'Virtue 4',  p_vir5: 'Virtue 5',
+        p_char1: 'Charism 1', p_char2: 'Charism 2', p_char3: 'Charism 3',
+    };
+
+    const JOURNAL_LABELS = {
+        j_s1q1: 'S1 Q1', j_s1q2: 'S1 Q2',
+        j_s2q1: 'S2 Q1', j_s2q2: 'S2 Q2',
+        j_s3q1: 'S3 Q1',
+        j_s4q1: 'S4 Q1', j_s5q1: 'S5 Q1', j_s6q1: 'S6 Q1',
+        j_s7q1: 'S7 Q1', j_s8q1: 'S8 Q1', j_s9q1: 'S9 Q1',
+        j_s10q1: 'S10 Q1', j_s10q2: 'S10 Q2',
+        j_s11q1: 'S11 Q1', j_s11q2: 'S11 Q2',
+        j_s12q1: 'S12 Q1', j_s12q2: 'S12 Q2',
+        j_syn1: 'Synthesis 1', j_syn2: 'Synthesis 2', j_syn3: 'Synthesis 3',
+        j_syn4: 'Synthesis 4', j_syn5: 'Synthesis 5',
+        j_syn6: 'Synthesis 6', j_syn7: 'Synthesis 7',
+        j_word1: 'Word: Who I Was',
+        j_word2: 'Word: This Journey',
+        j_word3: 'Word: Who I\'m Becoming',
+    };
+
+    // ── Auth check ────────────────────────────────────────────
+    sb.auth.getSession().then(async ({ data: { session } }) => {
+        document.getElementById('loading-msg').style.display = 'none';
+
+        if (!session) {
+            window.location.href = 'portal.html';
+            return;
+        }
+
+        const email = session.user.email;
+        if (email !== ADMIN_EMAIL && email !== ADMIN_EMAIL_ALT) {
+            document.getElementById('access-denied').style.display = 'block';
+            return;
+        }
+
+        document.getElementById('dashboard').style.display = 'block';
+        await loadDashboard();
+    });
+
+    sb.auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_OUT') window.location.href = 'portal.html';
+    });
+
+    // ── Load all data ─────────────────────────────────────────
+    async function loadDashboard() {
+        try {
+            // Get all user_results rows
+            const { data: results, error: rErr } = await sb
+                .from('user_results')
+                .select('user_id, assessment, result_data');
+
+            if (rErr) throw rErr;
+
+            // Get all auth users via admin — we use a workaround:
+            // query auth.users is not available with anon key,
+            // so we get emails from the profiles we have
+            // Group results by user_id
+            const byUser = {};
+            results.forEach(row => {
+                if (!byUser[row.user_id]) byUser[row.user_id] = { profile: null, journal: null };
+                if (row.assessment === 'symphony_profile') byUser[row.user_id].profile = row.result_data;
+                if (row.assessment === 'reflection_journal') byUser[row.user_id].journal = row.result_data;
+            });
+
+            // We need emails — use RPC or metadata workaround
+            // Try getting user metadata from auth.users via service role isn't available
+            // Instead, store emails alongside results by calling auth.getUser for each
+            // The cleanest approach: use a profiles table query if it exists,
+            // otherwise display user IDs with whatever we can get
+
+            // Try to get user list from auth (only works if RLS allows it)
+            const { data: { users }, error: uErr } = await sb.auth.admin?.listUsers() || { data: { users: [] }, error: null };
+
+            // Build email map
+            const emailMap = {};
+            if (users && users.length) {
+                users.forEach(u => { emailMap[u.id] = { email: u.email, name: u.user_metadata?.full_name || '' }; });
+            }
+
+            renderDashboard(byUser, emailMap);
+
+        } catch(e) {
+            console.error(e);
+            document.getElementById('participant-list').innerHTML =
+                '<p style="color:var(--red);font-family:Montserrat,sans-serif;font-size:0.85rem;">Error loading data: ' + e.message + '</p>';
+        }
+    }
+
+    // ── Render ────────────────────────────────────────────────
+    function renderDashboard(byUser, emailMap) {
+        const userIds = Object.keys(byUser);
+        const now = new Date().toLocaleString('en-US', { month:'long', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit' });
+        document.getElementById('last-updated').textContent = 'Last refreshed ' + now;
+
+        // Summary
+        let profileComplete = 0, profilePartial = 0, profileEmpty = 0;
+        userIds.forEach(uid => {
+            const p = byUser[uid].profile;
+            const filled = p ? Object.values(p).filter(v => v && v.trim && v.trim() !== '').length : 0;
+            const total = Object.keys(PROFILE_LABELS).length;
+            if (filled === 0) profileEmpty++;
+            else if (filled >= total * 0.7) profileComplete++;
+            else profilePartial++;
+        });
+
+        document.getElementById('summary-bar').innerHTML = `
+            <div class="summary-card"><div class="s-label">Total Participants</div><div class="s-value">${userIds.length}</div></div>
+            <div class="summary-card"><div class="s-label">Profile Complete</div><div class="s-value" style="color:var(--green)">${profileComplete}</div></div>
+            <div class="summary-card"><div class="s-label">Profile Partial</div><div class="s-value" style="color:var(--amber)">${profilePartial}</div></div>
+            <div class="summary-card"><div class="s-label">Profile Empty</div><div class="s-value" style="color:var(--red)">${profileEmpty}</div></div>
+        `;
+
+        // Participant cards
+        const list = document.getElementById('participant-list');
+        list.innerHTML = '';
+
+        userIds.forEach((uid, idx) => {
+            const info = emailMap[uid] || {};
+            const email = info.email || uid.substring(0, 12) + '...';
+            const name = info.name || email.split('@')[0];
+            const initial = name.charAt(0).toUpperCase();
+            const profile = byUser[uid].profile || {};
+            const journal = byUser[uid].journal || {};
+
+            const profFilled = Object.values(profile).filter(v => v && v.trim && v.trim() !== '').length;
+            const profTotal = Object.keys(PROFILE_LABELS).length;
+            const profPct = profTotal > 0 ? Math.round((profFilled / profTotal) * 100) : 0;
+
+            let statusClass = 'empty', statusLabel = 'No data';
+            if (profFilled >= profTotal * 0.7) { statusClass = 'complete'; statusLabel = 'Profile complete'; }
+            else if (profFilled > 0) { statusClass = 'partial'; statusLabel = profPct + '% complete'; }
+
+            const card = document.createElement('div');
+            card.className = 'participant-card';
+            card.innerHTML = `
+                <div class="participant-header" onclick="toggleCard(this)">
+                    <div class="p-avatar">${initial}</div>
+                    <div class="p-info">
+                        <div class="p-name">${name}</div>
+                        <div class="p-email">${email}</div>
+                    </div>
+                    <div class="p-status">
+                        <span class="status-pill ${statusClass}">${statusLabel}</span>
+                    </div>
+                    <div class="p-chevron">&#9660;</div>
+                </div>
+                <div class="participant-detail">
+                    ${renderDetail(profile, journal, name)}
+                </div>
+            `;
+            list.appendChild(card);
+        });
+    }
+
+    function renderDetail(profile, journal, name) {
+        // Symphony profile section
+        const coreFields = ['p_name_lord','p_identity','p_word_spoken','p_color_season','p_style_essence','p_silhouette','p_love_primary','p_love_secondary','p_temperament','p_type'];
+        const strFields  = ['p_str1','p_str2','p_str3','p_str4','p_str5'];
+        const virFields  = ['p_vir1','p_vir2','p_vir3','p_vir4','p_vir5'];
+        const charFields = ['p_char1','p_char2','p_char3'];
+
+        function fieldRow(key, data) {
+            const val = data[key];
+            const hasVal = val && val.trim && val.trim() !== '';
+            return `<div class="detail-row">
+                <span class="detail-key">${PROFILE_LABELS[key]}</span>
+                <span class="detail-val ${hasVal ? '' : 'empty'}">${hasVal ? val : '&mdash; not filled in'}</span>
+            </div>`;
+        }
+
+        // Build opus summary string
+        const opusParts = [];
+        const season = profile.p_color_season; if (season) opusParts.push('Color season: ' + season);
+        const style = profile.p_style_essence; if (style) opusParts.push('Style essence: ' + style);
+        const sil = profile.p_silhouette; if (sil) opusParts.push('Silhouette: ' + sil);
+        const ll1 = profile.p_love_primary; if (ll1) opusParts.push('Primary love language: ' + ll1);
+        const ll2 = profile.p_love_secondary; if (ll2) opusParts.push('Secondary love language: ' + ll2);
+        const temp = profile.p_temperament; if (temp) opusParts.push('Temperament: ' + temp);
+        const type = profile.p_type; if (type) opusParts.push('Personality type: ' + type);
+        const strs = strFields.map(f => profile[f]).filter(Boolean);
+        if (strs.length) opusParts.push('Strengths: ' + strs.join(', '));
+        const virs = virFields.map(f => profile[f]).filter(Boolean);
+        if (virs.length) opusParts.push('Virtues: ' + virs.join(', '));
+        const chars = charFields.map(f => profile[f]).filter(Boolean);
+        if (chars.length) opusParts.push('Charisms: ' + chars.join(', '));
+        const nameL = profile.p_name_lord; if (nameL) opusParts.push('Name from the Lord: ' + nameL);
+        const ident = profile.p_identity; if (ident) opusParts.push('Identity: ' + ident);
+
+        const opusText = opusParts.length
+            ? opusParts.map(p => '<strong>' + p.split(':')[0] + ':</strong>' + p.split(':').slice(1).join(':')).join('<br>')
+            : '<em style="opacity:0.5">No profile data saved yet.</em>';
+
+        const opusCopyText = opusParts.length
+            ? name + '\n\n' + opusParts.join('\n')
+            : '';
+
+        // Journal highlights
+        const synFields = ['j_syn1','j_syn2','j_syn3','j_syn4','j_syn5','j_syn6','j_syn7'];
+        const wordFields = ['j_word1','j_word2','j_word3'];
+        const synLabels = [
+            'What has stayed with her',
+            'What has shifted',
+            'Moment of feeling seen',
+            'Most significant revelation',
+            'Where her symphony is coming into focus',
+            'What she wants the group to know',
+            'What she wants to bring to the celebration',
+        ];
+
+        const journalRows = synFields.map((f, i) => {
+            const val = journal[f];
+            const hasVal = val && val.trim && val.trim() !== '';
+            return `<div class="journal-entry">
+                <div class="j-label">${synLabels[i]}</div>
+                <div class="j-text ${hasVal ? '' : 'empty'}">${hasVal ? val : 'Not filled in yet'}</div>
+            </div>`;
+        }).join('');
+
+        const threeWords = wordFields.map(f => journal[f]).filter(Boolean);
+        const wordsDisplay = threeWords.length
+            ? '<div style="font-family:Cinzel,serif;font-size:1.1rem;color:var(--gold-dark);margin:0.5rem 0 1rem;">' + threeWords.join(' &nbsp;&middot;&nbsp; ') + '</div>'
+            : '<div class="detail-val empty">&mdash; not filled in</div>';
+
+        return `
+        <div class="detail-grid">
+            <div class="detail-section">
+                <h4>Symphony Profile &mdash; Core</h4>
+                ${coreFields.map(f => fieldRow(f, profile)).join('')}
+            </div>
+            <div class="detail-section">
+                <h4>Strengths, Virtues &amp; Charisms</h4>
+                ${strFields.map(f => fieldRow(f, profile)).join('')}
+                <br>
+                ${virFields.map(f => fieldRow(f, profile)).join('')}
+                <br>
+                ${charFields.map(f => fieldRow(f, profile)).join('')}
+            </div>
+        </div>
+
+        <div class="opus-panel">
+            <h4>&#9836; Opus Summary &mdash; ${name}</h4>
+            <div class="opus-summary">${opusText}</div>
+            ${opusCopyText ? `<button class="copy-btn" onclick="copyOpus(this, \`${opusCopyText.replace(/`/g,'\\`')}\`)">Copy for Udio &rarr;</button>` : ''}
+        </div>
+
+        <div class="detail-section" style="margin-top:1.5rem;">
+            <h4>Three Words</h4>
+            ${wordsDisplay}
+            <h4 style="margin-top:1.25rem;">Synthesis Reflections</h4>
+            ${journalRows}
+        </div>`;
+    }
+
+    // ── Toggle card ───────────────────────────────────────────
+    function toggleCard(header) {
+        header.closest('.participant-card').classList.toggle('open');
+    }
+
+    // ── Copy opus text ────────────────────────────────────────
+    function copyOpus(btn, text) {
+        navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'Copy for Udio \u2192';
+                btn.classList.remove('copied');
+            }, 2000);
+        });
+    }
+
+    // ── Sign out ──────────────────────────────────────────────
+    async function signOut() { await sb.auth.signOut(); }
+</script>
+</body>
+</html>
