@@ -295,32 +295,122 @@
             gap: 1.5rem;
         }
 
+        /* Flip Card */
         .virtue-card {
-            background: white;
+            perspective: 1000px;
+            min-height: 200px;
+            cursor: pointer;
+        }
+
+        .virtue-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 200px;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .virtue-card.flipped .virtue-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .virtue-card-front,
+        .virtue-card-back {
+            position: absolute;
+            width: 100%;
+            min-height: 200px;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
             border-radius: 12px;
             padding: 1.75rem;
             box-shadow: 0 5px 20px rgba(212, 175, 55, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            transition: all 0.3s ease;
         }
 
-        .virtue-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+        .virtue-card-front {
+            background: white;
+            border: 1px solid rgba(212, 175, 55, 0.15);
         }
 
-        .virtue-card h3 {
+        .virtue-card-back {
+            background: linear-gradient(135deg, #2C2416, #3A2E1E);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transform: rotateY(180deg);
+        }
+
+        .virtue-card-front h3 {
             font-family: 'Cinzel', serif;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             color: var(--gold-dark);
             margin-bottom: 0.75rem;
             font-weight: 500;
         }
 
-        .virtue-card p {
+        .virtue-card-front p {
             font-size: 1rem;
             color: var(--text-medium);
             line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .flip-hint {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.7;
+        }
+
+        .virtue-card-back .back-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--gold-light);
+            margin-bottom: 1.25rem;
+            font-weight: 400;
+            text-align: center;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .extreme { margin-bottom: 1rem; }
+        .extreme:last-of-type { margin-bottom: 0; }
+
+        .extreme-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.3rem;
+        }
+
+        .extreme-label.too-little { color: var(--gold-light); }
+        .extreme-label.too-much { color: #C4B8E0; }
+
+        .extreme-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: white;
+            margin-bottom: 0.25rem;
+            font-weight: 400;
+        }
+
+        .extreme-desc {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            color: rgba(253, 248, 243, 0.75);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .flip-back-hint {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            color: rgba(212, 175, 55, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-align: center;
+            margin-top: 1.25rem;
         }
 
         /* CTA Section */
@@ -628,17 +718,74 @@
                 <h2>Theological Virtues</h2>
             </div>
             <div class="virtues-grid">
-                <div class="virtue-card">
-                    <h3>Faith</h3>
-                    <p>The theological virtue by which we believe in God and all He has revealed, trusting completely in His word.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Faith</h3>
+                            <p>The theological virtue by which we believe in God and all He has revealed, trusting completely in His word.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Faith</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Unbelief</p>
+                                <p class="extreme-desc">Rejection or suppression of divine revelation; skepticism that closes the soul to God</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Credulity / Fanaticism</p>
+                                <p class="extreme-desc">Believing anything without discernment; rigid extremism that distorts the faith</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Hope</h3>
-                    <p>The theological virtue by which we desire and confidently expect eternal life and the grace needed to attain it.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Hope</h3>
+                            <p>The theological virtue by which we desire and confidently expect eternal life and the grace needed to attain it.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Hope</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Despair</p>
+                                <p class="extreme-desc">Giving up on God&rsquo;s mercy; believing one is beyond redemption</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Presumption</p>
+                                <p class="extreme-desc">Assuming salvation without effort or repentance; taking God&rsquo;s mercy for granted</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Love of God & Neighbour</h3>
-                    <p>The foundation of all Christian life, whereby we love God above all things and our neighbor as ourselves, seeking the eternal good of souls.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Love of God &amp; Neighbour</h3>
+                            <p>The foundation of all Christian life, whereby we love God above all things and our neighbor as ourselves, seeking the eternal good of souls.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Love of God &amp; Neighbour</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Selfishness</p>
+                                <p class="extreme-desc">Indifference to God and others; living only for oneself</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Sentimentalism</p>
+                                <p class="extreme-desc">Emotion without sacrifice or truth; love that enables rather than seeks the true good</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -650,21 +797,97 @@
                 <h2>Cardinal Virtues</h2>
             </div>
             <div class="virtues-grid">
-                <div class="virtue-card">
-                    <h3>Prudence</h3>
-                    <p>The mother of virtues that guides right judgment, enabling us to choose fitting means to achieve good ends and avoid evil.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Prudence</h3>
+                            <p>The mother of virtues that guides right judgment, enabling us to choose fitting means to achieve good ends and avoid evil.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Prudence</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Imprudence</p>
+                                <p class="extreme-desc">Recklessness, poor judgment; acting without foresight or wisdom</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Cunning / Craftiness</p>
+                                <p class="extreme-desc">Using wisdom for selfish ends; shrewdness without integrity</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Justice</h3>
-                    <p>The virtue that renders to God and neighbor what is due, maintaining right order in all relationships and obligations.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Justice</h3>
+                            <p>The virtue that renders to God and neighbor what is due, maintaining right order in all relationships and obligations.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Justice</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Injustice</p>
+                                <p class="extreme-desc">Withholding what is due; failing to render right to God or neighbor</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Scrupulosity</p>
+                                <p class="extreme-desc">Rigid, joyless over-exactness that burdens rather than restores right order</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Fortitude</h3>
-                    <p>Spiritual strength that enables the soul to undertake and endure difficult tasks for God without yielding to fear or adversity.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Fortitude</h3>
+                            <p>Spiritual strength that enables the soul to undertake and endure difficult tasks for God without yielding to fear or adversity.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Fortitude</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Cowardice / Pusillanimity</p>
+                                <p class="extreme-desc">Shrinking from what is right out of fear of cost or conflict</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Recklessness / Foolhardiness</p>
+                                <p class="extreme-desc">Charging forward without wisdom, mistaking impulsiveness for courage</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Temperance</h3>
-                    <p>The guardian of all virtues that moderates our inclinations and pleasures, keeping us from excess in temporal goods.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Temperance</h3>
+                            <p>The guardian of all virtues that moderates our inclinations and pleasures, keeping us from excess in temporal goods.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Temperance</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Intemperance</p>
+                                <p class="extreme-desc">Excess and lack of self-control; giving the appetites free reign</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Insensibility</p>
+                                <p class="extreme-desc">Unnecessary austerity; refusing legitimate goods God intended for our good</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -676,29 +899,143 @@
                 <h2>Virtues of Humility & Self-Mastery</h2>
             </div>
             <div class="virtues-grid">
-                <div class="virtue-card">
-                    <h3>Humility</h3>
-                    <p>True humility fears receiving glory and contemns it when given, always preferring to be unknown rather than celebrated.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Humility</h3>
+                            <p>True humility fears receiving glory and contemns it when given, always preferring to be unknown rather than celebrated.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Humility</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Pride / Vainglory</p>
+                                <p class="extreme-desc">Seeking recognition and honor; believing oneself more than one is</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Self-Deprecation</p>
+                                <p class="extreme-desc">False humility that denies God&rsquo;s gifts; refusing to receive what He has given</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Obedience</h3>
-                    <p>The virtue by which we submit our will to God and His representatives, dying to self-will and embracing divine providence.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Obedience</h3>
+                            <p>The virtue by which we submit our will to God and His representatives, dying to self-will and embracing divine providence.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Obedience</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Self-Will / Contumacy</p>
+                                <p class="extreme-desc">Defiance of legitimate authority; pride of opinion that resists God&rsquo;s will</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Servility</p>
+                                <p class="extreme-desc">Blind compliance without conscience; following what should not be followed</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Poverty</h3>
-                    <p>Voluntary poverty of spirit that liberates the soul from attachment to created things, making room for God alone.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Poverty of Spirit</h3>
+                            <p>Voluntary poverty of spirit that liberates the soul from attachment to created things, making room for God alone.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Poverty of Spirit</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Avarice / Greed</p>
+                                <p class="extreme-desc">Attachment to material things; allowing possessions to possess the soul</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Negligence</p>
+                                <p class="extreme-desc">Failing to steward what God has entrusted; neglect disguised as detachment</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Chastity</h3>
-                    <p>The angelic virtue that keeps the soul pure and undivided, directing all love toward God and spiritual goods.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Chastity</h3>
+                            <p>The angelic virtue that keeps the soul pure and undivided, directing all love toward God and spiritual goods.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Chastity</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Lust</p>
+                                <p class="extreme-desc">Disordered sexual desire; love directed away from God and true good</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Insensibility</p>
+                                <p class="extreme-desc">Rejecting legitimate love and affection; coldness that is not holiness</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Abstinence</h3>
-                    <p>Temperance in food and drink that keeps the body subject to the spirit and maintains clarity of mind for divine contemplation.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Abstinence</h3>
+                            <p>Temperance in food and drink that keeps the body subject to the spirit and maintains clarity of mind for divine contemplation.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Abstinence</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Gluttony</p>
+                                <p class="extreme-desc">Overindulgence in food and drink; the body ruling the spirit</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Excess Austerity</p>
+                                <p class="extreme-desc">Harming the body God gave you; austerity that becomes its own form of pride</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Mortification</h3>
-                    <p>The practice of dying to self through voluntary self-denial, subduing the flesh to liberate the spirit.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Mortification</h3>
+                            <p>The practice of dying to self through voluntary self-denial, subduing the flesh to liberate the spirit.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Mortification</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Sensuality</p>
+                                <p class="extreme-desc">Slavery to comfort and pleasure; refusing to deny the flesh anything</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Scrupulosity</p>
+                                <p class="extreme-desc">Self-punishment mistaken for holiness; penance driven by anxiety rather than love</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -710,21 +1047,102 @@
                 <h2>Virtues of Repentance</h2>
             </div>
             <div class="virtues-grid">
-                <div class="virtue-card">
-                    <h3>Sadness for Sin</h3>
-                    <p>Holy sorrow for sin that arises from love of God, grieving that we have offended infinite goodness and wounded others.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Sadness for Sin</h3>
+                            <p>Holy sorrow for sin that arises from love of God, grieving that we have offended infinite goodness and wounded others.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Sadness for Sin</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Impenitence / Hardness of Heart</p>
+                                <p class="extreme-desc">Indifference to sin; a closed conscience that feels no sorrow for offending God</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Despair</p>
+                                <p class="extreme-desc">Sorrow without hope of mercy; grief that turns inward rather than toward God</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Contrition</h3>
-                    <p>Perfect sorrow for sin arising from love of God, grieving that one has offended the Supreme Good.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Contrition</h3>
+                            <p>Perfect sorrow for sin arising from love of God, grieving that one has offended the Supreme Good.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Contrition</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Impenitence</p>
+                                <p class="extreme-desc">Minimizing or dismissing sin; refusing to grieve what truly grieves God</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Scrupulosity</p>
+                                <p class="extreme-desc">Excessive guilt that paralyzes rather than heals; sorrow that forgets mercy</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Honest Confession</h3>
+                            <p>The virtue of openly acknowledging one&rsquo;s sins and faults before God, leading to healing and restoration.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Honest Confession</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Dissimulation</p>
+                                <p class="extreme-desc">Concealment and rationalization; hiding sin rather than bringing it to the light</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Scrupulosity</p>
+                                <p class="extreme-desc">Confessing what is not sin out of anxiety; fear rather than love driving the sacrament</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="virtue-card">
                     <h3>Confession</h3>
                     <p>The virtue of openly acknowledging one's sins and faults before God, leading to healing and restoration.</p>
                 </div>
-                <div class="virtue-card">
-                    <h3>Penance</h3>
-                    <p>The virtue of making satisfaction for sins through prayer, fasting, almsgiving, and willingly accepted suffering.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Penance</h3>
+                            <p>The virtue of making satisfaction for sins through prayer, fasting, almsgiving, and willingly accepted suffering.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Penance</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Impenitence</p>
+                                <p class="extreme-desc">Avoiding all reparation; accepting forgiveness without willingness to make amends</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Excess Mortification</p>
+                                <p class="extreme-desc">Self-punishment beyond what is fitting or asked; penance as self-harm rather than love</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -736,41 +1154,212 @@
                 <h2>Virtues of Charity & Relationship</h2>
             </div>
             <div class="virtues-grid">
-                <div class="virtue-card">
-                    <h3>Compassion</h3>
-                    <p>The virtue of suffering with others, moved by their misery to alleviate their distress through works of mercy.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Compassion</h3>
+                            <p>The virtue of suffering with others, moved by their misery to alleviate their distress through works of mercy.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Compassion</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Hardness of Heart / Cruelty</p>
+                                <p class="extreme-desc">Indifference to others&rsquo; suffering; closing the heart to those in need</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Enabling</p>
+                                <p class="extreme-desc">Removing all consequences; pity that prevents growth rather than supporting it</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Mercy</h3>
-                    <p>The virtue by which we are moved with pity for another's distress and seek to relieve it, imitating God's infinite mercy.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Mercy</h3>
+                            <p>The virtue by which we are moved with pity for another&rsquo;s distress and seek to relieve it, imitating God&rsquo;s infinite mercy.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Mercy</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Harshness / Cruelty</p>
+                                <p class="extreme-desc">Withholding forgiveness; demanding justice without room for grace</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Laxism</p>
+                                <p class="extreme-desc">Excusing sin rather than the sinner; mercy that does not seek the true good</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Peace</h3>
-                    <p>The tranquility of order that arises from union with God, bringing serenity to the soul and harmony to relationships.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Peacefulness</h3>
+                            <p>The tranquility of order that arises from union with God, bringing serenity to the soul and harmony to relationships.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Peacefulness</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Contentiousness</p>
+                                <p class="extreme-desc">Agitation and conflict-seeking; a soul that stirs rather than settles</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Appeasement</p>
+                                <p class="extreme-desc">False peace by avoiding all truth; keeping the peace at the cost of what is right</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Concord</h3>
-                    <p>Unity of hearts and minds that binds people together in mutual goodwill, reflecting the unity of the Blessed Trinity.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Concord</h3>
+                            <p>Unity of hearts and minds that binds people together in mutual goodwill, reflecting the unity of the Blessed Trinity.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Concord</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Factionalism / Discord</p>
+                                <p class="extreme-desc">Division and strife; choosing sides over seeking unity in truth</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Human Respect</p>
+                                <p class="extreme-desc">Unity at the cost of truth or conscience; agreeing to avoid conflict</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Meekness</h3>
-                    <p>Gentleness of spirit that moderates anger and maintains tranquility in the face of injury, following Christ's example.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Gentleness</h3>
+                            <p>Gentleness of spirit that moderates anger and maintains tranquility in the face of injury, following Christ&rsquo;s example.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Gentleness</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Wrath / Harshness</p>
+                                <p class="extreme-desc">Unmoderated anger; severity that wounds rather than corrects</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Pusillanimity</p>
+                                <p class="extreme-desc">Never holding a firm position; gentleness become spinelessness</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Liberality</h3>
-                    <p>Proper use of material goods, giving freely without attachment while avoiding both miserliness and prodigality.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Generosity</h3>
+                            <p>Proper use of material goods, giving freely without attachment while avoiding both miserliness and prodigality.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Generosity</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Avarice / Miserliness</p>
+                                <p class="extreme-desc">Hoarding and withholding; clinging to what was given to be shared</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Prodigality</p>
+                                <p class="extreme-desc">Giving without wisdom or responsibility; squandering what was entrusted</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Gratitude</h3>
-                    <p>The virtue of recognizing benefits received and making due acknowledgment and return for them.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Gratitude</h3>
+                            <p>The virtue of recognizing benefits received and making due acknowledgment and return for them.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Gratitude</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Ingratitude</p>
+                                <p class="extreme-desc">Taking blessings for granted; failing to acknowledge the Giver behind every gift</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Obsequiousness</p>
+                                <p class="extreme-desc">Excessive indebtedness; unable to receive freely without feeling crushed by obligation</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Congratulation</h3>
-                    <p>The virtue of rejoicing with those who rejoice, sharing in the happiness of others without envy or resentment.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Sharing Joy</h3>
+                            <p>The virtue of rejoicing with those who rejoice, sharing in the happiness of others without envy or resentment.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Sharing Joy</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Envy</p>
+                                <p class="extreme-desc">Resentment of others&rsquo; blessings; sorrow at another&rsquo;s good</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Flattery</p>
+                                <p class="extreme-desc">Empty congratulation without sincerity; celebrating to be liked rather than to love</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Zeal of Souls</h3>
-                    <p>Ardent desire for the salvation of souls, moved by charity to seek the eternal good of all people.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Zeal for Souls</h3>
+                            <p>Ardent desire for the salvation of souls, moved by charity to seek the eternal good of all people.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Zeal for Souls</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Indifference / Sloth</p>
+                                <p class="extreme-desc">No care for others&rsquo; eternal good; keeping faith private when it was meant to be shared</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Intrusiveness / Proselytism</p>
+                                <p class="extreme-desc">Imposing faith without respect for freedom; zeal that forgets love</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -782,25 +1371,120 @@
                 <h2>Contemplative Virtues</h2>
             </div>
             <div class="virtues-grid">
-                <div class="virtue-card">
-                    <h3>Religion</h3>
-                    <p>The virtue by which the soul consciously governs the flesh &mdash; preferring spiritual nourishment over physical indulgence, and ordering all of life toward God rather than toward the comfort and pleasure of the body.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Religion / Spiritual Living</h3>
+                            <p>The virtue by which the soul consciously governs the flesh &mdash; preferring spiritual nourishment over physical indulgence, and ordering all of life toward God rather than toward the comfort and pleasure of the body.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Religion / Spiritual Living</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Carnality</p>
+                                <p class="extreme-desc">Living according to the flesh; physical comfort and pleasure ruling the interior life</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Excess Austerity</p>
+                                <p class="extreme-desc">Neglecting the body God created; contempt for the physical that becomes its own disorder</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Fear of the Lord</h3>
-                    <p>Filial fear that reverences God's greatness and dreads offending Him, the beginning of wisdom and foundation of devotion.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Holy Fear</h3>
+                            <p>Filial fear that reverences God&rsquo;s greatness and dreads offending Him, the beginning of wisdom and foundation of devotion.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Holy Fear</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Presumption</p>
+                                <p class="extreme-desc">No reverence or awe of God; treating the Holy as familiar or trivial</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Servile Fear</p>
+                                <p class="extreme-desc">Fearing punishment rather than loving God; a slave&rsquo;s relationship rather than a child&rsquo;s</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Silence</h3>
-                    <p>The virtue that guards the tongue and creates space for contemplation, speaking only what is necessary and good.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Holy Silence</h3>
+                            <p>The virtue that guards the tongue and creates space for contemplation, speaking only what is necessary and good.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Holy Silence</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Loquacity / Garrulousness</p>
+                                <p class="extreme-desc">Idle talk and gossip; filling every space with words that crowd out God</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Misanthropy</p>
+                                <p class="extreme-desc">Using silence to avoid all relationship; withdrawal that becomes coldness</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Solitude</h3>
-                    <p>The grace of withdrawing from external distractions to commune with God in the hidden sanctuary of the heart.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Solitude</h3>
+                            <p>The grace of withdrawing from external distractions to commune with God in the hidden sanctuary of the heart.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Solitude</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Dissipation</p>
+                                <p class="extreme-desc">Inability to be alone with God; constant distraction that prevents interior life</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Isolation</p>
+                                <p class="extreme-desc">Withdrawing from legitimate human communion; solitude become an escape</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Contemplation</h3>
-                    <p>The loving gaze upon divine truth, resting in God's presence and perceiving spiritual realities with the eyes of the soul.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Contemplation</h3>
+                            <p>The loving gaze upon divine truth, resting in God&rsquo;s presence and perceiving spiritual realities with the eyes of the soul.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Contemplation</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Acedia</p>
+                                <p class="extreme-desc">Restlessness and inability to be still before God; spiritual sloth that avoids depth</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Quietism</p>
+                                <p class="extreme-desc">Passivity that avoids all action and duty; contemplation used to escape responsibility</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -812,33 +1496,166 @@
                 <h2>Virtues of Character</h2>
             </div>
             <div class="virtues-grid">
-                <div class="virtue-card">
-                    <h3>Patience</h3>
-                    <p>The strength to bear adversity, tribulation, and injury with tranquility of spirit, knowing that all comes from God's hand.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Patience</h3>
+                            <p>The strength to bear adversity, tribulation, and injury with tranquility of spirit, knowing that all comes from God&rsquo;s hand.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Patience</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Impatience / Wrath</p>
+                                <p class="extreme-desc">Irritability and resistance to suffering; demanding circumstances conform to our timeline</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Passivity</p>
+                                <p class="extreme-desc">Tolerating what should be addressed; patience become an excuse for inaction</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Constancy</h3>
-                    <p>Firmness of spirit that maintains virtue in the face of changing circumstances and ongoing challenges.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Constancy</h3>
+                            <p>Firmness of spirit that maintains virtue in the face of changing circumstances and ongoing challenges.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Constancy</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Inconstancy / Fickleness</p>
+                                <p class="extreme-desc">Wavering and instability; commitments that dissolve under pressure</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Rigidity / Obstinacy</p>
+                                <p class="extreme-desc">Refusing to adapt even when wisdom requires it; constancy become stubbornness</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Perseverance</h3>
-                    <p>Steadfast continuance in good, remaining constant in virtue despite trials, temptations, and the passage of time.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Perseverance</h3>
+                            <p>Steadfast continuance in good, remaining constant in virtue despite trials, temptations, and the passage of time.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Perseverance</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Pusillanimity</p>
+                                <p class="extreme-desc">Giving up; abandoning what is good because it has become difficult or slow</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Obstinacy / Stubbornness</p>
+                                <p class="extreme-desc">Continuing what should be surrendered; persisting in error or pride</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Truth</h3>
-                    <p>The virtue of conforming one's words and deeds to reality, manifesting oneself truthfully to others.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Truthfulness</h3>
+                            <p>The virtue of conforming one&rsquo;s words and deeds to reality, manifesting oneself truthfully to others.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Truthfulness</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Lying / Duplicity</p>
+                                <p class="extreme-desc">Deception and false presentation of self; hiding what is real</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Bluntness / Brutality</p>
+                                <p class="extreme-desc">Truth without charity or prudence; honesty used as a weapon</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Simplicity</h3>
-                    <p>The virtue of being single in intention and transparent in action, without guile or divided heart.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Simplicity</h3>
+                            <p>The virtue of being single in intention and transparent in action, without guile or divided heart.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Simplicity</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Duplicity / Guile</p>
+                                <p class="extreme-desc">Hidden agendas and manipulation; presenting one face while intending another</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Naivety</p>
+                                <p class="extreme-desc">Simplicity without wisdom or discernment; innocence that cannot recognize wolves</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Discretion</h3>
-                    <p>The virtue of right judgment that enables one to distinguish between good and evil, appropriate and inappropriate.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Discretion</h3>
+                            <p>The virtue of right judgment that enables one to distinguish between good and evil, appropriate and inappropriate.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Discretion</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Imprudence / Rashness</p>
+                                <p class="extreme-desc">Acting without judgment; speaking or deciding before truly discerning</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Scrupulosity</p>
+                                <p class="extreme-desc">Paralysis by analysis; so much discernment that nothing is ever decided or done</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Maturity</h3>
-                    <p>A holy seriousness of soul &mdash; all affections and powers directed unanimously toward God, restrained from vanity and flippancy. Not the absence of joy, but the absence of the disordered levity that closes the heart to grace.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Maturity / Gravity</h3>
+                            <p>A holy seriousness of soul &mdash; all affections and powers directed unanimously toward God, restrained from vanity and flippancy. Not the absence of joy, but the absence of the disordered levity that closes the heart to grace.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Maturity / Gravity</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Levity / Buffoonery</p>
+                                <p class="extreme-desc">Flippancy and disordered jocularity; excessive merry-making that closes the heart to grace</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Austerity / Severity</p>
+                                <p class="extreme-desc">Joylessness and harshness; no capacity for delight in the goodness God created</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -850,21 +1667,97 @@
                 <h2>Virtues of Spiritual Freedom</h2>
             </div>
             <div class="virtues-grid">
-                <div class="virtue-card">
-                    <h3>Joy</h3>
-                    <p>The spiritual gladness that arises from union with God and the contemplation of divine goodness, even amid trials.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Spiritual Joy</h3>
+                            <p>The spiritual gladness that arises from union with God and the contemplation of divine goodness, even amid trials.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Spiritual Joy</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Acedia / Sadness</p>
+                                <p class="extreme-desc">Spiritual sadness and joylessness; a soul that cannot receive the goodness God offers</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Levity</p>
+                                <p class="extreme-desc">Forced cheerfulness that avoids suffering; joy that cannot sit with the cross</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Liberty</h3>
-                    <p>Spiritual freedom that comes from detachment, liberating the soul from bondage to sin and created things.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Liberty</h3>
+                            <p>Spiritual freedom that comes from detachment, liberating the soul from bondage to sin and created things.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Liberty</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Servility</p>
+                                <p class="extreme-desc">Slavery to passions, fear, and worldly opinion; a soul that cannot move freely toward God</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Licentiousness</p>
+                                <p class="extreme-desc">Freedom as license; no accountability, no structure, no reverence for the good</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Confidence</h3>
-                    <p>Filial trust in God's goodness and providence, approaching Him with the confidence of beloved children.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Confidence</h3>
+                            <p>Filial trust in God&rsquo;s goodness and providence, approaching Him with the confidence of beloved children.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Confidence</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Anxiety / Scrupulosity</p>
+                                <p class="extreme-desc">Distrust of God&rsquo;s goodness; approaching Him as a judge rather than a Father</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Presumption</p>
+                                <p class="extreme-desc">Approaching God without reverence or humility; confidence become entitlement</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="virtue-card">
-                    <h3>Contempt of the World</h3>
-                    <p>Holy indifference to worldly honors and goods, valuing eternal treasures above temporal vanities.</p>
+                <div class="virtue-card" onclick="this.classList.toggle('flipped')">
+                    <div class="virtue-card-inner">
+                        <div class="virtue-card-front">
+                            <h3>Disdain for Worldly Things</h3>
+                            <p>Holy indifference to worldly honors and goods, valuing eternal treasures above temporal vanities.</p>
+                            <p class="flip-hint">Tap to see the extremes &#8594;</p>
+                        </div>
+                        <div class="virtue-card-back">
+                            <p class="back-title">Disdain for Worldly Things</p>
+                            <div class="extreme">
+                                <p class="extreme-label too-little">Too Little</p>
+                                <p class="extreme-name">Worldliness / Avarice</p>
+                                <p class="extreme-desc">Attachment to status, comfort, and earthly goods; the world holding what only God should hold</p>
+                            </div>
+                            <div class="extreme">
+                                <p class="extreme-label too-much">Too Much</p>
+                                <p class="extreme-name">Contempt for Creation</p>
+                                <p class="extreme-desc">Rejecting the goodness of the material world God made and called good</p>
+                            </div>
+                            <p class="flip-back-hint">&#8592; Tap to flip back</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -913,12 +1806,7 @@
             <a href="made-beautiful.html">Retreat</a>
             <a href="personal-journey.html">1:1 Coaching</a>
             <a href="prelude.html">Free Prelude</a>
-            <a href="mailto:bea@myholycrescendo.com">Contact</a>
+            <a href="/cdn-cgi/l/email-protection#bcded9ddfcd1c5d4d3d0c5dfced9cfdfd9d2d8d392dfd3d1">Contact</a>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2025 My Holy Crescendo. All rights reserved.</p>
-        </div>
-    </footer>
-
-</body>
-</html>
