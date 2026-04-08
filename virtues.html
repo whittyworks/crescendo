@@ -298,7 +298,7 @@
         /* Flip Card */
         .virtue-card {
             perspective: 1000px;
-            min-height: 200px;
+            height: 300px;
             cursor: pointer;
         }
 
@@ -306,7 +306,6 @@
             position: relative;
             width: 100%;
             height: 100%;
-            min-height: 200px;
             transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
             transform-style: preserve-3d;
         }
@@ -319,12 +318,14 @@
         .virtue-card-back {
             position: absolute;
             width: 100%;
-            min-height: 200px;
+            height: 100%;
+            overflow-y: auto;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
             border-radius: 12px;
             padding: 1.75rem;
             box-shadow: 0 5px 20px rgba(212, 175, 55, 0.08);
+            box-sizing: border-box;
         }
 
         .virtue-card-front {
@@ -1806,7 +1807,7 @@
             <a href="made-beautiful.html">Retreat</a>
             <a href="personal-journey.html">1:1 Coaching</a>
             <a href="prelude.html">Free Prelude</a>
-            <a href="/cdn-cgi/l/email-protection#bcded9ddfcd1c5d4d3d0c5dfced9cfdfd9d2d8d392dfd3d1">Contact</a>
+            <a href="mailto:bea@myholycrescendo.com">Contact</a>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2025 My Holy Crescendo. All rights reserved.</p>
