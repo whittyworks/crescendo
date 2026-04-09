@@ -395,7 +395,7 @@ Format: Each section heading in all caps on its own line, followed by the paragr
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    model: 'claude-sonnet-4-20250514',
+                    model: 'claude-sonnet-4-5',
                     max_tokens: 2000,
                     system: SYSTEM_PROMPT,
                     messages: [{ role: 'user', content: buildPrompt() }]
@@ -403,15 +403,20 @@ Format: Each section heading in all caps on its own line, followed by the paragr
             });
 
             const data = await response.json();
-            if (!response.ok || data.error) throw new Error(data.error?.message || 'Generation failed. Please try again.');
+            console.log('API response:', JSON.stringify(data).slice(0, 500));
+            if (!response.ok || data.error) {
+                const msg = data.error?.message || data.error?.type || JSON.stringify(data.error) || 'Generation failed.';
+                throw new Error('API error: ' + msg);
+            }
             const text = data.content?.[0]?.text || '';
-            if (!text) throw new Error('No content returned. Please try again.');
+            if (!text) throw new Error('No content returned. Full response: ' + JSON.stringify(data).slice(0, 300));
             renderScore(text);
 
         } catch(e) {
             document.getElementById('loading-state').classList.remove('active');
             document.getElementById('error-state').classList.add('active');
             document.getElementById('error-message').textContent = e.message || 'Something went wrong. Please try again.';
+            console.error('Score generation error:', e);
             document.getElementById('generate-btn').disabled = false;
         }
     }
