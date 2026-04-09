@@ -13,185 +13,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The 25 Charisms · Participant Portal · My Holy Crescendo</title>
-    <meta name="description" content="Discover the 25 charisms (spiritual gifts) of the Holy Spirit. Learn how God has uniquely gifted you to serve others and build His kingdom.">
+            <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="My Holy Crescendo - Fearfully & Wonderfully Made">
+    <meta property="og:description" content="A transformative journey discovering God's design in your body, mind, and spirit through A Symphony of Grace.">
+    <meta property="og:image" content="https://myholycrescendo.com/assets/img/og-image.png">
+    <meta property="og:url" content="https://myholycrescendo.com/charisms.html">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://myholycrescendo.com/assets/img/og-image.png">
     <meta name="robots" content="noindex, nofollow">
-    
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+<!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"></head>
     
     <style>
-        :root {
-            --cream: #FDF8F3;
-            --cream-dark: #F5EFE7;
-            --gold: #D4AF37;
-            --gold-light: #E8C872;
-            --gold-dark: #B8941F;
-            --text-dark: #2C2416;
-            --text-medium: #5C5142;
-            --mauve: #DCC5D8;
-            --sage: #B8C5B0;
-            --blush: #EBD4D0;
+        /* Page-specific styles */
+        .charisms-hero {
+            min-height: 75vh;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Cormorant Garamond', serif;
-            background-color: var(--cream);
-            color: var(--text-dark);
-            line-height: 1.7;
-        }
-
-        .script {
-            font-family: 'Cinzel', serif;
-            font-weight: 400;
-            letter-spacing: 0.02em;
-        }
-
-        .sans {
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: 0.05em;
-        }
-
-        /* Portal Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(253, 248, 243, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .logo-link {
-            text-decoration: none;
-        }
-
-        .logo-image {
-            height: 45px;
-            width: auto;
-            display: block;
-            transition: opacity 0.3s ease;
-        }
-
-        .logo-image:hover {
-            opacity: 0.8;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-medium);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-            text-transform: uppercase;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-        }
-
-        .nav-links a:hover {
-            color: var(--gold);
-        }
-
-        .nav-links a.portal-back {
-            color: var(--gold);
-            font-weight: 500;
-        }
-
-        .nav-links a.portal-back:hover {
-            color: var(--gold-dark);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 8rem 5% 4rem;
-            overflow: hidden;
-            background: 
-                radial-gradient(ellipse at top, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom left, rgba(245, 225, 218, 0.4) 0%, transparent 40%),
-                radial-gradient(ellipse at bottom right, rgba(232, 237, 228, 0.4) 0%, transparent 40%),
-                var(--cream);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-subtitle {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 1rem;
-        }
-
-        .hero-title {
-            font-family: 'Cinzel', serif;
-            font-size: 3.5rem;
-            color: var(--gold-dark);
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-            line-height: 1.2;
-        }
-
-        .hero-tagline {
-            font-size: 1.5rem;
-            font-style: italic;
-            color: var(--text-medium);
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-description {
-            font-size: 1.2rem;
-            color: var(--text-medium);
-            line-height: 1.9;
-            max-width: 650px;
-            margin: 0 auto 2rem;
-        }
-
-        .gold-line {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            margin: 2rem auto;
-            max-width: 150px;
-        }
-
+        
         .charisms-intro {
             display: flex;
             align-items: center;
@@ -201,65 +44,25 @@
             padding: 1.5rem 2rem;
             border-radius: 8px;
             margin: 2rem auto;
-            max-width: 550px;
+            max-width: 650px;
             box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
         }
-
+        
         .charisms-intro-icon {
             font-size: 2rem;
         }
-
+        
         .charisms-intro-text {
             color: var(--text-medium);
             line-height: 1.6;
-            text-align: left;
         }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 5%;
-        }
-
-        /* Section Headers */
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-label {
-            font-size: 0.85rem;
-            letter-spacing: 3px;
-            color: var(--gold);
-            text-transform: uppercase;
-            margin-bottom: 0.75rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            color: var(--gold-dark);
-            margin-bottom: 1rem;
-        }
-
-        .section-description {
-            font-size: 1.15rem;
-            color: var(--text-medium);
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        /* What are Charisms */
-        section {
-            padding: 5rem 5%;
-        }
-
+        
+        /* What are Charisms section */
         .what-are-charisms {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 3rem auto;
         }
-
+        
         .charisms-block {
             background: white;
             padding: 3rem;
@@ -267,18 +70,18 @@
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
             border-left: 4px solid var(--gold);
         }
-
+        
         .charisms-block p {
             font-size: 1.15rem;
             line-height: 1.8;
             color: var(--text-medium);
             margin-bottom: 1.5rem;
         }
-
+        
         .charisms-block p:last-child {
             margin-bottom: 0;
         }
-
+        
         .ccc-quote {
             font-style: italic;
             color: var(--gold-dark);
@@ -289,7 +92,7 @@
             border-top: 1px solid rgba(212, 175, 55, 0.3);
             border-bottom: 1px solid rgba(212, 175, 55, 0.3);
         }
-
+        
         .ccc-quote cite {
             display: block;
             margin-top: 1rem;
@@ -297,15 +100,18 @@
             color: var(--text-medium);
             font-style: normal;
         }
-
+        
         /* Charisms Grid */
         .charisms-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
+        
         .charism-card {
             background: white;
             padding: 2rem 1.75rem;
@@ -314,17 +120,17 @@
             border-top: 3px solid var(--gold);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
+        
         .charism-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
         }
-
+        
         .charism-icon {
             font-size: 2rem;
             margin-bottom: 0.75rem;
         }
-
+        
         .charism-name {
             font-family: 'Cinzel', serif;
             font-size: 1.2rem;
@@ -332,236 +138,198 @@
             margin-bottom: 0.75rem;
             font-weight: 500;
         }
-
+        
         .charism-description {
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.05rem;
             color: var(--text-medium);
             line-height: 1.7;
         }
-
+        
         /* Assessment CTA */
         .assessment-cta {
             text-align: center;
-            padding: 3rem;
+            padding: 4rem 2rem;
             background: linear-gradient(135deg, rgba(253, 248, 243, 0.9), rgba(220, 197, 216, 0.15));
-            border: 2px solid rgba(212, 175, 55, 0.3);
-            border-radius: 12px;
-            max-width: 700px;
-            margin: 0 auto;
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 3rem auto;
         }
-
+        
         .assessment-cta h3 {
             font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--gold-dark);
             margin-bottom: 1rem;
         }
-
+        
         .assessment-cta p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-medium);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
+        
         .assessment-btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            background: var(--gold);
             color: white;
             padding: 1rem 2.5rem;
             border-radius: 50px;
             text-decoration: none;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+            border: 2px solid var(--gold);
         }
-
+        
         .assessment-btn:hover {
+            background: var(--gold-dark);
+            border-color: var(--gold-dark);
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
         }
-
+        
         .assessment-note {
-            font-size: 0.9rem;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
             color: var(--text-medium);
-            margin-top: 1.25rem;
             font-style: italic;
         }
-
+        
         .assessment-note a {
-            color: var(--gold);
+            color: var(--gold-dark);
         }
-
-        /* Discernment Steps */
+        
+        /* Discernment Section */
+        .discernment-section {
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
         .discernment-block {
             background: white;
             padding: 3rem;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
-            max-width: 800px;
-            margin: 0 auto;
         }
-
+        
         .discernment-block h3 {
             font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: var(--gold-dark);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
-
-        .discernment-block > p {
+        
+        .discernment-block p {
             font-size: 1.1rem;
             color: var(--text-medium);
             line-height: 1.8;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
-
+        
         .discernment-steps {
             list-style: none;
+            padding: 0;
+            margin: 2rem 0;
         }
-
+        
         .discernment-steps li {
             display: flex;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
         }
-
+        
+        .discernment-steps li:last-child {
+            border-bottom: none;
+        }
+        
         .step-number {
-            width: 40px;
-            height: 40px;
+            flex-shrink: 0;
+            width: 35px;
+            height: 35px;
             background: var(--gold);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Cinzel', serif;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
             font-weight: 600;
-            flex-shrink: 0;
         }
-
+        
         .step-content h4 {
-            font-family: 'Cinzel', serif;
-            color: var(--gold-dark);
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .step-content p {
-            color: var(--text-medium);
+            font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
-            line-height: 1.7;
+            color: var(--gold-dark);
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
-
+        
+        .step-content p {
+            margin: 0;
+            font-size: 1.05rem;
+        }
+        
         /* Scripture */
         .scripture-section {
             text-align: center;
+            padding: 3rem 2rem;
             max-width: 700px;
             margin: 0 auto;
-            padding: 3rem 2rem;
         }
-
+        
         .scripture-text {
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.4rem;
             font-style: italic;
-            color: var(--gold-dark);
+            color: var(--text-medium);
             line-height: 1.8;
             margin-bottom: 1rem;
         }
-
+        
         .scripture-ref {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.9rem;
-            color: var(--text-medium);
-            letter-spacing: 1px;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--text-dark);
-            color: rgba(255, 255, 255, 0.7);
-            padding: 3rem 5% 2rem;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-family: 'Cinzel', serif;
             color: var(--gold);
-            font-size: 1.5rem;
-            margin-bottom: 0.25rem;
+            letter-spacing: 0.1em;
         }
-
-        .footer-tagline {
-            font-style: italic;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-links a {
-            color: var(--gold-light);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--gold);
-        }
-
-        .copyright {
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
+        
         /* Responsive */
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-tagline {
-                font-size: 1.2rem;
-            }
-
             .charisms-grid {
                 grid-template-columns: 1fr;
             }
-
+            
             .charisms-intro {
                 flex-direction: column;
                 text-align: center;
             }
-
-            .charisms-intro-text {
-                text-align: center;
-            }
-
+            
             .discernment-steps li {
                 flex-direction: column;
-                gap: 0.75rem;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin: 0 auto;
             }
         }
     </style>
 </head>
 <body>
-
     <!-- Portal Navigation -->
     <nav class="sans">
         <a href="index.html" class="logo-link">
@@ -573,12 +341,39 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero charisms-hero">
+        <div class="watercolor-splash splash-1"></div>
+        <div class="watercolor-splash splash-2"></div>
+        <div class="watercolor-splash splash-3"></div>
+        
+        <!-- Virgo Constellation -->
+        <div class="virgo-constellation">
+            <div class="constellation-star star-large" style="left: 50%; bottom: 15%;"></div>
+            <div class="constellation-star star-medium" style="left: 45%; bottom: 30%;"></div>
+            <div class="constellation-star star-medium" style="left: 40%; bottom: 42%;"></div>
+            <div class="constellation-star star-small" style="left: 37%; bottom: 53%;"></div>
+            <div class="constellation-star star-medium" style="left: 35%; bottom: 62%;"></div>
+            <div class="constellation-star star-small" style="left: 55%; bottom: 33%;"></div>
+            <div class="constellation-star star-medium" style="left: 62%; bottom: 40%;"></div>
+            <div class="constellation-star star-small" style="left: 68%; bottom: 44%;"></div>
+            <div class="constellation-star star-medium" style="left: 38%; bottom: 70%;"></div>
+            <div class="constellation-star star-small" style="left: 45%; bottom: 77%;"></div>
+            <div class="constellation-star star-small" style="left: 32%; bottom: 55%;"></div>
+            <div class="constellation-star star-small" style="left: 25%; bottom: 50%;"></div>
+        </div>
+        
+        <!-- Watercolor flowers -->
+        <div class="watercolor-flower flower-1"></div>
+        <div class="watercolor-flower flower-2"></div>
+        <div class="watercolor-flower flower-3"></div>
+        
+        <div class="gold-leaf leaf-1"></div>
+        <div class="gold-leaf leaf-2"></div>
+        
         <div class="hero-content">
-            <p class="hero-subtitle sans">Spiritual Gifts Guide</p>
+            <p class="hero-subtitle sans">Session 13 · Spirit Module</p>
             <h1 class="hero-title script">The 25 Charisms</h1>
             <p class="hero-tagline">of the Holy Spirit</p>
-            <div class="gold-line"></div>
             <p class="hero-description">
                 God has given you unique spiritual gifts—charisms—to serve others and build His kingdom. 
                 Discovering your charisms helps you understand how the Holy Spirit is personally inviting 
@@ -591,11 +386,23 @@
                     The question isn't <em>if</em> you have them, but <em>which</em> ones.
                 </div>
             </div>
+            <a href="#assessment" class="cta-button">Discover Your Charisms</a>
+        </div>
+
+        <div class="gold-flecks">
+            <div class="fleck" style="top: 20%; left: 15%; animation-delay: 0s;"></div>
+            <div class="fleck" style="top: 45%; left: 85%; animation-delay: 1s;"></div>
+            <div class="fleck" style="top: 70%; left: 25%; animation-delay: 2s;"></div>
+            <div class="fleck" style="top: 35%; left: 75%; animation-delay: 1.5s;"></div>
+            <div class="fleck" style="top: 80%; left: 60%; animation-delay: 0.5s;"></div>
         </div>
     </section>
 
     <!-- What are Charisms -->
-    <section>
+    <section class="reveal">
+        <div class="watercolor-flower flower-3" style="top: 10%; right: 5%;"></div>
+        <div class="gold-leaf leaf-1"></div>
+        
         <div class="container">
             <div class="section-header">
                 <p class="section-label sans">Understanding Charisms</p>
@@ -632,7 +439,19 @@
     </section>
 
     <!-- The 25 Charisms -->
-    <section style="background: var(--cream-dark);">
+    <section class="reveal" style="background: var(--cream-dark);">
+        <div class="watercolor-flower flower-2" style="top: 15%; left: 5%;"></div>
+        <div class="gold-leaf leaf-2"></div>
+        
+        <div class="flower-accent" style="bottom: 15%; right: 8%;">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="flower-center"></div>
+        </div>
+        
         <div class="container">
             <div class="section-header">
                 <p class="section-label sans">The Gifts</p>
@@ -687,7 +506,7 @@
                 </div>
 
                 <div class="charism-card">
-                    <div class="charism-icon">💎</div>
+                    <div class="charism-icon">💝</div>
                     <h3 class="charism-name">Giving</h3>
                     <p class="charism-description">The ability to give generously of resources, time, and self with joy and without attachment. Those with this gift experience deep fulfillment through generosity.</p>
                 </div>
@@ -798,7 +617,10 @@
     </section>
 
     <!-- Take the Assessment -->
-    <section>
+    <section id="assessment" class="reveal">
+        <div class="watercolor-flower flower-1" style="top: 20%; right: 10%;"></div>
+        <div class="gold-leaf leaf-3"></div>
+        
         <div class="container">
             <div class="assessment-cta">
                 <h3>Discover Your Charisms</h3>
@@ -814,64 +636,97 @@
     </section>
 
     <!-- Discernment Process -->
-    <section style="background: var(--cream-dark);">
+    <section class="reveal" style="background: var(--cream-dark);">
+        <div class="watercolor-flower flower-2" style="bottom: 15%; left: 8%;"></div>
+        
         <div class="container">
             <div class="section-header">
                 <p class="section-label sans">The Process</p>
                 <h2 class="section-title script">Discerning Your Charisms</h2>
             </div>
 
-            <div class="discernment-block">
-                <h3>More Than a Quiz</h3>
-                <p>
-                    While a spiritual gifts inventory is a helpful starting point, true charism discernment 
-                    is an ongoing process that involves prayer, experience, and community confirmation. 
-                    Here's how to continue your journey:
-                </p>
-                
-                <ul class="discernment-steps">
-                    <li>
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>Take an Inventory</h4>
-                            <p>Complete a spiritual gifts assessment to identify potential charisms. This gives you a starting point for exploration.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>Experiment</h4>
-                            <p>Try serving in areas related to your top charisms. Do you experience joy, energy, and effectiveness? Do others benefit?</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>Seek Confirmation</h4>
-                            <p>Ask trusted friends, mentors, or spiritual directors if they see these gifts in you. Charisms are confirmed by community.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h4>Look for Fruit</h4>
-                            <p>True charisms bear fruit—both in your own spiritual life and in tangible benefits to others. Does your service produce good fruit?</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="step-number">5</div>
-                        <div class="step-content">
-                            <h4>Pray & Discern</h4>
-                            <p>Bring your charisms to prayer. Ask the Holy Spirit to confirm, clarify, and guide you in using them for God's glory.</p>
-                        </div>
-                    </li>
-                </ul>
+            <div class="discernment-section">
+                <div class="discernment-block">
+                    <h3>More Than a Quiz</h3>
+                    <p>
+                        While a spiritual gifts inventory is a helpful starting point, true charism discernment 
+                        is an ongoing process that involves prayer, experience, and community confirmation. 
+                        Here's how to continue your journey:
+                    </p>
+                    
+                    <ul class="discernment-steps">
+                        <li>
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Take an Inventory</h4>
+                                <p>Complete a spiritual gifts assessment to identify potential charisms. This gives you a starting point for exploration.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Experiment</h4>
+                                <p>Try serving in areas related to your top charisms. Do you experience joy, energy, and effectiveness? Do others benefit?</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Seek Confirmation</h4>
+                                <p>Ask trusted friends, mentors, or spiritual directors if they see these gifts in you. Charisms are confirmed by community.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Look for Fruit</h4>
+                                <p>True charisms bear fruit—both in your own spiritual life and in tangible benefits to others. Does your service produce good fruit?</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h4>Pray & Discern</h4>
+                                <p>Bring your charisms to prayer. Ask the Holy Spirit to confirm, clarify, and guide you in using them for God's glory.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Go Deeper -->
+    <section class="reveal">
+        <div class="watercolor-flower flower-3" style="top: 15%; left: 10%;"></div>
+        <div class="gold-leaf leaf-1"></div>
+        <div class="gold-leaf leaf-2"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">Go Deeper</p>
+                <h2 class="section-title script">Explore Your Charisms in Community</h2>
+            </div>
+
+            <div class="go-deeper" style="max-width: 800px; margin: 2rem auto;">
+                <div class="deeper-content" style="background: white; padding: 3rem; border-radius: 8px; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1); text-align: center; border: 2px solid rgba(212, 175, 55, 0.2);">
+                    <h3 style="font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--gold-dark); margin-bottom: 1rem;">Charism Discernment in A Symphony of Grace</h3>
+                    <p style="font-size: 1.1rem; color: var(--text-medium); line-height: 1.8; margin-bottom: 1.5rem;">
+                        In our 15-week journey, we dedicate time in the <strong>Spirit module</strong> to charism 
+                        discernment—not just taking an assessment, but exploring your results in community, 
+                        praying through what they mean, and discovering how to use your gifts in daily life.
+                    </p>
+                    <p style="font-size: 1.1rem; color: var(--text-medium); line-height: 1.8; margin-bottom: 2rem;">
+                        Because charisms aren't just about knowing your gifts—they're about <em>living</em> them.
+                    </p>
+                    <a href="symphony-of-grace.html" class="cta-button">Explore A Symphony of Grace</a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Scripture -->
-    <section>
+    <section class="reveal" style="background: var(--cream-dark);">
         <div class="scripture-section">
             <p class="scripture-text">
                 "Now there are varieties of gifts, but the same Spirit; and there are varieties of service, 
@@ -882,21 +737,71 @@
         </div>
     </section>
 
-    <!-- Portal Footer -->
-    <footer>
-        <div class="footer-logo script">My Holy Crescendo</div>
-        <p class="footer-tagline">fearfully & wonderfully made</p>
+    <!-- Other Resources -->
+    <section class="reveal">
+        <div class="watercolor-flower flower-1" style="bottom: 15%; right: 10%;"></div>
         
-        <div class="footer-links sans">
-            <a href="portal.html">Portal</a>
-            <a href="index.html">Main Site</a>
-            <a href="mailto:bea@myholycrescendo@gmail.com">Contact</a>
-        </div>
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">More Resources</p>
+                <h2 class="section-title script">Continue Your Journey</h2>
+            </div>
 
-        <p class="copyright">
-            © 2025 My Holy Crescendo. All rights reserved.
-        </p>
+            <div class="alternatives-grid">
+                <div class="alternative-card">
+                    <div class="alt-icon">📝</div>
+                    <h3 class="alt-title script">Virtue Assessment</h3>
+                    <p class="alt-subtitle">Discover Your Spiritual Strengths</p>
+                    <p class="alt-description">
+                        Explore the 42 virtues from St. Albert the Great and discover 
+                        which character strengths are most developed in your life.
+                    </p>
+                    <a href="virtue-assessment.html" class="cta-button secondary">Take the Assessment</a>
+                </div>
+
+                <div class="alternative-card">
+                    <div class="alt-icon">🌿</div>
+                    <h3 class="alt-title script">Rule of Life</h3>
+                    <p class="alt-subtitle">Create Sacred Rhythm</p>
+                    <p class="alt-description">
+                        Download our free Rule of Life starter template to create 
+                        intentional rhythms for prayer, rest, relationships, and service.
+                    </p>
+                    <a href="rule-of-life.html" class="cta-button secondary">Get the Template</a>
+                </div>
+
+                <div class="alternative-card">
+                    <div class="alt-icon">🧠</div>
+                    <h3 class="alt-title script">Mind Frameworks</h3>
+                    <p class="alt-subtitle">Understanding Your Design</p>
+                    <p class="alt-description">
+                        Explore the personality and psychology frameworks we use in 
+                        the Mind module of A Symphony of Grace.
+                    </p>
+                    <a href="mind-frameworks.html" class="cta-button secondary">Explore Frameworks</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3 class="script">My Holy Crescendo</h3>
+                <p class="footer-tagline">fearfully & wonderfully made</p>
+            </div>
+            <div class="footer-links">
+                <a href="portal.html">Portal</a>
+                <a href="index.html">Main Site</a>
+                <a href="mailto:myholycrescendo@gmail.com">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 My Holy Crescendo. All rights reserved.</p>
+        </div>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
