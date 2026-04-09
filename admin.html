@@ -458,6 +458,7 @@
 
     // ── Render ────────────────────────────────────────────────
     function renderDashboard(byUser) {
+        window.adminProfiles = byUser;
         const userIds = Object.keys(byUser);
         const now = new Date().toLocaleString('en-US', { month:'long', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit' });
         document.getElementById('last-updated').textContent = 'Last refreshed ' + now;
@@ -514,14 +515,14 @@
                     <div class="p-chevron">&#9660;</div>
                 </div>
                 <div class="participant-detail">
-                    ${renderDetail(profile, journal, name)}
+                    ${renderDetail(profile, journal, name, uid)}
                 </div>
             `;
             list.appendChild(card);
         });
     }
 
-    function renderDetail(profile, journal, name) {
+    function renderDetail(profile, journal, name, uid) {
         // Symphony profile section
         const coreFields = ['p_name_lord','p_identity','p_word_spoken','p_color_season','p_style_essence','p_silhouette','p_love_primary','p_love_secondary','p_temperament','p_type'];
         const strFields  = ['p_str1','p_str2','p_str3','p_str4','p_str5'];
@@ -609,7 +610,17 @@
         <div class="opus-panel">
             <h4>&#9836; Opus Summary &mdash; ${name}</h4>
             <div class="opus-summary">${opusText}</div>
-            ${opusCopyText ? `<button class="copy-btn" onclick="copyOpus(this, \`${opusCopyText.replace(/`/g,'\\`')}\`)">Copy for Udio &rarr;</button>` : ''}
+            <div class="score-actions">
+                ${opusCopyText ? `<button class="copy-btn" onclick="copyOpus(this, \`${opusCopyText.replace(/`/g,'\\`')}\`)">Copy for Udio &rarr;</button>` : ''}
+                <button class="generate-score-btn" onclick="generateScoreForParticipant(this, '${uid}', '${name}')">&#10022; Generate Score</button>
+            </div>
+            <div class="score-panel" id="score-panel-${uid}" style="display:none;">
+                <h4>&#9834; Symphony Score &mdash; ${name}</h4>
+                <div class="score-output" id="score-output-${uid}"></div>
+                <div class="score-actions" id="score-copy-row-${uid}" style="display:none;">
+                    <button class="copy-score-btn" id="copy-score-btn-${uid}" onclick="copyScore('${uid}')">Copy Score Text</button>
+                </div>
+            </div>
         </div>
 
         <div class="detail-section" style="margin-top:1.5rem;">
@@ -634,6 +645,143 @@
                 btn.textContent = 'Copy for Udio \u2192';
                 btn.classList.remove('copied');
             }, 2000);
+        });
+    }
+
+    // ── Generate Symphony Score ───────────────────────────────
+    const SCORE_SYSTEM_PROMPT = `You are a sacred witness — a wise, tender spiritual director writing a woman's Symphony Score: a personal document addressed directly to her reflecting who God created her to be and how to live it.
+
+VOICE: Speak directly to her ("you", never "she"). Be warm, specific, theologically grounded — never clinical or generic. Draw on her frameworks as lenses, not labels. Never say "as an INFP you tend to..." — say what is true about her specifically. Hold wounds with tenderness, gifts with reverence. End aimed outward — she is known so she can give herself away.
+
+FRAME: God is the Composer. She is His symphony — once in the universe, never repeated. Her identity is daughter of the King — named, claimed, beloved. Body, mind, spirit are movements in one piece of music. Charisms and virtues are entrusted gifts. Wounds are where Christ's light enters most deeply.
+
+NEVER: Use "based on your results" or "according to your profile." Never write anything generic that could apply to any woman. Never end inward. No bullet points.
+
+Write exactly 6 sections. Each heading in ALL CAPS on its own line. Blank line between paragraphs.
+
+DAUGHTER — 2-3 paragraphs. Open with her Name from the Lord and Identity in Christ. Make her feel specifically seen.
+
+INSTRUMENT — 2-3 paragraphs. Her color season, style essence, silhouette as a portrait of her embodied presence.
+
+MOVEMENTS — 3-4 paragraphs. Her temperament, type, strengths, love languages as a portrait of her inner life. Weave in tender places.
+
+THEME — 2-3 paragraphs. Her charisms and virtues — where the Spirit is visibly at work through her.
+
+SYMPHONY — 3-4 paragraphs. Full vocational synthesis. What is she made to give the world? Name it with conviction.
+
+SEND — 1-2 paragraphs. Conviction and release. Use her Name from the Lord. Send her out with courage.
+
+No preamble. No closing outside the six sections.`;
+
+    function buildScorePrompt(profile) {
+        const f = k => (profile[k] || '').trim() || '(not provided)';
+        const list = (...keys) => { const p = keys.map(k=>(profile[k]||'').trim()).filter(Boolean); return p.length ? p.join(', ') : '(not provided)'; };
+        return `Here is the Symphony Profile for this woman. Please write her Symphony Score.
+
+NAME FROM THE LORD: ${f('p_name_lord')}
+IDENTITY IN CHRIST: ${f('p_identity')}
+A WORD HE HAS SPOKEN OVER HER: ${f('p_word_spoken')}
+
+BODY:
+Color Season: ${f('p_color_season')}
+Style Essence: ${f('p_style_essence')}
+Sacred Silhouette: ${f('p_silhouette')}
+
+MIND:
+Temperament Blend: ${f('p_temperament')}
+Personality Type / Cognitive Functions: ${f('p_type')}
+Top Character Strengths: ${list('p_str1','p_str2','p_str3','p_str4','p_str5')}
+Primary Love Language: ${f('p_love_primary')}
+Secondary Love Language: ${f('p_love_secondary')}
+
+SPIRIT:
+Top Virtues in Growth: ${list('p_vir1','p_vir2','p_vir3','p_vir4','p_vir5')}
+Charisms: ${list('p_char1','p_char2','p_char3')}
+
+Where fields say "(not provided)", skip gracefully. Work richly with what is present.`;
+    }
+
+    const SCORE_SECTIONS = [
+        { key: 'DAUGHTER',   label: 'Daughter' },
+        { key: 'INSTRUMENT', label: 'The Instrument' },
+        { key: 'MOVEMENTS',  label: 'The Movements' },
+        { key: 'THEME',      label: 'The Theme' },
+        { key: 'SYMPHONY',   label: 'Your Symphony' },
+        { key: 'SEND',       label: 'Go and Live It' },
+    ];
+
+    window.scoreTexts = {};
+
+    async function generateScoreForParticipant(btn, uid, name) {
+        const panel = document.getElementById('score-panel-' + uid);
+        const output = document.getElementById('score-output-' + uid);
+        const copyRow = document.getElementById('score-copy-row-' + uid);
+        panel.style.display = 'block';
+        btn.disabled = true;
+        btn.textContent = 'Generating…';
+        output.innerHTML = '<div class="score-loading">Writing ' + name + '’s score… this may take up to 30 seconds.</div>';
+        copyRow.style.display = 'none';
+
+        const userData = window.adminProfiles[uid];
+        const profile = userData && userData.profile ? userData.profile : {};
+
+        try {
+            const response = await fetch('/.netlify/functions/claude-proxy', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    model: 'claude-haiku-4-5-20251001',
+                    max_tokens: 3000,
+                    system: SCORE_SYSTEM_PROMPT,
+                    messages: [{ role: 'user', content: buildScorePrompt(profile) }]
+                })
+            });
+            const data = await response.json();
+            if (!response.ok || data.error) throw new Error(data.error?.message || 'Generation failed');
+            const text = data.content?.[0]?.text || '';
+            if (!text) throw new Error('No content returned');
+
+            window.scoreTexts[uid] = text;
+            renderScoreOutput(output, text);
+            copyRow.style.display = 'flex';
+            btn.textContent = 'Regenerate Score';
+            btn.disabled = false;
+        } catch(e) {
+            output.innerHTML = '<div class="score-loading" style="color:#c44569;">Error: ' + e.message + '</div>';
+            btn.textContent = 'Try Again';
+            btn.disabled = false;
+        }
+    }
+
+    function renderScoreOutput(container, text) {
+        let html = '';
+        for (let i = 0; i < SCORE_SECTIONS.length; i++) {
+            const s = SCORE_SECTIONS[i];
+            const headingRegex = new RegExp('^' + s.key + '\\s*$', 'mi');
+            const match = headingRegex.exec(text);
+            if (!match) continue;
+            let sectionText = text.slice(match.index + match[0].length).trim();
+            const nextKeys = SCORE_SECTIONS.slice(i+1).map(x=>x.key);
+            if (nextKeys.length) {
+                const endPattern = new RegExp('^(' + nextKeys.map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|') + ')\\s*$','mi');
+                const endMatch = endPattern.exec(sectionText);
+                if (endMatch) sectionText = sectionText.slice(0, endMatch.index).trim();
+            }
+            html += '<div class="score-section-title">' + s.label + '</div>';
+            sectionText.split(/\n\n+/).map(p=>p.trim()).filter(Boolean).forEach(para => {
+                html += '<p class="score-para">' + para + '</p>';
+            });
+        }
+        container.innerHTML = html || '<p class="score-para">' + text + '</p>';
+    }
+
+    function copyScore(uid) {
+        const text = window.scoreTexts[uid] || '';
+        const btn = document.getElementById('copy-score-btn-' + uid);
+        navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = 'Copy Score Text'; btn.classList.remove('copied'); }, 2000);
         });
     }
 
