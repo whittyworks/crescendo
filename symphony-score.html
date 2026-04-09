@@ -190,6 +190,8 @@
         <p id="error-message">Something went wrong. Please try again in a moment.</p>
     </div>
 
+    <div id="debug-panel" style="display:none; background:#fff8f0; border:2px solid #D4AF37; border-radius:12px; padding:1.5rem; margin-bottom:2rem; font-family:monospace; font-size:0.8rem; color:#2C2416; white-space:pre-wrap; word-break:break-all; line-height:1.6;"></div>
+
     <div class="score-output" id="score-output">
         <div class="score-header">
             <p class="overline">A Symphony of Grace &nbsp;&middot;&nbsp; My Holy Crescendo</p>
@@ -213,10 +215,10 @@
     <div style="display:flex;justify-content:center;gap:2rem;font-family:'Montserrat',sans-serif;font-size:0.75rem;letter-spacing:1px;">
         <a href="portal.html" style="color:rgba(253,248,243,0.6);text-decoration:none;">Portal</a>
         <a href="index.html" style="color:rgba(253,248,243,0.6);text-decoration:none;">Main Site</a>
-        <a href="mailto:myholycrescendo@gmail.com" style="color:rgba(253,248,243,0.6);text-decoration:none;">Contact</a>
+        <a href="/cdn-cgi/l/email-protection#a9c4d0c1c6c5d0cadbccdacaccc7cdc6e9cec4c8c0c587cac6c4" style="color:rgba(253,248,243,0.6);text-decoration:none;">Contact</a>
     </div>
 </footer>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -265,7 +267,10 @@
             profileData = data[0].result_data || {};
             renderProfileSummary(profileData);
             checkCompleteness(profileData);
-        } catch(e) { console.error('Could not load profile:', e); }
+        } catch(e) {
+            const dbg = document.getElementById('debug-panel');
+            if (dbg) { dbg.style.display = 'block'; dbg.textContent = 'LOAD PROFILE ERROR:\n' + e.message; }
+        }
     }
 
     function val(key) { return (profileData[key] || '').trim(); }
@@ -395,8 +400,8 @@ Format: Each section heading in all caps on its own line, followed by the paragr
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    model: 'claude-sonnet-4-5',
-                    max_tokens: 2000,
+                    model: 'claude-haiku-4-5-20251001',
+                    max_tokens: 1500,
                     system: SYSTEM_PROMPT,
                     messages: [{ role: 'user', content: buildPrompt() }]
                 })
@@ -416,7 +421,9 @@ Format: Each section heading in all caps on its own line, followed by the paragr
             document.getElementById('loading-state').classList.remove('active');
             document.getElementById('error-state').classList.add('active');
             document.getElementById('error-message').textContent = e.message || 'Something went wrong. Please try again.';
-            console.error('Score generation error:', e);
+            const dbg = document.getElementById('debug-panel');
+            dbg.style.display = 'block';
+            dbg.textContent = 'ERROR DETAILS:\n' + e.message + '\n\nStack:\n' + (e.stack || 'none');
             document.getElementById('generate-btn').disabled = false;
         }
     }
