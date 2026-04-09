@@ -260,10 +260,9 @@
                 .from('user_results')
                 .select('result_data')
                 .eq('user_id', currentUser.id)
-                .eq('assessment', 'symphony_profile')
-                .single();
-            if (error || !data) return;
-            profileData = data.result_data || {};
+                .eq('assessment', 'symphony_profile');
+            if (error || !data || data.length === 0) return;
+            profileData = data[0].result_data || {};
             renderProfileSummary(profileData);
             checkCompleteness(profileData);
         } catch(e) { console.error('Could not load profile:', e); }
