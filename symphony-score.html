@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QX21GDR7T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7QX21GDR7T');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Symphony Score · My Holy Crescendo</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --cream: #FDF8F3; --cream-dark: #F5EFE7;
+            --gold: #D4AF37; --gold-light: #E8C872; --gold-dark: #B8941F;
+            --text-dark: #2C2416; --text-medium: #5C5142; --navy: #163245;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Cormorant Garamond', serif; background: var(--cream); color: var(--text-dark); line-height: 1.7; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(253,248,243,0.97); backdrop-filter: blur(10px); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; border-bottom: 1px solid rgba(212,175,55,0.1); }
+        .logo-text { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold-dark); text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-medium); text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+        .account-btn { display: flex; align-items: center; gap: 0.6rem; background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.25); border-radius: 50px; padding: 0.5rem 1.2rem 0.5rem 0.8rem; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 0.78rem; letter-spacing: 0.5px; color: var(--text-medium); transition: all 0.3s; }
+        .account-btn:hover { background: rgba(212,175,55,0.15); border-color: var(--gold); color: var(--gold-dark); }
+        .account-avatar { width: 28px; height: 28px; background: linear-gradient(135deg, var(--gold-light), var(--gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: white; font-weight: 600; flex-shrink: 0; }
+        .account-dropdown { position: absolute; top: calc(100% + 0.75rem); right: 0; background: white; border: 1px solid rgba(212,175,55,0.2); border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); min-width: 220px; overflow: hidden; display: none; z-index: 2000; }
+        .account-dropdown.open { display: block; }
+        .dropdown-header { padding: 1.2rem 1.5rem; background: var(--cream); border-bottom: 1px solid rgba(212,175,55,0.1); }
+        .dropdown-header .d-name { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold-dark); }
+        .dropdown-header .d-email { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; color: var(--text-medium); margin-top: 0.15rem; opacity: 0.8; }
+        .dropdown-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1.5rem; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: var(--text-medium); cursor: pointer; transition: background 0.2s; border: none; background: none; width: 100%; text-align: left; letter-spacing: 0.5px; }
+        .dropdown-item:hover { background: var(--cream); color: var(--gold-dark); }
+        .dropdown-item.danger:hover { background: #fff5f5; color: #c44569; }
+        .dropdown-divider { height: 1px; background: rgba(212,175,55,0.1); }
+        .page-hero { padding: 9rem 5% 4rem; text-align: center; background: radial-gradient(ellipse at top, rgba(212,175,55,0.08) 0%, transparent 50%), radial-gradient(ellipse at bottom left, rgba(245,225,218,0.4) 0%, transparent 40%), linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%); border-bottom: 1px solid rgba(212,175,55,0.1); position: relative; }
+        .page-hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent); }
+        .hero-label { font-family: 'Montserrat', sans-serif; font-size: 0.78rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+        .page-hero h1 { font-family: 'Cinzel', serif; font-size: 2.8rem; font-weight: 400; color: var(--text-dark); margin-bottom: 1rem; line-height: 1.2; }
+        .page-hero .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic; color: var(--text-medium); max-width: 540px; margin: 0 auto 1.5rem; }
+        .gold-line { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 1.5rem auto; }
+        .page-content { max-width: 860px; margin: 0 auto; padding: 3rem 5% 6rem; }
+        .profile-summary { background: white; border: 1px solid rgba(212,175,55,0.2); border-radius: 20px; padding: 2rem 2.5rem; margin-bottom: 2.5rem; box-shadow: 0 4px 20px rgba(44,36,22,0.05); }
+        .profile-summary h2 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-dark); margin-bottom: 0.4rem; font-weight: 500; }
+        .profile-summary p.intro { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: var(--text-medium); letter-spacing: 0.5px; margin-bottom: 1.5rem; }
+        .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 2rem; }
+        .profile-item { display: flex; flex-direction: column; gap: 0.1rem; }
+        .profile-item .label { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); }
+        .profile-item .value { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--text-dark); font-style: italic; }
+        .profile-item .value.empty { color: rgba(92,81,66,0.35); font-style: normal; font-size: 0.85rem; }
+        .profile-divider { height: 1px; background: rgba(212,175,55,0.12); margin: 1.2rem 0; }
+        .profile-group-label { font-family: 'Montserrat', sans-serif; font-size: 0.68rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-medium); margin-bottom: 0.8rem; opacity: 0.7; }
+        .incomplete-warning { background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.25); border-radius: 12px; padding: 1rem 1.4rem; display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 2rem; }
+        .incomplete-warning p { font-family: 'Montserrat', sans-serif; font-size: 0.78rem; color: var(--text-medium); line-height: 1.6; letter-spacing: 0.3px; }
+        .incomplete-warning a { color: var(--gold-dark); text-decoration: underline; }
+        .generate-section { text-align: center; margin-bottom: 3rem; }
+        .generate-intro { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--text-medium); max-width: 540px; margin: 0 auto 2rem; line-height: 1.8; }
+        .generate-btn { display: inline-flex; align-items: center; gap: 0.75rem; background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: white; border: none; border-radius: 50px; padding: 1.1rem 3rem; cursor: pointer; font-family: 'Cinzel', serif; font-size: 0.95rem; letter-spacing: 2px; box-shadow: 0 6px 25px rgba(212,175,55,0.35); transition: all 0.3s; text-transform: uppercase; }
+        .generate-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 35px rgba(212,175,55,0.45); }
+        .generate-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .generate-note { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; color: var(--text-medium); letter-spacing: 0.5px; margin-top: 1rem; opacity: 0.7; }
+        .loading-state { display: none; text-align: center; padding: 3rem 0; }
+        .loading-state.active { display: block; }
+        .loading-orb { width: 64px; height: 64px; margin: 0 auto 1.5rem; border-radius: 50%; background: conic-gradient(from 0deg, transparent 0%, var(--gold-light) 50%, transparent 100%); animation: spin 1.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: var(--text-medium); margin-bottom: 0.5rem; }
+        .loading-subtext { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; color: var(--text-medium); letter-spacing: 1px; opacity: 0.6; }
+        .error-state { display: none; background: rgba(196,69,105,0.06); border: 1px solid rgba(196,69,105,0.2); border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 2rem; text-align: center; }
+        .error-state.active { display: block; }
+        .error-state p { font-family: 'Montserrat', sans-serif; font-size: 0.82rem; color: #c44569; letter-spacing: 0.3px; }
+        .score-output { display: none; }
+        .score-output.active { display: block; }
+        .score-header { text-align: center; margin-bottom: 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(212,175,55,0.15); }
+        .score-header .overline { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+        .score-header .title { font-family: 'Cinzel', serif; font-size: 2.4rem; font-weight: 400; color: var(--text-dark); line-height: 1.2; margin-bottom: 0.5rem; }
+        .score-header .name-from-lord { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-style: italic; color: var(--gold-dark); margin-bottom: 1.5rem; }
+        .score-header .ornament { font-size: 1.2rem; color: var(--gold); letter-spacing: 8px; }
+        .score-section { margin-bottom: 3.5rem; }
+        .score-section-header { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1.5rem; }
+        .section-number { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 2px; color: var(--gold); opacity: 0.7; flex-shrink: 0; }
+        .section-rule { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(212,175,55,0.4), transparent); }
+        .score-section h2 { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 400; color: var(--navy); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .score-section p { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--text-dark); line-height: 1.9; margin-bottom: 1.2rem; }
+        .score-section p:last-child { margin-bottom: 0; }
+        .section-divider { width: 80px; height: 1px; margin: 3.5rem auto; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+        .actions-bar { display: flex; justify-content: center; gap: 1rem; margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid rgba(212,175,55,0.15); flex-wrap: wrap; }
+        .action-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.85rem 2rem; border-radius: 50px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.3s; border: 1px solid rgba(212,175,55,0.3); color: var(--text-medium); background: transparent; text-decoration: none; }
+        .action-btn:hover { background: rgba(212,175,55,0.08); color: var(--gold-dark); border-color: var(--gold); }
+        @media (max-width: 700px) { .page-hero h1 { font-size: 2rem; } .profile-grid { grid-template-columns: 1fr; } .nav-links { display: none; } .score-section p { font-size: 1.1rem; } }
+        @media print { nav, .profile-summary, .generate-section, .loading-state, .incomplete-warning, .actions-bar { display: none !important; } .page-hero { padding: 2rem 5% 2rem; } .page-hero::before { display: none; } body { background: white; } .score-output { display: block !important; } .score-section p { font-size: 11pt; line-height: 1.8; } .score-section h2 { font-size: 13pt; } .score-header .title { font-size: 22pt; } .score-header .name-from-lord { font-size: 14pt; } .page-content { padding: 1rem 5%; } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo-text">My Holy Crescendo</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portal.html">Portal</a></li>
+        <li><a href="my-profile.html">My Symphony</a></li>
+        <li><a href="symphony-score.html" class="active">My Score</a></li>
+    </ul>
+    <div style="position:relative;">
+        <button class="account-btn" onclick="toggleDropdown()" id="account-btn">
+            <div class="account-avatar" id="account-avatar">?</div>
+            <span id="account-btn-name">Account</span>
+        </button>
+        <div class="account-dropdown" id="account-dropdown">
+            <div class="dropdown-header">
+                <div class="d-name" id="dropdown-name">Welcome</div>
+                <div class="d-email" id="dropdown-email"></div>
+            </div>
+            <button class="dropdown-item" onclick="window.location.href='portal.html'">&#9674; Back to Portal</button>
+            <button class="dropdown-item" onclick="window.location.href='my-profile.html'">&#9675; My Symphony Profile</button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item danger" onclick="signOut()">&#10022; Sign Out</button>
+        </div>
+    </div>
+</nav>
+
+<div class="page-hero">
+    <p class="hero-label">A Symphony of Grace</p>
+    <h1>My Symphony Score</h1>
+    <p class="subtitle">Every note God wrote when He composed you</p>
+    <div class="gold-line"></div>
+</div>
+
+<div class="page-content">
+
+    <div class="profile-summary" id="profile-summary">
+        <h2>Your Symphony Profile</h2>
+        <p class="intro">This is the data your score will be drawn from. Return to <a href="my-profile.html">My Symphony Profile</a> to fill in any missing pieces.</p>
+        <div class="profile-group-label">Foundation</div>
+        <div class="profile-grid">
+            <div class="profile-item"><span class="label">Name from the Lord</span><span class="value" id="s_name_lord">—</span></div>
+            <div class="profile-item"><span class="label">Identity in Christ</span><span class="value" id="s_identity">—</span></div>
+            <div class="profile-item" style="grid-column:span 2;"><span class="label">A Word He Has Spoken Over You</span><span class="value" id="s_word_spoken">—</span></div>
+        </div>
+        <div class="profile-divider"></div>
+        <div class="profile-group-label">Body</div>
+        <div class="profile-grid">
+            <div class="profile-item"><span class="label">Color Season</span><span class="value" id="s_color_season">—</span></div>
+            <div class="profile-item"><span class="label">Style Essence</span><span class="value" id="s_style_essence">—</span></div>
+            <div class="profile-item"><span class="label">Sacred Silhouette</span><span class="value" id="s_silhouette">—</span></div>
+        </div>
+        <div class="profile-divider"></div>
+        <div class="profile-group-label">Mind</div>
+        <div class="profile-grid">
+            <div class="profile-item"><span class="label">Temperament Blend</span><span class="value" id="s_temperament">—</span></div>
+            <div class="profile-item"><span class="label">Personality Type</span><span class="value" id="s_type">—</span></div>
+            <div class="profile-item"><span class="label">Primary Love Language</span><span class="value" id="s_love_primary">—</span></div>
+            <div class="profile-item"><span class="label">Secondary Love Language</span><span class="value" id="s_love_secondary">—</span></div>
+            <div class="profile-item" style="grid-column:span 2;"><span class="label">Top Character Strengths</span><span class="value" id="s_strengths">—</span></div>
+        </div>
+        <div class="profile-divider"></div>
+        <div class="profile-group-label">Spirit</div>
+        <div class="profile-grid">
+            <div class="profile-item" style="grid-column:span 2;"><span class="label">Top Virtues</span><span class="value" id="s_virtues">—</span></div>
+            <div class="profile-item" style="grid-column:span 2;"><span class="label">Charisms</span><span class="value" id="s_charisms">—</span></div>
+        </div>
+    </div>
+
+    <div class="incomplete-warning" id="incomplete-warning" style="display:none;">
+        <span>&#10022;</span>
+        <p>Some fields in your profile are still empty. Your score will be richer the more complete your profile is. <a href="my-profile.html">Complete your profile &rarr;</a></p>
+    </div>
+
+    <div class="generate-section" id="generate-section">
+        <p class="generate-intro">When you are ready, let your symphony speak. What follows will be written for you &mdash; and only you.</p>
+        <button class="generate-btn" id="generate-btn" onclick="generateScore()">&#10022; &nbsp; Generate My Symphony Score</button>
+        <p class="generate-note">This may take 30&ndash;60 seconds. Find a quiet moment.</p>
+    </div>
+
+    <div class="loading-state" id="loading-state">
+        <div class="loading-orb"></div>
+        <p class="loading-text">Your score is being written&hellip;</p>
+        <p class="loading-subtext">Give it a moment. This is worth the wait.</p>
+    </div>
+
+    <div class="error-state" id="error-state">
+        <p id="error-message">Something went wrong. Please try again in a moment.</p>
+    </div>
+
+    <div class="score-output" id="score-output">
+        <div class="score-header">
+            <p class="overline">A Symphony of Grace &nbsp;&middot;&nbsp; My Holy Crescendo</p>
+            <h1 class="title">The Score of</h1>
+            <p class="name-from-lord" id="score-name-display"></p>
+            <p class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</p>
+        </div>
+        <div id="score-sections"></div>
+        <div class="actions-bar">
+            <button class="action-btn" onclick="window.print()">&#10022; &nbsp; Print My Score</button>
+            <button class="action-btn" onclick="regenerate()">&circlearrowleft; &nbsp; Regenerate</button>
+            <a href="my-profile.html" class="action-btn">&larr; &nbsp; Back to Profile</a>
+        </div>
+    </div>
+
+</div>
+
+<footer style="background:var(--navy);color:rgba(253,248,243,0.7);text-align:center;padding:3rem 5%;">
+    <p style="font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold-light);margin-bottom:0.4rem;">My Holy Crescendo</p>
+    <p style="font-family:'Montserrat',sans-serif;font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem;opacity:0.6;">fearfully &amp; wonderfully made</p>
+    <div style="display:flex;justify-content:center;gap:2rem;font-family:'Montserrat',sans-serif;font-size:0.75rem;letter-spacing:1px;">
+        <a href="portal.html" style="color:rgba(253,248,243,0.6);text-decoration:none;">Portal</a>
+        <a href="index.html" style="color:rgba(253,248,243,0.6);text-decoration:none;">Main Site</a>
+        <a href="mailto:myholycrescendo@gmail.com" style="color:rgba(253,248,243,0.6);text-decoration:none;">Contact</a>
+    </div>
+</footer>
+<script>
+    const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let currentUser = null;
+    let profileData = {};
+
+    const SECTIONS = [
+        { key: 'DAUGHTER',        label: 'Daughter',       num: 'I'   },
+        { key: 'THE INSTRUMENT',  label: 'The Instrument', num: 'II'  },
+        { key: 'THE MOVEMENTS',   label: 'The Movements',  num: 'III' },
+        { key: 'THE THEME',       label: 'The Theme',      num: 'IV'  },
+        { key: 'YOUR SYMPHONY',   label: 'Your Symphony',  num: 'V'   },
+        { key: 'GO AND LIVE IT',  label: 'Go and Live It', num: 'VI'  },
+    ];
+
+    sb.auth.getSession().then(async ({ data: { session } }) => {
+        if (!session) { window.location.href = 'portal.html'; return; }
+        currentUser = session.user;
+        populateNav(currentUser);
+        await loadProfile();
+    });
+
+    sb.auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_OUT') window.location.href = 'portal.html';
+    });
+
+    function populateNav(user) {
+        const name    = user.user_metadata?.full_name || '';
+        const email   = user.email || '';
+        const display = name || email;
+        document.getElementById('account-avatar').textContent   = display.charAt(0).toUpperCase();
+        document.getElementById('account-btn-name').textContent = name || 'Account';
+        document.getElementById('dropdown-name').textContent    = name || email;
+        document.getElementById('dropdown-email').textContent   = email;
+    }
+
+    async function loadProfile() {
+        try {
+            const { data, error } = await sb
+                .from('user_results')
+                .select('result_data')
+                .eq('user_id', currentUser.id)
+                .eq('assessment', 'symphony_profile')
+                .single();
+            if (error || !data) return;
+            profileData = data.result_data || {};
+            renderProfileSummary(profileData);
+            checkCompleteness(profileData);
+        } catch(e) { console.error('Could not load profile:', e); }
+    }
+
+    function val(key) { return (profileData[key] || '').trim(); }
+
+    function renderProfileSummary(d) {
+        const set = (id, keys) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            if (typeof keys === 'string') {
+                const v = (d[keys] || '').trim();
+                el.textContent = v || '—';
+                if (!v) el.classList.add('empty');
+            } else {
+                const parts = keys.map(k => (d[k] || '').trim()).filter(Boolean);
+                el.textContent = parts.length ? parts.join(', ') : '—';
+                if (!parts.length) el.classList.add('empty');
+            }
+        };
+        set('s_name_lord',     'p_name_lord');
+        set('s_identity',      'p_identity');
+        set('s_word_spoken',   'p_word_spoken');
+        set('s_color_season',  'p_color_season');
+        set('s_style_essence', 'p_style_essence');
+        set('s_silhouette',    'p_silhouette');
+        set('s_temperament',   'p_temperament');
+        set('s_type',          'p_type');
+        set('s_love_primary',  'p_love_primary');
+        set('s_love_secondary','p_love_secondary');
+        set('s_strengths',     ['p_str1','p_str2','p_str3','p_str4','p_str5']);
+        set('s_virtues',       ['p_vir1','p_vir2','p_vir3','p_vir4','p_vir5']);
+        set('s_charisms',      ['p_char1','p_char2','p_char3']);
+    }
+
+    function checkCompleteness(d) {
+        const core = ['p_name_lord','p_identity','p_color_season','p_style_essence',
+                      'p_silhouette','p_temperament','p_type','p_str1','p_love_primary','p_vir1','p_char1'];
+        const filled = core.filter(k => (d[k] || '').trim()).length;
+        if (filled < 6) document.getElementById('incomplete-warning').style.display = 'flex';
+    }
+
+    function buildPrompt() {
+        const d = profileData;
+        const f = k => (d[k] || '').trim() || '(not yet provided)';
+        const list = (...keys) => {
+            const parts = keys.map(k => (d[k] || '').trim()).filter(Boolean);
+            return parts.length ? parts.join(', ') : '(not yet provided)';
+        };
+        return `Here is the Symphony Profile for this woman. Please write her Symphony Score.
+
+NAME FROM THE LORD: ${f('p_name_lord')}
+IDENTITY IN CHRIST: ${f('p_identity')}
+A WORD HE HAS SPOKEN OVER HER: ${f('p_word_spoken')}
+
+BODY:
+Color Season: ${f('p_color_season')}
+Style Essence: ${f('p_style_essence')}
+Sacred Silhouette: ${f('p_silhouette')}
+
+MIND:
+Temperament Blend: ${f('p_temperament')}
+Personality Type / Cognitive Functions: ${f('p_type')}
+Top Character Strengths: ${list('p_str1','p_str2','p_str3','p_str4','p_str5')}
+Primary Love Language: ${f('p_love_primary')}
+Secondary Love Language: ${f('p_love_secondary')}
+
+SPIRIT:
+Top Virtues in Growth: ${list('p_vir1','p_vir2','p_vir3','p_vir4','p_vir5')}
+Charisms: ${list('p_char1','p_char2','p_char3')}
+
+Note: Where fields say "(not yet provided)", skip them gracefully — do not reference or call attention to missing data. Work richly with what is present.`;
+    }
+
+    const SYSTEM_PROMPT = `You are a sacred witness — a wise, tender spiritual director who has been paying close attention to this woman throughout a 15-week Catholic women's formation program called A Symphony of Grace, offered by My Holy Crescendo. Your task is to write her Symphony Score: a document addressed directly to her that reflects back the full beauty of who God created her to be, and points her toward how to live it.
+
+YOUR VOICE:
+- Always speak directly to her — "you," never "she"
+- Warm, specific, theologically grounded — never clinical, never generic, never gushing
+- Write like someone who has been paying very close attention to her specifically. Notice things. Name things she half-knew but never had words for.
+- Do not explain frameworks. Never say "as an INFP, you tend to..." — say what is true about her, drawing on each framework as a lens, not a label.
+- Hold her wounds (woven naturally throughout wherever relevant) with tenderness and her gifts with reverence.
+- Always aim her outward at the end — self-knowledge in this program is always in service of mission and gift.
+
+THEOLOGICAL FRAME:
+- God is the Composer. She is the symphony He wrote — once in the universe, never to be repeated.
+- Her identity is grounded entirely in being a daughter of the King — named, claimed, beloved before anything she does.
+- Her body, mind, and spirit are not separate compartments but movements in a single piece of music, composed by the same hand.
+- Her charisms and virtues are gifts entrusted to her for the building of the Kingdom — not achievements or accomplishments.
+- Her wounds are not disqualifications — they are where the light of Christ enters most deeply and where His redemption is most visible.
+
+WHAT YOU MUST NEVER DO:
+- Never use phrases like "based on your results," "according to your profile," or "your assessment shows."
+- Never explain what a framework means in general — only what it means specifically for her.
+- Never say anything that could apply to any woman. If a sentence could be copy-pasted into someone else's score unchanged, rewrite it until it cannot be.
+- Never end inward. She is known so that she can give herself away.
+- Never use bullet points, numbered lists, or subheadings within sections.
+
+OUTPUT STRUCTURE — write exactly these 6 sections with these exact headings on their own lines in all caps:
+
+DAUGHTER
+[2-3 paragraphs — Use her Name from the Lord and Identity in Christ to anchor everything from the first sentence. Make her feel genuinely, specifically seen before you say anything else.]
+
+THE INSTRUMENT
+[2-3 paragraphs — Her color season, style essence, and silhouette woven into a portrait of her embodied presence. What it means that God gave her this particular body.]
+
+THE MOVEMENTS
+[3-4 paragraphs — Her temperament, cognitive type, character strengths, and love languages as a living portrait of how she moves through the world. Weave in the tender places where relevant.]
+
+THE THEME
+[2-3 paragraphs — Her charisms and virtues. Where the Holy Spirit is most visibly at work in and through her.]
+
+YOUR SYMPHONY
+[3-4 paragraphs — Everything drawn together into vocational synthesis. What is she made to give the world? Name it with conviction.]
+
+GO AND LIVE IT
+[1-2 paragraphs — A conviction and a release. Name her with her Name from the Lord and send her out with courage.]
+
+Format: Each section heading in all caps on its own line, followed by the paragraphs. Separate paragraphs with a blank line. No preamble, no closing remarks outside the six sections.`;
+
+    async function generateScore() {
+        document.getElementById('error-state').classList.remove('active');
+        document.getElementById('score-output').classList.remove('active');
+        document.getElementById('generate-btn').disabled = true;
+        document.getElementById('loading-state').classList.add('active');
+
+        try {
+            const response = await fetch('/.netlify/functions/claude-proxy', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    model: 'claude-sonnet-4-20250514',
+                    max_tokens: 2000,
+                    system: SYSTEM_PROMPT,
+                    messages: [{ role: 'user', content: buildPrompt() }]
+                })
+            });
+
+            const data = await response.json();
+            if (!response.ok || data.error) throw new Error(data.error?.message || 'Generation failed. Please try again.');
+            const text = data.content?.[0]?.text || '';
+            if (!text) throw new Error('No content returned. Please try again.');
+            renderScore(text);
+
+        } catch(e) {
+            document.getElementById('loading-state').classList.remove('active');
+            document.getElementById('error-state').classList.add('active');
+            document.getElementById('error-message').textContent = e.message || 'Something went wrong. Please try again.';
+            document.getElementById('generate-btn').disabled = false;
+        }
+    }
+
+    function renderScore(text) {
+        document.getElementById('loading-state').classList.remove('active');
+
+        const nameLord = val('p_name_lord') || 'Beloved';
+        document.getElementById('score-name-display').textContent = nameLord;
+
+        const sectionsEl = document.getElementById('score-sections');
+        sectionsEl.innerHTML = '';
+
+        let parsed = [];
+        for (let i = 0; i < SECTIONS.length; i++) {
+            const s = SECTIONS[i];
+            const headingRegex = new RegExp(`^${s.key.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}\\s*$`, 'mi');
+            const headingMatch = headingRegex.exec(text);
+            if (!headingMatch) continue;
+
+            let sectionText = text.slice(headingMatch.index + headingMatch[0].length).trim();
+            const nextKeys = SECTIONS.slice(i + 1).map(x => x.key);
+            if (nextKeys.length) {
+                const endPattern = new RegExp(`^(${nextKeys.map(k => k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')})\\s*$`, 'mi');
+                const endMatch = endPattern.exec(sectionText);
+                if (endMatch) sectionText = sectionText.slice(0, endMatch.index).trim();
+            }
+            parsed.push({ section: s, content: sectionText });
+        }
+
+        if (parsed.length === 0) {
+            const fallback = document.createElement('div');
+            fallback.className = 'score-section';
+            fallback.innerHTML = '<p>' + text.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>') + '</p>';
+            sectionsEl.appendChild(fallback);
+        } else {
+            parsed.forEach((item, idx) => {
+                const el = document.createElement('div');
+                el.className = 'score-section';
+
+                const headerRow = document.createElement('div');
+                headerRow.className = 'score-section-header';
+                headerRow.innerHTML = `<span class="section-number">${item.section.num}</span><div class="section-rule"></div>`;
+                el.appendChild(headerRow);
+
+                const h2 = document.createElement('h2');
+                h2.textContent = item.section.label;
+                el.appendChild(h2);
+
+                item.content.split(/\n\n+/).map(p => p.trim()).filter(Boolean).forEach(para => {
+                    const p = document.createElement('p');
+                    p.textContent = para;
+                    el.appendChild(p);
+                });
+
+                sectionsEl.appendChild(el);
+
+                if (idx < parsed.length - 1) {
+                    const div = document.createElement('div');
+                    div.className = 'section-divider';
+                    sectionsEl.appendChild(div);
+                }
+            });
+        }
+
+        document.getElementById('generate-section').style.display = 'none';
+        document.getElementById('score-output').classList.add('active');
+    }
+
+    function regenerate() {
+        document.getElementById('score-output').classList.remove('active');
+        document.getElementById('generate-section').style.display = 'block';
+        document.getElementById('generate-btn').disabled = false;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleDropdown() {
+        document.getElementById('account-dropdown').classList.toggle('open');
+    }
+    document.addEventListener('click', function(e) {
+        const btn = document.getElementById('account-btn');
+        const dd  = document.getElementById('account-dropdown');
+        if (dd && btn && !btn.contains(e.target) && !dd.contains(e.target)) dd.classList.remove('open');
+    });
+
+    async function signOut() { await sb.auth.signOut(); }
+</script>
+</body>
+</html>
