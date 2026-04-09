@@ -619,6 +619,8 @@
                 <div class="score-output" id="score-output-${uid}"></div>
                 <div class="score-actions" id="score-copy-row-${uid}" style="display:none;">
                     <button class="copy-score-btn" id="copy-score-btn-${uid}" onclick="copyScore('${uid}')">Copy Score Text</button>
+                    <button class="generate-score-btn" id="save-score-btn-${uid}" onclick="saveScoreForParticipant('${uid}', '${name}')">&#10022; Save to Profile</button>
+                    <span id="save-score-badge-${uid}" style="display:none; font-family:'Montserrat',sans-serif; font-size:0.72rem; letter-spacing:1px; color:#4a7c59; padding:0.4rem 0.8rem; background:rgba(74,124,89,0.1); border-radius:50px;">&#10003; Saved</span>
                 </div>
             </div>
         </div>
@@ -783,6 +785,29 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
             btn.classList.add('copied');
             setTimeout(() => { btn.textContent = 'Copy Score Text'; btn.classList.remove('copied'); }, 2000);
         });
+    }
+
+    // ── Save score to participant profile ────────────────────
+    async function saveScoreForParticipant(uid, name) {
+        const btn = document.getElementById('save-score-btn-' + uid);
+        const badge = document.getElementById('save-score-badge-' + uid);
+        const text = window.scoreTexts && window.scoreTexts[uid];
+        if (!text) return;
+        btn.disabled = true;
+        btn.textContent = 'Saving…';
+        try {
+            const { error } = await sb.from('user_results').upsert(
+                { user_id: uid, assessment: 'symphony_score', result_data: { text: text }, updated_at: new Date().toISOString() },
+                { onConflict: 'user_id,assessment' }
+            );
+            if (error) throw error;
+            btn.textContent = '✓ Saved';
+            if (badge) badge.style.display = 'inline-block';
+        } catch(e) {
+            btn.textContent = 'Save failed';
+            btn.disabled = false;
+            alert('Could not save score for ' + name + ': ' + e.message);
+        }
     }
 
     // ── Sign out ──────────────────────────────────────────────

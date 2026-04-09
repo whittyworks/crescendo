@@ -200,8 +200,12 @@
             <p class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</p>
         </div>
         <div id="score-sections"></div>
+        <div style="text-align:center; margin-top:1.5rem; margin-bottom:0.5rem;">
+            <span id="score-saved-badge" style="display:none; font-family:'Montserrat',sans-serif; font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:#4a7c59; background:rgba(74,124,89,0.08); border:1px solid rgba(74,124,89,0.25); border-radius:50px; padding:0.35rem 1rem;">&#10003; Score Saved</span>
+        </div>
         <div class="actions-bar">
-            <button class="action-btn" onclick="window.print()">&#10022; &nbsp; Print My Score</button>
+            <button class="action-btn primary" id="save-score-btn" onclick="saveScore()" style="background:linear-gradient(135deg,var(--gold-light),var(--gold));color:white;border-color:transparent;box-shadow:0 4px 15px rgba(212,175,55,0.3);">&#10022; &nbsp; Save My Score</button>
+            <button class="action-btn" onclick="window.print()">&#9113; &nbsp; Print My Score</button>
             <button class="action-btn" onclick="regenerate()">&circlearrowleft; &nbsp; Regenerate</button>
             <a href="my-profile.html" class="action-btn">&larr; &nbsp; Back to Profile</a>
         </div>
@@ -260,17 +264,38 @@
         try {
             const { data, error } = await sb
                 .from('user_results')
-                .select('result_data')
+                .select('assessment, result_data')
                 .eq('user_id', currentUser.id)
-                .eq('assessment', 'symphony_profile');
-            if (error || !data || data.length === 0) return;
-            profileData = data[0].result_data || {};
-            renderProfileSummary(profileData);
-            checkCompleteness(profileData);
+                .in('assessment', ['symphony_profile', 'symphony_score']);
+            if (error) return;
+            if (data) {
+                const profileRow = data.find(r => r.assessment === 'symphony_profile');
+                const scoreRow   = data.find(r => r.assessment === 'symphony_score');
+                if (profileRow) {
+                    profileData = profileRow.result_data || {};
+                    renderProfileSummary(profileData);
+                    checkCompleteness(profileData);
+                }
+                if (scoreRow && scoreRow.result_data && scoreRow.result_data.text) {
+                    showSavedScore(scoreRow.result_data.text);
+                }
+            }
         } catch(e) {
             const dbg = document.getElementById('debug-panel');
             if (dbg) { dbg.style.display = 'block'; dbg.textContent = 'LOAD PROFILE ERROR:\n' + e.message; }
         }
+    }
+
+    function showSavedScore(text) {
+        renderScore(text);
+        // Swap generate button for "regenerate" state
+        document.getElementById('generate-section').style.display = 'none';
+        // Show saved indicator
+        const savedBadge = document.getElementById('score-saved-badge');
+        if (savedBadge) savedBadge.style.display = 'inline-block';
+        // Hide save button since it's already saved
+        const saveBtn = document.getElementById('save-score-btn');
+        if (saveBtn) { saveBtn.textContent = '\u2713 Score Saved'; saveBtn.disabled = true; }
     }
 
     function val(key) { return (profileData[key] || '').trim(); }
@@ -393,6 +418,7 @@ No preamble. No closing outside the six sections.`;
             }
             const text = data.content?.[0]?.text || '';
             if (!text) throw new Error('No content returned. Full response: ' + JSON.stringify(data).slice(0, 300));
+            currentScoreText = text;
             renderScore(text);
 
         } catch(e) {
@@ -469,12 +495,18 @@ No preamble. No closing outside the six sections.`;
 
         document.getElementById('generate-section').style.display = 'none';
         document.getElementById('score-output').classList.add('active');
+        // Reset save button for fresh generation
+        const saveBtn = document.getElementById('save-score-btn');
+        if (saveBtn) { saveBtn.textContent = '\u2726 \u00a0 Save My Score'; saveBtn.disabled = false; }
+        const badge = document.getElementById('score-saved-badge');
+        if (badge) badge.style.display = 'none';
     }
 
     function regenerate() {
         document.getElementById('score-output').classList.remove('active');
         document.getElementById('generate-section').style.display = 'block';
         document.getElementById('generate-btn').disabled = false;
+        currentScoreText = '';
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -486,6 +518,29 @@ No preamble. No closing outside the six sections.`;
         const dd  = document.getElementById('account-dropdown');
         if (dd && btn && !btn.contains(e.target) && !dd.contains(e.target)) dd.classList.remove('open');
     });
+
+    // ── Save score ────────────────────────────────────────────
+    let currentScoreText = '';
+
+    async function saveScore() {
+        if (!currentScoreText) return;
+        const btn = document.getElementById('save-score-btn');
+        btn.disabled = true;
+        btn.textContent = 'Saving\u2026';
+        try {
+            const { error } = await sb.from('user_results').upsert(
+                { user_id: currentUser.id, assessment: 'symphony_score', result_data: { text: currentScoreText }, updated_at: new Date().toISOString() },
+                { onConflict: 'user_id,assessment' }
+            );
+            if (error) throw error;
+            btn.textContent = '\u2713 Score Saved';
+            const badge = document.getElementById('score-saved-badge');
+            if (badge) badge.style.display = 'inline-block';
+        } catch(e) {
+            btn.textContent = 'Save failed \u2014 try again';
+            btn.disabled = false;
+        }
+    }
 
     async function signOut() { await sb.auth.signOut(); }
 </script>
