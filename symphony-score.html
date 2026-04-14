@@ -399,7 +399,7 @@ No preamble. No closing outside the six sections.`;
         document.getElementById('loading-state').classList.add('active');
 
         try {
-            const response = await fetch('/.netlify/functions/claude-proxy', {
+            const response = await fetch('/api/claude-stream', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
