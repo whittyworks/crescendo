@@ -1,36 +1,36 @@
-const { stream } = require("@netlify/functions");
-
-exports.handler = stream(async (event) => {
+exports.handler = async function (event) {
     if (event.httpMethod !== 'POST') {
-        return new Response('Method Not Allowed', { status: 405 });
+        return { statusCode: 405, body: 'Method Not Allowed' };
     }
 
-    const body = JSON.parse(event.body);
-    body.stream = true;
+    try {
+        const body = JSON.parse(event.body);
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': process.env.ANTHROPIC_API_KEY,
-            'anthropic-version': '2023-06-01',
-        },
-        body: JSON.stringify(body),
-    });
-
-    if (!response.ok) {
-        const error = await response.text();
-        return new Response(error, {
-            status: response.status,
-            headers: { 'Access-Control-Allow-Origin': '*' }
+        const response = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': process.env.ANTHROPIC_API_KEY,
+                'anthropic-version': '2023-06-01',
+            },
+            body: JSON.stringify(body),
         });
-    }
 
-    return new Response(response.body, {
-        headers: {
-            'Content-Type': 'text/event-stream',
-            'Cache-Control': 'no-cache',
-            'Access-Control-Allow-Origin': '*',
-        },
-    });
-});
+        const data = await response.json();
+
+        return {
+            statusCode: response.status,
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            },
+            body: JSON.stringify(data),
+        };
+    } catch (err) {
+        return {
+            statusCode: 500,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ error: err.message }),
+        };
+    }
+};
