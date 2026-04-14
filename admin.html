@@ -315,6 +315,19 @@
         }
         .copy-btn:hover { background: var(--gold-dark); }
         .copy-btn.copied { background: var(--green); }
+
+        @media print {
+            nav, .page-header, .summary-bar, .detail-grid,
+            .opus-summary, .score-actions, .copy-btn,
+            .generate-score-btn, .p-chevron, .participant-header,
+            .opus-panel h4, .detail-section, .journal-entry { display: none !important; }
+            body { background: white; padding-top: 0; }
+            .participant-card { box-shadow: none; border: none; }
+            .participant-card.open .participant-detail { display: block; }
+            .score-panel { display: block !important; }
+            .score-output { display: block !important; }
+            .opus-panel { border: none; background: white; }
+        }
     </style>
 </head>
 <body>
@@ -620,6 +633,7 @@
                 <div class="score-actions" id="score-copy-row-${uid}" style="display:none;">
                     <button class="copy-score-btn" id="copy-score-btn-${uid}" onclick="copyScore('${uid}')">Copy Score Text</button>
                     <button class="generate-score-btn" id="save-score-btn-${uid}" onclick="saveScoreForParticipant('${uid}', '${name}')">&#10022; Save to Profile</button>
+                    <button class="copy-btn" onclick="window.print()">&#9113; &nbsp; Print Score</button>
                     <span id="save-score-badge-${uid}" style="display:none; font-family:'Montserrat',sans-serif; font-size:0.72rem; letter-spacing:1px; color:#4a7c59; padding:0.4rem 0.8rem; background:rgba(74,124,89,0.1); border-radius:50px;">&#10003; Saved</span>
                 </div>
             </div>
