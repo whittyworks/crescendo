@@ -315,19 +315,6 @@
         }
         .copy-btn:hover { background: var(--gold-dark); }
         .copy-btn.copied { background: var(--green); }
-
-        @media print {
-            nav, .page-header, .summary-bar, .detail-grid,
-            .opus-summary, .score-actions, .copy-btn,
-            .generate-score-btn, .p-chevron, .participant-header,
-            .opus-panel h4, .detail-section, .journal-entry { display: none !important; }
-            body { background: white; padding-top: 0; }
-            .participant-card { box-shadow: none; border: none; }
-            .participant-card.open .participant-detail { display: block; }
-            .score-panel { display: block !important; }
-            .score-output { display: block !important; }
-            .opus-panel { border: none; background: white; }
-        }
     </style>
 </head>
 <body>
@@ -633,7 +620,7 @@
                 <div class="score-actions" id="score-copy-row-${uid}" style="display:none;">
                     <button class="copy-score-btn" id="copy-score-btn-${uid}" onclick="copyScore('${uid}')">Copy Score Text</button>
                     <button class="generate-score-btn" id="save-score-btn-${uid}" onclick="saveScoreForParticipant('${uid}', '${name}')">&#10022; Save to Profile</button>
-                    <button class="copy-btn" onclick="window.print()">&#9113; &nbsp; Print Score</button>
+                    <button class="copy-btn" onclick="printScore('${uid}', '${name}')">&#9113; &nbsp; Print Score</button>
                     <span id="save-score-badge-${uid}" style="display:none; font-family:'Montserrat',sans-serif; font-size:0.72rem; letter-spacing:1px; color:#4a7c59; padding:0.4rem 0.8rem; background:rgba(74,124,89,0.1); border-radius:50px;">&#10003; Saved</span>
                 </div>
             </div>
@@ -822,6 +809,178 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
             btn.disabled = false;
             alert('Could not save score for ' + name + ': ' + e.message);
         }
+    }
+
+    // ── Print score as beautiful PDF ─────────────────────────
+    function printScore(uid, name) {
+        const text = window.scoreTexts && window.scoreTexts[uid];
+        if (!text) return;
+
+        const userData = window.adminProfiles[uid];
+        const profile = userData && userData.profile ? userData.profile : {};
+        const nameLord = (profile.p_name_lord || name || 'Beloved').trim();
+
+        const SECTIONS = [
+            { key: 'DAUGHTER',   label: 'DAUGHTER',        num: 'I' },
+            { key: 'INSTRUMENT', label: 'THE INSTRUMENT',  num: 'II' },
+            { key: 'MOVEMENTS',  label: 'THE MOVEMENTS',   num: 'III' },
+            { key: 'THEME',      label: 'THE THEME',       num: 'IV' },
+            { key: 'SYMPHONY',   label: 'YOUR SYMPHONY',   num: 'V' },
+            { key: 'SEND',       label: 'GO AND LIVE IT',  num: 'VI' },
+        ];
+
+        let sectionsHtml = '';
+        for (let i = 0; i < SECTIONS.length; i++) {
+            const s = SECTIONS[i];
+            const regex = new RegExp('^' + s.key + '\\s*$', 'mi');
+            const match = regex.exec(text);
+            if (!match) continue;
+            let sectionText = text.slice(match.index + match[0].length).trim();
+            const nextKeys = SECTIONS.slice(i+1).map(x=>x.key);
+            if (nextKeys.length) {
+                const endPattern = new RegExp('^(' + nextKeys.map(k=>k.replace(/[.*+?^${}()|[\\]\\]/g,'\\$&')).join('|') + ')\\s*$','mi');
+                const endMatch = endPattern.exec(sectionText);
+                if (endMatch) sectionText = sectionText.slice(0, endMatch.index).trim();
+            }
+            const paras = sectionText.split(/\n\n+/).map(p=>p.trim()).filter(Boolean)
+                .map(p => '<p>' + p + '</p>').join('');
+
+            if (i > 0) sectionsHtml += '<div class="divider"></div>';
+            sectionsHtml += `
+                <div class="section">
+                    <div class="section-header">
+                        <span class="section-num">${s.num}</span>
+                        <div class="section-rule"></div>
+                    </div>
+                    <h2>${s.label}</h2>
+                    ${paras}
+                </div>`;
+        }
+
+        const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Symphony Score &mdash; ${name}</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        background: white;
+        color: #2C2416;
+        line-height: 1.9;
+        padding: 3rem 4rem;
+        max-width: 780px;
+        margin: 0 auto;
+    }
+    .header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+        padding-bottom: 3rem;
+        border-bottom: 1px solid rgba(212,175,55,0.3);
+    }
+    .overline {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.65rem;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: #D4AF37;
+        margin-bottom: 1.25rem;
+    }
+    .title {
+        font-family: 'Cinzel', serif;
+        font-size: 2.2rem;
+        font-weight: 400;
+        color: #163245;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+    }
+    .name-lord {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-style: italic;
+        color: #B8941F;
+        margin-bottom: 1.5rem;
+    }
+    .ornament { font-size: 1.1rem; color: #D4AF37; letter-spacing: 10px; }
+    .section { margin-bottom: 3rem; }
+    .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+    .section-num {
+        font-family: 'Cinzel', serif;
+        font-size: 0.7rem;
+        color: #D4AF37;
+        letter-spacing: 2px;
+        flex-shrink: 0;
+    }
+    .section-rule { flex: 1; height: 1px; background: rgba(212,175,55,0.25); }
+    h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: #163245;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 1.25rem;
+    }
+    p {
+        font-size: 1.1rem;
+        color: #2C2416;
+        line-height: 1.9;
+        margin-bottom: 1.1rem;
+    }
+    p:last-child { margin-bottom: 0; }
+    .divider {
+        text-align: center;
+        color: #D4AF37;
+        margin: 2.5rem 0;
+        font-size: 0.8rem;
+        letter-spacing: 6px;
+    }
+    .divider::before { content: "✦ ✦ ✦"; }
+    .footer {
+        margin-top: 3.5rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(212,175,55,0.3);
+        text-align: center;
+        font-family: 'Cinzel', serif;
+        font-size: 0.9rem;
+        color: #D4AF37;
+        letter-spacing: 2px;
+    }
+    .footer-sub {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.6rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #B8941F;
+        margin-top: 0.4rem;
+    }
+    @media print {
+        body { padding: 1.5rem 2rem; }
+        @page { margin: 1.5cm; }
+    }
+</style>
+</head>
+<body>
+<div class="header">
+    <div class="overline">A Symphony of Grace &middot; My Holy Crescendo</div>
+    <div class="title">The Score of</div>
+    <div class="name-lord">${nameLord}</div>
+    <div class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
+</div>
+${sectionsHtml}
+<div class="footer">
+    My Holy Crescendo
+    <div class="footer-sub">Fearfully &amp; Wonderfully Made</div>
+</div>
+<script>window.onload = function() { window.print(); }<\/script>
+</body>
+</html>`;
+
+        const win = window.open('', '_blank');
+        win.document.write(html);
+        win.document.close();
     }
 
     // ── Sign out ──────────────────────────────────────────────
