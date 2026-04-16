@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1TDP2G3LV2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1TDP2G3LV2');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gifts of Grace &#183; My Holy Crescendo</title>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Gifts of Grace &#183; My Holy Crescendo">
+    <meta property="og:description" content="Discover the 24 Gifts of Grace God wired into you &#8212; a prayerful inventory of how you were made to flourish.">
+    <meta property="og:url" content="https://myholycrescendo.com/gifts-of-grace.html">
+    <meta name="description" content="Discover the 24 Gifts of Grace God wired into you &#8212; a prayerful inventory of how you were made to flourish.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <style>
+        /* Page-specific styles */
+        .strengths-hero {
+            min-height: 75vh;
+        }
+        
+        .strengths-intro {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            margin: 2rem auto;
+            max-width: 650px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
+        }
+        
+        .strengths-intro-icon {
+            font-size: 2rem;
+        }
+        
+        .strengths-intro-text {
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        
+        /* Info Block */
+        .what-are-section {
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
+        .info-block {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--gold);
+        }
+        
+        .info-block p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-block p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .scripture-quote {
+            font-style: italic;
+            color: var(--gold-dark);
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .scripture-quote cite {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            font-style: normal;
+        }
+        
+        /* Virtue Category */
+        .virtue-category {
+            margin-bottom: 4rem;
+        }
+        
+        .virtue-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .virtue-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .virtue-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .virtue-description {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .strength-card {
+            background: white;
+            padding: 1.75rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.08);
+            border-top: 3px solid var(--gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .strength-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+        }
+        
+        .card-icon {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .card-description {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        
+        /* Assessment CTA */
+        .assessment-cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(253, 248, 243, 0.9), rgba(220, 197, 216, 0.15));
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
+        .assessment-cta h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .assessment-cta p {
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .assessment-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gold);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+        }
+        
+        .assessment-btn:hover {
+            background: var(--gold-dark);
+            border-color: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+        
+        .assessment-note {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+        
+        .assessment-note a {
+            color: var(--gold-dark);
+        }
+        
+        /* Alternatives Grid */
+        .alternatives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+        
+        .alternative-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .alternative-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .alt-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .alt-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .alt-subtitle {
+            font-size: 0.95rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .alt-description {
+            font-size: 1rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Scripture Section */
+        .scripture-section {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        
+        .scripture-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--gold-dark);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .scripture-ref {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            letter-spacing: 0.05em;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+    // MHC Shared Supabase Client
+    window._mhcSb = supabase.createClient("https://whpxmygwxdwktnwpzqkt.supabase.co", "sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km");
+    </script>
+    <script>
+    // MHC Auth Guard
+    (async function() {
+        document.documentElement.style.visibility = "hidden";
+        try {
+            const { data: { session } } = await window._mhcSb.auth.getSession();
+            if (!session) {
+                window.location.replace("portal.html");
+            } else {
+                document.documentElement.style.visibility = "";
+                window._mhcAuth = window._mhcSb;
+            }
+        } catch(e) {
+            window.location.replace("portal.html");
+        }
+    })();
+    </script>
+</head>
+<body>
+    <!-- Portal Navigation -->
+    <nav class="sans">
+        <a href="index.html" class="logo-link">
+            <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
+        </a>
+        <ul class="nav-links">
+            <li><a href="portal.html" class="portal-back">← Back to Portal</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero strengths-hero">
+        <div class="hero-bg"></div>
+        <div class="watercolor-flower flower-1"></div>
+        <div class="watercolor-flower flower-2"></div>
+        <div class="gold-leaf leaf-1"></div>
+        <div class="gold-leaf leaf-2"></div>
+        
+        <div class="hero-content">
+            <p class="hero-label sans">Session 8 &#183; Strengths as Entrusted Gifts</p>
+            <h1 class="hero-title script">Gifts of Grace</h1>
+            <p class="hero-subtitle">A prayerful inventory of how God wired you to flourish</p>
+        </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="reveal">
+        <div class="container">
+            <div class="strengths-intro">
+                <span class="strengths-intro-icon">&#128142;</span>
+                <p class="strengths-intro-text">
+                    Your Gifts of Grace are not personality traits to optimize&#8212;they are particular gifts entrusted to you by God for your own flourishing and the service of others.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Are Character Strengths -->
+    <section class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">The Framework</p>
+                <h2 class="section-title script">What Are the Gifts of Grace?</h2>
+            </div>
+
+            <div class="what-are-section">
+                <div class="info-block">
+                    <p>
+                        God did not make you in generalities. He made you in particulars&#8212;with a specific mind, a specific heart, a specific way of moving through the world. These are not accidents. They are gifts.
+                    </p>
+                    <p>
+                        The <strong>Gifts of Grace</strong> are 24 natural strengths organized under four families: <strong>Gifts of the Mind</strong> (how you think, learn, and discern), <strong>Gifts of the Heart</strong> (how you love, connect, and relate), <strong>Gifts of the Will</strong> (how you act, lead, and persevere), and <strong>Gifts of the Soul</strong> (how you encounter God and transcendence).
+                    </p>
+                    <p>
+                        Every woman carries all 24 gifts to varying degrees. Your <strong>signature gifts</strong>&#8212;your top 5&#8212;are the ones that feel most essentially <em>you</em>. Living from them doesn't exhaust you. It frees you.
+                    </p>
+                    
+                    <div class="scripture-quote">
+                        "As each has received a gift, use it to serve one another, as good stewards 
+                        of God's varied grace."
+                        <cite>&#8212; 1 Peter 4:10</cite>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Take Assessment CTA (before the strengths) -->
+    <section class="reveal" style="background: var(--cream-dark);">
+        <div class="container">
+            <div class="assessment-cta">
+                <h3>Discover Your Signature Gifts</h3>
+                <p>
+                    Take the Gifts of Grace inventory to discover your unique profile&#8212;
+                    all 24 gifts ranked, your top 5 revealed, and results saved directly to your Symphony Profile.
+                </p>
+                <a href="gifts-of-grace-quiz.html" class="assessment-btn">
+                    Take the Inventory &#8594;
+                </a>
+                <p class="assessment-note">
+                    72 reflective statements. Takes about 15 minutes. 
+                    Results save automatically to your Symphony Profile.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The 24 Character Strengths by Virtue -->
+    <section class="reveal">
+        <div class="watercolor-flower flower-3" style="top: 5%; right: 5%;"></div>
+        <div class="gold-leaf leaf-1"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">The 24 Gifts</p>
+                <h2 class="section-title script">Organized by Four Families</h2>
+            </div>
+
+            <!-- GIFTS OF THE MIND -->
+            <div class="virtue-category">
+                <div class="virtue-header">
+                    <div class="virtue-icon">&#10022;</div>
+                    <h3 class="virtue-name">Gifts of the Mind</h3>
+                    <p class="virtue-description">How you think, learn, and discern</p>
+                </div>
+                <div class="cards-grid">
+                    <div class="strength-card">
+                        <h4 class="card-name">Making</h4>
+                        <p class="card-description">You see what isn&#8217;t there yet&#8212;and you know how to bring it into being. You make things&#8212;beauty, solutions, connections, meaning&#8212;out of what everyone else walks past.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Seeking</h4>
+                        <p class="card-description">Questions delight you. You don&#8217;t find uncertainty threatening&#8212;you find it interesting. Your curiosity is not distraction; it is desire. You were made to seek.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Wonder</h4>
+                        <p class="card-description">You are never quite finished learning. New ideas, new subjects, new depths of old ones&#8212;they fill something in you that stays hungry. Wonder keeps you humble and alive.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Discernment</h4>
+                        <p class="card-description">You see clearly. You weigh things carefully and resist the pull toward easy answers. Discernment is not cynicism; it is clear-eyed love.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Wisdom</h4>
+                        <p class="card-description">You stand back and see the whole. Where others are caught in the immediate, you find the longer view&#8212;the pattern, the meaning, the larger story.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Counsel</h4>
+                        <p class="card-description">You know how to act well in the particular moment. Not just what is true in the abstract, but what is right <em>here, now, for this person</em>. You don&#8217;t just know the good; you know how to do it.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GIFTS OF THE HEART -->
+            <div class="virtue-category">
+                <div class="virtue-header">
+                    <div class="virtue-icon">&#10022;</div>
+                    <h3 class="virtue-name">Gifts of the Heart</h3>
+                    <p class="virtue-description">How you love, connect, and relate</p>
+                </div>
+                <div class="cards-grid">
+                    <div class="strength-card">
+                        <h4 class="card-name">Devotion</h4>
+                        <p class="card-description">You love deeply and you mean it. Not the feeling that comes and goes, but the kind of love that shows up, stays, and gives itself away. You don&#8217;t love halfway.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Tenderness</h4>
+                        <p class="card-description">You notice the person in front of you. Not the role, not the function&#8212;the person. Tenderness is not softness for its own sake; it is strength that has chosen to be gentle.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Reading Hearts</h4>
+                        <p class="card-description">You read rooms, relationships, and people with an accuracy that can feel almost uncanny. You were given eyes that see people truly so that you could love them truly.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Mercy</h4>
+                        <p class="card-description">You know how to let things go&#8212;not because they didn&#8217;t matter, but because you&#8217;ve touched something of the mercy of God and can&#8217;t help but pass it on.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">True Seeing</h4>
+                        <p class="card-description">You see yourself as you are&#8212;neither inflated nor diminished. The gift of standing before God without performance, without apology, without pretense.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Lightness</h4>
+                        <p class="card-description">You know how to make people laugh, and you understand instinctively that laughter is a form of grace. It is the gift of the woman who dances at the feast because she knows the Host.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GIFTS OF THE WILL -->
+            <div class="virtue-category">
+                <div class="virtue-header">
+                    <div class="virtue-icon">&#10022;</div>
+                    <h3 class="virtue-name">Gifts of the Will</h3>
+                    <p class="virtue-description">How you act, lead, and persevere</p>
+                </div>
+                <div class="cards-grid">
+                    <div class="strength-card">
+                        <h4 class="card-name">Courage</h4>
+                        <p class="card-description">You act even when you are afraid. Not the absence of fear&#8212;you feel it&#8212;but you don&#8217;t let it have the last word. Courage is love that has decided the risk is worth it.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Steadfastness</h4>
+                        <p class="card-description">You finish what you start. You are the woman who shows up on the hard days, the unglamorous days, the days when no one is watching. Steadfastness builds things that last.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Integrity</h4>
+                        <p class="card-description">What you say and who you are match. In a world of curated personas, you are refreshingly, sometimes uncomfortably, real.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Unity</h4>
+                        <p class="card-description">You bring people together, hold the group, tend the <em>we.</em> Unity doesn&#8217;t erase difference; it harmonizes it. This is the gift that builds the Body of Christ from the inside out.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Justice</h4>
+                        <p class="card-description">You feel the weight of what is right and wrong, and you can&#8217;t pretend otherwise. You are the woman who speaks up, who counts everyone in, who refuses to look away.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Shepherding</h4>
+                        <p class="card-description">You lead by walking ahead and turning back to make sure everyone is still with you. Your leadership looks like tending&#8212;knowing the names of the people in your care.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Order</h4>
+                        <p class="card-description">You have an interior governor&#8212;a capacity to align your actions with your values even when your feelings pull another way. Order is the gift that makes everything else possible.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GIFTS OF THE SOUL -->
+            <div class="virtue-category">
+                <div class="virtue-header">
+                    <div class="virtue-icon">&#10022;</div>
+                    <h3 class="virtue-name">Gifts of the Soul</h3>
+                    <p class="virtue-description">How you encounter God and transcendence</p>
+                </div>
+                <div class="cards-grid">
+                    <div class="strength-card">
+                        <h4 class="card-name">Beholding</h4>
+                        <p class="card-description">You stop. You notice. Beauty is how God signs His work, and you were given eyes to see His signature everywhere. Beholding is not aesthetic indulgence; it is a form of prayer.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Thanksgiving</h4>
+                        <p class="card-description">You receive well. You have a native capacity to find the grace inside the moment and name it. Thanksgiving is not optimism; it is attentiveness.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Holy Hope</h4>
+                        <p class="card-description">You carry the future with you. Holy Hope is not wishful thinking; it is theological conviction lived from the inside out. You act as if the resurrection already changes everything&#8212;because it does.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Aliveness</h4>
+                        <p class="card-description">You bring energy into the room when you enter it. Not performance&#8212;presence. It is the overflow of a soul that has said yes to being here, fully, without holding back.</p>
+                    </div>
+                    <div class="strength-card">
+                        <h4 class="card-name">Holy Longing</h4>
+                        <p class="card-description">There is a hunger in you that the world cannot satisfy&#8212;and you&#8217;ve stopped trying to make it. This longing is not a wound; it is a compass pointing always toward God.</p>
+                    </div>
+                </div>
+            </div>
+                </div>
+    </section>
+
+    <!-- Using Your Strengths -->
+    <section class="reveal" style="background: var(--cream-dark);">
+        <div class="watercolor-flower flower-2" style="bottom: 15%; left: 5%;"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">Putting It to Work</p>
+                <h2 class="section-title script">Living from Your Strengths</h2>
+            </div>
+
+            <div class="what-are-section">
+                <div class="info-block">
+                    <p>
+                        Your <strong>signature gifts</strong>&#8212;your top 5&#8212;are the ones that feel most authentically <em>you</em>. Living from them doesn&#8217;t exhaust you. It frees you. They&#8217;re often so native to who you are that you may not even recognize them as gifts at all.
+                    </p>
+                    <p>
+                        In <em>A Symphony of Grace</em>, we explore your Gifts of Grace as <strong>entrusted gifts</strong>&#8212;given by God for your own flourishing and to bless those around you. The question isn&#8217;t just what they are, but how you are stewarding them.
+                    </p>
+                    <p>
+                        When you live from your signature gifts, you&#8217;re not performing a version of yourself. You&#8217;re living as the woman God actually made.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Record Your Results -->
+    <section class="reveal" id="record-results" style="background: white; padding: 5rem 5%;">
+        <div class="container" style="max-width: 700px; margin: 0 auto;">
+            <div class="section-header" style="text-align:center; margin-bottom: 2.5rem;">
+                <p class="section-label sans">Save to Your Profile</p>
+                <h2 class="section-title script">Record Your Top Gifts</h2>
+                <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--text-medium); margin-top:1rem; line-height:1.8;">After completing the inventory, your top 5 Gifts of Grace save automatically. You can also enter or update them here.</p>
+            </div>
+            <div id="strengths-login-msg" style="display:none; text-align:center; font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; color:var(--text-medium); margin-bottom:1.5rem;"><a href="portal.html" style="color:var(--gold);">Sign in to your portal</a> to save your results.</div>
+            <div id="strengths-form">
+                <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;">
+                    <div style="display:flex;align-items:center;gap:1rem;"><span style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-light);min-width:20px;text-align:right;">1</span><input type="text" id="str1" placeholder="Your top gift&hellip;" style="flex:1;border:none;border-bottom:1px solid rgba(212,175,55,0.35);background:transparent;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-dark);padding:8px 4px;outline:none;"></div>
+                    <div style="display:flex;align-items:center;gap:1rem;"><span style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-light);min-width:20px;text-align:right;">2</span><input type="text" id="str2" placeholder="" style="flex:1;border:none;border-bottom:1px solid rgba(212,175,55,0.35);background:transparent;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-dark);padding:8px 4px;outline:none;"></div>
+                    <div style="display:flex;align-items:center;gap:1rem;"><span style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-light);min-width:20px;text-align:right;">3</span><input type="text" id="str3" placeholder="" style="flex:1;border:none;border-bottom:1px solid rgba(212,175,55,0.35);background:transparent;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-dark);padding:8px 4px;outline:none;"></div>
+                    <div style="display:flex;align-items:center;gap:1rem;"><span style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-light);min-width:20px;text-align:right;">4</span><input type="text" id="str4" placeholder="" style="flex:1;border:none;border-bottom:1px solid rgba(212,175,55,0.35);background:transparent;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-dark);padding:8px 4px;outline:none;"></div>
+                    <div style="display:flex;align-items:center;gap:1rem;"><span style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-light);min-width:20px;text-align:right;">5</span><input type="text" id="str5" placeholder="" style="flex:1;border:none;border-bottom:1px solid rgba(212,175,55,0.35);background:transparent;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-dark);padding:8px 4px;outline:none;"></div>
+                </div>
+                <div style="text-align:center;">
+                    <button id="save-strengths-btn" onclick="saveStrengths()" style="font-family:'Montserrat',sans-serif;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;padding:1rem 2.5rem;background:linear-gradient(135deg,#B8941F,#D4AF37);color:white;border:none;border-radius:50px;cursor:pointer;box-shadow:0 4px 20px rgba(212,175,55,0.3);">&#10022; Save to My Profile</button>
+                    <p id="save-strengths-msg" style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;margin-top:1rem;display:none;"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripture -->
+
+    <section class="reveal">
+        <div class="scripture-section">
+            <p class="scripture-text">
+                "For we are his workmanship, created in Christ Jesus for good works, 
+                which God prepared beforehand, that we should walk in them."
+            </p>
+            <p class="scripture-ref">&#8212; Ephesians 2:10</p>
+        </div>
+    </section>
+
+    <!-- Other Resources -->
+    <section class="reveal" style="background: var(--cream-dark);">
+        <div class="watercolor-flower flower-1" style="bottom: 15%; right: 10%;"></div>
+        
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label sans">More Resources</p>
+                <h2 class="section-title script">Continue Your Journey</h2>
+            </div>
+
+            <div class="alternatives-grid">
+                <div class="alternative-card">
+                    <div class="alt-icon">&#128293;</div>
+                    <h3 class="alt-title script">Charisms</h3>
+                    <p class="alt-subtitle">Spiritual Gifts</p>
+                    <p class="alt-description">
+                        Discover the charisms of the Holy Spirit&#8212;supernatural gifts 
+                        given for building up the Body of Christ.
+                    </p>
+                    <a href="charisms.html" class="cta-button secondary">Explore Charisms</a>
+                </div>
+
+                <div class="alternative-card">
+                    <div class="alt-icon">&#128255;</div>
+                    <h3 class="alt-title script">Virtue Assessment</h3>
+                    <p class="alt-subtitle">Classical Virtues</p>
+                    <p class="alt-description">
+                        Explore the 42 virtues from St. Albert the Great and discover 
+                        where you're growing in holiness.
+                    </p>
+                    <a href="virtue-assessment.html" class="cta-button secondary">Take Assessment</a>
+                </div>
+
+                <div class="alternative-card">
+                    <div class="alt-icon">&#128149;</div>
+                    <h3 class="alt-title script">Love Languages</h3>
+                    <p class="alt-subtitle">How You Give & Receive Love</p>
+                    <p class="alt-description">
+                        Discover your love language and attachment style to transform 
+                        your closest relationships.
+                    </p>
+                    <a href="love-languages.html" class="cta-button secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3 class="script">My Holy Crescendo</h3>
+                <p class="footer-tagline">fearfully & wonderfully made</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="symphony-of-grace.html">15-Week Journey</a>
+                <a href="made-beautiful.html">Retreat</a>
+                <a href="personal-journey.html">1:1 Coaching</a>
+                <a href="prelude.html">Free Prelude</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 My Holy Crescendo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const sb = window._mhcSb; // shared client
+        sb.auth.getSession().then(async ({ data: { session } }) => {
+            if (!session) { document.getElementById('strengths-login-msg').style.display = 'block'; document.getElementById('save-strengths-btn').style.display = 'none'; return; }
+            const { data } = await sb.from('user_results').select('result_data').eq('user_id', session.user.id).eq('assessment', 'symphony_profile').maybeSingle();
+            if (data?.result_data) { ['str1','str2','str3','str4','str5'].forEach(id => { const val = data.result_data['p_' + id]; if (val) document.getElementById(id).value = val; }); }
+        });
+        async function saveStrengths() {
+            const { data: { session } } = await sb.auth.getSession();
+            if (!session) return;
+            const btn = document.getElementById('save-strengths-btn');
+            btn.textContent = 'Saving…'; btn.disabled = true;
+            const { data: existing } = await sb.from('user_results').select('result_data').eq('user_id', session.user.id).eq('assessment', 'symphony_profile').maybeSingle();
+            const profileData = existing?.result_data || {};
+            ['str1','str2','str3','str4','str5'].forEach(id => { profileData['p_' + id] = document.getElementById(id).value; });
+            const { error } = await sb.from('user_results').upsert({ user_id: session.user.id, assessment: 'symphony_profile', result_data: profileData, updated_at: new Date().toISOString() }, { onConflict: 'user_id,assessment' });
+            btn.textContent = '✦ Save to My Profile'; btn.disabled = false;
+            const msg = document.getElementById('save-strengths-msg');
+            if (error) { msg.textContent = 'Something went wrong — please try again.'; msg.style.color = '#c44569'; }
+            else { msg.textContent = '✦ Your top strengths have been saved to your Symphony Profile.'; msg.style.color = '#4a7c59'; btn.textContent = '✓ Saved!'; }
+            msg.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>

@@ -374,8 +374,8 @@
         p_love_secondary: 'Secondary Love Language',
         p_temperament:    'Temperament',
         p_type:           'Personality Type',
-        p_str1: 'Strength 1', p_str2: 'Strength 2', p_str3: 'Strength 3',
-        p_str4: 'Strength 4', p_str5: 'Strength 5',
+        p_str1: 'Gift of Grace 1', p_str2: 'Gift of Grace 2', p_str3: 'Gift of Grace 3',
+        p_str4: 'Gift of Grace 4', p_str5: 'Gift of Grace 5',
         p_vir1: 'Virtue 1',  p_vir2: 'Virtue 2',  p_vir3: 'Virtue 3',
         p_vir4: 'Virtue 4',  p_vir5: 'Virtue 5',
         p_char1: 'Charism 1', p_char2: 'Charism 2', p_char3: 'Charism 3',
@@ -548,7 +548,7 @@
         const temp = profile.p_temperament; if (temp) opusParts.push('Temperament: ' + temp);
         const type = profile.p_type; if (type) opusParts.push('Personality type: ' + type);
         const strs = strFields.map(f => profile[f]).filter(Boolean);
-        if (strs.length) opusParts.push('Strengths: ' + strs.join(', '));
+        if (strs.length) opusParts.push('Gifts of Grace: ' + strs.join(', '));
         const virs = virFields.map(f => profile[f]).filter(Boolean);
         if (virs.length) opusParts.push('Virtues: ' + virs.join(', '));
         const chars = charFields.map(f => profile[f]).filter(Boolean);
@@ -598,7 +598,7 @@
                 ${coreFields.map(f => fieldRow(f, profile)).join('')}
             </div>
             <div class="detail-section">
-                <h4>Strengths, Virtues &amp; Charisms</h4>
+                <h4>Gifts of Grace, Virtues &amp; Charisms</h4>
                 ${strFields.map(f => fieldRow(f, profile)).join('')}
                 <br>
                 ${virFields.map(f => fieldRow(f, profile)).join('')}
@@ -693,7 +693,7 @@ Sacred Silhouette: ${f('p_silhouette')}
 MIND:
 Temperament Blend: ${f('p_temperament')}
 Personality Type / Cognitive Functions: ${f('p_type')}
-Top Character Strengths: ${list('p_str1','p_str2','p_str3','p_str4','p_str5')}
+Top Gifts of Grace: ${list('p_str1','p_str2','p_str3','p_str4','p_str5')}
 Primary Love Language: ${f('p_love_primary')}
 Secondary Love Language: ${f('p_love_secondary')}
 

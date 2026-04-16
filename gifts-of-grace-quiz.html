@@ -1291,11 +1291,11 @@ async function saveToProfile() {
         .maybeSingle();
 
     const profileData = existing?.result_data || {};
-    profileData.p_gifts_top1 = top5[0] || '';
-    profileData.p_gifts_top2 = top5[1] || '';
-    profileData.p_gifts_top3 = top5[2] || '';
-    profileData.p_gifts_top4 = top5[3] || '';
-    profileData.p_gifts_top5 = top5[4] || '';
+    profileData.p_str1 = top5[0] || '';
+    profileData.p_str2 = top5[1] || '';
+    profileData.p_str3 = top5[2] || '';
+    profileData.p_str4 = top5[3] || '';
+    profileData.p_str5 = top5[4] || '';
 
     const { error } = await sb.from('user_results').upsert({
         user_id: currentUser.id,
