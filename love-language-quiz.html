@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QX21GDR7T"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7QX21GDR7T');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Language of Your Love &middot; My Holy Crescendo</title>
+    <meta name="description" content="Discover how you give love, how you receive it, and what love feels like when it is truly working.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="The Language of Your Love &middot; My Holy Crescendo">
+    <meta property="og:url" content="https://myholycrescendo.com/love-languages-quiz.html">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+            --text-light: #8A7A6A;
+            --shadow: rgba(44, 36, 22, 0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ── Auth Gate ── */
+        #auth-gate {
+            display: none; min-height: 100vh;
+            align-items: center; justify-content: center; padding: 2rem;
+        }
+        .auth-card {
+            background: white; border-radius: 12px; padding: 3rem 2.5rem;
+            max-width: 480px; text-align: center;
+            box-shadow: 0 8px 32px var(--shadow); border-top: 3px solid var(--gold);
+        }
+        .auth-card h2 { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold-dark); margin-bottom: 1rem; }
+        .auth-card p { font-size: 1.05rem; color: var(--text-medium); line-height: 1.75; margin-bottom: 1.5rem; }
+        .auth-card a {
+            display: inline-block; background: var(--gold); color: white;
+            font-family: 'Montserrat', sans-serif; font-size: 0.82rem;
+            letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+            padding: 0.9rem 2.5rem; border-radius: 50px; transition: all 0.3s;
+        }
+        .auth-card a:hover { background: var(--gold-dark); transform: translateY(-1px); }
+
+        /* ── Nav ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(253,248,243,0.97); backdrop-filter: blur(10px);
+            padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; border-bottom: 1px solid rgba(212,175,55,0.2);
+        }
+        .logo-link { text-decoration: none; }
+        .logo-image { height: 40px; width: auto; display: block; transition: opacity 0.3s; }
+        .logo-image:hover { opacity: 0.8; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: var(--text-medium); text-decoration: none;
+            font-family: 'Montserrat', sans-serif; font-size: 0.82rem;
+            letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold-dark); }
+
+        /* ── App wrapper ── */
+        #quiz-app { display: none; padding-top: 75px; min-height: 100vh; }
+
+        /* ── Shared screen wrapper ── */
+        .screen { width: 100%; max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+        .screen.hidden { display: none; }
+
+        /* ── Intro ── */
+        .intro-icon {
+            font-size: 3.5rem; display: block; text-align: center;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        .intro-label {
+            font-family: 'Montserrat', sans-serif; font-size: 0.75rem;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--gold); text-align: center; margin-bottom: 0.75rem;
+        }
+        .intro-title {
+            font-family: 'Cinzel', serif; font-size: clamp(1.8rem,5vw,2.8rem);
+            color: var(--gold-dark); line-height: 1.25;
+            text-align: center; margin-bottom: 0.5rem;
+        }
+        .intro-subtitle {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+            font-style: italic; color: var(--text-medium);
+            text-align: center; margin-bottom: 2rem;
+        }
+        .intro-card {
+            background: white; border-radius: 12px; padding: 2.5rem;
+            margin-bottom: 2rem; box-shadow: 0 8px 32px var(--shadow);
+            border-top: 3px solid var(--gold);
+        }
+        .intro-card p { font-size: 1.1rem; color: var(--text-medium); line-height: 1.85; margin-bottom: 1.25rem; }
+        .intro-card p:last-child { margin-bottom: 0; }
+        .intro-card strong { color: var(--text-dark); }
+        .intro-stats {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 1rem; margin-bottom: 2rem;
+        }
+        .stat-item {
+            background: white; border-radius: 10px; padding: 1.25rem 1rem;
+            text-align: center; box-shadow: 0 4px 16px var(--shadow);
+        }
+        .stat-number { font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--gold-dark); display: block; margin-bottom: 0.25rem; }
+        .stat-label { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; letter-spacing: 0.05em; color: var(--text-light); text-transform: uppercase; }
+        .prayer-card {
+            background: linear-gradient(135deg,rgba(212,175,55,0.07),rgba(253,248,243,0.95));
+            border: 1.5px solid rgba(212,175,55,0.3); border-radius: 12px;
+            padding: 2.5rem 2.25rem; margin-bottom: 2rem; text-align: center;
+        }
+        .prayer-cross { font-size: 1.3rem; color: var(--gold); margin-bottom: 0.5rem; display: block; letter-spacing: 0.1em; }
+        .prayer-label { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+        .prayer-text p { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--text-medium); line-height: 1.9; margin-bottom: 1.1rem; }
+        .prayer-text p:last-child { margin-bottom: 0; }
+        .prayer-amen { font-family: 'Cinzel', serif !important; font-size: 1.1rem !important; font-style: normal !important; color: var(--gold-dark) !important; letter-spacing: 0.12em; margin-top: 1.5rem !important; }
+        .begin-btn {
+            display: block; margin: 0 auto;
+            background: var(--gold); color: white; border: none;
+            padding: 1.1rem 3rem; border-radius: 50px;
+            font-family: 'Montserrat', sans-serif; font-size: 0.9rem;
+            font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+            cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(212,175,55,0.35);
+        }
+        .begin-btn:hover { background: var(--gold-dark); transform: translateY(-2px); }
+
+        /* ── Quiz Screen ── */
+        .quiz-header { text-align: center; margin-bottom: 2rem; }
+        .quiz-section-label { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.35rem; }
+        .quiz-section-title { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold-dark); }
+        .quiz-section-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: var(--text-medium); margin-top: 0.25rem; }
+
+        .progress-wrap { margin-bottom: 2.5rem; }
+        .progress-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+        .progress-text { font-family: 'Montserrat', sans-serif; font-size: 0.78rem; color: var(--text-light); }
+        .progress-pct { font-family: 'Montserrat', sans-serif; font-size: 0.78rem; color: var(--gold); font-weight: 500; }
+        .progress-bar { height: 6px; background: rgba(212,175,55,0.15); border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg,var(--gold-light),var(--gold)); border-radius: 3px; transition: width 0.5s ease; }
+
+        /* ── Forced Choice ── */
+        .fc-pair {
+            margin-bottom: 1.25rem;
+            background: white; border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow);
+            overflow: hidden;
+        }
+        .fc-num {
+            font-family: 'Montserrat', sans-serif; font-size: 0.68rem;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--gold); padding: 0.75rem 1.5rem 0;
+        }
+        .fc-instruction {
+            font-family: 'Montserrat', sans-serif; font-size: 0.7rem;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--text-light); padding: 0.25rem 1.5rem 0.75rem;
+        }
+        .fc-options { display: grid; grid-template-columns: 1fr 1fr; }
+        .fc-option {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer; transition: all 0.2s;
+            border-top: 1px solid rgba(212,175,55,0.12);
+            font-size: 1.05rem; color: var(--text-medium); line-height: 1.6;
+            position: relative;
+        }
+        .fc-option:first-child { border-right: 1px solid rgba(212,175,55,0.12); }
+        .fc-option:hover { background: rgba(212,175,55,0.06); color: var(--text-dark); }
+        .fc-option.selected {
+            background: var(--gold); color: white;
+        }
+        .fc-option.selected::after {
+            content: '&#10003;';
+            position: absolute; top: 0.75rem; right: 0.75rem;
+            font-size: 0.9rem; opacity: 0.8;
+        }
+        .fc-option.dimmed { opacity: 0.4; }
+        .fc-pair.answered { border-left: 3px solid var(--gold); }
+
+        /* ── Likert (D3) ── */
+        .question-card {
+            background: white; border-radius: 12px; padding: 1.75rem 2rem;
+            box-shadow: 0 4px 20px var(--shadow);
+            border-left: 3px solid rgba(212,175,55,0.25);
+            transition: border-color 0.3s; margin-bottom: 1.25rem;
+        }
+        .question-card.answered { border-left-color: var(--gold); }
+        .question-num { font-family: 'Montserrat', sans-serif; font-size: 0.68rem; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.4rem; }
+        .question-text { font-size: 1.1rem; color: var(--text-dark); line-height: 1.65; margin-bottom: 1.25rem; }
+        .rating-scale { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+        .rating-btn {
+            flex: 1; min-width: 48px; background: var(--cream-dark);
+            border: 1.5px solid transparent; border-radius: 8px;
+            padding: 0.55rem 0.25rem; cursor: pointer; transition: all 0.2s;
+            display: flex; flex-direction: column; align-items: center; gap: 3px;
+        }
+        .rating-btn:hover { background: rgba(212,175,55,0.12); border-color: var(--gold-light); }
+        .rating-btn.selected { background: var(--gold); border-color: var(--gold); }
+        .rb-num { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--text-medium); font-weight: 600; }
+        .rating-btn.selected .rb-num { color: white; }
+        .rb-label { font-family: 'Montserrat', sans-serif; font-size: 0.55rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-light); text-align: center; line-height: 1.2; }
+        .rating-btn.selected .rb-label { color: rgba(255,255,255,0.85); }
+        .scale-legend { display: flex; justify-content: space-between; margin-top: 0.4rem; }
+        .scale-legend span { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.05em; color: var(--text-light); text-transform: uppercase; }
+
+        /* ── Nav buttons ── */
+        .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; flex-wrap: wrap; gap: 1rem; }
+        .nav-btn { font-family: 'Montserrat', sans-serif; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; padding: 0.75rem 1.75rem; border-radius: 50px; }
+        .btn-prev { background: transparent; border: 1.5px solid rgba(212,175,55,0.4); color: var(--text-medium); }
+        .btn-prev:hover:not(:disabled) { border-color: var(--gold); color: var(--gold-dark); }
+        .btn-prev:disabled { opacity: 0.35; cursor: default; }
+        .btn-next { background: var(--gold); color: white; border: none; box-shadow: 0 4px 16px rgba(212,175,55,0.35); }
+        .btn-next:hover { background: var(--gold-dark); transform: translateY(-1px); }
+        .btn-results { background: linear-gradient(135deg,var(--gold-dark),var(--gold)); color: white; border: none; display: none; box-shadow: 0 4px 20px rgba(212,175,55,0.4); }
+        .btn-results:hover { transform: translateY(-2px); }
+        .unanswered-msg { text-align: center; color: #c0783a; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; margin-top: 0.75rem; display: none; }
+
+        /* ── Results ── */
+        .results-hero {
+            text-align: center; margin-bottom: 3rem; padding: 3rem 2rem;
+            background: linear-gradient(135deg,rgba(212,175,55,0.08),rgba(253,248,243,0.9));
+            border-radius: 16px;
+        }
+        .results-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .results-label { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+        .results-title { font-family: 'Cinzel', serif; font-size: clamp(1.6rem,4vw,2.4rem); color: var(--gold-dark); margin-bottom: 0.5rem; }
+        .results-sub { font-size: 1.2rem; font-style: italic; color: var(--text-medium); }
+        .results-portrait {
+            background: white; border-radius: 12px; padding: 2rem 2.25rem;
+            margin-bottom: 2.5rem; box-shadow: 0 6px 24px var(--shadow);
+            border-left: 4px solid var(--gold); font-size: 1.15rem;
+            color: var(--text-medium); line-height: 1.85; font-style: italic;
+        }
+
+        .section-heading { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-dark); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(212,175,55,0.2); letter-spacing: 0.05em; }
+
+        .result-card {
+            background: white; border-radius: 12px; padding: 2rem 2.25rem;
+            margin-bottom: 1.5rem; box-shadow: 0 6px 28px var(--shadow);
+            border-top: 3px solid var(--gold); position: relative; overflow: hidden;
+        }
+        .result-card::before { content: attr(data-rank); position: absolute; right: 1.5rem; top: 1.25rem; font-family: 'Cinzel', serif; font-size: 3.5rem; color: rgba(212,175,55,0.08); font-weight: 600; line-height: 1; }
+        .result-card.secondary { border-top-color: var(--gold-light); }
+        .result-card-label { font-family: 'Montserrat', sans-serif; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+        .result-card-name { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold-dark); margin-bottom: 1rem; }
+        .result-card-desc { font-size: 1.05rem; color: var(--text-medium); line-height: 1.8; }
+
+        .gap-insight {
+            background: linear-gradient(135deg,rgba(212,175,55,0.06),rgba(253,248,243,0.9));
+            border: 1.5px solid rgba(212,175,55,0.25); border-radius: 12px;
+            padding: 1.75rem 2rem; margin-bottom: 2.5rem;
+        }
+        .gap-insight h4 { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold-dark); margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+        .gap-insight p { font-size: 1.05rem; color: var(--text-medium); line-height: 1.75; }
+
+        .orientation-card {
+            background: white; border-radius: 12px; padding: 2rem 2.25rem;
+            margin-bottom: 1.5rem; box-shadow: 0 6px 28px var(--shadow);
+            border-top: 3px solid var(--gold-dark);
+        }
+        .orientation-label { font-family: 'Montserrat', sans-serif; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 0.3rem; }
+        .orientation-name { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold-dark); margin-bottom: 1rem; }
+        .orientation-desc { font-size: 1.05rem; color: var(--text-medium); line-height: 1.8; }
+
+        /* Bar chart */
+        .bar-section { margin-bottom: 3rem; }
+        .bar-group-label { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.75rem; }
+        .bar-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.8rem; }
+        .bar-name { font-family: 'Montserrat', sans-serif; font-size: 0.76rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-medium); width: 130px; flex-shrink: 0; }
+        .bar-name.top { color: var(--gold-dark); font-weight: 500; }
+        .bar-track { flex: 1; height: 9px; background: rgba(212,175,55,0.12); border-radius: 5px; overflow: hidden; }
+        .bar-fill { height: 100%; background: linear-gradient(90deg,var(--gold-light),var(--gold)); border-radius: 5px; width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+        .bar-fill.top { background: linear-gradient(90deg,var(--gold),var(--gold-dark)); }
+        .bar-score { font-family: 'Montserrat', sans-serif; font-size: 0.73rem; color: var(--text-light); width: 32px; text-align: right; flex-shrink: 0; }
+
+        /* Save section */
+        .save-section {
+            background: linear-gradient(135deg,rgba(212,175,55,0.06),rgba(253,248,243,0.9));
+            border: 1.5px solid rgba(212,175,55,0.25); border-radius: 12px;
+            padding: 2rem 2.25rem; margin-bottom: 2.5rem; text-align: center;
+        }
+        .save-section h4 { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold-dark); margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+        .save-section p { font-size: 1.05rem; color: var(--text-medium); line-height: 1.75; margin-bottom: 1.25rem; }
+        .save-btn {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            background: linear-gradient(135deg,var(--gold-dark),var(--gold)); color: white; border: none;
+            font-family: 'Montserrat', sans-serif; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 0.9rem 2.25rem; border-radius: 50px; cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(212,175,55,0.35);
+        }
+        .save-btn:hover { transform: translateY(-2px); }
+        .save-btn:disabled { opacity: 0.6; cursor: default; transform: none; }
+        #save-msg { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; margin-top: 1rem; display: none; }
+        .retake-btn {
+            display: block; margin: 1rem auto 0; background: transparent;
+            border: 1.5px solid rgba(212,175,55,0.4); color: var(--text-medium);
+            font-family: 'Montserrat', sans-serif; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 0.65rem 1.75rem; border-radius: 50px; cursor: pointer; transition: all 0.3s;
+        }
+        .retake-btn:hover { border-color: var(--gold); color: var(--gold-dark); }
+        .results-cta {
+            text-align: center; padding: 2.5rem; background: white;
+            border-radius: 12px; box-shadow: 0 6px 24px var(--shadow);
+        }
+        .results-cta h3 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--gold-dark); margin-bottom: 0.75rem; }
+        .results-cta p { font-size: 1.1rem; color: var(--text-medium); line-height: 1.75; margin-bottom: 1.5rem; }
+        .cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-primary { display: inline-block; background: var(--gold); color: white; font-family: 'Montserrat', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 0.9rem 2rem; border-radius: 50px; transition: all 0.3s; }
+        .cta-primary:hover { background: var(--gold-dark); transform: translateY(-1px); }
+        .cta-secondary { display: inline-block; background: transparent; border: 1.5px solid rgba(212,175,55,0.5); color: var(--text-medium); font-family: 'Montserrat', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 0.9rem 2rem; border-radius: 50px; transition: all 0.3s; }
+        .cta-secondary:hover { border-color: var(--gold); color: var(--gold-dark); }
+
+        @media (max-width: 560px) {
+            .fc-options { grid-template-columns: 1fr; }
+            .fc-option:first-child { border-right: none; border-bottom: 1px solid rgba(212,175,55,0.12); }
+            .bar-name { width: 100px; font-size: 0.68rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Auth Gate -->
+<div id="auth-gate">
+    <div class="auth-card">
+        <h2>Portal Access Required</h2>
+        <p>The Language of Your Love inventory is available to <em>A Symphony of Grace</em> participants. Please sign in to your portal to continue.</p>
+        <a href="portal.html">Sign In to Your Portal</a>
+    </div>
+</div>
+
+<!-- Main App -->
+<div id="quiz-app">
+
+    <nav class="sans">
+        <a href="index.html" class="logo-link">
+            <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
+        </a>
+        <ul class="nav-links">
+            <li><a href="portal.html" class="portal-back">← Back to Portal</a></li>
+        </ul>
+    </nav>
+
+    <!-- Intro -->
+    <div class="screen" id="screen-intro">
+        <span class="intro-icon">&#10084;&#65039;</span>
+        <p class="intro-label">Session 7 &middot; Giving &amp; Receiving</p>
+        <h1 class="intro-title">The Language of Your Love</h1>
+        <p class="intro-subtitle">How you give, how you receive, and what love feels like when it&rsquo;s truly working</p>
+
+        <div class="intro-card">
+            <p>God made you to give and receive love in particular ways. Not just any love &mdash; the specific kind that reaches you, fills you, and flows most naturally from you.</p>
+            <p>This inventory explores <strong>three dimensions</strong> of your love life: how you tend to <em>express</em> love to others, how you most deeply <em>receive</em> it, and what love <em>feels like</em> for you when it is truly working. These three may surprise you &mdash; they don&rsquo;t always match.</p>
+            <p>Answer as honestly as you can. There are no right answers. Every language is a gift.</p>
+        </div>
+
+        <div class="intro-stats">
+            <div class="stat-item"><span class="stat-number">52</span><span class="stat-label">Questions</span></div>
+            <div class="stat-item"><span class="stat-number">3</span><span class="stat-label">Dimensions</span></div>
+            <div class="stat-item"><span class="stat-number">~15</span><span class="stat-label">Minutes</span></div>
+        </div>
+
+        <div class="prayer-card">
+            <span class="prayer-cross">&#10013;</span>
+            <p class="prayer-label">A Prayer Before Beginning</p>
+            <div class="prayer-text">
+                <p>Lord, You made me for love &mdash; to give it and to receive it. You who are Love itself have poured that love into me and shaped me to carry it in particular ways.</p>
+                <p>As I move through this inventory, open my eyes to see how You wired me. Let me be honest about what fills me and what flows from me. And let what I discover here draw me closer to You and to the people You have placed in my life.</p>
+                <p class="prayer-amen">Amen.</p>
+            </div>
+        </div>
+
+        <button class="begin-btn" onclick="startQuiz()">Begin the Inventory</button>
+    </div>
+
+    <!-- Quiz: D1 - Giving -->
+    <div class="screen hidden" id="screen-d1">
+        <div class="quiz-header">
+            <p class="quiz-section-label">Dimension 1 of 3</p>
+            <h2 class="quiz-section-title">How You Give Love</h2>
+            <p class="quiz-section-subtitle">Choose the statement that feels more like you</p>
+        </div>
+        <div class="progress-wrap">
+            <div class="progress-meta">
+                <span class="progress-text">Section 1 of 3</span>
+                <span class="progress-pct" id="d1-pct">0%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="d1-fill" style="width:0%"></div></div>
+        </div>
+        <div id="d1-pairs"></div>
+        <p class="unanswered-msg" id="d1-msg">Please answer all questions before continuing.</p>
+        <div class="nav-row">
+            <button class="nav-btn btn-prev" disabled>&#8592; Previous</button>
+            <button class="nav-btn btn-next" onclick="goToD2()">Next &#8594;</button>
+        </div>
+    </div>
+
+    <!-- Quiz: D2 - Receiving -->
+    <div class="screen hidden" id="screen-d2">
+        <div class="quiz-header">
+            <p class="quiz-section-label">Dimension 2 of 3</p>
+            <h2 class="quiz-section-title">How You Receive Love</h2>
+            <p class="quiz-section-subtitle">Choose the statement that feels more true for you</p>
+        </div>
+        <div class="progress-wrap">
+            <div class="progress-meta">
+                <span class="progress-text">Section 2 of 3</span>
+                <span class="progress-pct" id="d2-pct">0%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="d2-fill" style="width:0%"></div></div>
+        </div>
+        <div id="d2-pairs"></div>
+        <p class="unanswered-msg" id="d2-msg">Please answer all questions before continuing.</p>
+        <div class="nav-row">
+            <button class="nav-btn btn-prev" onclick="goToD1()">&#8592; Previous</button>
+            <button class="nav-btn btn-next" onclick="goToD3()">Next &#8594;</button>
+        </div>
+    </div>
+
+    <!-- Quiz: D3 - Orientation -->
+    <div class="screen hidden" id="screen-d3">
+        <div class="quiz-header">
+            <p class="quiz-section-label">Dimension 3 of 3</p>
+            <h2 class="quiz-section-title">What Love Feels Like</h2>
+            <p class="quiz-section-subtitle">Rate each statement from Not at all like me to Completely like me</p>
+        </div>
+        <div class="progress-wrap">
+            <div class="progress-meta">
+                <span class="progress-text">Section 3 of 3</span>
+                <span class="progress-pct" id="d3-pct">0%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="d3-fill" style="width:0%"></div></div>
+        </div>
+        <div id="d3-questions"></div>
+        <p class="unanswered-msg" id="d3-msg">Please answer all questions before continuing.</p>
+        <div class="nav-row">
+            <button class="nav-btn btn-prev" onclick="goToD2()">&#8592; Previous</button>
+            <button class="nav-btn btn-results" id="btn-results" style="display:inline-block;" onclick="showResults()">See My Results &#10022;</button>
+        </div>
+    </div>
+
+    <!-- Results -->
+    <div class="screen hidden" id="screen-results">
+
+        <div class="results-hero">
+            <div class="results-icon">&#10084;&#65039;</div>
+            <p class="results-label">Your Love Portrait</p>
+            <h2 class="results-title" id="results-headline">Your Love Portrait</h2>
+            <p class="results-sub" id="results-sub"></p>
+        </div>
+
+        <p class="results-portrait" id="results-portrait"></p>
+
+        <div style="margin-bottom:3rem;">
+            <h3 class="section-heading">How You Give Love</h3>
+            <div id="give-cards"></div>
+        </div>
+
+        <div style="margin-bottom:3rem;">
+            <h3 class="section-heading">How You Receive Love</h3>
+            <div id="receive-cards"></div>
+        </div>
+
+        <div id="gap-section" style="display:none; margin-bottom:2.5rem;"></div>
+
+        <div style="margin-bottom:3rem;">
+            <h3 class="section-heading">What Love Feels Like for You</h3>
+            <div id="orientation-card"></div>
+        </div>
+
+        <div class="bar-section">
+            <h3 class="section-heading">Your Full Scores</h3>
+            <p class="bar-group-label" style="margin-bottom:1rem;">How You Give &mdash; all five languages</p>
+            <div id="give-bars"></div>
+            <p class="bar-group-label" style="margin-top:2rem; margin-bottom:1rem;">How You Receive &mdash; all five languages</p>
+            <div id="receive-bars"></div>
+            <p class="bar-group-label" style="margin-top:2rem; margin-bottom:1rem;">Love Orientations</p>
+            <div id="orientation-bars"></div>
+        </div>
+
+        <div class="save-section">
+            <h4>Save to Your Symphony Profile</h4>
+            <p>Your primary giving language, primary receiving language, and love orientation will be saved to your Symphony Profile.</p>
+            <button class="save-btn" id="save-btn" onclick="saveToProfile()">&#10022; Save to My Profile</button>
+            <p id="save-msg"></p>
+            <button class="retake-btn" onclick="retakeQuiz()">Retake the Inventory</button>
+        </div>
+
+        <div class="results-cta">
+            <h3>Go Deeper</h3>
+            <p>In <em>A Symphony of Grace</em>, we bring your love portrait into community &mdash; exploring how these dimensions shape your closest relationships and how God is inviting you to give and receive love more freely.</p>
+            <div class="cta-row">
+                <a href="portal.html" class="cta-primary">Return to Portal</a>
+                <a href="my-profile.html" class="cta-secondary">View My Profile</a>
+            </div>
+        </div>
+
+    </div><!-- /results -->
+
+</div><!-- /quiz-app -->
+
+<script>
+// ═══════════════════════════════════════════
+//  SUPABASE AUTH
+// ═══════════════════════════════════════════
+const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let currentUser = null;
+
+(async () => {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) {
+        document.getElementById('auth-gate').style.display = 'flex';
+    } else {
+        currentUser = session.user;
+        document.getElementById('quiz-app').style.display = 'block';
+    }
+})();
+
+// ═══════════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════════
+const languages = [
+    {
+        id: 'spoken',
+        name: 'The Spoken Word',
+        description: 'Words are not decoration for you \u2014 they are substance. When someone names what they see in you, speaks your worth out loud, or takes the time to say the true thing, it lands somewhere deep. You were made by a God who <em>spoke</em> you into being, and something in you recognizes that words carry the weight of that original act. You also give love this way \u2014 you know how to say the thing that stays with someone.'
+    },
+    {
+        id: 'hands',
+        name: 'Hands That Serve',
+        description: 'Love, for you, has hands. When someone steps in without being asked \u2014 takes something off your plate, fixes what\u2019s broken, shows up to help carry the weight \u2014 it says <em>I see you</em> more clearly than almost anything else. This is the love of Martha, not as a lesser calling but as a holy one. You also love this way \u2014 you express your heart through action, through the doing, through the care that shows up in practical form.'
+    },
+    {
+        id: 'tokens',
+        name: 'Tokens of Love',
+        description: 'It was never about the thing itself. It\u2019s about what the thing means \u2014 that someone saw something and thought of you, that they carried you with them when you weren\u2019t there. A token of love is a small act of remembrance, and you feel its weight. This is a sacramental instinct: the physical object becomes a vessel for something invisible. You love others this way too \u2014 you remember, you notice, you bring back something that says <em>you were on my mind.</em>'
+    },
+    {
+        id: 'presence',
+        name: 'Full Presence',
+        description: 'What you need \u2014 and what you give \u2014 is undivided attention. Not someone in the room while their mind is elsewhere. Not time that\u2019s technically shared but emotionally absent. Real presence: eyes that stay, conversation that goes somewhere, the feeling that you are the most important thing happening right now. This is the love of the Incarnation \u2014 God didn\u2019t send a memo. He came.'
+    },
+    {
+        id: 'nearness',
+        name: 'The Nearness',
+        description: 'Presence, for you, is physical. A hand on the shoulder, a long embrace, sitting close \u2014 these communicate what words sometimes can\u2019t reach. This is not about romantic love specifically; it is about the body as a vehicle of the soul. The Church has always known this \u2014 she anoints, she lays on hands, she signs with oil and water. You give and receive love through contact, through closeness, through the simple holiness of being near.'
+    }
+];
+
+const orientations = [
+    {
+        id: 'belonging',
+        name: 'Belonging',
+        description: 'What you most need to feel loved is to know you are <em>chosen</em> \u2014 not tolerated, not included by default, but actively wanted. When someone seeks you out, makes room for you, says <em>you specifically</em> \u2014 something settles in you that nothing else can. The wound underneath this orientation is often exclusion or invisibility. The healing is learning to receive what God has always said: <em>I have called you by name. You are mine.</em>'
+    },
+    {
+        id: 'security',
+        name: 'Security',
+        description: 'What you most need to feel loved is to know it is <em>stable</em> \u2014 that love won\u2019t disappear, won\u2019t be withdrawn when you fail, won\u2019t leave without warning. Consistency is the language your heart reads as love. Reliability is intimacy to you. The wound underneath is often early experiences of love that felt unpredictable or conditional. The healing is learning to rest in a love that is the same yesterday, today, and forever.'
+    },
+    {
+        id: 'delight',
+        name: 'Delight',
+        description: 'What you most need to feel loved is to know that your presence is a <em>gift</em> \u2014 that someone is genuinely glad you\u2019re there, that you bring something irreplaceable into the room. To be met with genuine enthusiasm is love to you. The wound underneath is often the feeling of being too much, or not enough, or simply unnoticed. The healing is receiving what is already true: <em>the Lord takes delight in you.</em>'
+    },
+    {
+        id: 'freedom',
+        name: 'Freedom',
+        description: 'What you most need to feel loved is to know you are loved <em>as you are</em> \u2014 without having to earn it, manage it, or perform for it. The moment love starts to feel conditional, something in you closes. Acceptance is the deepest language your heart speaks. The wound underneath is often love that came with strings, with conditions, with a version of you that had to be maintained. The healing is the scandalous grace of a God who loved you before you could do anything about it.'
+    }
+];
+
+// Forced choice pairs [langA_id, langB_id, textA, textB]
+const d1Pairs = [
+    ['spoken','hands','I show someone I love them by telling them \u2014 specifically, truly, out loud.','I show someone I love them by doing something that makes their life easier.'],
+    ['spoken','hands','When I care about someone, I make sure they know it in words.','When I care about someone, I look for ways to practically help them.'],
+    ['spoken','tokens','I express love by saying the true thing \u2014 the word that names what I see in someone.','I express love by finding or making something that says \u201cI was thinking of you.\u201d'],
+    ['spoken','tokens','I often write notes, send messages, or speak words I want someone to carry with them.','I often bring back small things \u2014 a token, a gift \u2014 that I know will mean something to someone.'],
+    ['spoken','presence','I love people by telling them what they mean to me.','I love people by giving them my full, unhurried attention.'],
+    ['spoken','presence','My love tends to come out in words \u2014 encouragement, affirmation, the thing I notice about someone.','My love tends to come out in time \u2014 showing up, staying present, being fully there.'],
+    ['spoken','nearness','I reach for words when I want someone to feel loved.','I reach for physical closeness when I want someone to feel loved.'],
+    ['spoken','nearness','Saying \u201cI love you\u201d \u2014 or something specific and true about someone \u2014 is how I naturally express it.','A hug, a touch on the arm, sitting close \u2014 that\u2019s how I naturally express it.'],
+    ['hands','tokens','I show love by stepping in and helping \u2014 taking something off someone\u2019s plate.','I show love by remembering \u2014 bringing back something that says I was thinking of them.'],
+    ['hands','tokens','When I love someone, I look for what needs doing and do it.','When I love someone, I look for what would delight them and find it.'],
+    ['hands','presence','I love people through action \u2014 fixing, helping, taking care of what needs taking care of.','I love people through attention \u2014 setting everything aside and just being with them.'],
+    ['hands','presence','My love looks like doing something useful for someone.','My love looks like being somewhere fully for someone.'],
+    ['hands','nearness','I express care by serving \u2014 by making someone\u2019s life tangibly better.','I express care by being physically present and close.'],
+    ['hands','nearness','When someone I love is struggling, I want to help them practically.','When someone I love is struggling, I want to hold them.'],
+    ['tokens','presence','I love people by remembering them \u2014 finding the thing that says I was thinking of you.','I love people by showing up \u2014 giving them time that is fully theirs.'],
+    ['tokens','presence','A carefully chosen gift feels like love to give.','An afternoon with no distractions feels like love to give.'],
+    ['tokens','nearness','I reach for a token \u2014 a note, a small gift \u2014 to tell someone they matter to me.','I reach for physical closeness \u2014 a hug, sitting near \u2014 to tell someone they matter to me.'],
+    ['tokens','nearness','Remembering someone with something tangible is how my love tends to express itself.','Being close, touching, embracing \u2014 that\u2019s how my love tends to express itself.'],
+    ['presence','nearness','I give love by showing up fully present \u2014 eye contact, real conversation, unhurried time.','I give love through physical affection \u2014 nearness, touch, closeness.'],
+    ['presence','nearness','Time that is truly shared, truly present, is my primary love language when giving.','Physical touch \u2014 the laying on of hands, so to speak \u2014 is my primary love language when giving.']
+];
+
+const d2Pairs = [
+    ['spoken','hands','I feel most loved when someone tells me \u2014 specifically, sincerely \u2014 what I mean to them.','I feel most loved when someone steps in and takes something off my plate without being asked.'],
+    ['spoken','hands','Words of affirmation from someone I trust stay with me for a long time.','Someone doing something practical for me without being asked says love more than almost anything.'],
+    ['spoken','tokens','What makes me feel seen is when someone says the true thing \u2014 names what they see in me.','What makes me feel seen is when someone brings me something they knew I\u2019d love.'],
+    ['spoken','tokens','I carry words with me \u2014 encouragement, affirmation, something someone said that named me truly.','I hold onto tokens \u2014 the small things people bring that say they were thinking of me.'],
+    ['spoken','presence','I feel loved when someone takes the time to put into words what I mean to them.','I feel loved when someone gives me their full, undivided attention.'],
+    ['spoken','presence','An encouraging word or a sincere compliment fills something in me.','Time \u2014 real, present, unhurried time \u2014 fills something in me.'],
+    ['spoken','nearness','Being told I am loved lands differently than being shown it. Words are primary for me.','Being held, touched, or physically close lands differently than being told. Nearness is primary for me.'],
+    ['spoken','nearness','I feel most cared for when someone says something true and specific about me.','I feel most cared for when someone is physically present and close.'],
+    ['hands','tokens','When someone steps in and helps me practically, I feel deeply cared for.','When someone brings me something they thought I\u2019d love, I feel deeply cared for.'],
+    ['hands','tokens','Service speaks love to me \u2014 someone doing something for me says \u201cI see your need.\u201d','A thoughtful gift speaks love to me \u2014 someone finding something that says \u201cI was thinking of you.\u201d'],
+    ['hands','presence','I feel loved when someone takes care of something practical for me.','I feel loved when someone sets everything aside and is fully present with me.'],
+    ['hands','presence','Acts of service \u2014 someone helping, fixing, doing \u2014 register as love to me.','Quality time \u2014 someone fully there, no distractions \u2014 registers as love to me.'],
+    ['hands','nearness','Someone doing something for me \u2014 helping, serving, taking care of something \u2014 says love.','Someone being physically close \u2014 touching, embracing, sitting near \u2014 says love.'],
+    ['hands','nearness','When I\u2019m struggling, I feel most loved when someone helps me practically.','When I\u2019m struggling, I feel most loved when someone holds me.'],
+    ['tokens','presence','A thoughtful gift \u2014 something that says \u201cI remembered you\u201d \u2014 fills my love tank.','Undivided time and attention \u2014 someone truly present with me \u2014 fills my love tank.'],
+    ['tokens','presence','I feel cared for when someone brings me something they knew I\u2019d want or love.','I feel cared for when someone gives me time that is entirely, unhurriedly mine.'],
+    ['tokens','nearness','A token \u2014 a note, a small gift, something that says I was remembered \u2014 makes me feel loved.','Physical closeness \u2014 a long hug, a hand held, being near \u2014 makes me feel loved.'],
+    ['tokens','nearness','Something tangible that says \u201cyou were on my mind\u201d is love to me.','Something physical that says \u201cI want to be near you\u201d is love to me.'],
+    ['presence','nearness','I feel most loved when someone is fully, completely present with me \u2014 no phone, no distraction, just me.','I feel most loved when someone is physically affectionate \u2014 close, warm, touching.'],
+    ['presence','nearness','Undivided attention is the deepest love language for me when receiving.','Physical touch and nearness is the deepest love language for me when receiving.']
+];
+
+const d3Questions = [
+    { orientation: 'belonging', text: 'I notice when I\u2019m not explicitly included, even in small things.' },
+    { orientation: 'belonging', text: 'Feeling chosen \u2014 sought out, specifically wanted \u2014 matters deeply to me.' },
+    { orientation: 'belonging', text: 'I feel most loved when someone makes it clear they want me there.' },
+    { orientation: 'security',  text: 'Consistency in relationships matters more to me than grand gestures.' },
+    { orientation: 'security',  text: 'I feel most loved when love feels predictable, steady, and reliable.' },
+    { orientation: 'security',  text: 'Uncertainty about where I stand with someone is especially hard for me.' },
+    { orientation: 'delight',   text: 'I light up when someone is visibly happy to see me.' },
+    { orientation: 'delight',   text: 'I feel most loved when my presence seems to genuinely bring someone joy.' },
+    { orientation: 'delight',   text: 'To be met with enthusiasm \u2014 someone glad I showed up \u2014 is deeply meaningful to me.' },
+    { orientation: 'freedom',   text: 'I feel most loved when I sense I don\u2019t have to earn it or manage it.' },
+    { orientation: 'freedom',   text: 'Love that comes with conditions or expectations weighs heavily on me.' },
+    { orientation: 'freedom',   text: 'Being accepted exactly as I am \u2014 without needing to perform or adjust \u2014 is what love feels like to me.' }
+];
+
+// ═══════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════
+let d1Answers = {}; // { pairIndex: 'a'|'b' }
+let d2Answers = {};
+let d3Answers = {}; // { qIndex: 1-5 }
+let results = {};
+
+// ═══════════════════════════════════════════
+//  RENDER
+// ═══════════════════════════════════════════
+function renderFCPairs(containerId, pairs, answersObj, dim, pctId, fillId) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+    pairs.forEach((pair, i) => {
+        const ans = answersObj[i];
+        const div = document.createElement('div');
+        div.className = 'fc-pair' + (ans !== undefined ? ' answered' : '');
+        div.id = `${dim}_pair_${i}`;
+        div.innerHTML = `
+            <p class="fc-num">&#10022; ${i+1} of ${pairs.length}</p>
+            <p class="fc-instruction">Choose one</p>
+            <div class="fc-options">
+                <div class="fc-option${ans==='a'?' selected':ans==='b'?' dimmed':''}" onclick="selectFC('${dim}',${i},'a','${pctId}','${fillId}')">
+                    ${pair[2]}
+                </div>
+                <div class="fc-option${ans==='b'?' selected':ans==='a'?' dimmed':''}" onclick="selectFC('${dim}',${i},'b','${pctId}','${fillId}')">
+                    ${pair[3]}
+                </div>
+            </div>`;
+        container.appendChild(div);
+    });
+    updateFCProgress(answersObj, pairs.length, pctId, fillId);
+}
+
+function selectFC(dim, pairIndex, choice, pctId, fillId) {
+    const answersObj = dim === 'd1' ? d1Answers : d2Answers;
+    answersObj[pairIndex] = choice;
+    const pairEl = document.getElementById(`${dim}_pair_${pairIndex}`);
+    pairEl.classList.add('answered');
+    const opts = pairEl.querySelectorAll('.fc-option');
+    opts[0].className = 'fc-option' + (choice==='a' ? ' selected' : ' dimmed');
+    opts[1].className = 'fc-option' + (choice==='b' ? ' selected' : ' dimmed');
+    const pairs = dim === 'd1' ? d1Pairs : d2Pairs;
+    updateFCProgress(answersObj, pairs.length, pctId, fillId);
+    // Clear unanswered msg
+    document.getElementById(`${dim}-msg`).style.display = 'none';
+}
+
+function updateFCProgress(answersObj, total, pctId, fillId) {
+    const answered = Object.keys(answersObj).length;
+    // Use global progress: D1=0-33, D2=33-66, D3=66-100
+    const sectionPct = Math.round((answered / total) * 100);
+    document.getElementById(pctId).textContent = sectionPct + '%';
+    document.getElementById(fillId).style.width = sectionPct + '%';
+}
+
+function renderD3() {
+    const container = document.getElementById('d3-questions');
+    container.innerHTML = '';
+    d3Questions.forEach((q, i) => {
+        const ans = d3Answers[i];
+        const card = document.createElement('div');
+        card.className = 'question-card' + (ans !== undefined ? ' answered' : '');
+        card.id = `d3_q_${i}`;
+        let btnsHtml = '';
+        for (let v = 1; v <= 5; v++) {
+            const sel = ans === v ? ' selected' : '';
+            const lbl = v === 1 ? 'Not at all' : v === 5 ? 'Completely' : '';
+            btnsHtml += `<button class="rating-btn${sel}" onclick="selectD3(${i},${v},this)">
+                <span class="rb-num">${v}</span>
+                <span class="rb-label">${lbl}</span>
+            </button>`;
+        }
+        card.innerHTML = `
+            <p class="question-num">&#10022; ${i+1} of ${d3Questions.length}</p>
+            <p class="question-text">${q.text}</p>
+            <div class="rating-scale">${btnsHtml}</div>
+            <div class="scale-legend"><span>Not at all like me</span><span>Completely like me</span></div>`;
+        container.appendChild(card);
+    });
+    updateD3Progress();
+}
+
+function selectD3(idx, val, btn) {
+    d3Answers[idx] = val;
+    const siblings = btn.closest('.rating-scale').querySelectorAll('.rating-btn');
+    siblings.forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById(`d3_q_${idx}`).classList.add('answered');
+    updateD3Progress();
+    document.getElementById('d3-msg').style.display = 'none';
+}
+
+function updateD3Progress() {
+    const answered = Object.keys(d3Answers).length;
+    const pct = Math.round((answered / d3Questions.length) * 100);
+    document.getElementById('d3-pct').textContent = pct + '%';
+    document.getElementById('d3-fill').style.width = pct + '%';
+}
+
+// ═══════════════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════════════
+function showScreen(id) {
+    ['screen-intro','screen-d1','screen-d2','screen-d3','screen-results'].forEach(s => {
+        document.getElementById(s).classList.add('hidden');
+    });
+    document.getElementById(id).classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function startQuiz() {
+    renderFCPairs('d1-pairs', d1Pairs, d1Answers, 'd1', 'd1-pct', 'd1-fill');
+    showScreen('screen-d1');
+}
+
+function goToD2() {
+    if (Object.keys(d1Answers).length < d1Pairs.length) {
+        document.getElementById('d1-msg').style.display = 'block';
+        scrollToFirstUnanswered('d1', d1Pairs, d1Answers);
+        return;
+    }
+    renderFCPairs('d2-pairs', d2Pairs, d2Answers, 'd2', 'd2-pct', 'd2-fill');
+    showScreen('screen-d2');
+}
+
+function goToD1() {
+    renderFCPairs('d1-pairs', d1Pairs, d1Answers, 'd1', 'd1-pct', 'd1-fill');
+    showScreen('screen-d1');
+}
+
+function goToD3() {
+    if (Object.keys(d2Answers).length < d2Pairs.length) {
+        document.getElementById('d2-msg').style.display = 'block';
+        scrollToFirstUnanswered('d2', d2Pairs, d2Answers);
+        return;
+    }
+    renderD3();
+    showScreen('screen-d3');
+}
+
+function scrollToFirstUnanswered(dim, pairs, answersObj) {
+    for (let i = 0; i < pairs.length; i++) {
+        if (answersObj[i] === undefined) {
+            document.getElementById(`${dim}_pair_${i}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+    }
+}
+
+// ═══════════════════════════════════════════
+//  SCORING & RESULTS
+// ═══════════════════════════════════════════
+function showResults() {
+    if (Object.keys(d3Answers).length < d3Questions.length) {
+        document.getElementById('d3-msg').style.display = 'block';
+        for (let i = 0; i < d3Questions.length; i++) {
+            if (d3Answers[i] === undefined) {
+                document.getElementById(`d3_q_${i}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+        }
+        return;
+    }
+
+    // Score D1 (giving)
+    const giveScores = {};
+    languages.forEach(l => giveScores[l.id] = 0);
+    d1Pairs.forEach((pair, i) => {
+        const choice = d1Answers[i];
+        if (choice === 'a') giveScores[pair[0]]++;
+        else if (choice === 'b') giveScores[pair[1]]++;
+    });
+
+    // Score D2 (receiving)
+    const receiveScores = {};
+    languages.forEach(l => receiveScores[l.id] = 0);
+    d2Pairs.forEach((pair, i) => {
+        const choice = d2Answers[i];
+        if (choice === 'a') receiveScores[pair[0]]++;
+        else if (choice === 'b') receiveScores[pair[1]]++;
+    });
+
+    // Score D3 (orientation)
+    const orientScores = {};
+    orientations.forEach(o => orientScores[o.id] = 0);
+    d3Questions.forEach((q, i) => {
+        orientScores[q.orientation] += (d3Answers[i] || 0);
+    });
+
+    // Sort
+    const sortedGive = [...languages].sort((a,b) => giveScores[b.id] - giveScores[a.id]);
+    const sortedReceive = [...languages].sort((a,b) => receiveScores[b.id] - receiveScores[a.id]);
+    const sortedOrient = [...orientations].sort((a,b) => orientScores[b.id] - orientScores[a.id]);
+
+    results = { giveScores, receiveScores, orientScores, sortedGive, sortedReceive, sortedOrient };
+
+    // Headline
+    const topGive = sortedGive[0];
+    const topReceive = sortedReceive[0];
+    const topOrient = sortedOrient[0];
+    const sameTopLang = topGive.id === topReceive.id;
+
+    document.getElementById('results-headline').textContent = 'Your Love Portrait';
+    document.getElementById('results-sub').textContent = topGive.name + (sameTopLang ? '' : ' \u2022 ' + topReceive.name) + ' \u2022 ' + topOrient.name;
+
+    // Portrait sentence
+    let portrait;
+    if (sameTopLang) {
+        portrait = `You speak love and receive it in the same language \u2014 ${topGive.name}. What love feels like for you when it is truly working is ${topOrient.name}: ${topOrient.id === 'belonging' ? 'to know you are chosen' : topOrient.id === 'security' ? 'to know it is steady and will not leave' : topOrient.id === 'delight' ? 'to know your presence brings joy' : 'to know you are loved exactly as you are'}.`;
+    } else {
+        portrait = `You give love most naturally through ${topGive.name}, but you receive it most deeply through ${topReceive.name}. This difference is not a problem \u2014 it is a door. What love feels like for you when it is truly working is ${topOrient.name}: ${topOrient.id === 'belonging' ? 'to know you are chosen' : topOrient.id === 'security' ? 'to know it is steady and will not leave' : topOrient.id === 'delight' ? 'to know your presence brings joy' : 'to know you are loved exactly as you are'}.`;
+    }
+    document.getElementById('results-portrait').textContent = portrait;
+
+    // Giving cards
+    renderResultCards('give-cards', sortedGive.slice(0,2), 'How you give love');
+
+    // Receiving cards
+    renderResultCards('receive-cards', sortedReceive.slice(0,2), 'How you receive love');
+
+    // Gap insight
+    const gapSection = document.getElementById('gap-section');
+    if (!sameTopLang) {
+        gapSection.style.display = 'block';
+        gapSection.innerHTML = `<div class="gap-insight">
+            <h4>A Note on the Gap</h4>
+            <p>You give most naturally through <strong>${topGive.name}</strong> and receive most deeply through <strong>${topReceive.name}</strong>. This is more common than you might think \u2014 and it matters. The people who love you may be speaking your giving language back to you, not realizing your receiving language is different. This is worth a conversation.</p>
+        </div>`;
+    } else {
+        gapSection.style.display = 'none';
+    }
+
+    // Orientation
+    const oc = document.getElementById('orientation-card');
+    const o = sortedOrient[0];
+    oc.innerHTML = `<div class="orientation-card">
+        <p class="orientation-label">Your Love Orientation</p>
+        <h3 class="orientation-name">${o.name}</h3>
+        <p class="orientation-desc">${o.description}</p>
+    </div>`;
+
+    // Bars
+    renderBars('give-bars', sortedGive, giveScores, 8);
+    renderBars('receive-bars', sortedReceive, receiveScores, 8);
+    renderOrientBars('orientation-bars', sortedOrient, orientScores, 15);
+
+    showScreen('screen-results');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+        document.querySelectorAll('.bar-fill[data-w]').forEach(el => el.style.width = el.getAttribute('data-w'));
+    }));
+}
+
+function renderResultCards(containerId, items, directionLabel) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+    const ranks = ['Primary', 'Secondary'];
+    items.forEach((lang, i) => {
+        const card = document.createElement('div');
+        card.className = 'result-card' + (i > 0 ? ' secondary' : '');
+        card.setAttribute('data-rank', i + 1);
+        card.innerHTML = `
+            <p class="result-card-label">${ranks[i]} &mdash; ${directionLabel}</p>
+            <h3 class="result-card-name">${lang.name}</h3>
+            <p class="result-card-desc">${lang.description}</p>`;
+        container.appendChild(card);
+    });
+}
+
+function renderBars(containerId, sorted, scores, maxScore) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+    sorted.forEach((lang, i) => {
+        const pct = Math.round((scores[lang.id] / maxScore) * 100);
+        const isTop = i < 2;
+        const row = document.createElement('div');
+        row.className = 'bar-row';
+        row.innerHTML = `
+            <span class="bar-name${isTop?' top':''}">${lang.name}</span>
+            <div class="bar-track"><div class="bar-fill${isTop?' top':''}" data-w="${pct}%" style="width:0%"></div></div>
+            <span class="bar-score">${scores[lang.id]}/${maxScore}</span>`;
+        container.appendChild(row);
+    });
+}
+
+function renderOrientBars(containerId, sorted, scores, maxScore) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+    sorted.forEach((o, i) => {
+        const pct = Math.round((scores[o.id] / maxScore) * 100);
+        const isTop = i === 0;
+        const row = document.createElement('div');
+        row.className = 'bar-row';
+        row.innerHTML = `
+            <span class="bar-name${isTop?' top':''}">${o.name}</span>
+            <div class="bar-track"><div class="bar-fill${isTop?' top':''}" data-w="${pct}%" style="width:0%"></div></div>
+            <span class="bar-score">${scores[o.id]}/${maxScore}</span>`;
+        container.appendChild(row);
+    });
+}
+
+// ═══════════════════════════════════════════
+//  SAVE
+// ═══════════════════════════════════════════
+async function saveToProfile() {
+    if (!currentUser || !results.sortedGive) return;
+    const btn = document.getElementById('save-btn');
+    btn.disabled = true; btn.textContent = 'Saving\u2026';
+
+    const { data: existing } = await sb.from('user_results')
+        .select('result_data').eq('user_id', currentUser.id)
+        .eq('assessment', 'symphony_profile').maybeSingle();
+
+    const profileData = existing?.result_data || {};
+    profileData.p_love_primary   = results.sortedReceive[0].name;
+    profileData.p_love_secondary = results.sortedReceive[1].name;
+    profileData.p_love_give1     = results.sortedGive[0].name;
+    profileData.p_love_give2     = results.sortedGive[1].name;
+    profileData.p_love_orientation = results.sortedOrient[0].name;
+
+    const { error } = await sb.from('user_results').upsert({
+        user_id: currentUser.id, assessment: 'symphony_profile',
+        result_data: profileData, updated_at: new Date().toISOString()
+    }, { onConflict: 'user_id,assessment' });
+
+    const msg = document.getElementById('save-msg');
+    msg.style.display = 'block';
+    if (error) {
+        msg.textContent = 'Something went wrong \u2014 please try again.';
+        msg.style.color = '#c44569';
+        btn.disabled = false; btn.innerHTML = '&#10022; Save to My Profile';
+    } else {
+        msg.textContent = '\u2714 Your love portrait has been saved to your Symphony Profile.';
+        msg.style.color = '#4a7c59';
+        btn.innerHTML = '\u2714 Saved!';
+    }
+}
+
+function retakeQuiz() {
+    d1Answers = {}; d2Answers = {}; d3Answers = {}; results = {};
+    showScreen('screen-intro');
+}
+</script>
+</body>
+</html>

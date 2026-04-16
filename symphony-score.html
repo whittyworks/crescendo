@@ -159,6 +159,8 @@
             <div class="profile-item"><span class="label">Personality Type</span><span class="value" id="s_type">—</span></div>
             <div class="profile-item"><span class="label">Primary Love Language</span><span class="value" id="s_love_primary">—</span></div>
             <div class="profile-item"><span class="label">Secondary Love Language</span><span class="value" id="s_love_secondary">—</span></div>
+            <div class="profile-item"><span class="label">How You Give Love</span><span class="value" id="s_love_give">—</span></div>
+            <div class="profile-item"><span class="label">Love Orientation</span><span class="value" id="s_love_orientation">—</span></div>
             <div class="profile-item" style="grid-column:span 2;"><span class="label">Top Gifts of Grace</span><span class="value" id="s_strengths">—</span></div>
         </div>
         <div class="profile-divider"></div>
@@ -324,6 +326,8 @@
         set('s_type',          'p_type');
         set('s_love_primary',  'p_love_primary');
         set('s_love_secondary','p_love_secondary');
+        set('s_love_give',       'p_love_give1');
+        set('s_love_orientation', 'p_love_orientation');
         set('s_strengths',     ['p_str1','p_str2','p_str3','p_str4','p_str5']);
         set('s_virtues',       ['p_vir1','p_vir2','p_vir3','p_vir4','p_vir5']);
         set('s_charisms',      ['p_char1','p_char2','p_char3']);
@@ -358,8 +362,10 @@ MIND:
 Temperament Blend: ${f('p_temperament')}
 Personality Type / Cognitive Functions: ${f('p_type')}
 Top Gifts of Grace: ${list('p_str1','p_str2','p_str3','p_str4','p_str5')}
-Primary Love Language: ${f('p_love_primary')}
-Secondary Love Language: ${f('p_love_secondary')}
+Primary Love Language (receiving): ${f('p_love_primary')}
+Secondary Love Language (receiving): ${f('p_love_secondary')}
+How You Give Love: ${f('p_love_give1')}
+Love Orientation: ${f('p_love_orientation')}
 
 SPIRIT:
 Top Virtues in Growth: ${list('p_vir1','p_vir2','p_vir3','p_vir4','p_vir5')}

@@ -370,8 +370,11 @@
         p_color_season:   'Color Season',
         p_style_essence:  'Style Essence',
         p_silhouette:     'Silhouette',
-        p_love_primary:   'Primary Love Language',
-        p_love_secondary: 'Secondary Love Language',
+        p_love_primary:   'Primary Love Language (Receiving)',
+        p_love_secondary: 'Secondary Love Language (Receiving)',
+        p_love_give1:     'How You Give Love (Primary)',
+        p_love_give2:     'How You Give Love (Secondary)',
+        p_love_orientation: 'Love Orientation',
         p_temperament:    'Temperament',
         p_type:           'Personality Type',
         p_str1: 'Gift of Grace 1', p_str2: 'Gift of Grace 2', p_str3: 'Gift of Grace 3',
@@ -543,8 +546,10 @@
         const season = profile.p_color_season; if (season) opusParts.push('Color season: ' + season);
         const style = profile.p_style_essence; if (style) opusParts.push('Style essence: ' + style);
         const sil = profile.p_silhouette; if (sil) opusParts.push('Silhouette: ' + sil);
-        const ll1 = profile.p_love_primary; if (ll1) opusParts.push('Primary love language: ' + ll1);
+        const ll1 = profile.p_love_primary; if (ll1) opusParts.push('Receives love through: ' + ll1);
         const ll2 = profile.p_love_secondary; if (ll2) opusParts.push('Secondary love language: ' + ll2);
+        const lg1 = profile.p_love_give1; if (lg1) opusParts.push('Gives love through: ' + lg1);
+        const lo = profile.p_love_orientation; if (lo) opusParts.push('Love orientation: ' + lo);
         const temp = profile.p_temperament; if (temp) opusParts.push('Temperament: ' + temp);
         const type = profile.p_type; if (type) opusParts.push('Personality type: ' + type);
         const strs = strFields.map(f => profile[f]).filter(Boolean);
@@ -694,8 +699,10 @@ MIND:
 Temperament Blend: ${f('p_temperament')}
 Personality Type / Cognitive Functions: ${f('p_type')}
 Top Gifts of Grace: ${list('p_str1','p_str2','p_str3','p_str4','p_str5')}
-Primary Love Language: ${f('p_love_primary')}
-Secondary Love Language: ${f('p_love_secondary')}
+Primary Love Language (receiving): ${f('p_love_primary')}
+Secondary Love Language (receiving): ${f('p_love_secondary')}
+How You Give Love: ${f('p_love_give1')}
+Love Orientation: ${f('p_love_orientation')}
 
 SPIRIT:
 Top Virtues in Growth: ${list('p_vir1','p_vir2','p_vir3','p_vir4','p_vir5')}

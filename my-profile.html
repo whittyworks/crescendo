@@ -509,6 +509,18 @@
                     <label>Secondary Love Language</label>
                     <input type="text" id="p_love_secondary" placeholder="Your second language&hellip;" oninput="markUnsaved()">
                 </div>
+                <div>
+                    <label>How You Give Love (Primary)</label>
+                    <input type="text" id="p_love_give1" placeholder="Your primary giving language&hellip;" oninput="markUnsaved()">
+                </div>
+                <div>
+                    <label>How You Give Love (Secondary)</label>
+                    <input type="text" id="p_love_give2" placeholder="Your secondary giving language&hellip;" oninput="markUnsaved()">
+                </div>
+                <div>
+                    <label>Love Orientation</label>
+                    <input type="text" id="p_love_orientation" placeholder="Belonging, Security, Delight, or Freedom&hellip;" oninput="markUnsaved()">
+                </div>
             </div>
 
             <div class="profile-divider"></div>
@@ -663,7 +675,7 @@
     <div class="session-card">
         <div class="session-card-header">
             <span class="session-number">10</span>
-            <div><div class="session-title">Giving &amp; Receiving: Love Languages</div><div class="session-subtitle">How we give and receive love</div></div>
+            <div><div class="session-title">Giving &amp; Receiving: The Language of Your Love</div><div class="session-subtitle">How you give and receive love</div></div>
         </div>
         <div class="session-card-body">
             <div class="question"><p>How has knowing your love language (and others&#8217;) changed how you give or receive love &#8212; in your relationships, and with God?</p><textarea id="j_s10q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
@@ -767,7 +779,7 @@
     const PROFILE_FIELDS = [
         'p_name_lord','p_identity','p_word_spoken',
         'p_color_season','p_style_essence','p_silhouette',
-        'p_love_primary','p_love_secondary',
+        'p_love_primary','p_love_secondary','p_love_give1','p_love_give2','p_love_orientation',
         'p_temperament','p_type',
         'p_str1','p_str2','p_str3','p_str4','p_str5',
         'p_vir1','p_vir2','p_vir3','p_vir4','p_vir5',
