@@ -1,2 +1,6 @@
 [build]
   functions = "netlify/functions"
+  [[redirects]]
+  from = "/character-strengths.html"
+  to = "/gifts-of-grace.html"
+  status = 301
