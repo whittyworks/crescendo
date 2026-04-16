@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QX21GDR7T"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7QX21GDR7T');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gifts of Grace &middot; My Holy Crescendo</title>
+    <meta name="description" content="Discover the unique gifts God wired into you through this prayerful inventory of your 24 Gifts of Grace.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Gifts of Grace &middot; My Holy Crescendo">
+    <meta property="og:description" content="Discover the unique gifts God wired into you through this prayerful inventory of your 24 Gifts of Grace.">
+    <meta property="og:url" content="https://myholycrescendo.com/gifts-of-grace-quiz.html">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+            --text-light: #8A7A6A;
+            --shadow: rgba(44, 36, 22, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ── Auth Gate ── */
+        #auth-gate {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+        .auth-card {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem 2.5rem;
+            max-width: 480px;
+            box-shadow: 0 8px 32px var(--shadow);
+            border-top: 3px solid var(--gold);
+        }
+        .auth-card .auth-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+        .auth-card h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+        }
+        .auth-card p {
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            line-height: 1.75;
+            margin-bottom: 1.5rem;
+        }
+        .auth-card a {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(212,175,55,0.3);
+        }
+        .auth-card a:hover { background: var(--gold-dark); transform: translateY(-1px); }
+
+        /* ── Nav ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(253, 248, 243, 0.97);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .logo-link { display: block; text-decoration: none; }
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--gold-dark);
+            letter-spacing: 0.05em;
+        }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: var(--text-medium); text-decoration: none;
+            font-family: 'Montserrat', sans-serif; font-size: 0.82rem;
+            letter-spacing: 0.05em; text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold-dark); }
+
+        /* ── Quiz Wrapper ── */
+        #quiz-app {
+            display: none;
+            padding-top: 75px;
+            min-height: 100vh;
+        }
+
+        /* ── Intro Screen ── */
+        .intro-screen {
+            width: 100%; max-width: 680px;
+            margin: 3rem auto; padding: 0 1.5rem 5rem;
+            text-align: center;
+        }
+        .intro-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .intro-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--gold);
+            margin-bottom: 0.75rem;
+        }
+        .intro-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            color: var(--gold-dark); line-height: 1.25;
+            margin-bottom: 0.5rem;
+        }
+        .intro-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem; font-style: italic;
+            color: var(--text-medium); margin-bottom: 2rem;
+        }
+        .intro-card {
+            background: white; border-radius: 12px;
+            padding: 2.5rem; margin-bottom: 2rem;
+            box-shadow: 0 8px 32px var(--shadow);
+            border-top: 3px solid var(--gold);
+            text-align: left;
+        }
+        .intro-card p {
+            font-size: 1.1rem; color: var(--text-medium);
+            line-height: 1.85; margin-bottom: 1.25rem;
+        }
+        .intro-card p:last-child { margin-bottom: 0; }
+        .intro-card strong { color: var(--text-dark); }
+
+        .intro-stats {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1rem; margin-bottom: 2rem;
+        }
+        .stat-item {
+            background: white; border-radius: 10px;
+            padding: 1.25rem 1rem; text-align: center;
+            box-shadow: 0 4px 16px var(--shadow);
+        }
+        .stat-number {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem; color: var(--gold-dark);
+            display: block; margin-bottom: 0.25rem;
+        }
+        .stat-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem; letter-spacing: 0.05em;
+            color: var(--text-light); text-transform: uppercase;
+        }
+
+        .prayer-card {
+            background: linear-gradient(135deg, rgba(212,175,55,0.07), rgba(253,248,243,0.95));
+            border: 1.5px solid rgba(212,175,55,0.3);
+            border-radius: 12px; padding: 2.5rem 2.25rem;
+            margin-bottom: 2rem; text-align: center;
+        }
+        .prayer-cross {
+            font-size: 1.3rem; color: var(--gold);
+            margin-bottom: 0.5rem; display: block; letter-spacing: 0.1em;
+        }
+        .prayer-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;
+        }
+        .prayer-text p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem; font-style: italic;
+            color: var(--text-medium); line-height: 1.9; margin-bottom: 1.1rem;
+        }
+        .prayer-text p:last-child { margin-bottom: 0; }
+        .prayer-amen {
+            font-family: 'Cinzel', serif !important;
+            font-size: 1.1rem !important; font-style: normal !important;
+            color: var(--gold-dark) !important;
+            letter-spacing: 0.12em; margin-top: 1.5rem !important;
+        }
+
+        .begin-btn {
+            display: inline-block;
+            background: var(--gold); color: white; border: none;
+            padding: 1.1rem 3rem; border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem; font-weight: 500;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(212,175,55,0.35);
+        }
+        .begin-btn:hover {
+            background: var(--gold-dark); transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(212,175,55,0.45);
+        }
+
+        /* ── Quiz Screen ── */
+        .quiz-screen {
+            width: 100%; max-width: 720px;
+            margin: 2rem auto; padding: 0 1.5rem 5rem;
+            display: none;
+        }
+        .quiz-header { text-align: center; margin-bottom: 2rem; }
+        .quiz-family-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--gold); margin-bottom: 0.35rem;
+        }
+        .quiz-family-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem; color: var(--gold-dark);
+        }
+        .quiz-family-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem; font-style: italic;
+            color: var(--text-medium); margin-top: 0.25rem;
+        }
+
+        .progress-wrap { margin-bottom: 2.5rem; }
+        .progress-meta {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 0.6rem;
+        }
+        .progress-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem; color: var(--text-light); letter-spacing: 0.04em;
+        }
+        .progress-pct {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem; color: var(--gold); font-weight: 500;
+        }
+        .progress-bar {
+            height: 6px; background: rgba(212,175,55,0.15);
+            border-radius: 3px; overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold));
+            border-radius: 3px; transition: width 0.5s ease;
+        }
+
+        .questions-group { display: flex; flex-direction: column; gap: 1.25rem; }
+        .question-card {
+            background: white; border-radius: 12px;
+            padding: 1.75rem 2rem;
+            box-shadow: 0 4px 20px var(--shadow);
+            border-left: 3px solid rgba(212,175,55,0.25);
+            transition: border-color 0.3s;
+        }
+        .question-card.answered { border-left-color: var(--gold); }
+        .question-num {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.68rem; letter-spacing: 0.12em;
+            color: var(--gold); text-transform: uppercase; margin-bottom: 0.4rem;
+        }
+        .question-text {
+            font-size: 1.1rem; color: var(--text-dark);
+            line-height: 1.65; margin-bottom: 1.25rem;
+        }
+
+        .rating-scale { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+        .rating-btn {
+            flex: 1; min-width: 48px;
+            background: var(--cream-dark);
+            border: 1.5px solid transparent;
+            border-radius: 8px; padding: 0.55rem 0.25rem;
+            cursor: pointer; transition: all 0.2s;
+            display: flex; flex-direction: column; align-items: center; gap: 3px;
+        }
+        .rating-btn:hover {
+            background: rgba(212,175,55,0.12);
+            border-color: var(--gold-light);
+        }
+        .rating-btn.selected {
+            background: var(--gold); border-color: var(--gold);
+        }
+        .rating-btn .rb-num {
+            font-family: 'Cinzel', serif; font-size: 1rem;
+            color: var(--text-medium); font-weight: 600;
+        }
+        .rating-btn.selected .rb-num { color: white; }
+        .rating-btn .rb-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.55rem; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--text-light);
+            text-align: center; line-height: 1.2;
+        }
+        .rating-btn.selected .rb-label { color: rgba(255,255,255,0.85); }
+
+        .scale-legend {
+            display: flex; justify-content: space-between; margin-top: 0.4rem;
+        }
+        .scale-legend span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem; letter-spacing: 0.05em;
+            color: var(--text-light); text-transform: uppercase;
+        }
+
+        .nav-row {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 2rem; flex-wrap: wrap; gap: 1rem;
+        }
+        .nav-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
+            cursor: pointer; transition: all 0.3s;
+            padding: 0.75rem 1.75rem; border-radius: 50px;
+        }
+        .btn-prev {
+            background: transparent;
+            border: 1.5px solid rgba(212,175,55,0.4);
+            color: var(--text-medium);
+        }
+        .btn-prev:hover:not(:disabled) { border-color: var(--gold); color: var(--gold-dark); }
+        .btn-prev:disabled { opacity: 0.35; cursor: default; }
+        .btn-next {
+            background: var(--gold); color: white; border: none;
+            box-shadow: 0 4px 16px rgba(212,175,55,0.35);
+        }
+        .btn-next:hover { background: var(--gold-dark); transform: translateY(-1px); }
+        .btn-results {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            color: white; border: none; display: none;
+            box-shadow: 0 4px 20px rgba(212,175,55,0.4);
+        }
+        .btn-results:hover { transform: translateY(-2px); }
+
+        .unanswered-msg {
+            text-align: center; color: #c0783a;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem; margin-top: 0.75rem; display: none;
+        }
+
+        /* ── Results Screen ── */
+        .results-screen {
+            width: 100%; max-width: 720px;
+            margin: 2rem auto; padding: 0 1.5rem 5rem;
+            display: none;
+        }
+
+        .results-hero {
+            text-align: center; margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(253,248,243,0.9));
+            border-radius: 16px;
+        }
+        .results-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .results-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 0.5rem;
+        }
+        .results-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            color: var(--gold-dark); margin-bottom: 0.5rem;
+        }
+        .results-sub {
+            font-size: 1.2rem; font-style: italic; color: var(--text-medium);
+        }
+
+        .section-heading {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem; color: var(--gold-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            letter-spacing: 0.05em;
+        }
+
+        /* Signature gift cards */
+        .signature-gifts { margin-bottom: 3rem; }
+        .gift-result-card {
+            background: white; border-radius: 12px;
+            padding: 2rem 2.25rem; margin-bottom: 1.5rem;
+            box-shadow: 0 6px 28px var(--shadow);
+            border-top: 3px solid var(--gold);
+            position: relative; overflow: hidden;
+        }
+        .gift-result-card::before {
+            content: attr(data-rank);
+            position: absolute; right: 1.5rem; top: 1.25rem;
+            font-family: 'Cinzel', serif; font-size: 3.5rem;
+            color: rgba(212,175,55,0.08); font-weight: 600; line-height: 1;
+        }
+        .card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+        .card-rank-badge {
+            display: inline-block;
+            background: var(--gold); color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 3px 10px; border-radius: 20px; margin-left: 0.5rem;
+        }
+        .card-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem; color: var(--gold-dark);
+        }
+        .card-family {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--text-light); margin-top: 0.2rem;
+        }
+        .card-description {
+            font-size: 1.1rem; color: var(--text-medium);
+            line-height: 1.8; margin-bottom: 0;
+        }
+
+        /* Family groupings */
+        .family-group { margin-bottom: 3rem; }
+        .family-header {
+            display: flex; align-items: center; gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .family-icon { font-size: 1.4rem; }
+        .family-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem; color: var(--gold-dark); letter-spacing: 0.05em;
+        }
+        .family-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem; font-style: italic; color: var(--text-light);
+        }
+
+        /* Bar chart */
+        .bar-row {
+            display: flex; align-items: center;
+            gap: 0.75rem; margin-bottom: 0.8rem;
+        }
+        .bar-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.76rem; letter-spacing: 0.04em; text-transform: uppercase;
+            color: var(--text-medium); width: 130px; flex-shrink: 0;
+        }
+        .bar-name.top { color: var(--gold-dark); font-weight: 500; }
+        .bar-track {
+            flex: 1; height: 9px;
+            background: rgba(212,175,55,0.12);
+            border-radius: 5px; overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold));
+            border-radius: 5px; width: 0;
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bar-fill.top { background: linear-gradient(90deg, var(--gold), var(--gold-dark)); }
+        .bar-score {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.73rem; color: var(--text-light);
+            width: 32px; text-align: right; flex-shrink: 0;
+        }
+
+        /* Save section */
+        .save-section {
+            background: linear-gradient(135deg, rgba(212,175,55,0.06), rgba(253,248,243,0.9));
+            border: 1.5px solid rgba(212,175,55,0.25);
+            border-radius: 12px; padding: 2rem 2.25rem;
+            margin-bottom: 2.5rem; text-align: center;
+        }
+        .save-section h4 {
+            font-family: 'Cinzel', serif; font-size: 1rem;
+            color: var(--gold-dark); margin-bottom: 0.75rem; letter-spacing: 0.05em;
+        }
+        .save-section p {
+            font-size: 1.05rem; color: var(--text-medium);
+            line-height: 1.75; margin-bottom: 1.25rem;
+        }
+        .save-btn {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            color: white; border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 0.9rem 2.25rem; border-radius: 50px;
+            cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(212,175,55,0.35);
+        }
+        .save-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,175,55,0.45); }
+        .save-btn:disabled { opacity: 0.6; cursor: default; transform: none; }
+        #save-msg {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem; font-style: italic;
+            margin-top: 1rem; display: none;
+        }
+
+        .retake-btn {
+            display: block; margin: 1rem auto 0;
+            background: transparent;
+            border: 1.5px solid rgba(212,175,55,0.4);
+            color: var(--text-medium);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 0.65rem 1.75rem; border-radius: 50px;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .retake-btn:hover { border-color: var(--gold); color: var(--gold-dark); }
+
+        .results-cta {
+            text-align: center; padding: 2.5rem;
+            background: white; border-radius: 12px;
+            box-shadow: 0 6px 24px var(--shadow);
+        }
+        .results-cta h3 {
+            font-family: 'Cinzel', serif; font-size: 1.2rem;
+            color: var(--gold-dark); margin-bottom: 0.75rem;
+        }
+        .results-cta p {
+            font-size: 1.1rem; color: var(--text-medium);
+            line-height: 1.75; margin-bottom: 1.5rem;
+        }
+        .cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-primary {
+            display: inline-block; background: var(--gold); color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; padding: 0.9rem 2rem; border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .cta-primary:hover { background: var(--gold-dark); transform: translateY(-1px); }
+        .cta-secondary {
+            display: inline-block; background: transparent;
+            border: 1.5px solid rgba(212,175,55,0.5);
+            color: var(--text-medium);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; padding: 0.9rem 2rem; border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .cta-secondary:hover { border-color: var(--gold); color: var(--gold-dark); }
+
+        .print-footer { display: none; }
+        @media print {
+            nav, .nav-row, .save-section, .results-cta, .retake-btn { display: none !important; }
+            .print-footer { display: block; text-align: center; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #888; margin-top: 2rem; }
+            .bar-fill { transition: none !important; }
+        }
+        @media (max-width: 600px) {
+            .intro-stats { grid-template-columns: repeat(3, 1fr); }
+            .bar-name { width: 100px; font-size: 0.68rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Auth Gate -->
+<div id="auth-gate" style="display:none;">
+    <div class="auth-card">
+        <span class="auth-icon">&#10022;</span>
+        <h2>Portal Access Required</h2>
+        <p>The Gifts of Grace inventory is available to <em>A Symphony of Grace</em> participants. Please sign in to your portal to continue.</p>
+        <a href="portal.html">Sign In to Your Portal</a>
+    </div>
+</div>
+
+<!-- Main Quiz App -->
+<div id="quiz-app">
+
+    <nav>
+        <a href="portal.html" class="logo-link">
+            <span class="logo-text">My Holy Crescendo</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="portal.html">Portal</a></li>
+            <li><a href="my-profile.html">My Profile</a></li>
+        </ul>
+    </nav>
+
+    <!-- Intro Screen -->
+    <div class="intro-screen" id="intro-screen">
+        <span class="intro-icon">&#10022;</span>
+        <p class="intro-label">Session 8 &middot; Gifts of the Mind, Heart, Will &amp; Soul</p>
+        <h1 class="intro-title">Gifts of Grace</h1>
+        <p class="intro-subtitle">A prayerful inventory of how God wired you</p>
+
+        <div class="intro-card">
+            <p>God did not make you in generalities. He made you in particulars &mdash; with a specific mind, a specific heart, a specific way of moving through the world. These are not accidents. They are gifts.</p>
+            <p>This inventory will help you identify your <strong>24 Gifts of Grace</strong> &mdash; the natural strengths built into the particular woman God made you to be. Read each statement and rate how true it feels, not how you wish it were or how it was at your best, but how it is for you, most of the time.</p>
+            <p>There are no right answers. Every gift is needed in the Body of Christ.</p>
+        </div>
+
+        <div class="intro-stats">
+            <div class="stat-item">
+                <span class="stat-number">72</span>
+                <span class="stat-label">Statements</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">24</span>
+                <span class="stat-label">Gifts</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">~15</span>
+                <span class="stat-label">Minutes</span>
+            </div>
+        </div>
+
+        <div class="prayer-card">
+            <span class="prayer-cross">&#10013;</span>
+            <p class="prayer-label">A Prayer Before Beginning</p>
+            <div class="prayer-text">
+                <p>Lord, You who knit me together in my mother&rsquo;s womb &mdash; You did not make me by accident. Every particular of who I am was made by You and for You.</p>
+                <p>As I move through this inventory, open my eyes to see myself as You see me. Let me receive what is true, without inflating it or dismissing it. Let me be honest about who I am, knowing that who I am is Your handiwork.</p>
+                <p>May what I discover here draw me closer to You and help me live more fully as the woman You made me to be.</p>
+                <p class="prayer-amen">Amen.</p>
+            </div>
+        </div>
+
+        <button class="begin-btn" onclick="startQuiz()">Begin the Inventory</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div class="quiz-screen" id="quiz-screen">
+        <div class="quiz-header">
+            <p class="quiz-family-label" id="family-label">Family 1 of 4</p>
+            <h2 class="quiz-family-title" id="family-title">Gifts of the Mind</h2>
+            <p class="quiz-family-subtitle" id="family-subtitle">How you think, learn, and discern</p>
+        </div>
+
+        <div class="progress-wrap">
+            <div class="progress-meta">
+                <span class="progress-text" id="progress-text">Questions 1&ndash;18</span>
+                <span class="progress-pct" id="progress-pct">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+            </div>
+        </div>
+
+        <div class="questions-group" id="questions-group"></div>
+
+        <p class="unanswered-msg" id="unanswered-msg">Please rate all statements before continuing.</p>
+
+        <div class="nav-row">
+            <button class="nav-btn btn-prev" id="btn-prev" onclick="prevPage()" disabled>&#8592; Previous</button>
+            <button class="nav-btn btn-next" id="btn-next" onclick="nextPage()">Next &#8594;</button>
+            <button class="nav-btn btn-results" id="btn-results" onclick="showResults()">See My Gifts &#10022;</button>
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div class="results-screen" id="results-screen">
+
+        <div class="results-hero">
+            <div class="results-icon">&#10022;</div>
+            <p class="results-label">Your Gifts of Grace Profile</p>
+            <h2 class="results-title" id="top-gift-title">Your Signature Gift</h2>
+            <p class="results-sub" id="top-gift-sub"></p>
+        </div>
+
+        <div class="signature-gifts">
+            <h3 class="section-heading">Your Signature Gifts &mdash; Top 5</h3>
+            <div id="signature-cards"></div>
+        </div>
+
+        <div id="family-results" style="margin-bottom:3rem;"></div>
+
+        <div style="margin-bottom:3rem;">
+            <h3 class="section-heading">All 24 Gifts &mdash; Your Full Portrait</h3>
+            <div id="all-bars"></div>
+        </div>
+
+        <div class="save-section">
+            <h4>Save to Your Symphony Profile</h4>
+            <p>Your top 5 Gifts of Grace will be saved to your Symphony Profile, where they join the full portrait of who God made you to be.</p>
+            <button class="save-btn" id="save-btn" onclick="saveToProfile()">&#10022; Save to My Profile</button>
+            <p id="save-msg"></p>
+            <button class="retake-btn" onclick="retakeQuiz()">Retake the Inventory</button>
+        </div>
+
+        <div class="results-cta">
+            <h3>Go Deeper with Your Gifts</h3>
+            <p>In <em>A Symphony of Grace</em>, we explore your Gifts of Grace in community &mdash; discovering what they mean, how they show up in your daily life, and how God is calling you to steward them.</p>
+            <div class="cta-row">
+                <a href="portal.html" class="cta-primary">Return to Portal</a>
+                <a href="my-profile.html" class="cta-secondary">View My Profile</a>
+            </div>
+        </div>
+
+        <div class="print-footer">My Holy Crescendo &middot; fearfully &amp; wonderfully made &middot; myholycrescendo.com</div>
+
+    </div><!-- /results-screen -->
+
+</div><!-- /quiz-app -->
+
+<script>
+// ═══════════════════════════════════════════
+//  SUPABASE AUTH CHECK
+// ═══════════════════════════════════════════
+const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let currentUser = null;
+
+(async () => {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) {
+        document.getElementById('auth-gate').style.display = 'flex';
+    } else {
+        currentUser = session.user;
+        document.getElementById('quiz-app').style.display = 'block';
+    }
+})();
+
+// ═══════════════════════════════════════════
+//  QUIZ DATA — 4 families × 6 strengths × 3 questions = 72
+// ═══════════════════════════════════════════
+const families = [
+    {
+        id: 'mind',
+        name: 'Gifts of the Mind',
+        subtitle: 'How you think, learn, and discern',
+        icon: '&#10022;',
+        strengths: [
+            {
+                id: 'making',
+                name: 'Making',
+                description: 'You see what isn\'t there yet \u2014 and you know how to bring it into being. This isn\'t just artistic talent; it\'s the image of God in you. <em>Imago Dei</em> means you were made by a Creator, and something of that creative impulse lives in you. You solve problems in ways others don\'t see coming. You make things \u2014 beauty, solutions, connections, meaning \u2014 out of what everyone else walks past.',
+                questions: [
+                    'I naturally find new and unexpected ways to solve problems.',
+                    'I am often drawn to create \u2014 whether through art, ideas, words, or something else entirely.',
+                    'I see possibilities in things others have already dismissed or overlooked.'
+                ]
+            },
+            {
+                id: 'seeking',
+                name: 'Seeking',
+                description: 'You are drawn toward the unknown like a moth to light. Questions delight you. You don\'t find uncertainty threatening \u2014 you find it interesting. This is a holy restlessness, an echo of Augustine\'s "our heart is restless until it rests in Thee." Your curiosity is not distraction; it is desire. You were made to seek, because you were made for a God who wants to be found.',
+                questions: [
+                    'I genuinely enjoy exploring topics I know nothing about.',
+                    'I find myself asking questions long after others have moved on.',
+                    'Uncertainty feels more like an invitation than a threat to me.'
+                ]
+            },
+            {
+                id: 'wonder',
+                name: 'Wonder',
+                description: 'You are never quite finished learning. New ideas, new subjects, new depths of old ones \u2014 they fill something in you that stays hungry. This is the contemplative impulse in an active form. You don\'t just want to know about God; you want to go deeper, always deeper. Wonder keeps you humble and alive. It is the posture of a soul that knows it has not yet arrived.',
+                questions: [
+                    'I find deep satisfaction in learning something new, regardless of whether it\'s practical.',
+                    'I am drawn to go deeper into subjects rather than settling for surface knowledge.',
+                    'I regularly seek out books, conversations, or experiences that expand what I know.'
+                ]
+            },
+            {
+                id: 'discernment',
+                name: 'Discernment',
+                description: 'You see clearly. You weigh things carefully, consider multiple sides, and resist the pull toward easy answers. This gift can feel like a burden \u2014 you notice what others miss, including what\'s broken. But the Church has always needed women who can see truly. Discernment is not cynicism; it is clear-eyed love. It is the gift that helps the body of Christ think well.',
+                questions: [
+                    'I naturally weigh multiple perspectives before forming an opinion.',
+                    'I notice inconsistencies or problems that others tend to overlook.',
+                    'I resist pressure to accept easy answers when something deserves more careful thought.'
+                ]
+            },
+            {
+                id: 'wisdom',
+                name: 'Wisdom',
+                description: 'You have a way of standing back and seeing the whole. Where others are caught in the immediate, you find the longer view \u2014 the pattern, the meaning, the larger story. People come to you not just for answers but for perspective. This is the gift of the elder, the counselor, the woman who has learned to hold complexity without being undone by it. Wisdom is love that has been seasoned by time and surrender.',
+                questions: [
+                    'People often come to me when they need help seeing the bigger picture.',
+                    'I can step back from an immediate situation and find the longer view.',
+                    'I am comfortable holding complexity without needing to resolve it quickly.'
+                ]
+            },
+            {
+                id: 'counsel',
+                name: 'Counsel',
+                description: 'You know how to act well in the particular moment. Not just what is true in the abstract, but what is right <em>here, now, for this person, in this situation.</em> The Church counts Counsel among the seven gifts of the Holy Spirit for good reason \u2014 it is the capacity to translate principle into lived reality. You are a woman of practical wisdom. You don\'t just know the good; you know how to do it.',
+                questions: [
+                    'I have a sense for what the right action is in a given moment, not just in principle.',
+                    'I think carefully about real-world consequences before acting or advising.',
+                    'People trust me to give practical, grounded advice for specific situations.'
+                ]
+            }
+        ]
+    },
+    {
+        id: 'heart',
+        name: 'Gifts of the Heart',
+        subtitle: 'How you love, connect, and relate',
+        icon: '&#10022;',
+        strengths: [
+            {
+                id: 'devotion',
+                name: 'Devotion',
+                description: 'You love deeply and you mean it. Not the feeling that comes and goes, but the kind of love that shows up, stays, and gives itself away. This is the heart of the Gospel lived out in a particular person \u2014 you. Your capacity for devotion mirrors the love of the Father who looked at you and called you good. You don\'t love halfway. That is not a vulnerability; it is a vocation.',
+                questions: [
+                    'When I love someone, I love them wholeheartedly and for the long haul.',
+                    'I am willing to sacrifice my own comfort for the people I care about.',
+                    'Deep, committed relationships are among the most important things in my life.'
+                ]
+            },
+            {
+                id: 'tenderness',
+                name: 'Tenderness',
+                description: 'You notice the person in front of you. Not the role, not the function \u2014 the person. And you respond to them with a gentleness that costs you something. Tenderness is not softness for its own sake; it is strength that has chosen to be gentle. It is the hands of Christ, who touched the leper, who wept at Lazarus\'s tomb, who knelt in the dirt beside a woman the crowd wanted to stone.',
+                questions: [
+                    'I notice when someone is struggling, even when they haven\'t said anything.',
+                    'I respond to people with gentleness, even when they are being difficult.',
+                    'Small acts of care toward others come naturally to me.'
+                ]
+            },
+            {
+                id: 'reading_hearts',
+                name: 'Reading Hearts',
+                description: 'You read rooms, relationships, and people with an accuracy that can feel almost uncanny. You know what\'s underneath what\'s being said. You sense the wound behind the sharp word, the fear behind the withdrawal. This is not a parlor trick \u2014 it is a form of compassion. You were given eyes that see people truly so that you could love them truly.',
+                questions: [
+                    'I can usually sense what someone is really feeling beneath what they\'re saying.',
+                    'I pick up on the emotional undercurrents in a room quickly.',
+                    'I adjust how I relate to people based on what I sense they need in the moment.'
+                ]
+            },
+            {
+                id: 'mercy',
+                name: 'Mercy',
+                description: 'You know how to let things go \u2014 not because they didn\'t matter, but because you\'ve touched something of the mercy of God and can\'t help but pass it on. Mercy is not naivety. It is not pretending harm didn\'t happen. It is choosing, again and again, to refuse the prison of resentment. You carry this gift for others who don\'t yet know how to put down what they\'re carrying.',
+                questions: [
+                    'I find it possible to let go of offenses rather than holding onto them.',
+                    'I genuinely want restoration in broken relationships more than I want to be right.',
+                    'I can see the humanity in people who have hurt me.'
+                ]
+            },
+            {
+                id: 'true_seeing',
+                name: 'True Seeing',
+                description: 'You see yourself as you are \u2014 neither inflated nor diminished. This is rarer than it sounds. True Seeing is the gift of standing before God without performance, without apology, without pretense. It is the posture of Mary at the Annunciation: <em>I am the handmaid of the Lord.</em> Not self-erasure. Not self-exaltation. Just truth, held quietly.',
+                questions: [
+                    'I can acknowledge my own weaknesses without excessive shame or defensiveness.',
+                    'I don\'t need to be seen as more than I am \u2014 or as less.',
+                    'I find it easier than most to receive correction or feedback without falling apart.'
+                ]
+            },
+            {
+                id: 'lightness',
+                name: 'Lightness',
+                description: 'You know how to make people laugh, and you understand instinctively that laughter is a form of grace. Joy is a fruit of the Spirit, and you carry it into rooms that need it. Lightness doesn\'t mean you aren\'t serious \u2014 it means you\'ve found something solid enough to stand on that you can afford to play. It is the gift of the woman who dances at the feast because she knows the Host.',
+                questions: [
+                    'I naturally find the funny side of everyday situations.',
+                    'I use humor to ease tension and help people feel at ease.',
+                    'Joy and laughter feel like an essential part of how I move through life.'
+                ]
+            }
+        ]
+    },
+    {
+        id: 'will',
+        name: 'Gifts of the Will',
+        subtitle: 'How you act, lead, and persevere',
+        icon: '&#10022;',
+        strengths: [
+            {
+                id: 'courage',
+                name: 'Courage',
+                description: 'You act even when you are afraid. Not the absence of fear \u2014 you feel it \u2014 but you don\'t let it have the last word. This is the virtue the saints called <em>fortitude</em>, and it lives in you as a native language. You speak hard truths. You step into difficult places. You stand when others sit down. Courage is not recklessness; it is love that has decided the risk is worth it.',
+                questions: [
+                    'I speak up about hard things even when it would be easier to stay silent.',
+                    'I have stepped into situations I was afraid of because I knew it was right.',
+                    'Fear rarely stops me from doing what I believe I should do.'
+                ]
+            },
+            {
+                id: 'steadfastness',
+                name: 'Steadfastness',
+                description: 'You finish what you start. Not because it\'s easy \u2014 often it isn\'t \u2014 but because you know that the long road is sometimes the only road. You are the woman who shows up on the hard days, the unglamorous days, the days when no one is watching. Steadfastness is quiet and it is powerful. It is the gift that builds things that last.',
+                questions: [
+                    'I follow through on commitments even when the initial enthusiasm has faded.',
+                    'I keep working toward a goal even when progress is slow or invisible.',
+                    'I am the person who shows up on the hard, unglamorous days.'
+                ]
+            },
+            {
+                id: 'integrity',
+                name: 'Integrity',
+                description: 'What you say and who you are match. You don\'t perform a version of yourself for different audiences. You don\'t say one thing and do another. This coherence \u2014 this wholeness \u2014 is the gift of Integrity. It creates safety for everyone around you. People know where they stand with you. In a world of curated personas, you are refreshingly, sometimes uncomfortably, real.',
+                questions: [
+                    'I am the same person in private that I am in public.',
+                    'I would rather say something difficult and true than something comfortable and false.',
+                    'I find it hard to pretend to be something I\'m not, even when it would be easier.'
+                ]
+            },
+            {
+                id: 'unity',
+                name: 'Unity',
+                description: 'You understand that you were not made to go it alone \u2014 and neither was anyone else. You bring people together, hold the group, tend the <em>we.</em> This is the gift that builds the Body of Christ from the inside out. Unity doesn\'t erase difference; it harmonizes it. You know how to find the common ground without flattening what makes each person distinct.',
+                questions: [
+                    'I naturally think about what\'s best for the group, not just for myself.',
+                    'I help people find common ground when they\'re in conflict.',
+                    'I find deep satisfaction in working toward something alongside others.'
+                ]
+            },
+            {
+                id: 'justice',
+                name: 'Justice',
+                description: 'You feel the weight of what is right and what is wrong, and you can\'t pretend otherwise. When something is unfair, you notice \u2014 and it bothers you in a way you can\'t easily set aside. This is not mere rule-following; it is a participation in the justice of God, who sees every person as infinitely valuable. You are the woman who speaks up, who counts everyone in, who refuses to look away.',
+                questions: [
+                    'I notice when someone is being treated unfairly, and it bothers me deeply.',
+                    'I speak up for people who aren\'t in the room to speak for themselves.',
+                    'I hold myself to the same standard I hold everyone else.'
+                ]
+            },
+            {
+                id: 'shepherding',
+                name: 'Shepherding',
+                description: 'You lead, but not by standing above \u2014 by walking ahead, turning back, making sure everyone is still with you. Your leadership looks like tending. It looks like knowing the names of the people in your care, knowing what they need, knowing when to push and when to hold. This is the leadership of the Good Shepherd, and it is written into the way you move through the world.',
+                questions: [
+                    'I lead by caring about the people I\'m leading, not just the outcome.',
+                    'I naturally check that everyone is with me before moving forward.',
+                    'People tend to follow me not because I demand it but because they trust me.'
+                ]
+            },
+            {
+                id: 'order',
+                name: 'Order',
+                description: 'You have an interior governor \u2014 a capacity to align your actions with your values even when your feelings are pulling in another direction. This is not rigidity; it is freedom. Order is the gift that makes everything else possible. You bring structure to chaos, calm to confusion, and discipline to the work of becoming. You know that the most creative life is also a well-ordered one.',
+                questions: [
+                    'I can align my actions with my values even when my emotions are pulling another direction.',
+                    'I find that structure and routine help me live more freely, not less.',
+                    'I follow through on what I\'ve decided to do, even when I don\'t feel like it.'
+                ]
+            }
+        ]
+    },
+    {
+        id: 'soul',
+        name: 'Gifts of the Soul',
+        subtitle: 'How you encounter God and transcendence',
+        icon: '&#10022;',
+        strengths: [
+            {
+                id: 'beholding',
+                name: 'Beholding',
+                description: 'You stop. You notice. Where others walk past, you pause \u2014 at the slant of afternoon light, at a line of poetry, at a face that is quietly extraordinary. This is not aesthetic indulgence; it is a form of prayer. Beauty is how God signs His work, and you were given eyes to see His signature everywhere. Beholding is the gift of the woman who knows that the world is charged with the grandeur of God \u2014 and refuses to stop noticing.',
+                questions: [
+                    'I am moved by beauty \u2014 in nature, in art, in people \u2014 more than most.',
+                    'I notice moments of grace and loveliness that others tend to walk past.',
+                    'Encountering something truly beautiful feels, to me, like an encounter with God.'
+                ]
+            },
+            {
+                id: 'thanksgiving',
+                name: 'Thanksgiving',
+                description: 'You receive well. Not just gifts, but life itself \u2014 the ordinary, the difficult, the unexpected. You have a native capacity to find the grace inside the moment and name it. This is rarer than it looks. Thanksgiving is not optimism; it is attentiveness. It is the discipline of the woman who has learned that every good thing is given, and that the right response to a given life is to give it back.',
+                questions: [
+                    'I regularly notice and name what I\'m grateful for, even in hard seasons.',
+                    'I receive gifts \u2014 whether large or small \u2014 with genuine, unhurried appreciation.',
+                    'I find grace in ordinary moments more easily than most people seem to.'
+                ]
+            },
+            {
+                id: 'holy_hope',
+                name: 'Holy Hope',
+                description: 'You carry the future with you. Not naively \u2014 you know the world is broken \u2014 but you have touched something on the other side of that brokenness and you cannot unsee it. Holy Hope is not wishful thinking; it is theological conviction lived from the inside out. You are the woman in the room who believes things can be different, who acts as if the resurrection already changes everything \u2014 because it does.',
+                questions: [
+                    'Even in dark or uncertain seasons, I find myself believing things can be different.',
+                    'I act in ways that reflect confidence in what God is doing, even when I can\'t see it.',
+                    'I am the person in the room who holds onto the longer, truer story.'
+                ]
+            },
+            {
+                id: 'aliveness',
+                name: 'Aliveness',
+                description: 'You bring energy into the room when you enter it. Not performance \u2014 presence. There is something in you that is genuinely lit up by life, by people, by the work of the day. This is the gift of Aliveness, and it is contagious in the best possible way. It is the overflow of a soul that has said yes to being here, fully, without holding back. Joy is not something you manufacture; it is something you carry.',
+                questions: [
+                    'I bring real energy to the people and places I\'m part of.',
+                    'I feel genuinely enthusiastic about life more often than not.',
+                    'Others would describe me as someone who makes a room feel more alive.'
+                ]
+            },
+            {
+                id: 'holy_longing',
+                name: 'Holy Longing',
+                description: 'There is a hunger in you that the world cannot satisfy \u2014 and you\'ve stopped trying to make it. This longing is not a wound; it is a compass. It points always toward God, always toward home, always toward the More that every beautiful thing on earth is only a shadow of. You are a woman of deep interiority. You pray not just as a practice but as a necessity. Holy Longing is the gift of the soul that knows it was made for eternity and lives accordingly.',
+                questions: [
+                    'I have a deep interior life that is central to who I am.',
+                    'I am drawn to prayer and to God not just as a duty but as a genuine need.',
+                    'There is a hunger in me for something beyond this world that has always been there.'
+                ]
+            }
+        ]
+    }
+];
+
+// ═══════════════════════════════════════════
+//  QUIZ STATE
+// ═══════════════════════════════════════════
+let currentPage = 0; // 0–3 (one per family)
+let answers = {}; // { questionKey: score }
+let scores = {}; // { strengthId: totalScore }
+let sortedStrengths = [];
+
+const scaleLabels = ['Not at all like me', 'A little like me', 'Somewhat like me', 'Quite like me', 'Completely like me'];
+
+function startQuiz() {
+    document.getElementById('intro-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    renderPage();
+}
+
+function renderPage() {
+    const family = families[currentPage];
+    document.getElementById('family-label').textContent = 'Family ' + (currentPage + 1) + ' of 4';
+    document.getElementById('family-title').textContent = family.name;
+    document.getElementById('family-subtitle').textContent = family.subtitle;
+
+    // Progress
+    const totalAnswered = Object.keys(answers).length;
+    const pct = Math.round((totalAnswered / 72) * 100);
+    document.getElementById('progress-text').textContent = 'Section ' + (currentPage + 1) + ' of 4';
+    document.getElementById('progress-pct').textContent = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    // Build questions
+    const container = document.getElementById('questions-group');
+    container.innerHTML = '';
+
+    let qGlobal = 0;
+    for (let fi = 0; fi < currentPage; fi++) {
+        qGlobal += families[fi].strengths.length * 3;
+    }
+
+    family.strengths.forEach((strength, si) => {
+        strength.questions.forEach((qText, qi) => {
+            const key = strength.id + '_' + qi;
+            const qNum = qGlobal + si * 3 + qi + 1;
+            const val = answers[key] || null;
+
+            const card = document.createElement('div');
+            card.className = 'question-card' + (val !== null ? ' answered' : '');
+            card.id = 'qcard_' + key;
+
+            let btnsHtml = '';
+            for (let v = 1; v <= 5; v++) {
+                const sel = val === v ? ' selected' : '';
+                const lbl = v === 1 ? 'Not at all' : v === 5 ? 'Completely' : '';
+                btnsHtml += `<button class="rating-btn${sel}" onclick="selectAnswer('${key}','${strength.id}',${v},this)">
+                    <span class="rb-num">${v}</span>
+                    <span class="rb-label">${lbl}</span>
+                </button>`;
+            }
+
+            card.innerHTML = `
+                <p class="question-num">&#10022; ${qNum} of 72</p>
+                <p class="question-text">${qText}</p>
+                <div class="rating-scale">${btnsHtml}</div>
+                <div class="scale-legend">
+                    <span>Not at all like me</span>
+                    <span>Completely like me</span>
+                </div>`;
+            container.appendChild(card);
+        });
+    });
+
+    // Nav buttons
+    document.getElementById('btn-prev').disabled = currentPage === 0;
+    const isLast = currentPage === families.length - 1;
+    document.getElementById('btn-next').style.display = isLast ? 'none' : 'inline-block';
+    document.getElementById('btn-results').style.display = isLast ? 'inline-block' : 'none';
+    document.getElementById('unanswered-msg').style.display = 'none';
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function selectAnswer(key, strengthId, value, btn) {
+    answers[key] = value;
+    // Update button states
+    const siblings = btn.closest('.rating-scale').querySelectorAll('.rating-btn');
+    siblings.forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    // Mark card answered
+    document.getElementById('qcard_' + key).classList.add('answered');
+    // Update progress
+    const totalAnswered = Object.keys(answers).length;
+    const pct = Math.round((totalAnswered / 72) * 100);
+    document.getElementById('progress-pct').textContent = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function pageComplete() {
+    const family = families[currentPage];
+    for (const strength of family.strengths) {
+        for (let qi = 0; qi < 3; qi++) {
+            const key = strength.id + '_' + qi;
+            if (answers[key] === undefined) return false;
+        }
+    }
+    return true;
+}
+
+function nextPage() {
+    if (!pageComplete()) {
+        document.getElementById('unanswered-msg').style.display = 'block';
+        // Scroll to first unanswered
+        const family = families[currentPage];
+        for (const strength of family.strengths) {
+            for (let qi = 0; qi < 3; qi++) {
+                const key = strength.id + '_' + qi;
+                if (answers[key] === undefined) {
+                    document.getElementById('qcard_' + key).scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+            }
+        }
+        return;
+    }
+    document.getElementById('unanswered-msg').style.display = 'none';
+    currentPage++;
+    renderPage();
+}
+
+function prevPage() {
+    if (currentPage > 0) { currentPage--; renderPage(); }
+}
+
+function showResults() {
+    if (!pageComplete()) {
+        document.getElementById('unanswered-msg').style.display = 'block';
+        return;
+    }
+    // Calculate scores
+    scores = {};
+    families.forEach(family => {
+        family.strengths.forEach(strength => {
+            let total = 0;
+            for (let qi = 0; qi < 3; qi++) {
+                total += answers[strength.id + '_' + qi] || 0;
+            }
+            scores[strength.id] = total;
+        });
+    });
+
+    // Build sorted list with family info
+    sortedStrengths = [];
+    families.forEach(family => {
+        family.strengths.forEach(strength => {
+            sortedStrengths.push({
+                ...strength,
+                familyName: family.name,
+                familyId: family.id,
+                score: scores[strength.id]
+            });
+        });
+    });
+    sortedStrengths.sort((a, b) => b.score - a.score);
+
+    // Switch screens
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('results-screen').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Render
+    const top = sortedStrengths[0];
+    document.getElementById('top-gift-title').textContent = 'The Gift of ' + top.name;
+    document.getElementById('top-gift-sub').textContent = top.familyName;
+
+    renderSignatureCards();
+    renderFamilyResults();
+    renderAllBars();
+}
+
+function renderSignatureCards() {
+    const container = document.getElementById('signature-cards');
+    container.innerHTML = '';
+    const top5 = sortedStrengths.slice(0, 5);
+    const ranks = ['1st', '2nd', '3rd', '4th', '5th'];
+    top5.forEach((s, i) => {
+        const card = document.createElement('div');
+        card.className = 'gift-result-card';
+        card.setAttribute('data-rank', i + 1);
+        card.innerHTML = `
+            <div class="card-header">
+                <div>
+                    <div class="card-name">
+                        The Gift of ${s.name}
+                        <span class="card-rank-badge">${ranks[i]}</span>
+                    </div>
+                    <div class="card-family">${s.familyName}</div>
+                </div>
+            </div>
+            <p class="card-description">${s.description}</p>`;
+        container.appendChild(card);
+    });
+}
+
+function renderFamilyResults() {
+    const container = document.getElementById('family-results');
+    container.innerHTML = '<h3 class="section-heading">Your Gifts by Family</h3>';
+    families.forEach(family => {
+        const familyStrengths = sortedStrengths.filter(s => s.familyId === family.id);
+        const familyGroup = document.createElement('div');
+        familyGroup.className = 'family-group';
+        let barsHtml = '';
+        familyStrengths.forEach(s => {
+            const pct = Math.round((s.score / 15) * 100);
+            const isTop5 = sortedStrengths.indexOf(s) < 5;
+            barsHtml += `
+                <div class="bar-row">
+                    <span class="bar-name${isTop5 ? ' top' : ''}">${s.name}</span>
+                    <div class="bar-track"><div class="bar-fill${isTop5 ? ' top' : ''}" data-w="${pct}%" style="width:0%"></div></div>
+                    <span class="bar-score">${s.score}/15</span>
+                </div>`;
+        });
+        familyGroup.innerHTML = `
+            <div class="family-header">
+                <span class="family-name">${family.name}</span>
+                <span class="family-subtitle">&mdash; ${family.subtitle}</span>
+            </div>
+            ${barsHtml}`;
+        container.appendChild(familyGroup);
+    });
+    animateBars();
+}
+
+function renderAllBars() {
+    const container = document.getElementById('all-bars');
+    container.innerHTML = '';
+    sortedStrengths.forEach((s, i) => {
+        const pct = Math.round((s.score / 15) * 100);
+        const isTop5 = i < 5;
+        const row = document.createElement('div');
+        row.className = 'bar-row';
+        row.innerHTML = `
+            <span class="bar-name${isTop5 ? ' top' : ''}">${s.name}</span>
+            <div class="bar-track"><div class="bar-fill${isTop5 ? ' top' : ''}" data-w="${pct}%" style="width:0%"></div></div>
+            <span class="bar-score">${s.score}/15</span>`;
+        container.appendChild(row);
+    });
+    animateBars();
+}
+
+function animateBars() {
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            document.querySelectorAll('.bar-fill[data-w]').forEach(el => {
+                el.style.width = el.getAttribute('data-w');
+            });
+        });
+    });
+}
+
+async function saveToProfile() {
+    if (!currentUser) return;
+    const btn = document.getElementById('save-btn');
+    btn.disabled = true;
+    btn.textContent = 'Saving\u2026';
+
+    const top5 = sortedStrengths.slice(0, 5).map(s => s.name);
+    const { data: existing } = await sb.from('user_results')
+        .select('result_data')
+        .eq('user_id', currentUser.id)
+        .eq('assessment', 'symphony_profile')
+        .maybeSingle();
+
+    const profileData = existing?.result_data || {};
+    profileData.p_gifts_top1 = top5[0] || '';
+    profileData.p_gifts_top2 = top5[1] || '';
+    profileData.p_gifts_top3 = top5[2] || '';
+    profileData.p_gifts_top4 = top5[3] || '';
+    profileData.p_gifts_top5 = top5[4] || '';
+
+    const { error } = await sb.from('user_results').upsert({
+        user_id: currentUser.id,
+        assessment: 'symphony_profile',
+        result_data: profileData,
+        updated_at: new Date().toISOString()
+    }, { onConflict: 'user_id,assessment' });
+
+    const msg = document.getElementById('save-msg');
+    msg.style.display = 'block';
+    if (error) {
+        msg.textContent = 'Something went wrong \u2014 please try again.';
+        msg.style.color = '#c44569';
+        btn.disabled = false;
+        btn.innerHTML = '&#10022; Save to My Profile';
+    } else {
+        msg.textContent = '\u2714 Your top 5 Gifts of Grace have been saved to your Symphony Profile.';
+        msg.style.color = '#4a7c59';
+        btn.innerHTML = '\u2714 Saved!';
+    }
+}
+
+function retakeQuiz() {
+    answers = {};
+    scores = {};
+    sortedStrengths = [];
+    currentPage = 0;
+    document.getElementById('results-screen').style.display = 'none';
+    document.getElementById('intro-screen').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
