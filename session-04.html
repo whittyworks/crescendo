@@ -7,6 +7,16 @@
     <meta name="robots" content="noindex, nofollow">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="favicon32x32.png">
+    <link rel="apple-touch-icon" href="appletouchicon.png">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QX21GDR7T"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7QX21GDR7T');
+    </script>
+
     <style>
         :root {
             --cream: #FDF8F3;
@@ -17,15 +27,12 @@
             --text-dark: #2C2416;
             --text-medium: #5C5142;
             --text-light: #8B8170;
-
-            /* Module wash for this session */
+            --status-done: #7A9670;
             --module-wash: rgba(163, 186, 150, 0.18);
             --module-wash-strong: rgba(140, 170, 130, 0.25);
             --module-accent: #7A9670;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: 'Cormorant Garamond', Georgia, serif;
             background: var(--cream);
@@ -36,7 +43,6 @@
             display: flex;
             flex-direction: column;
         }
-
         .watercolor-blob {
             position: fixed;
             border-radius: 50%;
@@ -66,7 +72,6 @@
             align-items: center;
             border-bottom: 1px solid rgba(212, 175, 55, 0.15);
         }
-
         .logo-text {
             font-family: 'Cinzel', serif;
             font-size: 1.3rem;
@@ -74,7 +79,6 @@
             text-decoration: none;
             letter-spacing: 1px;
         }
-
         .back-link {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.75rem;
@@ -82,118 +86,292 @@
             text-transform: uppercase;
             color: var(--text-medium);
             text-decoration: none;
-            transition: color 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
         }
         .back-link:hover { color: var(--gold-dark); }
 
-        .session-wrapper {
+        .session-header {
             position: relative;
             z-index: 1;
-            flex: 1;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 4rem 5%;
+            padding: 3rem 5% 1rem;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 100%;
         }
-
         .session-label {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--module-accent);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             font-weight: 500;
         }
-
-        .session-title {
+        .session-header h1 {
             font-family: 'Cinzel', serif;
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             color: var(--gold-dark);
             font-weight: 400;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             line-height: 1.2;
         }
 
-        .session-tagline {
+        /* Saint card */
+        .saint-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
+            margin: 2.5rem auto 0;
+            padding: 0 5%;
+            text-align: center;
+        }
+        .saint-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(253, 244, 231, 0.5));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 20px;
+            padding: 2rem 2.25rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.06);
+        }
+        .saint-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 85% 20%, var(--module-wash-strong) 0%, var(--module-wash) 40%, transparent 70%);
+            pointer-events: none;
+        }
+        .saint-card > * { position: relative; z-index: 1; }
+        .saint-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--module-accent);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+        .saint-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--gold-dark);
             font-style: italic;
-            color: var(--text-medium);
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.6rem;
+        }
+        .saint-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            font-style: italic;
+            line-height: 1.5;
         }
 
-        .placeholder-card {
+        .step-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 2.5rem auto 0;
+            padding: 0 5%;
+        }
+        .step-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 20px;
-            padding: 3rem 2.5rem;
-            margin-top: 2rem;
+            padding: 2.25rem;
             box-shadow: 0 10px 40px rgba(212, 175, 55, 0.08);
-            position: relative;
-            overflow: hidden;
         }
-        .placeholder-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
-        }
-
-        .placeholder-icon {
-            font-size: 2.5rem;
-            color: var(--module-accent);
-            margin-bottom: 1.25rem;
-            display: block;
-        }
-
-        .placeholder-heading {
-            font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
-            color: var(--gold-dark);
-            margin-bottom: 1rem;
-            font-weight: 400;
-        }
-
-        .placeholder-body {
-            color: var(--text-medium);
-            font-size: 1.1rem;
-            line-height: 1.65;
-            max-width: 500px;
-            margin: 0 auto 1.5rem;
-        }
-
-        .back-button {
-            display: inline-flex;
+        .step-header {
+            display: flex;
             align-items: center;
-            gap: 0.6rem;
-            padding: 1rem 2.25rem;
-            border-radius: 50px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.78rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .step-badge {
+            flex-shrink: 0;
+            width: 42px; height: 42px;
+            border-radius: 50%;
             background: linear-gradient(135deg, var(--gold-light), var(--gold));
             color: white;
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
-            text-decoration: none;
-            margin-top: 1rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
         }
-        .back-button:hover {
+        .step-meta { flex: 1; }
+        .step-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 0.2rem;
+        }
+        .step-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        .step-body { color: var(--text-medium); font-size: 1.05rem; line-height: 1.65; }
+        .step-body p { margin-bottom: 1rem; }
+        .step-body p:last-child { margin-bottom: 0; }
+
+        /* Buttons */
+        .workbook-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.95rem 1.5rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+        .btn-secondary {
+            background: white;
+            color: var(--text-medium);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .btn-secondary:hover {
+            background: var(--cream-dark);
+            border-color: var(--gold);
+            color: var(--gold-dark);
+        }
+
+        /* Tool links */
+        .tool-list {
+            display: grid;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+        }
+        .tool-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.1rem 1.4rem;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: all 0.3s;
+        }
+        .tool-link:hover {
+            background: white;
+            border-color: var(--gold);
+            transform: translateX(4px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.12);
+        }
+        .tool-icon {
+            color: var(--module-accent);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .tool-label {
+            flex: 1;
+            font-family: 'Cinzel', serif;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+        .tool-arrow {
+            color: var(--module-accent);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            transition: transform 0.3s;
+        }
+        .tool-link:hover .tool-arrow { transform: translateX(4px); }
+
+        /* Coming soon notice */
+        .notice {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
+            margin: 2.5rem auto 0;
+            padding: 0 5%;
+        }
+        .notice-card {
+            background: rgba(253, 248, 243, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 14px;
+            padding: 1.4rem 1.6rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        .notice-icon {
+            color: var(--module-accent);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .notice-text {
+            font-size: 1rem;
+            color: var(--text-medium);
+            line-height: 1.55;
+            font-style: italic;
+        }
+
+        /* Session nav */
+        .session-nav {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 3rem auto 3rem;
+            padding: 0 5%;
+            display: flex;
+            justify-content: center;
+        }
+        .session-nav-btn {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 1.1rem 1.8rem;
+            text-decoration: none;
+            color: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-medium);
+        }
+        .session-nav-btn:hover {
+            background: white;
+            border-color: var(--gold);
+            color: var(--gold-dark);
         }
 
         footer {
@@ -227,11 +405,13 @@
         }
 
         @media (max-width: 768px) {
-            .session-title { font-size: 2rem; }
-            .session-tagline { font-size: 1.1rem; }
-            .placeholder-card { padding: 2rem 1.5rem; }
-            .placeholder-heading { font-size: 1.25rem; }
-            .placeholder-body { font-size: 1rem; }
+            .session-header { padding: 2rem 5% 0.5rem; }
+            .session-header h1 { font-size: 2rem; }
+            .saint-card { padding: 1.5rem 1.25rem; }
+            .saint-quote { font-size: 1.05rem; }
+            .step-card { padding: 1.75rem 1.25rem; }
+            .step-title { font-size: 1.15rem; }
+            .workbook-actions { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -244,21 +424,79 @@
         <a href="portal.html" class="back-link"><span>&larr;</span> Back to Portal</a>
     </nav>
 
-    <div class="session-wrapper">
+    <div class="session-header">
         <p class="session-label">Body &middot; Session 04</p>
-        <h1 class="session-title">Colors of Creation</h1>
-        <p class="session-tagline">The palette God used to paint you</p>
+        <h1>Colors of Creation</h1>
         <div class="gold-line"></div>
+    </div>
 
-        <div class="placeholder-card">
-            <span class="placeholder-icon">&#10022;</span>
-            <h2 class="placeholder-heading">Being prepared with care</h2>
-            <p class="placeholder-body">This session is coming soon. Every page is being written, edited, and woven together with intention &mdash; so that when you sit down, what meets you is worthy of the time you are giving it.</p>
-            <p class="placeholder-body"><em>Thank you for your patience as we build the Symphony together.</em></p>
-            <a href="portal.html" class="back-button">
-                <span>&larr;</span> Return to Your Symphony
-            </a>
+    <!-- Saint Card -->
+    <div class="saint-wrap">
+        <div class="saint-card">
+            <div class="saint-label">Our Guide This Week</div>
+            <div class="saint-name">St. Hildegard of Bingen</div>
+            <p class="saint-quote">&ldquo;Every creature is a glittering, glistening mirror of divinity.&rdquo;</p>
         </div>
+    </div>
+
+    <!-- Workbook -->
+    <div class="step-wrap">
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-badge">&#9783;</div>
+                <div class="step-meta">
+                    <div class="step-label">Your Workbook</div>
+                    <div class="step-title">Session 04 Workbook</div>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>Read it on screen, or print it out for handwritten reflection &mdash; many women do both.</p>
+                <div class="workbook-actions">
+                    <a href="assets/pdf/sessions/session04.pdf" target="_blank" class="btn btn-primary">
+                        <span>&#9783;</span> Read the Workbook
+                    </a>
+                    <a href="assets/pdf/sessions/session04.pdf" class="btn btn-secondary" download="Session-04-Colors-of-Creation.pdf">
+                        <span>&darr;</span> Download to Print
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="step-wrap">
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-badge">&#9733;</div>
+                <div class="step-meta">
+                    <div class="step-label">Tools &amp; Assessments</div>
+                    <div class="step-title">Quick Access</div>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>Jump directly to this session&rsquo;s tools. Your responses are saved automatically to your profile.</p>
+                <div class="tool-list">
+                <a href="seasonal-color-analysis-quiz.html" class="tool-link">
+                    <span class="tool-icon">&#9734;</span>
+                    <span class="tool-label">Seasonal Color Analysis Quiz</span>
+                    <span class="tool-arrow">&rarr;</span>
+                </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Notice -->
+    <div class="notice">
+        <div class="notice-card">
+            <div class="notice-icon">&#10022;</div>
+            <div class="notice-text">Your full self-paced Session 04 experience &mdash; teaching video, guided reflection, and celebration &mdash; is being prepared. For now, your workbook and tools are here, ready whenever you are.</div>
+        </div>
+    </div>
+
+    <div class="session-nav">
+        <a href="portal.html" class="session-nav-btn">
+            <span>&larr;</span> Return to Your Symphony
+        </a>
     </div>
 
     <footer>
