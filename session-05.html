@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session 05: Presence & Grace: Sacred Style Essence &middot; My Holy Crescendo</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon32x32.png">
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+            --text-light: #8B8170;
+
+            /* Module wash for this session */
+            --module-wash: rgba(163, 186, 150, 0.18);
+            --module-wash-strong: rgba(140, 170, 130, 0.25);
+            --module-accent: #7A9670;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .watercolor-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, var(--module-wash-strong) 0%, transparent 70%); top: -150px; right: -150px; }
+        .blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(245, 225, 218, 0.5) 0%, transparent 70%); bottom: 10%; left: -100px; }
+
+        .gold-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 1.5rem auto;
+            max-width: 200px;
+        }
+
+        nav {
+            position: relative;
+            z-index: 10;
+            background: rgba(253, 248, 243, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 1.25rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold-dark);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .back-link {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .back-link:hover { color: var(--gold-dark); }
+
+        .session-wrapper {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .session-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--module-accent);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .session-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            color: var(--gold-dark);
+            font-weight: 400;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .session-tagline {
+            font-style: italic;
+            color: var(--text-medium);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .placeholder-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .placeholder-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
+        }
+
+        .placeholder-icon {
+            font-size: 2.5rem;
+            color: var(--module-accent);
+            margin-bottom: 1.25rem;
+            display: block;
+        }
+
+        .placeholder-heading {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .placeholder-body {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+            line-height: 1.65;
+            max-width: 500px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1rem 2.25rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        footer {
+            background: var(--text-dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 2.5rem 5% 1.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            margin-top: auto;
+        }
+        footer h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 0.4rem;
+            font-weight: 400;
+        }
+        footer .tagline {
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        footer .copyright {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
+            padding-top: 1.25rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .session-title { font-size: 2rem; }
+            .session-tagline { font-size: 1.1rem; }
+            .placeholder-card { padding: 2rem 1.5rem; }
+            .placeholder-heading { font-size: 1.25rem; }
+            .placeholder-body { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="watercolor-blob blob-1"></div>
+    <div class="watercolor-blob blob-2"></div>
+
+    <nav>
+        <a href="index.html" class="logo-text">My Holy Crescendo</a>
+        <a href="portal.html" class="back-link"><span>&larr;</span> Back to Portal</a>
+    </nav>
+
+    <div class="session-wrapper">
+        <p class="session-label">Body &middot; Session 05</p>
+        <h1 class="session-title">Presence &amp; Grace: Sacred Style Essence</h1>
+        <p class="session-tagline">How the Lord is glorified in your presence</p>
+        <div class="gold-line"></div>
+
+        <div class="placeholder-card">
+            <span class="placeholder-icon">&#10022;</span>
+            <h2 class="placeholder-heading">Being prepared with care</h2>
+            <p class="placeholder-body">This session is coming soon. Every page is being written, edited, and woven together with intention &mdash; so that when you sit down, what meets you is worthy of the time you are giving it.</p>
+            <p class="placeholder-body"><em>Thank you for your patience as we build the Symphony together.</em></p>
+            <a href="portal.html" class="back-button">
+                <span>&larr;</span> Return to Your Symphony
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <h3>My Holy Crescendo</h3>
+        <p class="tagline">Fearfully &amp; wonderfully made</p>
+        <p class="copyright">&copy; 2026 Whitty Works LLC &middot; All Rights Reserved</p>
+    </footer>
+</body>
+</html>
