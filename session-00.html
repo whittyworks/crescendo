@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Invitation: A Symphony of Grace &middot; My Holy Crescendo</title>
+    <title>The Invitation &middot; My Holy Crescendo</title>
     <meta name="robots" content="noindex, nofollow">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="favicon32x32.png">
+    <link rel="apple-touch-icon" href="appletouchicon.png">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QX21GDR7T"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7QX21GDR7T');
+    </script>
+
     <style>
         :root {
             --cream: #FDF8F3;
@@ -17,11 +27,12 @@
             --text-dark: #2C2416;
             --text-medium: #5C5142;
             --text-light: #8B8170;
+            --blush: #F5E1DA;
+            --status-done: #7A9670;
 
-            /* Module wash for this session */
-            --module-wash: rgba(245, 193, 150, 0.16);
-            --module-wash-strong: rgba(230, 170, 125, 0.28);
-            --module-accent: #C97A4A;
+            --module-wash: rgba(232, 190, 185, 0.18);
+            --module-wash-strong: rgba(216, 166, 160, 0.28);
+            --module-accent: #B07A7A;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,8 +44,6 @@
             line-height: 1.7;
             min-height: 100vh;
             overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
         }
 
         .watercolor-blob {
@@ -66,7 +75,6 @@
             align-items: center;
             border-bottom: 1px solid rgba(212, 175, 55, 0.15);
         }
-
         .logo-text {
             font-family: 'Cinzel', serif;
             font-size: 1.3rem;
@@ -74,7 +82,6 @@
             text-decoration: none;
             letter-spacing: 1px;
         }
-
         .back-link {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.75rem;
@@ -82,158 +89,494 @@
             text-transform: uppercase;
             color: var(--text-medium);
             text-decoration: none;
-            transition: color 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
+            transition: color 0.2s;
         }
         .back-link:hover { color: var(--gold-dark); }
 
-        .session-wrapper {
+        .session-header {
             position: relative;
             z-index: 1;
-            flex: 1;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 4rem 5%;
+            padding: 3rem 5% 1rem;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 100%;
         }
-
         .session-label {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--module-accent);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             font-weight: 500;
         }
-
-        .session-title {
+        .session-header h1 {
             font-family: 'Cinzel', serif;
             font-size: 2.8rem;
             color: var(--gold-dark);
             font-weight: 400;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             line-height: 1.2;
         }
-
-        .session-tagline {
+        .session-header .tagline {
             font-style: italic;
             color: var(--text-medium);
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
         }
 
-        .placeholder-card {
+        .goldilocks-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
+            margin: 3rem auto 0;
+            padding: 0 5%;
+            text-align: center;
+        }
+        .goldilocks-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(253, 241, 237, 0.6));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(176, 122, 122, 0.25);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(176, 122, 122, 0.08);
+        }
+        .goldilocks-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 85% 20%, var(--module-wash-strong) 0%, var(--module-wash) 40%, transparent 70%),
+                radial-gradient(circle 2px at 88% 30%, rgba(176, 122, 122, 0.4), transparent),
+                radial-gradient(circle 1.5px at 92% 18%, rgba(176, 122, 122, 0.35), transparent);
+            pointer-events: none;
+        }
+        .goldilocks-card > * { position: relative; z-index: 1; }
+        .goldilocks-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--module-accent);
+            margin-bottom: 1.25rem;
+            font-weight: 500;
+        }
+        .goldilocks-line {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 400;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        .goldilocks-promise {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--gold-dark);
+            font-weight: 500;
+            line-height: 1.3;
+            margin-top: 1.25rem;
+        }
+
+        .step-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 3rem auto 0;
+            padding: 0 5%;
+        }
+        .step-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 20px;
-            padding: 3rem 2.5rem;
-            margin-top: 2rem;
+            padding: 2.5rem;
             box-shadow: 0 10px 40px rgba(212, 175, 55, 0.08);
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .step-badge {
+            flex-shrink: 0;
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+        }
+        .step-meta { flex: 1; }
+        .step-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 0.2rem;
+        }
+        .step-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        .step-body { color: var(--text-medium); font-size: 1.08rem; line-height: 1.7; }
+        .step-body p { margin-bottom: 1rem; }
+        .step-body p:last-child { margin-bottom: 0; }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: linear-gradient(135deg, var(--module-accent), var(--gold-dark));
+            border-radius: 14px;
+            overflow: hidden;
+            margin-top: 1.25rem;
+            box-shadow: 0 10px 30px rgba(44, 36, 22, 0.2);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
+        }
+        .video-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.9);
+            text-align: center;
+            padding: 2rem;
+        }
+        .video-placeholder .icon {
+            width: 80px; height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .video-placeholder .icon::after {
+            content: '';
+            width: 0; height: 0;
+            border-top: 14px solid transparent;
+            border-bottom: 14px solid transparent;
+            border-left: 22px solid var(--gold-dark);
+            margin-left: 6px;
+        }
+        .video-placeholder .note {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        .workbook-viewer {
+            background: var(--cream-dark);
+            border-radius: 14px;
+            padding: 1rem;
+            margin-top: 1.25rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            overflow: hidden;
+        }
+        .workbook-viewer iframe {
+            width: 100%;
+            height: 600px;
+            border: 0;
+            border-radius: 8px;
+            display: block;
+            background: white;
+        }
+        .workbook-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.95rem 1.5rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+        .btn-secondary {
+            background: white;
+            color: var(--text-medium);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .btn-secondary:hover {
+            background: var(--cream-dark);
+            border-color: var(--gold);
+            color: var(--gold-dark);
+        }
+        .btn-lg { padding: 1.1rem 2.5rem; font-size: 0.8rem; }
+        .btn[disabled] {
+            background: var(--cream-dark);
+            color: var(--text-light);
+            border: 1px solid rgba(201, 195, 184, 0.5);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .btn[disabled]:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .reflection-block {
+            background: linear-gradient(135deg, rgba(253, 248, 243, 0.7), rgba(245, 239, 231, 0.5));
+            border-radius: 14px;
+            padding: 1.5rem 1.75rem;
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            margin-top: 1.25rem;
+        }
+        .reflection-prompt {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.9rem;
+            line-height: 1.5;
+        }
+        .reflection-prompt strong {
+            font-family: 'Cinzel', serif;
+            font-weight: 500;
+            color: var(--module-accent);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .reflection-textarea {
+            width: 100%;
+            padding: 0.9rem 1.1rem;
+            border: 1.5px solid rgba(212, 175, 55, 0.25);
+            border-radius: 14px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            background: white;
+            resize: vertical;
+            min-height: 100px;
+            line-height: 1.6;
+            transition: all 0.2s;
+        }
+        .reflection-textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        .save-status {
+            margin-top: 0.8rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            min-height: 1.3rem;
+        }
+        .save-status.saved { color: var(--status-done); }
+        .save-status.saving { color: var(--gold-dark); }
+        .save-status.guest { color: var(--text-light); font-style: italic; }
+        .save-status a { color: var(--gold-dark); text-decoration: none; margin-left: 0.25rem; }
+        .save-status a:hover { text-decoration: underline; }
+
+        .complete-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 3rem auto 1rem;
+            padding: 0 5%;
+            text-align: center;
+        }
+        .complete-card {
+            background: linear-gradient(135deg, rgba(253, 248, 243, 0.95), rgba(245, 239, 231, 0.95));
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 24px;
+            padding: 2.5rem;
             position: relative;
             overflow: hidden;
         }
-        .placeholder-card::before {
+        .complete-card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 4px;
             background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
         }
-
-        .placeholder-icon {
-            font-size: 2.5rem;
-            color: var(--module-accent);
-            margin-bottom: 1.25rem;
-            display: block;
+        .complete-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
         }
-
-        .placeholder-heading {
+        .complete-title {
             font-family: 'Cinzel', serif;
             font-size: 1.5rem;
             color: var(--gold-dark);
             margin-bottom: 1rem;
             font-weight: 400;
         }
-
-        .placeholder-body {
+        .complete-desc {
+            font-style: italic;
             color: var(--text-medium);
-            font-size: 1.1rem;
-            line-height: 1.65;
-            max-width: 500px;
-            margin: 0 auto 1.5rem;
+            margin-bottom: 1.75rem;
+            font-size: 1.05rem;
         }
-
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 1rem 2.25rem;
-            border-radius: 50px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.78rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .complete-desc a {
+            color: var(--gold-dark);
             font-weight: 500;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold));
-            color: white;
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
             text-decoration: none;
+        }
+        .complete-desc a:hover { text-decoration: underline; }
+        .complete-done {
+            color: var(--status-done);
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
             margin-top: 1rem;
         }
-        .back-button:hover {
+
+        .session-nav {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 2rem auto 4rem;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .session-nav-btn {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            transition: all 0.3s;
+        }
+        .session-nav-btn:hover:not(.disabled) {
+            background: white;
+            border-color: var(--gold);
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.12);
+        }
+        .session-nav-btn.next { text-align: right; }
+        .session-nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .nav-btn-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+        .nav-btn-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-weight: 500;
         }
 
         footer {
             background: var(--text-dark);
             color: rgba(255, 255, 255, 0.7);
-            padding: 2.5rem 5% 1.5rem;
+            padding: 3rem 5% 2rem;
             text-align: center;
             position: relative;
             z-index: 1;
-            margin-top: auto;
         }
         footer h3 {
             font-family: 'Cinzel', serif;
             color: var(--gold);
-            font-size: 1.3rem;
-            margin-bottom: 0.4rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
             font-weight: 400;
         }
         footer .tagline {
             font-style: italic;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
             color: rgba(255, 255, 255, 0.5);
         }
         footer .copyright {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             letter-spacing: 1.5px;
-            padding-top: 1.25rem;
+            padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         @media (max-width: 768px) {
-            .session-title { font-size: 2rem; }
-            .session-tagline { font-size: 1.1rem; }
-            .placeholder-card { padding: 2rem 1.5rem; }
-            .placeholder-heading { font-size: 1.25rem; }
-            .placeholder-body { font-size: 1rem; }
+            .session-header { padding: 2rem 5% 0.5rem; }
+            .session-header h1 { font-size: 2rem; }
+            .session-header .tagline { font-size: 1.1rem; }
+            .goldilocks-card { padding: 2rem 1.5rem; }
+            .goldilocks-line { font-size: 1.2rem; }
+            .goldilocks-promise { font-size: 1.4rem; }
+            .step-card { padding: 1.75rem 1.25rem; }
+            .step-title { font-size: 1.15rem; }
+            .workbook-actions { grid-template-columns: 1fr; }
+            .workbook-viewer iframe { height: 450px; }
+            .session-nav { flex-direction: column; }
+            .session-nav-btn.next { text-align: left; }
+            .complete-card { padding: 2rem 1.25rem; }
+            .complete-title { font-size: 1.3rem; }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="watercolor-blob blob-1"></div>
@@ -244,21 +587,122 @@
         <a href="portal.html" class="back-link"><span>&larr;</span> Back to Portal</a>
     </nav>
 
-    <div class="session-wrapper">
-        <p class="session-label">Begin Here &middot; The Invitation</p>
-        <h1 class="session-title">A Symphony of Grace</h1>
-        <p class="session-tagline">An invitation to the journey ahead</p>
+    <div class="session-header">
+        <p class="session-label">Begin Here</p>
+        <h1>The Invitation</h1>
+        <p class="tagline">A Symphony of Grace</p>
         <div class="gold-line"></div>
+    </div>
 
-        <div class="placeholder-card">
-            <span class="placeholder-icon">&#10022;</span>
-            <h2 class="placeholder-heading">Being prepared with care</h2>
-            <p class="placeholder-body">This session is coming soon. Every page is being written, edited, and woven together with intention &mdash; so that when you sit down, what meets you is worthy of the time you are giving it.</p>
-            <p class="placeholder-body"><em>Thank you for your patience as we build the Symphony together.</em></p>
-            <a href="portal.html" class="back-button">
-                <span>&larr;</span> Return to Your Symphony
-            </a>
+    <!-- GOLDILOCKS PROMISE -->
+    <div class="goldilocks-wrap">
+        <div class="goldilocks-card">
+            <div class="goldilocks-label">Before We Begin</div>
+            <p class="goldilocks-line">For every woman who has ever felt like she was too much and not enough, all at the same time &mdash;</p>
+            <p class="goldilocks-promise">You are just right.</p>
         </div>
+    </div>
+
+    <!-- STEP 1: VIDEO -->
+    <div class="step-wrap">
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-badge">1</div>
+                <div class="step-meta">
+                    <div class="step-label">Step One</div>
+                    <div class="step-title">A Word from Bea</div>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>Begin here. In this short teaching, I share why Crescendo was born, what the Symphony of Grace is, and why your journey through it matters.</p>
+                <div class="video-wrapper">
+                    <!-- TODO: After recording, replace the div below with:
+                         <iframe src="https://player.vimeo.com/video/YOUR_VIDEO_ID" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    -->
+                    <div class="video-placeholder">
+                        <div class="icon"></div>
+                        <div class="note">Teaching video coming soon</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 2: WORKBOOK -->
+    <div class="step-wrap">
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-badge">2</div>
+                <div class="step-meta">
+                    <div class="step-label">Step Two</div>
+                    <div class="step-title">The Invitation Workbook</div>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>Move through the workbook at your own pace. You can read it here, or print it out for handwritten reflection. The workbook introduces the heart of Crescendo &mdash; why we&rsquo;re here, what we&rsquo;ll walk through, and the quiet language of music that will carry us.</p>
+                <div class="workbook-viewer">
+                    <iframe src="session00.pdf#view=FitH" title="The Invitation Workbook"></iframe>
+                </div>
+                <div class="workbook-actions">
+                    <a href="session00.pdf" target="_blank" class="btn btn-primary">
+                        <span>&#9783;</span> Open Full View
+                    </a>
+                    <a href="session00.pdf" class="btn btn-secondary" download="The-Invitation-Workbook.pdf">
+                        <span>&darr;</span> Download to Print
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 3: REFLECTION -->
+    <div class="step-wrap">
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-badge">3</div>
+                <div class="step-meta">
+                    <div class="step-label">Step Three</div>
+                    <div class="step-title">A Gentle Beginning</div>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>Before you close this first session, sit for a few moments with one question. No right answer. No wrong answer. Just the one that rises.</p>
+
+                <div class="reflection-block">
+                    <div class="reflection-prompt">
+                        <strong>Notice</strong>
+                        What drew you here?
+                    </div>
+                    <textarea class="reflection-textarea" id="reflection-0" placeholder="Write as little or as much as rises..."></textarea>
+                    <div class="save-status" id="save-status-0">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MARK COMPLETE -->
+    <div class="complete-wrap">
+        <div class="complete-card" id="complete-card">
+            <div class="complete-label">A Moment of Closure</div>
+            <h2 class="complete-title" id="complete-title">Ready to close this session?</h2>
+            <p class="complete-desc" id="complete-desc">When you&rsquo;re ready, mark The Invitation complete. You can always return here to revisit anything.</p>
+            <button class="btn btn-primary btn-lg" id="mark-complete-btn" onclick="markComplete()">
+                <span>&#10022;</span> Mark Session Complete
+            </button>
+            <div id="complete-done" class="complete-done" style="display:none">&#10003; Complete</div>
+        </div>
+    </div>
+
+    <!-- SESSION NAV -->
+    <div class="session-nav">
+        <a href="portal.html" class="session-nav-btn">
+            <span class="nav-btn-label">&larr; Back to</span>
+            <span class="nav-btn-title">Your Symphony</span>
+        </a>
+        <a href="session-01.html" class="session-nav-btn next" id="next-session-btn">
+            <span class="nav-btn-label" id="next-label">Session 01 &middot; Locked</span>
+            <span class="nav-btn-title">You Are Called</span>
+        </a>
     </div>
 
     <footer>
@@ -266,5 +710,201 @@
         <p class="tagline">Fearfully &amp; wonderfully made</p>
         <p class="copyright">&copy; 2026 Whitty Works LLC &middot; All Rights Reserved</p>
     </footer>
+
+    <script>
+        const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const SESSION_NUM = 0;
+        const REFLECTION_FIELD = 'reflection_drew_here';
+        const SAVE_DEBOUNCE_MS = 2000;
+
+        let currentUser = null;
+        let userProfile = null;
+        let saveTimer = null;
+
+        (async function init() {
+            const { data: { session } } = await sb.auth.getSession();
+            if (!session) {
+                setupGuestMode();
+                return;
+            }
+            currentUser = session.user;
+            await loadProfile();
+            await loadReflection();
+            setupLoggedInMode();
+        })();
+
+        async function loadProfile() {
+            const { data } = await sb.from('profiles')
+                .select('has_full_access, grandfathered')
+                .eq('id', currentUser.id)
+                .maybeSingle();
+            userProfile = data || { has_full_access: false, grandfathered: false };
+        }
+
+        function hasFullAccess() {
+            return !!(userProfile && (userProfile.has_full_access || userProfile.grandfathered));
+        }
+
+        function setupGuestMode() {
+            const status = document.getElementById('save-status-0');
+            status.className = 'save-status guest';
+            status.innerHTML = 'Your reflection won&rsquo;t be saved. <a href="portal.html">Sign in or create a free account to save it.</a>';
+
+            const btn = document.getElementById('mark-complete-btn');
+            btn.innerHTML = '<span>&#10022;</span> Sign in to mark complete';
+            btn.onclick = function() { window.location.href = 'portal.html'; };
+        }
+
+        function setupLoggedInMode() {
+            const textarea = document.getElementById('reflection-0');
+            textarea.addEventListener('input', handleReflectionInput);
+            textarea.addEventListener('blur', function() {
+                if (saveTimer) {
+                    clearTimeout(saveTimer);
+                    saveReflection();
+                }
+            });
+            updateNextSessionButton();
+        }
+
+        function handleReflectionInput() {
+            const status = document.getElementById('save-status-0');
+            status.className = 'save-status';
+            status.textContent = '';
+            if (saveTimer) clearTimeout(saveTimer);
+            saveTimer = setTimeout(saveReflection, SAVE_DEBOUNCE_MS);
+        }
+
+        async function saveReflection() {
+            saveTimer = null;
+            const textarea = document.getElementById('reflection-0');
+            const status = document.getElementById('save-status-0');
+            const value = textarea.value.trim();
+
+            status.className = 'save-status saving';
+            status.innerHTML = '&#8987; Saving...';
+
+            try {
+                const { error } = await sb
+                    .from('session_progress')
+                    .upsert({
+                        user_id: currentUser.id,
+                        session_num: SESSION_NUM,
+                        status: 'in_progress',
+                        notes: { [REFLECTION_FIELD]: value },
+                        started_at: new Date().toISOString()
+                    }, { onConflict: 'user_id,session_num' });
+
+                if (error) throw error;
+                status.className = 'save-status saved';
+                status.innerHTML = '&#10022; Saved';
+            } catch (e) {
+                console.warn('Save error:', e);
+                status.className = 'save-status';
+                status.style.color = '#c44569';
+                status.textContent = 'Save failed - will retry on next edit';
+            }
+        }
+
+        async function loadReflection() {
+            const { data } = await sb
+                .from('session_progress')
+                .select('status, notes')
+                .eq('user_id', currentUser.id)
+                .eq('session_num', SESSION_NUM)
+                .maybeSingle();
+
+            if (data) {
+                if (data.notes && data.notes[REFLECTION_FIELD]) {
+                    document.getElementById('reflection-0').value = data.notes[REFLECTION_FIELD];
+                    const status = document.getElementById('save-status-0');
+                    status.className = 'save-status saved';
+                    status.innerHTML = '&#10022; Saved';
+                }
+                if (data.status === 'complete') {
+                    showCompleteState();
+                }
+            }
+        }
+
+        async function markComplete() {
+            const btn = document.getElementById('mark-complete-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<span>&#8987;</span> Closing this session...';
+
+            if (saveTimer) {
+                clearTimeout(saveTimer);
+                await saveReflection();
+            }
+
+            try {
+                const textarea = document.getElementById('reflection-0');
+                const { error: progErr } = await sb
+                    .from('session_progress')
+                    .upsert({
+                        user_id: currentUser.id,
+                        session_num: SESSION_NUM,
+                        status: 'complete',
+                        notes: { [REFLECTION_FIELD]: textarea.value.trim() },
+                        completed_at: new Date().toISOString()
+                    }, { onConflict: 'user_id,session_num' });
+
+                if (progErr) throw progErr;
+
+                showCompleteState();
+
+                if (hasFullAccess()) {
+                    await sb.from('session_progress').upsert({
+                        user_id: currentUser.id,
+                        session_num: 1,
+                        status: 'unlocked'
+                    }, { onConflict: 'user_id,session_num', ignoreDuplicates: true });
+                }
+            } catch (e) {
+                console.error('Mark complete failed:', e);
+                btn.disabled = false;
+                btn.innerHTML = '<span>&#10022;</span> Try Again';
+            }
+        }
+
+        function showCompleteState() {
+            const title = document.getElementById('complete-title');
+            const desc = document.getElementById('complete-desc');
+            const btn = document.getElementById('mark-complete-btn');
+            const done = document.getElementById('complete-done');
+            const paid = hasFullAccess();
+
+            btn.style.display = 'none';
+            done.style.display = 'block';
+
+            if (paid) {
+                title.textContent = 'The Invitation is complete.';
+                desc.innerHTML = 'Session 1 awaits &mdash; <a href="session-01.html">You Are Called &rarr;</a>';
+            } else {
+                title.textContent = 'Thank you for sitting with The Invitation.';
+                desc.innerHTML = 'Ready for the full journey? <a href="symphony-of-grace.html#purchase">Begin your Symphony of Grace &rarr;</a>';
+            }
+            updateNextSessionButton();
+        }
+
+        function updateNextSessionButton() {
+            const nextBtn = document.getElementById('next-session-btn');
+            const nextLabel = document.getElementById('next-label');
+            const paid = hasFullAccess();
+
+            if (paid) {
+                nextBtn.classList.remove('disabled');
+                nextBtn.href = 'session-01.html';
+                nextLabel.textContent = 'Session 01 \u00b7 Up Next';
+            } else {
+                nextBtn.classList.add('disabled');
+                nextBtn.href = 'symphony-of-grace.html#purchase';
+                nextLabel.textContent = 'Session 01 \u00b7 Locked';
+            }
+        }
+    </script>
 </body>
 </html>
