@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Participant Portal &#183; My Holy Crescendo</title>
+    <title>Participant Portal &middot; My Holy Crescendo</title>
     <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="Exclusive resources for A Symphony of Grace participants.">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <meta name="description" content="Your Symphony of Grace journey begins here.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="favicon32x32.png">
+    <link rel="apple-touch-icon" href="appletouchicon.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QX21GDR7T"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7QX21GDR7T');
+    </script>
+
     <style>
         :root {
             --cream: #FDF8F3;
@@ -17,16 +28,36 @@
             --gold-dark: #B8941F;
             --text-dark: #2C2416;
             --text-medium: #5C5142;
+            --text-light: #8B8170;
             --blush: #F5E1DA;
             --sage: #E8EDE4;
             --lavender: #EDE8F2;
+            --status-done: #7A9670;
+            --status-progress: #D4AF37;
+            --status-locked: #C9C3B8;
+
+            /* Module washes - mirror the workbook corner watercolors */
+            --wash-foundation: rgba(212, 175, 55, 0.10);
+            --wash-foundation-strong: rgba(212, 175, 55, 0.18);
+            --wash-body: rgba(163, 186, 150, 0.18);
+            --wash-body-strong: rgba(140, 170, 130, 0.25);
+            --wash-mind: rgba(176, 196, 216, 0.25);
+            --wash-mind-strong: rgba(150, 178, 205, 0.32);
+            --wash-spirit: rgba(192, 178, 214, 0.22);
+            --wash-spirit-strong: rgba(168, 148, 200, 0.30);
+
+            /* Sunrise wash for Session 00 - pulled from PDF cover */
+            --wash-sunrise: rgba(245, 193, 150, 0.16);
+            --wash-sunrise-strong: rgba(230, 170, 125, 0.28);
+
+            --accent-foundation: #B8941F;
+            --accent-body: #7A9670;
+            --accent-mind: #6B8BA8;
+            --accent-spirit: #8B7AA8;
+            --accent-sunrise: #C97A4A;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Cormorant Garamond', Georgia, serif;
@@ -38,67 +69,30 @@
         }
 
         /* ============================================
-           DECORATIVE ELEMENTS
+           DECORATIVE
            ============================================ */
-        
         .watercolor-blob {
-            position: absolute;
+            position: fixed;
             border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.5;
+            filter: blur(80px);
+            opacity: 0.35;
             pointer-events: none;
             z-index: 0;
         }
-
-        .blob-1 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
-            top: -100px;
-            right: -100px;
-        }
-
-        .blob-2 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(245, 225, 218, 0.6) 0%, transparent 70%);
-            bottom: -50px;
-            left: -50px;
-        }
-
-        .blob-3 {
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(232, 237, 228, 0.6) 0%, transparent 70%);
-            top: 50%;
-            left: 10%;
-        }
-
-        .flourish {
-            display: block;
-            margin: 2rem auto;
-            text-align: center;
-            color: var(--gold);
-            font-size: 1.5rem;
-            letter-spacing: 0.5rem;
-            opacity: 0.6;
-        }
-
-        .flourish::before {
-            content: "\2726  \2726  \2726";
-        }
+        .blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, transparent 70%); top: -150px; right: -150px; }
+        .blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(245, 225, 218, 0.6) 0%, transparent 70%); bottom: 10%; left: -100px; }
+        .blob-3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(232, 237, 228, 0.6) 0%, transparent 70%); top: 40%; right: 5%; }
 
         .gold-line {
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            margin: 2rem auto;
+            margin: 1.5rem auto;
             max-width: 200px;
         }
 
         /* ============================================
            LOGIN SCREEN
            ============================================ */
-        
         .portal-login {
             min-height: 100vh;
             display: flex;
@@ -106,7 +100,7 @@
             justify-content: center;
             padding: 2rem;
             position: relative;
-            background: 
+            background:
                 radial-gradient(ellipse at top right, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
                 radial-gradient(ellipse at bottom left, rgba(245, 225, 218, 0.4) 0%, transparent 50%),
                 radial-gradient(ellipse at center, rgba(232, 237, 228, 0.3) 0%, transparent 70%),
@@ -118,9 +112,7 @@
             backdrop-filter: blur(10px);
             padding: 3.5rem;
             border-radius: 20px;
-            box-shadow: 
-                0 20px 60px rgba(212, 175, 55, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(212, 175, 55, 0.2);
             max-width: 480px;
             width: 100%;
@@ -128,32 +120,15 @@
             position: relative;
             overflow: hidden;
         }
-
         .login-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 4px;
             background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
         }
 
-        .login-card::after {
-            content: '&#10087;';
-            position: absolute;
-            bottom: 1rem;
-            right: 1.5rem;
-            font-size: 2rem;
-            color: var(--gold);
-            opacity: 0.2;
-        }
-
-        .login-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
+        .login-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
 
         .login-card h1 {
             font-family: 'Cinzel', serif;
@@ -162,22 +137,44 @@
             margin-bottom: 0.25rem;
             font-weight: 400;
         }
-
         .login-card .tagline {
             font-style: italic;
             color: var(--gold);
             margin-bottom: 2rem;
             font-size: 1.1rem;
         }
-
-        .login-card .welcome-text {
+        .welcome-text {
             color: var(--text-medium);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
         }
 
-        .password-input {
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-radius: 50px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .auth-tab {
+            flex: 1;
+            padding: 0.8rem;
+            background: transparent;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .auth-tab.active {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+        }
+
+        .auth-input {
             width: 100%;
             padding: 1.1rem 1.5rem;
             border: 2px solid rgba(212, 175, 55, 0.3);
@@ -186,517 +183,870 @@
             font-family: 'Montserrat', sans-serif;
             text-align: center;
             margin-bottom: 1rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             background: rgba(255, 255, 255, 0.8);
+            color: var(--text-dark);
         }
-
-        .password-input:focus {
+        .auth-input:focus {
             outline: none;
             border-color: var(--gold);
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
         }
-
-        .password-input::placeholder {
-            color: #bbb;
-            font-style: italic;
-        }
+        .auth-input::placeholder { color: #bbb; font-style: italic; }
 
         .login-btn {
             width: 100%;
             padding: 1.1rem;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
-            color: white;
             border: none;
             border-radius: 50px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
             font-family: 'Montserrat', sans-serif;
             font-size: 0.85rem;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
         }
-
         .login-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
         }
 
         .login-error {
             color: #c44569;
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        .login-success {
+            color: #4a7c59;
             font-size: 0.95rem;
             margin-top: 1rem;
             display: none;
             font-style: italic;
         }
-
-        .login-hint {
-            font-size: 0.9rem;
-            color: var(--text-medium);
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-            line-height: 1.8;
-        }
-
-        .login-hint a {
-            color: var(--gold);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .login-hint a:hover {
-            text-decoration: underline;
-        }
+        .login-hint { font-size: 0.9rem; color: var(--text-medium); margin-top: 1.5rem; }
+        .login-hint a { color: var(--gold-dark); text-decoration: none; }
+        .login-hint a:hover { text-decoration: underline; }
+        .auth-loading { opacity: 0.6; pointer-events: none; }
 
         /* ============================================
-           PORTAL CONTENT
+           PORTAL CONTENT (hidden until logged in)
            ============================================ */
-        
-        .portal-content {
-            display: none;
-        }
+        .portal-content { display: none; }
+        .portal-content.active { display: block; }
 
-        .portal-content.active {
-            display: block;
-        }
-
-        /* Navigation */
+        /* ============================================
+           NAV
+           ============================================ */
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(253, 248, 243, 0.95);
+            position: relative;
+            z-index: 10;
+            background: rgba(253, 248, 243, 0.85);
             backdrop-filter: blur(10px);
-            padding: 1rem 5%;
+            padding: 1.25rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
         }
-
         .logo-text {
             font-family: 'Cinzel', serif;
             font-size: 1.3rem;
             color: var(--gold-dark);
             text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
             letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--text-medium);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            white-space: nowrap;
         }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--gold);
-        }
-
-        /* Hero */
-        .portal-hero {
-            padding: 10rem 5% 5rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            background: 
-                radial-gradient(ellipse at top, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom left, rgba(245, 225, 218, 0.4) 0%, transparent 40%),
-                radial-gradient(ellipse at bottom right, rgba(232, 237, 228, 0.4) 0%, transparent 40%),
-                linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
-        }
-
-        .portal-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
-        }
-
-        .hero-decoration {
-            position: absolute;
-            font-size: 15rem;
-            opacity: 0.03;
-            color: var(--gold);
-            pointer-events: none;
-        }
-
-        .hero-decoration.left {
-            top: 10%;
-            left: -5%;
-            transform: rotate(-15deg);
-        }
-
-        .hero-decoration.right {
-            bottom: 0;
-            right: -5%;
-            transform: rotate(15deg);
-        }
-
-        .portal-welcome {
-            max-width: 750px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .portal-welcome .label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 4px;
-            color: var(--gold);
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-
-        .portal-welcome h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 3.5rem;
-            color: var(--gold-dark);
-            margin-bottom: 1rem;
-            font-weight: 400;
-            line-height: 1.2;
-        }
-
-        .portal-welcome .subtitle {
-            font-size: 1.4rem;
-            font-style: italic;
-            color: var(--text-medium);
-            margin-bottom: 2rem;
-        }
-
-        .portal-welcome p {
-            font-size: 1.15rem;
-            color: var(--text-medium);
-            line-height: 1.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Quick Links */
-        .quick-links {
-            background: white;
-            padding: 2.5rem 5%;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-        }
-
-        .quick-links-inner {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .quick-links h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            color: var(--gold-dark);
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-        }
-
-        .quick-links-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .quick-link {
-            background: var(--cream);
-            color: var(--text-medium);
-            text-decoration: none;
-            padding: 0.9rem 1.8rem;
-            border-radius: 50px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .quick-link:hover {
-            background: var(--gold);
-            color: white;
-            border-color: var(--gold);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-        }
-
-        /* Module Sections */
-        .portal-modules {
-            padding: 5rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .module-section {
-            margin-bottom: 5rem;
-            position: relative;
-        }
-
-        .module-header {
+        .nav-right {
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            margin-bottom: 2.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 2px solid transparent;
-            border-image: linear-gradient(90deg, var(--gold), transparent) 1;
+        }
+        .nav-link {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover { color: var(--gold-dark); }
+
+        .account-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 50px;
+            padding: 0.45rem 1rem 0.45rem 0.5rem;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .account-btn:hover {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: var(--gold);
+            color: var(--gold-dark);
+        }
+        .account-avatar {
+            width: 26px; height: 26px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; color: white; font-weight: 600;
+            flex-shrink: 0;
         }
 
-        .module-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--cream), white);
+        .account-dropdown {
+            position: absolute;
+            top: calc(100% + 0.75rem);
+            right: 0;
+            background: white;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            min-width: 240px;
+            overflow: hidden;
+            display: none;
+            z-index: 2000;
+        }
+        .account-dropdown.open { display: block; }
+        .dropdown-header {
+            padding: 1.2rem 1.5rem;
+            background: var(--cream);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .dropdown-header .d-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--gold-dark);
+        }
+        .dropdown-header .d-email {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            color: var(--text-medium);
+            margin-top: 0.15rem;
+            opacity: 0.8;
+        }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.9rem 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: background 0.2s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+        }
+        .dropdown-item:hover { background: var(--cream); color: var(--gold-dark); }
+        .dropdown-item.danger:hover { background: #fff5f5; color: #c44569; }
+        .dropdown-divider { height: 1px; background: rgba(212, 175, 55, 0.1); }
+        .dropdown-icon { font-size: 1rem; width: 18px; text-align: center; }
+
+        /* ============================================
+           HERO
+           ============================================ */
+        .portal-hero {
+            position: relative;
+            z-index: 1;
+            padding: 4rem 5% 2rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .welcome-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+        }
+        .portal-hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            color: var(--gold-dark);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        .portal-hero .hero-tagline {
+            font-style: italic;
+            color: var(--text-medium);
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Progress */
+        .progress-wrap { max-width: 500px; margin: 0 auto; }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-medium);
+            margin-bottom: 0.6rem;
+        }
+        .progress-label .count { color: var(--gold-dark); font-weight: 600; }
+        .progress-track {
+            height: 6px;
+            background: rgba(212, 175, 55, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold));
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.8s ease;
+        }
+
+        /* ============================================
+           QUICK ACCESS STRIP
+           ============================================ */
+        .quick-strip {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 2rem auto 0;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .quick-tile {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+        .quick-tile:hover {
+            background: white;
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+        }
+        .quick-tile.primary {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.95), rgba(184, 148, 31, 0.95));
+            border-color: var(--gold-dark);
+        }
+        .quick-tile.primary .quick-label,
+        .quick-tile.primary .quick-title { color: white; }
+        .quick-tile.primary .quick-icon { color: rgba(255,255,255,0.9); }
+        .quick-icon {
+            font-size: 1.6rem;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+        .quick-text { flex: 1; min-width: 0; }
+        .quick-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 0.15rem;
+        }
+        .quick-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* ============================================
+           PURCHASE CTA (free users only)
+           ============================================ */
+        .purchase-cta-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 3rem auto 0;
+            padding: 0 5%;
+        }
+        .purchase-cta {
+            background: linear-gradient(135deg, rgba(253, 248, 243, 0.95), rgba(245, 225, 218, 0.6));
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.12);
+        }
+        .purchase-cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
+        }
+        .purchase-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        .purchase-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold-dark);
+            font-weight: 400;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        .purchase-desc {
+            font-style: italic;
+            color: var(--text-medium);
+            font-size: 1.15rem;
+            max-width: 550px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        .purchase-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.35);
+            text-decoration: none;
+        }
+        .purchase-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(212, 175, 55, 0.45);
+        }
+
+        /* ============================================
+           SESSION 00 FEATURED CARD (Begin Here)
+           ============================================ */
+        .begin-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 3rem auto 0;
+            padding: 0 5%;
+        }
+        .begin-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 237, 220, 0.5));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(201, 122, 74, 0.3);
+            border-radius: 20px;
+            padding: 2rem 2rem 2rem 2.25rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1.5rem;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(201, 122, 74, 0.08);
+        }
+        .begin-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #F5C196, var(--accent-sunrise));
+        }
+        .begin-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 85% 50%, var(--wash-sunrise-strong) 0%, var(--wash-sunrise) 40%, transparent 70%),
+                radial-gradient(circle 2px at 90% 75%, rgba(201, 122, 74, 0.4), transparent),
+                radial-gradient(circle 1.5px at 88% 30%, rgba(201, 122, 74, 0.35), transparent);
+            pointer-events: none;
+        }
+        .begin-card > * { position: relative; z-index: 1; }
+        .begin-card:hover {
+            border-color: var(--accent-sunrise);
+            transform: translateX(4px);
+            box-shadow: 0 15px 50px rgba(201, 122, 74, 0.18);
+        }
+        .begin-badge {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            background: var(--accent-sunrise);
+            color: white;
+            display: inline-block;
+            margin-left: 0.75rem;
+            vertical-align: middle;
+        }
+        .begin-icon {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #F5C196, var(--accent-sunrise));
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            color: white;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 15px rgba(201, 122, 74, 0.25);
+        }
+        .begin-body { min-width: 0; }
+        .begin-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-sunrise);
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+        }
+        .begin-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.35rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            line-height: 1.3;
+        }
+        .begin-desc {
+            font-size: 1.02rem;
+            color: var(--text-medium);
+            line-height: 1.55;
+            font-style: italic;
+        }
+        .begin-cta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-sunrise);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .begin-cta .arrow {
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        .begin-card:hover .begin-cta .arrow { transform: translateX(4px); }
+
+        /* Complete state for Session 00 */
+        .begin-card.complete .begin-badge {
+            background: var(--status-done);
+        }
+
+        /* ============================================
+           SESSION JOURNEY
+           ============================================ */
+        .journey {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 3rem auto 0;
+            padding: 0 5%;
+        }
+
+        .module-block {
+            margin-bottom: 3.5rem;
+            position: relative;
+            padding: 2rem 1.5rem 2.5rem;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        .module-block::before {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -15%;
+            width: 70%;
+            height: 90%;
+            background: radial-gradient(ellipse at 30% 70%, var(--wash-strong, transparent) 0%, var(--wash, transparent) 40%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .module-block::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle 3px at 8% 88%, rgba(184, 148, 31, 0.55), transparent),
+                radial-gradient(circle 2px at 14% 78%, rgba(184, 148, 31, 0.45), transparent),
+                radial-gradient(circle 2.5px at 6% 70%, rgba(184, 148, 31, 0.4), transparent),
+                radial-gradient(circle 1.5px at 18% 85%, rgba(184, 148, 31, 0.5), transparent),
+                radial-gradient(circle 2px at 22% 72%, rgba(184, 148, 31, 0.35), transparent),
+                radial-gradient(circle 3px at 4% 80%, rgba(184, 148, 31, 0.4), transparent),
+                radial-gradient(circle 1.5px at 12% 65%, rgba(184, 148, 31, 0.45), transparent),
+                radial-gradient(circle 2px at 26% 90%, rgba(184, 148, 31, 0.3), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .module-foundation { --wash: var(--wash-foundation); --wash-strong: var(--wash-foundation-strong); --accent: var(--accent-foundation); }
+        .module-body       { --wash: var(--wash-body);       --wash-strong: var(--wash-body-strong);       --accent: var(--accent-body); }
+        .module-mind       { --wash: var(--wash-mind);       --wash-strong: var(--wash-mind-strong);       --accent: var(--accent-mind); }
+        .module-spirit     { --wash: var(--wash-spirit);     --wash-strong: var(--wash-spirit-strong);     --accent: var(--accent-spirit); }
+
+        .module-block > * { position: relative; z-index: 1; }
+
+        .module-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .module-number {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--accent, var(--gold));
+            letter-spacing: 3px;
+        }
+        .module-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--accent, var(--gold-dark));
+            font-weight: 400;
+            flex: 1;
+        }
+        .module-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-medium);
+            font-weight: 300;
+        }
+
+        .sessions-list { display: grid; gap: 1rem; }
+
+        .session-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem 1.75rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1.5rem;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .session-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: var(--status-locked);
+            transition: background 0.3s;
+        }
+        .session-card:hover {
+            background: white;
+            border-color: var(--gold);
+            transform: translateX(4px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.12);
+        }
+        .session-card.complete::before { background: var(--status-done); }
+        .session-card.progress::before { background: var(--status-progress); }
+        .session-card.unlocked::before { background: var(--status-progress); }
+        .session-card.locked::before { background: var(--status-locked); }
+
+        .session-card.locked {
+            background: rgba(255, 255, 255, 0.5);
+            cursor: not-allowed;
+            opacity: 0.65;
+        }
+        .session-card.locked:hover {
+            transform: none;
+            border-color: rgba(212, 175, 55, 0.2);
+            box-shadow: none;
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .session-card.locked .session-title,
+        .session-card.locked .session-desc { color: var(--text-light); }
+
+        .status-circle {
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 
-                0 5px 20px rgba(212, 175, 55, 0.15),
-                inset 0 -2px 5px rgba(212, 175, 55, 0.1);
-            border: 2px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .module-header h2 {
+            flex-shrink: 0;
             font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            color: var(--gold-dark);
-            margin: 0;
-            font-weight: 400;
-        }
-
-        .module-header .module-subtitle {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            color: var(--text-medium);
-            text-transform: uppercase;
-            margin-top: 0.25rem;
-        }
-
-        /* Resource Cards */
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        @media (max-width: 768px) {
-            .resources-grid { grid-template-columns: 1fr; }
-        }
-
-        .resource-card {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 
-                0 10px 40px rgba(212, 175, 55, 0.08),
-                0 2px 10px rgba(0, 0, 0, 0.03);
-            border: 1px solid rgba(212, 175, 55, 0.12);
-            transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
+            font-size: 0.95rem;
+            font-weight: 500;
             position: relative;
-            overflow: hidden;
         }
-
-        .resource-card::before {
+        .status-circle.complete {
+            background: var(--status-done);
+            color: white;
+        }
+        .status-circle.complete::after {
             content: '';
+            width: 14px;
+            height: 8px;
+            border-left: 2.5px solid white;
+            border-bottom: 2.5px solid white;
+            transform: rotate(-45deg) translateY(-3px);
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--gold-light), var(--gold));
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        }
+        .status-circle.complete .session-num { display: none; }
+        .status-circle.progress, .status-circle.unlocked {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold-dark);
+            border: 2px solid var(--gold);
+        }
+        .status-circle.locked {
+            background: var(--cream-dark);
+            color: var(--text-light);
+            border: 2px solid rgba(201, 195, 184, 0.5);
+        }
+        .status-circle.locked .session-num { display: none; }
+        .status-circle.locked::after {
+            content: '\1F512';
+            font-size: 0.95rem;
+            opacity: 0.6;
         }
 
-        .resource-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 
-                0 20px 50px rgba(212, 175, 55, 0.15),
-                0 5px 20px rgba(0, 0, 0, 0.05);
+        .session-body { min-width: 0; }
+        .session-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 0.35rem;
+            flex-wrap: wrap;
         }
-
-        .resource-card:hover::before {
-            opacity: 1;
-        }
-
-        .resource-card.coming-soon {
-            opacity: 0.7;
-        }
-
-        .resource-card.coming-soon:hover {
-            transform: none;
-            box-shadow: 
-                0 10px 40px rgba(212, 175, 55, 0.08),
-                0 2px 10px rgba(0, 0, 0, 0.03);
-        }
-
-        .resource-type {
-            display: inline-block;
+        .session-label {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.65rem;
             letter-spacing: 2px;
-            color: white;
             text-transform: uppercase;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold));
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            margin-bottom: 1rem;
-            align-self: flex-start;
+            color: var(--text-light);
         }
-
-        .resource-card h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            color: var(--text-dark);
-            margin-bottom: 0.75rem;
+        .status-badge {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.62rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
             font-weight: 500;
         }
+        .status-badge.complete { background: rgba(122, 150, 112, 0.12); color: var(--status-done); }
+        .status-badge.progress { background: rgba(212, 175, 55, 0.15); color: var(--gold-dark); }
+        .status-badge.unlocked { background: rgba(212, 175, 55, 0.15); color: var(--gold-dark); }
+        .status-badge.locked { background: rgba(201, 195, 184, 0.25); color: var(--text-light); }
 
-        .resource-card p {
+        .session-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-bottom: 0.35rem;
+            line-height: 1.35;
+        }
+        .session-desc {
             font-size: 1rem;
             color: var(--text-medium);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
+            line-height: 1.5;
         }
 
-        .resource-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+        .session-cta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             color: var(--gold-dark);
-            text-decoration: none;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
-
-        .resource-link:hover {
-            color: var(--gold);
-            gap: 0.75rem;
-        }
-
-        .resource-link.disabled {
-            color: #ccc;
-            cursor: not-allowed;
-        }
-
-        .coming-badge {
+        .session-cta .arrow {
             display: inline-block;
-            background: var(--cream-dark);
-            color: var(--text-medium);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            text-transform: uppercase;
+            transition: transform 0.3s;
         }
+        .session-card:hover .arrow { transform: translateX(4px); }
+        .session-card.locked .session-cta { color: var(--text-light); }
 
-        /* Scripture Quote */
-        .scripture-section {
-            background: 
-                radial-gradient(ellipse at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%),
-                var(--cream-dark);
-            padding: 4rem 5%;
-            text-align: center;
+        /* ============================================
+           CAPSTONE
+           ============================================ */
+        .capstone-section {
             position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 4rem auto 3rem;
+            padding: 0 5%;
+            text-align: center;
         }
-
-        .scripture-section blockquote {
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.4rem;
+        .capstone-card {
+            background: linear-gradient(135deg, rgba(253, 248, 243, 0.95), rgba(245, 239, 231, 0.95));
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 24px;
+            padding: 3.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.12);
+        }
+        .capstone-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
+        }
+        .capstone-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        .capstone-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        .capstone-desc {
             font-style: italic;
             color: var(--text-medium);
-            line-height: 1.9;
+            font-size: 1.15rem;
+            max-width: 550px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
         }
-
-        .scripture-section cite {
-            display: block;
+        .capstone-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            border: none;
+            cursor: not-allowed;
+            transition: all 0.3s;
+            background: var(--cream-dark);
+            color: var(--text-light);
+            border: 1px solid rgba(201, 195, 184, 0.5);
+        }
+        .capstone-btn.unlocked {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.35);
+        }
+        .capstone-btn.unlocked:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(212, 175, 55, 0.45);
+        }
+        .lock-icon { font-size: 0.9rem; opacity: 0.7; }
+        .capstone-remaining {
             margin-top: 1.5rem;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            color: var(--gold);
-            font-style: normal;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
+            color: var(--text-medium);
         }
+        .capstone-remaining .count { color: var(--gold-dark); font-weight: 600; }
 
-        .scripture-section .quote-mark {
-            font-family: 'Cinzel', serif;
-            font-size: 5rem;
-            color: var(--gold);
-            opacity: 0.2;
-            line-height: 0;
-            display: block;
-            margin-bottom: 1rem;
-        }
-
-        /* Support Section */
+        /* ============================================
+           SUPPORT FOOTER SECTION
+           ============================================ */
         .portal-support {
-            padding: 4rem 5%;
+            padding: 3rem 5%;
             text-align: center;
-            background: white;
+            background: rgba(255, 255, 255, 0.5);
             border-top: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+            z-index: 1;
         }
-
         .portal-support h3 {
             font-family: 'Cinzel', serif;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             color: var(--gold-dark);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             font-weight: 400;
         }
-
         .portal-support p {
             color: var(--text-medium);
-            margin-bottom: 0.5rem;
             font-size: 1.05rem;
         }
-
         .portal-support a {
-            color: var(--gold);
+            color: var(--gold-dark);
             text-decoration: none;
+            font-weight: 500;
         }
+        .portal-support a:hover { text-decoration: underline; }
 
-        .portal-support a:hover {
-            text-decoration: underline;
-        }
-
-        /* Footer */
+        /* ============================================
+           FOOTER
+           ============================================ */
         footer {
             background: var(--text-dark);
             color: rgba(255, 255, 255, 0.7);
             padding: 3rem 5% 2rem;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
-
         footer h3 {
             font-family: 'Cinzel', serif;
             color: var(--gold);
@@ -704,171 +1054,213 @@
             margin-bottom: 0.5rem;
             font-weight: 400;
         }
-
         footer .tagline {
             font-style: italic;
             font-size: 0.95rem;
             margin-bottom: 2rem;
             color: rgba(255, 255, 255, 0.5);
         }
-
         footer .copyright {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            padding-top: 2rem;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Logout Button */
-        .logout-btn {
+        /* ============================================
+           ACCOUNT MODAL
+           ============================================ */
+        .account-modal-overlay {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            inset: 0;
+            background: rgba(44, 36, 22, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .account-modal-overlay.open { display: flex; }
+        .account-modal {
             background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 460px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            position: relative;
+        }
+        .account-modal::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            border-radius: 20px 20px 0 0;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
+        }
+        .modal-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 0.25rem;
+            font-weight: 400;
+        }
+        .modal-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 1px;
             color: var(--text-medium);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 0.85rem 1.8rem;
-            border-radius: 50px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        .modal-field { margin-bottom: 1.25rem; }
+        .modal-label {
+            display: block;
             font-family: 'Montserrat', sans-serif;
             font-size: 0.75rem;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-medium);
+            margin-bottom: 0.5rem;
+        }
+        .modal-input {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid rgba(212, 175, 55, 0.25);
+            border-radius: 12px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            background: var(--cream);
+            transition: all 0.3s;
+        }
+        .modal-input:focus { outline: none; border-color: var(--gold); background: white; }
+        .modal-actions { display: flex; gap: 1rem; margin-top: 1.75rem; }
+        .modal-btn {
+            flex: 1;
+            padding: 0.9rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            z-index: 100;
+            transition: all 0.3s;
+            border: none;
         }
-
-        .logout-btn:hover {
-            background: var(--cream-dark);
-            border-color: var(--gold);
-            color: var(--gold-dark);
+        .modal-btn-primary {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
         }
-
-        /* Mobile menu toggle */
-        .menu-toggle {
-            display: none;
+        .modal-btn-secondary {
+            background: var(--cream);
+            color: var(--text-medium);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .modal-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.5rem;
             background: none;
             border: none;
+            font-size: 1.5rem;
             cursor: pointer;
-            padding: 0.5rem;
+            color: var(--text-medium);
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+        .modal-close:hover { opacity: 1; }
+        .modal-success {
+            color: #4a7c59;
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-top: 0.75rem;
+            display: none;
+        }
+        .modal-error {
+            color: #c44569;
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-top: 0.75rem;
+            display: none;
+        }
+        .modal-tabs {
+            display: flex;
+            margin-bottom: 1.75rem;
+            border-radius: 50px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+        }
+        .modal-tab {
+            flex: 1;
+            padding: 0.65rem;
+            background: transparent;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .modal-tab.active {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
         }
 
-        .menu-toggle span {
-            display: block;
-            width: 25px;
-            height: 2px;
-            background: var(--gold);
-            margin: 5px 0;
-            transition: all 0.3s ease;
+        /* ============================================
+           LOADING STATE
+           ============================================ */
+        .loading-skeleton {
+            background: linear-gradient(90deg, rgba(212,175,55,0.05), rgba(212,175,55,0.12), rgba(212,175,55,0.05));
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 16px;
+            height: 120px;
+            margin-bottom: 1rem;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
-        /* Responsive */
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
         @media (max-width: 768px) {
-            .portal-hero {
-                padding: 8rem 5% 4rem;
+            .portal-hero { padding: 3rem 5% 1.5rem; }
+            .portal-hero h1 { font-size: 2rem; }
+            .portal-hero .hero-tagline { font-size: 1.1rem; }
+
+            .quick-strip { grid-template-columns: 1fr; gap: 0.75rem; }
+
+            .session-card, .begin-card {
+                grid-template-columns: auto 1fr;
+                gap: 1rem;
+                padding: 1.25rem;
             }
-
-            .portal-welcome h1 {
-                font-size: 2.2rem;
+            .session-cta, .begin-cta {
+                grid-column: 1 / -1;
+                justify-content: flex-end;
+                margin-top: 0.5rem;
             }
+            .module-header { flex-wrap: wrap; }
+            .module-title { font-size: 1.4rem; }
 
-            .portal-welcome .subtitle {
-                font-size: 1.1rem;
-            }
+            .capstone-card, .purchase-cta { padding: 2.5rem 1.5rem; }
+            .capstone-title, .purchase-title { font-size: 1.5rem; }
+            .capstone-desc, .purchase-desc { font-size: 1.05rem; }
+            .capstone-btn, .purchase-btn { padding: 1rem 2rem; font-size: 0.72rem; }
 
-
-
-            .module-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .logout-btn {
-                bottom: 1rem;
-                right: 1rem;
-                padding: 0.7rem 1.2rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .login-card {
-                padding: 2.5rem 2rem;
-            }
-
-            .login-card h1 {
-                font-size: 1.8rem;
-            }
+            .nav-link { display: none; }
+            .login-card { padding: 2.5rem 2rem; }
+            .login-card h1 { font-size: 1.8rem; }
         }
-
-        /* Animation for cards on scroll */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .resource-card {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .resource-card:nth-child(2) { animation-delay: 0.1s; }
-        .resource-card:nth-child(3) { animation-delay: 0.2s; }
-
-        .auth-tabs { display:flex; margin-bottom:2rem; border-radius:50px; overflow:hidden; border:1px solid rgba(212,175,55,0.3); }
-        .auth-tab { flex:1; padding:0.8rem; background:transparent; border:none; font-family:'Montserrat',sans-serif; font-size:0.78rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-medium); cursor:pointer; transition:all 0.3s; }
-        .auth-tab.active { background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:white; }
-        .auth-input { width:100%; padding:1.1rem 1.5rem; border:2px solid rgba(212,175,55,0.3); border-radius:50px; font-size:1rem; font-family:'Montserrat',sans-serif; text-align:center; margin-bottom:1rem; transition:all 0.3s; background:rgba(255,255,255,0.8); color:var(--text-dark); }
-        .auth-input:focus { outline:none; border-color:var(--gold); box-shadow:0 0 20px rgba(212,175,55,0.2); }
-        .auth-input::placeholder { color:#bbb; font-style:italic; }
-        .login-success { color:#4a7c59; font-size:0.95rem; margin-top:1rem; display:none; font-style:italic; }
-        .auth-loading { opacity:0.6; pointer-events:none; }
-        .user-badge { display:inline-block; font-family:'Montserrat',sans-serif; font-size:0.75rem; letter-spacing:1px; color:var(--gold-dark); background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.2); padding:0.4rem 1.2rem; border-radius:50px; margin-bottom:1.5rem; }
-        .account-btn { display:flex; align-items:center; gap:0.6rem; background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.25); border-radius:50px; padding:0.5rem 1.2rem 0.5rem 0.8rem; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:0.78rem; letter-spacing:0.5px; color:var(--text-medium); transition:all 0.3s; position:relative; }
-        .account-btn:hover { background:rgba(212,175,55,0.15); border-color:var(--gold); color:var(--gold-dark); }
-        .account-avatar { width:28px; height:28px; background:linear-gradient(135deg,var(--gold-light),var(--gold)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; color:white; font-weight:600; flex-shrink:0; }
-        .account-dropdown { position:absolute; top:calc(100% + 0.75rem); right:0; background:white; border:1px solid rgba(212,175,55,0.2); border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,0.1); min-width:220px; overflow:hidden; display:none; z-index:2000; }
-        .account-dropdown.open { display:block; }
-        .dropdown-header { padding:1.2rem 1.5rem; background:var(--cream); border-bottom:1px solid rgba(212,175,55,0.1); }
-        .dropdown-header .d-name { font-family:'Cinzel',serif; font-size:1rem; color:var(--gold-dark); }
-        .dropdown-header .d-email { font-family:'Montserrat',sans-serif; font-size:0.72rem; color:var(--text-medium); margin-top:0.15rem; opacity:0.8; }
-        .dropdown-item { display:flex; align-items:center; gap:0.75rem; padding:0.9rem 1.5rem; font-family:'Montserrat',sans-serif; font-size:0.8rem; color:var(--text-medium); cursor:pointer; transition:background 0.2s; border:none; background:none; width:100%; text-align:left; letter-spacing:0.5px; }
-        .dropdown-item:hover { background:var(--cream); color:var(--gold-dark); }
-        .dropdown-item.danger:hover { background:#fff5f5; color:#c44569; }
-        .dropdown-divider { height:1px; background:rgba(212,175,55,0.1); }
-        .dropdown-icon { font-size:1rem; width:18px; text-align:center; }
-        .account-modal-overlay { position:fixed; inset:0; background:rgba(44,36,22,0.5); backdrop-filter:blur(4px); z-index:3000; display:none; align-items:center; justify-content:center; padding:2rem; }
-        .account-modal-overlay.open { display:flex; }
-        .account-modal { background:white; border-radius:20px; padding:2.5rem; max-width:460px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.15); border:1px solid rgba(212,175,55,0.15); position:relative; }
-        .account-modal::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; border-radius:20px 20px 0 0; background:linear-gradient(90deg,var(--gold-light),var(--gold),var(--gold-light)); }
-        .modal-title { font-family:'Cinzel',serif; font-size:1.5rem; color:var(--gold-dark); margin-bottom:0.25rem; font-weight:400; }
-        .modal-subtitle { font-family:'Montserrat',sans-serif; font-size:0.78rem; letter-spacing:1px; color:var(--text-medium); text-transform:uppercase; margin-bottom:2rem; }
-        .modal-field { margin-bottom:1.25rem; }
-        .modal-label { display:block; font-family:'Montserrat',sans-serif; font-size:0.75rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-medium); margin-bottom:0.5rem; }
-        .modal-input { width:100%; padding:0.9rem 1.2rem; border:2px solid rgba(212,175,55,0.25); border-radius:12px; font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:var(--text-dark); background:var(--cream); transition:all 0.3s; }
-        .modal-input:focus { outline:none; border-color:var(--gold); background:white; }
-        .modal-actions { display:flex; gap:1rem; margin-top:1.75rem; }
-        .modal-btn { flex:1; padding:0.9rem; border-radius:50px; font-family:'Montserrat',sans-serif; font-size:0.78rem; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; border:none; }
-        .modal-btn-primary { background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:white; box-shadow:0 4px 15px rgba(212,175,55,0.3); }
-        .modal-btn-secondary { background:var(--cream); color:var(--text-medium); border:1px solid rgba(212,175,55,0.2); }
-        .modal-close { position:absolute; top:1.25rem; right:1.5rem; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text-medium); opacity:0.5; transition:opacity 0.2s; }
-        .modal-close:hover { opacity:1; }
-        .modal-success { color:#4a7c59; font-style:italic; font-size:0.95rem; margin-top:0.75rem; display:none; }
-        .modal-error { color:#c44569; font-style:italic; font-size:0.95rem; margin-top:0.75rem; display:none; }
-        .modal-tabs { display:flex; margin-bottom:1.75rem; border-radius:50px; overflow:hidden; border:1px solid rgba(212,175,55,0.25); }
-        .modal-tab { flex:1; padding:0.65rem; background:transparent; border:none; font-family:'Montserrat',sans-serif; font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-medium); cursor:pointer; transition:all 0.3s; }
-        .modal-tab.active { background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:white; }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -881,7 +1273,7 @@
         <div class="watercolor-blob blob-1"></div>
         <div class="watercolor-blob blob-2"></div>
         <div class="watercolor-blob blob-3"></div>
-        
+
         <div class="login-card">
             <span class="login-icon">&#127807;</span>
             <h1>Participant Portal</h1>
@@ -902,565 +1294,213 @@
             </div>
 
             <div id="signup-form" style="display:none">
-                <p class="welcome-text">Create your account to begin the journey.</p>
+                <p class="welcome-text">Begin here. Session 00 is free &mdash; no payment required.</p>
                 <input type="text" id="signup-name" class="auth-input" placeholder="&#10022;  Your first name  &#10022;" autocomplete="given-name">
                 <input type="email" id="signup-email" class="auth-input" placeholder="&#10022;  Your email  &#10022;" autocomplete="email">
-                <input type="password" id="signup-password" class="auth-input" placeholder="&#10022;  Choose a password  &#10022;" autocomplete="new-password">
+                <input type="password" id="signup-password" class="auth-input" placeholder="&#10022;  Create a password  &#10022;" autocomplete="new-password">
                 <input type="password" id="signup-confirm" class="auth-input" placeholder="&#10022;  Confirm password  &#10022;" autocomplete="new-password">
                 <button class="login-btn" onclick="signUp()">Create Account</button>
                 <p id="signup-error" class="login-error"></p>
-                <p id="signup-success" class="login-success">&#10022; Check your email for a confirmation link, beloved. &#10022;</p>
+                <p id="signup-success" class="login-success">Welcome! Please check your email to confirm your account, then sign in.</p>
             </div>
 
             <div id="forgot-form" style="display:none">
-                <p class="welcome-text">We&#8217;ll send you a link to reset your password.</p>
+                <p class="welcome-text">Enter your email and we&rsquo;ll send you a reset link.</p>
                 <input type="email" id="forgot-email" class="auth-input" placeholder="&#10022;  Your email  &#10022;" autocomplete="email">
                 <button class="login-btn" onclick="sendReset()">Send Reset Link</button>
                 <p id="forgot-error" class="login-error"></p>
-                <p id="forgot-success" class="login-success">&#10022; Check your email for a reset link. &#10022;</p>
+                <p id="forgot-success" class="login-success">Reset link sent. Check your email.</p>
                 <p class="login-hint" style="margin-top:1.5rem;"><a href="#" onclick="showTab('signin'); return false;">Back to sign in</a></p>
             </div>
-        </div></div>
+        </div>
     </div>
 
     <!-- ============================================
          PORTAL CONTENT
          ============================================ -->
     <div id="portal-content" class="portal-content">
-        
-        <!-- Navigation -->
+        <div class="watercolor-blob blob-1"></div>
+        <div class="watercolor-blob blob-2"></div>
+        <div class="watercolor-blob blob-3"></div>
+
+        <!-- NAV -->
         <nav>
             <a href="index.html" class="logo-text">My Holy Crescendo</a>
-            <button class="menu-toggle" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="symphony-of-grace.html">15-Week Journey</a></li>
-                <li><a href="portal.html" class="active">My Portal</a></li>
-                <li><a href="among-sisters.html">Among Sisters</a></li>
-            </ul>
-            <div style="position:relative;">
-                <button class="account-btn" onclick="toggleAccountDropdown()" id="account-btn">
-                    <div class="account-avatar" id="account-avatar">?</div>
-                    <span id="account-btn-name">Account</span>
-                </button>
-                <div class="account-dropdown" id="account-dropdown">
-                    <div class="dropdown-header">
-                        <div class="d-name" id="dropdown-name">Welcome</div>
-                        <div class="d-email" id="dropdown-email"></div>
+            <div class="nav-right">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <div style="position:relative;">
+                    <button class="account-btn" onclick="toggleAccountDropdown()" id="account-btn">
+                        <div class="account-avatar" id="account-avatar">?</div>
+                        <span id="account-btn-name">Account</span>
+                    </button>
+                    <div class="account-dropdown" id="account-dropdown">
+                        <div class="dropdown-header">
+                            <div class="d-name" id="dropdown-name">Welcome</div>
+                            <div class="d-email" id="dropdown-email"></div>
+                        </div>
+                        <a class="dropdown-item" href="my-profile.html">
+                            <span class="dropdown-icon">&#9675;</span> My Symphony Profile
+                        </a>
+                        <button class="dropdown-item" onclick="openAccountModal('profile')">
+                            <span class="dropdown-icon">&#9998;</span> Edit Account
+                        </button>
+                        <button class="dropdown-item" onclick="openAccountModal('password')">
+                            <span class="dropdown-icon">&#128274;</span> Change Password
+                        </button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item danger" onclick="logout()">
+                            <span class="dropdown-icon">&#10022;</span> Sign Out
+                        </button>
                     </div>
-                    <button class="dropdown-item" onclick="window.location.href='my-profile.html'">
-                        <span class="dropdown-icon">&#9675;</span> My Symphony Profile
-                    </button>
-                    <button class="dropdown-item" onclick="openAccountModal('profile')">
-                        <span class="dropdown-icon">&#9998;</span> Edit Account
-                    </button>
-                    <button class="dropdown-item" onclick="openAccountModal('password')">
-                        <span class="dropdown-icon">&#128274;</span> Change Password
-                    </button>
-                    <div class="dropdown-divider"></div>
-                    <button class="dropdown-item danger" onclick="logout()">
-                        <span class="dropdown-icon">&#10022;</span> Sign Out
-                    </button>
                 </div>
             </div>
         </nav>
 
-        <!-- Hero -->
+        <!-- HERO -->
         <section class="portal-hero">
-            <span class="hero-decoration left">&#10087;</span>
-            <span class="hero-decoration right">&#9753;</span>
-            
-            <div class="portal-welcome">
-                <p id="user-badge" class="user-badge" style="display:none"></p>
-                <p class="label">Welcome to Your</p>
-                <h1>Participant Portal</h1>
-                <p class="subtitle">Everything you need for your Symphony of Grace journey</p>
-                <div class="gold-line"></div>
-                <p>
-                    These resources are yours to explore, revisit, and treasure. Each one is designed 
-                    to help you discover another facet of how God fearfully and wonderfully made you.
-                </p>
-            </div>
-        </section>
+            <p class="welcome-label" id="welcome-label">Welcome back, beloved</p>
+            <h1>Your Symphony of Grace</h1>
+            <p class="hero-tagline">Fearfully and wonderfully made</p>
+            <div class="gold-line"></div>
 
-        <!-- Quick Links -->
-        <section class="quick-links">
-            <div class="quick-links-inner">
-                <h3>Journey to Your Module</h3>
-                <div class="quick-links-list">
-                    <a href="#foundation" class="quick-link">&#127807; Foundation</a>
-                    <a href="#body" class="quick-link">&#10024; Body</a>
-                    <a href="#mind" class="quick-link">&#128171; Mind</a>
-                    <a href="#spirit" class="quick-link">&#128330;&#65039; Spirit</a>
+            <div class="progress-wrap" id="progress-wrap" style="display:none">
+                <div class="progress-label">
+                    <span>Your Journey</span>
+                    <span><span class="count" id="progress-count">0</span> of 15 sessions</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progress-fill"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Resources by Module -->
-        <section class="portal-modules">
-            
-            <!-- Foundation -->
-            <div id="foundation" class="module-section">
+        <!-- QUICK ACCESS (paid users only) -->
+        <div class="quick-strip" id="quick-strip" style="display:none">
+            <a href="#" class="quick-tile primary" id="continue-tile">
+                <span class="quick-icon">&#9834;</span>
+                <div class="quick-text">
+                    <div class="quick-label">Continue</div>
+                    <div class="quick-title" id="continue-title">Begin Here</div>
+                </div>
+            </a>
+            <a href="#" class="quick-tile">
+                <span class="quick-icon">&#9775;</span>
+                <div class="quick-text">
+                    <div class="quick-label">Community</div>
+                    <div class="quick-title">Among Sisters</div>
+                </div>
+            </a>
+            <a href="my-profile.html" class="quick-tile">
+                <span class="quick-icon">&#10022;</span>
+                <div class="quick-text">
+                    <div class="quick-label">Your Growing Portrait</div>
+                    <div class="quick-title">My Symphony Profile</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- SESSION 00 - Begin Here -->
+        <div class="begin-wrap">
+            <a href="session-00.html" class="begin-card" id="begin-card">
+                <div class="begin-icon">&#9728;</div>
+                <div class="begin-body">
+                    <div class="begin-label">
+                        Begin Here
+                        <span class="begin-badge" id="begin-badge">Free Preview</span>
+                    </div>
+                    <div class="begin-title">A Symphony of Grace &mdash; An Invitation</div>
+                    <div class="begin-desc">Why Crescendo was born, what it means, and the journey that awaits you.</div>
+                </div>
+                <div class="begin-cta" id="begin-cta">Begin <span class="arrow">&rarr;</span></div>
+            </a>
+        </div>
+
+        <!-- PURCHASE CTA (free users only) -->
+        <div class="purchase-cta-wrap" id="purchase-cta-wrap" style="display:none">
+            <div class="purchase-cta">
+                <div class="purchase-label">The Full Journey Awaits</div>
+                <h2 class="purchase-title">Ready to walk the full fifteen weeks?</h2>
+                <p class="purchase-desc">Session 00 is only the beginning. The full Symphony of Grace carries you through foundation, body, mind, and spirit &mdash; a 15-week pilgrimage into who God created you to be.</p>
+                <a href="symphony-of-grace.html#purchase" class="purchase-btn">
+                    Begin Your Symphony <span>&rarr;</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- JOURNEY (15 sessions) -->
+        <div class="journey" id="journey">
+
+            <!-- FOUNDATION -->
+            <div class="module-block module-foundation">
                 <div class="module-header">
-                    <div class="module-icon">&#127807;</div>
-                    <div>
-                        <h2>Foundation</h2>
-                        <p class="module-subtitle">Rooted in Christ &#183; Weeks 1&ndash;3</p>
-                    </div>
+                    <span class="module-number">I.</span>
+                    <h2 class="module-title">Foundation</h2>
+                    <span class="module-subtitle">Rooted in Christ</span>
                 </div>
-                
-                <div class="resources-grid">
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 1: You Are Called</h3>
-                        <p>Named and claimed by the Father &#8212; your identity begins here.</p>
-                        <a href="assets/pdf/sessions/session-01.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 2: Identity in Christ</h3>
-                        <p>Understanding who you are through the eyes of the One who made you.</p>
-                        <a href="assets/pdf/sessions/session-02.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 3: Receiving His Love</h3>
-                        <p>Learning to open your hands and heart to the love God offers freely.</p>
-                        <a href="assets/pdf/sessions/session-03.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div> 
-                    <div class="resource-card">
-                        <span class="resource-type">Guided Experience</span>
-                        <h3>Name from Heaven</h3>
-                        <p>Receive your name from Heaven through a guided prayer experience.</p>
-                        <a href="name-from-heaven.html" class="resource-link">Start Experience &#8594;</a>
-                    </div>
-                    
-
-                </div>
+                <div class="sessions-list" id="module-foundation-sessions"></div>
             </div>
 
-            <!-- Body -->
-            <div id="body" class="module-section">
+            <!-- BODY -->
+            <div class="module-block module-body">
                 <div class="module-header">
-                    <div class="module-icon">&#10024;</div>
-                    <div>
-                        <h2>Body</h2>
-                        <p class="module-subtitle">Embodied Beauty &#183; Weeks 4&ndash;6</p>
-                    </div>
+                    <span class="module-number">II.</span>
+                    <h2 class="module-title">Body</h2>
+                    <span class="module-subtitle">Embodied Beauty</span>
                 </div>
-                
-                <div class="resources-grid">
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 4: Colors of Creation</h3>
-                        <p>The unique palette God used to paint His masterpiece &#8212; you.</p>
-                        <a href="assets/pdf/sessions/session-04.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 5: Presence &amp; Grace: Sacred Style Essence</h3>
-                        <p>How the Lord is glorified in your presence in the world.</p>
-                        <a href="assets/pdf/sessions/session-05.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 6: Shape of Dignity: Sacred Silhouettes</h3>
-                        <p>Seeing the beauty and dignity in your God-given form.</p>
-                        <a href="assets/pdf/sessions/session-06.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
-
-
-                    <div class="resource-card">
-                        <span class="resource-type">Interactive Quiz</span>
-                        <h3>Seasonal Color Analysis</h3>
-                        <p>Understand the colors God chose for you and how they reflect His artistry woven into your very design.</p>
-                        <a href="seasonal-color-analysis-quiz.html" class="resource-link">Take the Quiz &#8594;</a>
-                    </div>
-                    
-                    <div class="resource-card">
-                        <span class="resource-type">Interactive Quiz</span>
-                        <h3>Sacred Style Essence</h3>
-                        <p>Discover how your unique presence reflects the Divine. Uncover your primary and secondary sacred essences.</p>
-                        <a href="sacred-style-essence-quiz-portal.html" class="resource-link">Take the Quiz &#8594;</a>
-                    </div>
-                    
-                    <div class="resource-card">
-                        <span class="resource-type">Interactive Quiz</span>
-                        <h3>Sacred Silhouettes</h3>
-                        <p>Discover your Sacred Silhouette &#8212; a starting point for exploring your God-given lines.</p>
-                        <a href="sacred-silhouettes.html" class="resource-link">Take the Quiz &#8594;</a>
-                    </div>
-
-                    <div class="resource-card">
-                        <span class="resource-type">Guided Exercise</span>
-                        <h3>Sacred Silhouettes Observation</h3>
-                        <p>Confirm your Sacred Silhouette through gentle observation of your actual lines.</p>
-                        <a href="sacred-silhouettes-observation.html" class="resource-link">Start Observation &#8594;</a>
-                    </div>
-                </div>
+                <div class="sessions-list" id="module-body-sessions"></div>
             </div>
 
-            <!-- Scripture Section -->
-            <div class="scripture-section">
-                <span class="quote-mark">"</span>
-                <blockquote>
-                    For we are God's masterpiece. He has created us anew in Christ Jesus, 
-                    so we can do the good things He planned for us long ago.
-                </blockquote>
-                <cite>Ephesians 2:10</cite>
-            </div>
-
-            <!-- Mind -->
-            <div id="mind" class="module-section" style="margin-top: 4rem;">
+            <!-- MIND -->
+            <div class="module-block module-mind">
                 <div class="module-header">
-                    <div class="module-icon">&#128171;</div>
-                    <div>
-                        <h2>Mind</h2>
-                        <p class="module-subtitle">Interior Landscape &#183; Weeks 7&ndash;10</p>
-                    </div>
+                    <span class="module-number">III.</span>
+                    <h2 class="module-title">Mind</h2>
+                    <span class="module-subtitle">How He Wired You</span>
                 </div>
-                
-                <div class="resources-grid">
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 7: Your Way of Being: Temperament</h3>
-                        <p>Discovering your God-given temperament and how He wired you.</p>
-                        <a href="assets/pdf/sessions/session-07.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 8: Your Way of Seeing: 16 Types</h3>
-                        <p>Exploring your cognitive wiring and how God designed your mind.</p>
-                        <a href="assets/pdf/sessions/session-08.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 8: Strengths as Entrusted Gifts</h3>
-                        <p>The unique Gifts of Grace God has wired into you.</p>
-                        <a href="assets/pdf/sessions/session-09.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 10: Giving &amp; Receiving: Love Languages</h3>
-                        <p>How you give and receive love &#8212; and what that reveals about God&#8217;s design.</p>
-                        <a href="assets/pdf/sessions/session-10.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
-                    <div class="resource-card"><span class="resource-type">Interactive Test</span><h3>Temperament Test</h3><p>Discover your classical temperament blend and understand the unique way God wired your natural way of being in the world.</p><a href="temperament-test.html" class="resource-link">Take the Test &#8594;</a></div>
-                    <div class="resource-card"><span class="resource-type">Interactive Test</span><h3>Cognitive Functions Test</h3><p>Explore how you process information, make decisions, and engage with the world God placed you in.</p><a href="cognitive-functions-test.html" class="resource-link">Take the Test &#8594;</a></div>
-                    <div class="resource-card"><span class="resource-type">Guided Reflection</span><h3>Your Way of Seeing</h3><p>A conversational reflection that reveals your personality type through real-life scenarios &#8212; not a quiz, but a guided discovery of how God uniquely wired your mind.</p><a href="way-of-seeing.html" class="resource-link">Begin Reflection &#8594;</a></div>
-                    <div class="resource-card"><span class="resource-type">Inventory</span><h3>Gifts of Grace</h3><p>Discover your 24 Gifts of Grace &#8212; the natural strengths God wired into the particular woman you are.</p><a href="gifts-of-grace-quiz.html" class="resource-link">Take the Inventory &#8594;</a></div>
-                    <div class="resource-card"><span class="resource-type">Guide</span><h3>Love Languages &amp; Styles</h3><p>Learn your love languages and styles to deepen your relationships and spiritual growth.</p><a href="love-languages.html" class="resource-link">Explore Guide &#8594;</a></div>
-                    <div class="resource-card"><span class="resource-type">PDF Guide</span><h3>Mind Frameworks Guide</h3><p>A comprehensive overview of personality frameworks and how they weave into your spiritual journey.</p><a href="assets/pdf/mind-frameworks-guide.pdf" class="resource-link">Download PDF &#8594;</a></div>
-                </div>
+                <div class="sessions-list" id="module-mind-sessions"></div>
             </div>
 
-            <!-- Spirit -->
-            <div id="spirit" class="module-section">
+            <!-- SPIRIT -->
+            <div class="module-block module-spirit">
                 <div class="module-header">
-                    <div class="module-icon">&#128330;&#65039;</div>
-                    <div>
-                        <h2>Spirit</h2>
-                        <p class="module-subtitle">Living Your Calling &#183; Weeks 11&ndash;15</p>
-                    </div>
+                    <span class="module-number">IV.</span>
+                    <h2 class="module-title">Spirit</h2>
+                    <span class="module-subtitle">Living Your Calling</span>
                 </div>
-                
-                <div class="resources-grid">
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 11: Light in the Shadows: Wound Work</h3>
-                        <p>Allowing the light of Christ to shine into the places that need healing.</p>
-                        <a href="assets/pdf/sessions/session-11.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 12: Growing in Holiness: 42 Virtues</h3>
-                        <p>Walking through St. Albert the Great&#8217;s <em>Paradise of the Soul</em>.</p>
-                        <a href="assets/pdf/sessions/session-12.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 13: The Spirit at Work: Charisms</h3>
-                        <p>Discovering the spiritual gifts the Holy Spirit has entrusted to you.</p>
-                        <a href="assets/pdf/sessions/session-13.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 14: Living Fully Alive: Rule of Life</h3>
-                        <p>Ordering your days with God at the center.</p>
-                        <a href="assets/pdf/sessions/session-14.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Session PDF</span>
-                        <h3>Session 15: Beautiful Symphony: Celebration</h3>
-                        <p>Beholding the holistic beauty of who God created you to be.</p>
-                        <a href="assets/pdf/sessions/session-15.pdf" class="resource-link" download>Download PDF &#8594;</a>
-                    </div>
-                    <div class="resource-card">
-                        <span class="resource-type">Guided Reflection</span>
-                        <h3>Healing Your Wounds</h3>
-                        <p>Reflect on your spiritual wounds and invite God's healing presence into your life.</p>
-                        <a href="healing-the-wounds.html" class="resource-link">Begin Reflection &#8594;</a>
-                    </div>
-                    
-                    <div class="resource-card">
-                        <span class="resource-type">Assessment</span>
-                        <h3>Virtue Assessment</h3>
-                        <p>Identify your strongest virtues and areas for growth as you cultivate a life of holy flourishing.</p>
-                        <a href="virtue-assessment.html" class="resource-link">Take Assessment &#8594;</a>
-                    </div>
-                    
-                    <div class="resource-card">
-                        <span class="resource-type">Guide</span>
-                        <h3>25 Charisms</h3>
-                        <p>Discover your spiritual gifts and how God has uniquely equipped you to serve others and build His Kingdom.</p>
-                        <a href="charisms-portal.html" class="resource-link">Explore Charisms &#8594;</a>
-                    </div>
-                    
-                    <div class="resource-card">
-                        <span class="resource-type">Workbook</span>
-                        <h3>Rule of Life</h3>
-                        <p>Create your personal rhythm of prayer, rest, work, and play &#8212; a holy structure that honors who you were made to be.</p>
-                        <a href="rule-of-life.html" class="resource-link">Build Your Rule &#8594;</a>
-                    </div>
-                </div>
+                <div class="sessions-list" id="module-spirit-sessions"></div>
             </div>
 
-            <!-- Before the Celebration -->
-            <div class="module-section" style="margin-top: 4rem;">
-                <div class="module-header">
-                    <div class="module-icon">&#127926;</div>
-                    <div>
-                        <h2>Before the Celebration</h2>
-                        <p class="module-subtitle">Sessions 1&#8211;12 &middot; A Look Back</p>
-                    </div>
-                </div>
-                <div class="resources-grid">
-                    <div class="resource-card" style="grid-column: 1 / -1; border-left: 4px solid var(--gold); background: linear-gradient(135deg, rgba(253,248,243,1), rgba(212,175,55,0.05));">
-                        <span class="resource-type">Reflection Form</span>
-                        <h3>Your Symphony, So Far</h3>
-                        <p>Twelve sessions. Four modules. One extraordinary journey. Before we celebrate, take time to look back at everything you have discovered &#8212; your name from the Lord, your colors, your strengths, your wounds, your virtues, and so much more.</p>
-                        <a href="crescendo-recap.html" class="resource-link">Open Reflection Form &#8594;</a>
-                    </div>
-                </div>
-            </div>
+        </div>
 
-            <!-- Additional Materials -->
-            <div class="module-section" style="margin-top: 4rem;">
-                <div class="module-header">
-                    <div class="module-icon">&#128218;</div>
-                    <div>
-                        <h2>Additional Materials</h2>
-                        <p class="module-subtitle">Bonus Resources for Your Journey</p>
-                    </div>
-                </div>
-                
-                <div class="resources-grid">
-                    <div class="resource-card">
-                        <span class="resource-type">PDF Workbook</span>
-                        <h3>Healing the Heart</h3>
-                        <p>A gentle journey into receiving God's love and healing the wounds that keep us from believing we are truly beloved.</p>
-                        <span class="resource-link" style="opacity: 0.6; cursor: default;">Coming Soon!</span>
-                    </div>
-                </div>
+        <!-- CAPSTONE -->
+        <section class="capstone-section">
+            <div class="capstone-card">
+                <div class="capstone-label">The Celebration</div>
+                <h2 class="capstone-title">Generate My Symphony Portrait</h2>
+                <p class="capstone-desc">When every session is complete, your answers become a living portrait &mdash; a gift to yourself, a testament to how fearfully and wonderfully you were made.</p>
+                <button class="capstone-btn" id="capstone-btn" disabled>
+                    <span class="lock-icon">&#128274;</span>
+                    Generate My Portrait
+                </button>
+                <p class="capstone-remaining"><span class="count" id="capstone-remaining-count">15</span> sessions remaining</p>
             </div>
-
         </section>
 
-        <!-- Support -->
+        <!-- SUPPORT -->
         <section class="portal-support">
-            <h3>Need Guidance?</h3>
-            <p>Questions about your resources or your journey?</p>
-            <p><a href="mailto:bea@myholycrescendo.com">bea@myholycrescendo.com</a></p>
-            <span class="flourish"></span>
+            <h3>Need a hand?</h3>
+            <p>Questions, stuck on something, or just want to say hello? Email <a href="mailto:bea@myholycrescendo.com">bea@myholycrescendo.com</a></p>
         </section>
 
-        <!-- Footer -->
+        <!-- FOOTER -->
         <footer>
             <h3>My Holy Crescendo</h3>
-            <p class="tagline">fearfully & wonderfully made</p>
-            <p class="copyright">&copy; 2025 My Holy Crescendo. All rights reserved.</p>
+            <p class="tagline">Fearfully &amp; wonderfully made</p>
+            <p class="copyright">&copy; 2026 Whitty Works LLC &middot; All Rights Reserved</p>
         </footer>
+
     </div>
-
-    <script>
-        const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
-        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-        sb.auth.getSession().then(({ data: { session } }) => {
-            if (session) showPortal(session.user);
-        });
-        sb.auth.onAuthStateChange((event, session) => {
-            if (event === 'SIGNED_IN' && session) showPortal(session.user);
-            if (event === 'SIGNED_OUT') showLoginScreen();
-        });
-
-        async function signIn() {
-            const email = document.getElementById('signin-email').value.trim();
-            const password = document.getElementById('signin-password').value;
-            const errEl = document.getElementById('signin-error');
-            errEl.style.display = 'none';
-            if (!email || !password) { errEl.textContent = 'Please enter your email and password.'; errEl.style.display = 'block'; return; }
-            const btn = document.querySelector('#signin-form .login-btn');
-            btn.textContent = 'Entering…'; btn.classList.add('auth-loading');
-            const { error } = await sb.auth.signInWithPassword({ email, password });
-            btn.textContent = 'Enter the Portal'; btn.classList.remove('auth-loading');
-            if (error) { errEl.textContent = 'That doesn’t seem right. Please try again, beloved.'; errEl.style.display = 'block'; }
-        }
-
-        async function signUp() {
-            const name = document.getElementById('signup-name').value.trim();
-            const email = document.getElementById('signup-email').value.trim();
-            const password = document.getElementById('signup-password').value;
-            const confirm = document.getElementById('signup-confirm').value;
-            const errEl = document.getElementById('signup-error');
-            const successEl = document.getElementById('signup-success');
-            const btn = document.querySelector('#signup-form .login-btn');
-            errEl.style.display = 'none'; successEl.style.display = 'none';
-            if (!name) { errEl.textContent = 'Please enter your first name.'; errEl.style.display = 'block'; return; }
-            if (!email || !password) { errEl.textContent = 'Please fill in all fields.'; errEl.style.display = 'block'; return; }
-            if (password !== confirm) { errEl.textContent = 'Passwords don’t match — try again.'; errEl.style.display = 'block'; return; }
-            if (password.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; errEl.style.display = 'block'; return; }
-            btn.textContent = 'Creating…'; btn.classList.add('auth-loading');
-            const { error } = await sb.auth.signUp({ email, password, options: { data: { full_name: name } } });
-            btn.textContent = 'Create Account'; btn.classList.remove('auth-loading');
-            if (error) { errEl.textContent = error.message; errEl.style.display = 'block'; }
-            else { successEl.style.display = 'block'; }
-        }
-
-        async function sendReset() {
-            const email = document.getElementById('forgot-email').value.trim();
-            const errEl = document.getElementById('forgot-error');
-            const successEl = document.getElementById('forgot-success');
-            const btn = document.querySelector('#forgot-form .login-btn');
-            errEl.style.display = 'none'; successEl.style.display = 'none';
-            if (!email) { errEl.textContent = 'Please enter your email address.'; errEl.style.display = 'block'; return; }
-            btn.textContent = 'Sending…'; btn.classList.add('auth-loading');
-            const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: 'https://myholycrescendo.com/portal.html' });
-            btn.textContent = 'Send Reset Link'; btn.classList.remove('auth-loading');
-            if (error) { errEl.textContent = error.message; errEl.style.display = 'block'; }
-            else { successEl.style.display = 'block'; }
-        }
-
-        async function logout() { await sb.auth.signOut(); }
-
-        function showPortal(user) {
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('portal-content').classList.add('active');
-            if (user) {
-                const name = user.user_metadata?.full_name || '';
-                const email = user.email || '';
-                const badge = document.getElementById('user-badge');
-                if (badge) { badge.textContent = '✦  Welcome, ' + (name || email) + '  ✦'; badge.style.display = 'inline-block'; }
-                const btnName = document.getElementById('account-btn-name');
-                if (btnName) btnName.textContent = name || 'Account';
-                const avatar = document.getElementById('account-avatar');
-                if (avatar) avatar.textContent = (name || email).charAt(0).toUpperCase();
-                const dName = document.getElementById('dropdown-name');
-                if (dName) dName.textContent = name || email;
-                const dEmail = document.getElementById('dropdown-email');
-                if (dEmail) dEmail.textContent = email;
-                const mn = document.getElementById('modal-name');
-                if (mn) mn.value = name;
-                const me = document.getElementById('modal-email');
-                if (me) me.value = email;
-            }
-        }
-
-        function showLoginScreen() {
-            document.getElementById('portal-content').classList.remove('active');
-            document.getElementById('login-screen').style.display = 'flex';
-        }
-
-        function toggleAccountDropdown() { document.getElementById('account-dropdown').classList.toggle('open'); }
-        document.addEventListener('click', function(e) {
-            const btn = document.getElementById('account-btn');
-            const dd = document.getElementById('account-dropdown');
-            if (dd && btn && !btn.contains(e.target) && !dd.contains(e.target)) dd.classList.remove('open');
-        });
-
-        function openAccountModal(tab) {
-            document.getElementById('account-dropdown').classList.remove('open');
-            document.getElementById('account-modal-overlay').classList.add('open');
-            switchModalTab(tab || 'profile');
-        }
-        function closeAccountModal(e) {
-            if (e && e.target !== document.getElementById('account-modal-overlay')) return;
-            document.getElementById('account-modal-overlay').classList.remove('open');
-            ['profile-success','profile-error','password-success','password-error'].forEach(id => {
-                const el = document.getElementById(id); if (el) el.style.display = 'none';
-            });
-        }
-        function switchModalTab(tab) {
-            document.getElementById('modal-profile-tab').style.display = tab === 'profile' ? 'block' : 'none';
-            document.getElementById('modal-password-tab').style.display = tab === 'password' ? 'block' : 'none';
-            document.querySelectorAll('.modal-tab').forEach((t, i) => t.classList.toggle('active', (i===0&&tab==='profile')||(i===1&&tab==='password')));
-        }
-        async function saveProfile() {
-            const name = document.getElementById('modal-name').value.trim();
-            const email = document.getElementById('modal-email').value.trim();
-            const successEl = document.getElementById('profile-success');
-            const errorEl = document.getElementById('profile-error');
-            successEl.style.display = 'none'; errorEl.style.display = 'none';
-            const updates = {};
-            if (name) updates.data = { full_name: name };
-            if (email) updates.email = email;
-            const { data, error } = await sb.auth.updateUser(updates);
-            if (error) { errorEl.textContent = error.message; errorEl.style.display = 'block'; }
-            else { successEl.style.display = 'block'; showPortal(data.user); }
-        }
-        async function savePassword() {
-            const newPass = document.getElementById('modal-new-password').value;
-            const confirm = document.getElementById('modal-confirm-password').value;
-            const successEl = document.getElementById('password-success');
-            const errorEl = document.getElementById('password-error');
-            successEl.style.display = 'none'; errorEl.style.display = 'none';
-            if (newPass !== confirm) { errorEl.textContent = 'Passwords don’t match.'; errorEl.style.display = 'block'; return; }
-            if (newPass.length < 6) { errorEl.textContent = 'Password must be at least 6 characters.'; errorEl.style.display = 'block'; return; }
-            const { error } = await sb.auth.updateUser({ password: newPass });
-            if (error) { errorEl.textContent = error.message; errorEl.style.display = 'block'; }
-            else { successEl.style.display = 'block'; document.getElementById('modal-new-password').value = ''; document.getElementById('modal-confirm-password').value = ''; }
-        }
-        function showTab(tab) {
-            document.getElementById('signin-form').style.display = tab==='signin'?'block':'none';
-            document.getElementById('signup-form').style.display = tab==='signup'?'block':'none';
-            document.getElementById('forgot-form').style.display = 'none';
-            document.querySelectorAll('.auth-tab').forEach((t,i) => t.classList.toggle('active',(i===0&&tab==='signin')||(i===1&&tab==='signup')));
-        }
-        function showForgot() {
-            document.getElementById('signin-form').style.display = 'none';
-            document.getElementById('signup-form').style.display = 'none';
-            document.getElementById('forgot-form').style.display = 'block';
-            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-        }
-        document.addEventListener('keydown', function(e) {
-            if (e.key==='Enter' && document.getElementById('login-screen').style.display!=='none') {
-                const sf = document.getElementById('signin-form');
-                if (sf && sf.style.display !== 'none') signIn();
-            }
-        });
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href==='#') return;
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-        function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        }
-    </script><script>
-        // ============================================
-
-    </script>
 
     <!-- Account Settings Modal -->
     <div class="account-modal-overlay" id="account-modal-overlay" onclick="closeAccountModal(event)">
@@ -1494,5 +1534,497 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // ============================================
+        // SUPABASE INIT
+        // ============================================
+        const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // ============================================
+        // SESSION CATALOG
+        // ============================================
+        const SESSIONS = [
+            { num: 1,  module: 'foundation', title: 'You Are Called',                     desc: 'Named and claimed by the Father &mdash; your identity begins here.' },
+            { num: 2,  module: 'foundation', title: 'Identity in Christ',                 desc: 'Understanding who you are through the eyes of the One who made you.' },
+            { num: 3,  module: 'foundation', title: 'Receiving His Love',                 desc: 'Learning to open your hands and heart to the love God offers freely.' },
+            { num: 4,  module: 'body',       title: 'Colors of Creation',                 desc: 'The unique palette God used to paint His masterpiece &mdash; you.' },
+            { num: 5,  module: 'body',       title: 'Presence &amp; Grace: Sacred Style Essence', desc: 'How the Lord is glorified in your presence in the world.' },
+            { num: 6,  module: 'body',       title: 'Shape of Dignity: Sacred Silhouettes', desc: 'Seeing the beauty and dignity in your God-given form.' },
+            { num: 7,  module: 'mind',       title: 'Your Way of Being: Four Temperaments', desc: 'Discovering your God-given temperament blend and how He wired you.' },
+            { num: 8,  module: 'mind',       title: 'Your Way of Seeing: Cognitive Functions', desc: 'Exploring your cognitive wiring and how God designed your mind.' },
+            { num: 9,  module: 'mind',       title: 'Strengths as Entrusted Gifts',       desc: 'The unique blend of strengths God has entrusted to you.' },
+            { num: 10, module: 'mind',       title: 'Giving &amp; Receiving: Language of Your Love', desc: 'How you give and receive love &mdash; and what that reveals about God&rsquo;s design.' },
+            { num: 11, module: 'spirit',     title: 'Light in the Shadows: Wound Work',   desc: 'Allowing the light of Christ to shine into the places that need healing.' },
+            { num: 12, module: 'spirit',     title: 'Growing in Holiness: 42 Virtues',    desc: 'Walking through St. Albert the Great&rsquo;s <em>Paradise of the Soul</em>.' },
+            { num: 13, module: 'spirit',     title: 'The Spirit at Work: 25 Charisms',    desc: 'Discovering the charisms the Holy Spirit has entrusted to you.' },
+            { num: 14, module: 'spirit',     title: 'Living Fully Alive: A Rule of Life', desc: 'Ordering your days with God at the center.' },
+            { num: 15, module: 'spirit',     title: 'Beautiful Symphony: A Celebration',  desc: 'Beholding the holistic beauty of who God created you to be.' }
+        ];
+
+        // ============================================
+        // STATE
+        // ============================================
+        let currentUser = null;
+        let userProfile = null;   // { has_full_access, grandfathered, first_name }
+        let userProgress = {};    // { 0: 'complete', 1: 'unlocked', 2: 'locked', ... }
+
+        // ============================================
+        // AUTH FLOW
+        // ============================================
+        sb.auth.getSession().then(({ data: { session } }) => {
+            if (session) bootPortal(session.user);
+        });
+
+        sb.auth.onAuthStateChange((event, session) => {
+            if (event === 'SIGNED_IN' && session) bootPortal(session.user);
+            if (event === 'SIGNED_OUT') showLoginScreen();
+        });
+
+        async function signIn() {
+            const email = document.getElementById('signin-email').value.trim();
+            const password = document.getElementById('signin-password').value;
+            const errEl = document.getElementById('signin-error');
+            errEl.style.display = 'none';
+            if (!email || !password) {
+                errEl.textContent = 'Please enter your email and password.';
+                errEl.style.display = 'block';
+                return;
+            }
+            const btn = document.querySelector('#signin-form .login-btn');
+            btn.textContent = 'Entering…';
+            btn.classList.add('auth-loading');
+            const { error } = await sb.auth.signInWithPassword({ email, password });
+            btn.textContent = 'Enter the Portal';
+            btn.classList.remove('auth-loading');
+            if (error) {
+                errEl.textContent = 'That doesn\u2019t seem right. Please try again, beloved.';
+                errEl.style.display = 'block';
+            }
+        }
+
+        async function signUp() {
+            const name = document.getElementById('signup-name').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const password = document.getElementById('signup-password').value;
+            const confirm = document.getElementById('signup-confirm').value;
+            const errEl = document.getElementById('signup-error');
+            const successEl = document.getElementById('signup-success');
+            const btn = document.querySelector('#signup-form .login-btn');
+            errEl.style.display = 'none';
+            successEl.style.display = 'none';
+            if (!name) { errEl.textContent = 'Please enter your first name.'; errEl.style.display = 'block'; return; }
+            if (!email || !password) { errEl.textContent = 'Please fill in all fields.'; errEl.style.display = 'block'; return; }
+            if (password !== confirm) { errEl.textContent = 'Passwords don\u2019t match \u2014 try again.'; errEl.style.display = 'block'; return; }
+            if (password.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; errEl.style.display = 'block'; return; }
+            btn.textContent = 'Creating…';
+            btn.classList.add('auth-loading');
+            const { error } = await sb.auth.signUp({
+                email, password,
+                options: { data: { full_name: name } }
+            });
+            btn.textContent = 'Create Account';
+            btn.classList.remove('auth-loading');
+            if (error) {
+                errEl.textContent = error.message;
+                errEl.style.display = 'block';
+            } else {
+                successEl.style.display = 'block';
+            }
+        }
+
+        async function sendReset() {
+            const email = document.getElementById('forgot-email').value.trim();
+            const errEl = document.getElementById('forgot-error');
+            const successEl = document.getElementById('forgot-success');
+            const btn = document.querySelector('#forgot-form .login-btn');
+            errEl.style.display = 'none';
+            successEl.style.display = 'none';
+            if (!email) { errEl.textContent = 'Please enter your email address.'; errEl.style.display = 'block'; return; }
+            btn.textContent = 'Sending…';
+            btn.classList.add('auth-loading');
+            const { error } = await sb.auth.resetPasswordForEmail(email, {
+                redirectTo: 'https://myholycrescendo.com/portal.html'
+            });
+            btn.textContent = 'Send Reset Link';
+            btn.classList.remove('auth-loading');
+            if (error) {
+                errEl.textContent = error.message;
+                errEl.style.display = 'block';
+            } else {
+                successEl.style.display = 'block';
+            }
+        }
+
+        async function logout() { await sb.auth.signOut(); }
+
+        function showLoginScreen() {
+            document.getElementById('portal-content').classList.remove('active');
+            document.getElementById('login-screen').style.display = 'flex';
+        }
+
+        function showTab(tab) {
+            document.getElementById('signin-form').style.display = tab === 'signin' ? 'block' : 'none';
+            document.getElementById('signup-form').style.display = tab === 'signup' ? 'block' : 'none';
+            document.getElementById('forgot-form').style.display = 'none';
+            document.querySelectorAll('.auth-tab').forEach((t, i) =>
+                t.classList.toggle('active', (i === 0 && tab === 'signin') || (i === 1 && tab === 'signup'))
+            );
+        }
+
+        function showForgot() {
+            document.getElementById('signin-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'none';
+            document.getElementById('forgot-form').style.display = 'block';
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+        }
+
+        // ============================================
+        // PORTAL BOOT - load profile + progress, render
+        // ============================================
+        async function bootPortal(user) {
+            currentUser = user;
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('portal-content').classList.add('active');
+            populateAccountChrome(user);
+
+            await loadProfile();
+            await loadProgress();
+            renderPortal();
+        }
+
+        async function loadProfile() {
+            // profiles table is optional; if missing, treat as free user
+            const { data, error } = await sb
+                .from('profiles')
+                .select('has_full_access, grandfathered, first_name')
+                .eq('id', currentUser.id)
+                .maybeSingle();
+
+            if (error) {
+                console.warn('Profile fetch failed, treating as free user:', error.message);
+                userProfile = { has_full_access: false, grandfathered: false, first_name: null };
+                return;
+            }
+            userProfile = data || { has_full_access: false, grandfathered: false, first_name: null };
+        }
+
+        async function loadProgress() {
+            const { data, error } = await sb
+                .from('session_progress')
+                .select('session_num, status')
+                .eq('user_id', currentUser.id);
+
+            if (error) {
+                console.warn('Progress fetch failed:', error.message);
+                userProgress = {};
+                return;
+            }
+            userProgress = {};
+            (data || []).forEach(row => { userProgress[row.session_num] = row.status; });
+        }
+
+        // ============================================
+        // RENDER LOGIC
+        // ============================================
+        function hasFullAccess() {
+            return !!(userProfile && (userProfile.has_full_access || userProfile.grandfathered));
+        }
+
+        function sessionStatus(num) {
+            // Session 00 is always accessible to anyone logged in
+            if (num === 0) return userProgress[0] === 'complete' ? 'complete' : 'unlocked';
+
+            // Grandfathered users see all sessions unlocked
+            if (userProfile && userProfile.grandfathered) {
+                return userProgress[num] === 'complete' ? 'complete' : 'unlocked';
+            }
+
+            // Paid users: linear gating
+            if (userProfile && userProfile.has_full_access) {
+                if (userProgress[num] === 'complete') return 'complete';
+
+                // Session 1 unlocks when Session 00 is complete
+                if (num === 1) {
+                    return userProgress[0] === 'complete' ? 'unlocked' : 'locked';
+                }
+                // Session N unlocks when Session N-1 is complete
+                return userProgress[num - 1] === 'complete' ? 'unlocked' : 'locked';
+            }
+
+            // Free users: all 1-15 locked
+            return 'locked';
+        }
+
+        function renderPortal() {
+            const paid = hasFullAccess();
+
+            // Hero welcome label uses first name if available
+            const name = (userProfile && userProfile.first_name) ||
+                         (currentUser.user_metadata && currentUser.user_metadata.full_name) ||
+                         '';
+            if (name) {
+                document.getElementById('welcome-label').textContent = 'Welcome back, ' + name;
+            }
+
+            // Progress bar only for paid users
+            const paidCompleteCount = paid
+                ? SESSIONS.filter(s => userProgress[s.num] === 'complete').length
+                : 0;
+
+            if (paid) {
+                document.getElementById('progress-wrap').style.display = 'block';
+                document.getElementById('progress-count').textContent = paidCompleteCount;
+                document.getElementById('progress-fill').style.width = (paidCompleteCount / 15 * 100) + '%';
+                document.getElementById('quick-strip').style.display = 'grid';
+                updateContinueTile();
+            }
+
+            // Session 00 card
+            renderBeginCard();
+
+            // Purchase CTA only for free users
+            if (!paid) {
+                document.getElementById('purchase-cta-wrap').style.display = 'block';
+            }
+
+            // 15 session cards, grouped by module
+            renderJourney();
+
+            // Capstone
+            renderCapstone(paid, paidCompleteCount);
+        }
+
+        function renderBeginCard() {
+            const card = document.getElementById('begin-card');
+            const badge = document.getElementById('begin-badge');
+            const cta = document.getElementById('begin-cta');
+            const status = sessionStatus(0);
+
+            if (status === 'complete') {
+                card.classList.add('complete');
+                badge.textContent = 'Complete';
+                cta.innerHTML = 'Revisit <span class="arrow">&rarr;</span>';
+            } else {
+                badge.textContent = hasFullAccess() ? 'Start Here' : 'Free Preview';
+                cta.innerHTML = 'Begin <span class="arrow">&rarr;</span>';
+            }
+        }
+
+        function renderJourney() {
+            const grouped = { foundation: [], body: [], mind: [], spirit: [] };
+            SESSIONS.forEach(s => grouped[s.module].push(s));
+
+            Object.keys(grouped).forEach(mod => {
+                const container = document.getElementById('module-' + mod + '-sessions');
+                container.innerHTML = grouped[mod].map(renderSessionCard).join('');
+            });
+        }
+
+        function renderSessionCard(s) {
+            const status = sessionStatus(s.num);
+            const href = status === 'locked' ? 'javascript:void(0)' : 'session-' + String(s.num).padStart(2, '0') + '.html';
+            const numStr = String(s.num).padStart(2, '0');
+            const tag = status === 'locked' ? 'div' : 'a';
+
+            const badgeText = status === 'complete' ? 'Complete'
+                           : status === 'progress' ? 'In Progress'
+                           : status === 'unlocked' ? 'Ready to Begin'
+                           : 'Locked';
+
+            const ctaText = status === 'complete' ? 'Revisit'
+                          : status === 'progress' ? 'Continue'
+                          : status === 'unlocked' ? 'Begin'
+                          : 'Locked';
+
+            const ctaArrow = status === 'locked' ? '' : ' <span class="arrow">&rarr;</span>';
+
+            return `
+                <${tag} ${tag === 'a' ? 'href="' + href + '"' : ''} class="session-card ${status}">
+                    <div class="status-circle ${status}"><span class="session-num">${s.num}</span></div>
+                    <div class="session-body">
+                        <div class="session-meta">
+                            <span class="session-label">Session ${numStr}</span>
+                            <span class="status-badge ${status}">${badgeText}</span>
+                        </div>
+                        <h3 class="session-title">${s.title}</h3>
+                        <p class="session-desc">${s.desc}</p>
+                    </div>
+                    <div class="session-cta">${ctaText}${ctaArrow}</div>
+                </${tag}>
+            `;
+        }
+
+        function renderCapstone(paid, completeCount) {
+            const btn = document.getElementById('capstone-btn');
+            const remaining = document.getElementById('capstone-remaining-count');
+            const remainingText = remaining.parentElement;
+
+            const allDone = paid && completeCount === 15;
+            const remainingCount = paid ? (15 - completeCount) : 15;
+
+            remaining.textContent = remainingCount;
+
+            if (allDone) {
+                btn.classList.add('unlocked');
+                btn.disabled = false;
+                btn.innerHTML = '<span>&#10022;</span> Generate My Portrait';
+                remainingText.style.display = 'none';
+                btn.onclick = () => {
+                    // Placeholder - capstone generation flow to be built later
+                    alert('Capstone generation coming soon. Your portrait awaits.');
+                };
+            } else {
+                btn.classList.remove('unlocked');
+                btn.disabled = true;
+                btn.innerHTML = '<span class="lock-icon">&#128274;</span> Generate My Portrait';
+                remainingText.style.display = 'block';
+            }
+        }
+
+        function updateContinueTile() {
+            // "Continue" tile points to the next unlocked/in-progress session
+            const tile = document.getElementById('continue-tile');
+            const title = document.getElementById('continue-title');
+
+            // Check Session 00 first
+            if (sessionStatus(0) !== 'complete') {
+                tile.href = 'session-00.html';
+                title.textContent = 'Begin Here';
+                return;
+            }
+
+            // Find the lowest session that is unlocked or in progress
+            for (const s of SESSIONS) {
+                const st = sessionStatus(s.num);
+                if (st === 'unlocked' || st === 'progress') {
+                    tile.href = 'session-' + String(s.num).padStart(2, '0') + '.html';
+                    title.textContent = 'Session ' + String(s.num).padStart(2, '0') + ': ' + stripHtml(s.title);
+                    return;
+                }
+            }
+
+            // All complete
+            tile.href = '#';
+            title.textContent = 'All Sessions Complete';
+        }
+
+        function stripHtml(html) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        }
+
+        // ============================================
+        // ACCOUNT CHROME (avatar, dropdown, modal)
+        // ============================================
+        function populateAccountChrome(user) {
+            const name = (user.user_metadata && user.user_metadata.full_name) || '';
+            const email = user.email || '';
+            const btnName = document.getElementById('account-btn-name');
+            if (btnName) btnName.textContent = name || 'Account';
+            const avatar = document.getElementById('account-avatar');
+            if (avatar) avatar.textContent = (name || email).charAt(0).toUpperCase();
+            const dName = document.getElementById('dropdown-name');
+            if (dName) dName.textContent = name || email;
+            const dEmail = document.getElementById('dropdown-email');
+            if (dEmail) dEmail.textContent = email;
+            const mn = document.getElementById('modal-name');
+            if (mn) mn.value = name;
+            const me = document.getElementById('modal-email');
+            if (me) me.value = email;
+        }
+
+        function toggleAccountDropdown() {
+            document.getElementById('account-dropdown').classList.toggle('open');
+        }
+
+        document.addEventListener('click', function(e) {
+            const btn = document.getElementById('account-btn');
+            const dd = document.getElementById('account-dropdown');
+            if (dd && btn && !btn.contains(e.target) && !dd.contains(e.target)) dd.classList.remove('open');
+        });
+
+        function openAccountModal(tab) {
+            document.getElementById('account-dropdown').classList.remove('open');
+            document.getElementById('account-modal-overlay').classList.add('open');
+            switchModalTab(tab || 'profile');
+        }
+
+        function closeAccountModal(e) {
+            if (e && e.target !== document.getElementById('account-modal-overlay')) return;
+            document.getElementById('account-modal-overlay').classList.remove('open');
+            ['profile-success', 'profile-error', 'password-success', 'password-error'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
+        }
+
+        function switchModalTab(tab) {
+            document.getElementById('modal-profile-tab').style.display = tab === 'profile' ? 'block' : 'none';
+            document.getElementById('modal-password-tab').style.display = tab === 'password' ? 'block' : 'none';
+            document.querySelectorAll('.modal-tab').forEach((t, i) =>
+                t.classList.toggle('active', (i === 0 && tab === 'profile') || (i === 1 && tab === 'password'))
+            );
+        }
+
+        async function saveProfile() {
+            const name = document.getElementById('modal-name').value.trim();
+            const email = document.getElementById('modal-email').value.trim();
+            const successEl = document.getElementById('profile-success');
+            const errorEl = document.getElementById('profile-error');
+            successEl.style.display = 'none';
+            errorEl.style.display = 'none';
+            const updates = {};
+            if (name) updates.data = { full_name: name };
+            if (email) updates.email = email;
+            const { data, error } = await sb.auth.updateUser(updates);
+            if (error) {
+                errorEl.textContent = error.message;
+                errorEl.style.display = 'block';
+            } else {
+                successEl.style.display = 'block';
+                populateAccountChrome(data.user);
+            }
+        }
+
+        async function savePassword() {
+            const newPass = document.getElementById('modal-new-password').value;
+            const confirm = document.getElementById('modal-confirm-password').value;
+            const successEl = document.getElementById('password-success');
+            const errorEl = document.getElementById('password-error');
+            successEl.style.display = 'none';
+            errorEl.style.display = 'none';
+            if (newPass !== confirm) {
+                errorEl.textContent = 'Passwords don\u2019t match.';
+                errorEl.style.display = 'block';
+                return;
+            }
+            if (newPass.length < 6) {
+                errorEl.textContent = 'Password must be at least 6 characters.';
+                errorEl.style.display = 'block';
+                return;
+            }
+            const { error } = await sb.auth.updateUser({ password: newPass });
+            if (error) {
+                errorEl.textContent = error.message;
+                errorEl.style.display = 'block';
+            } else {
+                successEl.style.display = 'block';
+                document.getElementById('modal-new-password').value = '';
+                document.getElementById('modal-confirm-password').value = '';
+            }
+        }
+
+        // Enter key submits signin
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') {
+                const sf = document.getElementById('signin-form');
+                if (sf && sf.style.display !== 'none') signIn();
+            }
+        });
+    </script>
 </body>
 </html>
