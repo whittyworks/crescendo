@@ -46,15 +46,16 @@
             --wash-spirit: rgba(192, 178, 214, 0.22);
             --wash-spirit-strong: rgba(168, 148, 200, 0.30);
 
-            /* Sunrise wash for Session 00 - pulled from PDF cover */
-            --wash-sunrise: rgba(245, 193, 150, 0.16);
-            --wash-sunrise-strong: rgba(230, 170, 125, 0.28);
+
+            /* Begin Here wash - soft blush to echo cover page watercolor */
+            --wash-sunrise: rgba(232, 190, 185, 0.18);
+            --wash-sunrise-strong: rgba(216, 166, 160, 0.28);
 
             --accent-foundation: #B8941F;
             --accent-body: #7A9670;
             --accent-mind: #6B8BA8;
             --accent-spirit: #8B7AA8;
-            --accent-sunrise: #C97A4A;
+            --accent-sunrise: #B07A7A;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -568,7 +569,7 @@
         .begin-card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 237, 220, 0.5));
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(201, 122, 74, 0.3);
+            border: 1px solid rgba(176, 122, 122, 0.3);
             border-radius: 20px;
             padding: 2rem 2rem 2rem 2.25rem;
             display: grid;
@@ -580,14 +581,14 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(201, 122, 74, 0.08);
+            box-shadow: 0 10px 40px rgba(176, 122, 122, 0.08);
         }
         .begin-card::before {
             content: '';
             position: absolute;
             left: 0; top: 0; bottom: 0;
             width: 4px;
-            background: linear-gradient(180deg, #F5C196, var(--accent-sunrise));
+            background: linear-gradient(180deg, #E8BEB9, var(--accent-sunrise));
         }
         .begin-card::after {
             content: '';
@@ -595,15 +596,15 @@
             inset: 0;
             background:
                 radial-gradient(ellipse at 85% 50%, var(--wash-sunrise-strong) 0%, var(--wash-sunrise) 40%, transparent 70%),
-                radial-gradient(circle 2px at 90% 75%, rgba(201, 122, 74, 0.4), transparent),
-                radial-gradient(circle 1.5px at 88% 30%, rgba(201, 122, 74, 0.35), transparent);
+                radial-gradient(circle 2px at 90% 75%, rgba(176, 122, 122, 0.4), transparent),
+                radial-gradient(circle 1.5px at 88% 30%, rgba(176, 122, 122, 0.35), transparent);
             pointer-events: none;
         }
         .begin-card > * { position: relative; z-index: 1; }
         .begin-card:hover {
             border-color: var(--accent-sunrise);
             transform: translateX(4px);
-            box-shadow: 0 15px 50px rgba(201, 122, 74, 0.18);
+            box-shadow: 0 15px 50px rgba(176, 122, 122, 0.18);
         }
         .begin-badge {
             font-family: 'Montserrat', sans-serif;
@@ -621,12 +622,12 @@
         .begin-icon {
             width: 56px; height: 56px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #F5C196, var(--accent-sunrise));
+            background: linear-gradient(135deg, #E8BEB9, var(--accent-sunrise));
             display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
             color: white;
             font-size: 1.4rem;
-            box-shadow: 0 4px 15px rgba(201, 122, 74, 0.25);
+            box-shadow: 0 4px 15px rgba(176, 122, 122, 0.25);
         }
         .begin-body { min-width: 0; }
         .begin-label {
@@ -1802,13 +1803,21 @@
             const badge = document.getElementById('begin-badge');
             const cta = document.getElementById('begin-cta');
             const status = sessionStatus(0);
+            const paid = hasFullAccess();
 
             if (status === 'complete') {
                 card.classList.add('complete');
                 badge.textContent = 'Complete';
+                badge.style.display = 'inline-block';
                 cta.innerHTML = 'Revisit <span class="arrow">&rarr;</span>';
+            } else if (!paid) {
+                // Free user - show Free Preview badge as conversion signal
+                badge.textContent = 'Free Preview';
+                badge.style.display = 'inline-block';
+                cta.innerHTML = 'Begin <span class="arrow">&rarr;</span>';
             } else {
-                badge.textContent = hasFullAccess() ? 'Start Here' : 'Free Preview';
+                // Paid / grandfathered - no badge needed
+                badge.style.display = 'none';
                 cta.innerHTML = 'Begin <span class="arrow">&rarr;</span>';
             }
         }
