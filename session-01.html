@@ -7,6 +7,16 @@
     <meta name="robots" content="noindex, nofollow">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="favicon32x32.png">
+    <link rel="apple-touch-icon" href="appletouchicon.png">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QX21GDR7T"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7QX21GDR7T');
+    </script>
+
     <style>
         :root {
             --cream: #FDF8F3;
@@ -17,11 +27,17 @@
             --text-dark: #2C2416;
             --text-medium: #5C5142;
             --text-light: #8B8170;
+            --blush: #F5E1DA;
+            --status-done: #7A9670;
 
-            /* Module wash for this session */
+            /* Foundation module - gold */
             --module-wash: rgba(212, 175, 55, 0.10);
             --module-wash-strong: rgba(212, 175, 55, 0.18);
             --module-accent: #B8941F;
+
+            /* Prayer Cord red */
+            --cord-red: #B8343A;
+            --cord-red-dark: #8A2A30;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,8 +49,6 @@
             line-height: 1.7;
             min-height: 100vh;
             overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
         }
 
         .watercolor-blob {
@@ -66,7 +80,6 @@
             align-items: center;
             border-bottom: 1px solid rgba(212, 175, 55, 0.15);
         }
-
         .logo-text {
             font-family: 'Cinzel', serif;
             font-size: 1.3rem;
@@ -74,7 +87,6 @@
             text-decoration: none;
             letter-spacing: 1px;
         }
-
         .back-link {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.75rem;
@@ -82,158 +94,583 @@
             text-transform: uppercase;
             color: var(--text-medium);
             text-decoration: none;
-            transition: color 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
+            transition: color 0.2s;
         }
         .back-link:hover { color: var(--gold-dark); }
 
-        .session-wrapper {
+        .locked-screen {
             position: relative;
             z-index: 1;
-            flex: 1;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 4rem 5%;
-            text-align: center;
+            min-height: 60vh;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            width: 100%;
+            padding: 3rem 5%;
         }
-
-        .session-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--module-accent);
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .session-title {
-            font-family: 'Cinzel', serif;
-            font-size: 2.8rem;
-            color: var(--gold-dark);
-            font-weight: 400;
-            margin-bottom: 0.75rem;
-            line-height: 1.2;
-        }
-
-        .session-tagline {
-            font-style: italic;
-            color: var(--text-medium);
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
-
-        .placeholder-card {
-            background: rgba(255, 255, 255, 0.85);
+        .locked-card {
+            background: rgba(255,255,255,0.9);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 24px;
             padding: 3rem 2.5rem;
-            margin-top: 2rem;
-            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.08);
-            position: relative;
-            overflow: hidden;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.1);
         }
-        .placeholder-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
-        }
-
-        .placeholder-icon {
+        .locked-icon {
             font-size: 2.5rem;
-            color: var(--module-accent);
-            margin-bottom: 1.25rem;
-            display: block;
+            color: var(--text-light);
+            margin-bottom: 1rem;
         }
-
-        .placeholder-heading {
+        .locked-title {
             font-family: 'Cinzel', serif;
             font-size: 1.5rem;
             color: var(--gold-dark);
             margin-bottom: 1rem;
             font-weight: 400;
         }
-
-        .placeholder-body {
+        .locked-desc {
             color: var(--text-medium);
-            font-size: 1.1rem;
-            line-height: 1.65;
-            max-width: 500px;
-            margin: 0 auto 1.5rem;
+            font-size: 1.05rem;
+            margin-bottom: 1.75rem;
+            line-height: 1.6;
         }
 
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 1rem 2.25rem;
-            border-radius: 50px;
+        .session-header {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 5% 1rem;
+            text-align: center;
+        }
+        .session-label {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.78rem;
-            letter-spacing: 2px;
+            font-size: 0.72rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            color: var(--module-accent);
+            margin-bottom: 0.75rem;
             font-weight: 500;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
+        }
+        .session-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            color: var(--gold-dark);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        .session-header .tagline {
+            font-style: italic;
+            color: var(--text-medium);
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Saint Quote Card */
+        .saint-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
+            margin: 3rem auto 0;
+            padding: 0 5%;
+            text-align: center;
+        }
+        .saint-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(253, 244, 231, 0.6));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 24px;
+            padding: 2.5rem 2.25rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.08);
+        }
+        .saint-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 85% 20%, var(--module-wash-strong) 0%, var(--module-wash) 40%, transparent 70%),
+                radial-gradient(circle 2px at 88% 30%, rgba(184, 148, 31, 0.4), transparent),
+                radial-gradient(circle 1.5px at 92% 18%, rgba(184, 148, 31, 0.35), transparent);
+            pointer-events: none;
+        }
+        .saint-card > * { position: relative; z-index: 1; }
+        .saint-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--module-accent);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .saint-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold-dark);
+            font-style: italic;
+            margin-bottom: 0.75rem;
+        }
+        .saint-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .step-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 3rem auto 0;
+            padding: 0 5%;
+        }
+        .step-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.08);
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .step-badge {
+            flex-shrink: 0;
+            width: 42px; height: 42px;
+            border-radius: 50%;
             background: linear-gradient(135deg, var(--gold-light), var(--gold));
             color: white;
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+        }
+        .step-meta { flex: 1; }
+        .step-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 0.2rem;
+        }
+        .step-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        .step-body { color: var(--text-medium); font-size: 1.08rem; line-height: 1.7; }
+        .step-body p { margin-bottom: 1rem; }
+        .step-body p:last-child { margin-bottom: 0; }
+
+        /* Video */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: linear-gradient(135deg, var(--module-accent), var(--gold-dark));
+            border-radius: 14px;
+            overflow: hidden;
+            margin-top: 1.25rem;
+            box-shadow: 0 10px 30px rgba(44, 36, 22, 0.2);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
+        }
+        .video-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.9);
+            text-align: center;
+            padding: 2rem;
+        }
+        .video-placeholder .icon {
+            width: 80px; height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .video-placeholder .icon::after {
+            content: '';
+            width: 0; height: 0;
+            border-top: 14px solid transparent;
+            border-bottom: 14px solid transparent;
+            border-left: 22px solid var(--gold-dark);
+            margin-left: 6px;
+        }
+        .video-placeholder .note {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        /* Workbook buttons only */
+        .workbook-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.95rem 1.5rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 500;
             text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: white;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+        .btn-secondary {
+            background: white;
+            color: var(--text-medium);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .btn-secondary:hover {
+            background: var(--cream-dark);
+            border-color: var(--gold);
+            color: var(--gold-dark);
+        }
+        .btn-lg { padding: 1.1rem 2.5rem; font-size: 0.8rem; }
+        .btn[disabled] {
+            background: var(--cream-dark);
+            color: var(--text-light);
+            border: 1px solid rgba(201, 195, 184, 0.5);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .btn[disabled]:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Prayer Cord */
+        .cord-intro {
+            background: linear-gradient(135deg, rgba(245, 225, 218, 0.3), rgba(212, 175, 55, 0.08));
+            border-radius: 14px;
+            padding: 1.5rem 1.75rem;
+            margin-top: 1.25rem;
+            border: 1px solid rgba(184, 52, 58, 0.18);
+        }
+        .cord-visual {
+            text-align: center;
+            padding: 1rem 0 1.5rem;
+        }
+        .cord-svg {
+            max-width: 440px;
+            width: 100%;
+            height: auto;
+        }
+        .cord-caption {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--cord-red-dark);
+            margin-top: 0.75rem;
+        }
+
+        .knot-list {
+            display: grid;
+            gap: 0.85rem;
+            margin-top: 1.5rem;
+        }
+        .knot-row {
+            display: grid;
+            grid-template-columns: 40px 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+        .knot-number {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: var(--cord-red-dark);
+            text-align: center;
+            background: rgba(184, 52, 58, 0.08);
+            border-radius: 50%;
+            width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1.5px solid rgba(184, 52, 58, 0.35);
+        }
+        .knot-input {
+            width: 100%;
+            padding: 0.75rem 1.1rem;
+            border: 1.5px solid rgba(212, 175, 55, 0.25);
+            border-radius: 50px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            background: white;
+            transition: all 0.2s;
+        }
+        .knot-input::placeholder {
+            color: var(--text-light);
+            font-style: italic;
+        }
+        .knot-input:focus {
+            outline: none;
+            border-color: var(--cord-red);
+            box-shadow: 0 0 0 3px rgba(184, 52, 58, 0.1);
+        }
+
+        /* Reflection */
+        .reflection-block {
+            background: linear-gradient(135deg, rgba(253, 248, 243, 0.7), rgba(245, 239, 231, 0.5));
+            border-radius: 14px;
+            padding: 1.5rem 1.75rem;
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            margin-bottom: 1rem;
+        }
+        .reflection-block:last-child { margin-bottom: 0; }
+        .reflection-prompt {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.9rem;
+            line-height: 1.5;
+        }
+        .reflection-prompt strong {
+            font-family: 'Cinzel', serif;
+            font-weight: 500;
+            color: var(--module-accent);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .reflection-textarea {
+            width: 100%;
+            padding: 0.9rem 1.1rem;
+            border: 1.5px solid rgba(212, 175, 55, 0.25);
+            border-radius: 14px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            background: white;
+            resize: vertical;
+            min-height: 90px;
+            line-height: 1.6;
+            transition: all 0.2s;
+        }
+        .reflection-textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        .save-status {
+            margin-top: 0.8rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            min-height: 1.3rem;
+        }
+        .save-status.saved { color: var(--status-done); }
+        .save-status.saving { color: var(--gold-dark); }
+
+        /* Complete */
+        .complete-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 3rem auto 1rem;
+            padding: 0 5%;
+            text-align: center;
+        }
+        .complete-card {
+            background: linear-gradient(135deg, rgba(253, 248, 243, 0.95), rgba(245, 239, 231, 0.95));
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 24px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .complete-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
+        }
+        .complete-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+        }
+        .complete-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold-dark);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+        .complete-desc {
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 1.75rem;
+            font-size: 1.05rem;
+        }
+        .complete-desc a {
+            color: var(--gold-dark);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .complete-desc a:hover { text-decoration: underline; }
+        .complete-done {
+            color: var(--status-done);
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
             margin-top: 1rem;
         }
-        .back-button:hover {
+
+        .session-nav {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 2rem auto 4rem;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .session-nav-btn {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            transition: all 0.3s;
+        }
+        .session-nav-btn:hover:not(.disabled) {
+            background: white;
+            border-color: var(--gold);
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.12);
+        }
+        .session-nav-btn.next { text-align: right; }
+        .session-nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .nav-btn-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+        .nav-btn-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-weight: 500;
         }
 
         footer {
             background: var(--text-dark);
             color: rgba(255, 255, 255, 0.7);
-            padding: 2.5rem 5% 1.5rem;
+            padding: 3rem 5% 2rem;
             text-align: center;
             position: relative;
             z-index: 1;
-            margin-top: auto;
         }
         footer h3 {
             font-family: 'Cinzel', serif;
             color: var(--gold);
-            font-size: 1.3rem;
-            margin-bottom: 0.4rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
             font-weight: 400;
         }
         footer .tagline {
             font-style: italic;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
             color: rgba(255, 255, 255, 0.5);
         }
         footer .copyright {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             letter-spacing: 1.5px;
-            padding-top: 1.25rem;
+            padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         @media (max-width: 768px) {
-            .session-title { font-size: 2rem; }
-            .session-tagline { font-size: 1.1rem; }
-            .placeholder-card { padding: 2rem 1.5rem; }
-            .placeholder-heading { font-size: 1.25rem; }
-            .placeholder-body { font-size: 1rem; }
+            .session-header { padding: 2rem 5% 0.5rem; }
+            .session-header h1 { font-size: 2rem; }
+            .session-header .tagline { font-size: 1.1rem; }
+            .saint-card { padding: 1.75rem 1.25rem; }
+            .saint-quote { font-size: 1.15rem; }
+            .step-card { padding: 1.75rem 1.25rem; }
+            .step-title { font-size: 1.15rem; }
+            .workbook-actions { grid-template-columns: 1fr; }
+            .session-nav { flex-direction: column; }
+            .session-nav-btn.next { text-align: left; }
+            .complete-card { padding: 2rem 1.25rem; }
+            .complete-title { font-size: 1.3rem; }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="watercolor-blob blob-1"></div>
@@ -244,21 +681,199 @@
         <a href="portal.html" class="back-link"><span>&larr;</span> Back to Portal</a>
     </nav>
 
-    <div class="session-wrapper">
-        <p class="session-label">Foundation &middot; Session 01</p>
-        <h1 class="session-title">You Are Called</h1>
-        <p class="session-tagline">Named and claimed by the Father</p>
-        <div class="gold-line"></div>
+    <!-- LOCKED STATE (shown only if not unlocked) -->
+    <div id="locked-screen" class="locked-screen" style="display:none">
+        <div class="locked-card">
+            <div class="locked-icon">&#128274;</div>
+            <h1 class="locked-title">Session 01 is locked</h1>
+            <p class="locked-desc" id="locked-desc">Complete The Invitation first &mdash; then Session 01 will open for you.</p>
+            <a href="portal.html" class="btn btn-primary">Return to Portal</a>
+        </div>
+    </div>
 
-        <div class="placeholder-card">
-            <span class="placeholder-icon">&#10022;</span>
-            <h2 class="placeholder-heading">Being prepared with care</h2>
-            <p class="placeholder-body">This session is coming soon. Every page is being written, edited, and woven together with intention &mdash; so that when you sit down, what meets you is worthy of the time you are giving it.</p>
-            <p class="placeholder-body"><em>Thank you for your patience as we build the Symphony together.</em></p>
-            <a href="portal.html" class="back-button">
-                <span>&larr;</span> Return to Your Symphony
+    <!-- SESSION CONTENT -->
+    <div id="session-content" style="display:none">
+
+        <div class="session-header">
+            <p class="session-label">Foundation &middot; Session 01</p>
+            <h1>You Are Called</h1>
+            <p class="tagline">Named and claimed by the Father</p>
+            <div class="gold-line"></div>
+        </div>
+
+        <!-- Saint Card -->
+        <div class="saint-wrap">
+            <div class="saint-card">
+                <div class="saint-label">Our Guide This Week</div>
+                <div class="saint-name">Mary, Star of the Sea</div>
+                <p class="saint-quote">&ldquo;Look to the star, call on Mary.&rdquo;</p>
+            </div>
+        </div>
+
+        <!-- STEP 1: VIDEO -->
+        <div class="step-wrap">
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-badge">1</div>
+                    <div class="step-meta">
+                        <div class="step-label">Step One</div>
+                        <div class="step-title">Welcome &amp; Teaching</div>
+                    </div>
+                </div>
+                <div class="step-body">
+                    <p>Begin here. In this teaching, we explore what it means that God has named you and claimed you &mdash; and why remembering His voice is the foundation of everything.</p>
+                    <div class="video-wrapper">
+                        <!-- TODO: Replace with Vimeo embed when recorded
+                             <iframe src="https://player.vimeo.com/video/YOUR_VIDEO_ID" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                        -->
+                        <div class="video-placeholder">
+                            <div class="icon"></div>
+                            <div class="note">Teaching video coming soon</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2: WORKBOOK -->
+        <div class="step-wrap">
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-badge">2</div>
+                    <div class="step-meta">
+                        <div class="step-label">Step Two</div>
+                        <div class="step-title">Your Workbook</div>
+                    </div>
+                </div>
+                <div class="step-body">
+                    <p>Move through the workbook at your own pace. Read it on screen, or print it out for handwritten reflection. This week&rsquo;s workbook introduces Mary, Star of the Sea &mdash; the woman who will walk beside you this week &mdash; and invites you to hear the name your Father calls you by.</p>
+                    <div class="workbook-actions">
+                        <a href="assets/pdf/sessions/session01.pdf" target="_blank" class="btn btn-primary">
+                            <span>&#9783;</span> Read the Workbook
+                        </a>
+                        <a href="assets/pdf/sessions/session01.pdf" class="btn btn-secondary" download="Session-01-You-Are-Called.pdf">
+                            <span>&darr;</span> Download to Print
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3: PRAYER CORD ACTIVITY -->
+        <div class="step-wrap">
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-badge">3</div>
+                    <div class="step-meta">
+                        <div class="step-label">Step Three &middot; Activity</div>
+                        <div class="step-title">The Prayer Cord</div>
+                    </div>
+                </div>
+                <div class="step-body">
+                    <p>You did not find your way here by accident. Ten women&rsquo;s <em>yeses</em> &mdash; ten moments of grace &mdash; carried you to this threshold. Like a Marian decade, you&rsquo;ll name each one as you tie a knot in a red cord you&rsquo;ll wear for the next fifteen weeks.</p>
+
+                    <div class="cord-intro">
+                        <p style="margin-bottom: 0.75rem;"><strong style="color:var(--gold-dark);font-family:'Cinzel',serif;">What you&rsquo;ll need:</strong> a 24-inch length of red six-strand cotton embroidery floss (DMC #321 is perfect), or the optional Prayer Cord Kit if you ordered one.</p>
+                        <p style="margin-bottom:0;">Tie ten knots, spaced evenly. At each knot, name a woman whose <em>yes</em> made yours possible. A mother, a grandmother, a friend, a saint &mdash; any woman whose life made yours. Wear the cord for the next fifteen weeks as a quiet prayer. At Session 15, we&rsquo;ll cut it off together.</p>
+                    </div>
+
+                    <div class="cord-visual">
+                        <svg class="cord-svg" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="20" y1="50" x2="480" y2="50" stroke="#B8343A" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
+                            <g fill="#8A2A30">
+                                <circle cx="60" cy="50" r="7"/>
+                                <circle cx="107" cy="50" r="7"/>
+                                <circle cx="154" cy="50" r="7"/>
+                                <circle cx="201" cy="50" r="7"/>
+                                <circle cx="248" cy="50" r="7"/>
+                                <circle cx="295" cy="50" r="7"/>
+                                <circle cx="342" cy="50" r="7"/>
+                                <circle cx="389" cy="50" r="7"/>
+                                <circle cx="436" cy="50" r="7"/>
+                                <circle cx="470" cy="50" r="7"/>
+                            </g>
+                        </svg>
+                        <div class="cord-caption">Ten knots &middot; Ten women &middot; Ten yeses</div>
+                    </div>
+
+                    <p style="margin-top:1rem;">As you tie each knot, type the woman&rsquo;s name here. Just her name, or a short phrase &mdash; whatever rises.</p>
+
+                    <div class="knot-list">
+                        <div class="knot-row"><div class="knot-number">1</div><input type="text" class="knot-input" id="knot-1" placeholder="A woman whose yes made mine possible..."></div>
+                        <div class="knot-row"><div class="knot-number">2</div><input type="text" class="knot-input" id="knot-2" placeholder="A woman whose yes made mine possible..."></div>
+                        <div class="knot-row"><div class="knot-number">3</div><input type="text" class="knot-input" id="knot-3" placeholder="A woman whose yes made mine possible..."></div>
+                        <div class="knot-row"><div class="knot-number">4</div><input type="text" class="knot-input" id="knot-4" placeholder="A woman whose yes made mine possible..."></div>
+                        <div class="knot-row"><div class="knot-number">5</div><input type="text" class="knot-input" id="knot-5" placeholder="A woman whose yes made mine possible..."></div>
+                        <div class="knot-row"><div class="knot-number">6</div><input type="text" class="knot-input" id="knot-6" placeholder="A woman whose yes made mine possible..."></div>
+                        <div class="knot-row"><div class="knot-number">7</div><input type="text" class="knot-input" id="knot-7" placeholder="A woman whose yes made mine possible..."></div>
+                        <div class="knot-row"><div class="knot-number">8</div><input type="text" class="knot-input" id="knot-8" placeholder="A woman whose yes made mine possible..."></div>
+                        <div class="knot-row"><div class="knot-number">9</div><input type="text" class="knot-input" id="knot-9" placeholder="A woman whose yes made mine possible..."></div>
+                        <div class="knot-row"><div class="knot-number">10</div><input type="text" class="knot-input" id="knot-10" placeholder="A woman whose yes made mine possible..."></div>
+                    </div>
+                    <div class="save-status" id="knots-status">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4: REFLECTION -->
+        <div class="step-wrap">
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-badge">4</div>
+                    <div class="step-meta">
+                        <div class="step-label">Step Four &middot; This Week</div>
+                        <div class="step-title">A Quiet Reflection</div>
+                    </div>
+                </div>
+                <div class="step-body">
+                    <p>Before you close the session, sit for a few minutes with what rose in you. Two questions. No right answer. These reflections will be woven into your Symphony Portrait at the end of your journey.</p>
+
+                    <div class="reflection-block">
+                        <div class="reflection-prompt">
+                            <strong>Receive</strong>
+                            What name did you hear when you were still enough to listen?
+                        </div>
+                        <textarea class="reflection-textarea" id="reflection-1" placeholder="Write as little or as much as rises..."></textarea>
+                    </div>
+
+                    <div class="reflection-block">
+                        <div class="reflection-prompt">
+                            <strong>Notice</strong>
+                            Which yes, from which woman, is surprising you today?
+                        </div>
+                        <textarea class="reflection-textarea" id="reflection-2" placeholder="Write as little or as much as rises..."></textarea>
+                    </div>
+
+                    <div class="save-status" id="reflections-status">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MARK COMPLETE -->
+        <div class="complete-wrap">
+            <div class="complete-card" id="complete-card">
+                <div class="complete-label">A Moment of Closure</div>
+                <h2 class="complete-title" id="complete-title">Ready to close this session?</h2>
+                <p class="complete-desc" id="complete-desc">When you&rsquo;re ready, mark Session 01 complete to unlock Session 02. You can always return here to revisit anything.</p>
+                <button class="btn btn-primary btn-lg" id="mark-complete-btn" onclick="markComplete()">
+                    <span>&#10022;</span> Mark Session Complete
+                </button>
+                <div id="complete-done" class="complete-done" style="display:none">&#10003; Complete</div>
+            </div>
+        </div>
+
+        <!-- SESSION NAV -->
+        <div class="session-nav">
+            <a href="portal.html" class="session-nav-btn">
+                <span class="nav-btn-label">&larr; Back to</span>
+                <span class="nav-btn-title">Your Symphony</span>
+            </a>
+            <a href="session-02.html" class="session-nav-btn next disabled" id="next-session-btn">
+                <span class="nav-btn-label" id="next-label">Session 02 &middot; Locked</span>
+                <span class="nav-btn-title">Identity in Christ</span>
             </a>
         </div>
+
     </div>
 
     <footer>
@@ -266,5 +881,295 @@
         <p class="tagline">Fearfully &amp; wonderfully made</p>
         <p class="copyright">&copy; 2026 Whitty Works LLC &middot; All Rights Reserved</p>
     </footer>
+
+    <script>
+        const SUPABASE_URL = 'https://whpxmygwxdwktnwpzqkt.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const SESSION_NUM = 1;
+        const SAVE_DEBOUNCE_MS = 2000;
+
+        let currentUser = null;
+        let userProfile = null;
+        let knotsTimer = null;
+        let reflectionsTimer = null;
+
+        (async function init() {
+            const { data: { session } } = await sb.auth.getSession();
+            if (!session) {
+                // Not logged in -> send to portal login
+                window.location.href = 'portal.html';
+                return;
+            }
+            currentUser = session.user;
+            await loadProfile();
+
+            // Check access
+            if (!canAccessSession()) {
+                showLocked();
+                return;
+            }
+
+            await loadProgress();
+            showContent();
+            setupSaveListeners();
+            updateNextSessionButton();
+        })();
+
+        async function loadProfile() {
+            const { data } = await sb.from('profiles')
+                .select('has_full_access, grandfathered')
+                .eq('id', currentUser.id)
+                .maybeSingle();
+            userProfile = data || { has_full_access: false, grandfathered: false };
+        }
+
+        function hasFullAccess() {
+            return !!(userProfile && (userProfile.has_full_access || userProfile.grandfathered));
+        }
+
+        async function canAccessSession() {
+            // Free users cannot access Session 01+
+            if (!hasFullAccess()) return false;
+
+            // Grandfathered: always open
+            if (userProfile.grandfathered) return true;
+
+            // Paid: must have completed session 00
+            const { data } = await sb.from('session_progress')
+                .select('status')
+                .eq('user_id', currentUser.id)
+                .eq('session_num', 0)
+                .maybeSingle();
+
+            return data && data.status === 'complete';
+        }
+
+        function showLocked() {
+            document.getElementById('locked-screen').style.display = 'flex';
+            const desc = document.getElementById('locked-desc');
+            if (!hasFullAccess()) {
+                desc.innerHTML = 'Session 01 is part of the full Symphony of Grace. <a href="symphony-of-grace.html#purchase" style="color:var(--gold-dark);font-weight:500">Begin your journey here &rarr;</a>';
+            }
+            // else: default message about completing The Invitation first
+        }
+
+        function showContent() {
+            document.getElementById('session-content').style.display = 'block';
+        }
+
+        async function loadProgress() {
+            const { data } = await sb.from('session_progress')
+                .select('status, notes')
+                .eq('user_id', currentUser.id)
+                .eq('session_num', SESSION_NUM)
+                .maybeSingle();
+
+            if (!data) return;
+
+            const notes = data.notes || {};
+
+            // Restore knots
+            for (let i = 1; i <= 10; i++) {
+                const key = 'knot_' + i;
+                if (notes[key]) {
+                    document.getElementById('knot-' + i).value = notes[key];
+                }
+            }
+            if (hasAnyKnots(notes)) {
+                setStatus('knots-status', 'saved', '\u2726 Saved');
+            }
+
+            // Restore reflections
+            if (notes.reflection_receive) {
+                document.getElementById('reflection-1').value = notes.reflection_receive;
+            }
+            if (notes.reflection_notice) {
+                document.getElementById('reflection-2').value = notes.reflection_notice;
+            }
+            if (notes.reflection_receive || notes.reflection_notice) {
+                setStatus('reflections-status', 'saved', '\u2726 Saved');
+            }
+
+            if (data.status === 'complete') {
+                showCompleteState();
+            }
+        }
+
+        function hasAnyKnots(notes) {
+            for (let i = 1; i <= 10; i++) {
+                if (notes['knot_' + i]) return true;
+            }
+            return false;
+        }
+
+        function setupSaveListeners() {
+            // Knot inputs
+            for (let i = 1; i <= 10; i++) {
+                const input = document.getElementById('knot-' + i);
+                input.addEventListener('input', handleKnotsInput);
+                input.addEventListener('blur', function() {
+                    if (knotsTimer) {
+                        clearTimeout(knotsTimer);
+                        saveKnots();
+                    }
+                });
+            }
+            // Reflections
+            const r1 = document.getElementById('reflection-1');
+            const r2 = document.getElementById('reflection-2');
+            [r1, r2].forEach(el => {
+                el.addEventListener('input', handleReflectionsInput);
+                el.addEventListener('blur', function() {
+                    if (reflectionsTimer) {
+                        clearTimeout(reflectionsTimer);
+                        saveReflections();
+                    }
+                });
+            });
+        }
+
+        function setStatus(id, cls, text) {
+            const el = document.getElementById(id);
+            el.className = 'save-status' + (cls ? ' ' + cls : '');
+            el.innerHTML = text || '&nbsp;';
+        }
+
+        function handleKnotsInput() {
+            setStatus('knots-status', '', '');
+            if (knotsTimer) clearTimeout(knotsTimer);
+            knotsTimer = setTimeout(saveKnots, SAVE_DEBOUNCE_MS);
+        }
+
+        function handleReflectionsInput() {
+            setStatus('reflections-status', '', '');
+            if (reflectionsTimer) clearTimeout(reflectionsTimer);
+            reflectionsTimer = setTimeout(saveReflections, SAVE_DEBOUNCE_MS);
+        }
+
+        async function loadCurrentNotes() {
+            // Fetch current notes so we don't clobber other fields
+            const { data } = await sb.from('session_progress')
+                .select('notes')
+                .eq('user_id', currentUser.id)
+                .eq('session_num', SESSION_NUM)
+                .maybeSingle();
+            return (data && data.notes) || {};
+        }
+
+        async function saveKnots() {
+            knotsTimer = null;
+            setStatus('knots-status', 'saving', '\u23F3 Saving...');
+            try {
+                const notes = await loadCurrentNotes();
+                for (let i = 1; i <= 10; i++) {
+                    const val = document.getElementById('knot-' + i).value.trim();
+                    notes['knot_' + i] = val;
+                }
+                await upsertProgress(notes, 'in_progress');
+                setStatus('knots-status', 'saved', '\u2726 Saved');
+            } catch (e) {
+                console.warn('Knots save failed:', e);
+                setStatus('knots-status', '', 'Save failed \u2014 will retry on next edit');
+            }
+        }
+
+        async function saveReflections() {
+            reflectionsTimer = null;
+            setStatus('reflections-status', 'saving', '\u23F3 Saving...');
+            try {
+                const notes = await loadCurrentNotes();
+                notes.reflection_receive = document.getElementById('reflection-1').value.trim();
+                notes.reflection_notice = document.getElementById('reflection-2').value.trim();
+                await upsertProgress(notes, 'in_progress');
+                setStatus('reflections-status', 'saved', '\u2726 Saved');
+            } catch (e) {
+                console.warn('Reflections save failed:', e);
+                setStatus('reflections-status', '', 'Save failed \u2014 will retry on next edit');
+            }
+        }
+
+        async function upsertProgress(notes, status) {
+            const payload = {
+                user_id: currentUser.id,
+                session_num: SESSION_NUM,
+                status: status,
+                notes: notes
+            };
+            if (status === 'in_progress') {
+                payload.started_at = new Date().toISOString();
+            }
+            if (status === 'complete') {
+                payload.completed_at = new Date().toISOString();
+            }
+            const { error } = await sb.from('session_progress')
+                .upsert(payload, { onConflict: 'user_id,session_num' });
+            if (error) throw error;
+        }
+
+        async function markComplete() {
+            const btn = document.getElementById('mark-complete-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<span>&#8987;</span> Closing this session...';
+
+            // Flush any pending saves
+            if (knotsTimer) { clearTimeout(knotsTimer); await saveKnots(); }
+            if (reflectionsTimer) { clearTimeout(reflectionsTimer); await saveReflections(); }
+
+            try {
+                const notes = await loadCurrentNotes();
+                // Merge current inputs into notes
+                for (let i = 1; i <= 10; i++) {
+                    notes['knot_' + i] = document.getElementById('knot-' + i).value.trim();
+                }
+                notes.reflection_receive = document.getElementById('reflection-1').value.trim();
+                notes.reflection_notice = document.getElementById('reflection-2').value.trim();
+
+                await upsertProgress(notes, 'complete');
+
+                // Unlock Session 2
+                await sb.from('session_progress').upsert({
+                    user_id: currentUser.id,
+                    session_num: 2,
+                    status: 'unlocked'
+                }, { onConflict: 'user_id,session_num', ignoreDuplicates: true });
+
+                showCompleteState();
+            } catch (e) {
+                console.error('Mark complete failed:', e);
+                btn.disabled = false;
+                btn.innerHTML = '<span>&#10022;</span> Try Again';
+            }
+        }
+
+        function showCompleteState() {
+            const title = document.getElementById('complete-title');
+            const desc = document.getElementById('complete-desc');
+            const btn = document.getElementById('mark-complete-btn');
+            const done = document.getElementById('complete-done');
+
+            btn.style.display = 'none';
+            done.style.display = 'block';
+
+            title.textContent = 'Session 01 is complete.';
+            desc.innerHTML = 'Session 02 is waiting &mdash; <a href="session-02.html">Identity in Christ &rarr;</a>';
+
+            updateNextSessionButton(true);
+        }
+
+        function updateNextSessionButton(forceUnlock) {
+            const nextBtn = document.getElementById('next-session-btn');
+            const nextLabel = document.getElementById('next-label');
+            // Since only paid/grandfathered users reach this point, next is unlocked if session complete
+            // We can check the complete-done element state, or pass forceUnlock
+            if (forceUnlock) {
+                nextBtn.classList.remove('disabled');
+                nextBtn.href = 'session-02.html';
+                nextLabel.textContent = 'Session 02 \u00b7 Up Next';
+            }
+            // Otherwise leave as locked until Mark Complete fires
+        }
+    </script>
 </body>
 </html>
