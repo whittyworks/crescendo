@@ -1584,6 +1584,18 @@
             if (event === 'SIGNED_OUT') showLoginScreen();
         });
 
+        // URL hash handling: lets external pages (e.g. invitation.html) pre-select the
+        // right auth tab by linking to portal.html#signup or portal.html#signin
+        function applyHashTab() {
+            if (window.location.hash === '#signup') {
+                showTab('signup');
+            } else if (window.location.hash === '#signin') {
+                showTab('signin');
+            }
+        }
+        applyHashTab();
+        window.addEventListener('hashchange', applyHashTab);
+
         async function signIn() {
             const email = document.getElementById('signin-email').value.trim();
             const password = document.getElementById('signin-password').value;
