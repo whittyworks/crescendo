@@ -1734,5 +1734,21 @@
             if (msg) { msg.textContent = text; msg.style.color = color; msg.style.display = 'block'; }
         }
     </script>
+    <script>
+(function() {
+    const link = document.getElementById('portal-nav-link');
+    if (!link || typeof supabase === 'undefined') return;
+    try {
+        const sb = supabase.createClient(
+            'https://whpxmygwxdwktnwpzqkt.supabase.co',
+            'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km'
+        );
+        link.textContent = 'Sign In';
+        sb.auth.getSession().then(({ data: { session } }) => {
+            link.textContent = session ? 'Portal' : 'Sign In';
+        });
+    } catch (e) { /* already initialized elsewhere */ }
+})();
+</script>
 </body>
 </html>

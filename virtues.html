@@ -1800,4 +1800,25 @@
             <a href="mailto:bea@myholycrescendo.com">Contact</a>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 My Holy Crescendo. All rights reserved.</p>
+            <p>&copy; 2025 My Holy Crescendo. All rights reserved.</p>            <p class="copyright-text">Made with love in Oklahoma &mdash; for every daughter of the King.</p>
+        </div>
+    </footer>
+
+    <!-- Portal nav state: flips button text between "Sign In" and "Portal" -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+    (function() {
+        const link = document.getElementById('portal-nav-link');
+        if (!link) return;
+        const sb = supabase.createClient(
+            'https://whpxmygwxdwktnwpzqkt.supabase.co',
+            'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km'
+        );
+        link.textContent = 'Sign In';
+        sb.auth.getSession().then(({ data: { session } }) => {
+            link.textContent = session ? 'Portal' : 'Sign In';
+        });
+    })();
+    </script>
+</body>
+</html>
