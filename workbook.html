@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7QX21GDR7T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7QX21GDR7T');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome, Workbook Reader · My Holy Crescendo</title>
+    <meta name="description" content="If you're holding A Symphony of Grace in your hands, you've already stepped in. Welcome to the companion of your journey.">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="My Holy Crescendo - Fearfully & Wonderfully Made">
+    <meta property="og:description" content="A transformative journey discovering God's design in your body, mind, and spirit through A Symphony of Grace.">
+    <meta property="og:image" content="https://myholycrescendo.com/assets/img/og-image.png">
+    <meta property="og:url" content="https://myholycrescendo.com/workbook">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://myholycrescendo.com/assets/img/og-image.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <style>
+        /* ─────────────────────────────────────────────
+           WORKBOOK PAGE — CUSTOM STYLES
+           ───────────────────────────────────────────── */
+
+        /* Hero */
+        .workbook-hero {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 10rem 5% 5rem;
+            overflow: hidden;
+            background: linear-gradient(180deg,
+                rgba(253, 248, 243, 1) 0%,
+                rgba(245, 225, 218, 0.4) 45%,
+                rgba(232, 200, 114, 0.15) 100%);
+        }
+
+        .workbook-hero-content {
+            max-width: 720px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .workbook-hero .eyebrow {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .workbook-hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.4rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .workbook-hero .hero-intro {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-medium);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .workbook-hero .hero-signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--gold-dark);
+            margin-top: 2rem;
+        }
+
+        .workbook-hero .hero-signature .bea-name {
+            display: block;
+            font-size: 1.35rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Hero decorative flourishes */
+        .hero-flourish {
+            display: block;
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        .hero-flourish::before {
+            content: '❖';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--cream);
+            padding: 0 0.8rem;
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        /* Sunset orbs */
+        .sunset-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .orb-1 { top: 10%; left: 8%; width: 280px; height: 280px;
+                 background: radial-gradient(circle, rgba(245, 170, 120, 0.4), transparent 70%); }
+        .orb-2 { bottom: 15%; right: 10%; width: 320px; height: 320px;
+                 background: radial-gradient(circle, rgba(220, 180, 210, 0.35), transparent 70%); }
+        .orb-3 { top: 45%; left: 50%; transform: translateX(-50%); width: 400px; height: 400px;
+                 background: radial-gradient(circle, rgba(255, 220, 170, 0.3), transparent 70%); }
+
+        /* Gold flecks */
+        .hero-fleck {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0.6;
+            pointer-events: none;
+            animation: fleckFloat 8s ease-in-out infinite;
+        }
+        @keyframes fleckFloat {
+            0%, 100% { transform: translateY(0); opacity: 0.6; }
+            50% { transform: translateY(-15px); opacity: 1; }
+        }
+
+        /* ─────────────────────────────────────────────
+           BEGIN HERE (video section)
+           ───────────────────────────────────────────── */
+        .begin-here {
+            padding: 6rem 5%;
+            background: var(--cream);
+            position: relative;
+        }
+
+        .begin-here-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-eyebrow {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 1.25rem;
+            font-weight: 400;
+        }
+
+        .begin-here h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.6rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.02em;
+        }
+
+        .begin-here .section-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+        }
+
+        .begin-here .section-body {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            max-width: 650px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 820px;
+            margin: 0 auto;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(184, 148, 31, 0.25),
+                        0 0 0 1px rgba(212, 175, 55, 0.3);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .after-video-note {
+            margin-top: 2.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-medium);
+        }
+
+        /* ─────────────────────────────────────────────
+           PORTAL CTA
+           ───────────────────────────────────────────── */
+        .portal-cta {
+            padding: 7rem 5%;
+            background: linear-gradient(180deg,
+                var(--cream) 0%,
+                var(--cream-dark) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal-cta-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .portal-cta h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.6rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.02em;
+        }
+
+        .portal-cta .section-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 3rem;
+        }
+
+        .portal-offerings {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            text-align: left;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            line-height: 1.9;
+        }
+
+        .portal-offerings p {
+            margin-bottom: 1.25rem;
+        }
+
+        .portal-offerings .offering-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .portal-offerings .offering-list li {
+            padding: 0.6rem 0 0.6rem 2rem;
+            position: relative;
+        }
+
+        .portal-offerings .offering-list li::before {
+            content: '❖';
+            position: absolute;
+            left: 0;
+            top: 0.7rem;
+            color: var(--gold);
+            font-size: 0.85rem;
+        }
+
+        .portal-offerings .inclusive-note {
+            font-style: italic;
+            color: var(--text-medium);
+            text-align: center;
+            max-width: 540px;
+            margin: 2rem auto 0;
+            padding: 1.5rem 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.25);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+        }
+
+        /* Primary CTA Button */
+        .cta-button-primary {
+            display: inline-block;
+            padding: 1.1rem 2.8rem;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--cream);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 24px rgba(184, 148, 31, 0.3);
+            margin-top: 1rem;
+        }
+
+        .cta-button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(184, 148, 31, 0.45);
+        }
+
+        .secondary-link {
+            display: block;
+            margin-top: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--gold-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .secondary-link:hover {
+            color: var(--gold);
+        }
+
+        /* ─────────────────────────────────────────────
+           OTHER WAYS TO WALK WITH US
+           ───────────────────────────────────────────── */
+        .other-ways {
+            padding: 7rem 5%;
+            background: var(--cream);
+            position: relative;
+        }
+
+        .other-ways-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .other-ways-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .other-ways h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.4rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.02em;
+        }
+
+        .other-ways .section-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--text-medium);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .offering-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .offering-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px rgba(212, 175, 55, 0.2);
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .offering-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .offering-card p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-link {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border: 1px solid var(--gold);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .card-link:hover {
+            background: var(--gold);
+            color: var(--cream);
+        }
+
+        /* Inline Prelude signup */
+        .prelude-form {
+            margin-top: 1rem;
+        }
+
+        .prelude-form input[type="email"] {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 2px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            background: var(--cream);
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .prelude-form input[type="email"]:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .prelude-form button {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--cream);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .prelude-form button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(184, 148, 31, 0.3);
+        }
+
+        .form-error {
+            color: #b85450;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .form-error.show { display: block; }
+
+        /* ─────────────────────────────────────────────
+           CLOSING
+           ───────────────────────────────────────────── */
+        .closing-blessing {
+            padding: 6rem 5%;
+            text-align: center;
+            background: linear-gradient(180deg,
+                var(--cream) 0%,
+                rgba(245, 225, 218, 0.3) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .closing-content {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .closing-content .blessing {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+        }
+
+        .closing-content .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--gold-dark);
+            margin-top: 2rem;
+        }
+
+        .closing-content .signature .bea-name {
+            display: block;
+            font-size: 1.4rem;
+            margin-top: 0.4rem;
+        }
+
+        .closing-flourish {
+            display: block;
+            width: 140px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 2.5rem auto;
+            position: relative;
+        }
+
+        .closing-flourish::before {
+            content: '❖';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--cream);
+            padding: 0 0.8rem;
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        /* ─────────────────────────────────────────────
+           RESPONSIVE
+           ───────────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .workbook-hero { padding: 8rem 5% 4rem; }
+            .workbook-hero h1 { font-size: 2.2rem; }
+            .workbook-hero .hero-intro { font-size: 1.2rem; }
+            .begin-here, .portal-cta, .other-ways, .closing-blessing { padding: 4rem 5%; }
+            .begin-here h2, .portal-cta h2, .other-ways h2 { font-size: 2rem; }
+            .begin-here .section-subtitle, .portal-cta .section-subtitle { font-size: 1.15rem; }
+            .portal-offerings { font-size: 1.05rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .closing-content .blessing { font-size: 1.25rem; }
+            .orb-1, .orb-2, .orb-3 { width: 200px; height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════ -->
+<nav class="sans">
+    <a href="index.html" class="logo-link">
+        <img src="assets/img/logo-horizontal.svg" alt="My Holy Crescendo" class="logo-image">
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="symphony-of-grace.html">15-Session Journey</a></li>
+        <li><a href="personal-journey.html">1:1 Coaching</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle">Free Resources</a>
+            <ul class="dropdown-menu">
+                <li><a href="prelude.html">Free Prelude</a></li>
+                <li><a href="sacred-style-essence-quiz.html">Sacred Style Quiz</a></li>
+                <li><a href="mind-frameworks.html">Mind Frameworks Guide</a></li>
+                <li><a href="virtues.html">42 Virtues</a></li>
+                <li><a href="charisms.html">25 Charisms</a></li>
+            </ul>
+        </li>
+        <li><a href="portal.html">Portal</a></li>
+    </ul>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO — WELCOME, WORKBOOK READER
+     ═══════════════════════════════════════════ -->
+<section class="workbook-hero">
+    <div class="sunset-orb orb-1"></div>
+    <div class="sunset-orb orb-2"></div>
+    <div class="sunset-orb orb-3"></div>
+
+    <div class="hero-fleck" style="top: 22%; left: 18%;"></div>
+    <div class="hero-fleck" style="top: 35%; right: 22%; animation-delay: 1.5s;"></div>
+    <div class="hero-fleck" style="bottom: 30%; left: 25%; animation-delay: 2.5s;"></div>
+    <div class="hero-fleck" style="bottom: 20%; right: 30%; animation-delay: 3s;"></div>
+
+    <div class="workbook-hero-content">
+        <p class="eyebrow">For the Woman Holding the Workbook</p>
+        <h1>Welcome, friend.</h1>
+        <span class="hero-flourish"></span>
+        <p class="hero-intro">
+            If you are holding <em>A Symphony of Grace</em> in your hands,
+            you have already stepped in. You have already said yes to a journey
+            that most women spend their whole lives circling.
+        </p>
+        <p class="hero-intro" style="font-size: 1.25rem; margin-top: -0.5rem;">
+            I am so glad you are here.
+        </p>
+        <p class="hero-signature">
+            <em>Gratia et Gaudio,</em>
+            <span class="bea-name">Bea 🌼🐝</span>
+        </p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     BEGIN HERE — FREE TEACHING VIDEO
+     ═══════════════════════════════════════════ -->
+<section class="begin-here">
+    <div class="begin-here-container">
+        <p class="section-eyebrow">Start Here</p>
+        <h2>Begin Here</h2>
+        <p class="section-subtitle">A free teaching to open the door.</p>
+        <p class="section-body">
+            Before we go any further, I want to sit with you for a few minutes.
+            This short teaching is my gift to you — no sign-up required, no payment,
+            no commitment beyond your attention. It is the invitation I wish I could
+            extend in person to every woman who opens this workbook.
+        </p>
+
+        <div class="video-wrapper">
+            <!-- REPLACE WITH YOUR ACTUAL VIMEO EMBED URL -->
+            <iframe src="https://player.vimeo.com/video/YOUR_VIDEO_ID?h=YOUR_HASH&title=0&byline=0&portrait=0"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowfullscreen
+                    title="Begin Here — A Symphony of Grace"></iframe>
+        </div>
+
+        <p class="after-video-note">
+            When you are ready, keep scrolling.
+        </p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PORTAL CTA — CONTINUE IN THE PORTAL
+     ═══════════════════════════════════════════ -->
+<section class="portal-cta">
+    <div class="sunset-orb orb-1" style="opacity: 0.3;"></div>
+
+    <div class="portal-cta-container">
+        <p class="section-eyebrow">The Companion</p>
+        <h2>Continue in the Portal</h2>
+        <p class="section-subtitle">The digital companion to your workbook.</p>
+
+        <div class="portal-offerings">
+            <p>
+                The workbook you hold is the written journey.
+                The portal is the living one.
+            </p>
+            <p>Inside, you will find:</p>
+            <ul class="offering-list">
+                <li>Teaching videos for every session</li>
+                <li>Guided digital assessments that build your personal portrait</li>
+                <li>A private community of sisters walking the same path</li>
+                <li>The capstone experience: <em>Generate My Portrait</em></li>
+            </ul>
+            <p class="inclusive-note">
+                Every woman moves through Crescendo at her own pace.
+                Some will walk these fifteen sessions in fifteen weeks, with a group.
+                Others will take a year or more, alone, in the quiet of morning.
+                Both are holy. Both are welcome here.
+            </p>
+        </div>
+
+        <a href="portal.html?utm_source=workbook&utm_medium=print&utm_campaign=sog_launch" class="cta-button-primary">
+            Step Into the Portal
+        </a>
+
+        <a href="symphony-of-grace.html?utm_source=workbook&utm_medium=print&utm_campaign=sog_launch" class="secondary-link">
+            Learn more about A Symphony of Grace →
+        </a>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     OTHER WAYS TO WALK WITH US
+     ═══════════════════════════════════════════ -->
+<section class="other-ways">
+    <div class="other-ways-container">
+        <div class="other-ways-header">
+            <p class="section-eyebrow">Continue the Conversation</p>
+            <h2>Other Ways to Walk With Us</h2>
+            <p class="section-subtitle">The journey beyond the workbook.</p>
+        </div>
+
+        <div class="cards-grid">
+
+            <!-- Card 1: Prelude -->
+            <div class="offering-card">
+                <div class="card-icon">❖</div>
+                <h3>Prelude to a Symphony of Grace</h3>
+                <p>
+                    A free three-day email retreat — a gentle introduction
+                    to the work of Crescendo.
+                </p>
+                <form id="prelude-form" class="prelude-form">
+                    <input type="email" id="prelude-email" placeholder="your@email.com" required>
+                    <button type="submit" id="prelude-submit">Send the Prelude</button>
+                    <p class="form-error" id="prelude-error"></p>
+                </form>
+            </div>
+
+            <!-- Card 2: Grace Notes -->
+            <div class="offering-card">
+                <div class="card-icon">❖</div>
+                <h3>Grace Notes Podcast</h3>
+                <p>
+                    A podcast on faith, womanhood, and the sacred beauty
+                    of everyday life. Co-hosted with Sarah.
+                </p>
+                <a href="https://podcasters.spotify.com/pod/show/gracenotes" target="_blank" rel="noopener" class="card-link">
+                    Listen on Spotify
+                </a>
+            </div>
+
+            <!-- Card 3: 1:1 Coaching -->
+            <div class="offering-card">
+                <div class="card-icon">❖</div>
+                <h3>1:1 Coaching with Bea</h3>
+                <p>
+                    Personal guidance through this journey, or any chapter
+                    of your life where you long for a companion.
+                </p>
+                <a href="personal-journey.html?utm_source=workbook&utm_medium=print&utm_campaign=sog_launch" class="card-link">
+                    Book a Conversation
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CLOSING BLESSING
+     ═══════════════════════════════════════════ -->
+<section class="closing-blessing">
+    <div class="sunset-orb orb-2" style="opacity: 0.35;"></div>
+
+    <div class="closing-content">
+        <p class="blessing">
+            Whether you walk these pages alone or join us online —
+            know that you are deeply welcome here.
+        </p>
+        <span class="closing-flourish"></span>
+        <p class="signature">
+            <em>Gratia et Gaudio,</em>
+            <span class="bea-name">Bea 🌼🐝</span>
+        </p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════ -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-brand">
+            <h3 class="script">My Holy Crescendo</h3>
+            <p class="footer-tagline">fearfully &amp; wonderfully made</p>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="symphony-of-grace.html">15-Session Journey</a>
+            <a href="prelude.html">Free Prelude</a>
+            <a href="portal.html">Portal</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 My Holy Crescendo. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+
+<!-- ═══════════════════════════════════════════
+     PRELUDE FORM SUBMISSION (MailerLite)
+     ═══════════════════════════════════════════ -->
+<script>
+    document.getElementById('prelude-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const submitBtn = document.getElementById('prelude-submit');
+        const errorDiv = document.getElementById('prelude-error');
+        const email = document.getElementById('prelude-email').value.trim();
+
+        // Basic email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+            errorDiv.textContent = 'Please enter a valid email address.';
+            errorDiv.classList.add('show');
+            return;
+        }
+
+        errorDiv.classList.remove('show');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        const formData = new FormData();
+        formData.append('fields[email]', email);
+        formData.append('ml-submit', '1');
+        formData.append('anticsrf', 'true');
+
+        fetch('https://assets.mailerlite.com/jsonp/1906810/forms/170526439362267129/subscribe', {
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors'
+        })
+        .then(() => {
+            setTimeout(() => {
+                window.location.href = 'thank-you.html';
+            }, 500);
+        })
+        .catch((error) => {
+            console.log('Form submission completed');
+            setTimeout(() => {
+                window.location.href = 'thank-you.html';
+            }, 500);
+        });
+    });
+</script>
+
+</body>
+</html>
