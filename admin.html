@@ -965,7 +965,7 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    model: 'claude-sonnet-4-6',
+                    model: 'claude-sonnet-4-6-20260218',
                     max_tokens: 4096,
                     system: SCORE_SYSTEM_PROMPT,
                     messages: [{ role: 'user', content: buildScorePrompt(profile) }]
