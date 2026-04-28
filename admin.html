@@ -482,12 +482,14 @@
                         full_name: '',
                         last_sign_in_at: null,
                         profile: null,
-                        journal: null
+                        journal: null,
+                        score: null
                     };
                 }
                 if (row.email) byUser[row.user_id].email = row.email;
                 if (row.assessment === 'symphony_profile') byUser[row.user_id].profile = row.result_data;
                 if (row.assessment === 'reflection_journal') byUser[row.user_id].journal = row.result_data;
+                if (row.assessment === 'symphony_score') byUser[row.user_id].score = row.result_data;
             });
 
             // Merge auth user data (full_name, last sign-in). Includes users
@@ -495,7 +497,7 @@
             if (Array.isArray(authUsers)) {
                 for (const u of authUsers) {
                     if (!byUser[u.id]) {
-                        byUser[u.id] = { email: u.email || null, full_name: '', last_sign_in_at: null, profile: null, journal: null };
+                        byUser[u.id] = { email: u.email || null, full_name: '', last_sign_in_at: null, profile: null, journal: null, score: null };
                     }
                     byUser[u.id].full_name = u.full_name || '';
                     byUser[u.id].last_sign_in_at = u.last_sign_in_at || null;
@@ -621,6 +623,42 @@
             `;
             list.appendChild(card);
         });
+
+        // Rehydrate any saved scores into the DOM so they survive page refresh
+        userIds.forEach(uid => {
+            const sc = byUser[uid] && byUser[uid].score;
+            if (sc && sc.text) {
+                restoreScoreToCard(uid, sc.text, sc.music_brief || '');
+            }
+        });
+    }
+
+    // Restore a previously-saved score into a participant card's score panel.
+    // Called after renderDashboard builds DOM, so getElementById can find the panel.
+    function restoreScoreToCard(uid, text, brief) {
+        window.scoreTexts = window.scoreTexts || {};
+        window.musicBriefs = window.musicBriefs || {};
+        window.scoreTexts[uid] = text;
+        window.musicBriefs[uid] = brief;
+
+        const panel = document.getElementById('score-panel-' + uid);
+        const output = document.getElementById('score-output-' + uid);
+        const copyRow = document.getElementById('score-copy-row-' + uid);
+        const briefPanel = document.getElementById('music-brief-panel-' + uid);
+        const briefTextEl = document.getElementById('music-brief-text-' + uid);
+        const badge = document.getElementById('save-score-badge-' + uid);
+        const generateBtn = document.getElementById('generate-score-btn-' + uid);
+        if (!panel || !output) return;
+
+        panel.style.display = 'block';
+        renderScoreOutput(output, text);
+        if (copyRow) copyRow.style.display = 'flex';
+        if (brief && briefPanel && briefTextEl) {
+            briefTextEl.textContent = brief;
+            briefPanel.style.display = 'block';
+        }
+        if (badge) badge.style.display = 'inline-block';
+        if (generateBtn) generateBtn.innerHTML = '&#10022; Regenerate Score';
     }
 
     // Tiny escape helpers for safe interpolation into innerHTML.
@@ -805,7 +843,7 @@
             <div class="opus-summary">${opusText}</div>
             <div class="score-actions">
                 ${opusCopyText ? `<button class="copy-btn" onclick="copyOpus(this, \`${opusCopyText.replace(/`/g,'\\`')}\`)">Copy for Udio &rarr;</button>` : ''}
-                <button class="generate-score-btn" onclick="generateScoreForParticipant(this, '${uid}', '${name}')">&#10022; Generate Score</button>
+                <button class="generate-score-btn" id="generate-score-btn-${uid}" onclick="generateScoreForParticipant(this, '${uid}', '${name}')">&#10022; Generate Score</button>
             </div>
             <div class="score-panel" id="score-panel-${uid}" style="display:none;">
                 <h4>&#9834; Symphony Score &mdash; ${name}</h4>
