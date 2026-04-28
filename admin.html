@@ -960,19 +960,29 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
         const userData = window.adminProfiles[uid];
         const profile = userData && userData.profile ? userData.profile : {};
 
+        const requestBody = {
+            model: 'claude-haiku-4-5-20251001',
+            max_tokens: 4096,
+            system: SCORE_SYSTEM_PROMPT,
+            messages: [{ role: 'user', content: buildScorePrompt(profile) }]
+        };
+
+        console.log('[Score Gen] Request body:', requestBody);
+
         try {
             const response = await fetch('/.netlify/functions/claude-proxy', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    model: 'claude-sonnet-4-5-20250929',
-                    max_tokens: 4096,
-                    system: SCORE_SYSTEM_PROMPT,
-                    messages: [{ role: 'user', content: buildScorePrompt(profile) }]
-                })
+                body: JSON.stringify(requestBody)
             });
             const data = await response.json();
-            if (!response.ok || data.error) throw new Error(data.error?.message || 'Generation failed');
+            console.log('[Score Gen] Response status:', response.status);
+            console.log('[Score Gen] Response data:', data);
+
+            if (!response.ok || data.error) {
+                const fullMsg = (data.error && (data.error.message || data.error)) || 'Generation failed';
+                throw new Error(typeof fullMsg === 'string' ? fullMsg : JSON.stringify(fullMsg));
+            }
             const rawText = data.content?.[0]?.text || '';
             if (!rawText) throw new Error('No content returned');
 
@@ -998,7 +1008,8 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
             btn.textContent = 'Regenerate Score';
             btn.disabled = false;
         } catch(e) {
-            output.innerHTML = '<div class="score-loading" style="color:#c44569;">Error: ' + e.message + '</div>';
+            console.error('[Score Gen] Error:', e);
+            output.innerHTML = '<div class="score-loading" style="color:#c44569;">Error: ' + e.message + '<br><span style="font-size:0.75rem;opacity:0.7;">(Open browser console for full details)</span></div>';
             btn.textContent = 'Try Again';
             btn.disabled = false;
         }
