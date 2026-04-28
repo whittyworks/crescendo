@@ -980,6 +980,8 @@ After the six sections, generate a three-sentence brief for the Suno music model
 
 Wrap the brief between <<<MUSIC_BRIEF>>> and <<<END>>> on their own lines.
 
+SECTION ORDER (strict): Output the sections in this exact sequence: DAUGHTER, then INSTRUMENT, then MOVEMENTS, then THEME, then SYMPHONY, then SEND. Do not skip ahead. Do not backtrack. Once you have written the SEND section, you are finished — do not return to earlier sections, do not output any further headings, do not add a postscript. SEND is the final word of the response.
+
 No preamble. No commentary. No closing outside the six sections. Begin with the word DAUGHTER on its own line.`;
 
     function buildScorePrompt(profile) {
@@ -1146,24 +1148,52 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
     }
 
     function renderScoreOutput(container, text) {
-        let html = '';
-        for (let i = 0; i < SCORE_SECTIONS.length; i++) {
-            const s = SCORE_SECTIONS[i];
-            const headingRegex = new RegExp('^' + s.key + '\\s*$', 'mi');
-            const match = headingRegex.exec(text);
-            if (!match) continue;
-            let sectionText = text.slice(match.index + match[0].length).trim();
-            const nextKeys = SCORE_SECTIONS.slice(i+1).map(x=>x.key);
-            if (nextKeys.length) {
-                const endPattern = new RegExp('^(' + nextKeys.map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|') + ')\\s*$','mi');
-                const endMatch = endPattern.exec(sectionText);
-                if (endMatch) sectionText = sectionText.slice(0, endMatch.index).trim();
+        // Find every occurrence of every section heading in the text.
+        // Each entry: { key, label, start, end, contentStart }
+        const allHeadings = [];
+        SCORE_SECTIONS.forEach(s => {
+            const re = new RegExp('^' + s.key + '\\s*$', 'gmi');
+            let m;
+            while ((m = re.exec(text)) !== null) {
+                allHeadings.push({
+                    key: s.key,
+                    label: s.label,
+                    start: m.index,
+                    contentStart: m.index + m[0].length
+                });
             }
-            html += '<div class="score-section-title">' + s.label + '</div>';
-            sectionText.split(/\n\n+/).map(p=>p.trim()).filter(Boolean).forEach(para => {
+        });
+        // Sort by position so we know what each section's content extends to
+        allHeadings.sort((a, b) => a.start - b.start);
+
+        // For each heading, content runs until the next heading (any heading)
+        for (let i = 0; i < allHeadings.length; i++) {
+            const next = allHeadings[i + 1];
+            allHeadings[i].content = text.slice(
+                allHeadings[i].contentStart,
+                next ? next.start : text.length
+            ).trim();
+        }
+
+        // Pick FIRST occurrence of each canonical section, render in canonical order
+        const seen = new Set();
+        const sectionsToRender = [];
+        SCORE_SECTIONS.forEach(s => {
+            const found = allHeadings.find(h => h.key === s.key && !seen.has(h.key));
+            if (found && found.content) {
+                seen.add(s.key);
+                sectionsToRender.push({ label: s.label, content: found.content });
+            }
+        });
+
+        let html = '';
+        sectionsToRender.forEach(sec => {
+            html += '<div class="score-section-title">' + sec.label + '</div>';
+            sec.content.split(/\n\n+/).map(p=>p.trim()).filter(Boolean).forEach(para => {
                 html += '<p class="score-para">' + para + '</p>';
             });
-        }
+        });
+
         container.innerHTML = html || '<p class="score-para">' + text + '</p>';
     }
 
