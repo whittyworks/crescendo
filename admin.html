@@ -1242,6 +1242,8 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
         color: #2C2416;
         line-height: 1.9;
         margin-bottom: 1.1rem;
+        orphans: 3;
+        widows: 3;
     }
     p:last-child { margin-bottom: 0; }
     .divider {
@@ -1271,8 +1273,15 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
         margin-top: 0.4rem;
     }
     @media print {
-        body { padding: 1.5rem 2rem; }
+        body {
+            padding: 1.5rem 2rem;
+            max-width: none;
+        }
         @page { margin: 1.5cm; }
+        h2 { page-break-after: avoid; break-after: avoid; }
+        .section-header { page-break-after: avoid; break-after: avoid; }
+        .section { page-break-inside: auto; }
+        .footer { page-break-before: avoid; break-before: avoid; }
     }
 </style>
 </head>
@@ -1288,7 +1297,22 @@ ${sectionsHtml}
     My Holy Crescendo
     <div class="footer-sub">Fearfully &amp; Wonderfully Made</div>
 </div>
-<script>window.onload = function() { window.print(); }<\/script>
+<script>
+  function triggerPrint() {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function() {
+        setTimeout(function() { window.print(); }, 250);
+      });
+    } else {
+      setTimeout(function() { window.print(); }, 800);
+    }
+  }
+  if (document.readyState === 'complete') {
+    triggerPrint();
+  } else {
+    window.addEventListener('load', triggerPrint);
+  }
+<\/script>
 </body>
 </html>`;
 
