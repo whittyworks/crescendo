@@ -1354,9 +1354,15 @@ ${sectionsHtml}
 </body>
 </html>`;
 
-        const win = window.open('', '_blank');
-        win.document.write(html);
-        win.document.close();
+        const blob = new Blob([html], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const win = window.open(url, '_blank');
+        // Revoke the URL after the window has had time to load it.
+        // Don't auto-close the window — Chrome needs it alive to finish
+        // serializing multi-page PDFs to disk after the user clicks Save.
+        if (win) {
+            setTimeout(function() { URL.revokeObjectURL(url); }, 60000);
+        }
     }
 
     // ── Sign out ──────────────────────────────────────────────
