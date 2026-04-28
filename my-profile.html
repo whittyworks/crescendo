@@ -227,6 +227,10 @@
         }
         .name-from-lord input:focus { border-bottom-color: var(--gold); }
         .name-from-lord input::placeholder { color: rgba(92,81,66,0.3); font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; }
+        .name-from-lord .field-help {
+            margin-top: 0.85rem; text-align: center; max-width: 480px;
+            margin-left: auto; margin-right: auto;
+        }
 
         /* ── Group labels / dividers ── */
         .group-label {
@@ -252,6 +256,15 @@
         }
         .field-group input:focus { border-bottom-color: var(--gold); }
         .field-group input::placeholder { color: rgba(92,81,66,0.3); font-style: italic; }
+        .field-help {
+            font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; font-style: italic;
+            color: var(--text-medium); line-height: 1.45; margin-top: 2px;
+        }
+        .section-framing {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic;
+            color: var(--text-medium); line-height: 1.6; margin: -0.5rem 0 1.5rem 0;
+            padding: 0 0.25rem;
+        }
 
         /* ── Multi-entry (strengths, charisms, etc.) ── */
         .multi-entries { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.75rem; }
@@ -442,36 +455,44 @@
 
             <!-- Foundation -->
             <div class="group-label">Foundation</div>
+            <div class="section-framing">Two truths to anchor you: what is true of every daughter of the King, and the name He calls you alone.</div>
+
             <div class="field-grid-3">
                 <div class="field-group">
                     <label>Given Name</label>
                     <input type="text" id="p_name_given" placeholder="e.g. Sarah Margaret" oninput="markUnsaved()">
+                    <div class="field-help">The name your parents gave you at birth.</div>
                 </div>
                 <div class="field-group">
                     <label>Name You Live Under</label>
                     <input type="text" id="p_name_lived" placeholder="Optional &mdash; e.g. married or chosen name" oninput="markUnsaved()">
+                    <div class="field-help">Only if different from your given name &mdash; a married, chosen, or religious name.</div>
                 </div>
                 <div class="field-group">
-                    <label>Confirmation or Patron Saint Name</label>
+                    <label>Confirmation Name</label>
                     <input type="text" id="p_name_confirmation" placeholder="e.g. Th&eacute;r&egrave;se" oninput="markUnsaved()">
+                    <div class="field-help">The patron saint you took at Confirmation.</div>
                 </div>
             </div>
 
-            <!-- Name from the Father (centered hero field) -->
-            <div class="name-from-lord">
-                <label>My Name from the Father</label>
-                <input type="text" id="p_name_lord" placeholder="e.g. Beloved, My Joy, Cherished" oninput="markUnsaved()">
-            </div>
-
-            <div class="field-grid-2" style="margin-bottom:0;">
+            <div class="field-grid-2">
                 <div class="field-group">
                     <label>My Identity in Christ</label>
                     <input type="text" id="p_identity" placeholder="e.g. Daughter of the King, Redeemed" oninput="markUnsaved()">
+                    <div class="field-help">What is true of you because of what Christ has done &mdash; what every daughter of the King can claim.</div>
                 </div>
                 <div class="field-group">
                     <label>My Anchor Verse</label>
                     <input type="text" id="p_anchor_verse" placeholder="e.g. Psalm 139:14, Isaiah 43:1" oninput="markUnsaved()">
+                    <div class="field-help">A Scripture that has marked you through this program.</div>
                 </div>
+            </div>
+
+            <!-- Name from the Father (centered hero field — the climax of Foundation) -->
+            <div class="name-from-lord">
+                <label>My Name from the Father</label>
+                <input type="text" id="p_name_lord" placeholder="e.g. Beloved, My Joy, Cherished" oninput="markUnsaved()">
+                <div class="field-help">The personal, intimate name He spoke to you in the silence of Session 2 &mdash; yours alone.</div>
             </div>
 
             <div class="profile-divider"></div>

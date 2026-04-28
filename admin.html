@@ -273,12 +273,51 @@
         .detail-val {
             font-size: 1rem;
             color: var(--text-dark);
+            cursor: pointer;
+            border-bottom: 1px dashed transparent;
+            transition: border-color 0.15s, color 0.15s;
+            flex: 1;
+        }
+        .detail-val:hover {
+            border-bottom-color: rgba(212,175,55,0.4);
+            color: var(--gold-dark);
         }
         .detail-val.empty {
             font-style: italic;
             color: rgba(92,81,66,0.4);
             font-size: 0.85rem;
         }
+        .detail-val.empty:hover { color: var(--gold-dark); }
+        .detail-edit { display: flex; gap: 0.5rem; align-items: center; flex: 1; }
+        .detail-edit input[type="text"] {
+            flex: 1;
+            border: none;
+            border-bottom: 1px solid var(--gold);
+            background: rgba(212,175,55,0.06);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--text-dark);
+            padding: 4px 6px;
+            outline: none;
+        }
+        .detail-edit button {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border: 1px solid rgba(212,175,55,0.4);
+            background: transparent;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .detail-edit .edit-save {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+        }
+        .detail-edit .edit-save:hover { background: var(--gold-dark); }
+        .detail-edit .edit-cancel:hover { background: rgba(0,0,0,0.04); }
 
         /* journal entries truncated */
         .journal-entry {
@@ -753,9 +792,17 @@
         function fieldRow(key, data) {
             const val = data[key];
             const hasVal = val && val.trim && val.trim() !== '';
-            return `<div class="detail-row">
+            // Escape value for safe insertion into both HTML and an attribute
+            const safeVal = (val || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+            return `<div class="detail-row" data-key="${key}" data-uid="${uid}">
                 <span class="detail-key">${PROFILE_LABELS[key]}</span>
-                <span class="detail-val ${hasVal ? '' : 'empty'}">${hasVal ? val : '&mdash; not filled in'}</span>
+                <span class="detail-val ${hasVal ? '' : 'empty'}" id="val-${uid}-${key}"
+                      onclick="startEditField('${uid}','${key}')" title="Click to edit">${hasVal ? safeVal : '&mdash; not filled in'}</span>
+                <span class="detail-edit" id="edit-${uid}-${key}" style="display:none;">
+                    <input type="text" id="input-${uid}-${key}" value="${safeVal}" onkeydown="onEditFieldKey(event, '${uid}','${key}')">
+                    <button class="edit-save" onclick="saveFieldEdit('${uid}','${key}')">Save</button>
+                    <button class="edit-cancel" onclick="cancelFieldEdit('${uid}','${key}')">Cancel</button>
+                </span>
             </div>`;
         }
 
@@ -1139,6 +1186,74 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
             btn.classList.add('copied');
             setTimeout(() => { btn.textContent = 'Copy Brief for Suno \u2192'; btn.classList.remove('copied'); }, 2000);
         });
+    }
+
+    // ── Inline edit for participant profile fields ──────────────
+    // Lets admin click any value in the detail panel, edit it, save back
+    // to Supabase. Used to fix swapped fields, typos, etc.
+    function startEditField(uid, key) {
+        // Close any other open edits in this card so only one is editing at a time
+        document.querySelectorAll('.detail-edit').forEach(el => {
+            const id = el.id;
+            if (id !== 'edit-' + uid + '-' + key) {
+                el.style.display = 'none';
+                const valId = id.replace('edit-', 'val-');
+                const valEl = document.getElementById(valId);
+                if (valEl) valEl.style.display = '';
+            }
+        });
+        document.getElementById('val-' + uid + '-' + key).style.display = 'none';
+        const editEl = document.getElementById('edit-' + uid + '-' + key);
+        editEl.style.display = 'flex';
+        const input = document.getElementById('input-' + uid + '-' + key);
+        input.focus();
+        input.select();
+    }
+
+    function cancelFieldEdit(uid, key) {
+        document.getElementById('edit-' + uid + '-' + key).style.display = 'none';
+        document.getElementById('val-' + uid + '-' + key).style.display = '';
+    }
+
+    function onEditFieldKey(e, uid, key) {
+        if (e.key === 'Enter') { e.preventDefault(); saveFieldEdit(uid, key); }
+        else if (e.key === 'Escape') { e.preventDefault(); cancelFieldEdit(uid, key); }
+    }
+
+    async function saveFieldEdit(uid, key) {
+        const input = document.getElementById('input-' + uid + '-' + key);
+        const newVal = input.value;
+        const userData = window.adminProfiles[uid];
+        if (!userData) return;
+        const profile = userData.profile || {};
+
+        // Build the updated profile object
+        const updated = Object.assign({}, profile, { [key]: newVal });
+
+        try {
+            const { error } = await sb.from('user_results').upsert(
+                { user_id: uid, assessment: 'symphony_profile', result_data: updated, updated_at: new Date().toISOString() },
+                { onConflict: 'user_id,assessment' }
+            );
+            if (error) throw error;
+
+            // Update in-memory cache
+            userData.profile = updated;
+
+            // Update the visible value
+            const valEl = document.getElementById('val-' + uid + '-' + key);
+            const trimmed = (newVal || '').trim();
+            if (trimmed) {
+                valEl.textContent = trimmed;
+                valEl.classList.remove('empty');
+            } else {
+                valEl.innerHTML = '&mdash; not filled in';
+                valEl.classList.add('empty');
+            }
+            cancelFieldEdit(uid, key);
+        } catch(e) {
+            alert('Could not save: ' + e.message);
+        }
     }
 
     // ── Save score to participant profile ────────────────────
