@@ -395,24 +395,30 @@
 
     // Profile field labels for display
     const PROFILE_LABELS = {
-        p_name_lord:      'Name from the Lord',
-        p_identity:       'Identity in Christ',
-        p_word_spoken:    'Word Spoken Over Me',
-        p_color_season:   'Color Season',
-        p_style_essence:  'Style Essence',
-        p_silhouette:     'Silhouette',
-        p_love_primary:   'Primary Love Language (Receiving)',
-        p_love_secondary: 'Secondary Love Language (Receiving)',
-        p_love_give1:     'How You Give Love (Primary)',
-        p_love_give2:     'How You Give Love (Secondary)',
-        p_love_orientation: 'Love Orientation',
-        p_temperament:    'Temperament',
-        p_type:           'Personality Type',
+        p_name_given:        'Given Name',
+        p_name_lived:        'Name She Lives Under',
+        p_name_confirmation: 'Confirmation Name',
+        p_name_lord:         'Name from the Father',
+        p_identity:          'Identity in Christ',
+        p_anchor_verse:      'Anchor Verse',
+        p_color_season:      'Color Season',
+        p_style_essence:     'Style Essence',
+        p_silhouette:        'Silhouette',
+        p_love_primary:      'Primary Love Language (Receiving)',
+        p_love_secondary:    'Secondary Love Language (Receiving)',
+        p_love_give1:        'How You Give Love (Primary)',
+        p_love_give2:        'How You Give Love (Secondary)',
+        p_love_orientation:  'Love Orientation',
+        p_temperament:       'Temperament',
+        p_type:              'Personality Type',
         p_str1: 'Gift of Grace 1', p_str2: 'Gift of Grace 2', p_str3: 'Gift of Grace 3',
         p_str4: 'Gift of Grace 4', p_str5: 'Gift of Grace 5',
         p_vir1: 'Virtue 1',  p_vir2: 'Virtue 2',  p_vir3: 'Virtue 3',
         p_vir4: 'Virtue 4',  p_vir5: 'Virtue 5',
         p_char1: 'Charism 1', p_char2: 'Charism 2', p_char3: 'Charism 3',
+        p_music1: 'Sounds That Move Her 1',
+        p_music2: 'Sounds That Move Her 2',
+        p_music3: 'Sounds That Move Her 3',
     };
 
     const JOURNAL_LABELS = {
@@ -700,10 +706,11 @@
 
     function renderDetail(profile, journal, name, uid) {
         // Symphony profile section
-        const coreFields = ['p_name_lord','p_identity','p_word_spoken','p_color_season','p_style_essence','p_silhouette','p_love_primary','p_love_secondary','p_temperament','p_type'];
+        const coreFields = ['p_name_given','p_name_lived','p_name_confirmation','p_name_lord','p_identity','p_anchor_verse','p_color_season','p_style_essence','p_silhouette','p_love_primary','p_love_secondary','p_temperament','p_type'];
         const strFields  = ['p_str1','p_str2','p_str3','p_str4','p_str5'];
         const virFields  = ['p_vir1','p_vir2','p_vir3','p_vir4','p_vir5'];
         const charFields = ['p_char1','p_char2','p_char3'];
+        const musicFields = ['p_music1','p_music2','p_music3'];
 
         function fieldRow(key, data) {
             const val = data[key];
@@ -716,6 +723,12 @@
 
         // Build opus summary string
         const opusParts = [];
+        const given = profile.p_name_given; if (given) opusParts.push('Given name: ' + given);
+        const lived = profile.p_name_lived; if (lived) opusParts.push('Name she lives under: ' + lived);
+        const conf = profile.p_name_confirmation; if (conf) opusParts.push('Confirmation name: ' + conf);
+        const nameL = profile.p_name_lord; if (nameL) opusParts.push('Name from the Father: ' + nameL);
+        const ident = profile.p_identity; if (ident) opusParts.push('Identity: ' + ident);
+        const anchor = profile.p_anchor_verse; if (anchor) opusParts.push('Anchor verse: ' + anchor);
         const season = profile.p_color_season; if (season) opusParts.push('Color season: ' + season);
         const style = profile.p_style_essence; if (style) opusParts.push('Style essence: ' + style);
         const sil = profile.p_silhouette; if (sil) opusParts.push('Silhouette: ' + sil);
@@ -731,8 +744,8 @@
         if (virs.length) opusParts.push('Virtues: ' + virs.join(', '));
         const chars = charFields.map(f => profile[f]).filter(Boolean);
         if (chars.length) opusParts.push('Charisms: ' + chars.join(', '));
-        const nameL = profile.p_name_lord; if (nameL) opusParts.push('Name from the Lord: ' + nameL);
-        const ident = profile.p_identity; if (ident) opusParts.push('Identity: ' + ident);
+        const music = musicFields.map(f => profile[f]).filter(Boolean);
+        if (music.length) opusParts.push('Sounds that move her: ' + music.join(', '));
 
         const opusText = opusParts.length
             ? opusParts.map(p => '<strong>' + p.split(':')[0] + ':</strong>' + p.split(':').slice(1).join(':')).join('<br>')
@@ -782,6 +795,8 @@
                 ${virFields.map(f => fieldRow(f, profile)).join('')}
                 <br>
                 ${charFields.map(f => fieldRow(f, profile)).join('')}
+                <br>
+                ${musicFields.map(f => fieldRow(f, profile)).join('')}
             </div>
         </div>
 
@@ -795,6 +810,11 @@
             <div class="score-panel" id="score-panel-${uid}" style="display:none;">
                 <h4>&#9834; Symphony Score &mdash; ${name}</h4>
                 <div class="score-output" id="score-output-${uid}"></div>
+                <div class="music-brief-panel" id="music-brief-panel-${uid}" style="display:none; margin-top:1.5rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.06); border:1px dashed rgba(212,175,55,0.35); border-radius:8px;">
+                    <div style="font-family:'Montserrat',sans-serif; font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-dark); margin-bottom:0.5rem;">&#9836; Music Brief for Suno &mdash; admin only</div>
+                    <div class="music-brief-text" id="music-brief-text-${uid}" style="font-family:'Cormorant Garamond',serif; font-size:1.02rem; font-style:italic; color:var(--text-medium); line-height:1.55; margin-bottom:0.75rem;"></div>
+                    <button class="copy-btn" id="copy-brief-btn-${uid}" onclick="copyMusicBrief('${uid}')" style="font-size:0.7rem; padding:0.5rem 1rem;">Copy Brief for Suno &rarr;</button>
+                </div>
                 <div class="score-actions" id="score-copy-row-${uid}" style="display:none;">
                     <button class="copy-score-btn" id="copy-score-btn-${uid}" onclick="copyScore('${uid}')">Copy Score Text</button>
                     <button class="generate-score-btn" id="save-score-btn-${uid}" onclick="saveScoreForParticipant('${uid}', '${name}')">&#10022; Save to Profile</button>
@@ -830,38 +850,63 @@
     }
 
     // ── Generate Symphony Score ───────────────────────────────
-    const SCORE_SYSTEM_PROMPT = `You are a sacred witness — a wise, tender spiritual director writing a woman's Symphony Score: a personal document addressed directly to her reflecting who God created her to be and how to live it.
+    const SCORE_SYSTEM_PROMPT = `You are a sacred witness — a wise, tender spiritual director writing a woman's Symphony Score: a personal document addressed directly to her, reflecting who God created her to be and how to live it. She has just completed "A Symphony of Grace," a 15-week formation program rooted in Psalm 139:14 (RSV2CE): "I praise thee, for I am fearfully and wonderfully made."
 
-VOICE: Speak directly to her ("you", never "she"). Be warm, specific, theologically grounded — never clinical or generic. Draw on her frameworks as lenses, not labels. Never say "as an INFP you tend to..." — say what is true about her specifically. Hold wounds with tenderness, gifts with reverence. End aimed outward — she is known so she can give herself away.
+VOICE: Speak directly to her ("you," never "she"). Warm, contemplative, beautiful. Concrete over abstract — a single physical detail outperforms three thematic statements. Use her actual data — if her color season is Soft Autumn, name what Soft Autumn evokes (golden hour, harvest, low light), not "your colors are unique." Draw on her frameworks as lenses, not labels. Never say "as an INFP you tend to..." — say what is true about her specifically. Hold wounds with tenderness, gifts with reverence. End aimed outward — she is known so she can give herself away. All Scripture in RSV2CE; three or four passages woven through the whole score, not one per section.
 
-FRAME: God is the Composer. She is His symphony — once in the universe, never repeated. Her identity is daughter of the King — named, claimed, beloved. Body, mind, spirit are movements in one piece of music. Charisms and virtues are entrusted gifts. Wounds are where Christ's light enters most deeply.
+FRAME: God is the Composer. She is His symphony — once in the universe, never repeated. Body, mind, spirit are movements in one piece of music. Charisms and virtues are entrusted gifts. Wounds are where Christ's light enters most deeply.
 
-NEVER: Use "based on your results" or "according to your profile." Never write anything generic that could apply to any woman. Never end inward. No bullet points.
+NAMING THEOLOGY (most important — read carefully):
 
-Write exactly 6 sections. Each heading in ALL CAPS on its own line. Blank line between paragraphs.
+She has up to four names on her profile, each doing different theological work:
 
-DAUGHTER — 2-3 paragraphs. Open with her Name from the Lord and Identity in Christ. Make her feel specifically seen.
+- GIVEN NAME — the first earthly word spoken over her, the echo in time of how God has been speaking her since before the foundation of the world (cf. Jeremiah 1:5, Ephesians 1:4, Isaiah 49:1, RSV2CE).
 
-INSTRUMENT — 2-3 paragraphs. Her color season, style essence, silhouette as a portrait of her embodied presence.
+- NAME SHE LIVES UNDER — present only if different from her given name (married, chosen, religious). When present, place her in the biblical lineage of name change: Abram→Abraham, Sarai→Sarah, Jacob→Israel, Simon→Peter, Saul→Paul. The journey BETWEEN those two names is conversion. Honor it.
 
-MOVEMENTS — 3-4 paragraphs. Her temperament, type, strengths, love languages as a portrait of her inner life. Weave in tender places.
+- CONFIRMATION NAME — the patron saint chosen at full initiation. Briefly honor what the saint's charism reveals about her own vocation.
 
-THEME — 2-3 paragraphs. Her charisms and virtues — where the Spirit is visibly at work through her.
+- NAME FROM THE FATHER — the eternal, personal name He has been speaking over her since before time, which she heard in stillness during Session 2 (cf. Revelation 2:17, RSV2CE — the white stone, the name no one knows except the one who receives it). The most intimate of the names; the one that completes the arc.
 
-SYMPHONY — 3-4 paragraphs. Full vocational synthesis. What is she made to give the world? Name it with conviction.
+When the GIVEN NAME has a known etymology, surface it AS THEOLOGY — etymology becomes prophecy in retrospect. Pattern: "Your parents called you Sarah. The name means princess — and not by accident. From the very first word spoken over you in this world, He was preparing you to know yourself as a daughter of the King." If etymology is contested, acknowledge variants. If a name has no clear root, honor the sound, the feel, the uniqueness. If a name field is empty, do not address it.
 
-SEND — 1-2 paragraphs. Conviction and release. Use her Name from the Lord. Send her out with courage.
+NEVER: Use "based on your results" or "according to your profile." Never write anything generic that could apply to any woman. Never end inward. No bullet points. No clichés like "your unique journey" or "you are amazing" or "you are enough" — that is therapeutic language; this is theological writing. Speak only from what is on her profile; do not invent suffering, healing, or backstory she has not described.
 
-No preamble. No closing outside the six sections.`;
+STRUCTURE: Six sections. Each heading in ALL CAPS on its own line. Blank line between paragraphs.
+
+DAUGHTER — 3-4 paragraphs. Open with the name arc: given → lived (if present) → confirmation (if present) → Name from the Father. Weave in her Identity in Christ and Anchor Verse. Make her feel specifically seen and named.
+
+INSTRUMENT — 2-3 paragraphs. Her color season, style essence, sacred silhouette as a portrait of her embodied presence. Tactile. Specific.
+
+MOVEMENTS — 3-4 paragraphs. Her temperament, type, gifts of grace, love languages as a portrait of her inner life — how she perceives, processes, gives, and receives.
+
+THEME — 2-3 paragraphs. Her charisms and virtues — where the Spirit is visibly at work through her and what He is composing through her shape.
+
+SYMPHONY — 3-4 paragraphs. Full vocational synthesis. Name what kind of symphony she is — a single clear sentence that captures her unrepeatable composition. What is she made to give the world? Name it with conviction.
+
+SEND — 1-2 paragraphs. Conviction and release. Use her Name from the Father if present. Send her out with courage.
+
+After the six sections, generate a three-sentence brief for the Suno music model. This is NOT for her to read — it is technical input for music generation:
+- Sentence 1: instrumentation and genre, drawn from her stated music preferences
+- Sentence 2: mood, drawn from her temperament, virtues, and Name from the Father
+- Sentence 3: arc — movement from one feeling to another, reflecting her journey
+
+Wrap the brief between <<<MUSIC_BRIEF>>> and <<<END>>> on their own lines.
+
+No preamble. No commentary. No closing outside the six sections. Begin with the word DAUGHTER on its own line.`;
 
     function buildScorePrompt(profile) {
         const f = k => (profile[k] || '').trim() || '(not provided)';
         const list = (...keys) => { const p = keys.map(k=>(profile[k]||'').trim()).filter(Boolean); return p.length ? p.join(', ') : '(not provided)'; };
         return `Here is the Symphony Profile for this woman. Please write her Symphony Score.
 
-NAME FROM THE LORD: ${f('p_name_lord')}
-IDENTITY IN CHRIST: ${f('p_identity')}
-A WORD HE HAS SPOKEN OVER HER: ${f('p_word_spoken')}
+FOUNDATION:
+Given Name: ${f('p_name_given')}
+Name She Lives Under: ${f('p_name_lived')}
+Confirmation Name: ${f('p_name_confirmation')}
+Name from the Father: ${f('p_name_lord')}
+Identity in Christ: ${f('p_identity')}
+Anchor Verse: ${f('p_anchor_verse')}
 
 BODY:
 Color Season: ${f('p_color_season')}
@@ -881,6 +926,9 @@ SPIRIT:
 Top Virtues in Growth: ${list('p_vir1','p_vir2','p_vir3','p_vir4','p_vir5')}
 Charisms: ${list('p_char1','p_char2','p_char3')}
 
+MUSIC PREFERENCES:
+Sounds That Move Her: ${list('p_music1','p_music2','p_music3')}
+
 Where fields say "(not provided)", skip gracefully. Work richly with what is present.`;
     }
 
@@ -894,16 +942,20 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
     ];
 
     window.scoreTexts = {};
+    window.musicBriefs = {};
 
     async function generateScoreForParticipant(btn, uid, name) {
         const panel = document.getElementById('score-panel-' + uid);
         const output = document.getElementById('score-output-' + uid);
         const copyRow = document.getElementById('score-copy-row-' + uid);
+        const briefPanel = document.getElementById('music-brief-panel-' + uid);
+        const briefText = document.getElementById('music-brief-text-' + uid);
         panel.style.display = 'block';
         btn.disabled = true;
         btn.textContent = 'Generating…';
-        output.innerHTML = '<div class="score-loading">Writing ' + name + '’s score… this may take up to 30 seconds.</div>';
+        output.innerHTML = '<div class="score-loading">Writing ' + name + '’s score… this may take up to 45 seconds.</div>';
         copyRow.style.display = 'none';
+        if (briefPanel) briefPanel.style.display = 'none';
 
         const userData = window.adminProfiles[uid];
         const profile = userData && userData.profile ? userData.profile : {};
@@ -913,19 +965,35 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    model: 'claude-haiku-4-5-20251001',
-                    max_tokens: 3000,
+                    model: 'claude-sonnet-4-6',
+                    max_tokens: 4096,
                     system: SCORE_SYSTEM_PROMPT,
                     messages: [{ role: 'user', content: buildScorePrompt(profile) }]
                 })
             });
             const data = await response.json();
             if (!response.ok || data.error) throw new Error(data.error?.message || 'Generation failed');
-            const text = data.content?.[0]?.text || '';
-            if (!text) throw new Error('No content returned');
+            const rawText = data.content?.[0]?.text || '';
+            if (!rawText) throw new Error('No content returned');
 
-            window.scoreTexts[uid] = text;
-            renderScoreOutput(output, text);
+            // Split score from music brief
+            let scoreText = rawText;
+            let musicBrief = '';
+            const briefMatch = rawText.match(/<<<MUSIC_BRIEF>>>([\s\S]*?)<<<END>>>/);
+            if (briefMatch) {
+                musicBrief = briefMatch[1].trim();
+                scoreText = rawText.replace(/<<<MUSIC_BRIEF>>>[\s\S]*?<<<END>>>/, '').trim();
+            }
+
+            window.scoreTexts[uid] = scoreText;
+            window.musicBriefs[uid] = musicBrief;
+
+            renderScoreOutput(output, scoreText);
+            if (musicBrief && briefPanel && briefText) {
+                briefText.textContent = musicBrief;
+                briefPanel.style.display = 'block';
+            }
+
             copyRow.style.display = 'flex';
             btn.textContent = 'Regenerate Score';
             btn.disabled = false;
@@ -968,17 +1036,29 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
         });
     }
 
+    function copyMusicBrief(uid) {
+        const text = window.musicBriefs && window.musicBriefs[uid] ? window.musicBriefs[uid] : '';
+        if (!text) return;
+        const btn = document.getElementById('copy-brief-btn-' + uid);
+        navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = 'Copy Brief for Suno \u2192'; btn.classList.remove('copied'); }, 2000);
+        });
+    }
+
     // ── Save score to participant profile ────────────────────
     async function saveScoreForParticipant(uid, name) {
         const btn = document.getElementById('save-score-btn-' + uid);
         const badge = document.getElementById('save-score-badge-' + uid);
         const text = window.scoreTexts && window.scoreTexts[uid];
+        const brief = (window.musicBriefs && window.musicBriefs[uid]) || '';
         if (!text) return;
         btn.disabled = true;
         btn.textContent = 'Saving…';
         try {
             const { error } = await sb.from('user_results').upsert(
-                { user_id: uid, assessment: 'symphony_score', result_data: { text: text }, updated_at: new Date().toISOString() },
+                { user_id: uid, assessment: 'symphony_score', result_data: { text: text, music_brief: brief }, updated_at: new Date().toISOString() },
                 { onConflict: 'user_id,assessment' }
             );
             if (error) throw error;
