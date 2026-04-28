@@ -1,14 +1,12 @@
-// netlify/functions/claude-stream.mjs
+// netlify/edge-functions/claude-stream.js
 //
-// Streaming proxy for the Anthropic Messages API.
-// Returns Server-Sent Events (SSE) so long generations don't time out.
+// Edge Function streaming proxy for the Anthropic Messages API.
+// Runs on Deno at the edge with NATIVE streaming (not buffered like
+// Lambda-based Netlify Functions). Time spent waiting on the upstream
+// fetch does not count against the 50-second execution cap, so long
+// generations work reliably.
 //
-// The client POSTs the same body shape it would send to claude-proxy
-// (model, max_tokens, system, messages). This function forces stream:true
-// upstream and pipes the SSE response back to the browser unchanged.
-//
-// Uses the modern Netlify Functions v2 API (Web Standard Request/Response).
-// The .mjs extension forces ESM regardless of package.json type.
+// Routed at /api/claude-stream via the export const config below.
 
 export default async (request) => {
     if (request.method !== 'POST') {
@@ -25,21 +23,28 @@ export default async (request) => {
         );
     }
 
-    // Force streaming upstream — even if the client forgot to set it
+    // Force streaming upstream
     body.stream = true;
+
+    const apiKey = Netlify.env.get('ANTHROPIC_API_KEY');
+    if (!apiKey) {
+        return new Response(
+            JSON.stringify({ error: { message: 'ANTHROPIC_API_KEY not configured in Netlify env' } }),
+            { status: 500, headers: { 'Content-Type': 'application/json' } }
+        );
+    }
 
     const upstream = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'x-api-key': process.env.ANTHROPIC_API_KEY,
+            'x-api-key': apiKey,
             'anthropic-version': '2023-06-01',
         },
         body: JSON.stringify(body),
     });
 
-    // If Anthropic rejected the request, it returns JSON, not SSE.
-    // Pass that error body straight through so the client can surface it.
+    // If Anthropic rejected the request, it returns JSON not SSE — pass through
     if (!upstream.ok) {
         const errText = await upstream.text();
         return new Response(errText, {
@@ -62,4 +67,8 @@ export default async (request) => {
             'X-Accel-Buffering': 'no',
         },
     });
+};
+
+export const config = {
+    path: '/api/claude-stream',
 };

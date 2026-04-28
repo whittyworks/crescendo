@@ -971,7 +971,7 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
         };
 
         try {
-            const response = await fetch('/.netlify/functions/claude-stream', {
+            const response = await fetch('/api/claude-stream', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestBody)
