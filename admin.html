@@ -811,7 +811,7 @@
                 <h4>&#9834; Symphony Score &mdash; ${name}</h4>
                 <div class="score-output" id="score-output-${uid}"></div>
                 <div class="music-brief-panel" id="music-brief-panel-${uid}" style="display:none; margin-top:1.5rem; padding:1.25rem 1.5rem; background:rgba(212,175,55,0.06); border:1px dashed rgba(212,175,55,0.35); border-radius:8px;">
-                    <div style="font-family:'Montserrat',sans-serif; font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-dark); margin-bottom:0.5rem;">&#9836; Music Brief for Suno &mdash; admin only</div>
+                    <div style="font-family:'Montserrat',sans-serif; font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-dark); margin-bottom:0.5rem;">&#9836; Music Brief for Suno &mdash; admin only (draft &mdash; edit freely)</div>
                     <div class="music-brief-text" id="music-brief-text-${uid}" style="font-family:'Cormorant Garamond',serif; font-size:1.02rem; font-style:italic; color:var(--text-medium); line-height:1.55; margin-bottom:0.75rem;"></div>
                     <button class="copy-btn" id="copy-brief-btn-${uid}" onclick="copyMusicBrief('${uid}')" style="font-size:0.7rem; padding:0.5rem 1rem;">Copy Brief for Suno &rarr;</button>
                 </div>
@@ -949,58 +949,101 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
         const output = document.getElementById('score-output-' + uid);
         const copyRow = document.getElementById('score-copy-row-' + uid);
         const briefPanel = document.getElementById('music-brief-panel-' + uid);
-        const briefText = document.getElementById('music-brief-text-' + uid);
+        const briefTextEl = document.getElementById('music-brief-text-' + uid);
         panel.style.display = 'block';
         btn.disabled = true;
         btn.textContent = 'Generating…';
-        output.innerHTML = '<div class="score-loading">Writing ' + name + '’s score… this may take up to 45 seconds.</div>';
         copyRow.style.display = 'none';
         if (briefPanel) briefPanel.style.display = 'none';
+
+        // Live streaming view — replaced with formatted output when complete
+        output.innerHTML = '<div class="score-streaming" style="white-space:pre-wrap; font-family:\'Cormorant Garamond\',Georgia,serif; font-size:1.05rem; line-height:1.7; color:var(--text-dark, #2C2416); padding:1rem 0; opacity:0.85;"></div>';
+        const streamDiv = output.querySelector('.score-streaming');
 
         const userData = window.adminProfiles[uid];
         const profile = userData && userData.profile ? userData.profile : {};
 
         const requestBody = {
             model: 'claude-haiku-4-5-20251001',
-            max_tokens: 3000,
+            max_tokens: 4096,
             system: SCORE_SYSTEM_PROMPT,
             messages: [{ role: 'user', content: buildScorePrompt(profile) }]
         };
 
-        console.log('[Score Gen] Request body:', requestBody);
-
         try {
-            const response = await fetch('/.netlify/functions/claude-proxy', {
+            const response = await fetch('/.netlify/functions/claude-stream', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestBody)
             });
-            const data = await response.json();
-            console.log('[Score Gen] Response status:', response.status);
-            console.log('[Score Gen] Response data:', data);
 
-            if (!response.ok || data.error) {
-                const fullMsg = (data.error && (data.error.message || data.error)) || 'Generation failed';
-                throw new Error(typeof fullMsg === 'string' ? fullMsg : JSON.stringify(fullMsg));
+            // If we got a JSON error response (non-stream), surface it
+            if (!response.ok) {
+                let errMsg = 'HTTP ' + response.status;
+                try {
+                    const errBody = await response.text();
+                    try {
+                        const parsed = JSON.parse(errBody);
+                        errMsg = parsed?.error?.message || parsed?.error || errBody;
+                    } catch { errMsg = errBody || errMsg; }
+                } catch {}
+                throw new Error(errMsg);
             }
-            const rawText = data.content?.[0]?.text || '';
-            if (!rawText) throw new Error('No content returned');
+
+            // Read SSE stream from Anthropic
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let buffer = '';
+            let fullText = '';
+
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) break;
+
+                buffer += decoder.decode(value, { stream: true });
+                const lines = buffer.split('\n');
+                buffer = lines.pop(); // keep last incomplete line for next chunk
+
+                for (const line of lines) {
+                    if (!line.startsWith('data: ')) continue;
+                    const dataStr = line.slice(6).trim();
+                    if (!dataStr) continue;
+                    try {
+                        const evt = JSON.parse(dataStr);
+                        if (evt.type === 'content_block_delta' && evt.delta && evt.delta.type === 'text_delta') {
+                            fullText += evt.delta.text;
+                            // Filter the brief delimiter and everything after it from the live display
+                            const briefStart = fullText.indexOf('<<<MUSIC_BRIEF>>>');
+                            streamDiv.textContent = briefStart >= 0 ? fullText.slice(0, briefStart).trim() : fullText;
+                            output.scrollTop = output.scrollHeight;
+                        } else if (evt.type === 'error') {
+                            throw new Error(evt.error?.message || 'Stream error');
+                        }
+                    } catch (e) {
+                        if (e.message && e.message !== 'Stream error') {
+                            if (e.message.startsWith('Stream error') || e.message.includes('error')) throw e;
+                        }
+                    }
+                }
+            }
+
+            if (!fullText) throw new Error('No content received');
 
             // Split score from music brief
-            let scoreText = rawText;
+            let scoreText = fullText;
             let musicBrief = '';
-            const briefMatch = rawText.match(/<<<MUSIC_BRIEF>>>([\s\S]*?)<<<END>>>/);
+            const briefMatch = fullText.match(/<<<MUSIC_BRIEF>>>([\s\S]*?)<<<END>>>/);
             if (briefMatch) {
                 musicBrief = briefMatch[1].trim();
-                scoreText = rawText.replace(/<<<MUSIC_BRIEF>>>[\s\S]*?<<<END>>>/, '').trim();
+                scoreText = fullText.replace(/<<<MUSIC_BRIEF>>>[\s\S]*?<<<END>>>/, '').trim();
             }
 
             window.scoreTexts[uid] = scoreText;
             window.musicBriefs[uid] = musicBrief;
 
             renderScoreOutput(output, scoreText);
-            if (musicBrief && briefPanel && briefText) {
-                briefText.textContent = musicBrief;
+            if (musicBrief && briefPanel && briefTextEl) {
+                briefTextEl.textContent = musicBrief;
                 briefPanel.style.display = 'block';
             }
 
@@ -1009,7 +1052,7 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
             btn.disabled = false;
         } catch(e) {
             console.error('[Score Gen] Error:', e);
-            output.innerHTML = '<div class="score-loading" style="color:#c44569;">Error: ' + e.message + '<br><span style="font-size:0.75rem;opacity:0.7;">(Open browser console for full details)</span></div>';
+            output.innerHTML = '<div class="score-loading" style="color:#c44569;">Error: ' + e.message + '</div>';
             btn.textContent = 'Try Again';
             btn.disabled = false;
         }
