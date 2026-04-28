@@ -474,6 +474,43 @@
             font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
             padding: 3px 10px; border-radius: 20px; margin-left: 0.5rem;
         }
+        .card-archetype {
+            display: inline-block;
+            margin-left: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 2px 9px;
+            border-radius: 20px;
+            background: rgba(212, 175, 55, 0.06);
+        }
+
+        /* Dominant archetype banner */
+        .archetype-banner {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.10), rgba(253, 248, 243, 0.95));
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 12px;
+            padding: 1.25rem 1.75rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .archetype-banner-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.4rem;
+        }
+        .archetype-banner-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            color: var(--gold-dark);
+            font-weight: 500;
+        }
         .card-description {
             font-size: 1.1rem; color: var(--text-medium);
             line-height: 1.8; margin-bottom: 1rem;
@@ -885,6 +922,7 @@ const charisms = [
     {
         id: "administration",
         name: "Administration",
+        archetype: "Leader",
         icon: "📋",
         description: "The God-given ability to organize people, tasks, and resources to accomplish goals that serve the Church and others. Those with this gift bring order, clarity, and efficiency to ministry.",
         reflection: "You help others find their footing by creating the structures that let them flourish.",
@@ -896,6 +934,7 @@ const charisms = [
     {
         id: "craftsmanship",
         name: "Craftsmanship",
+        archetype: "Creator",
         icon: "🎨",
         description: "The ability to use hands and creativity — art, making, building — to create works that reflect God's beauty and draw people toward faith, wonder, and encounter with the divine.",
         reflection: "Your hands are a channel of beauty that speaks what words cannot say.",
@@ -907,6 +946,7 @@ const charisms = [
     {
         id: "discernment",
         name: "Discernment",
+        archetype: "Intercessor",
         icon: "🔎",
         description: "The ability to perceive whether something is from God, from human nature, or from the evil one. Those with this gift sense spiritual realities that others often miss.",
         reflection: "You are called to be a guardian of truth — helping others see what is really at work.",
@@ -916,19 +956,9 @@ const charisms = [
         ]
     },
     {
-        id: "digital",
-        name: "Digital Communications",
-        icon: "💻",
-        description: "The ability to use technology, media, and digital platforms to spread the Gospel, build community, and serve the Church's mission in the modern world.",
-        reflection: "You are a missionary to the digital age, bringing light into the online world.",
-        questions: [
-            "I feel drawn to share my faith through digital content, online platforms, or technology.",
-            "I have a sense for how to use media to build community and spread truth effectively."
-        ]
-    },
-    {
         id: "encouragement",
         name: "Encouragement",
+        archetype: "Proclaimer",
         icon: "💪",
         description: "The ability to come alongside others with words that comfort, strengthen, and urge them forward in faith. Those with this gift lift spirits and inspire perseverance.",
         reflection: "Your words are a lifeline — they remind people who they are and what they're capable of.",
@@ -940,8 +970,9 @@ const charisms = [
     {
         id: "evangelism",
         name: "Evangelism",
+        archetype: "Proclaimer",
         icon: "📣",
-        description: "The ability to share the Gospel in a way that draws others to faith in Christ. Those with this gift naturally find opportunities to share God's love — without it feeling forced.",
+        description: "The ability to share the Gospel in a way that draws others to faith in Christ. Those with this gift naturally find opportunities to share God's love — in person, in conversation, and through whatever medium fits the moment — without it feeling forced.",
         reflection: "You carry good news wherever you go, and people are drawn to hear it.",
         questions: [
             "I find natural openings to share my faith in ways that draw others toward God.",
@@ -951,6 +982,7 @@ const charisms = [
     {
         id: "faith",
         name: "Faith",
+        archetype: "Intercessor",
         icon: "✝️",
         description: "An extraordinary trust in God's promises and providence, even in difficult or impossible-seeming circumstances. Those with this gift inspire others to believe and surrender more deeply.",
         reflection: "Your unwavering trust becomes an anchor for others in the storm.",
@@ -962,6 +994,7 @@ const charisms = [
     {
         id: "giving",
         name: "Giving",
+        archetype: "Server",
         icon: "💝",
         description: "The ability to give generously of resources, time, and self with joy and without attachment. Those with this gift experience deep fulfillment through generosity.",
         reflection: "Your open hands are an image of the Father's lavish, uncalculating love.",
@@ -971,19 +1004,9 @@ const charisms = [
         ]
     },
     {
-        id: "global",
-        name: "Global & Cultural Awareness",
-        icon: "🌍",
-        description: "The ability to connect with ease across cultural, ethnic, and socioeconomic differences, bringing diverse people together in Christ and enriching the whole community.",
-        reflection: "You see the image of God in every face and build bridges where walls once stood.",
-        questions: [
-            "I feel genuinely at home crossing cultural, ethnic, or socioeconomic boundaries to connect.",
-            "I have a heart for those who are different from me and naturally draw diverse people together."
-        ]
-    },
-    {
         id: "healing",
         name: "Healing",
+        archetype: "Intercessor",
         icon: "💚",
         description: "The ability to be a channel of God's healing power — physical, emotional, or spiritual. Those with this gift bring restoration and comfort to those who are suffering.",
         reflection: "Christ's hands of mercy work through yours, offering restoration to the broken.",
@@ -995,6 +1018,7 @@ const charisms = [
     {
         id: "helping",
         name: "Helping",
+        archetype: "Server",
         icon: "🤝",
         description: "The ability to joyfully support others in their work and calling, often quietly behind the scenes. Those with this gift find fulfillment in enabling others' success.",
         reflection: "Your quiet faithfulness behind the scenes makes the whole mission possible.",
@@ -1006,6 +1030,7 @@ const charisms = [
     {
         id: "hospitality",
         name: "Hospitality",
+        archetype: "Server",
         icon: "🏠",
         description: "The ability to create warm, welcoming environments where people feel at home, known, and cared for. Those with this gift make strangers feel like family.",
         reflection: "Your home and your presence are a foretaste of heaven's welcome.",
@@ -1017,6 +1042,7 @@ const charisms = [
     {
         id: "intercession",
         name: "Intercession",
+        archetype: "Intercessor",
         icon: "🙏",
         description: "The ability to pray for others with unusual faithfulness and see remarkable answers to prayer. Those with this gift feel called to stand in the gap for others.",
         reflection: "You hold others before the Father in ways they may never know but will always benefit from.",
@@ -1028,17 +1054,19 @@ const charisms = [
     {
         id: "knowledge",
         name: "Knowledge",
+        archetype: "Proclaimer",
         icon: "📚",
-        description: "The ability to study, research, and communicate truth in ways that enlighten others. Those with this gift love learning deeply and helping others understand faith and reason together.",
+        description: "The ability to study, research, and articulate truth in ways that enlighten others. Those with this gift love learning deeply and helping others understand faith and reason together — they have something true to say, and a way of saying it that lands.",
         reflection: "Your love of truth becomes a lamp that illuminates the path for others.",
         questions: [
-            "I love researching deeply and find natural ways to connect what I learn to faith and life.",
+            "I love researching deeply and find natural ways to share what I learn so others can grasp it.",
             "Others often turn to me when they want a thorough, well-reasoned understanding of something."
         ]
     },
     {
         id: "leadership",
         name: "Leadership",
+        archetype: "Leader",
         icon: "👑",
         description: "The ability to see God's vision for a community and guide others toward it with clarity and conviction. Those with this gift naturally inspire people to move and work together.",
         reflection: "You see where God is calling a community and help them find the courage to get there.",
@@ -1048,8 +1076,21 @@ const charisms = [
         ]
     },
     {
+        id: "maternity",
+        name: "Spiritual Maternity",
+        archetype: "Creator",
+        icon: "🌹",
+        description: "The distinctively feminine charism of receiving, nurturing, and shaping life — biological, but more deeply spiritual. Those with this gift carry souls into being: their children, godchildren, students, friends, communities. They form interior worlds and foster the growth of others into their truest selves in Christ. This gift is given to women in every state of life — married, single, religious, widowed.",
+        reflection: "You are a midwife of souls — and the Church is more whole because you have said yes to motherhood that goes far beyond the body.",
+        questions: [
+            "I feel a deep, almost physical responsibility to nurture the inner life and growth of particular people God has placed in my care.",
+            "People — children or adults — seem to grow into themselves more fully because of my presence in their lives."
+        ]
+    },
+    {
         id: "mercy",
         name: "Mercy",
+        archetype: "Server",
         icon: "💕",
         description: "The ability to feel deep, visceral compassion for those who suffer and respond with practical, loving action. Those with this gift are drawn to the marginalized, hurting, and forgotten.",
         reflection: "You embody the tender heart of Christ for those the world passes by.",
@@ -1059,8 +1100,21 @@ const charisms = [
         ]
     },
     {
+        id: "missionary",
+        name: "Missionary",
+        archetype: "Leader",
+        icon: "⛵",
+        description: "The ability to feel called beyond familiar ground — sent across boundaries of place, culture, or community to bring the Gospel where it has not yet taken root. Those with this gift are drawn to those who are far off, those who are different, and those the Church has not yet reached.",
+        reflection: "You go where you are sent — and the people you meet there were waiting for the face of Christ you carry.",
+        questions: [
+            "I feel a particular pull toward people, places, or communities that are unfamiliar or far from where I started.",
+            "Crossing boundaries — of culture, language, geography, or experience — to share Christ feels less like effort and more like calling."
+        ]
+    },
+    {
         id: "musicianship",
         name: "Musicianship",
+        archetype: "Creator",
         icon: "🎵",
         description: "The ability to write, perform, or lead music that draws people into worship and encounter with God. Those with this gift help others experience God through song and sound.",
         reflection: "Your music is a doorway the Holy Spirit uses to bring people into His presence.",
@@ -1072,6 +1126,7 @@ const charisms = [
     {
         id: "peacemaking",
         name: "Peacemaking",
+        archetype: "Leader",
         icon: "☮️",
         description: "The ability to mediate conflict and bring reconciliation between individuals or groups. Those with this gift help restore broken relationships and build unity where there is division.",
         reflection: "You are a bearer of shalom — bringing the peace of Christ into broken places.",
@@ -1083,6 +1138,7 @@ const charisms = [
     {
         id: "prophecy",
         name: "Prophecy",
+        archetype: "Proclaimer",
         icon: "🔥",
         description: "The ability to receive and communicate messages from God that speak to the present moment — calling people to deeper faithfulness, repentance, or awareness of God's work.",
         reflection: "You carry a word the world needs — and God trusts you to deliver it with love.",
@@ -1094,6 +1150,7 @@ const charisms = [
     {
         id: "service",
         name: "Service",
+        archetype: "Server",
         icon: "🛠️",
         description: "The ability to identify practical needs and meet them with joy, often in hands-on, tangible ways. Those with this gift express love through action and deeds, not just words.",
         reflection: "Your hands and feet are the love of God made visible.",
@@ -1105,6 +1162,7 @@ const charisms = [
     {
         id: "shepherding",
         name: "Shepherding",
+        archetype: "Leader",
         icon: "🐑",
         description: "The ability to nurture, guide, and care for a group of people over time, helping them grow in faith and holiness. Those with this gift take responsibility for others' spiritual welfare.",
         reflection: "You carry your community in your heart and walk with them through every season.",
@@ -1116,6 +1174,7 @@ const charisms = [
     {
         id: "teaching",
         name: "Teaching",
+        archetype: "Proclaimer",
         icon: "📖",
         description: "The ability to explain truth clearly in ways that help others truly understand and apply it. Those with this gift make complex ideas accessible, practical, and transformative.",
         reflection: "You have the gift of clarity — and through you, truth comes alive for others.",
@@ -1127,8 +1186,9 @@ const charisms = [
     {
         id: "poverty",
         name: "Voluntary Poverty",
+        archetype: "Creator",
         icon: "🕊️",
-        description: "The ability to live simply and joyfully with few possessions, freeing oneself for greater love and service. Those with this gift find genuine freedom in detachment from material things.",
+        description: "The ability to live simply and joyfully with few possessions, freeing oneself for greater love and service. Those with this gift find genuine freedom in detachment from material things — and shape a counter-cultural way of being that invites others into the same freedom.",
         reflection: "Your freedom from things is an invitation for others to find freedom in the One who is enough.",
         questions: [
             "I feel genuine peace and even joy in living simply with fewer possessions than I could have.",
@@ -1138,6 +1198,7 @@ const charisms = [
     {
         id: "wisdom",
         name: "Wisdom",
+        archetype: "Intercessor",
         icon: "💡",
         description: "The ability to see situations from God's perspective and offer insight for decisions and direction. Those with this gift help others navigate complex situations with clarity and grace.",
         reflection: "You see what others cannot yet see — and gently help them find the path God intends.",
@@ -1149,8 +1210,9 @@ const charisms = [
     {
         id: "writing",
         name: "Writing",
+        archetype: "Creator",
         icon: "✍️",
-        description: "The ability to compose words that reveal truth, beauty, and goodness in ways that touch hearts and minds. Those with this gift communicate God's love and truth through the written word.",
+        description: "The ability to compose words that reveal truth, beauty, and goodness in ways that touch hearts and minds. Those with this gift make with language — shaping reflections, stories, prayers, or essays that the Holy Spirit uses to reach souls. The medium is the page, in print or online; the calling is to make beauty of words.",
         reflection: "Your words carry a weight and beauty that the Holy Spirit uses to reach souls.",
         questions: [
             "Writing is one of my primary ways of processing truth, beauty, and my relationship with God.",
@@ -1303,6 +1365,23 @@ function renderResults() {
         pct: Math.round((scores[c.id] / 10) * 100)
     })).sort((a, b) => b.score - a.score);
 
+    // Compute archetype totals — sum of all charism scores within each archetype.
+    // Each archetype has exactly 5 charisms, so max raw total = 5 × 10 = 50.
+    const ARCHETYPES = ['Proclaimer', 'Server', 'Intercessor', 'Leader', 'Creator'];
+    const archetypeScores = {};
+    ARCHETYPES.forEach(a => { archetypeScores[a] = 0; });
+    charisms.forEach(c => {
+        if (archetypeScores.hasOwnProperty(c.archetype)) {
+            archetypeScores[c.archetype] += scores[c.id] || 0;
+        }
+    });
+    const sortedArchetypes = ARCHETYPES
+        .map(a => ({ name: a, total: archetypeScores[a], pct: Math.round((archetypeScores[a] / 50) * 100) }))
+        .sort((a, b) => b.total - a.total);
+    const dominantArchetype = sortedArchetypes[0].name;
+    window._dominantArchetype = dominantArchetype;
+    window._archetypeRanking = sortedArchetypes;
+
     document.getElementById('quizScreen').style.display = 'none';
     document.getElementById('resultsScreen').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1312,7 +1391,12 @@ function renderResults() {
 
     // Top 3 cards
     const topContainer = document.getElementById('topCharismsContainer');
-    topContainer.innerHTML = '<h3 class="section-heading">Your Top Charisms</h3>';
+    topContainer.innerHTML =
+        '<div class="archetype-banner">' +
+            '<p class="archetype-banner-label">Your Dominant Archetype</p>' +
+            '<p class="archetype-banner-name">The ' + dominantArchetype + '</p>' +
+        '</div>' +
+        '<h3 class="section-heading">Your Top Charisms</h3>';
     const ordinals = ['Your #1 Gift', 'Your #2 Gift', 'Your #3 Gift'];
     savedRanked.slice(0, 3).forEach((c, idx) => {
         const card = document.createElement('div');
@@ -1323,6 +1407,7 @@ function renderResults() {
                 <span class="card-icon">${c.icon}</span>
                 <div>
                     <span class="card-name">${c.name}</span>
+                    <span class="card-archetype">The ${c.archetype}</span>
                     <span class="card-rank-badge">${ordinals[idx]}</span>
                 </div>
             </div>
@@ -1356,8 +1441,9 @@ function renderResults() {
         });
     }, 200);
 
-    // Store top 3 for Supabase save
+    // Store top 3 (with archetype) and dominant archetype for Supabase save
     window._charismResults = savedRanked.slice(0, 3).map(c => c.name);
+    window._charismArchetypes = savedRanked.slice(0, 3).map(c => c.archetype);
     checkAndShowSaveButton();
 
 }
@@ -1402,9 +1488,14 @@ async function saveToProfile() {
 
     const profileData = existing?.result_data || {};
     const charisms = window._charismResults || [];
+    const archetypes = window._charismArchetypes || [];
     profileData.p_char1 = charisms[0] || '';
     profileData.p_char2 = charisms[1] || '';
     profileData.p_char3 = charisms[2] || '';
+    profileData.p_char1_archetype = archetypes[0] || '';
+    profileData.p_char2_archetype = archetypes[1] || '';
+    profileData.p_char3_archetype = archetypes[2] || '';
+    profileData.p_char_dominant_archetype = window._dominantArchetype || '';
 
     const { error } = await sb.from('user_results').upsert({
         user_id: session.user.id, assessment: 'symphony_profile',

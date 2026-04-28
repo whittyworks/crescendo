@@ -110,10 +110,47 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
-            margin-top: 3rem;
+            margin-top: 0;
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        /* Archetype groupings */
+        .archetype-section {
+            margin: 0 auto 4.5rem;
+            max-width: 1200px;
+        }
+        .archetype-section:last-child { margin-bottom: 2rem; }
+
+        .archetype-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .archetype-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.6rem;
+        }
+        .archetype-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold-dark);
+            font-weight: 400;
+            margin-bottom: 0.85rem;
+        }
+        .archetype-description {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            line-height: 1.75;
+            font-style: italic;
         }
         
         .charism-card {
@@ -465,160 +502,197 @@
                 <p class="section-label sans">The Gifts</p>
                 <h2 class="section-title script">The 25 Charisms</h2>
                 <p class="section-description">
-                    While not an exhaustive list, these 25 charisms represent the most commonly recognized 
-                    spiritual gifts given by the Holy Spirit for service in the Church and world.
+                    These 25 charisms — gifts the Holy Spirit gives to the Church for service in the world — fall into five archetypes. Each archetype names a way of giving: a Proclaimer's words reach, a Server's hands move, an Intercessor sees beneath the surface, a Leader orients others, a Creator makes.
                 </p>
             </div>
 
-            <div class="charisms-grid">
-                <div class="charism-card">
-                    <div class="charism-icon">📋</div>
-                    <h3 class="charism-name">Administration</h3>
-                    <p class="charism-description">The ability to organize people, tasks, and resources to accomplish goals that serve the Church and others. Those with this gift bring order and efficiency to ministry.</p>
+            <!-- The Proclaimer -->
+            <div class="archetype-section">
+                <div class="archetype-header">
+                    <p class="archetype-label">Archetype 1 of 5</p>
+                    <h3 class="archetype-name">The Proclaimer</h3>
+                    <p class="archetype-description">
+                        Those with Proclaimer charisms have words that reach. Truth lives in their mouths and on their pages. They teach, encourage, write, and proclaim &mdash; and people receive something through them that words alone shouldn't be able to carry.
+                    </p>
                 </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">🎨</div>
-                    <h3 class="charism-name">Craftsmanship</h3>
-                    <p class="charism-description">The ability to use hands and creativity to create art, crafts, or other works that reflect God's beauty and inspire others toward faith and wonder.</p>
+                <div class="charisms-grid">
+                    <div class="charism-card">
+                        <div class="charism-icon">💪</div>
+                        <h3 class="charism-name">Encouragement</h3>
+                        <p class="charism-description">The ability to come alongside others with words that comfort, strengthen, and urge them forward in faith. Those with this gift lift spirits and inspire perseverance.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">📣</div>
+                        <h3 class="charism-name">Evangelism</h3>
+                        <p class="charism-description">The ability to share the Gospel in a way that draws others to faith in Christ &mdash; in person, in conversation, or through whatever medium fits the moment. Those with this gift naturally find openings to share God's love.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">📚</div>
+                        <h3 class="charism-name">Knowledge</h3>
+                        <p class="charism-description">The ability to study, articulate, and share truth in ways that enlighten others. Those with this gift have something true to say &mdash; and a way of saying it that lands.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">🔥</div>
+                        <h3 class="charism-name">Prophecy</h3>
+                        <p class="charism-description">The ability to receive and communicate messages from God that speak to the present moment. Those with this gift call people to deeper faithfulness and awareness.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">📖</div>
+                        <h3 class="charism-name">Teaching</h3>
+                        <p class="charism-description">The ability to explain truth clearly in ways that help others understand and apply it. Those with this gift make complex ideas accessible and transformative.</p>
+                    </div>
                 </div>
+            </div>
 
-                <div class="charism-card">
-                    <div class="charism-icon">🔎</div>
-                    <h3 class="charism-name">Discernment</h3>
-                    <p class="charism-description">The ability to perceive whether something is from God, from human nature, or from the evil one. Those with this gift sense spiritual realities others miss.</p>
+            <!-- The Server -->
+            <div class="archetype-section">
+                <div class="archetype-header">
+                    <p class="archetype-label">Archetype 2 of 5</p>
+                    <h3 class="archetype-name">The Server</h3>
+                    <p class="archetype-description">
+                        Those with Server charisms love through action. Something in them cannot rest while a need is unmet. They are the ones who notice the empty cup, the exhausted mother, the unset table &mdash; and they move toward it, not reluctantly but with something that looks a lot like joy.
+                    </p>
                 </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">💻</div>
-                    <h3 class="charism-name">Digital Communications</h3>
-                    <p class="charism-description">The ability to use technology and digital platforms to spread the Gospel, build community, and serve the Church's mission in the modern world.</p>
+                <div class="charisms-grid">
+                    <div class="charism-card">
+                        <div class="charism-icon">💝</div>
+                        <h3 class="charism-name">Giving</h3>
+                        <p class="charism-description">The ability to give generously of resources, time, and self with joy and without attachment. Those with this gift experience deep fulfillment through generosity.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">🤝</div>
+                        <h3 class="charism-name">Helping</h3>
+                        <p class="charism-description">The ability to joyfully support others in their work and calling, often behind the scenes. Those with this gift find fulfillment in enabling others' success.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">🏠</div>
+                        <h3 class="charism-name">Hospitality</h3>
+                        <p class="charism-description">The ability to create welcoming, warm environments where people feel at home and cared for. Those with this gift make strangers feel like family.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">💕</div>
+                        <h3 class="charism-name">Mercy</h3>
+                        <p class="charism-description">The ability to feel deep compassion for those who suffer and respond with practical, loving action. Those with this gift are drawn to the marginalized and hurting.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">🛠️</div>
+                        <h3 class="charism-name">Service</h3>
+                        <p class="charism-description">The ability to identify needs and meet them with joy, often in practical, hands-on ways. Those with this gift express love through action and deeds.</p>
+                    </div>
                 </div>
+            </div>
 
-                <div class="charism-card">
-                    <div class="charism-icon">💪</div>
-                    <h3 class="charism-name">Encouragement</h3>
-                    <p class="charism-description">The ability to come alongside others with words that comfort, strengthen, and urge them forward in faith. Those with this gift lift spirits and inspire perseverance.</p>
+            <!-- The Intercessor -->
+            <div class="archetype-section">
+                <div class="archetype-header">
+                    <p class="archetype-label">Archetype 3 of 5</p>
+                    <h3 class="archetype-name">The Intercessor</h3>
+                    <p class="archetype-description">
+                        Those with Intercessor charisms are given access to what others cannot yet see or feel. They pray with unusual persistence. They sense what is true beneath the surface. They carry others before God in ways the others may never know but will always benefit from.
+                    </p>
                 </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">📣</div>
-                    <h3 class="charism-name">Evangelism</h3>
-                    <p class="charism-description">The ability to share the Gospel in a way that draws others to faith in Christ. Those with this gift naturally find opportunities to share God's love.</p>
+                <div class="charisms-grid">
+                    <div class="charism-card">
+                        <div class="charism-icon">🔎</div>
+                        <h3 class="charism-name">Discernment</h3>
+                        <p class="charism-description">The ability to perceive whether something is from God, from human nature, or from the evil one. Those with this gift sense spiritual realities others miss.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">✝️</div>
+                        <h3 class="charism-name">Faith</h3>
+                        <p class="charism-description">An extraordinary trust in God's promises and providence, even in difficult circumstances. Those with this gift inspire others to believe and trust God more deeply.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">💚</div>
+                        <h3 class="charism-name">Healing</h3>
+                        <p class="charism-description">The ability to be a channel of God's healing power&mdash;physical, emotional, or spiritual. Those with this gift bring restoration and comfort to the suffering.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">🙏</div>
+                        <h3 class="charism-name">Intercession</h3>
+                        <p class="charism-description">The ability to pray for others with unusual faithfulness and see remarkable answers to prayer. Those with this gift feel called to stand in the gap for others.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">💡</div>
+                        <h3 class="charism-name">Wisdom</h3>
+                        <p class="charism-description">The ability to see situations from God's perspective and offer insight for decisions and direction. Those with this gift help others navigate complex situations.</p>
+                    </div>
                 </div>
+            </div>
 
-                <div class="charism-card">
-                    <div class="charism-icon">✝️</div>
-                    <h3 class="charism-name">Faith</h3>
-                    <p class="charism-description">An extraordinary trust in God's promises and providence, even in difficult circumstances. Those with this gift inspire others to believe and trust God more deeply.</p>
+            <!-- The Leader -->
+            <div class="archetype-section">
+                <div class="archetype-header">
+                    <p class="archetype-label">Archetype 4 of 5</p>
+                    <h3 class="archetype-name">The Leader</h3>
+                    <p class="archetype-description">
+                        Those with Leader charisms are given gifts oriented toward others &mdash; toward community, toward mission, toward the flourishing of the whole. They are not always the most visible. But they are often the reason something works, the reason people stay, the reason a group finds its way.
+                    </p>
                 </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">💝</div>
-                    <h3 class="charism-name">Giving</h3>
-                    <p class="charism-description">The ability to give generously of resources, time, and self with joy and without attachment. Those with this gift experience deep fulfillment through generosity.</p>
+                <div class="charisms-grid">
+                    <div class="charism-card">
+                        <div class="charism-icon">📋</div>
+                        <h3 class="charism-name">Administration</h3>
+                        <p class="charism-description">The ability to organize people, tasks, and resources to accomplish goals that serve the Church and others. Those with this gift bring order and efficiency to ministry.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">👑</div>
+                        <h3 class="charism-name">Leadership</h3>
+                        <p class="charism-description">The ability to see God's vision and guide others toward it with clarity and conviction. Those with this gift naturally inspire people to follow and work together.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">⛵</div>
+                        <h3 class="charism-name">Missionary</h3>
+                        <p class="charism-description">The ability to feel called beyond familiar ground &mdash; sent across boundaries of place, culture, or community to bring the Gospel where it has not yet taken root. Those with this gift carry the face of Christ to those who haven't yet seen Him.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">☮️</div>
+                        <h3 class="charism-name">Peacemaking</h3>
+                        <p class="charism-description">The ability to mediate conflict and bring reconciliation between people or groups. Those with this gift help restore broken relationships and build unity.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">🐑</div>
+                        <h3 class="charism-name">Shepherding</h3>
+                        <p class="charism-description">The ability to nurture, guide, and care for a group of people over time, helping them grow in faith. Those with this gift take responsibility for others' spiritual welfare.</p>
+                    </div>
                 </div>
+            </div>
 
-                <div class="charism-card">
-                    <div class="charism-icon">🌍</div>
-                    <h3 class="charism-name">Global & Cultural Awareness</h3>
-                    <p class="charism-description">The ability to connect across cultural, ethnic, and socioeconomic differences, bringing diverse people together in Christ and enhancing community.</p>
+            <!-- The Creator -->
+            <div class="archetype-section">
+                <div class="archetype-header">
+                    <p class="archetype-label">Archetype 5 of 5</p>
+                    <h3 class="archetype-name">The Creator</h3>
+                    <p class="archetype-description">
+                        Those with Creator charisms are gifts of making. They shape matter, sound, words, culture, and the slow forming of souls. Through their hands and presence and craft, the Holy Spirit makes beauty visible &mdash; and people are drawn closer to God because of what they have made.
+                    </p>
                 </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">💚</div>
-                    <h3 class="charism-name">Healing</h3>
-                    <p class="charism-description">The ability to be a channel of God's healing power—physical, emotional, or spiritual. Those with this gift bring restoration and comfort to the suffering.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">🤝</div>
-                    <h3 class="charism-name">Helping</h3>
-                    <p class="charism-description">The ability to joyfully support others in their work and calling, often behind the scenes. Those with this gift find fulfillment in enabling others' success.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">🏠</div>
-                    <h3 class="charism-name">Hospitality</h3>
-                    <p class="charism-description">The ability to create welcoming, warm environments where people feel at home and cared for. Those with this gift make strangers feel like family.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">🙏</div>
-                    <h3 class="charism-name">Intercession</h3>
-                    <p class="charism-description">The ability to pray for others with unusual faithfulness and see remarkable answers to prayer. Those with this gift feel called to stand in the gap for others.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">📚</div>
-                    <h3 class="charism-name">Knowledge</h3>
-                    <p class="charism-description">The ability to study, understand, and communicate truth in ways that enlighten others. Those with this gift love learning and sharing wisdom from faith and reason.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">👑</div>
-                    <h3 class="charism-name">Leadership</h3>
-                    <p class="charism-description">The ability to see God's vision and guide others toward it with clarity and conviction. Those with this gift naturally inspire people to follow and work together.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">💕</div>
-                    <h3 class="charism-name">Mercy</h3>
-                    <p class="charism-description">The ability to feel deep compassion for those who suffer and respond with practical, loving action. Those with this gift are drawn to the marginalized and hurting.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">🎵</div>
-                    <h3 class="charism-name">Musicianship</h3>
-                    <p class="charism-description">The ability to write, perform, or lead music that draws people into worship and encounter with God. Those with this gift help others experience God through song.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">☮️</div>
-                    <h3 class="charism-name">Peacemaking</h3>
-                    <p class="charism-description">The ability to mediate conflict and bring reconciliation between people or groups. Those with this gift help restore broken relationships and build unity.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">🔥</div>
-                    <h3 class="charism-name">Prophecy</h3>
-                    <p class="charism-description">The ability to receive and communicate messages from God that speak to the present moment. Those with this gift call people to deeper faithfulness and awareness.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">🛠️</div>
-                    <h3 class="charism-name">Service</h3>
-                    <p class="charism-description">The ability to identify needs and meet them with joy, often in practical, hands-on ways. Those with this gift express love through action and deeds.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">🐑</div>
-                    <h3 class="charism-name">Shepherding</h3>
-                    <p class="charism-description">The ability to nurture, guide, and care for a group of people over time, helping them grow in faith. Those with this gift take responsibility for others' spiritual welfare.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">📖</div>
-                    <h3 class="charism-name">Teaching</h3>
-                    <p class="charism-description">The ability to explain truth clearly in ways that help others understand and apply it. Those with this gift make complex ideas accessible and transformative.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">🕊️</div>
-                    <h3 class="charism-name">Voluntary Poverty</h3>
-                    <p class="charism-description">The ability to live simply and joyfully with few possessions, freeing oneself for greater service. Those with this gift find freedom in detachment from material things.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">💡</div>
-                    <h3 class="charism-name">Wisdom</h3>
-                    <p class="charism-description">The ability to see situations from God's perspective and offer insight for decisions and direction. Those with this gift help others navigate complex situations.</p>
-                </div>
-
-                <div class="charism-card">
-                    <div class="charism-icon">✍️</div>
-                    <h3 class="charism-name">Writing</h3>
-                    <p class="charism-description">The ability to compose words that reveal truth, beauty, and goodness in ways that touch hearts and minds. Those with this gift communicate God's love through the written word.</p>
+                <div class="charisms-grid">
+                    <div class="charism-card">
+                        <div class="charism-icon">🎨</div>
+                        <h3 class="charism-name">Craftsmanship</h3>
+                        <p class="charism-description">The ability to use hands and creativity to create art, crafts, or other works that reflect God's beauty and inspire others toward faith and wonder.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">🎵</div>
+                        <h3 class="charism-name">Musicianship</h3>
+                        <p class="charism-description">The ability to write, perform, or lead music that draws people into worship and encounter with God. Those with this gift help others experience God through song.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">🌹</div>
+                        <h3 class="charism-name">Spiritual Maternity</h3>
+                        <p class="charism-description">The distinctively feminine charism of receiving, nurturing, and shaping life &mdash; biological, but more deeply spiritual. Those with this gift carry souls into being, forming interior worlds in those God has placed in their care.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">🕊️</div>
+                        <h3 class="charism-name">Voluntary Poverty</h3>
+                        <p class="charism-description">The ability to live simply and joyfully with few possessions, shaping a counter-cultural way of being. Those with this gift find freedom in detachment &mdash; and invite others into that same freedom.</p>
+                    </div>
+                    <div class="charism-card">
+                        <div class="charism-icon">✍️</div>
+                        <h3 class="charism-name">Writing</h3>
+                        <p class="charism-description">The ability to compose words that reveal truth, beauty, and goodness &mdash; making with language. Those with this gift shape reflections, stories, and prayers that the Holy Spirit uses to reach souls.</p>
+                    </div>
                 </div>
             </div>
         </div>
