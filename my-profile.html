@@ -440,22 +440,37 @@
         </div>
         <div class="profile-card-body">
 
-            <!-- Name from the Lord -->
-            <div class="name-from-lord">
-                <label>My Name from the Lord</label>
-                <input type="text" id="p_name_lord" placeholder="The name He has spoken over you&hellip;" oninput="markUnsaved()">
-            </div>
-
             <!-- Foundation -->
             <div class="group-label">Foundation</div>
+            <div class="field-grid-3">
+                <div class="field-group">
+                    <label>Given Name</label>
+                    <input type="text" id="p_name_given" placeholder="e.g. Sarah Margaret" oninput="markUnsaved()">
+                </div>
+                <div class="field-group">
+                    <label>Name You Live Under</label>
+                    <input type="text" id="p_name_lived" placeholder="Optional &mdash; e.g. married or chosen name" oninput="markUnsaved()">
+                </div>
+                <div class="field-group">
+                    <label>Confirmation Name</label>
+                    <input type="text" id="p_name_confirmation" placeholder="e.g. Th&eacute;r&egrave;se" oninput="markUnsaved()">
+                </div>
+            </div>
+
+            <!-- Name from the Father (centered hero field) -->
+            <div class="name-from-lord">
+                <label>My Name from the Father</label>
+                <input type="text" id="p_name_lord" placeholder="e.g. Beloved, My Joy, Cherished" oninput="markUnsaved()">
+            </div>
+
             <div class="field-grid-2" style="margin-bottom:0;">
                 <div class="field-group">
                     <label>My Identity in Christ</label>
-                    <input type="text" id="p_identity" placeholder="Who He says you are&hellip;" oninput="markUnsaved()">
+                    <input type="text" id="p_identity" placeholder="e.g. Daughter of the King, Redeemed" oninput="markUnsaved()">
                 </div>
                 <div class="field-group">
-                    <label>A Word He Has Spoken Over Me</label>
-                    <input type="text" id="p_word_spoken" placeholder="A word or phrase&hellip;" oninput="markUnsaved()">
+                    <label>My Anchor Verse</label>
+                    <input type="text" id="p_anchor_verse" placeholder="e.g. Psalm 139:14, Isaiah 43:1" oninput="markUnsaved()">
                 </div>
             </div>
 
@@ -494,7 +509,7 @@
             </div>
             <div class="group-label" style="margin-top:0.25rem;">Top Character Strengths</div>
             <div class="multi-entries">
-                <div class="multi-entry"><span class="entry-num">1</span><input type="text" id="p_str1" placeholder="Your top gift&hellip;" oninput="markUnsaved()"></div>
+                <div class="multi-entry"><span class="entry-num">1</span><input type="text" id="p_str1" placeholder="Your signature strength&hellip;" oninput="markUnsaved()"></div>
                 <div class="multi-entry"><span class="entry-num">2</span><input type="text" id="p_str2" placeholder="" oninput="markUnsaved()"></div>
                 <div class="multi-entry"><span class="entry-num">3</span><input type="text" id="p_str3" placeholder="" oninput="markUnsaved()"></div>
                 <div class="multi-entry"><span class="entry-num">4</span><input type="text" id="p_str4" placeholder="" oninput="markUnsaved()"></div>
@@ -508,18 +523,6 @@
                 <div class="field-group">
                     <label>Secondary Love Language</label>
                     <input type="text" id="p_love_secondary" placeholder="Your second language&hellip;" oninput="markUnsaved()">
-                </div>
-                <div>
-                    <label>How You Give Love (Primary)</label>
-                    <input type="text" id="p_love_give1" placeholder="Your primary giving language&hellip;" oninput="markUnsaved()">
-                </div>
-                <div>
-                    <label>How You Give Love (Secondary)</label>
-                    <input type="text" id="p_love_give2" placeholder="Your secondary giving language&hellip;" oninput="markUnsaved()">
-                </div>
-                <div>
-                    <label>Love Orientation</label>
-                    <input type="text" id="p_love_orientation" placeholder="Belonging, Security, Delight, or Freedom&hellip;" oninput="markUnsaved()">
                 </div>
             </div>
 
@@ -536,10 +539,21 @@
                 <div class="multi-entry"><span class="entry-num">5</span><input type="text" id="p_vir5" placeholder="" oninput="markUnsaved()"></div>
             </div>
             <div class="group-label" style="font-size:0.62rem; margin-bottom:0.6rem; margin-top:1rem;">My Charisms</div>
-            <div class="multi-entries" style="margin-bottom:0;">
+            <div class="multi-entries">
                 <div class="multi-entry"><span class="entry-num">1</span><input type="text" id="p_char1" placeholder="A gift the Spirit has entrusted to you&hellip;" oninput="markUnsaved()"></div>
                 <div class="multi-entry"><span class="entry-num">2</span><input type="text" id="p_char2" placeholder="" oninput="markUnsaved()"></div>
                 <div class="multi-entry"><span class="entry-num">3</span><input type="text" id="p_char3" placeholder="" oninput="markUnsaved()"></div>
+            </div>
+
+            <div class="profile-divider"></div>
+
+            <!-- For Your Final Composition -->
+            <div class="group-label">For Your Final Composition</div>
+            <p style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-style:italic; color:var(--text-medium); margin-top:-0.5rem; margin-bottom:1rem; line-height:1.5;">The sounds that move you &mdash; instruments or genres, in any blend.</p>
+            <div class="multi-entries" style="margin-bottom:0;">
+                <div class="multi-entry"><span class="entry-num">1</span><input type="text" id="p_music1" placeholder="e.g. cello" oninput="markUnsaved()"></div>
+                <div class="multi-entry"><span class="entry-num">2</span><input type="text" id="p_music2" placeholder="e.g. folk music" oninput="markUnsaved()"></div>
+                <div class="multi-entry"><span class="entry-num">3</span><input type="text" id="p_music3" placeholder="e.g. Gregorian chant" oninput="markUnsaved()"></div>
             </div>
 
         </div>
@@ -665,17 +679,17 @@
     <div class="session-card">
         <div class="session-card-header">
             <span class="session-number">9</span>
-            <div><div class="session-title">Strengths as Entrusted Gifts: Gifts of Grace</div><div class="session-subtitle">The unique blend of strengths God has given you</div></div>
+            <div><div class="session-title">Strengths as Entrusted Gifts: VIA Character Strengths</div><div class="session-subtitle">The unique blend of strengths God has given you</div></div>
         </div>
         <div class="session-card-body">
-            <div class="question"><p>Which of your Gifts of Grace surprised you most? Which one do you feel most called to steward right now &#8212; and how are you living from it?</p><textarea id="j_s9q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
+            <div class="question"><p>Which of your character strengths surprised you most? Which one do you feel most called to steward right now &#8212; and how are you doing that?</p><textarea id="j_s9q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
         </div>
     </div>
 
     <div class="session-card">
         <div class="session-card-header">
             <span class="session-number">10</span>
-            <div><div class="session-title">Giving &amp; Receiving: The Language of Your Love</div><div class="session-subtitle">How you give and receive love</div></div>
+            <div><div class="session-title">Giving &amp; Receiving: Love Languages</div><div class="session-subtitle">How we give and receive love</div></div>
         </div>
         <div class="session-card-body">
             <div class="question"><p>How has knowing your love language (and others&#8217;) changed how you give or receive love &#8212; in your relationships, and with God?</p><textarea id="j_s10q1" rows="3" placeholder="Reflect here&hellip;" oninput="markUnsaved()"></textarea></div>
@@ -777,13 +791,15 @@
 
     // ── Profile field IDs ─────────────────────────────────────
     const PROFILE_FIELDS = [
-        'p_name_lord','p_identity','p_word_spoken',
+        'p_name_given','p_name_lived','p_name_confirmation',
+        'p_name_lord','p_identity','p_anchor_verse',
         'p_color_season','p_style_essence','p_silhouette',
-        'p_love_primary','p_love_secondary','p_love_give1','p_love_give2','p_love_orientation',
+        'p_love_primary','p_love_secondary',
         'p_temperament','p_type',
         'p_str1','p_str2','p_str3','p_str4','p_str5',
         'p_vir1','p_vir2','p_vir3','p_vir4','p_vir5',
-        'p_char1','p_char2','p_char3'
+        'p_char1','p_char2','p_char3',
+        'p_music1','p_music2','p_music3'
     ];
     const JOURNAL_FIELDS = [
         'j_s1q1','j_s1q2','j_s2q1','j_s2q2','j_s3q1',
@@ -877,8 +893,8 @@
 
         try {
             const upserts = [
-                { user_id: currentUser.id, email: currentUser.email, assessment: 'symphony_profile', result_data: profileData, updated_at: new Date().toISOString() },
-                { user_id: currentUser.id, email: currentUser.email, assessment: 'reflection_journal', result_data: journeyData, updated_at: new Date().toISOString() }
+                { user_id: currentUser.id, assessment: 'symphony_profile', result_data: profileData, updated_at: new Date().toISOString() },
+                { user_id: currentUser.id, assessment: 'reflection_journal', result_data: journeyData, updated_at: new Date().toISOString() }
             ];
             const { error } = await sb.from('user_results').upsert(upserts, { onConflict: 'user_id,assessment' });
             if (error) throw error;
