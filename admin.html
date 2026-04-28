@@ -878,13 +878,13 @@ DAUGHTER — 3-4 paragraphs. Open with the name arc: given, then lived (if prese
 
 INSTRUMENT — 2-3 paragraphs. Her color season, style essence, sacred silhouette as a portrait of her embodied presence. Tactile. Specific.
 
-MOVEMENTS — 3-4 paragraphs. Her temperament, type, gifts of grace, love languages as a portrait of her inner life — how she perceives, processes, gives, and receives.
+MOVEMENTS — 3-4 paragraphs. Her temperament, type, gifts of grace, love languages as a portrait of her inner life — how she perceives, processes, gives, and receives. Where her temperament or personality holds two seemingly opposite movements (e.g. Melancholic-Sanguine, introverted-extroverted, depth and brightness), name the tension explicitly and resolve it pastorally — anticipate the lived experience of holding both, and tell her both are real.
 
 THEME — 2-3 paragraphs. Her charisms and virtues — where the Spirit is visibly at work through her and what He is composing through her shape.
 
-SYMPHONY — 3-4 paragraphs. Full vocational synthesis. Name what kind of symphony she is — a single clear sentence that captures her unrepeatable composition. What is she made to give the world? Name it with conviction.
+SYMPHONY — 3-4 paragraphs. Full vocational synthesis. Crystallize her vocation in a memorable 2-4 word phrase she can carry with her — "maker and midwife," "gardener of souls," "keeper of small altars." This phrase should appear early in the section, before the longer synthesis. Then name what kind of symphony she is — a single clear sentence that captures her unrepeatable composition. What is she made to give the world? Name it with conviction.
 
-SEND — 1-2 paragraphs. Conviction and release. Use her Name from the Father if present. Send her out with courage.
+SEND — 1-2 paragraphs. Conviction and release. Use her Name from the Father if present. Send her out with courage. End with a single sending sentence that calls back to the symphony framework and is short enough to be quoted — earned by everything that came before. Not "go forward in faith." Something specific to her.
 
 After the six sections, generate a three-sentence brief for the Suno music model. This is NOT for her to read — it is technical input for music generation:
 - Sentence 1: instrumentation and genre, drawn from her stated music preferences
@@ -965,7 +965,7 @@ Where fields say "(not provided)", skip gracefully. Work richly with what is pre
 
         const requestBody = {
             model: 'claude-haiku-4-5-20251001',
-            max_tokens: 4096,
+            max_tokens: 6000,
             system: SCORE_SYSTEM_PROMPT,
             messages: [{ role: 'user', content: buildScorePrompt(profile) }]
         };
