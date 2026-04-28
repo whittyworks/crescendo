@@ -397,7 +397,7 @@
     const PROFILE_LABELS = {
         p_name_given:        'Given Name',
         p_name_lived:        'Name She Lives Under',
-        p_name_confirmation: 'Confirmation Name',
+        p_name_confirmation: 'Confirmation or Patron SaintName',
         p_name_lord:         'Name from the Father',
         p_identity:          'Identity in Christ',
         p_anchor_verse:      'Anchor Verse',
@@ -763,7 +763,7 @@
         const opusParts = [];
         const given = profile.p_name_given; if (given) opusParts.push('Given name: ' + given);
         const lived = profile.p_name_lived; if (lived) opusParts.push('Name she lives under: ' + lived);
-        const conf = profile.p_name_confirmation; if (conf) opusParts.push('Confirmation name: ' + conf);
+        const conf = profile.p_name_confirmation; if (conf) opusParts.push('Confirmation or Patron Saintname: ' + conf);
         const nameL = profile.p_name_lord; if (nameL) opusParts.push('Name from the Father: ' + nameL);
         const ident = profile.p_identity; if (ident) opusParts.push('Identity: ' + ident);
         const anchor = profile.p_anchor_verse; if (anchor) opusParts.push('Anchor verse: ' + anchor);
@@ -902,7 +902,7 @@ She has up to four names on her profile, each doing different theological work:
 
 - NAME SHE LIVES UNDER — present only if different from her given name (married, chosen, religious). When present, place her in the biblical lineage of name change: Abram to Abraham, Sarai to Sarah, Jacob to Israel, Simon to Peter, Saul to Paul. The journey BETWEEN those two names is conversion. Honor it.
 
-- CONFIRMATION NAME — the patron saint chosen at full initiation. Briefly honor what the saint's charism reveals about her own vocation.
+- CONFIRMATION OR PATRON SAINT NAME — the patron saint chosen at full initiation. Briefly honor what the saint's charism reveals about her own vocation.
 
 - NAME FROM THE FATHER — the eternal, personal name He has been speaking over her since before time, which she heard in stillness during Session 2 (cf. Revelation 2:17, RSV2CE — the white stone, the name no one knows except the one who receives it). The most intimate of the names; the one that completes the arc.
 
@@ -912,7 +912,7 @@ NEVER: Use "based on your results" or "according to your profile." Never write a
 
 STRUCTURE: Six sections. Each heading in ALL CAPS on its own line. Blank line between paragraphs.
 
-DAUGHTER — 3-4 paragraphs. Open with the name arc: given, then lived (if present), then confirmation (if present), then Name from the Father. Weave in her Identity in Christ and Anchor Verse. Make her feel specifically seen and named.
+DAUGHTER — 3-4 paragraphs. Open with the name arc: given, then lived (if present), then confirmation or patron saint name (if present), then Name from the Father. Weave in her Identity in Christ and Anchor Verse. Make her feel specifically seen and named.
 
 INSTRUMENT — 2-3 paragraphs. Her color season, style essence, sacred silhouette as a portrait of her embodied presence. Tactile. Specific.
 
@@ -941,7 +941,7 @@ No preamble. No commentary. No closing outside the six sections. Begin with the 
 FOUNDATION:
 Given Name: ${f('p_name_given')}
 Name She Lives Under: ${f('p_name_lived')}
-Confirmation Name: ${f('p_name_confirmation')}
+Confirmation or Patron Saint Name: ${f('p_name_confirmation')}
 Name from the Father: ${f('p_name_lord')}
 Identity in Christ: ${f('p_identity')}
 Anchor Verse: ${f('p_anchor_verse')}
