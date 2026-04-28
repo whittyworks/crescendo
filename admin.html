@@ -158,12 +158,43 @@
         }
 
         .p-info { flex: 1; min-width: 0; }
+        .p-name-row {
+            display: flex; align-items: center; gap: 0.5rem;
+        }
         .p-name {
             font-family: 'Cinzel', serif;
             font-size: 1.1rem;
             color: var(--text-dark);
             font-weight: 400;
         }
+        .p-name.placeholder { color: var(--text-medium); font-style: italic; }
+        .p-name-edit {
+            background: none; border: none; cursor: pointer;
+            color: var(--text-medium); font-size: 0.85rem;
+            opacity: 0.5; transition: opacity 0.2s, color 0.2s;
+            padding: 0.15rem 0.35rem; border-radius: 4px;
+        }
+        .p-name-edit:hover { opacity: 1; color: var(--gold-dark); background: rgba(212,175,55,0.08); }
+        .p-name-edit-form {
+            display: none; align-items: center; gap: 0.4rem; flex-wrap: wrap;
+        }
+        .p-name-edit-form input {
+            border: 1.5px solid rgba(212,175,55,0.3); border-radius: 6px;
+            padding: 0.35rem 0.7rem;
+            font-family: 'Cormorant Garamond', serif; font-size: 1rem;
+            color: var(--text-dark); background: var(--cream);
+            min-width: 180px;
+        }
+        .p-name-edit-form input:focus { outline: none; border-color: var(--gold); background: white; }
+        .p-name-save, .p-name-cancel {
+            font-family: 'Montserrat', sans-serif; font-size: 0.65rem;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            padding: 0.4rem 0.85rem; border-radius: 50px; border: none; cursor: pointer;
+        }
+        .p-name-save { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: white; }
+        .p-name-save[disabled] { opacity: 0.5; cursor: not-allowed; }
+        .p-name-cancel { background: transparent; color: var(--text-medium); border: 1px solid rgba(212,175,55,0.25); }
+        .p-name-cancel:hover { border-color: var(--gold); color: var(--gold-dark); }
         .p-email {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.72rem;
@@ -427,12 +458,14 @@
     // ── Load all data ─────────────────────────────────────────
     async function loadDashboard() {
         try {
-            // Get all user_results rows including email column
-            const { data: results, error: rErr } = await sb
-                .from('user_results')
-                .select('user_id, email, assessment, result_data');
+            // Run user_results query and the admin auth-users fetch in parallel.
+            const [resultsRes, authUsers] = await Promise.all([
+                sb.from('user_results').select('user_id, email, assessment, result_data'),
+                fetchAuthUsers()
+            ]);
 
-            if (rErr) throw rErr;
+            if (resultsRes.error) throw resultsRes.error;
+            const results = resultsRes.data || [];
 
             // Group results by user_id
             const byUser = {};
@@ -440,15 +473,29 @@
                 if (!byUser[row.user_id]) {
                     byUser[row.user_id] = {
                         email: row.email || null,
+                        full_name: '',
+                        last_sign_in_at: null,
                         profile: null,
                         journal: null
                     };
                 }
-                // Always update email if we find one
                 if (row.email) byUser[row.user_id].email = row.email;
                 if (row.assessment === 'symphony_profile') byUser[row.user_id].profile = row.result_data;
                 if (row.assessment === 'reflection_journal') byUser[row.user_id].journal = row.result_data;
             });
+
+            // Merge auth user data (full_name, last sign-in). Includes users
+            // who may have signed up but never saved a profile yet.
+            if (Array.isArray(authUsers)) {
+                for (const u of authUsers) {
+                    if (!byUser[u.id]) {
+                        byUser[u.id] = { email: u.email || null, full_name: '', last_sign_in_at: null, profile: null, journal: null };
+                    }
+                    byUser[u.id].full_name = u.full_name || '';
+                    byUser[u.id].last_sign_in_at = u.last_sign_in_at || null;
+                    if (!byUser[u.id].email && u.email) byUser[u.id].email = u.email;
+                }
+            }
 
             renderDashboard(byUser);
 
@@ -456,6 +503,33 @@
             console.error(e);
             document.getElementById('participant-list').innerHTML =
                 '<p style="color:var(--red);font-family:Montserrat,sans-serif;font-size:0.85rem;">Error loading data: ' + e.message + '</p>';
+        }
+    }
+
+    // Fetch auth users (for full_name + last_sign_in) via Netlify Function.
+    // Returns null silently if the function isn't deployed yet — admin still works,
+    // just falls back to email-prefix names.
+    async function fetchAuthUsers() {
+        try {
+            const { data: { session } } = await sb.auth.getSession();
+            if (!session) return null;
+            const res = await fetch('/.netlify/functions/admin-users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + session.access_token,
+                },
+                body: JSON.stringify({ action: 'list' }),
+            });
+            if (!res.ok) {
+                console.warn('admin-users list failed:', res.status, await res.text().catch(() => ''));
+                return null;
+            }
+            const data = await res.json();
+            return data.users || [];
+        } catch (e) {
+            console.warn('admin-users list error:', e);
+            return null;
         }
     }
 
@@ -490,8 +564,14 @@
 
         userIds.forEach((uid, idx) => {
             const email = byUser[uid].email || uid.substring(0, 12) + '...';
-            const name = email.split('@')[0];
-            const initial = name.charAt(0).toUpperCase();
+            const fullName = (byUser[uid].full_name || '').trim();
+            const emailPrefix = (email || '').split('@')[0];
+            // Real name if we have it; otherwise fall back to email prefix for display only.
+            const displayName = fullName || emailPrefix;
+            const initial = (displayName || '?').charAt(0).toUpperCase();
+            // For the score-generation flow we still pass a name into renderDetail —
+            // pass the actual full name when present, falling back to email prefix.
+            const nameForScore = fullName || emailPrefix;
             const profile = byUser[uid].profile || {};
             const journal = byUser[uid].journal || {};
 
@@ -503,14 +583,26 @@
             if (profFilled >= profTotal * 0.7) { statusClass = 'complete'; statusLabel = 'Profile complete'; }
             else if (profFilled > 0) { statusClass = 'partial'; statusLabel = profPct + '% complete'; }
 
+            const nameClasses = 'p-name' + (fullName ? '' : ' placeholder');
             const card = document.createElement('div');
             card.className = 'participant-card';
             card.innerHTML = `
                 <div class="participant-header" onclick="toggleCard(this)">
-                    <div class="p-avatar">${initial}</div>
+                    <div class="p-avatar">${escapeHtml(initial)}</div>
                     <div class="p-info">
-                        <div class="p-name">${name}</div>
-                        <div class="p-email">${email}</div>
+                        <div class="p-name-row" id="p-name-row-${uid}">
+                            <span class="${nameClasses}" id="p-name-${uid}">${escapeHtml(displayName)}</span>
+                            <button class="p-name-edit" onclick="event.stopPropagation(); editName('${uid}')" title="Edit name">&#9998;</button>
+                        </div>
+                        <div class="p-name-edit-form" id="p-name-form-${uid}">
+                            <input type="text" id="p-name-input-${uid}" value="${escapeAttr(fullName)}"
+                                placeholder="${escapeAttr('e.g. ' + (emailPrefix.charAt(0).toUpperCase() + emailPrefix.slice(1)))}"
+                                onclick="event.stopPropagation();"
+                                onkeydown="onNameKey(event, '${uid}')">
+                            <button class="p-name-save" id="p-name-save-${uid}" onclick="event.stopPropagation(); saveDisplayName('${uid}')">Save</button>
+                            <button class="p-name-cancel" onclick="event.stopPropagation(); cancelEditName('${uid}')">Cancel</button>
+                        </div>
+                        <div class="p-email">${escapeHtml(email)}</div>
                     </div>
                     <div class="p-status">
                         <span class="status-pill ${statusClass}">${statusLabel}</span>
@@ -518,11 +610,92 @@
                     <div class="p-chevron">&#9660;</div>
                 </div>
                 <div class="participant-detail">
-                    ${renderDetail(profile, journal, name, uid)}
+                    ${renderDetail(profile, journal, nameForScore, uid)}
                 </div>
             `;
             list.appendChild(card);
         });
+    }
+
+    // Tiny escape helpers for safe interpolation into innerHTML.
+    function escapeHtml(s) {
+        return String(s == null ? '' : s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+    function escapeAttr(s) {
+        return String(s == null ? '' : s)
+            .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    // ── Inline name edit ──────────────────────────────────────
+    function editName(uid) {
+        // Close any other open edit forms first.
+        document.querySelectorAll('.p-name-edit-form').forEach(f => f.style.display = 'none');
+        document.querySelectorAll('.p-name-row').forEach(r => r.style.display = 'flex');
+        document.getElementById('p-name-row-' + uid).style.display = 'none';
+        document.getElementById('p-name-form-' + uid).style.display = 'flex';
+        const input = document.getElementById('p-name-input-' + uid);
+        input.focus();
+        input.select();
+    }
+
+    function cancelEditName(uid) {
+        document.getElementById('p-name-form-' + uid).style.display = 'none';
+        document.getElementById('p-name-row-' + uid).style.display = 'flex';
+    }
+
+    function onNameKey(e, uid) {
+        if (e.key === 'Enter') { e.preventDefault(); saveDisplayName(uid); }
+        else if (e.key === 'Escape') { e.preventDefault(); cancelEditName(uid); }
+    }
+
+    async function saveDisplayName(uid) {
+        const input = document.getElementById('p-name-input-' + uid);
+        const newName = input.value.trim();
+        const saveBtn = document.getElementById('p-name-save-' + uid);
+
+        const { data: { session } } = await sb.auth.getSession();
+        if (!session) { alert('Session expired. Please sign in again.'); return; }
+
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving…';
+
+        try {
+            const res = await fetch('/.netlify/functions/admin-users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + session.access_token,
+                },
+                body: JSON.stringify({ action: 'update_name', user_id: uid, full_name: newName }),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(data.error || ('Save failed (' + res.status + ').'));
+
+            const savedName = (data.user && data.user.full_name) || '';
+            const email = (data.user && data.user.email) || '';
+            const display = savedName || (email.split('@')[0] || '');
+
+            // Update local cache so re-renders are correct.
+            if (window.adminProfiles && window.adminProfiles[uid]) {
+                window.adminProfiles[uid].full_name = savedName;
+            }
+            // Update the visible name + avatar initial, no full re-render needed.
+            const nameEl = document.getElementById('p-name-' + uid);
+            nameEl.textContent = display;
+            nameEl.classList.toggle('placeholder', !savedName);
+            const card = nameEl.closest('.participant-card');
+            const avatar = card && card.querySelector('.p-avatar');
+            if (avatar) avatar.textContent = (display || '?').charAt(0).toUpperCase();
+
+            cancelEditName(uid);
+        } catch (e) {
+            alert('Could not save name: ' + e.message);
+        } finally {
+            saveBtn.disabled = false;
+            saveBtn.textContent = 'Save';
+        }
     }
 
     function renderDetail(profile, journal, name, uid) {
