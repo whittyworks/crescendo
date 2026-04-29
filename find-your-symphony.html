@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QX21GDR7T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7QX21GDR7T');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Symphony — My Holy Crescendo</title>
+    <meta name="description" content="A 3-minute reflection across body, mind, spirit, and foundation — discover where your symphony is resonant and where it's still being tuned.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Find Your Symphony — My Holy Crescendo">
+    <meta property="og:description" content="A 3-minute reflection on the symphony God is composing in you.">
+    <meta property="og:image" content="https://myholycrescendo.com/ogimage.png">
+    <meta property="og:url" content="https://myholycrescendo.com/find-your-symphony.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+            --mauve: #DCC5D8;
+            --sage: #B8C5B0;
+            --blush: #EBD4D0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            background-color: var(--cream);
+            color: var(--text-dark);
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Soft watercolor washes */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.18;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(60px);
+        }
+        body::before {
+            top: -100px;
+            right: -100px;
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, var(--gold-light), transparent 70%);
+        }
+        body::after {
+            bottom: -100px;
+            left: -100px;
+            width: 340px;
+            height: 340px;
+            background: radial-gradient(circle, var(--mauve), transparent 70%);
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem;
+        }
+
+        /* Top branding strip */
+        .brand-top {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .brand-mark {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* Section visibility */
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .section.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ====== INTRO ====== */
+        .intro h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.4rem;
+            font-weight: 500;
+            color: var(--gold-dark);
+            text-align: center;
+            line-height: 1.25;
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.04em;
+        }
+        .intro .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.35rem;
+            color: var(--text-medium);
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .flourish {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        .flourish-line {
+            flex: 0 1 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+        .flourish-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            margin: 0 0.7rem;
+            transform: rotate(45deg);
+        }
+
+        .intro .body-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+            text-align: center;
+            margin: 0 auto 1rem;
+            max-width: 540px;
+        }
+        .intro .body-text em {
+            color: var(--gold-dark);
+            font-style: italic;
+        }
+
+        .scripture {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            text-align: center;
+            margin: 2rem auto 2.5rem;
+            max-width: 460px;
+            line-height: 1.55;
+        }
+        .scripture .ref {
+            display: block;
+            font-style: normal;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1.1rem 2.5rem;
+            background: var(--gold);
+            color: var(--cream);
+            border: 1.5px solid var(--gold-dark);
+            border-radius: 14px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 3px 12px rgba(184, 148, 31, 0.25);
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn:hover, .btn:active {
+            background: var(--gold-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(184, 148, 31, 0.35);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold-dark);
+            box-shadow: none;
+        }
+        .btn-secondary:hover {
+            background: rgba(212, 175, 55, 0.08);
+            color: var(--gold-dark);
+        }
+        .center { text-align: center; }
+        .meta-note {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            text-align: center;
+            margin-top: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* ====== QUIZ ====== */
+        .progress-wrap {
+            margin-bottom: 2.5rem;
+        }
+        .progress-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 3px;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--gold);
+            transition: width 0.4s ease;
+        }
+
+        .question-block {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .module-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            text-align: center;
+            line-height: 1.4;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .answers {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .answer {
+            display: block;
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1.5px solid rgba(212, 175, 55, 0.4);
+            border-radius: 12px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--text-dark);
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .answer:hover, .answer:active {
+            background: rgba(212, 175, 55, 0.08);
+            border-color: var(--gold);
+            transform: translateY(-1px);
+        }
+        .answer.selected {
+            background: var(--gold);
+            color: var(--cream);
+            border-color: var(--gold-dark);
+            font-weight: 500;
+        }
+
+        .answer-num {
+            display: inline-block;
+            width: 24px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--gold-dark);
+            margin-right: 0.5rem;
+        }
+        .answer.selected .answer-num {
+            color: var(--cream);
+        }
+
+        .nav-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+        .nav-link {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            background: none;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.5rem 0;
+        }
+        .nav-link:hover { color: var(--gold-dark); }
+        .nav-link[disabled] {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* ====== RESULTS ====== */
+        .results h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold-dark);
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+        .results .lede {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-chart {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 2rem 1.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .module-row {
+            margin-bottom: 1.25rem;
+        }
+        .module-row:last-child { margin-bottom: 0; }
+
+        .module-row-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.4rem;
+        }
+        .module-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        .module-status {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .bar-track {
+            width: 100%;
+            height: 10px;
+            background: rgba(212, 175, 55, 0.15);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--gold-light), var(--gold));
+            border-radius: 5px;
+            transition: width 1s ease 0.3s;
+            width: 0;
+        }
+
+        .narrative {
+            background: rgba(255, 255, 255, 0.5);
+            border-left: 3px solid var(--gold);
+            border-radius: 4px;
+            padding: 1.5rem 1.5rem 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .narrative h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--gold-dark);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+        .narrative p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+        .narrative p:last-child { margin-bottom: 0; }
+        .narrative em {
+            color: var(--gold-dark);
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        /* CTA block */
+        .cta-block {
+            background: var(--cream-dark);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            padding: 2rem 1.75rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .cta-eyebrow {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        .cta-block h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.03em;
+        }
+        .cta-block p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            max-width: 460px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Email capture */
+        .email-block {
+            margin-top: 2rem;
+            padding: 1.75rem;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px dashed rgba(212, 175, 55, 0.4);
+            border-radius: 12px;
+            text-align: center;
+        }
+        .email-block h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        .email-block p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            margin-bottom: 1rem;
+        }
+        .email-form {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+        .email-form input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1.5px solid rgba(212, 175, 55, 0.4);
+            border-radius: 10px;
+            background: var(--cream);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            outline: none;
+        }
+        .email-form input:focus {
+            border-color: var(--gold);
+        }
+        .email-form button {
+            padding: 0.75rem 1.25rem;
+            background: var(--gold-dark);
+            color: var(--cream);
+            border: none;
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .email-form button:hover { background: var(--gold); }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 3rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            color: var(--text-medium);
+            text-transform: uppercase;
+        }
+        .footer-note a {
+            color: var(--gold-dark);
+            text-decoration: none;
+        }
+
+        /* Mobile tweaks */
+        @media (max-width: 480px) {
+            .container { padding: 2rem 1rem 3rem; }
+            .intro h1 { font-size: 1.85rem; }
+            .intro .subtitle { font-size: 1.15rem; }
+            .question-block { padding: 1.75rem 1.25rem; }
+            .question-text { font-size: 1.25rem; }
+            .answer { font-size: 1rem; padding: 0.85rem 1rem; }
+            .results h1 { font-size: 1.6rem; }
+            .email-form { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="brand-top">
+        <a href="index.html" style="text-decoration:none;color:inherit;">
+            <span class="brand-mark">My Holy Crescendo</span>
+        </a>
+    </div>
+
+    <!-- ============ INTRO ============ -->
+    <section id="intro-section" class="section active intro">
+        <h1>Find Your<br>Symphony</h1>
+
+        <div class="flourish">
+            <span class="flourish-line"></span>
+            <span class="flourish-dot"></span>
+            <span class="flourish-line"></span>
+        </div>
+
+        <p class="subtitle">A 3-minute reflection.<br>Not a test. A listening.</p>
+
+        <p class="body-text">
+            Every woman is a unique <em>once-in-a-universe</em> symphony composed by a God who delights in her. Some notes are already resonant. Others are still being tuned.
+        </p>
+
+        <p class="body-text">
+            This reflection moves through twelve gentle questions across the four movements of the symphony — <em>Foundation, Body, Mind, Spirit</em>. There are no right answers. Just where you are, today.
+        </p>
+
+        <div class="scripture">
+            "I praise You, for I am fearfully and wonderfully made."
+            <span class="ref">Psalm 139:14  ·  RSV2CE</span>
+        </div>
+
+        <div class="center">
+            <button class="btn" onclick="startQuiz()">Begin the reflection</button>
+            <p class="meta-note">12 questions  ·  about 3 minutes</p>
+        </div>
+    </section>
+
+    <!-- ============ QUIZ ============ -->
+    <section id="quiz-section" class="section">
+
+        <div class="progress-wrap">
+            <div class="progress-text" id="progress-text">Question 1 of 12</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width:8.33%"></div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="module-label" id="module-label">Foundation</div>
+            <div class="question-text" id="question-text">Loading...</div>
+
+            <div class="answers" id="answers"></div>
+        </div>
+
+        <div class="nav-row">
+            <button class="nav-link" id="back-btn" onclick="goBack()" disabled>← Back</button>
+            <button class="nav-link" id="forward-btn" onclick="goForward()" disabled>Next →</button>
+        </div>
+    </section>
+
+    <!-- ============ RESULTS ============ -->
+    <section id="results-section" class="section results">
+
+        <div class="brand-top">
+            <span class="brand-mark">Your Symphony Profile</span>
+        </div>
+
+        <h1 id="results-headline">Your strongest note<br>is <em id="strongest-name">Foundation</em></h1>
+
+        <p class="lede" id="results-lede">Here's where the symphony is most resonant — and where it is still being tuned.</p>
+
+        <div class="flourish">
+            <span class="flourish-line"></span>
+            <span class="flourish-dot"></span>
+            <span class="flourish-line"></span>
+        </div>
+
+        <div class="profile-chart" id="profile-chart">
+            <!-- Bars get rendered here -->
+        </div>
+
+        <div class="narrative" id="narrative-strong">
+            <h3>Your Strong Note</h3>
+            <p id="narrative-strong-text"></p>
+        </div>
+
+        <div class="narrative" id="narrative-quiet">
+            <h3>The Note Still Being Tuned</h3>
+            <p id="narrative-quiet-text"></p>
+        </div>
+
+        <div class="cta-block">
+            <div class="cta-eyebrow">Your next step</div>
+            <h2>The Invitation</h2>
+            <p>The free first session of <em>A Symphony of Grace</em>. Step inside and begin tuning the symphony that is uniquely yours.</p>
+            <a href="portal.html" class="btn">Open The Invitation</a>
+        </div>
+
+        <!--
+            Email capture form.
+            Netlify handles the form automatically once deployed (data-netlify="true").
+            You'll receive submissions in your Netlify dashboard under Forms.
+            To pipe to your email tool, set up a Netlify form notification or webhook.
+        -->
+        <form class="email-block" name="symphony-quiz" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleEmailSubmit(event)">
+            <input type="hidden" name="form-name" value="symphony-quiz">
+            <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+            <input type="hidden" name="strongest" id="hidden-strongest">
+            <input type="hidden" name="quietest" id="hidden-quietest">
+            <input type="hidden" name="scores" id="hidden-scores">
+
+            <h3>Want a deeper reflection delivered to your inbox?</h3>
+            <p>Receive your personalized profile + a 3-day mini retreat. No spam, ever.</p>
+            <div class="email-form">
+                <input type="email" name="email" required placeholder="your email" id="email-input">
+                <button type="submit">Send it</button>
+            </div>
+        </form>
+
+        <div class="footer-note">
+            <a href="index.html">myholycrescendo.com</a>
+        </div>
+    </section>
+
+</div>
+
+<script>
+// ============ QUIZ DATA ============
+
+const questions = [
+    // FOUNDATION
+    { module: 'Foundation', text: 'I know God delights in me, even when I am not productive.' },
+    { module: 'Foundation', text: 'When I think about who I am, I think first about whose I am.' },
+    { module: 'Foundation', text: 'I let myself be loved without trying to earn it first.' },
+    // BODY
+    { module: 'Body', text: 'I see my body as God\u2019s specific design, not a problem to fix.' },
+    { module: 'Body', text: 'I know how to present myself in a way that reflects who I am, not just what is trendy.' },
+    { module: 'Body', text: 'I feel at peace with the form and features God gave me.' },
+    // MIND
+    { module: 'Mind', text: 'I understand how I am uniquely made — my temperament, my gifts, the way I love.' },
+    { module: 'Mind', text: 'I work with my wiring instead of against it.' },
+    { module: 'Mind', text: 'I know how I best receive love and how I most naturally give it.' },
+    // SPIRIT
+    { module: 'Spirit', text: 'My prayer life feels like a real relationship, not an obligation.' },
+    { module: 'Spirit', text: 'I know what to do with my woundedness — I bring it to God instead of hiding from it.' },
+    { module: 'Spirit', text: 'My days have a rhythm that keeps God at the center, even in the chaos.' }
+];
+
+const answerOptions = [
+    { label: 'Not yet', value: 1 },
+    { label: 'Sometimes', value: 2 },
+    { label: 'Growing', value: 3 },
+    { label: 'Often', value: 4 },
+    { label: 'Deeply yes', value: 5 }
+];
+
+// Narrative content per module
+const narratives = {
+    Foundation: {
+        strong: 'You know, deep down, that you are <em>His</em> before you are anything else. You are not earning love — you are receiving it. This is the rarest gift in our striving world, and it is the bedrock everything else rests on. From here, the rest of the symphony has somewhere to stand.',
+        tuning: 'You believe in your belovedness on the good days. On the harder ones, you slip back into earning it. Foundation is the work of letting His naming of you go deeper than your own self-criticism. The first three sessions of <em>A Symphony of Grace</em> live exactly here.',
+        quiet: 'You are still wrestling with whether you are wanted by God for who you are, or only for what you do. This is the most foundational work — and it is also the work most women skip past in pursuit of the next thing. Foundation has to be tended first. Sessions 1\u20133 of the program — <em>You Are Called, Named by the Father, Receiving His Love</em> — are written for exactly this season.'
+    },
+    Body: {
+        strong: 'You see your body as a gift, not a project. You know your colors, your form, your presence in a room — and you receive them as His specific design. The Body module of the program would feel like deepening, not learning.',
+        tuning: 'You are at peace with your body some days, at war with it others. You sense that your physical presence is part of how you reflect God in the world, but you are not always sure how to inhabit it on purpose. The Body module — Colors, Sacred Style Essence, Sacred Silhouettes — was built for this exact tension.',
+        quiet: 'You are likely working against your body more than with it. The good news: this is one of the most transformative modules women experience, because so few of us have ever been taught a Catholic theology of beauty and presence. The Body module of <em>A Symphony of Grace</em> would be a homecoming.'
+    },
+    Mind: {
+        strong: 'You know how you are wired. You understand your temperament, your gifts, the ways you give and receive love. You are not living against the grain. The Mind module would deepen your existing self-knowledge into theological grounding.',
+        tuning: 'You have done some self-discovery work, but pieces are still missing — or you have learned frameworks that are not fully Catholic. The Mind module replaces secular instruments with Catholic ones: Gifts of Grace instead of VIA, Language of Your Love instead of the Truity love languages, plus the cognitive functions, temperament, and personality work woven through.',
+        quiet: 'You are working hard but often against your own wiring — wondering why something that comes naturally to others feels impossible for you. The Mind module exists for this exact ache. Sessions 7\u201310 are some of the most concretely life-changing weeks women experience in the program.'
+    },
+    Spirit: {
+        strong: 'Your interior life has shape. You know how you pray, how to bring your wounds to Christ, how to order your days around what matters most. The Spirit module would offer language and structure to the integrated life you are already living.',
+        tuning: 'You have a real prayer life, but it is uneven. Some weeks are luminous; others feel like silence. You know about the saints, the virtues, the sacraments — but the integration is still being woven. The Spirit module — Wounds, Virtues, Charisms, Rule of Life — addresses this exact unevenness.',
+        quiet: 'Your interior life feels harder to access than you wish it were. Prayer can feel like a duty more than a relationship. The Spirit module is where so many women experience the deepest transformation — because the work of healing wounds and ordering a real, livable rule of life changes everything underneath.'
+    }
+};
+
+// ============ STATE ============
+
+let currentQuestion = 0;
+let answers = new Array(questions.length).fill(null);
+
+// ============ FUNCTIONS ============
+
+function startQuiz() {
+    document.getElementById('intro-section').classList.remove('active');
+    document.getElementById('quiz-section').classList.add('active');
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof gtag === 'function') gtag('event', 'quiz_start', { quiz_name: 'find_your_symphony' });
+}
+
+function renderQuestion() {
+    const q = questions[currentQuestion];
+    document.getElementById('module-label').textContent = q.module;
+    document.getElementById('question-text').textContent = q.text;
+    document.getElementById('progress-text').textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+    document.getElementById('progress-fill').style.width =
+        ((currentQuestion + 1) / questions.length * 100) + '%';
+
+    // Render answer options
+    const answersDiv = document.getElementById('answers');
+    answersDiv.innerHTML = '';
+    answerOptions.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer';
+        if (answers[currentQuestion] === opt.value) btn.classList.add('selected');
+        btn.innerHTML = `<span class="answer-num">${idx + 1}.</span>${opt.label}`;
+        btn.onclick = () => selectAnswer(opt.value);
+        answersDiv.appendChild(btn);
+    });
+
+    // Update nav buttons
+    document.getElementById('back-btn').disabled = (currentQuestion === 0);
+    document.getElementById('forward-btn').disabled = (answers[currentQuestion] === null);
+}
+
+function selectAnswer(value) {
+    answers[currentQuestion] = value;
+
+    // Auto-advance after a short delay (with visual feedback)
+    const buttons = document.querySelectorAll('.answer');
+    buttons.forEach((b, i) => {
+        b.classList.toggle('selected', answerOptions[i].value === value);
+    });
+
+    setTimeout(() => {
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            renderQuestion();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            showResults();
+        }
+    }, 350);
+}
+
+function goForward() {
+    if (answers[currentQuestion] === null) return;
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        showResults();
+    }
+}
+
+function goBack() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+function computeScores() {
+    const modules = ['Foundation', 'Body', 'Mind', 'Spirit'];
+    const scores = {};
+    modules.forEach(m => scores[m] = 0);
+
+    questions.forEach((q, i) => {
+        scores[q.module] += answers[i] || 0;
+    });
+
+    // Convert to percentage (each module max is 15)
+    const percentages = {};
+    modules.forEach(m => {
+        percentages[m] = Math.round((scores[m] / 15) * 100);
+    });
+    return percentages;
+}
+
+function getStatus(percent) {
+    if (percent >= 75) return { label: 'Strong note', key: 'strong' };
+    if (percent >= 50) return { label: 'Tuning', key: 'tuning' };
+    return { label: 'Quiet note', key: 'quiet' };
+}
+
+function showResults() {
+    document.getElementById('quiz-section').classList.remove('active');
+    document.getElementById('results-section').classList.add('active');
+
+    const scores = computeScores();
+    const modules = ['Foundation', 'Body', 'Mind', 'Spirit'];
+
+    // Find strongest and quietest
+    let strongest = modules[0], quietest = modules[0];
+    modules.forEach(m => {
+        if (scores[m] > scores[strongest]) strongest = m;
+        if (scores[m] < scores[quietest]) quietest = m;
+    });
+
+    // Headline
+    document.getElementById('strongest-name').textContent = strongest;
+
+    // Render the bar chart
+    const chart = document.getElementById('profile-chart');
+    chart.innerHTML = '';
+    modules.forEach(m => {
+        const status = getStatus(scores[m]);
+        const row = document.createElement('div');
+        row.className = 'module-row';
+        row.innerHTML = `
+            <div class="module-row-top">
+                <span class="module-name">${m}</span>
+                <span class="module-status">${status.label}</span>
+            </div>
+            <div class="bar-track">
+                <div class="bar-fill" data-target="${scores[m]}"></div>
+            </div>
+        `;
+        chart.appendChild(row);
+    });
+
+    // Animate bars
+    setTimeout(() => {
+        document.querySelectorAll('.bar-fill').forEach(bar => {
+            bar.style.width = bar.dataset.target + '%';
+        });
+    }, 100);
+
+    // Narratives
+    const strongStatus = getStatus(scores[strongest]);
+    const quietStatus = getStatus(scores[quietest]);
+    document.getElementById('narrative-strong-text').innerHTML =
+        narratives[strongest][strongStatus.key];
+    document.getElementById('narrative-quiet-text').innerHTML =
+        narratives[quietest][quietStatus.key];
+
+    // Hidden form fields for Netlify capture
+    document.getElementById('hidden-strongest').value = strongest;
+    document.getElementById('hidden-quietest').value = quietest;
+    document.getElementById('hidden-scores').value = JSON.stringify(scores);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (typeof gtag === 'function') {
+        gtag('event', 'quiz_complete', {
+            quiz_name: 'find_your_symphony',
+            strongest: strongest,
+            quietest: quietest
+        });
+    }
+}
+
+function handleEmailSubmit(event) {
+    if (typeof gtag === 'function') {
+        gtag('event', 'quiz_email_submit', { quiz_name: 'find_your_symphony' });
+    }
+    // Let Netlify handle the actual submission. Replace UI after submit:
+    setTimeout(() => {
+        const form = event.target;
+        form.innerHTML = '<h3 style="font-style:italic;">Beautifully done.</h3><p style="margin-top:0.5rem;">Check your inbox for your reflection.</p>';
+    }, 100);
+    return true;
+}
+</script>
+
+</body>
+</html>
