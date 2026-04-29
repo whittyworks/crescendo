@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QX21GDR7T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7QX21GDR7T');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Holy Crescendo — Begin Here</title>
+    <meta name="description" content="Begin your journey with My Holy Crescendo — Catholic formation for women. Free Session 00, the Prelude mini-retreat, and more.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="My Holy Crescendo — Begin Here">
+    <meta property="og:description" content="Catholic formation for women — body, mind, and spirit.">
+    <meta property="og:image" content="https://myholycrescendo.com/assets/img/og-image.png">
+    <meta property="og:url" content="https://myholycrescendo.com/links.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <style>
+        :root {
+            --cream: #FDF8F3;
+            --cream-dark: #F5EFE7;
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --gold-dark: #B8941F;
+            --text-dark: #2C2416;
+            --text-medium: #5C5142;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            background-color: var(--cream);
+            color: var(--text-dark);
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Soft watercolor wash backgrounds */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.18;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(60px);
+        }
+        body::before {
+            top: -100px;
+            right: -100px;
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, var(--gold-light), transparent 70%);
+        }
+        body::after {
+            bottom: -100px;
+            left: -100px;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, #DCC5D8, transparent 70%);
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 460px;
+            margin: 0 auto;
+            padding: 3rem 1.75rem 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Profile photo */
+        .profile-photo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--gold);
+            box-shadow: 0 4px 24px rgba(184, 148, 31, 0.18);
+            margin-bottom: 1.25rem;
+        }
+
+        /* Name */
+        .name {
+            font-family: 'Cinzel', serif;
+            font-weight: 500;
+            font-size: 1.5rem;
+            color: var(--gold-dark);
+            letter-spacing: 0.08em;
+            text-align: center;
+            margin-bottom: 0.4rem;
+        }
+
+        .handle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            letter-spacing: 0.1em;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Gold flourish divider */
+        .flourish {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            width: 100%;
+        }
+        .flourish-line {
+            flex: 0 1 60px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+        .flourish-dot {
+            width: 5px;
+            height: 5px;
+            background: var(--gold);
+            border-radius: 50%;
+            margin: 0 0.6rem;
+            transform: rotate(45deg);
+        }
+
+        /* Tagline */
+        .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--text-medium);
+            text-align: center;
+            line-height: 1.55;
+            margin-bottom: 2.5rem;
+            max-width: 340px;
+        }
+        .tagline .em {
+            color: var(--gold-dark);
+            font-weight: 500;
+            font-style: normal;
+            letter-spacing: 0.02em;
+        }
+
+        /* Link buttons */
+        .links {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .link-button {
+            display: block;
+            width: 100%;
+            padding: 1.1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1.5px solid var(--gold);
+            border-radius: 14px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.25s ease;
+            letter-spacing: 0.01em;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .link-button:hover,
+        .link-button:active {
+            background: rgba(212, 175, 55, 0.08);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(184, 148, 31, 0.15);
+        }
+
+        /* Primary CTA — Session 00 */
+        .link-primary {
+            background: var(--gold);
+            border-color: var(--gold-dark);
+            color: var(--cream);
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 1.25rem 1.25rem;
+            box-shadow: 0 3px 12px rgba(184, 148, 31, 0.25);
+        }
+        .link-primary:hover,
+        .link-primary:active {
+            background: var(--gold-dark);
+            color: var(--cream);
+        }
+
+        .link-button .label {
+            display: block;
+        }
+        .link-button .sublabel {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-medium);
+            margin-top: 0.25rem;
+            font-weight: 400;
+        }
+        .link-primary .sublabel {
+            color: rgba(253, 248, 243, 0.85);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 2.5rem;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            padding-bottom: 1rem;
+        }
+        .footer a {
+            color: var(--gold-dark);
+            text-decoration: none;
+        }
+        .footer .scripture {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            text-transform: none;
+            color: var(--text-medium);
+            display: block;
+            margin-bottom: 0.6rem;
+            line-height: 1.5;
+        }
+
+        /* Responsive nudges */
+        @media (max-width: 380px) {
+            .container { padding: 2.25rem 1.25rem; }
+            .name { font-size: 1.3rem; }
+            .tagline { font-size: 1.05rem; }
+            .link-button { font-size: 1.05rem; padding: 1rem; }
+            .link-primary { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <img src="assets/img/beawhitmarsh.jpg" alt="Bea Whitmarsh" class="profile-photo">
+
+        <div class="name">My Holy Crescendo</div>
+        <div class="handle">@myholycrescendo</div>
+
+        <div class="flourish">
+            <span class="flourish-line"></span>
+            <span class="flourish-dot"></span>
+            <span class="flourish-line"></span>
+        </div>
+
+        <p class="tagline">
+            <span class="em">Know yourself.<br>Live yourself.<br>Love yourself</span><br>
+            — the way God already does.
+        </p>
+
+        <div class="links">
+
+            <!-- PRIMARY: Session 00 / Begin Here -->
+            <a href="portal.html" class="link-button link-primary"
+               onclick="gtag('event', 'links_click', {link_name: 'session_00'});">
+                <span class="label">The Invitation</span>
+                <span class="sublabel">Free first session — begin here</span>
+            </a>
+
+            <!-- Free 3-day mini retreat -->
+            <a href="prelude.html" class="link-button"
+               onclick="gtag('event', 'links_click', {link_name: 'prelude'});">
+                <span class="label">The Prelude</span>
+                <span class="sublabel">Free 3-day mini retreat</span>
+            </a>
+
+            <!-- Sacred Style Essence — currently the free, public-facing quiz -->
+            <a href="sacred-style-essence-quiz.html" class="link-button"
+               onclick="gtag('event', 'links_click', {link_name: 'sacred_style_essence'});">
+                <span class="label">Sacred Style Essence</span>
+                <span class="sublabel">Discover your sacred presence</span>
+            </a>
+
+            <!-- Grace Notes podcast — placeholder until launched -->
+            <!--
+            Replace href with the actual podcast URL once Grace Notes is live.
+            Spotify for Podcasters: https://podcasters.spotify.com/pod/show/...
+            -->
+            <a href="#" class="link-button"
+               onclick="gtag('event', 'links_click', {link_name: 'grace_notes'}); return false;">
+                <span class="label">Grace Notes Podcast</span>
+                <span class="sublabel">Coming soon</span>
+            </a>
+
+            <!-- 15-week program overview -->
+            <a href="symphony-of-grace.html" class="link-button"
+               onclick="gtag('event', 'links_click', {link_name: 'symphony_of_grace'});">
+                <span class="label">A Symphony of Grace</span>
+                <span class="sublabel">The 15-week journey</span>
+            </a>
+
+            <!-- About -->
+            <a href="about.html" class="link-button"
+               onclick="gtag('event', 'links_click', {link_name: 'about'});">
+                <span class="label">About Bea</span>
+                <span class="sublabel">The story behind My Holy Crescendo</span>
+            </a>
+
+            <!-- 1:1 Coaching -->
+            <a href="personal-journey.html" class="link-button"
+               onclick="gtag('event', 'links_click', {link_name: 'coaching'});">
+                <span class="label">1:1 Coaching</span>
+                <span class="sublabel">Walk with Bea personally</span>
+            </a>
+
+        </div>
+
+        <div class="footer">
+            <span class="scripture">
+                "I praise You, for I am fearfully and wonderfully made."<br>— Psalm 139:14
+            </span>
+            <a href="index.html">myholycrescendo.com</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
