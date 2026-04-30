@@ -304,6 +304,32 @@
             transition: box-shadow 0.3s;
         }
 
+                /* ============================================
+        FROM BEA POSTS
+        ============================================ */
+        .post-card.from-bea {
+            background: linear-gradient(180deg, #FDF8F0 0%, #FBF3E5 100%);
+            border-left: 3px solid var(--gold);
+            box-shadow: 0 2px 14px rgba(212, 175, 55, 0.1);
+        }
+
+        .post-bea-badge-wrap {
+            margin-bottom: 1rem;
+        }
+
+        .post-bea-badge {
+            display: inline-block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 0.45rem 1rem;
+            border-radius: 20px;
+        }
+
         .post-card:hover { box-shadow: 0 6px 25px rgba(212,175,55,0.12); }
 
         .post-header {
@@ -678,7 +704,7 @@
                 ></textarea>
                 <div class="compose-footer">
                     <div class="compose-tags">
-                        <button class="tag-btn" id="tag-general" onclick="selectTag('general')">&#10022; Reflection</button>
+                        <button class="tag-btn" id="tag-general" onclick="selectTag('general')">&#10022; Note</button>
                         <button class="tag-btn" id="tag-prayer" onclick="selectTag('prayer')">&#128147; Prayer Request</button>
                         <button class="tag-btn" id="tag-celebration" onclick="selectTag('celebration')">&#10024; Celebration</button>
                     </div>
@@ -717,6 +743,7 @@
         const SUPABASE_KEY = 'sb_publishable_5WOVS7lAtfbdccptcZeB3g_A3k2U6km';
         const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+        const ADMIN_EMAILS = ['bea@myholycrescendo.com', 'bea.whitmarsh@gmail.com'];
         let currentUser = null;
         let selectedTag = 'general';
         let userReactions = {}; // postId -> { praying: bool, heart: bool }
@@ -780,11 +807,14 @@
 
             const name = currentUser.user_metadata?.full_name || currentUser.email?.split('@')[0] || 'Sister';
 
+            const isFromBea = ADMIN_EMAILS.includes((currentUser.email || '').toLowerCase());
+
             const { error } = await sb.from('community_posts').insert({
                 user_id: currentUser.id,
                 author_name: name,
                 content: text,
-                tag: selectedTag
+                tag: selectedTag,
+                is_from_bea: isFromBea
             });
 
             btn.disabled = false;
@@ -853,7 +883,11 @@
         function renderPost(post) {
             const initials = getInitials(post.author_name);
             const timeAgo = formatTime(post.created_at);
-            const tagLabel = { prayer: 'Prayer', celebration: 'Celebration', general: 'Reflection' }[post.tag] || 'Reflection';
+            const tagLabel = { prayer: 'Prayer', celebration: 'Celebration', general: 'Note' }[post.tag] || 'Note';
+            const fromBeaClass = post.is_from_bea ? ' from-bea' : '';
+            const fromBeaBadge = post.is_from_bea
+                ? '<div class="post-bea-badge-wrap"><span class="post-bea-badge">&#10022; From Bea &#10022;</span></div>'
+                : '';
             const tagClass = 'tag-' + (post.tag || 'general');
             const prayCount = post.pray_count || 0;
             const heartCount = post.heart_count || 0;
@@ -868,7 +902,8 @@
                 : 'background:#E8EDE4; border-color:#8A9E85; color:#4A6741;';
 
             return `
-                <div class="post-card" id="post-${post.id}">
+                <div class="post-card${fromBeaClass}" id="post-${post.id}">
+                   ${fromBeaBadge}
                     <div class="post-header">
                         <div class="post-avatar" style="${avatarStyle}">${initials}</div>
                         <div class="post-meta">
