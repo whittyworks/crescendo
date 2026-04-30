@@ -295,6 +295,7 @@
            POST CARD
         ============================================ */
         .post-card {
+            position: relative;
             background: white;
             border-radius: 14px;
             border: 1px solid rgba(212,175,55,0.15);
@@ -303,6 +304,41 @@
             box-shadow: 0 3px 15px rgba(212,175,55,0.06);
             transition: box-shadow 0.3s;
         }
+
+        .post-delete-btn,
+        .reply-delete-btn {
+            background: none;
+            border: none;
+            color: #C0B0A0;
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 0.35rem 0.5rem;
+            border-radius: 50%;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+
+        .post-delete-btn {
+            position: absolute;
+            top: 0.85rem;
+            right: 0.85rem;
+        }
+
+        .post-delete-btn:hover,
+        .reply-delete-btn:hover {
+            background: rgba(196, 69, 105, 0.08);
+            color: #C44569;
+        }
+
+        .reply-delete-btn {
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+            opacity: 0.5;
+        }
+
+        .reply-delete-btn:hover { opacity: 1; }
+
+
 
                 /* ============================================
         FROM BEA POSTS
@@ -888,6 +924,11 @@
             const fromBeaBadge = post.is_from_bea
                 ? '<div class="post-bea-badge-wrap"><span class="post-bea-badge">&#10022; From Bea &#10022;</span></div>'
                 : '';
+            const canDelete = (post.user_id === currentUser.id)
+                || ADMIN_EMAILS.includes((currentUser.email || '').toLowerCase());
+            const deleteBtn = canDelete
+                ? `<button class="post-delete-btn" onclick="deletePost('${post.id}')" title="Delete">&times;</button>`
+                : '';
             const tagClass = 'tag-' + (post.tag || 'general');
             const prayCount = post.pray_count || 0;
             const heartCount = post.heart_count || 0;
@@ -901,8 +942,9 @@
                 ? 'background:#FDF0DC; border-color:#D4AF37; color:#B8941F;'
                 : 'background:#E8EDE4; border-color:#8A9E85; color:#4A6741;';
 
-            return `
+                return `
                 <div class="post-card${fromBeaClass}" id="post-${post.id}">
+                   ${deleteBtn}
                    ${fromBeaBadge}
                     <div class="post-header">
                         <div class="post-avatar" style="${avatarStyle}">${initials}</div>
@@ -1006,6 +1048,42 @@
             }
         }
 
+        async function deletePost(postId) {
+            if (!confirm('Delete this post? This cannot be undone.')) return;
+
+            const { error } = await sb.rpc('delete_community_post', { post_id_param: postId });
+
+            if (error) {
+                alert('Could not delete: ' + error.message);
+                return;
+            }
+            loadFeed();
+        }
+
+        async function deleteReply(replyId, postId) {
+            if (!confirm('Delete this reply?')) return;
+
+            const { error } = await sb.from('community_replies').delete().eq('id', replyId);
+
+            if (error) {
+                alert('Could not delete: ' + error.message);
+                return;
+            }
+
+            await sb.rpc('decrement_reply_count', { post_id_input: postId });
+            await loadReplies(postId);
+
+            // Update reply count label on the parent post
+            const toggleBtn = document.querySelector(`#post-${postId} .reply-toggle-btn`);
+            if (toggleBtn) {
+                const { data } = await sb.from('community_posts').select('reply_count').eq('id', postId).single();
+                if (data) {
+                    const c = data.reply_count || 0;
+                    toggleBtn.textContent = c > 0 ? c + ' ' + (c === 1 ? 'reply' : 'replies') : 'Reply';
+                }
+            }
+        }
+        
         async function loadReplies(postId) {
             const list = document.getElementById('replies-list-' + postId);
             const { data: replies, error } = await sb
@@ -1019,15 +1097,22 @@
                 return;
             }
 
-            list.innerHTML = replies.map(r => `
-                <div class="reply-item">
-                    <div class="reply-avatar">${getInitials(r.author_name)}</div>
-                    <div class="reply-bubble">
-                        <p class="reply-author">${escHtml(r.author_name)} &middot; ${formatTime(r.created_at)}</p>
-                        <p class="reply-body">${escHtml(r.content)}</p>
+            const isAdmin = ADMIN_EMAILS.includes((currentUser.email || '').toLowerCase());
+            list.innerHTML = replies.map(r => {
+                const canDeleteReply = (r.user_id === currentUser.id) || isAdmin;
+                const replyDelBtn = canDeleteReply
+                    ? `<button class="reply-delete-btn" onclick="deleteReply('${r.id}', '${postId}')" title="Delete">&times;</button>`
+                    : '';
+                return `
+                    <div class="reply-item">
+                        <div class="reply-avatar">${getInitials(r.author_name)}</div>
+                        <div class="reply-bubble">
+                            <p class="reply-author">${escHtml(r.author_name)} &middot; ${formatTime(r.created_at)}${replyDelBtn}</p>
+                            <p class="reply-body">${escHtml(r.content)}</p>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         async function submitReply(postId) {
