@@ -677,17 +677,16 @@
         </div>
 
         <!--
-            Email capture form.
-            Netlify handles the form automatically once deployed (data-netlify="true").
-            You'll receive submissions in your Netlify dashboard under Forms.
-            To pipe to your email tool, set up a Netlify form notification or webhook.
+            Email capture form — uses Formspree.
+            BEFORE DEPLOYING: Replace YOUR_FORMSPREE_ID below with your actual form endpoint.
+            Get it from your Formspree dashboard → create new form → copy the endpoint URL.
+            Recommend a NEW form for this so quiz-takers stay separate from your other captures.
         -->
-        <form class="email-block" name="symphony-quiz" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleEmailSubmit(event)">
-            <input type="hidden" name="form-name" value="symphony-quiz">
-            <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+        <form class="email-block" action="https://formspree.io/f/mkoywqar" method="POST" onsubmit="return handleEmailSubmit(event)">
             <input type="hidden" name="strongest" id="hidden-strongest">
             <input type="hidden" name="quietest" id="hidden-quietest">
             <input type="hidden" name="scores" id="hidden-scores">
+            <input type="hidden" name="_subject" value="New Find Your Symphony quiz submission">
 
             <h3>Want a deeper reflection delivered to your inbox?</h3>
             <p>Receive your personalized profile + a 3-day mini retreat. No spam, ever.</p>
@@ -929,15 +928,29 @@ function showResults() {
 }
 
 function handleEmailSubmit(event) {
-    if (typeof gtag === 'function') {
-        gtag('event', 'quiz_email_submit', { quiz_name: 'find_your_symphony' });
-    }
-    // Let Netlify handle the actual submission. Replace UI after submit:
-    setTimeout(() => {
-        const form = event.target;
-        form.innerHTML = '<h3 style="font-style:italic;">Beautifully done.</h3><p style="margin-top:0.5rem;">Check your inbox for your reflection.</p>';
-    }, 100);
-    return true;
+    event.preventDefault();
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Form submission failed');
+        if (typeof gtag === 'function') {
+            gtag('event', 'quiz_email_submit', { quiz_name: 'find_your_symphony' });
+        }
+        form.innerHTML = '<h3 style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:1.4rem;color:var(--gold-dark);margin-bottom:0.6rem;">Beautifully done.</h3><p style="font-family:\'Cormorant Garamond\',serif;font-size:1.05rem;color:var(--text-medium);">Check your inbox for your reflection — give it a few minutes to arrive.</p>';
+    })
+    .catch(error => {
+        console.error('Form submission error:', error);
+        form.innerHTML = '<p style="font-family:\'Cormorant Garamond\',serif;font-size:1.05rem;color:var(--text-medium);">Something went sideways. Please email <a href="mailto:bea@myholycrescendo.com" style="color:var(--gold-dark);">bea@myholycrescendo.com</a> directly and I will add you manually.</p>';
+    });
+
+    return false;
 }
 </script>
 
